@@ -1,0 +1,85 @@
+object telaEmiteDanfe: TtelaEmiteDanfe
+  Left = 192
+  Top = 124
+  Width = 474
+  Height = 253
+  Caption = 'Emitir DANFE'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GroupBox1: TGroupBox
+    Left = 8
+    Top = 8
+    Width = 441
+    Height = 105
+    Caption = 'Selecionar Arquivo'
+    TabOrder = 0
+    object spb: TSpeedButton
+      Left = 392
+      Top = 29
+      Width = 23
+      Height = 22
+      Caption = '...'
+      OnClick = spbClick
+    end
+    object editArq: TEdit
+      Left = 16
+      Top = 32
+      Width = 369
+      Height = 21
+      TabOrder = 0
+      OnExit = editArqExit
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 168
+    Width = 458
+    Height = 47
+    Align = alBottom
+    TabOrder = 1
+    object BitBtn1: TBitBtn
+      Left = 128
+      Top = 8
+      Width = 75
+      Height = 25
+      Action = actEmitir
+      Caption = 'F2 - Emitir'
+      TabOrder = 0
+    end
+    object BitBtn2: TBitBtn
+      Left = 216
+      Top = 8
+      Width = 75
+      Height = 25
+      Action = actFechar
+      Caption = 'F3 - Fechar'
+      TabOrder = 1
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 400
+    Top = 72
+  end
+  object ActionList1: TActionList
+    Left = 400
+    Top = 176
+    object actEmitir: TAction
+      Caption = 'F2 - Emitir'
+      ShortCut = 113
+      OnExecute = actEmitirExecute
+    end
+    object actFechar: TAction
+      Caption = 'F3 - Fechar'
+      ShortCut = 114
+      OnExecute = actFecharExecute
+    end
+  end
+end

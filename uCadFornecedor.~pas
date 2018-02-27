@@ -1,0 +1,311 @@
+unit uCadFornecedor;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, StdCtrls, uDados, Mask, DBCtrls, Buttons, ActnList,
+  ACBrBase, ACBrSocket, ACBrCEP, uPesFornecedor;
+
+type
+  TtelaCadFor = class(TForm)
+    GroupBox1: TGroupBox;
+    Panel1: TPanel;
+    Label1: TLabel;
+    editId: TDBEdit;
+    Label2: TLabel;
+    editNome: TDBEdit;
+    Label3: TLabel;
+    editEndereco: TDBEdit;
+    Label4: TLabel;
+    editNum: TDBEdit;
+    Label5: TLabel;
+    editBairro: TDBEdit;
+    Label6: TLabel;
+    editCidade: TDBEdit;
+    Label7: TLabel;
+    editCep: TDBEdit;
+    Label8: TLabel;
+    editTel1: TDBEdit;
+    Label9: TLabel;
+    editTel2: TDBEdit;
+    Label10: TLabel;
+    editCnpj: TDBEdit;
+    Label11: TLabel;
+    editInsc: TDBEdit;
+    Label12: TLabel;
+    editUf: TDBEdit;
+    Label13: TLabel;
+    editEmail: TDBEdit;
+    btnCep: TSpeedButton;
+    labelCompl: TLabel;
+    editCompl: TDBEdit;
+    ActionList1: TActionList;
+    actIncluir: TAction;
+    actExcluir: TAction;
+    actConfirmar: TAction;
+    actCancelar: TAction;
+    actPesquisar: TAction;
+    actFechar: TAction;
+    btnIncluir: TBitBtn;
+    btnExcluir: TBitBtn;
+    btnConfirmar: TBitBtn;
+    btnCancelar: TBitBtn;
+    btnPesquisar: TBitBtn;
+    btnFechar: TBitBtn;
+    ACBrCEP1: TACBrCEP;
+    actEditar: TAction;
+    btnEditar: TBitBtn;
+    procedure actCancelarExecute(Sender: TObject);
+    procedure actConfirmarExecute(Sender: TObject);
+    procedure actIncluirExecute(Sender: TObject);
+    procedure actFecharExecute(Sender: TObject);
+    procedure btnCepClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure actPesquisarExecute(Sender: TObject);
+    procedure actEditarExecute(Sender: TObject);
+    procedure actExcluirExecute(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  telaCadFor: TtelaCadFor;
+
+implementation
+
+{$R *.dfm}
+
+procedure TtelaCadFor.actCancelarExecute(Sender: TObject);
+begin
+  btnCep.Enabled := false;
+
+  editNome.Enabled := false;
+  editCep.Enabled := false;
+  editCidade.Enabled := false;
+  editEndereco.Enabled := false;
+  editBairro.Enabled := false;
+  editNum.Enabled := false;
+  editCompl.Enabled := false;
+  editUf.Enabled := false;
+  editTel1.Enabled := false;
+  editTel2.Enabled := false;
+  editCnpj.Enabled := false;
+  editInsc.Enabled := false;
+  editEmail.Enabled := false;
+
+  actExcluir.Enabled := true;
+  actConfirmar.Enabled := false;
+  actCancelar.Enabled := false;
+  actIncluir.Enabled := true;
+  actEditar.Enabled := true;
+
+  btnExcluir.Enabled := true;
+  btnConfirmar.Enabled := false;
+  btnCancelar.Enabled := false;
+  btnIncluir.Enabled := true;
+  btnEditar.Enabled := true;
+
+  telaDados.tblFornecedores.Cancel;
+
+end;
+
+procedure TtelaCadFor.actConfirmarExecute(Sender: TObject);
+begin
+
+if (editNome.Text = '') then begin
+  ShowMessage('Por favor digite o Nome');
+  editNome.SetFocus;
+  Abort;
+end;
+if (editCep.Text = '') then begin
+  ShowMessage('Por favor digite o CEP');
+  editCep.SetFocus;
+  Abort;
+end;
+if (editEndereco.GetTextLen < 2 ) then begin
+  ShowMessage('Digite um endereço Válido');
+  editEndereco.SetFocus;
+  Abort;
+end;
+if (editBairro.GetTextLen < 2) then begin
+  ShowMessage('Por favor digite o Bairro');
+  editBairro.SetFocus;
+  Abort;
+end;
+if (editNum.Text = '') then begin
+  ShowMessage('Por favor digite o Número');
+  editNum.SetFocus;
+  Abort;
+end;
+if (editCidade.Text = '') then begin
+  ShowMessage('Por favor digite o Cidade');
+  editCidade.SetFocus;
+  Abort;
+end;
+if (editTel1.Text = '') and (editTel2.Text = '') then begin
+  ShowMessage('Por favor digite um Telefone');
+  editTel1.SetFocus;
+  Abort;
+end;
+if not (telaDados.verificaCnpj(editCnpj.Text)) then begin
+  ShowMessage('Cnpj Inválido');
+  editCnpj.SetFocus;
+  Abort;
+end;
+
+  telaDados.tblFornecedores.Post;
+
+   btnCep.Enabled := false;
+
+  editNome.Enabled := false;
+  editCep.Enabled := false;
+  editCidade.Enabled := false;
+  editEndereco.Enabled := false;
+  editBairro.Enabled := false;
+  editNum.Enabled := false;
+  editCompl.Enabled := false;
+  editUf.Enabled := false;
+  editTel1.Enabled := false;
+  editTel2.Enabled := false;
+  editCnpj.Enabled := false;
+  editInsc.Enabled := false;
+  editEmail.Enabled := false;
+
+  actExcluir.Enabled := true;
+  actConfirmar.Enabled := false;
+  actCancelar.Enabled := false;
+  actIncluir.Enabled := true;
+  actEditar.Enabled := true;
+
+  btnExcluir.Enabled := true;
+  btnConfirmar.Enabled := false;
+  btnCancelar.Enabled := false;
+  btnIncluir.Enabled := true;
+  btnEditar.Enabled := true;
+
+end;
+
+procedure TtelaCadFor.actIncluirExecute(Sender: TObject);
+var
+id : integer;
+begin
+
+  telaDados.tblFornecedores.Last;
+
+  id := telaDados.tblFornecedoresID.Value + 1;
+
+  telaDados.tblFornecedores.Insert;
+  telaDados.tblFornecedoresID.Value := id;
+
+  btnCep.Enabled := true;
+
+  editNome.Enabled := true;
+  editCep.Enabled := true;
+  editCidade.Enabled := true;
+  editEndereco.Enabled := true;
+  editBairro.Enabled := true;
+  editNum.Enabled := true;
+  editCompl.Enabled := true;
+  editUf.Enabled := true;
+  editTel1.Enabled := true;
+  editTel2.Enabled := true;
+  editCnpj.Enabled := true;
+  editInsc.Enabled := true;
+  editEmail.Enabled := true;
+
+  editNome.SetFocus;
+
+  actExcluir.Enabled   := false;
+  actConfirmar.Enabled := true;
+  actCancelar.Enabled  := true;
+  actIncluir.Enabled   := false;
+  actEditar.Enabled    := false;
+
+  btnExcluir.Enabled   := false;
+  btnConfirmar.Enabled := true;
+  btnCancelar.Enabled  := true;
+  btnIncluir.Enabled   := false;
+  btnEditar.Enabled    := false;
+end;
+
+procedure TtelaCadFor.actFecharExecute(Sender: TObject);
+begin
+  telaCadFor.Close;
+end;
+
+procedure TtelaCadFor.btnCepClick(Sender: TObject);
+var i : integer;
+begin
+ACBrCEP1.BuscarPorCEP(editCep.Text);
+
+  for i := 0 to ACBrCEP1.Enderecos.Count -1 do
+  begin
+    telaDados.tblFornecedoresCEP_END.AsString     := UpperCase(ACBrCEP1.Enderecos[i].CEP);
+    telaDados.tblFornecedoresENDERECO.AsString    := UpperCase(ACBrCEP1.Enderecos[i].Logradouro);
+    telaDados.tblFornecedoresCOMPLEMENTO.AsString := UpperCase(ACBrCEP1.Enderecos[i].Complemento);
+    telaDados.tblFornecedoresCIDADE_END.AsString  := UpperCase(ACBrCEP1.Enderecos[i].Municipio);
+    telaDados.tblFornecedoresUF_END.AsString      := UpperCase(ACBrCEP1.Enderecos[i].UF);
+    telaDados.tblFornecedoresBAIRRO_END.AsString  := UpperCase(ACBrCEP1.Enderecos[i].Bairro);
+
+  end;
+end;
+
+procedure TtelaCadFor.FormShow(Sender: TObject);
+begin
+  telaDados.FormataCampos;
+end;
+
+procedure TtelaCadFor.actPesquisarExecute(Sender: TObject);
+begin
+Application.CreateForm(TtelaPesFor, telaPesFor);
+telaPesFor.Show;
+end;
+
+procedure TtelaCadFor.actEditarExecute(Sender: TObject);
+begin
+  btnCep.Enabled := true;
+
+  editNome.Enabled := true;
+  editCep.Enabled := true;
+  editCidade.Enabled := true;
+  editEndereco.Enabled := true;
+  editBairro.Enabled := true;
+  editNum.Enabled := true;
+  editCompl.Enabled := true;
+  editUf.Enabled := true;
+  editTel1.Enabled := true;
+  editTel2.Enabled := true;
+  editCnpj.Enabled := true;
+  editInsc.Enabled := true;
+  editEmail.Enabled := true;
+
+  editNome.SetFocus;
+
+  actExcluir.Enabled := false;
+  actConfirmar.Enabled := true;
+  actCancelar.Enabled := true;
+  actIncluir.Enabled := false;
+  actEditar.Enabled := false;
+
+  btnExcluir.Enabled := false;
+  btnConfirmar.Enabled := true;
+  btnCancelar.Enabled := true;
+  btnIncluir.Enabled := false;
+  btnEditar.Enabled := false;
+end;
+
+procedure TtelaCadFor.actExcluirExecute(Sender: TObject);
+begin
+  telaDados.qryFornecedores.Close;
+  telaDados.qryFornecedores.SQL.Clear;
+  telaDados.qryFornecedores.SQL.Add('Delete from fornecedor where id = ');
+  telaDados.qryFornecedores.SQL.Add(editId.Text);
+  telaDados.qryFornecedores.Open;
+
+  telaDados.tblFornecedores.Refresh;
+end;
+
+end.
