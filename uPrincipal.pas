@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus, uConfig, uStatus, uCadClientes, uCadProdutos, uCadUnidade, uLancPedidos;
+  Dialogs, Menus, uConfig, uStatus, uCadClientes, uCadProdutos, uCadUnidade, uLancPedidos,
+  ACBrBase, ACBrPosPrinter, Buttons, ExtCtrls, pngextra, pngimage;
 
 type
   TtelaPrincipal = class(TForm)
@@ -31,6 +32,12 @@ type
     Fornecedores1: TMenuItem;
     LanamentodeCompras1: TMenuItem;
     GerarNFeEntrada1: TMenuItem;
+    PNGButton1: TPNGButton;
+    PNGButton5: TPNGButton;
+    PNGButton4: TPNGButton;
+    PNGButton3: TPNGButton;
+    PNGButton2: TPNGButton;
+    Image1: TImage;
     procedure Configuraes1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure StatusdeServio1Click(Sender: TObject);
@@ -48,6 +55,9 @@ type
     procedure Fornecedores1Click(Sender: TObject);
     procedure LanamentodeCompras1Click(Sender: TObject);
     procedure GerarNFeEntrada1Click(Sender: TObject);
+    procedure PNGButton1Click(Sender: TObject);
+    procedure PNGButton2Click(Sender: TObject);
+    procedure PNGButton3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,7 +70,7 @@ var
 implementation
 
 uses uGerarNfe, uDados, uValidaXml, uEnviarNfe, uCancelaNfe, uInutilizaNfe,
-  uEmiteDanfe, uEnviaEmail, uCadFornecedor, uLancCompras, uGerarNfeEntrada;
+  uEmiteDanfe, uEnviaEmail, uCadFornecedor, uLancCompras, uGerarNfeEntrada, XPMan;
 
 {$R *.dfm}
 
@@ -165,6 +175,23 @@ procedure TtelaPrincipal.GerarNFeEntrada1Click(Sender: TObject);
 begin
 Application.CreateForm(TtelaGerarNfeEntrada, telaGerarNfeEntrada);
 telaGerarNfeEntrada.Show;
+end;
+
+procedure TtelaPrincipal.PNGButton1Click(Sender: TObject);
+begin
+Application.Terminate;
+end;
+
+procedure TtelaPrincipal.PNGButton2Click(Sender: TObject);
+begin
+Application.CreateForm(TtelaCadClientes, telaCadClientes);
+telaCadClientes.Show;
+end;
+
+procedure TtelaPrincipal.PNGButton3Click(Sender: TObject);
+begin
+Application.CreateForm(TtelaCadFor, telaCadFor);
+telaCadFor.Show;
 end;
 
 end.

@@ -26,7 +26,8 @@ uses
   uCadFornecedor in 'uCadFornecedor.pas' {telaCadFor},
   uLancCompras in 'uLancCompras.pas' {telaLancCompras},
   uPesFornecedor in 'uPesFornecedor.pas' {telaPesFor},
-  uGerarNfeEntrada in 'uGerarNfeEntrada.pas' {telaGerarNfeEntrada};
+  uGerarNfeEntrada in 'uGerarNfeEntrada.pas' {telaGerarNfeEntrada},
+  uLoading in 'uLoading.pas' {telaLoading};
 
 {$R *.res}
 
@@ -34,7 +35,6 @@ begin
   Application.Initialize;
   Application.CreateForm(TtelaPrincipal, telaPrincipal);
   Application.CreateForm(TtelaDados, telaDados);
-  Application.CreateForm(TtelaLogin, telaLogin);
   Application.CreateForm(TtelaEnviaEmail, telaEnviaEmail);
   Application.Run;
 end.

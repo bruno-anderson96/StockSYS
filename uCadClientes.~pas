@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ExtCtrls, uDados, StdCtrls, Mask, DBCtrls, Buttons,
-  ActnList, Menus, uPesCliente, ACBrBase, ACBrSocket, ACBrCEP, ACBrIBGE;
+  ActnList, Menus, uPesCliente, ACBrBase, ACBrSocket, ACBrCEP, ACBrIBGE,
+  pngextra;
 
 type
   TtelaCadClientes = class(TForm)
@@ -63,7 +64,6 @@ type
     Label21: TLabel;
     editEntCompl: TDBEdit;
     Label22: TLabel;
-    editODLocal: TDBEdit;
     Label23: TLabel;
     editODEnd: TDBEdit;
     Label24: TLabel;
@@ -98,8 +98,8 @@ type
     Label33: TLabel;
     RadioGroup1: TRadioGroup;
     ACBrCEP1: TACBrCEP;
-    P: TSpeedButton;
-    SpeedButton1: TSpeedButton;
+    btnPes: TSpeedButton;
+    btnPesEnt: TSpeedButton;
     ACBrIBGE1: TACBrIBGE;
     btnEditar: TBitBtn;
     Editar: TAction;
@@ -113,8 +113,8 @@ type
     procedure CancelarExecute(Sender: TObject);
     procedure RadioGroup1Click(Sender: TObject);
     procedure PesquisarExecute(Sender: TObject);
-    procedure PClick(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
+    procedure btnPesClick(Sender: TObject);
+    procedure btnPesEntClick(Sender: TObject);
     procedure EditarExecute(Sender: TObject);
     procedure ExcluirExecute(Sender: TObject);
   private
@@ -272,6 +272,13 @@ begin
 
   telaDados.FormataCampos;
 
+  if editNome.Text = '' then begin
+  Excluir.Enabled := False;
+  end else begin
+  Excluir.Enabled := true;
+  end;
+
+
 end;
 
 procedure TtelaCadClientes.IncluirExecute(Sender: TObject);
@@ -324,11 +331,14 @@ begin
    btnConfirmar.Enabled := true;
    btnCancelar.Enabled := true;
    btnEditar.Enabled := false;
+   btnPes.Enabled := true;
+   btnPesEnt.Enabled := true;
 
    Confirmar.Enabled := True;
    Incluir.Enabled := False;
    Cancelar.Enabled := True;
    Editar.Enabled := false;
+   Pesquisar.Enabled := false;
 
    id := telaDados.tblClientesID.AsInteger + 1;
    telaDados.tblClientes.Insert;
@@ -345,7 +355,6 @@ end;
 
 procedure TtelaCadClientes.ConfirmarExecute(Sender: TObject);
 begin
-
 if (editNome.Text = '') then begin
   ShowMessage('Por favor digite o Nome');
   editNome.SetFocus;
@@ -383,6 +392,16 @@ end;
 if RadioGroup1.ItemIndex >=0 then begin
   if RadioGroup1.ItemIndex = 0 then
   begin
+  {  telaDados.qryClientes.Close;
+    telaDados.qryClientes.SQL.Clear;
+    telaDados.qryClientes.SQL.Add('Select * from clientes where ');
+    telaDados.qryClientes.SQL.Add(editCpf.Text);
+    telaDados.qryClientes.Open;
+    if telaDados.qryClientes.Params.Count > 0 then begin
+      ShowMessage('Cpf já cadastrado');
+      editCpf.SetFocus;
+      Abort;
+    end;}
     if not (telaDados.verificaCpf(editCpf.Text)) then begin
       ShowMessage('Cpf Inválido');
       editCpf.SetFocus;
@@ -410,6 +429,8 @@ end;
   btnConfirmar.Enabled := false;
   btnCancelar.Enabled := false;
   btnEditar.Enabled := true;
+  btnPes.Enabled := false;
+  btnPesEnt.Enabled := false;
 
   Confirmar.Enabled := false;
   Incluir.Enabled := true;
@@ -503,11 +524,19 @@ telaDados.tblClientes.Cancel;
 
    RadioGroup1.Enabled := false;
 
+   btnPes.Enabled := false;
+   btnPesEnt.Enabled := false;
+
   Incluir.Enabled   := true;
   Confirmar.Enabled := false;
-  Excluir.Enabled   := false;
   Cancelar.Enabled  := false;
   Editar.Enabled    := true;
+  Pesquisar.Enabled := true;
+    if editNome.Text = '' then begin
+      Excluir.Enabled := False;
+    end else begin
+      Excluir.Enabled := true;
+    end;
   
 end;
 
@@ -529,24 +558,24 @@ Application.CreateForm(TtelaPesCliente, telaPesCliente);
 telaPesCliente.Show;
 end;
 
-procedure TtelaCadClientes.PClick(Sender: TObject);
+procedure TtelaCadClientes.btnPesClick(Sender: TObject);
 var i : integer;
 begin
 ACBrCEP1.BuscarPorCEP(editCep.Text);
 
   for i := 0 to ACBrCEP1.Enderecos.Count -1 do
   begin
-    telaDados.tblClientesCEP_END.AsString := ACBrCEP1.Enderecos[i].CEP;
-    telaDados.tblClientesENDERECO.AsString := ACBrCEP1.Enderecos[i].Logradouro;
-    telaDados.tblClientesCOMPLEMENTO.AsString := ACBrCEP1.Enderecos[i].Complemento;
-    telaDados.tblClientesCIDADE_END.AsString := ACBrCEP1.Enderecos[i].Municipio;
-    telaDados.tblClientesUF_END.AsString := ACBrCEP1.Enderecos[i].UF;
-    telaDados.tblClientesBAIRRO_END.AsString := ACBrCEP1.Enderecos[i].Bairro;
+    telaDados.tblClientesCEP_END.AsString    := UpperCase(ACBrCEP1.Enderecos[i].CEP);
+    telaDados.tblClientesENDERECO.AsString   := UpperCase(ACBrCEP1.Enderecos[i].Logradouro);
+    telaDados.tblClientesCOMPLEMENTO.AsString:= UpperCase(ACBrCEP1.Enderecos[i].Complemento);
+    telaDados.tblClientesCIDADE_END.AsString := UpperCase(ACBrCEP1.Enderecos[i].Municipio);
+    telaDados.tblClientesUF_END.AsString     := UpperCase(ACBrCEP1.Enderecos[i].UF);
+    telaDados.tblClientesBAIRRO_END.AsString := UpperCase(ACBrCEP1.Enderecos[i].Bairro);
     
   end;
 end;
 
-procedure TtelaCadClientes.SpeedButton1Click(Sender: TObject);
+procedure TtelaCadClientes.btnPesEntClick(Sender: TObject);
 VAR i : integer;
 begin
 
@@ -577,6 +606,9 @@ begin
   btnCancelar.Enabled := true;
   btnEditar.Enabled := false;
   btnConfirmar.Enabled := true;
+  btnPes.Enabled := true;
+  btnPesEnt.Enabled := true;
+
 
    editNome.Enabled := true;
    editCep.Enabled := true;

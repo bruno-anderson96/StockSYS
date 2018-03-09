@@ -61,7 +61,7 @@ var num : string;
 begin
   num := DBGrid1.Columns.Items[5].Field.AsString;
                               
-  telaDados.tblFornecedor.Locate('CNPJ_CPF', num , []);
+  telaDados.tblFornecedores.Locate('CNPJ_CPF', num , []);
 
   telaPesFor.Close;;
 end;
