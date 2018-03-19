@@ -364,7 +364,6 @@ type
     cdsCTempItensqryCompraItens: TDataSetField;
     ACBrIBGE1: TACBrIBGE;
   private
-    procedure FormataCamposFor;
     { Private declarations }
 
 
@@ -737,8 +736,6 @@ begin
   //
   ArqINI.Free;
 
-
-
 end;
 
 procedure TtelaDados.GeraBarrasEAN13(CodBarras: string; Imagem: TCanvas);
@@ -840,9 +837,9 @@ end;
 
 function TtelaDados.pegaCodMun(cidade, uf: String): Integer;
 begin
-ACBrIBGE1.BuscarPorNome(cidade,uf,false,true);
+ACBrIBGE1.BuscarPorNome(cidade,uf,true;
 
-result := ACBrIBGE1.Cidades[0].CodMunicio;
+result := ACBrIBGE1.Cidades[0].CodMunicipio;
 
 end;
 

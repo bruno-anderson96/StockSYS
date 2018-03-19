@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Buttons, ExtCtrls, IniFiles, uDados, DB,
-  Mask, DBCtrls, ACBrBase, ACBrSocket, ACBrCEP, ACBrIBGE;
+  Mask, DBCtrls, ACBrBase, ACBrSocket, ACBrCEP, ACBrIBGE, uPrincipal;
 
 type
   TtelaConfig = class(TForm)
@@ -90,6 +90,14 @@ type
     edtEmailEmitente: TDBEdit;
     ACBrCEP1: TACBrCEP;
     SpeedButton2: TSpeedButton;
+    TabSheet6: TTabSheet;
+    Panel2: TPanel;
+    Label22: TLabel;
+    label23: TLabel;
+    edtArqLog: TEdit;
+    edtPathDll: TEdit;
+    SpeedButton3: TSpeedButton;
+    btnArqLog: TSpeedButton;
     procedure btnEscolherCaminhoClick(Sender: TObject);
     procedure btnEscolherCaminho2Click(Sender: TObject);
     procedure btnCaminhoCertClick(Sender: TObject);
@@ -100,11 +108,15 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure btnArqLogClick(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+
   private
     { Private declarations }
 
   public
     { Public declarations }
+   
   end;
 
 var
@@ -262,6 +274,20 @@ ACBrCEP1.BuscarPorCEP(edtCep.Text);
     telaDados.tblEmitenteCODMUN.AsString := ACBrCEP1.Enderecos[i].IBGE_Municipio;
   end;
 end;
+
+procedure TtelaConfig.btnArqLogClick(Sender: TObject);
+begin
+OpenDialog1.Execute;
+edtArqLog.Text := OpenDialog1.FileName;
+end;
+
+procedure TtelaConfig.SpeedButton3Click(Sender: TObject);
+begin
+OpenDialog1.Execute;
+edtPathDll.Text := OpenDialog1.FileName;
+end;
+
+
 
 end.
 

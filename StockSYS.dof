@@ -135,11 +135,5 @@ ProductName=
 ProductVersion=1.0.0.0
 Comments=
 [Excluded Packages]
-C:\ACBr\Lib\Delphi\LibD7\ACBr_Convenio115.bpl=ACBr - Convênio ICMS 115 - (http://www.projetoacbr.com.br/)
-C:\ACBr\Lib\Delphi\LibD7\ACBr_NFeDanfeESCPOS.bpl=ACBr - DANFe para NFC-e Impressora Serial - (http://www.projetoacbr.com.br/)
-C:\ACBr\Lib\Delphi\LibD7\ACBr_CTe.bpl=ACBr - Conhecimento de Transporte Eletrônico - (http://www.projetoacbr.com.br/)
-C:\ACBr\Lib\Delphi\LibD7\ACBr_NFSe.bpl=ACBr - Nota Fiscal de Serviço Eletrônica - (http://www.projetoacbr.com.br/)
-C:\ACBr\Lib\Delphi\LibD7\ACBr_MDFe.bpl=ACBr - Manifesto de Documentos Fiscais Eletrônico - (http://www.projetoacbr.com.br/)
-C:\ACBr\Lib\Delphi\LibD7\ACBr_BlocoX.bpl=ACBr - Bloco X - (http://www.projetoacbr.com.br/)
-C:\ACBr\Lib\Delphi\LibD7\ACBr_BPe.bpl=ACBr - Bilhete de Passagem Eletrônica - (http://www.projetoacbr.com.br/)
-C:\ACBr\Lib\Delphi\LibD7\ACBr_ANe.bpl=ACBr - Averbação Eletrônica Nacional - (http://www.projetoacbr.com.br/)
+C:\Program Files\FastReports\FastReport 4\LibD7\dclfrxBDE7.bpl=FastReport 4.0 BDE Components
+C:\Program Files\FastReports\FastReport 4\LibD7\dclfsBDE7.bpl=FastScript 1.9 BDE Components

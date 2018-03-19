@@ -247,7 +247,6 @@ type
     tblContaSENHA: TIBStringField;
     dsPesPedidos: TDataSource;
     tblPedidosCHAVENFE: TIBStringField;
-    ACBrNFeDANFeRL1: TACBrNFeDANFeRL;
     tblEmitenteEMAIL: TIBStringField;
     tblProdutosVAL_ICMS: TIBBCDField;
     tblProdutosVAL_IPI: TIBBCDField;
@@ -736,8 +735,6 @@ begin
   //
   ArqINI.Free;
 
-
-
 end;
 
 procedure TtelaDados.GeraBarrasEAN13(CodBarras: string; Imagem: TCanvas);
@@ -839,9 +836,9 @@ end;
 
 function TtelaDados.pegaCodMun(cidade, uf: String): Integer;
 begin
-ACBrIBGE1.BuscarPorNome(cidade,uf,false,true);
+ACBrIBGE1.BuscarPorNome(cidade,uf,true);
 
-result := ACBrIBGE1.Cidades[0].CodMunicio;
+result := ACBrIBGE1.Cidades[0].CodMunicipio;
 
 end;
 

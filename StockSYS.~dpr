@@ -36,5 +36,6 @@ begin
   Application.CreateForm(TtelaPrincipal, telaPrincipal);
   Application.CreateForm(TtelaDados, telaDados);
   Application.CreateForm(TtelaEnviaEmail, telaEnviaEmail);
+  Application.CreateForm(TtelaConfig, telaConfig);
   Application.Run;
 end.

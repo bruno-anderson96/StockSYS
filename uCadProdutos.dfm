@@ -1,8 +1,8 @@
 object telaCadProdutos: TtelaCadProdutos
-  Left = 538
-  Top = 160
-  Width = 806
-  Height = 483
+  Left = 339
+  Top = 76
+  Width = 795
+  Height = 418
   Caption = 'Cadastro de Produtos'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,17 +17,17 @@ object telaCadProdutos: TtelaCadProdutos
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
-    Left = 605
-    Top = 0
-    Width = 185
-    Height = 445
-    Align = alRight
+    Left = 0
+    Top = 323
+    Width = 779
+    Height = 57
+    Align = alBottom
     TabOrder = 0
     object btnIncluir: TBitBtn
       Left = 0
       Top = 0
-      Width = 185
-      Height = 35
+      Width = 90
+      Height = 57
       Action = Incluir
       Caption = 'F2 - &Incluir'
       TabOrder = 0
@@ -145,10 +145,10 @@ object telaCadProdutos: TtelaCadProdutos
       NumGlyphs = 2
     end
     object btnExcluir: TBitBtn
-      Left = 0
-      Top = 34
-      Width = 185
-      Height = 35
+      Left = 89
+      Top = 0
+      Width = 90
+      Height = 57
       Action = Excluir
       Caption = 'F3 - E&xcluir'
       TabOrder = 1
@@ -266,10 +266,10 @@ object telaCadProdutos: TtelaCadProdutos
       NumGlyphs = 2
     end
     object btnConfirmar: TBitBtn
-      Left = 0
-      Top = 68
-      Width = 185
-      Height = 35
+      Left = 178
+      Top = 0
+      Width = 104
+      Height = 57
       Action = Confirmar
       Caption = 'F4 - &Confirmar'
       Enabled = False
@@ -388,10 +388,10 @@ object telaCadProdutos: TtelaCadProdutos
       NumGlyphs = 2
     end
     object btnCancelar: TBitBtn
-      Left = 0
-      Top = 102
-      Width = 185
-      Height = 35
+      Left = 281
+      Top = 0
+      Width = 100
+      Height = 57
       Action = Cancelar
       Caption = 'F5 - C&ancelar'
       Enabled = False
@@ -510,10 +510,10 @@ object telaCadProdutos: TtelaCadProdutos
       NumGlyphs = 2
     end
     object btnPesquisar: TBitBtn
-      Left = 0
-      Top = 136
-      Width = 185
-      Height = 35
+      Left = 380
+      Top = 0
+      Width = 103
+      Height = 57
       Action = Pesquisar
       Caption = 'F6 - &Pesquisar'
       TabOrder = 4
@@ -631,10 +631,10 @@ object telaCadProdutos: TtelaCadProdutos
       NumGlyphs = 2
     end
     object btnRelatorio: TBitBtn
-      Left = 0
-      Top = 170
-      Width = 185
-      Height = 35
+      Left = 482
+      Top = 0
+      Width = 101
+      Height = 57
       Caption = 'F7 - &Relat'#243'rio'
       TabOrder = 5
       Glyph.Data = {
@@ -751,10 +751,10 @@ object telaCadProdutos: TtelaCadProdutos
       NumGlyphs = 2
     end
     object btnFechar: TBitBtn
-      Left = 0
-      Top = 407
-      Width = 185
-      Height = 35
+      Left = 677
+      Top = 0
+      Width = 101
+      Height = 57
       Caption = 'F10 - &Fechar'
       TabOrder = 6
       OnClick = btnFecharClick
@@ -872,10 +872,10 @@ object telaCadProdutos: TtelaCadProdutos
       NumGlyphs = 2
     end
     object btnEditar: TBitBtn
-      Left = 0
-      Top = 204
-      Width = 185
-      Height = 35
+      Left = 582
+      Top = 0
+      Width = 90
+      Height = 57
       Action = Editar
       Caption = 'F8 - E&ditar'
       TabOrder = 7
@@ -996,8 +996,8 @@ object telaCadProdutos: TtelaCadProdutos
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
-    Width = 605
-    Height = 445
+    Width = 779
+    Height = 323
     Align = alClient
     TabOrder = 1
     object Label1: TLabel
@@ -1009,8 +1009,8 @@ object telaCadProdutos: TtelaCadProdutos
       FocusControl = editId
     end
     object Label2: TLabel
-      Left = 16
-      Top = 53
+      Left = 164
+      Top = 27
       Width = 48
       Height = 13
       Caption = 'Descri'#231#227'o'
@@ -1018,7 +1018,7 @@ object telaCadProdutos: TtelaCadProdutos
     end
     object Label3: TLabel
       Left = 16
-      Top = 80
+      Top = 56
       Width = 52
       Height = 13
       Caption = 'Refer'#234'ncia'
@@ -1026,46 +1026,46 @@ object telaCadProdutos: TtelaCadProdutos
     end
     object Label4: TLabel
       Left = 17
-      Top = 105
+      Top = 81
       Width = 40
       Height = 13
       Caption = 'Unidade'
     end
     object Label5: TLabel
       Left = 253
-      Top = 104
+      Top = 80
       Width = 55
       Height = 13
       Caption = 'Embalagem'
       FocusControl = editEmb
     end
     object Label6: TLabel
-      Left = 407
-      Top = 102
+      Left = 435
+      Top = 55
       Width = 49
       Height = 13
       Caption = 'C'#243'd. NCM'
       FocusControl = editNcm
     end
     object Label7: TLabel
-      Left = 16
-      Top = 134
+      Left = 14
+      Top = 104
       Width = 59
       Height = 13
       Caption = 'C'#243'd. EAN13'
       FocusControl = editEan
     end
     object Label8: TLabel
-      Left = 272
-      Top = 133
+      Left = 319
+      Top = 103
       Width = 36
       Height = 13
       Caption = 'DUN14'
       FocusControl = editDun
     end
     object btnPncm: TSpeedButton
-      Left = 576
-      Top = 96
+      Left = 608
+      Top = 50
       Width = 23
       Height = 22
       Caption = 'P'
@@ -1073,7 +1073,7 @@ object telaCadProdutos: TtelaCadProdutos
       OnClick = btnPncmClick
     end
     object Image1: TImage
-      Left = 472
+      Left = 648
       Top = 16
       Width = 121
       Height = 73
@@ -1081,7 +1081,7 @@ object telaCadProdutos: TtelaCadProdutos
     object editId: TDBEdit
       Left = 88
       Top = 24
-      Width = 134
+      Width = 65
       Height = 21
       DataField = 'ID'
       DataSource = telaDados.dsProdutos
@@ -1089,9 +1089,9 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 0
     end
     object editDesc: TDBEdit
-      Left = 88
-      Top = 50
-      Width = 289
+      Left = 227
+      Top = 23
+      Width = 400
       Height = 21
       CharCase = ecUpperCase
       DataField = 'DESCRICAO'
@@ -1100,9 +1100,9 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 1
     end
     object editRef: TDBEdit
-      Left = 88
-      Top = 76
-      Width = 264
+      Left = 87
+      Top = 52
+      Width = 336
       Height = 21
       CharCase = ecUpperCase
       DataField = 'REFERENCIA'
@@ -1112,7 +1112,7 @@ object telaCadProdutos: TtelaCadProdutos
     end
     object editEmb: TDBEdit
       Left = 317
-      Top = 102
+      Top = 77
       Width = 75
       Height = 21
       CharCase = ecUpperCase
@@ -1122,8 +1122,8 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 3
     end
     object editNcm: TDBEdit
-      Left = 462
-      Top = 98
+      Left = 492
+      Top = 52
       Width = 108
       Height = 21
       DataField = 'CODIGO_NCM'
@@ -1132,9 +1132,9 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 4
     end
     object editEan: TDBEdit
-      Left = 88
-      Top = 130
-      Width = 173
+      Left = 86
+      Top = 101
+      Width = 152
       Height = 21
       CharCase = ecUpperCase
       DataField = 'EAN13'
@@ -1145,8 +1145,8 @@ object telaCadProdutos: TtelaCadProdutos
       OnKeyPress = editEanKeyPress
     end
     object editDun: TDBEdit
-      Left = 317
-      Top = 129
+      Left = 365
+      Top = 101
       Width = 186
       Height = 21
       CharCase = ecUpperCase
@@ -1156,9 +1156,9 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 6
     end
     object GroupBox2: TGroupBox
-      Left = 8
-      Top = 168
-      Width = 193
+      Left = 16
+      Top = 134
+      Width = 198
       Height = 153
       Color = clSkyBlue
       Ctl3D = False
@@ -1221,9 +1221,9 @@ object telaCadProdutos: TtelaCadProdutos
       end
     end
     object GroupBox3: TGroupBox
-      Left = 200
-      Top = 168
-      Width = 201
+      Left = 214
+      Top = 134
+      Width = 213
       Height = 153
       Color = clSkyBlue
       Ctl3D = False
@@ -1327,9 +1327,9 @@ object telaCadProdutos: TtelaCadProdutos
       end
     end
     object GroupBox4: TGroupBox
-      Left = 400
-      Top = 168
-      Width = 193
+      Left = 427
+      Top = 134
+      Width = 201
       Height = 153
       Color = clSkyBlue
       Ctl3D = False
@@ -1394,8 +1394,8 @@ object telaCadProdutos: TtelaCadProdutos
       end
     end
     object cbAtivo: TDBCheckBox
-      Left = 8
-      Top = 416
+      Left = 24
+      Top = 296
       Width = 97
       Height = 17
       Caption = 'Ativo'
@@ -1409,8 +1409,8 @@ object telaCadProdutos: TtelaCadProdutos
       ValueUnchecked = 'False'
     end
     object cbCtrlEstoque: TDBCheckBox
-      Left = 88
-      Top = 416
+      Left = 104
+      Top = 296
       Width = 108
       Height = 17
       Caption = 'Controlar Estoque'
@@ -1422,8 +1422,8 @@ object telaCadProdutos: TtelaCadProdutos
       ValueUnchecked = 'False'
     end
     object cbFracionada: TDBCheckBox
-      Left = 215
-      Top = 416
+      Left = 231
+      Top = 296
       Width = 97
       Height = 17
       Caption = 'Fracionada'
@@ -1435,12 +1435,11 @@ object telaCadProdutos: TtelaCadProdutos
       ValueUnchecked = 'False'
     end
     object radTipoProduto: TRadioGroup
-      Left = 8
-      Top = 336
-      Width = 577
-      Height = 65
+      Left = 643
+      Top = 104
+      Width = 129
+      Height = 185
       Caption = 'Tipo de Produto'
-      Columns = 3
       Enabled = False
       Items.Strings = (
         '0 - Tributado'
@@ -1451,9 +1450,9 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 13
     end
     object cbUnidade: TDBComboBox
-      Left = 88
-      Top = 104
-      Width = 153
+      Left = 87
+      Top = 77
+      Width = 154
       Height = 21
       DataField = 'UNIDADE'
       DataSource = telaDados.dsProdutos
@@ -1463,8 +1462,8 @@ object telaCadProdutos: TtelaCadProdutos
     end
   end
   object ActionList1: TActionList
-    Left = 755
-    Top = 336
+    Left = 323
+    Top = 288
     object Incluir: TAction
       Caption = 'F2 - &Incluir'
       ShortCut = 113
@@ -1508,7 +1507,7 @@ object telaCadProdutos: TtelaCadProdutos
   object ACBrNCMs1: TACBrNCMs
     ProxyPort = '8080'
     UrlConsulta = 'http://www4.receita.fazenda.gov.br/simulador/PesquisarNCM.jsp?'
-    Left = 757
-    Top = 368
+    Left = 357
+    Top = 288
   end
 end

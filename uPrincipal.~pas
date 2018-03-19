@@ -4,8 +4,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus, uConfig, uStatus, uCadClientes, uCadProdutos, uCadUnidade, uLancPedidos,
-  ACBrBase, ACBrPosPrinter, Buttons, ExtCtrls, pngextra, pngimage;
+  Dialogs, Menus, uStatus, uCadClientes, uCadProdutos, uCadUnidade, uLancPedidos,
+  ACBrBase, ACBrPosPrinter, Buttons, ExtCtrls, pngextra, pngimage, StdCtrls, ComCtrls,
+  ACBrSAT, TypInfo, ACBrSATClass, ACBrIntegrador, ACBrSATExtratoClass,
+  ACBrSATExtratoESCPOS, pcnConversao;
 
 type
   TtelaPrincipal = class(TForm)
@@ -38,6 +40,12 @@ type
     PNGButton3: TPNGButton;
     PNGButton2: TPNGButton;
     Image1: TImage;
+    Panel1: TPanel;
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    GroupBox3: TGroupBox;
+    StatusBar1: TStatusBar;
+    SAT1: TMenuItem;
     procedure Configuraes1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);
     procedure StatusdeServio1Click(Sender: TObject);
@@ -58,10 +66,17 @@ type
     procedure PNGButton1Click(Sender: TObject);
     procedure PNGButton2Click(Sender: TObject);
     procedure PNGButton3Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure SAT1Click(Sender: TObject);
+
+
   private
     { Private declarations }
+
+                             
   public
     { Public declarations }
+
   end;
 
 var
@@ -70,7 +85,8 @@ var
 implementation
 
 uses uGerarNfe, uDados, uValidaXml, uEnviarNfe, uCancelaNfe, uInutilizaNfe,
-  uEmiteDanfe, uEnviaEmail, uCadFornecedor, uLancCompras, uGerarNfeEntrada, XPMan;
+  uEmiteDanfe, uEnviaEmail, uCadFornecedor, uLancCompras, uGerarNfeEntrada, XPMan, uConfig,
+  uConfigSat;
 
 {$R *.dfm}
 
@@ -192,6 +208,20 @@ procedure TtelaPrincipal.PNGButton3Click(Sender: TObject);
 begin
 Application.CreateForm(TtelaCadFor, telaCadFor);
 telaCadFor.Show;
+end;
+
+procedure TtelaPrincipal.FormShow(Sender: TObject);
+
+begin
+StatusBar1.Panels[0].Text := telaConfig.edtRazSoc.Text;
+StatusBar1.Panels[2].Text := DateToStr(Date);
+StatusBar1.Panels[3].Text := TimeToStr(Time);
+end;
+
+procedure TtelaPrincipal.SAT1Click(Sender: TObject);
+begin
+Application.CreateForm(TtelaConfigSat, telaConfigSat);
+telaConfigSat.Show;
 end;
 
 end.
