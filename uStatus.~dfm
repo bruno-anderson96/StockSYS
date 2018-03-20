@@ -86,8 +86,7 @@ object telaStatus: TtelaStatus
     Configuracoes.WebServices.UF = 'SP'
     Configuracoes.WebServices.AguardarConsultaRet = 0
     Configuracoes.WebServices.QuebradeLinha = '|'
-    Configuracoes.WebServices.TimeoutIntegrador = 0
     Left = 832
-    Top = 328
+    Top = 336
   end
 end

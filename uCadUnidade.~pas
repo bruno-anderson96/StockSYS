@@ -106,9 +106,7 @@ begin
     end;
    }
    telaDados.tblUnidade.Insert;
-   telaDados.tblUnidadeID.Value := id;
-
-
+   telaDados.tblUnidadeID.Value := id; 
 
    {editId.Text := IntToStr(id);}
 

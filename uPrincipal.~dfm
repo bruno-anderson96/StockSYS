@@ -13,6 +13,7 @@ object telaPrincipal: TtelaPrincipal
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
+  Position = poDesktopCenter
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -3928,6 +3929,7 @@ object telaPrincipal: TtelaPrincipal
       Height = 57
       Cursor = crHandPoint
       ButtonLayout = pbsImageAbove
+      Caption = 'Fechar'
       ImageNormal.Data = {
         89504E470D0A1A0A0000000D4948445200000018000000180806000000E0773D
         F80000000467414D410000B18F0BFC610500000006624B4744000000000000F9

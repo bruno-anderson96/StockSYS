@@ -1,6 +1,6 @@
 object telaCadClientes: TtelaCadClientes
-  Left = -3
-  Top = 86
+  Left = 127
+  Top = 164
   Width = 807
   Height = 448
   Caption = 'Cadastro de Cliente'
@@ -11,6 +11,7 @@ object telaCadClientes: TtelaCadClientes
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -1654,6 +1655,7 @@ object telaCadClientes: TtelaCadClientes
   end
   object ACBrIBGE1: TACBrIBGE
     ProxyPort = '8080'
+    CacheArquivo = 'ACBrIBGE.txt'
     Left = 372
     Top = 32
   end

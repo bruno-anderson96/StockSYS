@@ -1,6 +1,6 @@
 object telaLancCompras: TtelaLancCompras
-  Left = 322
-  Top = 26
+  Left = 251
+  Top = 76
   Width = 1008
   Height = 593
   Caption = 'Lan'#231'amento de Compras'

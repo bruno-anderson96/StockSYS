@@ -52,8 +52,8 @@ begin
 
       case cbCategoria.ItemIndex of
         0:telaDados.qryClientes.SQL.Add('NOME like :pDados');
-        1:telaDados.qryClientes.SQL.Add('CNPJ_cpf = :pDados ');
-        2:telaDados.qryClientes.SQL.Add('INSC_RG = :pDados ');
+        1:telaDados.qryClientes.SQL.Add('CNPJ_cpf like :pDados ');
+        2:telaDados.qryClientes.SQL.Add('INSC_RG like :pDados ');
         3:telaDados.qryClientes.SQL.Add('CIDADE_END like :pDados');
       end;
     telaDados.qryClientes.Params.ParamByName('pDados').asString := editBusca.Text + '%';

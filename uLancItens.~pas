@@ -190,7 +190,6 @@ begin
 
 
    }
-   telaDados.tblPedidosItens.Close;
    end else begin
    telaDados.tblCompraItens.Open;
   {telaDados.tblPedidosItensID_PEDIDO.Value := StrToInt(telaLancPedidos.editId.Text);
