@@ -1,6 +1,6 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 274
-  Top = 120
+  Left = 195
+  Top = 109
   Width = 1001
   Height = 583
   Caption = 'Lan'#231'amento de Pedidos'

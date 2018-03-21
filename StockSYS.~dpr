@@ -27,7 +27,8 @@ uses
   uLancCompras in 'uLancCompras.pas' {telaLancCompras},
   uPesFornecedor in 'uPesFornecedor.pas' {telaPesFor},
   uGerarNfeEntrada in 'uGerarNfeEntrada.pas' {telaGerarNfeEntrada},
-  uLoading in 'uLoading.pas' {telaLoading};
+  uLoading in 'uLoading.pas' {telaLoading},
+  uConfigSat in 'uConfigSat.pas' {telaConfigSat};
 
 {$R *.res}
 
@@ -37,5 +38,6 @@ begin
   Application.CreateForm(TtelaDados, telaDados);
   Application.CreateForm(TtelaEnviaEmail, telaEnviaEmail);
   Application.CreateForm(TtelaConfig, telaConfig);
+  Application.CreateForm(TtelaConfigSat, telaConfigSat);
   Application.Run;
 end.

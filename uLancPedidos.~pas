@@ -103,7 +103,7 @@ var
 
 implementation
 
-uses DB;
+uses DB,uConfigSat;
 
 {$R *.dfm}
 
@@ -477,6 +477,8 @@ if editValProd.Text = '' then
       telaDados.cdsTempItens.Delete;
 
   end;
+
+  telaConfigSat.gerarVenda;
 
   telaDados.tblPedidosItens.ApplyUpdates;
   telaDados.tblProdutos.Close; 

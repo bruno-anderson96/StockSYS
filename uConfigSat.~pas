@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, Buttons, ACBrPosPrinter, ACBrSATExtratoClass,
   ACBrSATExtratoESCPOS, ACBrSAT, ACBrBase,  TypInfo, ACBrSATClass,
    ACBrIntegrador, pcnConversao, Math, ACBrUtil, RLPrinters, Printers, ACBrSATMFe_integrador, pcnVFPe,
-   ACBrDFeSSL;
+   ACBrDFeSSL, ExtCtrls, uConfig, uDados, uLancPedidos;
 
 type
   TtelaConfigSat = class(TForm)
@@ -26,16 +26,17 @@ type
     editSchema: TEdit;
     SpeedButton3: TSpeedButton;
     OpenDialog1: TOpenDialog;
+    Panel1: TPanel;
     procedure At(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
     procedure EnviarClick(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure AjustarCfe;
     procedure FormCreate(Sender: TObject);
+    procedure gerarVenda;
   private
     { Private declarations }
     procedure GetsignAC(var Chave: AnsiString);
@@ -50,7 +51,7 @@ var
 
 implementation
 
-uses pcnCFe;
+uses pcnCFe, DB;
 
 {$R *.dfm}
 
@@ -93,13 +94,13 @@ begin
   Config.ide_CNPJ := '11.111.111/1111-11'; }
   config.ide_numeroCaixa := 1;
   Config.ide_tpAmb := taHomologacao;
-  Config.emit_IE := '123456789123';
+  Config.emit_IE := telaConfig.edtInscEst.Text;
   Config.emit_IM := '';
   Config.emit_cRegTrib := RTSimplesNacional;
   Config.emit_cRegTribISSQN := RTISSMicroempresaMunicipal;
   Config.emit_indRatISSQN := irNao;    {
   Config.emit_CNPJ := '14200166000166'; }
-  Config.emit_CNPJ := '11111111111111';
+  Config.emit_CNPJ := telaConfig.edtCnpj.Text;
 
 
   {ACBrSAT1.OnGetNumeroSessao := GetNumeroSessao;}
@@ -114,16 +115,10 @@ ACBrSAT1.OnGetsignAC := GetsignAC;
 {'12373349000158'}
 end;
 
-procedure TtelaConfigSat.SpeedButton5Click(Sender: TObject);
-begin
-  
-  Memo1.Text := ACBrSAT1.AssociarAssinatura( '11111111111111' + '11111111111111','MD2Nof/O0tQMPKiYeeAydSjYt7YV9kU0nWKZGXHVdYIzR2W9Z6tgXni/Y5bnjmUAk8MkqlBJIiOOIskKCjJ086k7vAP0EU5cBRYj/nzHUiRdu9AVD7WRfVs00BDyb5fsnnKg7gAXXH6SBgCxG9yjAkxJ0l2E2idsWBAJ5peQEBZqtHytRUC+FLaSfd3+'+'66QNxIBlDwQIRzUGPaU6fvErVDSfMUf8WpkwnPz36fCQnyLypqe/5mbox9pt3RCbbXcYqnR/4poYGr9M9Kymj4/PyX9xGeiXwbgzOOHNIU5M/aAs0rulXz948bZla0eXABgEcp6mDkTzweLPZTbmOhX+eA==');
-end;
-
-procedure TtelaConfigSat.SpeedButton1Click(Sender: TObject);
+procedure TtelaConfigSat.gerarVenda;
 var
   TotalItem, TotalGeral, Pagto1: Double;
-  A: Integer;
+  A, aNumItem: Integer;
   Loops: Integer;
 begin
   Memo1.Clear;{
@@ -140,76 +135,103 @@ begin
   AjustarCfe;
   ACBrSAT1.InicializaCFe;
 
+  telaDados.qryPedidos.Close;
+  telaDados.qryPedidos.SQL.Clear;
+  telaDados.qryPedidos.SQL.Add('Select * from Pedido where ID = ');
+  telaDados.qryPedidos.SQL.Add(telaLancPedidos.editId.Text);
+  telaDados.qryPedidos.Open;
 
+  telaDados.qryClientes.Close;
+  telaDados.qryClientes.SQL.Clear;
+  telaDados.qryClientes.SQL.Add('Select * from CLIENTE where id =');
+  telaDados.qryClientes.SQL.Add(telaDados.qryPedidos.FieldByName('ID_CLIENTE').Value);
+  telaDados.qryClientes.Open;
+
+  telaDados.qryPedidosItens.Close;
+  telaDados.qryPedidosItens.SQL.Clear;
+  telaDados.qryPedidosItens.SQL.Add('Select * from PEDIDO_ITENS where ID_PEDIDO = ');
+  telaDados.qryPedidosItens.SQL.Add(telaDados.qryPedidos.FieldByName('ID').Value);
+  telaDados.qryPedidosItens.Open;
 
   // Montando uma Venda //
   with ACBrSAT1.CFe do
   begin
 
-    Emit.IE := '123456789123';
     ide.numeroCaixa := 1;
     ide.cNF := Random(999999);
 
-    Dest.CNPJCPF := '5481336000137';
-    Dest.xNome := 'D.J. SYSTEM ¡…Õ”⁄·ÈÌÛ˙«Á teste de nome Longo';
+    Dest.CNPJCPF := telaDados.qryClientes.FieldByName('CNPJ_CPF').AsString;
+    Dest.xNome := telaDados.qryClientes.FieldByName('NOME').AsString;
 
-    Entrega.xLgr := 'logradouro';
-    Entrega.nro := '112233';
-    Entrega.xCpl := 'complemento';
-    Entrega.xBairro := 'bairro';
-    Entrega.xMun := 'municipio';
-    Entrega.UF := 'RJ';
+    Entrega.xLgr := telaDados.qryClientes.FieldByName('ENDERECO').AsString;
+    Entrega.nro := telaDados.qryClientes.FieldByName('NUM_END').AsString;
+    Entrega.xCpl := telaDados.qryClientes.FieldByName('COMPLEMENTO').AsString;
+    Entrega.xBairro := telaDados.qryClientes.FieldByName('BAIRRO_END').AsString;
+    Entrega.xMun := telaDados.qryClientes.FieldByName('CIDADE_END').AsString;
+    Entrega.UF := telaDados.qryClientes.FieldByName('UF_END').AsString;
 
-    Loops := max(Trunc(10 / 3)-1, 0);
 
-    For A := 0 to Loops do  // Ajuste aqui para vender mais itens
-    begin
-    with Det.Add do
-    begin
-      nItem := 1 + (A * 3);
-      Prod.cProd := 'ACBR0001';
-      Prod.cEAN := '6291041500213';
-      Prod.xProd := 'Assinatura SAC';
-      prod.NCM := '99';
-      Prod.CFOP := '5120';
-      Prod.uCom := 'UN';
-      Prod.qCom := 1;
-      Prod.vUnCom := 120.00;
-      Prod.indRegra := irTruncamento;
-      Prod.vDesc := 1;
-
-      with Prod.obsFiscoDet.Add do
+    telaDados.tblPedidosItens.Open;
+    telaDados.qryPedidosItens.First;
+    {Loops := telaDados.qryPedidosItens.RecordCount;  // Ajuste aqui para vender mais itens
+    For A := 1 to Loops do}
+     while not telaDados.qryPedidosItens.Eof do
       begin
-        xCampoDet := 'campo';
-        xTextoDet := 'texto';
-      end;
+        
+        telaDados.qryProdutos.Close;
+        telaDados.qryProdutos.SQL.Clear;
+        telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID =');
+        telaDados.qryProdutos.SQL.Add(telaDados.qryPedidosItens.FieldByName('ID_PRODUTO').Value);
+        telaDados.qryProdutos.Open;
+      with Det.Add do
+        begin
+        nItem := telaDados.qryPedidosItens.RecordCount;
+        {nItem := 1 + (A * 3);}
+        Prod.cProd := telaDados.qryProdutos.FieldByName('ID').AsString;
+        Prod.cEAN := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+        Prod.xProd := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
+        prod.NCM := telaDados.qryProdutos.FieldByName('CODIGO_NCM').AsString;
+        Prod.CFOP := 'CFOP';
+        Prod.uCom := telaDados.qryProdutos.FieldByName('UNIDADE').AsString;
+        Prod.qCom := telaDados.qryPedidosItens.FieldByName('QUANTIDADE').AsInteger;
+        Prod.vUnCom := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
+        Prod.indRegra := irTruncamento;
+        Prod.vDesc := telaDados.qryPedidos.FieldByName('DESCONTO').AsFloat;
 
-      TotalItem := RoundABNT((Prod.qCom * Prod.vUnCom) + Prod.vOutro - Prod.vDesc, -2);
-      TotalGeral := TotalGeral + TotalItem;
-      Imposto.vItem12741 := TotalItem * 0.12;
+        with Prod.obsFiscoDet.Add do
+          begin
+          xCampoDet := 'campo';
+          xTextoDet := 'texto';
+        end;
 
-      Imposto.ICMS.orig := oeNacional;
-      if Emit.cRegTrib = RTSimplesNacional then
-        Imposto.ICMS.CSOSN := csosn102
-      else
-        Imposto.ICMS.CST := cst00;
+        TotalItem := RoundABNT((Prod.qCom * Prod.vUnCom) + Prod.vOutro - Prod.vDesc, -2);
+        TotalGeral := TotalGeral + TotalItem;
+        Imposto.vItem12741 := TotalItem * 0.12;
 
-      Imposto.ICMS.pICMS := 18;
+        Imposto.ICMS.orig := oeNacional;
+          if Emit.cRegTrib = RTSimplesNacional then
+            Imposto.ICMS.CSOSN := csosn102
+          else
+            Imposto.ICMS.CST := cst00;
 
-      Imposto.PIS.CST := pis49;
-      Imposto.PIS.vBC := TotalItem;
-      Imposto.PIS.pPIS := 0.0065;
+        Imposto.ICMS.pICMS := telaDados.qryProdutos.FieldByName('VAL_ICMS').AsInteger;
 
-      Imposto.COFINS.CST := cof49;
-      Imposto.COFINS.vBC := TotalItem;
-      Imposto.COFINS.pCOFINS := 0.0065;
+        Imposto.PIS.CST := pis49;
+        Imposto.PIS.vBC := TotalItem;
+        Imposto.PIS.pPIS := 0.0065;
+
+        Imposto.COFINS.CST := cof49;
+        Imposto.COFINS.vBC := TotalItem;
+        Imposto.COFINS.pCOFINS := 0.0065;
       //
       //Imposto.COFINSST.vBC := 87206.46;
       //Imposto.COFINSST.pCOFINS := 1.8457;
 
-      infAdProd := 'Informacoes adicionais';
-    end;
+        infAdProd := 'Informacoes adicionais';
 
+      end;
+    telaDados.qryPedidosItens.Next;
+     {
     with Det.Add do
     begin
       nItem := 2 + (A * 3);
@@ -281,7 +303,7 @@ begin
     end;
 
     end;
-
+      }
 
     Total.DescAcrEntr.vDescSubtot := 5;
     Total.vCFeLei12741 := 1.23;
@@ -309,8 +331,15 @@ begin
 
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicaÁ„o
 
-
+  
   end;
+end;
+
+procedure TtelaConfigSat.SpeedButton5Click(Sender: TObject);
+begin
+  
+  Memo1.Text := ACBrSAT1.AssociarAssinatura( '11111111111111' + '11111111111111','MD2Nof/O0tQMPKiYeeAydSjYt7YV9kU0nWKZGXHVdYIzR2W9Z6tgXni/Y5bnjmUAk8MkqlBJIiOOIskKCjJ086k7vAP0EU5cBRYj/nzHUiRdu9AVD7WRfVs00BDyb5fsnnKg7gAXXH6SBgCxG9yjAkxJ0l2E2idsWBAJ5peQEBZqtHytRUC+FLaSfd3+'+'66QNxIBlDwQIRzUGPaU6fvErVDSfMUf8WpkwnPz36fCQnyLypqe/5mbox9pt3RCbbXcYqnR/4poYGr9M9Kymj4/PyX9xGeiXwbgzOOHNIU5M/aAs0rulXz948bZla0eXABgEcp6mDkTzweLPZTbmOhX+eA==');
+end;
 
 procedure TtelaConfigSat.EnviarClick(Sender: TObject);
 var

@@ -1,6 +1,6 @@
 object telaPrincipal: TtelaPrincipal
-  Left = 234
-  Top = 124
+  Left = 268
+  Top = 334
   Width = 1040
   Height = 580
   Caption = 'Projeto NFe - ACBr'
