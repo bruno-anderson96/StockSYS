@@ -68,6 +68,8 @@ type
     procedure PNGButton3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SAT1Click(Sender: TObject);
+    procedure PNGButton4Click(Sender: TObject);
+    procedure PNGButton5Click(Sender: TObject);
 
 
   private
@@ -222,6 +224,18 @@ procedure TtelaPrincipal.SAT1Click(Sender: TObject);
 begin
 Application.CreateForm(TtelaConfigSat, telaConfigSat);
 telaConfigSat.Show;
+end;
+
+procedure TtelaPrincipal.PNGButton4Click(Sender: TObject);
+begin
+Application.CreateForm(TtelaLancPedidos, telaLancPedidos);
+telaLancPedidos.Show;
+end;
+
+procedure TtelaPrincipal.PNGButton5Click(Sender: TObject);
+begin
+Application.CreateForm(TtelaLancCompras, telaLancCompras);
+telaLancCompras.Show;
 end;
 
 end.

@@ -28,7 +28,8 @@ uses
   uPesFornecedor in 'uPesFornecedor.pas' {telaPesFor},
   uGerarNfeEntrada in 'uGerarNfeEntrada.pas' {telaGerarNfeEntrada},
   uLoading in 'uLoading.pas' {telaLoading},
-  uConfigSat in 'uConfigSat.pas' {telaConfigSat};
+  uConfigSat in 'uConfigSat.pas' {telaConfigSat},
+  configuraserial in 'configuraserial.pas';
 
 {$R *.res}
 

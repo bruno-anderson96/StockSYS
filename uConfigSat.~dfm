@@ -1,6 +1,6 @@
 object telaConfigSat: TtelaConfigSat
-  Left = 216
-  Top = 130
+  Left = 489
+  Top = 234
   Width = 749
   Height = 445
   Caption = 'Configura'#231#227'o SAT'
@@ -25,7 +25,7 @@ object telaConfigSat: TtelaConfigSat
     TabOrder = 0
     object SpeedButton3: TSpeedButton
       Left = 248
-      Top = 355
+      Top = 347
       Width = 23
       Height = 22
       OnClick = SpeedButton3Click
@@ -413,6 +413,36 @@ object telaConfigSat: TtelaConfigSat
       Caption = 'Enviar Venda'
       OnClick = EnviarClick
     end
+    object SpeedButton7: TSpeedButton
+      Left = 560
+      Top = 40
+      Width = 81
+      Height = 22
+      Caption = 'Gerar Extrato'
+      OnClick = SpeedButton7Click
+    end
+    object SpeedButton8: TSpeedButton
+      Left = 560
+      Top = 72
+      Width = 81
+      Height = 22
+      Caption = 'Imprimir extrato'
+      OnClick = SpeedButton8Click
+    end
+    object SpeedButton9: TSpeedButton
+      Left = 16
+      Top = 8
+      Width = 23
+      Height = 22
+      OnClick = SpeedButton9Click
+    end
+    object lImpressora: TLabel
+      Left = 48
+      Top = 8
+      Width = 53
+      Height = 13
+      Caption = 'lImpressora'
+    end
     object ComboBox1: TComboBox
       Left = 104
       Top = 352
@@ -439,6 +469,38 @@ object telaConfigSat: TtelaConfigSat
         '')
       TabOrder = 2
     end
+    object cbxModelo: TComboBox
+      Left = 256
+      Top = 8
+      Width = 145
+      Height = 21
+      ItemHeight = 13
+      TabOrder = 3
+    end
+    object cbxPagCodigo: TComboBox
+      Left = 408
+      Top = 8
+      Width = 145
+      Height = 21
+      ItemHeight = 13
+      TabOrder = 4
+    end
+    object cbxPorta: TComboBox
+      Left = 408
+      Top = 40
+      Width = 145
+      Height = 21
+      ItemHeight = 13
+      TabOrder = 5
+    end
+    object cbxModeloPosPrinter: TComboBox
+      Left = 256
+      Top = 40
+      Width = 145
+      Height = 21
+      ItemHeight = 13
+      TabOrder = 6
+    end
   end
   object ACBrIntegrador1: TACBrIntegrador
     PastaInput = 'C:\Integrador\Input\'
@@ -448,7 +510,8 @@ object telaConfigSat: TtelaConfigSat
   end
   object ACBrSAT1: TACBrSAT
     Integrador = ACBrIntegrador1
-    NomeDLL = 'C:\SAT\SAT.dll'
+    Extrato = ACBrSATExtratoFortes1
+    NomeDLL = 'C:\Users\Bruno\Documents\StockSYS\dll\elgin\mfe.dll'
     ValidarNumeroSessaoResposta = True
     NumeroTentativasValidarSessao = 2
     Config.infCFe_versaoDadosEnt = 0.070000000000000010
@@ -471,11 +534,6 @@ object telaConfigSat: TtelaConfigSat
     Rede.tipoInter = infETHE
     Rede.seg = segNONE
     Rede.tipoLan = lanDHCP
-    Rede.lanIP = '192.168.1.1'
-    Rede.lanMask = '255.255.255.0'
-    Rede.lanGW = '192.168.1.1'
-    Rede.lanDNS1 = '192.168.1.1'
-    Rede.lanDNS2 = '192.168.1.1'
     Rede.proxy = 0
     Rede.proxy_porta = 0
     Left = 464
@@ -493,6 +551,7 @@ object telaConfigSat: TtelaConfigSat
     Top = 336
   end
   object ACBrPosPrinter1: TACBrPosPrinter
+    Modelo = ppEscPosEpson
     ConfigBarras.MostrarCodigo = False
     ConfigBarras.LarguraLinha = 0
     ConfigBarras.Altura = 0
@@ -507,5 +566,32 @@ object telaConfigSat: TtelaConfigSat
   object OpenDialog1: TOpenDialog
     Left = 560
     Top = 336
+  end
+  object ACBrSATExtratoFortes1: TACBrSATExtratoFortes
+    ACBrSAT = ACBrSAT1
+    Mask_qCom = ',0.0000'
+    Mask_vUnCom = ',0.000'
+    MostrarPreview = True
+    MostrarSetup = True
+    NomeArquivo = 'mfepdf.pdf'
+    SoftwareHouse = 'Projeto ACBr'
+    Site = 'http://www.projetoacbr.com.br'
+    MsgAppQRCode = 
+      'Consulte o QR Code pelo aplicativo  "De olho na nota", dispon'#237've' +
+      'l na AppStore (Apple) e PlayStore (Android)'
+    Left = 592
+    Top = 336
+  end
+  object PrintDialog1: TPrintDialog
+    Left = 432
+    Top = 368
+  end
+  object RLPDFFilter1: TRLPDFFilter
+    DocumentInfo.Creator = 
+      'FortesReport Community Edition v4.0 \251 Copyright '#169' 1999-2016 F' +
+      'ortes Inform'#225'tica'
+    DisplayName = 'Documento PDF'
+    Left = 464
+    Top = 368
   end
 end

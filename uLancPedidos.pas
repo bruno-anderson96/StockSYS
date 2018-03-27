@@ -14,7 +14,6 @@ type
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
     gbCli: TGroupBox;
-    radTpPg: TRadioGroup;
     GroupBox4: TGroupBox;
     btnIncItem: TBitBtn;
     btnExcItem: TBitBtn;
@@ -74,6 +73,8 @@ type
     Encerrar: TAction;
     Confirmar: TAction;
     Excluir: TAction;
+    cbTpPg: TComboBox;
+    GroupBox3: TGroupBox;
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnIncItemClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -141,7 +142,7 @@ editDtEmissao.Enabled := true; {
 editHrEmissao.Enabled := true; }
 editIdCliente.Enabled := true;
 cbCliente.Enabled := true;
-radTpPg.Enabled := true;
+cbTpPg.Enabled := true;
 {editValProd.Enabled := true;}
 editDesc.Enabled := true;
 editAsc.Enabled := true;
@@ -167,7 +168,7 @@ btnIncluir.Enabled := false;
 btnConfirmar.Enabled := true;
 btnCancelar.Enabled := true;
 
-radTpPg.ItemIndex := 0;
+cbTpPg.ItemIndex := 0;
 
 editDesc.Text := FloatToStr(d);
 editAsc.Text  := FloatToStr(a);
@@ -239,7 +240,7 @@ if editValProd.Text = '' then
   editHrEmissao.Enabled := false; }
   editIdCliente.Enabled := false;
   cbCliente.Enabled := false;
-  radTpPg.Enabled := false;
+  cbTpPg.Enabled := false;
   editValProd.Enabled := false;
   editDesc.Enabled := false;
   editAsc.Enabled := false;
@@ -391,7 +392,7 @@ if editValProd.Text = '' then
   editHrEmissao.Enabled := false; }
   editIdCliente.Enabled := false;
   cbCliente.Enabled := false;
-  radTpPg.Enabled := false;
+  cbTpPg.Enabled := false;
   editValProd.Enabled := false;
   editDesc.Enabled := false;
   editAsc.Enabled := false;
@@ -502,7 +503,7 @@ editDtEmissao.Enabled := true; {
 editHrEmissao.Enabled := true; }
 editIdCliente.Enabled := true;
 cbCliente.Enabled := true;
-radTpPg.Enabled := true;
+cbTpPg.Enabled := true;
 {editValProd.Enabled := true;}
 editDesc.Enabled := true;
 editAsc.Enabled := true;
@@ -532,7 +533,7 @@ Incluir.Enabled := false;
 Confirmar.Enabled := true;
 Cancelar.Enabled := true; 
 
-radTpPg.ItemIndex := 0;
+cbTpPg.ItemIndex := 0;
 
 editDesc.Text := FloatToStr(d);
 editAsc.Text  := FloatToStr(a);
@@ -574,7 +575,7 @@ editDtEmissao.Enabled := false; {
 editHrEmissao.Enabled := true; }
 editIdCliente.Enabled := false;
 cbCliente.Enabled := false;
-radTpPg.Enabled := false;
+cbTpPg.Enabled := false;
 {editValProd.Enabled := true;}
 editDesc.Enabled := false;
 editAsc.Enabled := false;

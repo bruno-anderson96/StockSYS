@@ -6,8 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Buttons, ACBrPosPrinter, ACBrSATExtratoClass,
   ACBrSATExtratoESCPOS, ACBrSAT, ACBrBase,  TypInfo, ACBrSATClass,
-   ACBrIntegrador, pcnConversao, Math, ACBrUtil, RLPrinters, Printers, ACBrSATMFe_integrador, pcnVFPe,
-   ACBrDFeSSL, ExtCtrls, uConfig, uDados, uLancPedidos;
+  ACBrIntegrador, pcnConversao, Math, ACBrUtil, RLPrinters, Printers, ACBrSATMFe_integrador, pcnVFPe,
+  ACBrDFeSSL, ExtCtrls, uConfig, uDados, uLancPedidos,
+  ACBrSATExtratoReportClass, ACBrSATExtratoFortesFr, RLFilters, RLPDFFilter;
 
 type
   TtelaConfigSat = class(TForm)
@@ -27,6 +28,17 @@ type
     SpeedButton3: TSpeedButton;
     OpenDialog1: TOpenDialog;
     Panel1: TPanel;
+    cbxModelo: TComboBox;
+    cbxPagCodigo: TComboBox;
+    SpeedButton7: TSpeedButton;
+    cbxPorta: TComboBox;
+    cbxModeloPosPrinter: TComboBox;
+    ACBrSATExtratoFortes1: TACBrSATExtratoFortes;
+    SpeedButton8: TSpeedButton;
+    SpeedButton9: TSpeedButton;
+    lImpressora: TLabel;
+    PrintDialog1: TPrintDialog;
+    RLPDFFilter1: TRLPDFFilter;
     procedure At(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
@@ -37,6 +49,13 @@ type
     procedure AjustarCfe;
     procedure FormCreate(Sender: TObject);
     procedure gerarVenda;
+    procedure LeDadosRedeSat;
+    procedure ConfiguraRedeSat;
+    procedure PrepararImpressao;
+    procedure SpeedButton7Click(Sender: TObject);
+    procedure SpeedButton8Click(Sender: TObject);
+    procedure SpeedButton9Click(Sender: TObject);
+
   private
     { Private declarations }
     procedure GetsignAC(var Chave: AnsiString);
@@ -57,13 +76,13 @@ uses pcnCFe, DB;
 
 procedure TtelaConfigSat.GetsignAC(var Chave: AnsiString);
 begin
-  Chave := AnsiString( 'MD2Nof/O0tQMPKiYeeAydSjYt7YV9kU0nWKZGXHVdYIzR2W9Z6tgXni/Y5bnjmUAk8MkqlBJIiOOIskKCjJ086k7vAP0EU5cBRYj/nzHUi'+'Rdu9AVD7WRfVs00BDyb5fsnnKg7gAXXH6SBgCxG9yjAkxJ0l2E2idsWBAJ5peQEBZqtHytRUC+FLaSfd3+66QNxIBlDwQIRzUGPaU6fvErVDSfMUf8WpkwnPz36fCQnyLypqe/5mbox9pt3RCbbXcYqnR/4poYGr9M9Kymj4/PyX9xGeiXwbgzOOHNIU5M/aAs0rulXz948bZla0eXABgEcp6mDkTzweLPZTbmOhX+eA=='  );
+  Chave := AnsiString('AvKLv0zW5pywUQi/myFzzoJhSLsbx3g0Ro5VwZvngLuzVDVJbLng/pZb4Upstr872qb59DlkAKg54Riv+AoCYSQj7mIiJ8rVPbeiAKrnoekm4XVKZKiAZN/4Fve2n4S/b/N8M0kItwhIWsAUURP0ESJ3LKSTk5RgrUPb8UXRWG7QGZHunmndLJ42vxKf7Wz/74bRZfA36g1AL3'+'/ojB+QwrPx0wqSbTLJCmizmI4o7X9vmP9m+VS0qk3GUBdLII/j2dt6ni9nDYYxofDbpclsK6Y6ZO2E3YgNPSP4DHUwNo3hs0ij3+ROWlYZF2FqAOdFo5pUxL7fmn+/oHV0dHUoCw==' );
 
 end;
 
 procedure TtelaConfigSat.GetcodigoDeAtivacao(var Chave: AnsiString);
 begin
-  Chave := AnsiString( '123456789' );
+  Chave := AnsiString( '123123123' );
 end;
 
 procedure TtelaConfigSat.GetNumeroSessao(var Chave: Integer);
@@ -78,7 +97,7 @@ end;
 
 procedure TtelaConfigSat.SpeedButton6Click(Sender: TObject);
 begin
-Memo1.Text := ACBrSAT1.ConsultarSAT;
+Memo1.Text := ACBrSAT1.ConsultarSAT + ACBrSAT1.ConsultarStatusOperacional;
 end;
 
 procedure TtelaConfigSat.AjustarCfe;
@@ -87,20 +106,20 @@ begin
  begin
 
 
-  Modelo := satDinamico_stdcall;
-  Config.ide_CNPJ := '11111111111111';
+  Modelo := mfe_Integrador_XML;
+  Config.ide_CNPJ := '02709607000170'{'11111111111111'};
   {
   Config.ide_CNPJ := '08490295000133';
   Config.ide_CNPJ := '11.111.111/1111-11'; }
   config.ide_numeroCaixa := 1;
   Config.ide_tpAmb := taHomologacao;
-  Config.emit_IE := telaConfig.edtInscEst.Text;
+  Config.emit_IE := '064075559'{telaConfig.edtInscEst.Text};
   Config.emit_IM := '';
   Config.emit_cRegTrib := RTSimplesNacional;
   Config.emit_cRegTribISSQN := RTISSMicroempresaMunicipal;
   Config.emit_indRatISSQN := irNao;    {
   Config.emit_CNPJ := '14200166000166'; }
-  Config.emit_CNPJ := telaConfig.edtCnpj.Text;
+  Config.emit_CNPJ := '12373349000158'{telaConfig.edtCnpj.Text};
 
 
   {ACBrSAT1.OnGetNumeroSessao := GetNumeroSessao;}
@@ -187,11 +206,11 @@ begin
         begin
         nItem := telaDados.qryPedidosItens.RecordCount;
         {nItem := 1 + (A * 3);}
-        Prod.cProd := telaDados.qryProdutos.FieldByName('ID').AsString;
-        Prod.cEAN := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+        Prod.cProd := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+        {Prod.cEAN := telaDados.qryProdutos.FieldByName('EAN13').AsString; }
         Prod.xProd := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
         prod.NCM := telaDados.qryProdutos.FieldByName('CODIGO_NCM').AsString;
-        Prod.CFOP := 'CFOP';
+        Prod.CFOP := '5102';
         Prod.uCom := telaDados.qryProdutos.FieldByName('UNIDADE').AsString;
         Prod.qCom := telaDados.qryPedidosItens.FieldByName('QUANTIDADE').AsInteger;
         Prod.vUnCom := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
@@ -330,7 +349,8 @@ begin
   end;
 
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
-
+  Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda; 
+  
   
   end;
 end;
@@ -401,8 +421,144 @@ begin
 end;
 
 procedure TtelaConfigSat.FormCreate(Sender: TObject);
+var I : TACBrSATModelo;
+    O : TACBrPosPaginaCodigo;
+    N : TACBrPosPrinterModelo;
 begin
 AjustarCfe;
+  cbxModelo.Items.Clear ;
+  For I := Low(TACBrSATModelo) to High(TACBrSATModelo) do
+     cbxModelo.Items.Add( GetEnumName(TypeInfo(TACBrSATModelo), integer(I) ) ) ;
+
+  cbxPagCodigo.Items.Clear ;
+  For O := Low(TACBrPosPaginaCodigo) to High(TACBrPosPaginaCodigo) do
+     cbxPagCodigo.Items.Add( GetEnumName(TypeInfo(TACBrPosPaginaCodigo), integer(O) ) ) ;
+
+  cbxModeloPosPrinter.Items.Clear ;
+  For N := Low(TACBrPosPrinterModelo) to High(TACBrPosPrinterModelo) do
+     cbxModeloPosPrinter.Items.Add( GetEnumName(TypeInfo(TACBrPosPrinterModelo), integer(N) ) ) ;
+
+  cbxPorta.Items.Clear;
+  ACBrPosPrinter1.Device.AcharPortasSeriais( cbxPorta.Items );
+  cbxPorta.Items.Add('LPT1') ;
+  cbxPorta.Items.Add('LPT2') ;
+  cbxPorta.Items.Add('/dev/ttyS0') ;
+  cbxPorta.Items.Add('/dev/ttyS1') ;
+  cbxPorta.Items.Add('/dev/ttyUSB0') ;
+  cbxPorta.Items.Add('/dev/ttyUSB1') ;
+  cbxPorta.Items.Add('\\localhost\Epson') ;
+  cbxPorta.Items.Add('c:\temp\ecf.txt') ;
+  cbxPorta.Items.Add('/tmp/ecf.txt') ;
+
+end;
+
+
+procedure TtelaConfigSat.ConfiguraRedeSAT;
+begin{
+  with ACBrSAT1.Rede do
+  begin
+    tipoInter   := TTipoInterface( rgRedeTipoInter.ItemIndex );
+    SSID        := edRedeSSID.Text ;
+    seg         := TSegSemFio( cbxRedeSeg.ItemIndex ) ;
+    codigo      := edRedeCodigo.Text ;
+    tipoLan     := TTipoLan( rgRedeTipoLan.ItemIndex ) ;
+    lanIP       := edRedeIP.Text ;
+    lanMask     := edRedeMask.Text ;
+    lanGW       := edRedeGW.Text ;
+    lanDNS1     := edRedeDNS1.Text ;
+    lanDNS2     := edRedeDNS2.Text ;
+    usuario     := edRedeUsuario.Text ;
+    senha       := edRedeSenha.Text ;
+    proxy       := cbxRedeProxy.ItemIndex ;
+    proxy_ip    := edRedeProxyIP.Text ;
+    proxy_porta := edRedeProxyPorta.Value ;
+    proxy_user  := edRedeProxyUser.Text ;
+    proxy_senha := edRedeProxySenha.Text ;
+  end;}
+end;
+
+procedure TtelaConfigSat.LeDadosRedeSAT;
+begin {
+  with ACBrSAT1.Rede do
+  begin
+    rgRedeTipoInter.ItemIndex := Integer(tipoInter);
+    edRedeSSID.Text           := SSID ;
+    cbxRedeSeg.ItemIndex      := Integer(seg) ;
+    edRedeCodigo.Text         := codigo ;
+    rgRedeTipoLan.ItemIndex   := Integer(tipoLan);
+    edRedeIP.Text             := lanIP;
+    edRedeMask.Text           := lanMask;
+    edRedeGW.Text             := lanGW;
+    edRedeDNS1.Text           := lanDNS1;
+    edRedeDNS2.Text           := lanDNS2;
+    edRedeUsuario.Text        := usuario;
+    edRedeSenha.Text          := senha;
+    cbxRedeProxy.ItemIndex    := proxy;
+    edRedeProxyIP.Text        := proxy_ip;
+    edRedeProxyPorta.Value    := proxy_porta;
+    edRedeProxyUser.Text      := proxy_user;
+    edRedeProxySenha.Text     := proxy_senha;
+  end;}
+end;
+
+procedure TtelaConfigSat.PrepararImpressao;
+begin
+  {if ACBrSAT1.Extrato = ACBrSATExtratoESCPOS1 then
+  begin
+    ACBrPosPrinter1.Desativar;
+    ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModeloPosPrinter.ItemIndex );
+    ACBrPosPrinter1.PaginaDeCodigo := TACBrPosPaginaCodigo( cbxPagCodigo.ItemIndex );
+    ACBrPosPrinter1.Porta := cbxPorta.Text;
+    ACBrPosPrinter1.ColunasFonteNormal := 58;
+    ACBrPosPrinter1.LinhasEntreCupons := 58;
+    ACBrPosPrinter1.EspacoEntreLinhas := 2;
+    ACBrSATExtratoESCPOS1.ImprimeQRCode := True;
+    ACBrSATExtratoESCPOS1.ImprimeEmUmaLinha := false;
+    {if cbImprimirChaveUmaLinha.Checked then
+      ACBrSATExtratoESCPOS1.ImprimeChaveEmUmaLinha := rSim
+    else
+      ACBrSATExtratoESCPOS1.ImprimeChaveEmUmaLinha := rAuto;
+  end
+  else
+  begin}
+    ACBrSATExtratoFortes1.LarguraBobina    := 150;
+    ACBrSATExtratoFortes1.Margens.Topo     := 3 ;
+    ACBrSATExtratoFortes1.Margens.Fundo    := 5 ;
+    ACBrSATExtratoFortes1.Margens.Esquerda := 3 ;
+    ACBrSATExtratoFortes1.Margens.Direita  := 3 ;
+    ACBrSATExtratoFortes1.MostrarPreview   := true;
+
+
+    ACBrSATExtratoFortes1.PrinterName := lImpressora.Caption;
+
+  
+end;
+
+
+procedure TtelaConfigSat.SpeedButton7Click(Sender: TObject);
+var
+  tini, tfim: TDateTime;
+begin
+  PrepararImpressao;
+  
+  tini := now;
+  Memo1.Lines.Add(ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe);
+  tfim := now;
+  Memo1.Lines.Add('Inciado em: '+DateTimeToStr(tini)) ;
+  Memo1.Lines.Add('Finalizado em: '+DateTimeToStr(tFim)) ;
+end;
+
+procedure TtelaConfigSat.SpeedButton8Click(Sender: TObject);
+begin
+ PrepararImpressao;
+ ACBrSAT1.ImprimirExtrato;
+
+end;
+
+procedure TtelaConfigSat.SpeedButton9Click(Sender: TObject);
+begin
+  if PrintDialog1.Execute then
+    lImpressora.Caption := Printer.Printers[Printer.PrinterIndex] ;
 end;
 
 end.

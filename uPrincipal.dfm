@@ -1,6 +1,6 @@
 object telaPrincipal: TtelaPrincipal
-  Left = 268
-  Top = 334
+  Left = 258
+  Top = 322
   Width = 1040
   Height = 580
   Caption = 'Projeto NFe - ACBr'
@@ -4053,6 +4053,7 @@ object telaPrincipal: TtelaPrincipal
         7900323031382D30332D31395432303A33373A30382B30313A30305AEF129000
         00000049454E44AE426082}
       ButtonStyle = pbsFlat
+      OnClick = PNGButton5Click
     end
     object PNGButton4: TPNGButton
       Left = 225
@@ -4162,6 +4163,7 @@ object telaPrincipal: TtelaPrincipal
         33363A35302B30313A3030CE2239AD0000001974455874536F66747761726500
         41646F626520496D616765526561647971C9653C0000000049454E44AE426082}
       ButtonStyle = pbsFlat
+      OnClick = PNGButton4Click
     end
     object PNGButton3: TPNGButton
       Left = 75
