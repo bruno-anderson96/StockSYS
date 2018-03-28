@@ -1,6 +1,6 @@
 object telaConfig: TtelaConfig
-  Left = 785
-  Top = 27
+  Left = 630
+  Top = 33
   Width = 473
   Height = 688
   Caption = 'Configura'#231#227'o NFe'
@@ -56,7 +56,7 @@ object telaConfig: TtelaConfig
     Top = 0
     Width = 457
     Height = 609
-    ActivePage = TabSheet3
+    ActivePage = TabSheet5
     Align = alClient
     TabOrder = 1
     object TabSheet1: TTabSheet
@@ -621,62 +621,6 @@ object telaConfig: TtelaConfig
           Width = 121
           Height = 21
           TabOrder = 3
-        end
-      end
-    end
-    object TabSheet6: TTabSheet
-      Caption = '&6 - SAT'
-      ImageIndex = 5
-      object Panel2: TPanel
-        Left = 0
-        Top = 0
-        Width = 449
-        Height = 581
-        Align = alClient
-        TabOrder = 0
-        object Label22: TLabel
-          Left = 8
-          Top = 40
-          Width = 46
-          Height = 13
-          Caption = 'Arq. Log: '
-        end
-        object label23: TLabel
-          Left = 8
-          Top = 74
-          Width = 67
-          Height = 13
-          Caption = 'Caminho DLL:'
-        end
-        object btnArqLog: TSpeedButton
-          Left = 224
-          Top = 40
-          Width = 23
-          Height = 22
-          Caption = '...'
-          OnClick = btnArqLogClick
-        end
-        object SpeedButton3: TSpeedButton
-          Left = 224
-          Top = 72
-          Width = 23
-          Height = 22
-          Caption = '...'
-          OnClick = SpeedButton3Click
-        end
-        object edtArqLog: TEdit
-          Left = 96
-          Top = 40
-          Width = 121
-          Height = 21
-          TabOrder = 0
-        end
-        object edtPathDll: TEdit
-          Left = 96
-          Top = 72
-          Width = 121
-          Height = 21
-          TabOrder = 1
         end
       end
     end

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uDados, StdCtrls, ExtCtrls, Buttons, Grids, DBGrids, ComCtrls,
-  Mask, DBCtrls, uLancItens, ActnList;
+  Mask, DBCtrls, uLancItens, ActnList, ActnMan, ActnColorMaps;
 
 type
   TtelaLancPedidos = class(TForm)
@@ -17,7 +17,6 @@ type
     GroupBox4: TGroupBox;
     btnIncItem: TBitBtn;
     btnExcItem: TBitBtn;
-    btnFinPed: TBitBtn;
     btnRetPed: TBitBtn;
     TabSheet2: TTabSheet;
     GroupBox5: TGroupBox;
@@ -53,7 +52,6 @@ type
     editOutrasDesp: TDBEdit;
     Label19: TLabel;
     editVtotal: TDBEdit;
-    btnIncluir: TBitBtn;
     btnExcluir: TBitBtn;
     btnConfirmar: TBitBtn;
     btnCancelar: TBitBtn;
@@ -75,6 +73,11 @@ type
     Excluir: TAction;
     cbTpPg: TComboBox;
     GroupBox3: TGroupBox;
+    btnFinPed: TBitBtn;
+    Label10: TLabel;
+    btnIncluir: TBitBtn;
+    StatusBar1: TStatusBar;
+    adicionarItem: TAction;
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnIncItemClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -88,6 +91,7 @@ type
     procedure editDescExit(Sender: TObject);
     procedure editAscExit(Sender: TObject);
     procedure editOutrasDespExit(Sender: TObject);
+    procedure adicionarItemExecute(Sender: TObject);
 
   private
     procedure calculaPedido();
@@ -339,6 +343,7 @@ begin
 
 
   telaDados.tblPedidosVALOR_TOTAL.Value := vProd - dsc + acr + outrasDesp;
+
   telaLancPedidos.Refresh;
 
   telaDados.FormataCampos;
@@ -531,7 +536,8 @@ btnCancelar.Enabled := true;
 
 Incluir.Enabled := false;
 Confirmar.Enabled := true;
-Cancelar.Enabled := true; 
+Cancelar.Enabled := true;
+adicionarItem.Enabled := true;
 
 cbTpPg.ItemIndex := 0;
 
@@ -623,6 +629,13 @@ end;
 procedure TtelaLancPedidos.editOutrasDespExit(Sender: TObject);
 begin
 calculaPedido();
+end;
+
+procedure TtelaLancPedidos.adicionarItemExecute(Sender: TObject);
+begin
+Application.CreateForm(TtelaLancItens, telaLancItens);
+telaLancItens.Show;
+telaLancItens.pegaTipo(0);
 end;
 
 end.

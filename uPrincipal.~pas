@@ -45,8 +45,8 @@ type
     GroupBox2: TGroupBox;
     GroupBox3: TGroupBox;
     StatusBar1: TStatusBar;
-    SAT1: TMenuItem;
-    procedure Configuraes1Click(Sender: TObject);
+    C1: TMenuItem;
+    MFe1: TMenuItem;
     procedure Sair1Click(Sender: TObject);
     procedure StatusdeServio1Click(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
@@ -70,6 +70,8 @@ type
     procedure SAT1Click(Sender: TObject);
     procedure PNGButton4Click(Sender: TObject);
     procedure PNGButton5Click(Sender: TObject);
+    procedure C1Click(Sender: TObject);
+    procedure MFe1Click(Sender: TObject);
 
 
   private
@@ -92,13 +94,6 @@ uses uGerarNfe, uDados, uValidaXml, uEnviarNfe, uCancelaNfe, uInutilizaNfe,
 
 {$R *.dfm}
 
-
-procedure TtelaPrincipal.Configuraes1Click(Sender: TObject);
-begin
-Application.CreateForm(TtelaConfig, telaConfig);
-telaConfig.Show;
-telaDados.tblEmitente.Open;
-end;
 
 procedure TtelaPrincipal.Sair1Click(Sender: TObject);
 begin
@@ -236,6 +231,19 @@ procedure TtelaPrincipal.PNGButton5Click(Sender: TObject);
 begin
 Application.CreateForm(TtelaLancCompras, telaLancCompras);
 telaLancCompras.Show;
+end;
+
+procedure TtelaPrincipal.C1Click(Sender: TObject);
+begin
+Application.CreateForm(TtelaConfig, telaConfig);
+telaConfig.Show;
+telaDados.tblEmitente.Open;
+end;
+
+procedure TtelaPrincipal.MFe1Click(Sender: TObject);
+begin
+Application.CreateForm(TtelaConfigSat, telaConfigSat);
+telaConfigSat.Show;
 end;
 
 end.

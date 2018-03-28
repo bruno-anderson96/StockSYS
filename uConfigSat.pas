@@ -20,12 +20,6 @@ type
     SpeedButton4: TSpeedButton;
     SpeedButton5: TSpeedButton;
     SpeedButton6: TSpeedButton;
-    SpeedButton1: TSpeedButton;
-    Enviar: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    ComboBox1: TComboBox;
-    editSchema: TEdit;
-    SpeedButton3: TSpeedButton;
     OpenDialog1: TOpenDialog;
     Panel1: TPanel;
     cbxModelo: TComboBox;
@@ -39,13 +33,20 @@ type
     lImpressora: TLabel;
     PrintDialog1: TPrintDialog;
     RLPDFFilter1: TRLPDFFilter;
+    label44: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    edtCol: TEdit;
+    edtLin: TEdit;
+    edtEsp: TEdit;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
     procedure At(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
     procedure EnviarClick(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
     procedure AjustarCfe;
     procedure FormCreate(Sender: TObject);
     procedure gerarVenda;
@@ -382,44 +383,10 @@ begin
   begin
     LoadXML( ACBrSAT1.CFe.AsXMLString, Memo1 );
     }
-  end;
-
-procedure TtelaConfigSat.SpeedButton2Click(Sender: TObject);
-var
-  Erro: String;
-begin
- ACBrSAT1.Config.XmlSignLib := TSSLXmlSignLib(ComboBox1.ItemIndex);
-  ACBrSAT1.Config.ArqSchema := editSchema.Text;
-
-  if ACBrSAT1.ValidarDadosVenda( Memo1.Text, Erro ) then
-    Memo1.Lines.Add('XML Gerado pela aplicação, validado com sucesso')
-  else
-  begin
-    Memo1.Lines.Add('Erro na Validação do XML Gerado pela aplicação.');
-    Memo1.Lines.Add(Erro);
-  end;
-
-end;
+ end;
 
 
-procedure TtelaConfigSat.FormShow(Sender: TObject);
-var
-P: TSSLXmlSignLib;
 
-begin
-  ComboBox1.Items.Clear ;
-  For P := Low(TSSLXmlSignLib) to High(TSSLXmlSignLib) do
-     ComboBox1.Items.Add( GetEnumName(TypeInfo(TSSLXmlSignLib), integer(P) ) ) ;
-  end;
-
-procedure TtelaConfigSat.SpeedButton3Click(Sender: TObject);
-begin
-  OpenDialog1.Filter := 'Arquivo XSD|*.xsd';
-  OpenDialog1.InitialDir := ExtractFilePath(editSchema.Text);
-  OpenDialog1.FileName := editSchema.Text;
-  if OpenDialog1.Execute then
-    editSchema.Text := OpenDialog1.FileName ;
-end;
 
 procedure TtelaConfigSat.FormCreate(Sender: TObject);
 var I : TACBrSATModelo;
@@ -431,24 +398,26 @@ AjustarCfe;
   cbxModelo.Items.Clear ;
   For I := Low(TACBrSATModelo) to High(TACBrSATModelo) do
      cbxModelo.Items.Add( GetEnumName(TypeInfo(TACBrSATModelo), integer(I) ) ) ;
+  cbxModelo.ItemIndex := 3;
 
   cbxPagCodigo.Items.Clear ;
   For O := Low(TACBrPosPaginaCodigo) to High(TACBrPosPaginaCodigo) do
      cbxPagCodigo.Items.Add( GetEnumName(TypeInfo(TACBrPosPaginaCodigo), integer(O) ) ) ;
+  cbxPagCodigo.ItemIndex := 2;
 
   cbxModeloPosPrinter.Items.Clear ;
   For N := Low(TACBrPosPrinterModelo) to High(TACBrPosPrinterModelo) do
      cbxModeloPosPrinter.Items.Add( GetEnumName(TypeInfo(TACBrPosPrinterModelo), integer(N) ) ) ;
+  cbxModeloPosPrinter.ItemIndex := 1;
 
   cbxPorta.Items.Clear;
   ACBrPosPrinter1.Device.AcharPortasSeriais( cbxPorta.Items );
 
-  z := Printer.Printers.Count;
+  {z := Printer.Printers.Count;
   while z>0 do begin
     cbxPorta.Items.Add(Printer.Printers.ValueFromIndex[z-1]);
     z := z-1;
-  end;
-
+  end;  }
 
 end;
 
@@ -505,13 +474,13 @@ procedure TtelaConfigSat.PrepararImpressao;
 begin
   {if ACBrSAT1.Extrato = ACBrSATExtratoESCPOS1 then
   begin                          }
-  
+
     ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModeloPosPrinter.ItemIndex );
     ACBrPosPrinter1.PaginaDeCodigo := TACBrPosPaginaCodigo( cbxPagCodigo.ItemIndex );
     ACBrPosPrinter1.Porta := lImpressora.Caption;
-    ACBrPosPrinter1.ColunasFonteNormal := 20;
-    ACBrPosPrinter1.LinhasEntreCupons := 5;
-    ACBrPosPrinter1.EspacoEntreLinhas := 2;
+    ACBrPosPrinter1.ColunasFonteNormal := StrToInt(edtCol.Text);
+    ACBrPosPrinter1.LinhasEntreCupons := StrToInt(edtLin.Text);
+    ACBrPosPrinter1.EspacoEntreLinhas := StrToInt(edtEsp.Text);
     ACBrSATExtratoESCPOS1.ImprimeQRCode := True;
     ACBrSATExtratoESCPOS1.MostrarPreview := true;
     ACBrSATExtratoESCPOS1.ImprimeEmUmaLinha := false;
