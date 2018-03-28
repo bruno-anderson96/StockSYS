@@ -405,6 +405,7 @@ end;
 procedure TtelaConfigSat.FormShow(Sender: TObject);
 var
 P: TSSLXmlSignLib;
+
 begin
   ComboBox1.Items.Clear ;
   For P := Low(TSSLXmlSignLib) to High(TSSLXmlSignLib) do
@@ -424,6 +425,7 @@ procedure TtelaConfigSat.FormCreate(Sender: TObject);
 var I : TACBrSATModelo;
     O : TACBrPosPaginaCodigo;
     N : TACBrPosPrinterModelo;
+    z : Integer;
 begin
 AjustarCfe;
   cbxModelo.Items.Clear ;
@@ -440,15 +442,13 @@ AjustarCfe;
 
   cbxPorta.Items.Clear;
   ACBrPosPrinter1.Device.AcharPortasSeriais( cbxPorta.Items );
-  cbxPorta.Items.Add('LPT1') ;
-  cbxPorta.Items.Add('LPT2') ;
-  cbxPorta.Items.Add('/dev/ttyS0') ;
-  cbxPorta.Items.Add('/dev/ttyS1') ;
-  cbxPorta.Items.Add('/dev/ttyUSB0') ;
-  cbxPorta.Items.Add('/dev/ttyUSB1') ;
-  cbxPorta.Items.Add('\\localhost\Epson') ;
-  cbxPorta.Items.Add('c:\temp\ecf.txt') ;
-  cbxPorta.Items.Add('/tmp/ecf.txt') ;
+
+  z := Printer.Printers.Count;
+  while z>0 do begin
+    cbxPorta.Items.Add(Printer.Printers.ValueFromIndex[z-1]);
+    z := z-1;
+  end;
+
 
 end;
 
@@ -504,15 +504,16 @@ end;
 procedure TtelaConfigSat.PrepararImpressao;
 begin
   {if ACBrSAT1.Extrato = ACBrSATExtratoESCPOS1 then
-  begin
-    ACBrPosPrinter1.Desativar;
+  begin                          }
+  
     ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModeloPosPrinter.ItemIndex );
     ACBrPosPrinter1.PaginaDeCodigo := TACBrPosPaginaCodigo( cbxPagCodigo.ItemIndex );
-    ACBrPosPrinter1.Porta := cbxPorta.Text;
-    ACBrPosPrinter1.ColunasFonteNormal := 58;
-    ACBrPosPrinter1.LinhasEntreCupons := 58;
+    ACBrPosPrinter1.Porta := lImpressora.Caption;
+    ACBrPosPrinter1.ColunasFonteNormal := 20;
+    ACBrPosPrinter1.LinhasEntreCupons := 5;
     ACBrPosPrinter1.EspacoEntreLinhas := 2;
     ACBrSATExtratoESCPOS1.ImprimeQRCode := True;
+    ACBrSATExtratoESCPOS1.MostrarPreview := true;
     ACBrSATExtratoESCPOS1.ImprimeEmUmaLinha := false;
     {if cbImprimirChaveUmaLinha.Checked then
       ACBrSATExtratoESCPOS1.ImprimeChaveEmUmaLinha := rSim
@@ -520,8 +521,8 @@ begin
       ACBrSATExtratoESCPOS1.ImprimeChaveEmUmaLinha := rAuto;
   end
   else
-  begin}
-    ACBrSATExtratoFortes1.LarguraBobina    := 150;
+  begin
+    ACBrSATExtratoFortes1.LarguraBobina    := 210;
     ACBrSATExtratoFortes1.Margens.Topo     := 3 ;
     ACBrSATExtratoFortes1.Margens.Fundo    := 5 ;
     ACBrSATExtratoFortes1.Margens.Esquerda := 3 ;
@@ -530,7 +531,7 @@ begin
 
 
     ACBrSATExtratoFortes1.PrinterName := lImpressora.Caption;
-
+     }
   
 end;
 
@@ -540,12 +541,13 @@ var
   tini, tfim: TDateTime;
 begin
   PrepararImpressao;
-  
+   ACBrSAT1.ImprimirExtrato;
+   {
   tini := now;
   Memo1.Lines.Add(ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe);
   tfim := now;
   Memo1.Lines.Add('Inciado em: '+DateTimeToStr(tini)) ;
-  Memo1.Lines.Add('Finalizado em: '+DateTimeToStr(tFim)) ;
+  Memo1.Lines.Add('Finalizado em: '+DateTimeToStr(tFim)) ;}
 end;
 
 procedure TtelaConfigSat.SpeedButton8Click(Sender: TObject);
@@ -559,6 +561,7 @@ procedure TtelaConfigSat.SpeedButton9Click(Sender: TObject);
 begin
   if PrintDialog1.Execute then
     lImpressora.Caption := Printer.Printers[Printer.PrinterIndex] ;
+  
 end;
 
 end.

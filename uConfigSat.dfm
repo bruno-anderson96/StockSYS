@@ -510,7 +510,7 @@ object telaConfigSat: TtelaConfigSat
   end
   object ACBrSAT1: TACBrSAT
     Integrador = ACBrIntegrador1
-    Extrato = ACBrSATExtratoFortes1
+    Extrato = ACBrSATExtratoESCPOS1
     NomeDLL = 'C:\Users\Bruno\Documents\StockSYS\dll\elgin\mfe.dll'
     ValidarNumeroSessaoResposta = True
     NumeroTentativasValidarSessao = 2
@@ -540,13 +540,19 @@ object telaConfigSat: TtelaConfigSat
     Top = 336
   end
   object ACBrSATExtratoESCPOS1: TACBrSATExtratoESCPOS
+    ACBrSAT = ACBrSAT1
     Mask_qCom = ',0.0000'
     Mask_vUnCom = ',0.000'
+    MostrarPreview = True
+    MostrarSetup = True
+    NomeArquivo = 'cfeimpresso.pdf'
     SoftwareHouse = 'Projeto ACBr'
     Site = 'http://www.projetoacbr.com.br'
     MsgAppQRCode = 
       'Consulte o QR Code pelo aplicativo  "De olho na nota", dispon'#237've' +
       'l na AppStore (Apple) e PlayStore (Android)'
+    UsaCodigoEanImpressao = True
+    PosPrinter = ACBrPosPrinter1
     Left = 496
     Top = 336
   end
@@ -560,6 +566,7 @@ object telaConfigSat: TtelaConfigSat
     ConfigQRCode.LarguraModulo = 4
     ConfigQRCode.ErrorLevel = 0
     LinhasEntreCupons = 0
+    VerificarImpressora = True
     Left = 528
     Top = 336
   end
@@ -568,7 +575,6 @@ object telaConfigSat: TtelaConfigSat
     Top = 336
   end
   object ACBrSATExtratoFortes1: TACBrSATExtratoFortes
-    ACBrSAT = ACBrSAT1
     Mask_qCom = ',0.0000'
     Mask_vUnCom = ',0.000'
     MostrarPreview = True
