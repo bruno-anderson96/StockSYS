@@ -29,7 +29,8 @@ uses
   uGerarNfeEntrada in 'uGerarNfeEntrada.pas' {telaGerarNfeEntrada},
   uLoading in 'uLoading.pas' {telaLoading},
   uConfigSat in 'uConfigSat.pas' {telaConfigSat},
-  configuraserial in 'configuraserial.pas';
+  configuraserial in 'configuraserial.pas',
+  uConfigEmit in 'uConfigEmit.pas' {telaConfigEmit};
 
 {$R *.res}
 
@@ -40,5 +41,7 @@ begin
   Application.CreateForm(TtelaEnviaEmail, telaEnviaEmail);
   Application.CreateForm(TtelaConfig, telaConfig);
   Application.CreateForm(TtelaConfigSat, telaConfigSat);
+  Application.CreateForm(TtelaGerarNfe, telaGerarNfe);
+  Application.CreateForm(TtelaConfigEmit, telaConfigEmit);
   Application.Run;
 end.

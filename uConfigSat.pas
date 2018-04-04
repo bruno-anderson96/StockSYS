@@ -7,8 +7,9 @@ uses
   Dialogs, StdCtrls, Buttons, ACBrPosPrinter, ACBrSATExtratoClass,
   ACBrSATExtratoESCPOS, ACBrSAT, ACBrBase,  TypInfo, ACBrSATClass,
   ACBrIntegrador, pcnConversao, Math, ACBrUtil, RLPrinters, Printers, ACBrSATMFe_integrador, pcnVFPe,
-  ACBrDFeSSL, ExtCtrls, uConfig, uDados, uLancPedidos,
-  ACBrSATExtratoReportClass, ACBrSATExtratoFortesFr, RLFilters, RLPDFFilter;
+  ACBrDFeSSL, ExtCtrls, uConfig, uDados, uLancPedidos, IniFiles,
+  ACBrSATExtratoReportClass, ACBrSATExtratoFortesFr, RLFilters, RLPDFFilter, uGerarNfe,
+  ComCtrls, uConfigEmit;
 
 type
   TtelaConfigSat = class(TForm)
@@ -17,19 +18,16 @@ type
     ACBrSATExtratoESCPOS1: TACBrSATExtratoESCPOS;
     ACBrPosPrinter1: TACBrPosPrinter;
     Memo1: TMemo;
-    SpeedButton4: TSpeedButton;
-    SpeedButton5: TSpeedButton;
     SpeedButton6: TSpeedButton;
     OpenDialog1: TOpenDialog;
     Panel1: TPanel;
     cbxModelo: TComboBox;
     cbxPagCodigo: TComboBox;
     SpeedButton7: TSpeedButton;
-    cbxPorta: TComboBox;
     cbxModeloPosPrinter: TComboBox;
     ACBrSATExtratoFortes1: TACBrSATExtratoFortes;
     SpeedButton8: TSpeedButton;
-    SpeedButton9: TSpeedButton;
+    btnImp: TSpeedButton;
     lImpressora: TLabel;
     PrintDialog1: TPrintDialog;
     RLPDFFilter1: TRLPDFFilter;
@@ -43,6 +41,36 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
+    btnSalvar: TSpeedButton;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    edtNomeDLL: TEdit;
+    Label7: TLabel;
+    edtCodAtiv: TEdit;
+    lbl: TLabel;
+    edtCaixa: TEdit;
+    Caixa: TLabel;
+    cbxAmbiente: TRadioGroup;
+    TabSheet2: TTabSheet;
+    edtSwHCNPJ: TEdit;
+    Label8: TLabel;
+    Label9: TLabel;
+    TabSheet3: TTabSheet;
+    edtMFEInput: TEdit;
+    edtMFEOutput: TEdit;
+    edtMFETimeout: TEdit;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    ie: TEdit;
+    cnpjemit: TEdit;
+    edtSwHAss: TMemo;
+    SpeedButton10: TSpeedButton;
+    TabSheet4: TTabSheet;
+    TabSheet5: TTabSheet;
     procedure At(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
@@ -55,15 +83,22 @@ type
     procedure PrepararImpressao;
     procedure SpeedButton7Click(Sender: TObject);
     procedure SpeedButton8Click(Sender: TObject);
-    procedure SpeedButton9Click(Sender: TObject);
+    procedure btnImpClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
 
   private
     { Private declarations }
     procedure GetsignAC(var Chave: AnsiString);
     procedure GetcodigoDeAtivacao(var Chave: AnsiString);
     procedure GetNumeroSessao(var Chave: Integer);
+    procedure lerParams;
   public
     { Public declarations }
+    num : integer;
   end;
 
 var
@@ -77,13 +112,12 @@ uses pcnCFe, DB;
 
 procedure TtelaConfigSat.GetsignAC(var Chave: AnsiString);
 begin
-  Chave := AnsiString('AvKLv0zW5pywUQi/myFzzoJhSLsbx3g0Ro5VwZvngLuzVDVJbLng/pZb4Upstr872qb59DlkAKg54Riv+AoCYSQj7mIiJ8rVPbeiAKrnoekm4XVKZKiAZN/4Fve2n4S/b/N8M0kItwhIWsAUURP0ESJ3LKSTk5RgrUPb8UXRWG7QGZHunmndLJ42vxKf7Wz/74bRZfA36g1AL3'+'/ojB+QwrPx0wqSbTLJCmizmI4o7X9vmP9m+VS0qk3GUBdLII/j2dt6ni9nDYYxofDbpclsK6Y6ZO2E3YgNPSP4DHUwNo3hs0ij3+ROWlYZF2FqAOdFo5pUxL7fmn+/oHV0dHUoCw==' );
-
+  Chave := AnsiString(edtSwHAss.Text);
 end;
 
 procedure TtelaConfigSat.GetcodigoDeAtivacao(var Chave: AnsiString);
 begin
-  Chave := AnsiString( '123123123' );
+  Chave := AnsiString( edtCodAtiv.Text );
 end;
 
 procedure TtelaConfigSat.GetNumeroSessao(var Chave: Integer);
@@ -103,24 +137,24 @@ end;
 
 procedure TtelaConfigSat.AjustarCfe;
 begin
+
  with ACBrSAT1 do
  begin
-
-
-  Modelo := mfe_Integrador_XML;
-  Config.ide_CNPJ := '02709607000170'{'11111111111111'};
+  NomeDLL := edtNomeDLL.Text;
+  Modelo := TACBrSATModelo( cbxModelo.ItemIndex ) ;
+  Config.ide_CNPJ := edtSwHCNPJ.Text{'11111111111111'};
   {
   Config.ide_CNPJ := '08490295000133';
   Config.ide_CNPJ := '11.111.111/1111-11'; }
-  config.ide_numeroCaixa := 1;
-  Config.ide_tpAmb := taHomologacao;
-  Config.emit_IE := '064075559'{telaConfig.edtInscEst.Text};
-  Config.emit_IM := '';
+  config.ide_numeroCaixa := StrToInt(edtCaixa.Text);
+  Config.ide_tpAmb := TpcnTipoAmbiente(cbxAmbiente.ItemIndex); {taHomologacao]
   Config.emit_cRegTrib := RTSimplesNacional;
   Config.emit_cRegTribISSQN := RTISSMicroempresaMunicipal;
   Config.emit_indRatISSQN := irNao;    {
   Config.emit_CNPJ := '14200166000166'; }
-  Config.emit_CNPJ := '12373349000158'{telaConfig.edtCnpj.Text};
+  Config.emit_IE := telaConfigEmit.edtInscEst.Text{telaConfig.edtInscEst.Text};
+  Config.emit_IM := '';
+  Config.emit_CNPJ := telaConfigEmit.edtCnpj.Text{telaConfig.edtCnpj.Text};
 
 
   {ACBrSAT1.OnGetNumeroSessao := GetNumeroSessao;}
@@ -158,7 +192,7 @@ begin
   telaDados.qryPedidos.Close;
   telaDados.qryPedidos.SQL.Clear;
   telaDados.qryPedidos.SQL.Add('Select * from Pedido where ID = ');
-  telaDados.qryPedidos.SQL.Add(telaLancPedidos.editId.Text);
+  telaDados.qryPedidos.SQL.Add(IntToStr(num));
   telaDados.qryPedidos.Open;
 
   telaDados.qryClientes.Close;
@@ -394,7 +428,7 @@ var I : TACBrSATModelo;
     N : TACBrPosPrinterModelo;
     z : Integer;
 begin
-AjustarCfe;
+{AjustarCfe; }
   cbxModelo.Items.Clear ;
   For I := Low(TACBrSATModelo) to High(TACBrSATModelo) do
      cbxModelo.Items.Add( GetEnumName(TypeInfo(TACBrSATModelo), integer(I) ) ) ;
@@ -410,8 +444,11 @@ AjustarCfe;
      cbxModeloPosPrinter.Items.Add( GetEnumName(TypeInfo(TACBrPosPrinterModelo), integer(N) ) ) ;
   cbxModeloPosPrinter.ItemIndex := 1;
 
-  cbxPorta.Items.Clear;
+  {cbxPorta.Items.Clear;
   ACBrPosPrinter1.Device.AcharPortasSeriais( cbxPorta.Items );
+    }
+lerParams;
+
 
   {z := Printer.Printers.Count;
   while z>0 do begin
@@ -477,7 +514,7 @@ begin
 
     ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModeloPosPrinter.ItemIndex );
     ACBrPosPrinter1.PaginaDeCodigo := TACBrPosPaginaCodigo( cbxPagCodigo.ItemIndex );
-    ACBrPosPrinter1.Porta := lImpressora.Caption;
+    ACBrPosPrinter1.Porta := btnImp.Caption;
     ACBrPosPrinter1.ColunasFonteNormal := StrToInt(edtCol.Text);
     ACBrPosPrinter1.LinhasEntreCupons := StrToInt(edtLin.Text);
     ACBrPosPrinter1.EspacoEntreLinhas := StrToInt(edtEsp.Text);
@@ -526,11 +563,220 @@ begin
 
 end;
 
-procedure TtelaConfigSat.SpeedButton9Click(Sender: TObject);
+procedure TtelaConfigSat.btnImpClick(Sender: TObject);
 begin
   if PrintDialog1.Execute then
     lImpressora.Caption := Printer.Printers[Printer.PrinterIndex] ;
+    btnImp.Caption := Printer.Printers[Printer.PrinterIndex];
   
+end;
+
+procedure TtelaConfigSat.btnSalvarClick(Sender: TObject);
+Var
+  ArqINI : String ;
+  INI : TIniFile ;
+begin
+  ArqINI := ChangeFileExt( Application.ExeName,'.ini' ) ;
+
+  INI := TIniFile.Create(ArqINI);
+  try
+    INI.WriteInteger('SAT','Modelo',cbxModelo.ItemIndex);
+    {INI.WriteString('SAT','ArqLog',edLog.Text);}
+    INI.WriteString('SAT','NomeDLL',edtNomeDLL.Text);
+    INI.WriteString('SAT','CodigoAtivacao',edtCodAtiv.Text);
+    {INI.WriteString('SAT','CodigoUF',edtCodUF.Text);}
+    INI.WriteInteger('SAT','NumeroCaixa',StrToInt(edtCaixa.Text));
+    INI.WriteInteger('SAT','Ambiente',cbxAmbiente.ItemIndex);
+    {INI.WriteInteger('SAT','PaginaDeCodigo',sePagCod.Value);
+    INI.WriteFloat('SAT','versaoDadosEnt', StringToFloatDef( sfeVersaoEnt.Text, cversaoDadosEnt) );
+    INI.WriteBool('SAT','FormatarXML', cbxFormatXML.Checked);
+    INI.WriteBool('SAT','RetirarAcentos', cbxRemoverAcentos.Checked);
+    INI.WriteBool('SAT','SalvarCFe', cbxSalvarCFe.Checked);
+    INI.WriteBool('SAT','SalvarCFeCanc', cbxSalvarCFeCanc.Checked);
+    INI.WriteBool('SAT','SalvarEnvio', cbxSalvarEnvio.Checked);
+    INI.WriteBool('SAT','SepararPorCNPJ', cbxSepararPorCNPJ.Checked);
+    INI.WriteBool('SAT','SepararPorModelo', cbxSepararPorModelo.Checked);
+    INI.WriteBool('SAT','SepararPorDIA', cbxSepararPorDia.Checked);
+    INI.WriteBool('SAT','SepararPorMES', cbxSepararPorMes.Checked);
+    INI.WriteBool('SAT','SepararPorANO', cbxSepararPorAno.Checked);
+    INI.WriteString('SAT','SchemaVendaAPL',edSchemaVendaAPL.Text);
+    INI.WriteString('SAT','SchemaVendaSAT',edSchemaVendaSAT.Text);
+    INI.WriteInteger('SAT','XMLLib',cbxXmlSignLib.ItemIndex); }
+
+    INI.WriteInteger('PosPrinter','Modelo Impressora',cbxModeloPosPrinter.ItemIndex);
+    INI.WriteString('PosPrinter','Porta',lImpressora.Caption);
+    INI.WriteInteger('PosPrinter','PaginaDeCodigo',cbxPagCodigo.ItemIndex);
+    INI.WriteString('PosPrinter','ParamsString',ACBrPosPrinter1.Device.ParamsString);
+    INI.WriteInteger('PosPrinter','Colunas',StrToInt(edtCol.Text));
+    INI.WriteInteger('PosPrinter','EspacoLinhas',StrToInt(edtLin.Text));
+    INI.WriteInteger('PosPrinter','LinhasEntreCupons',StrToInt(edtEsp.Text));
+
+    {INI.WriteString('Emit','CNPJ',edtEmitCNPJ.Text);
+    INI.WriteString('Emit','IE',edtEmitIE.Text);
+    INI.WriteString('Emit','IM',edtEmitIM.Text);
+    INI.WriteInteger('Emit','RegTributario',cbxRegTributario.ItemIndex);
+    INI.WriteInteger('Emit','RegTribISSQN',cbxRegTribISSQN.ItemIndex);
+    INI.WriteInteger('Emit','IndRatISSQN',cbxIndRatISSQN.ItemIndex);}
+
+    INI.WriteString('SwH','CNPJ',edtSwHCNPJ.Text);
+    INI.WriteString('SwH','Assinatura',edtSwHAss.Text);
+
+    {INI.WriteBool('Fortes','UsarFortes',cbUsarFortes.Checked) ;
+    INI.WriteInteger('Fortes','Largura',seLargura.Value);
+    INI.WriteInteger('Fortes','MargemTopo',seMargemTopo.Value);
+    INI.WriteInteger('Fortes','MargemFundo',seMargemFundo.Value);
+    INI.WriteInteger('Fortes','MargemEsquerda',seMargemEsquerda.Value);
+    INI.WriteInteger('Fortes','MargemDireita',seMargemDireita.Value);
+    INI.WriteBool('Fortes','Preview',cbPreview.Checked);}
+
+    {INI.WriteString('Printer','Name',lImpressora.Caption);
+    INI.WriteBool('EscPos','ImprimirItemUmaLinha',cbImprimir1Linha.Checked);
+    INI.WriteBool('EscPos','ImprimirChaveUmaLinha',cbImprimirChaveUmaLinha.Checked);}
+
+    {INI.WriteInteger('Rede','tipoInter',rgRedeTipoInter.ItemIndex);
+    INI.WriteInteger('Rede','tipoLan',rgRedeTipoLan.ItemIndex);
+    INI.WriteString('Rede','SSID',edRedeSSID.Text);
+    INI.WriteInteger('Rede','seg',cbxRedeSeg.ItemIndex);
+    INI.WriteString('Rede','codigo',edRedeCodigo.Text);
+    INI.WriteString('Rede','lanIP',edRedeIP.Text);
+    INI.WriteString('Rede','lanMask',edRedeMask.Text);
+    INI.WriteString('Rede','lanGW',edRedeGW.Text);
+    INI.WriteString('Rede','lanDNS1',edRedeDNS1.Text);
+    INI.WriteString('Rede','lanDNS2',edRedeDNS2.Text);
+    INI.WriteString('Rede','usuario',edRedeUsuario.Text);
+    INI.WriteString('Rede','senha',edRedeSenha.Text);
+    INI.WriteInteger('Rede','proxy',cbxRedeProxy.ItemIndex);
+    INI.WriteString('Rede','proxy_ip',edRedeProxyIP.Text);
+    INI.WriteInteger('Rede','proxy_porta',edRedeProxyPorta.Value);
+    INI.WriteString('Rede','proxy_user',edRedeProxyUser.Text);
+    INI.WriteString('Rede','proxy_senha',edRedeProxySenha.Text); }
+
+    INI.WriteString('MFE','Input',edtMFEInput.Text);
+    INI.WriteString('MFE','Output',edtMFEOutput.Text);
+    INI.WriteInteger('MFE','Timeout',StrToInt(edtMFETimeout.Text));
+  finally
+     INI.Free ;
+  end ;
+end;
+
+procedure TtelaConfigSat.lerParams;
+Var
+  ArqINI: String ;
+  INI : TIniFile ;
+begin
+  ArqINI := ChangeFileExt( Application.ExeName,'.ini' ) ;
+
+  INI := TIniFile.Create(ArqINI);
+  try
+    cbxModelo.ItemIndex    := INI.ReadInteger('SAT','Modelo',0);
+    {edLog.Text             := INI.ReadString('SAT','ArqLog','ACBrSAT.log');}
+    edtNomeDLL.Text         := INI.ReadString('SAT','NomeDLL','C:\SAT\MFE.DLL');
+    edtCodAtiv.Text := INI.ReadString('SAT','CodigoAtivacao','123456');
+    {edtCodUF.Text          := INI.ReadString('SAT','CodigoUF','323');}
+    edtCaixa.Text    := INI.ReadString('SAT','NumeroCaixa','1');
+    cbxAmbiente.ItemIndex  := INI.ReadInteger('SAT','Ambiente',1);
+    cbxPagCodigo.ItemIndex := INI.ReadInteger('SAT','PaginaDeCodigo',0);
+    {sfeVersaoEnt.Text      := FloatToString( INI.ReadFloat('SAT','versaoDadosEnt', cversaoDadosEnt) );
+    cbxFormatXML.Checked   := INI.ReadBool('SAT','FormatarXML', True);
+    cbxRemoverAcentos.Checked:= INI.ReadBool('SAT','RetirarAcentos', True);
+    cbxSalvarCFe.Checked     := INI.ReadBool('SAT','SalvarCFe', True);
+    cbxSalvarCFeCanc.Checked := INI.ReadBool('SAT','SalvarCFeCanc', True);
+    cbxSalvarEnvio.Checked   := INI.ReadBool('SAT','SalvarEnvio', True);
+    cbxSepararPorCNPJ.Checked:= INI.ReadBool('SAT','SepararPorCNPJ', True);
+    cbxSepararPorModelo.Checked := INI.ReadBool('SAT','SepararPorModelo', True);
+    cbxSepararPorDia.Checked := INI.ReadBool('SAT','SepararPorDIA', True);
+    cbxSepararPorMes.Checked := INI.ReadBool('SAT','SepararPorMES', True);
+    cbxSepararPorAno.Checked := INI.ReadBool('SAT','SepararPorANO', True);
+    edSchemaVendaAPL.Text := INI.ReadString('SAT','SchemaVendaAPL','');
+    edSchemaVendaSAT.Text := INI.ReadString('SAT','SchemaVendaSAT','');
+    cbxXmlSignLib.ItemIndex := INI.ReadInteger('SAT','XMLLib',Integer(ACBrSAT1.Config.XmlSignLib));
+    sePagCodChange(Sender); }
+
+    cbxModeloPosPrinter.ItemIndex := INI.ReadInteger('PosPrinter', 'Modelo', Integer(ACBrPosPrinter1.Modelo));
+    btnImp.Caption := INI.ReadString('PosPrinter','Porta',lImpressora.Caption);
+    cbxPagCodigo.ItemIndex := INI.ReadInteger('PosPrinter','PaginaDeCodigo',Integer(ACBrPosPrinter1.PaginaDeCodigo));
+    ACBrPosPrinter1.Device.ParamsString := INI.ReadString('PosPrinter','ParamsString','');
+    edtCol.Text := INI.ReadString('PosPrinter','Colunas',IntToStr(ACBrPosPrinter1.ColunasFonteNormal));
+    edtLin.Text := INI.ReadString('PosPrinter','EspacoLinhas',IntToStr(ACBrPosPrinter1.EspacoEntreLinhas));
+    edtEsp.Text := INI.ReadString('PosPrinter','LinhasEntreCupons',IntToStr(ACBrPosPrinter1.LinhasEntreCupons));
+
+    {edtEmitCNPJ.Text := INI.ReadString('Emit','CNPJ','');
+    edtEmitIE.Text   := INI.ReadString('Emit','IE','');
+    edtEmitIM.Text   := INI.ReadString('Emit','IM','');
+    cbxRegTributario.ItemIndex := INI.ReadInteger('Emit','RegTributario',0);
+    cbxRegTribISSQN.ItemIndex  := INI.ReadInteger('Emit','RegTribISSQN',0);
+    cbxIndRatISSQN.ItemIndex   := INI.ReadInteger('Emit','IndRatISSQN',0);}
+
+    edtSwHCNPJ.Text       := INI.ReadString('SwH','CNPJ','11111111111111');
+    edtSwHAss.Text := INI.ReadString('SwH','Assinatura','zerado');
+
+    {cbUsarFortes.Checked   := INI.ReadBool('Fortes','UsarFortes', True) ;
+    cbUsarEscPos.Checked   := not cbUsarFortes.Checked;
+    seLargura.Value        := INI.ReadInteger('Fortes','Largura',ACBrSATExtratoFortes1.LarguraBobina);
+    seMargemTopo.Value     := INI.ReadInteger('Fortes','MargemTopo',ACBrSATExtratoFortes1.Margens.Topo);
+    seMargemFundo.Value    := INI.ReadInteger('Fortes','MargemFundo',ACBrSATExtratoFortes1.Margens.Fundo);
+    seMargemEsquerda.Value := INI.ReadInteger('Fortes','MargemEsquerda',ACBrSATExtratoFortes1.Margens.Esquerda);
+    seMargemDireita.Value  := INI.ReadInteger('Fortes','MargemDireita',ACBrSATExtratoFortes1.Margens.Direita);
+    cbPreview.Checked      := INI.ReadBool('Fortes','Preview',True);
+      }
+    lImpressora.Caption    := INI.ReadString('Printer','Name', '');
+
+    {cbImprimir1Linha.Checked := INI.ReadBool('EscPos','ImprimirItemUmaLinha',cbImprimir1Linha.Checked);
+    cbImprimirChaveUmaLinha.Checked := INI.ReadBool('EscPos','ImprimirChaveUmaLinha',cbImprimirChaveUmaLinha.Checked);
+
+    rgRedeTipoInter.ItemIndex := INI.ReadInteger('Rede','tipoInter',0);
+    rgRedeTipoLan.ItemIndex   := INI.ReadInteger('Rede','tipoLan',0);
+    edRedeSSID.Text           := INI.ReadString('Rede','SSID','');
+    cbxRedeSeg.ItemIndex      := INI.ReadInteger('Rede','seg',0);
+    edRedeCodigo.Text         := INI.ReadString('Rede','codigo','');
+    edRedeIP.Text             := INI.ReadString('Rede','lanIP','');
+    edRedeMask.Text           := INI.ReadString('Rede','lanMask','');
+    edRedeGW.Text             := INI.ReadString('Rede','lanGW','');
+    edRedeDNS1.Text           := INI.ReadString('Rede','lanDNS1','');
+    edRedeDNS2.Text           := INI.ReadString('Rede','lanDNS2','');
+    edRedeUsuario.Text        := INI.ReadString('Rede','usuario','');
+    edRedeSenha.Text          := INI.ReadString('Rede','senha','');
+    cbxRedeProxy.ItemIndex    := INI.ReadInteger('Rede','proxy',0);
+    edRedeProxyIP.Text        := INI.ReadString('Rede','proxy_ip','');
+    edRedeProxyPorta.Value    := INI.ReadInteger('Rede','proxy_porta',0);
+    edRedeProxyUser.Text      := INI.ReadString('Rede','proxy_user','');
+    edRedeProxySenha.Text     := INI.ReadString('Rede','proxy_senha','');
+                }
+    edtMFEInput.Text    :=  INI.ReadString('MFE','Input','c:\Integrador\Input\');
+    edtMFEOutput.Text   :=  INI.ReadString('MFE','Output','c:\Integrador\Output\');
+    edtMFETimeout.Text :=  INI.ReadString('MFE','Timeout','30');
+  finally
+     INI.Free ;
+  end;
+end;
+
+procedure TtelaConfigSat.SpeedButton1Click(Sender: TObject);
+begin
+
+  OpenDialog1.Execute;
+  edtNomeDLL.Text := OpenDialog1.FileName;
+  
+end;
+
+procedure TtelaConfigSat.SpeedButton2Click(Sender: TObject);
+begin
+
+  OpenDialog1.Execute;
+  edtMFEInput.Text := OpenDialog1.FileName;
+end;
+
+procedure TtelaConfigSat.SpeedButton3Click(Sender: TObject);
+begin
+
+  OpenDialog1.Execute;
+  edtMFEOutput.Text := OpenDialog1.FileName;
+end;
+
+procedure TtelaConfigSat.FormShow(Sender: TObject);
+begin
+  {edtSwHCNPJ.Clear;
+  edtSwHCNPJ.DisplayFormat        := '00.000.000/0000-00;0';}
+
 end;
 
 end.

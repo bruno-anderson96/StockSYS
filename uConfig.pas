@@ -5,38 +5,19 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Buttons, ExtCtrls, IniFiles, uDados, DB,
-  Mask, DBCtrls, ACBrBase, ACBrSocket, ACBrCEP, ACBrIBGE, uPrincipal;
+  Mask, DBCtrls, ACBrBase, ACBrSocket, ACBrCEP, ACBrIBGE;
 
 type
   TtelaConfig = class(TForm)
     Panel1: TPanel;
     btnConfirmar: TBitBtn;
     btnFechar: TBitBtn;
+    OpenDialog1: TOpenDialog;
+    BitBtn1: TBitBtn;
+    ACBrCEP1: TACBrCEP;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
-    TabSheet3: TTabSheet;
-    GroupBox1: TGroupBox;
-    GroupBox2: TGroupBox;
     GroupBox3: TGroupBox;
-    TabSheet4: TTabSheet;
-    OpenDialog1: TOpenDialog;
-    GroupBox6: TGroupBox;
-    GroupBox7: TGroupBox;
-    GroupBox8: TGroupBox;
-    edtCaminhoCert: TEdit;
-    btnCaminhoCert: TSpeedButton;
-    edtSenha: TEdit;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    Label9: TLabel;
-    Label10: TLabel;
     GroupBox5: TGroupBox;
     btnEscolherCaminho2: TSpeedButton;
     edtCaminhoArq: TEdit;
@@ -45,37 +26,32 @@ type
     edtLogomarca: TEdit;
     chArquivos: TCheckBox;
     radioFormas: TRadioGroup;
+    Schemas: TGroupBox;
+    SpeedButton1: TSpeedButton;
+    edtCaminhoSchemas: TEdit;
+    TabSheet2: TTabSheet;
+    GroupBox1: TGroupBox;
+    GroupBox6: TGroupBox;
+    btnCaminhoCert: TSpeedButton;
+    edtCaminhoCert: TEdit;
+    GroupBox7: TGroupBox;
+    edtSenha: TEdit;
+    GroupBox8: TGroupBox;
+    edtNumSer: TEdit;
+    TabSheet4: TTabSheet;
     GroupBox9: TGroupBox;
     Label11: TLabel;
     edtUfws: TEdit;
     radioAmbiente: TRadioGroup;
     GroupBox10: TGroupBox;
-    edtHost: TEdit;
-    edtPorta: TEdit;
-    edtUsuario: TEdit;
-    edtSenhaws: TEdit;
     Label12: TLabel;
     Label13: TLabel;
     Label14: TLabel;
     Label15: TLabel;
-    edtNumSer: TEdit;
-    Label16: TLabel;
-    edtRazSoc: TDBEdit;
-    edtNomeFan: TDBEdit;
-    edtCnpj: TDBEdit;
-    edtInscEst: TDBEdit;
-    edtEndereco: TDBEdit;
-    edtNum: TDBEdit;
-    edtBairro: TDBEdit;
-    edtCep: TDBEdit;
-    edtCidade: TDBEdit;
-    edtUf: TDBEdit;
-    edtTelefone: TDBEdit;
-    edtCodMun: TDBEdit;
-    BitBtn1: TBitBtn;
-    Schemas: TGroupBox;
-    edtCaminhoSchemas: TEdit;
-    SpeedButton1: TSpeedButton;
+    edtHost: TEdit;
+    edtPorta: TEdit;
+    edtUsuario: TEdit;
+    edtSenhaws: TEdit;
     TabSheet5: TTabSheet;
     GroupBox11: TGroupBox;
     Label17: TLabel;
@@ -86,10 +62,6 @@ type
     edtEPorta: TEdit;
     edtEUsuario: TEdit;
     edtESenha: TEdit;
-    Label21: TLabel;
-    edtEmailEmitente: TDBEdit;
-    ACBrCEP1: TACBrCEP;
-    SpeedButton2: TSpeedButton;
     procedure btnEscolherCaminhoClick(Sender: TObject);
     procedure btnEscolherCaminho2Click(Sender: TObject);
     procedure btnCaminhoCertClick(Sender: TObject);
@@ -100,13 +72,11 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
-
   private
     { Private declarations }
 
   public
     { Public declarations }
-   
   end;
 
 var
@@ -154,7 +124,7 @@ begin
   edtCaminhoCert.Text     := telaDados.sCertificado;
   edtSenha.Text           := telaDados.sSenha;
   edtNumSer.Text          := telaDados.sSerial;
-//EMITENTE
+{//EMITENTE
   edtRazSoc.Text          := telaDados.tblEmitenteRAZ_SOC.AsString;
   edtNomeFan.Text         := telaDados.tblEmitenteFANTASIA.AsString;
   edtCnpj.Text            := telaDados.tblEmitenteCNPJ.AsString;
@@ -167,6 +137,7 @@ begin
   edtUf.Text              := telaDados.tblEmitenteUF.AsString;
   edtTelefone.Text        := telaDados.tblEmitenteTELEFONE.AsString;
   edtCodMun.Text          := telaDados.tblEmitenteCODMUN.AsString;
+  }
 
 //WS
   edtUfws.Text            := telaDados.sUfws;
@@ -201,7 +172,7 @@ begin
   telaDados.sCertificado  := edtCaminhoCert.Text;
   telaDados.sSenha        := edtSenha.Text;
   telaDados.sSerial       := edtNumSer.Text;
-//EMITENTE
+{//EMITENTE
   telaDados.sRazSoc       := edtRazSoc.Text;
   telaDados.sFantasia     := edtNomeFan.Text;
   telaDados.sCnpj         := edtCnpj.Text;
@@ -213,7 +184,7 @@ begin
   telaDados.sCep          := edtCep.Text;
   telaDados.sUf           := edtUf.Text;
   telaDados.sCodMun       := edtCodMun.Text;
-  telaDados.sEmailEmitente:= edtEmailEmitente.Text;
+  telaDados.sEmailEmitente:= edtEmailEmitente.Text;}
 //WS
   telaDados.sUfws         := edtUfws.Text;
   telaDados.sAmbiente     := radioAmbiente.ItemIndex;
@@ -252,7 +223,7 @@ end;
 procedure TtelaConfig.SpeedButton2Click(Sender: TObject);
 var i : integer;
 begin
-ACBrCEP1.BuscarPorCEP(edtCep.Text);
+{ACBrCEP1.BuscarPorCEP(edtCep.Text);
 
   for i := 0 to ACBrCEP1.Enderecos.Count -1 do
   begin
@@ -262,7 +233,7 @@ ACBrCEP1.BuscarPorCEP(edtCep.Text);
     telaDados.tblEmitenteUF.AsString := ACBrCEP1.Enderecos[i].UF;
     telaDados.tblEmitenteBAIRRO.AsString := ACBrCEP1.Enderecos[i].Bairro;
     telaDados.tblEmitenteCODMUN.AsString := ACBrCEP1.Enderecos[i].IBGE_Municipio;
-  end;
+  end;}
 end;
 
 end.

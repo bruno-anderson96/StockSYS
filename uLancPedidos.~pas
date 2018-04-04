@@ -78,6 +78,7 @@ type
     btnIncluir: TBitBtn;
     StatusBar1: TStatusBar;
     adicionarItem: TAction;
+    radDoc: TRadioGroup;
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnIncItemClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -92,6 +93,7 @@ type
     procedure editAscExit(Sender: TObject);
     procedure editOutrasDespExit(Sender: TObject);
     procedure adicionarItemExecute(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
 
   private
     procedure calculaPedido();
@@ -108,7 +110,7 @@ var
 
 implementation
 
-uses DB,uConfigSat;
+uses DB,uConfigSat, uGerarNfe;
 
 {$R *.dfm}
 
@@ -484,10 +486,21 @@ if editValProd.Text = '' then
 
   end;
 
+  if radDoc.ItemIndex = 0 then begin
+
+  telaConfigSat.num := StrToInt(editId.Text);
   telaConfigSat.gerarVenda;
 
+  end else begin
+
+  telaGerarNfe.numN := StrToInt(editId.Text);
+  telaGerarNfe.btnGeraNfe.Click;
+
+  end;
+
   telaDados.tblPedidosItens.ApplyUpdates;
-  telaDados.tblProdutos.Close; 
+  telaDados.tblProdutos.Close;
+  label10.Caption := 'Tecle F2 para Abrir Cupom'; 
 
 end;
 
@@ -496,6 +509,8 @@ var
 id: Integer;
 d,a,od : Double;
 begin
+label10.Caption := 'Tecle F7 Para incluir um item';
+
 d  := 0.00;
 a  := 0.00;
 od := 0.00;
@@ -558,7 +573,8 @@ editOutrasDesp.Text := FloatToStr(od);
 
         telaDados.tblPedidos.Insert;
         telaDados.tblPedidosID.Value := id;
-        editDtCad.Text := DateToStr(date()) + ' ' +  TimeToStr(time());
+        editDtCad.Text     := DateToStr(date()) + ' ' +  TimeToStr(time());
+        editDtEmissao.Text := DateToStr(date()) + ' ' +  TimeToStr(time());
         telaLancPedidos.Refresh;
                                             {
         telaDados.tblPedidosID.Value := id;
@@ -567,6 +583,7 @@ editOutrasDesp.Text := FloatToStr(od);
       
 
         editId.Text := IntToStr(id);
+        cbCliente.SetFocus;
 
 end;
 
@@ -611,7 +628,8 @@ Incluir.Enabled := true;
 Confirmar.Enabled := false;
 Cancelar.Enabled := false;
 
-telaDados.cdsTempItens.EmptyDataSet; 
+telaDados.cdsTempItens.EmptyDataSet;
+label10.Caption := 'Tecle F2 para Abrir Cupom';  
 
 
 end;
@@ -636,6 +654,12 @@ begin
 Application.CreateForm(TtelaLancItens, telaLancItens);
 telaLancItens.Show;
 telaLancItens.pegaTipo(0);
+end;
+
+procedure TtelaLancPedidos.btnPesquisarClick(Sender: TObject);
+begin
+Application.CreateForm(TtelaGerarNfe, telaGerarNfe);
+telaGerarNfe.Show;
 end;
 
 end.

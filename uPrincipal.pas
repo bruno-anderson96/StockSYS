@@ -47,6 +47,15 @@ type
     StatusBar1: TStatusBar;
     C1: TMenuItem;
     MFe1: TMenuItem;
+    PNGButton6: TPNGButton;
+    GroupBox4: TGroupBox;
+    GroupBox5: TGroupBox;
+    GroupBox6: TGroupBox;
+    GroupBox7: TGroupBox;
+    GroupBox8: TGroupBox;
+    GroupBox9: TGroupBox;
+    GroupBox10: TGroupBox;
+    Emitente1: TMenuItem;
     procedure Sair1Click(Sender: TObject);
     procedure StatusdeServio1Click(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
@@ -68,10 +77,12 @@ type
     procedure PNGButton3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SAT1Click(Sender: TObject);
-    procedure PNGButton4Click(Sender: TObject);
     procedure PNGButton5Click(Sender: TObject);
     procedure C1Click(Sender: TObject);
     procedure MFe1Click(Sender: TObject);
+    procedure PNGButton4Click(Sender: TObject);
+    procedure PNGButton6Click(Sender: TObject);
+    procedure Emitente1Click(Sender: TObject);
 
 
   private
@@ -90,7 +101,7 @@ implementation
 
 uses uGerarNfe, uDados, uValidaXml, uEnviarNfe, uCancelaNfe, uInutilizaNfe,
   uEmiteDanfe, uEnviaEmail, uCadFornecedor, uLancCompras, uGerarNfeEntrada, XPMan, uConfig,
-  uConfigSat;
+  uConfigSat, uConfigEmit;
 
 {$R *.dfm}
 
@@ -210,7 +221,7 @@ end;
 procedure TtelaPrincipal.FormShow(Sender: TObject);
 
 begin
-StatusBar1.Panels[0].Text := telaConfig.edtRazSoc.Text;
+StatusBar1.Panels[0].Text := telaConfigEmit.edtRazSoc.Text;
 StatusBar1.Panels[2].Text := DateToStr(Date);
 StatusBar1.Panels[3].Text := TimeToStr(Time);
 end;
@@ -221,12 +232,6 @@ Application.CreateForm(TtelaConfigSat, telaConfigSat);
 telaConfigSat.Show;
 end;
 
-procedure TtelaPrincipal.PNGButton4Click(Sender: TObject);
-begin
-Application.CreateForm(TtelaLancPedidos, telaLancPedidos);
-telaLancPedidos.Show;
-end;
-
 procedure TtelaPrincipal.PNGButton5Click(Sender: TObject);
 begin
 Application.CreateForm(TtelaLancCompras, telaLancCompras);
@@ -235,15 +240,33 @@ end;
 
 procedure TtelaPrincipal.C1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaConfig, telaConfig);
-telaConfig.Show;
-telaDados.tblEmitente.Open;
+  Application.CreateForm(TtelaConfig, telaConfig);
+  telaConfig.Show;
+  telaDados.tblEmitente.Open;
 end;
 
 procedure TtelaPrincipal.MFe1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaConfigSat, telaConfigSat);
-telaConfigSat.Show;
+  Application.CreateForm(TtelaConfigSat, telaConfigSat);
+  telaConfigSat.Show;
+end;
+
+procedure TtelaPrincipal.PNGButton4Click(Sender: TObject);
+begin
+  Application.CreateForm(TtelaLancPedidos, telaLancPedidos);
+  telaLancPedidos.Show;
+  end;
+
+procedure TtelaPrincipal.PNGButton6Click(Sender: TObject);
+begin
+  Application.CreateForm(TtelaCadProdutos, telaCadProdutos);
+  telaCadProdutos.Show;
+end;
+
+procedure TtelaPrincipal.Emitente1Click(Sender: TObject);
+begin
+  Application.CreateForm(TtelaConfigEmit, telaConfigEmit);
+  telaConfigEmit.Show;
 end;
 
 end.
