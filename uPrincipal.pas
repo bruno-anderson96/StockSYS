@@ -255,7 +255,7 @@ procedure TtelaPrincipal.PNGButton4Click(Sender: TObject);
 begin
   Application.CreateForm(TtelaLancPedidos, telaLancPedidos);
   telaLancPedidos.Show;
-  end;
+end;
 
 procedure TtelaPrincipal.PNGButton6Click(Sender: TObject);
 begin

@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Mask, DBCtrls, ExtCtrls, uDados;
+  Dialogs, StdCtrls, Mask, DBCtrls, ExtCtrls, uDados, Buttons;
 
 type
   TtelaConfigEmit = class(TForm)
@@ -34,7 +34,14 @@ type
     edtCodMun: TDBEdit;
     edtEmailEmitente: TDBEdit;
     Label21: TLabel;
+    btnSalvar: TSpeedButton;
+    btnEditar: TSpeedButton;
+    btnCadastrar: TSpeedButton;
     procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnCadastrarClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -46,10 +53,16 @@ var
 
 implementation
 
+uses uCadEmit;
+
 {$R *.dfm}
 
 procedure TtelaConfigEmit.FormShow(Sender: TObject);
 begin
+telaDados.qryEmitente.Close;
+telaDados.qryEmitente.SQL.Clear;
+telaDados.qryEmitente.SQL.ADd('');
+
 //EMITENTE
   edtRazSoc.Text          := telaDados.tblEmitenteRAZ_SOC.AsString;
   edtNomeFan.Text         := telaDados.tblEmitenteFANTASIA.AsString;
@@ -63,6 +76,42 @@ begin
   edtUf.Text              := telaDados.tblEmitenteUF.AsString;
   edtTelefone.Text        := telaDados.tblEmitenteTELEFONE.AsString;
   edtCodMun.Text          := telaDados.tblEmitenteCODMUN.AsString;
+end;
+
+procedure TtelaConfigEmit.FormCreate(Sender: TObject);
+begin
+
+
+  telaDados.qryEmitente.Close;
+  telaDados.qryEmitente.SQL.Clear;
+  telaDados.qryEmitente.SQL.Add('Select * from Emitente where id_login = ');
+  telaDados.qryEmitente.SQL.Add(telaDados.tblLogin.FieldByName('ID').AsString);
+  if telaDados.tblLogin.FieldByName('ADM').AsInteger = 1 then begin
+    btnCadastrar.Visible := true;
+  end;
+  
+  if telaDados.qryEmitente.RecordCount > 0 then begin
+    telaDados.qryEmitente.Open;
+  end else begin
+    telaDados.qryEmitente.Close;
+  end;
+end;
+
+procedure TtelaConfigEmit.btnCadastrarClick(Sender: TObject);
+begin
+  Application.CreateForm(TtelaCadEmit, telaCadEmit);
+  telaCadEmit.Show;
+  telaConfigEmit.Hide;
+end;
+
+procedure TtelaConfigEmit.btnEditarClick(Sender: TObject);
+begin
+  telaDados.tblEmitente.Edit;
+end;
+
+procedure TtelaConfigEmit.btnSalvarClick(Sender: TObject);
+begin
+  telaDados.tblEmitente.Post;
 end;
 
 end.

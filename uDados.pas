@@ -7,7 +7,7 @@ uses
   Dialogs, IniFiles, ACBrBase, ACBrDFe, ACBrNFe, pcnConversao, DB,
   IBDatabase, IBCustomDataSet, IBTable, StdCtrls, IBQuery, DBClient,
   DBLocal, DBLocalI, Provider, Math, ACBrDFeSSL, ACBrNFeDANFEClass,
-  ACBrNFeDANFeRLClass, ACBrSocket, ACBrCEP, ACBrIBGE;
+  ACBrNFeDANFeRLClass, ACBrSocket, ACBrCEP, ACBrIBGE, IBUpdateSQL;
 
 type
   TtelaDados = class(TForm)
@@ -362,6 +362,18 @@ type
     cdsCTempItensibdsCompraItens: TDataSetField;
     cdsCTempItensqryCompraItens: TDataSetField;
     ACBrIBGE1: TACBrIBGE;
+    Label12: TLabel;
+    dsLogin: TDataSource;
+    tblLogin: TIBTable;
+    dbLogin: TIBDatabase;
+    trnscLogin: TIBTransaction;
+    qryLogin: TIBUpdateSQL;
+    ibdsLogin: TIBDataSet;
+    tblLoginID: TIntegerField;
+    tblLoginLOGIN: TIBStringField;
+    tblLoginSENHA: TIBStringField;
+    tblLoginADM: TIntegerField;
+    tblEmitenteID_LOGIN: TIntegerField;
   private
     { Private declarations }
 

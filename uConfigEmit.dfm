@@ -1,7 +1,7 @@
 object telaConfigEmit: TtelaConfigEmit
-  Left = 192
-  Top = 124
-  Width = 472
+  Left = 227
+  Top = 171
+  Width = 468
   Height = 418
   Caption = 'Emitente'
   Color = clBtnFace
@@ -11,13 +11,14 @@ object telaConfigEmit: TtelaConfigEmit
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 456
+    Width = 452
     Height = 380
     Align = alClient
     TabOrder = 0
@@ -57,7 +58,7 @@ object telaConfigEmit: TtelaConfigEmit
       Caption = 'Endere'#231'o'
     end
     object Label5: TLabel
-      Left = 360
+      Left = 353
       Top = 108
       Width = 25
       Height = 13
@@ -85,7 +86,7 @@ object telaConfigEmit: TtelaConfigEmit
       Caption = 'Cidade'
     end
     object Label9: TLabel
-      Left = 344
+      Left = 376
       Top = 178
       Width = 14
       Height = 13
@@ -113,10 +114,35 @@ object telaConfigEmit: TtelaConfigEmit
       Caption = 'Email'
       FocusControl = edtEmailEmitente
     end
+    object btnSalvar: TSpeedButton
+      Left = 200
+      Top = 296
+      Width = 65
+      Height = 25
+      Caption = 'Salvar'
+      OnClick = btnSalvarClick
+    end
+    object btnEditar: TSpeedButton
+      Left = 128
+      Top = 296
+      Width = 65
+      Height = 24
+      Caption = 'Editar'
+      OnClick = btnEditarClick
+    end
+    object btnCadastrar: TSpeedButton
+      Left = 360
+      Top = 344
+      Width = 89
+      Height = 33
+      Caption = 'Cadastrar'
+      Visible = False
+      OnClick = btnCadastrarClick
+    end
     object edtRazSoc: TDBEdit
-      Left = 88
+      Left = 96
       Top = 32
-      Width = 336
+      Width = 332
       Height = 21
       DataField = 'RAZ_SOC'
       DataSource = telaDados.dsEmitente
@@ -134,50 +160,50 @@ object telaConfigEmit: TtelaConfigEmit
     object edtInscEst: TDBEdit
       Left = 296
       Top = 80
-      Width = 129
+      Width = 132
       Height = 21
       DataField = 'INSCEST'
       DataSource = telaDados.dsEmitente
       TabOrder = 2
     end
     object edtCnpj: TDBEdit
-      Left = 56
+      Left = 96
       Top = 80
-      Width = 177
+      Width = 137
       Height = 21
       DataField = 'CNPJ'
       DataSource = telaDados.dsEmitente
       TabOrder = 3
     end
     object edtEndereco: TDBEdit
-      Left = 72
+      Left = 96
       Top = 104
-      Width = 274
+      Width = 249
       Height = 21
       DataField = 'ENDERECO'
       DataSource = telaDados.dsEmitente
       TabOrder = 4
     end
     object edtNum: TDBEdit
-      Left = 392
+      Left = 387
       Top = 104
-      Width = 49
+      Width = 41
       Height = 21
       DataField = 'NUMERO'
       DataSource = telaDados.dsEmitente
       TabOrder = 5
     end
     object edtBairro: TDBEdit
-      Left = 72
+      Left = 95
       Top = 128
-      Width = 369
+      Width = 333
       Height = 21
       DataField = 'BAIRRO'
       DataSource = telaDados.dsEmitente
       TabOrder = 6
     end
     object edtCep: TDBEdit
-      Left = 72
+      Left = 95
       Top = 152
       Width = 153
       Height = 21
@@ -186,16 +212,16 @@ object telaConfigEmit: TtelaConfigEmit
       TabOrder = 7
     end
     object edtCidade: TDBEdit
-      Left = 72
+      Left = 94
       Top = 176
-      Width = 249
+      Width = 273
       Height = 21
       DataField = 'CIDADE'
       DataSource = telaDados.dsEmitente
       TabOrder = 8
     end
     object edtUf: TDBEdit
-      Left = 368
+      Left = 400
       Top = 176
       Width = 30
       Height = 21
@@ -204,7 +230,7 @@ object telaConfigEmit: TtelaConfigEmit
       TabOrder = 9
     end
     object edtTelefone: TDBEdit
-      Left = 72
+      Left = 93
       Top = 200
       Width = 160
       Height = 21
@@ -213,18 +239,18 @@ object telaConfigEmit: TtelaConfigEmit
       TabOrder = 10
     end
     object edtCodMun: TDBEdit
-      Left = 96
+      Left = 93
       Top = 224
-      Width = 108
+      Width = 112
       Height = 21
       DataField = 'CODMUN'
       DataSource = telaDados.dsEmitente
       TabOrder = 11
     end
     object edtEmailEmitente: TDBEdit
-      Left = 56
+      Left = 92
       Top = 248
-      Width = 385
+      Width = 338
       Height = 21
       DataField = 'EMAIL'
       DataSource = telaDados.dsEmitente

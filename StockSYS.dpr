@@ -30,12 +30,14 @@ uses
   uLoading in 'uLoading.pas' {telaLoading},
   uConfigSat in 'uConfigSat.pas' {telaConfigSat},
   configuraserial in 'configuraserial.pas',
-  uConfigEmit in 'uConfigEmit.pas' {telaConfigEmit};
+  uConfigEmit in 'uConfigEmit.pas' {telaConfigEmit},
+  uCadEmit in 'uCadEmit.pas' {telaCadEmit};
 
 {$R *.res}
 
 begin
   Application.Initialize;
+  Application.CreateForm(TtelaLogin, telaLogin);
   Application.CreateForm(TtelaPrincipal, telaPrincipal);
   Application.CreateForm(TtelaDados, telaDados);
   Application.CreateForm(TtelaEnviaEmail, telaEnviaEmail);
