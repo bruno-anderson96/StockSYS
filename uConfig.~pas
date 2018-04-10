@@ -223,7 +223,7 @@ end;
 procedure TtelaConfig.SpeedButton2Click(Sender: TObject);
 var i : integer;
 begin
-ACBrCEP1.BuscarPorCEP(edtCep.Text);
+{ACBrCEP1.BuscarPorCEP(edtCep.Text);
 
   for i := 0 to ACBrCEP1.Enderecos.Count -1 do
   begin
@@ -233,7 +233,7 @@ ACBrCEP1.BuscarPorCEP(edtCep.Text);
     telaDados.tblEmitenteUF.AsString := ACBrCEP1.Enderecos[i].UF;
     telaDados.tblEmitenteBAIRRO.AsString := ACBrCEP1.Enderecos[i].Bairro;
     telaDados.tblEmitenteCODMUN.AsString := ACBrCEP1.Enderecos[i].IBGE_Municipio;
-  end;
+  end;}
 end;
 
 end.

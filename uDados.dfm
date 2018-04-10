@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 434
-  Top = 131
+  Left = 205
+  Top = 164
   Width = 886
   Height = 560
   Caption = 'Data m'#243'dulo'
@@ -175,6 +175,32 @@ object telaDados: TtelaDados
     Width = 56
     Height = 20
     Caption = 'LOGIN'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label13: TLabel
+    Left = 768
+    Top = 160
+    Width = 62
+    Height = 20
+    Caption = 'CSOSN'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label14: TLabel
+    Left = 768
+    Top = 344
+    Width = 35
+    Height = 20
+    Caption = 'CST'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -371,6 +397,18 @@ object telaDados: TtelaDados
         DataType = ftBCD
         Precision = 9
         Size = 2
+      end
+      item
+        Name = 'CFOP'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_CSOSN'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_CST'
+        DataType = ftInteger
       end>
     IndexDefs = <
       item
@@ -511,6 +549,15 @@ object telaDados: TtelaDados
       FieldName = 'VAL_IPI'
       Precision = 9
       Size = 2
+    end
+    object tblProdutosCFOP: TIntegerField
+      FieldName = 'CFOP'
+    end
+    object tblProdutosID_CSOSN: TIntegerField
+      FieldName = 'ID_CSOSN'
+    end
+    object tblProdutosID_CST: TIntegerField
+      FieldName = 'ID_CST'
     end
   end
   object trnscProdutos: TIBTransaction
@@ -1889,6 +1936,14 @@ object telaDados: TtelaDados
       item
         Name = 'ID_LOGIN'
         DataType = ftInteger
+      end
+      item
+        Name = 'REGIME'
+        DataType = ftInteger
+      end
+      item
+        Name = 'TIPOEMP'
+        DataType = ftInteger
       end>
     IndexDefs = <
       item
@@ -1960,6 +2015,12 @@ object telaDados: TtelaDados
     end
     object tblEmitenteID_LOGIN: TIntegerField
       FieldName = 'ID_LOGIN'
+    end
+    object tblEmitenteREGIME: TIntegerField
+      FieldName = 'REGIME'
+    end
+    object tblEmitenteTIPOEMP: TIntegerField
+      FieldName = 'TIPOEMP'
     end
   end
   object dbEmitente: TIBDatabase
@@ -3433,5 +3494,143 @@ object telaDados: TtelaDados
     DataSource = dsLogin
     Left = 832
     Top = 120
+  end
+  object dsCsosn: TDataSource
+    DataSet = tblCsosn
+    Left = 784
+    Top = 184
+  end
+  object tblCsosn: TIBTable
+    Database = dbCsosn
+    Transaction = trnscCsosn
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CODIGO'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'DESCRICAO'
+        DataType = ftMemo
+        Size = 8
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_CSOSN'
+        Fields = 'ID'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'CSOSN'
+    Left = 784
+    Top = 224
+  end
+  object qryCsosn: TIBQuery
+    Database = dbCsosn
+    Transaction = trnscCsosn
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsCsosn
+    SQL.Strings = (
+      'select * from CSOSN')
+    Left = 784
+    Top = 264
+  end
+  object trnscCsosn: TIBTransaction
+    Active = True
+    DefaultDatabase = dbCsosn
+    AutoStopAction = saNone
+    Left = 744
+    Top = 224
+  end
+  object dbCsosn: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    DefaultTransaction = trnscCsosn
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 824
+    Top = 224
+  end
+  object dsCst: TDataSource
+    Left = 776
+    Top = 376
+  end
+  object tblCst: TIBTable
+    Database = dbCst
+    Transaction = trnscCst
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CODIGO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        Size = 150
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_CST'
+        Fields = 'ID'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'CST'
+    Left = 776
+    Top = 416
+  end
+  object trnscCst: TIBTransaction
+    Active = True
+    DefaultDatabase = dbCst
+    AutoStopAction = saNone
+    Left = 728
+    Top = 416
+  end
+  object dbCst: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    DefaultTransaction = trnscCst
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 824
+    Top = 416
+  end
+  object qryCst: TIBQuery
+    Database = dbCst
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsCst
+    SQL.Strings = (
+      'select * from CST')
+    Left = 776
+    Top = 456
   end
 end

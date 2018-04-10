@@ -37,6 +37,9 @@ type
     btnSalvar: TSpeedButton;
     btnEditar: TSpeedButton;
     btnCadastrar: TSpeedButton;
+    Label11: TLabel;
+    cbEmpresa: TDBComboBox;
+    radReg: TDBRadioGroup;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnCadastrarClick(Sender: TObject);
@@ -53,16 +56,12 @@ var
 
 implementation
 
-uses uCadEmit;
+uses uCadEmit, DB;
 
 {$R *.dfm}
 
 procedure TtelaConfigEmit.FormShow(Sender: TObject);
 begin
-telaDados.qryEmitente.Close;
-telaDados.qryEmitente.SQL.Clear;
-telaDados.qryEmitente.SQL.ADd('');
-
 //EMITENTE
   edtRazSoc.Text          := telaDados.tblEmitenteRAZ_SOC.AsString;
   edtNomeFan.Text         := telaDados.tblEmitenteFANTASIA.AsString;
@@ -76,6 +75,8 @@ telaDados.qryEmitente.SQL.ADd('');
   edtUf.Text              := telaDados.tblEmitenteUF.AsString;
   edtTelefone.Text        := telaDados.tblEmitenteTELEFONE.AsString;
   edtCodMun.Text          := telaDados.tblEmitenteCODMUN.AsString;
+  cbEmpresa.ItemIndex     := telaDados.tblEmitenteTIPOEMP.Value;
+  radReg.ItemIndex        := telaDados.tblEmitenteREGIME.Value;
 end;
 
 procedure TtelaConfigEmit.FormCreate(Sender: TObject);
@@ -95,6 +96,7 @@ begin
   end else begin
     telaDados.qryEmitente.Close;
   end;
+
 end;
 
 procedure TtelaConfigEmit.btnCadastrarClick(Sender: TObject);

@@ -1,8 +1,8 @@
 object telaCadEmit: TtelaCadEmit
-  Left = 714
-  Top = 174
-  Width = 451
-  Height = 416
+  Left = 582
+  Top = 131
+  Width = 463
+  Height = 527
   Caption = 'Cadastro Emitente'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,8 +17,8 @@ object telaCadEmit: TtelaCadEmit
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 435
-    Height = 378
+    Width = 447
+    Height = 489
     Align = alClient
     TabOrder = 0
     object Label8: TLabel
@@ -37,7 +37,7 @@ object telaCadEmit: TtelaCadEmit
     end
     object btnSalvar: TSpeedButton
       Left = 176
-      Top = 336
+      Top = 440
       Width = 97
       Height = 25
       Caption = 'Salvar'
@@ -136,6 +136,13 @@ object telaCadEmit: TtelaCadEmit
       Width = 14
       Height = 13
       Caption = 'UF'
+    end
+    object Label11: TLabel
+      Left = 16
+      Top = 328
+      Width = 41
+      Height = 13
+      Caption = 'Empresa'
     end
     object edtBairro: TDBEdit
       Left = 93
@@ -271,6 +278,29 @@ object telaCadEmit: TtelaCadEmit
       DataField = 'UF'
       DataSource = telaDados.dsEmitente
       TabOrder = 11
+    end
+    object radReg: TRadioGroup
+      Left = 268
+      Top = 326
+      Width = 163
+      Height = 65
+      Caption = 'Regime Tribut'#225'rio'
+      Items.Strings = (
+        'Normal'
+        'Simples Nacional')
+      TabOrder = 15
+    end
+    object cbEmpresa: TComboBox
+      Left = 92
+      Top = 327
+      Width = 171
+      Height = 21
+      ItemHeight = 13
+      TabOrder = 16
+      Items.Strings = (
+        'Microempresa Municipal'
+        'Microempreendedor Individual'
+        'Empresa de Pequeno Porte')
     end
   end
 end

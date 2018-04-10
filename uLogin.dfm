@@ -4,7 +4,7 @@ object telaLogin: TtelaLogin
   BiDiMode = bdLeftToRight
   BorderStyle = bsToolWindow
   Caption = 'Login'
-  ClientHeight = 233
+  ClientHeight = 236
   ClientWidth = 472
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
@@ -149,14 +149,14 @@ object telaLogin: TtelaLogin
   end
   object Label1: TLabel
     Left = 232
-    Top = 32
+    Top = 56
     Width = 26
     Height = 13
     Caption = 'Login'
   end
   object Label2: TLabel
     Left = 233
-    Top = 87
+    Top = 111
     Width = 31
     Height = 13
     Caption = 'Senha'
@@ -743,16 +743,42 @@ object telaLogin: TtelaLogin
       455874646174653A6D6F6469667900323031382D30332D30375432313A35353A
       30392B30313A30306A6AE7370000000049454E44AE426082}
   end
+  object Label3: TLabel
+    Left = 258
+    Top = 16
+    Width = 98
+    Height = 35
+    Caption = 'Stock'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clNavy
+    Font.Height = -32
+    Font.Name = 'Algerian'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 359
+    Top = 16
+    Width = 57
+    Height = 35
+    Caption = 'SYS'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clYellow
+    Font.Height = -32
+    Font.Name = 'Algerian'
+    Font.Style = []
+    ParentFont = False
+  end
   object edtLogin: TEdit
     Left = 232
-    Top = 48
+    Top = 72
     Width = 226
     Height = 21
     TabOrder = 0
   end
   object edtSenha: TEdit
     Left = 233
-    Top = 103
+    Top = 127
     Width = 226
     Height = 21
     PasswordChar = '*'

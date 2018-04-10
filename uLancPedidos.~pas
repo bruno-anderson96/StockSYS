@@ -457,7 +457,7 @@ if editValProd.Text = '' then
     telaDados.qryProdutos.SQL.Clear;
     telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID = ');
     telaDados.qryProdutos.SQL.Add(telaDados.cdsTempItens.FieldByName('IDPROD').AsString);
-    estoque := telaDados.tblProdutosESTOQUE.AsInteger + telaDados.cdsTempItens.FieldByName('QUANT').AsInteger;
+    estoque := telaDados.tblProdutosESTOQUE.AsInteger - telaDados.cdsTempItens.FieldByName('QUANT').AsInteger;
     telaDados.qryProdutos.Open; 
 
     telaDados.qryProdutos.Close;

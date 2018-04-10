@@ -147,9 +147,29 @@ begin
   Config.ide_CNPJ := '08490295000133';
   Config.ide_CNPJ := '11.111.111/1111-11'; }
   config.ide_numeroCaixa := StrToInt(edtCaixa.Text);
-  Config.ide_tpAmb := TpcnTipoAmbiente(cbxAmbiente.ItemIndex); {taHomologacao]
-  Config.emit_cRegTrib := RTSimplesNacional;
-  Config.emit_cRegTribISSQN := RTISSMicroempresaMunicipal;
+  Config.ide_tpAmb := TpcnTipoAmbiente(cbxAmbiente.ItemIndex); {taHomologacao}
+
+  case telaDados.tblEmitenteREGIME.Value of
+  0:begin
+      Config.emit_cRegTrib := RTRegimeNormal;
+    end;
+  1:begin
+      Config.emit_cRegTrib := RTSimplesNacional;
+    end;
+  end;
+
+  case telaDados.tblEmitenteTIPOEMP.Value of
+  1:begin
+      Config.emit_cRegTribISSQN :=  RTISSMicroempresaMunicipal;
+    end;
+  2:begin
+      Config.emit_cRegTribISSQN :=  RTISSMEI;
+    end;
+  3:begin
+      Config.emit_cRegTribISSQN :=  RTISSMEEPP;
+    end;
+  end;
+
   Config.emit_indRatISSQN := irNao;    {
   Config.emit_CNPJ := '14200166000166'; }
   Config.emit_IE := telaConfigEmit.edtInscEst.Text{telaConfig.edtInscEst.Text};

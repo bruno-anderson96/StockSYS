@@ -374,6 +374,23 @@ type
     tblLoginSENHA: TIBStringField;
     tblLoginADM: TIntegerField;
     tblEmitenteID_LOGIN: TIntegerField;
+    tblEmitenteREGIME: TIntegerField;
+    tblEmitenteTIPOEMP: TIntegerField;
+    dsCsosn: TDataSource;
+    Label13: TLabel;
+    tblCsosn: TIBTable;
+    qryCsosn: TIBQuery;
+    trnscCsosn: TIBTransaction;
+    dbCsosn: TIBDatabase;
+    tblProdutosCFOP: TIntegerField;
+    tblProdutosID_CSOSN: TIntegerField;
+    Label14: TLabel;
+    dsCst: TDataSource;
+    tblCst: TIBTable;
+    trnscCst: TIBTransaction;
+    dbCst: TIBDatabase;
+    qryCst: TIBQuery;
+    tblProdutosID_CST: TIntegerField;
   private
     { Private declarations }
 

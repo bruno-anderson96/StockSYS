@@ -77,6 +77,13 @@ type
     Image1: TImage;
     btnEditar: TBitBtn;
     Editar: TAction;
+    cbCsosn: TComboBox;
+    Label20: TLabel;
+    GroupBox5: TGroupBox;
+    Label21: TLabel;
+    edtCfop: TDBEdit;
+    Label22: TLabel;
+    cbCst: TComboBox;
     procedure FormShow(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -100,6 +107,7 @@ type
     procedure editMvaExit(Sender: TObject);
     procedure EditarExecute(Sender: TObject);
     procedure ExcluirExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
 
   private
     { Private declarations }
@@ -334,6 +342,9 @@ begin
    cbAtivo.Enabled := true;
    cbCtrlEstoque.Enabled := true;
    cbFracionada.Enabled := true;
+   cbCst.Enabled := true;
+   cbCsosn.Enabled := true;
+   edtCfop.Enabled := true;
 
    btnPncm.Enabled := true;
 
@@ -383,12 +394,12 @@ ShowMessage('Preencha a unidade do produto');
 cbUnidade.SetFocus;
 Abort;
 end;
-if not ACBrNCMs1.Validar(editNcm.Text) then begin
+if editNcm.Text = '' then begin
 ShowMessage('Código do produto inválido');
 editNcm.SetFocus;
 Abort;
 end;
-if telaDados.qryProdutos.RecordCount > 0 then
+if telaDados.qryProdutos.RecordCount > 1 then
 begin
 ShowMessage('Código EAN13 já existente');
 editEan.SetFocus;
@@ -416,7 +427,9 @@ telaDados.tblProdutosUNIDADE.Value := cbUnidade.Text;
     4 : i := 4;
   end;
 telaDados.tblProdutosTIPOPROD.Value := i;
-
+telaDados.tblProdutosID_CSOSN.Value := cbCsosn.ItemIndex;
+telaDados.tblProdutosTIPOPROD.Value := radTipoProduto.ItemIndex;
+telaDados.tblProdutosID_CST.Value   := cbCst.ItemIndex;
 telaDados.tblProdutos.Post;
 
    editDesc.Enabled := false;
@@ -441,6 +454,9 @@ telaDados.tblProdutos.Post;
    cbAtivo.Enabled := false;
    cbCtrlEstoque.Enabled := false;
    cbFracionada.Enabled := false;
+   cbCst.Enabled := false;
+   cbCsosn.Enabled := false;
+   edtCfop.Enabled := false;
 
    btnPncm.Enabled := false;
 
@@ -525,6 +541,9 @@ begin
    cbAtivo.Enabled := false;
    cbCtrlEstoque.Enabled := false;
    cbFracionada.Enabled := false;
+   cbCst.Enabled := false;
+   cbCsosn.Enabled := false;
+   edtCfop.Enabled := false;
 
    btnPncm.Enabled := false;
 
@@ -713,6 +732,9 @@ begin
   cbAtivo.Enabled := true;
   cbCtrlEstoque.Enabled := true;
   cbFracionada.Enabled := true;
+  cbCst.Enabled := true;
+  cbCsosn.Enabled := true;
+  edtCfop.Enabled := true;
 
   cbAtivo.Checked := false;
   cbFracionada.Checked := false;
@@ -731,6 +753,28 @@ begin
   telaDados.qryProdutos.Open;
 
   telaDados.tblProdutos.Refresh;
+end;
+
+procedure TtelaCadProdutos.FormCreate(Sender: TObject);
+begin
+with telaDados.tblCsosn do 
+    begin 
+      First; 
+      while not Eof do 
+        begin 
+          cbCsosn.Items.Add(telaDados.tblCsosn.FieldByName('CODIGO').AsString + ' - ' + telaDados.tblCsosn.FieldByName('DESCRICAO').AsString); 
+          Next; 
+        end;
+end;
+with telaDados.tblCst do
+    begin 
+      First; 
+      while not Eof do 
+        begin 
+          cbCst.Items.Add(telaDados.tblCst.FieldByName('CODIGO').AsString + ' - ' + telaDados.tblCst.FieldByName('DESCRICAO').AsString); 
+          Next; 
+        end; 
+    end;
 end;
 
 end.

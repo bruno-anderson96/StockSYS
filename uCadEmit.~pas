@@ -39,6 +39,9 @@ type
     edtSenha: TDBEdit;
     btnSalvar: TSpeedButton;
     Panel1: TPanel;
+    radReg: TRadioGroup;
+    cbEmpresa: TComboBox;
+    Label11: TLabel;
     procedure btnSalvarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private

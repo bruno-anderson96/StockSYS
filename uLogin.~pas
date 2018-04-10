@@ -16,6 +16,8 @@ type
     edtLogin: TEdit;
     edtSenha: TEdit;
     Image1: TImage;
+    Label3: TLabel;
+    Label4: TLabel;
     procedure btnLoginClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure edtSenhaKeyPress(Sender: TObject; var Key: Char);

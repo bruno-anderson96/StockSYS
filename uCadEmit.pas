@@ -39,6 +39,9 @@ type
     edtSenha: TDBEdit;
     btnSalvar: TSpeedButton;
     Panel1: TPanel;
+    radReg: TRadioGroup;
+    cbEmpresa: TComboBox;
+    Label11: TLabel;
     procedure btnSalvarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
@@ -62,6 +65,8 @@ begin
   telaDados.tblLoginADM.Value := 0;
   telaDados.tblLogin.Post;
 
+  telaDados.tblEmitenteREGIME.Value := radReg.ItemIndex;
+  telaDados.tblEmitenteTIPOEMP.Value := cbEmpresa.ItemIndex;
   telaDados.tblEmitenteID_LOGIN.Value := 10;
   telaDados.tblEmitente.Post;
 

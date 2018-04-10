@@ -1260,9 +1260,9 @@ object telaLancPedidos: TtelaLancPedidos
         end
         object radDoc: TRadioGroup
           Left = 624
-          Top = 440
+          Top = 429
           Width = 186
-          Height = 73
+          Height = 84
           Caption = 'Documento'
           ItemIndex = 0
           Items.Strings = (

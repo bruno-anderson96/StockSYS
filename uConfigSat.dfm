@@ -1,7 +1,7 @@
 object telaConfigSat: TtelaConfigSat
-  Left = 129
+  Left = 128
   Top = 279
-  Width = 862
+  Width = 863
   Height = 386
   Caption = 'Configura'#231#227'o SAT'
   Color = clBtnFace
@@ -19,7 +19,7 @@ object telaConfigSat: TtelaConfigSat
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 846
+    Width = 847
     Height = 348
     Align = alClient
     TabOrder = 0
@@ -300,7 +300,7 @@ object telaConfigSat: TtelaConfigSat
       Top = 6
       Width = 329
       Height = 337
-      ActivePage = TabSheet1
+      ActivePage = TabSheet5
       TabOrder = 1
       object TabSheet1: TTabSheet
         Caption = 'MFe'
@@ -452,7 +452,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 15
           Width = 145
           Height = 21
-          ItemHeight = 0
+          ItemHeight = 13
           TabOrder = 0
         end
         object cbxPagCodigo: TComboBox
@@ -460,7 +460,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 78
           Width = 145
           Height = 21
-          ItemHeight = 0
+          ItemHeight = 13
           TabOrder = 1
         end
         object cbxModeloPosPrinter: TComboBox
@@ -468,7 +468,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 46
           Width = 145
           Height = 21
-          ItemHeight = 0
+          ItemHeight = 13
           TabOrder = 2
         end
       end
