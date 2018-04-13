@@ -3036,6 +3036,11 @@ object telaDados: TtelaDados
         Size = 60
       end
       item
+        Name = 'FANTASIA'
+        DataType = ftString
+        Size = 60
+      end
+      item
         Name = 'ENDERECO'
         DataType = ftString
         Size = 30
@@ -3164,6 +3169,10 @@ object telaDados: TtelaDados
     end
     object tblFornecedoresCOMPLEMENTO: TIBStringField
       FieldName = 'COMPLEMENTO'
+    end
+    object tblFornecedoresFANTASIA: TIBStringField
+      FieldName = 'FANTASIA'
+      Size = 60
     end
   end
   object qryFornecedores: TIBQuery
@@ -3625,6 +3634,7 @@ object telaDados: TtelaDados
   end
   object qryCst: TIBQuery
     Database = dbCst
+    Transaction = trnscCst
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsCst

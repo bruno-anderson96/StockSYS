@@ -1033,7 +1033,7 @@ object telaCadProdutos: TtelaCadProdutos
       Caption = 'Unidade'
     end
     object Label5: TLabel
-      Left = 253
+      Left = 301
       Top = 80
       Width = 55
       Height = 13
@@ -1112,7 +1112,7 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 2
     end
     object editEmb: TDBEdit
-      Left = 317
+      Left = 365
       Top = 77
       Width = 75
       Height = 21

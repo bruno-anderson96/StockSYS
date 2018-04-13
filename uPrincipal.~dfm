@@ -1,6 +1,6 @@
 object telaPrincipal: TtelaPrincipal
-  Left = 253
-  Top = 351
+  Left = 163
+  Top = 83
   Width = 1040
   Height = 580
   Caption = 'Projeto NFe - ACBr'
@@ -4000,7 +4000,7 @@ object telaPrincipal: TtelaPrincipal
       ButtonStyle = pbsFlat
       OnClick = PNGButton1Click
     end
-    object PNGButton5: TPNGButton
+    object btnCompra: TPNGButton
       Left = 222
       Top = 0
       Width = 73
@@ -4053,9 +4053,9 @@ object telaPrincipal: TtelaPrincipal
         7900323031382D30332D31395432303A33373A30382B30313A30305AEF129000
         00000049454E44AE426082}
       ButtonStyle = pbsFlat
-      OnClick = PNGButton5Click
+      OnClick = btnCompraClick
     end
-    object PNGButton4: TPNGButton
+    object btnVenda: TPNGButton
       Left = 296
       Top = 0
       Width = 73
@@ -4163,9 +4163,9 @@ object telaPrincipal: TtelaPrincipal
         33363A35302B30313A3030CE2239AD0000001974455874536F66747761726500
         41646F626520496D616765526561647971C9653C0000000049454E44AE426082}
       ButtonStyle = pbsFlat
-      OnClick = PNGButton4Click
+      OnClick = btnVendaClick
     end
-    object PNGButton3: TPNGButton
+    object btnFor: TPNGButton
       Left = 75
       Top = 0
       Width = 73
@@ -4239,14 +4239,15 @@ object telaPrincipal: TtelaPrincipal
         0000002574455874646174653A6D6F6469667900323031382D30332D31395432
         303A33363A33372B30313A3030CDEA0EA40000000049454E44AE426082}
       ButtonStyle = pbsFlat
-      OnClick = PNGButton3Click
+      OnClick = btnForClick
     end
-    object PNGButton2: TPNGButton
+    object btnCli: TPNGButton
       Left = 0
       Top = 0
       Width = 73
       Height = 57
       Cursor = crHandPoint
+      HelpType = htKeyword
       ButtonLayout = pbsImageAbove
       Caption = 'Cliente'
       ImageNormal.Data = {
@@ -4324,9 +4325,9 @@ object telaPrincipal: TtelaPrincipal
         332D31395432303A33353A32362B30313A30304C00BE8D0000000049454E44AE
         426082}
       ButtonStyle = pbsFlat
-      OnClick = PNGButton2Click
+      OnClick = btnCliClick
     end
-    object PNGButton6: TPNGButton
+    object btnProd: TPNGButton
       Left = 148
       Top = 0
       Width = 73
@@ -4414,7 +4415,7 @@ object telaPrincipal: TtelaPrincipal
         7C80CF0000002574455874646174653A6D6F6469667900323031382D30332D32
         395431383A30393A35372B30323A3030042138730000000049454E44AE426082}
       ButtonStyle = pbsFlat
-      OnClick = PNGButton6Click
+      OnClick = btnProdClick
     end
     object GroupBox1: TGroupBox
       Left = 72
@@ -4596,7 +4597,7 @@ object telaPrincipal: TtelaPrincipal
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEFEFF5FD3F733AFEDB3F3FFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-      Caption = 'Arquivo'
+      Caption = '&Arquivo'
       object Cadastro1: TMenuItem
         Caption = 'Cadastro'
         object Clientes1: TMenuItem
@@ -4803,5 +4804,9 @@ object telaPrincipal: TtelaPrincipal
       Caption = 'Sair'
       OnClick = Sair1Click
     end
+  end
+  object ActionList1: TActionList
+    Left = 896
+    Top = 120
   end
 end

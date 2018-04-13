@@ -390,6 +390,7 @@ type
     trnscCst: TIBTransaction;
     dbCst: TIBDatabase;
     qryCst: TIBQuery;
+    tblProdutosID_CST: TIntegerField;
   private
     { Private declarations }
 

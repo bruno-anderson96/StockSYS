@@ -1033,7 +1033,7 @@ object telaCadProdutos: TtelaCadProdutos
       Caption = 'Unidade'
     end
     object Label5: TLabel
-      Left = 253
+      Left = 301
       Top = 80
       Width = 55
       Height = 13
@@ -1112,7 +1112,7 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 2
     end
     object editEmb: TDBEdit
-      Left = 317
+      Left = 365
       Top = 77
       Width = 75
       Height = 21
@@ -1120,7 +1120,7 @@ object telaCadProdutos: TtelaCadProdutos
       DataField = 'QUANT_CAIXA'
       DataSource = telaDados.dsProdutos
       Enabled = False
-      TabOrder = 3
+      TabOrder = 5
     end
     object editNcm: TDBEdit
       Left = 492
@@ -1130,7 +1130,7 @@ object telaCadProdutos: TtelaCadProdutos
       DataField = 'CODIGO_NCM'
       DataSource = telaDados.dsProdutos
       Enabled = False
-      TabOrder = 4
+      TabOrder = 3
     end
     object editEan: TDBEdit
       Left = 86
@@ -1141,7 +1141,7 @@ object telaCadProdutos: TtelaCadProdutos
       DataField = 'EAN13'
       DataSource = telaDados.dsProdutos
       Enabled = False
-      TabOrder = 5
+      TabOrder = 6
       OnExit = editEanExit
       OnKeyPress = editEanKeyPress
     end
@@ -1154,7 +1154,7 @@ object telaCadProdutos: TtelaCadProdutos
       DataField = 'DUN14'
       DataSource = telaDados.dsProdutos
       Enabled = False
-      TabOrder = 6
+      TabOrder = 7
     end
     object GroupBox2: TGroupBox
       Left = 16
@@ -1165,7 +1165,7 @@ object telaCadProdutos: TtelaCadProdutos
       Ctl3D = False
       ParentColor = False
       ParentCtl3D = False
-      TabOrder = 7
+      TabOrder = 9
       object Label9: TLabel
         Left = 8
         Top = 26
@@ -1230,7 +1230,7 @@ object telaCadProdutos: TtelaCadProdutos
       Ctl3D = False
       ParentColor = False
       ParentCtl3D = False
-      TabOrder = 8
+      TabOrder = 10
       object Label12: TLabel
         Left = 9
         Top = 26
@@ -1336,7 +1336,7 @@ object telaCadProdutos: TtelaCadProdutos
       Ctl3D = False
       ParentColor = False
       ParentCtl3D = False
-      TabOrder = 9
+      TabOrder = 11
       object Label17: TLabel
         Left = 8
         Top = 26
@@ -1380,7 +1380,7 @@ object telaCadProdutos: TtelaCadProdutos
         DataField = 'PRECO_VENDA'
         DataSource = telaDados.dsProdutos
         Enabled = False
-        TabOrder = 1
+        TabOrder = 2
       end
       object editLucro: TDBEdit
         Left = 80
@@ -1390,7 +1390,7 @@ object telaCadProdutos: TtelaCadProdutos
         DataField = 'MARGEM_LUCRO'
         DataSource = telaDados.dsProdutos
         Enabled = False
-        TabOrder = 2
+        TabOrder = 1
         OnExit = editLucroExit
       end
     end
@@ -1405,7 +1405,7 @@ object telaCadProdutos: TtelaCadProdutos
       DataSource = telaDados.dsProdutos
       Enabled = False
       ParentCtl3D = False
-      TabOrder = 10
+      TabOrder = 13
       ValueChecked = 'True'
       ValueUnchecked = 'False'
     end
@@ -1418,7 +1418,7 @@ object telaCadProdutos: TtelaCadProdutos
       DataField = 'CONTROLADOR_ESTOQUE'
       DataSource = telaDados.dsProdutos
       Enabled = False
-      TabOrder = 11
+      TabOrder = 14
       ValueChecked = 'True'
       ValueUnchecked = 'False'
     end
@@ -1431,7 +1431,7 @@ object telaCadProdutos: TtelaCadProdutos
       DataField = 'FRACIONADO'
       DataSource = telaDados.dsProdutos
       Enabled = False
-      TabOrder = 12
+      TabOrder = 15
       ValueChecked = 'True'
       ValueUnchecked = 'False'
     end
@@ -1448,7 +1448,7 @@ object telaCadProdutos: TtelaCadProdutos
         '2 - N'#227'o Tributado'
         '3 - Sub. Tribut'#225'ria'
         '4 - Servi'#231'o')
-      TabOrder = 13
+      TabOrder = 12
     end
     object cbUnidade: TDBComboBox
       Left = 87
@@ -1459,7 +1459,7 @@ object telaCadProdutos: TtelaCadProdutos
       DataSource = telaDados.dsProdutos
       Enabled = False
       ItemHeight = 13
-      TabOrder = 14
+      TabOrder = 4
     end
     object GroupBox5: TGroupBox
       Left = 16
@@ -1467,7 +1467,7 @@ object telaCadProdutos: TtelaCadProdutos
       Width = 585
       Height = 81
       Caption = 'Classifica'#231#227'o Tribut'#225'ria'
-      TabOrder = 15
+      TabOrder = 8
       object Label20: TLabel
         Left = 14
         Top = 20
@@ -1509,7 +1509,7 @@ object telaCadProdutos: TtelaCadProdutos
         DataField = 'CFOP'
         DataSource = telaDados.dsProdutos
         Enabled = False
-        TabOrder = 1
+        TabOrder = 2
       end
       object cbCst: TComboBox
         Left = 64
@@ -1518,7 +1518,7 @@ object telaCadProdutos: TtelaCadProdutos
         Height = 21
         Enabled = False
         ItemHeight = 13
-        TabOrder = 2
+        TabOrder = 1
       end
     end
   end

@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, DB, StdCtrls, Mask, DBCtrls, Buttons, pngimage, ExtCtrls;
+  Dialogs, DB, StdCtrls, Mask, DBCtrls, Buttons, pngimage, ExtCtrls, jpeg;
 
 type
   TtelaLogin = class(TForm)
@@ -18,6 +18,7 @@ type
     Image1: TImage;
     Label3: TLabel;
     Label4: TLabel;
+    Image2: TImage;
     procedure btnLoginClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure edtSenhaKeyPress(Sender: TObject; var Key: Char);
@@ -41,6 +42,7 @@ begin
   if telaDados.tblLogin.Locate('login', edtLogin.Text, []) and
      telaDados.tblLogin.Locate('senha', edtSenha.Text, []) then begin
      telaPrincipal.Show;
+     telaLogin.Hide;
      telaDados.qryEmitente.Close;
      telaDados.qryEmitente.SQL.Clear;
      telaDados.qryEmitente.SQL.Add('Select * From emitente where ID_LOGIN =');

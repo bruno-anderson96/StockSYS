@@ -259,6 +259,7 @@ object telaCadEmit: TtelaCadEmit
       Height = 21
       DataField = 'SENHA'
       DataSource = telaDados.dsLogin
+      PasswordChar = '*'
       TabOrder = 1
     end
     object edtTelefone: TDBEdit

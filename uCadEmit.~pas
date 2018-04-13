@@ -65,6 +65,8 @@ begin
   telaDados.tblLoginADM.Value := 0;
   telaDados.tblLogin.Post;
 
+  telaDados.tblEmitenteREGIME.Value := radReg.ItemIndex;
+  telaDados.tblEmitenteTIPOEMP.Value := cbEmpresa.ItemIndex;
   telaDados.tblEmitenteID_LOGIN.Value := 10;
   telaDados.tblEmitente.Post;
 

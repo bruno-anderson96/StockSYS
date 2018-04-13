@@ -7,7 +7,7 @@ uses
   Dialogs, Menus, uStatus, uCadClientes, uCadProdutos, uCadUnidade, uLancPedidos,
   ACBrBase, ACBrPosPrinter, Buttons, ExtCtrls, pngextra, pngimage, StdCtrls, ComCtrls,
   ACBrSAT, TypInfo, ACBrSATClass, ACBrIntegrador, ACBrSATExtratoClass,
-  ACBrSATExtratoESCPOS, pcnConversao;
+  ACBrSATExtratoESCPOS, pcnConversao, ActnList;
 
 type
   TtelaPrincipal = class(TForm)
@@ -35,10 +35,10 @@ type
     LanamentodeCompras1: TMenuItem;
     GerarNFeEntrada1: TMenuItem;
     PNGButton1: TPNGButton;
-    PNGButton5: TPNGButton;
-    PNGButton4: TPNGButton;
-    PNGButton3: TPNGButton;
-    PNGButton2: TPNGButton;
+    btnCompra: TPNGButton;
+    btnVenda: TPNGButton;
+    btnFor: TPNGButton;
+    btnCli: TPNGButton;
     Image1: TImage;
     Panel1: TPanel;
     GroupBox1: TGroupBox;
@@ -47,7 +47,7 @@ type
     StatusBar1: TStatusBar;
     C1: TMenuItem;
     MFe1: TMenuItem;
-    PNGButton6: TPNGButton;
+    btnProd: TPNGButton;
     GroupBox4: TGroupBox;
     GroupBox5: TGroupBox;
     GroupBox6: TGroupBox;
@@ -56,6 +56,7 @@ type
     GroupBox9: TGroupBox;
     GroupBox10: TGroupBox;
     Emitente1: TMenuItem;
+    ActionList1: TActionList;
     procedure Sair1Click(Sender: TObject);
     procedure StatusdeServio1Click(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
@@ -73,15 +74,15 @@ type
     procedure LanamentodeCompras1Click(Sender: TObject);
     procedure GerarNFeEntrada1Click(Sender: TObject);
     procedure PNGButton1Click(Sender: TObject);
-    procedure PNGButton2Click(Sender: TObject);
-    procedure PNGButton3Click(Sender: TObject);
+    procedure btnCliClick(Sender: TObject);
+    procedure btnForClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SAT1Click(Sender: TObject);
-    procedure PNGButton5Click(Sender: TObject);
+    procedure btnCompraClick(Sender: TObject);
     procedure C1Click(Sender: TObject);
     procedure MFe1Click(Sender: TObject);
-    procedure PNGButton4Click(Sender: TObject);
-    procedure PNGButton6Click(Sender: TObject);
+    procedure btnVendaClick(Sender: TObject);
+    procedure btnProdClick(Sender: TObject);
     procedure Emitente1Click(Sender: TObject);
 
 
@@ -206,13 +207,13 @@ begin
 Application.Terminate;
 end;
 
-procedure TtelaPrincipal.PNGButton2Click(Sender: TObject);
+procedure TtelaPrincipal.btnCliClick(Sender: TObject);
 begin
 Application.CreateForm(TtelaCadClientes, telaCadClientes);
 telaCadClientes.Show;
 end;
 
-procedure TtelaPrincipal.PNGButton3Click(Sender: TObject);
+procedure TtelaPrincipal.btnForClick(Sender: TObject);
 begin
 Application.CreateForm(TtelaCadFor, telaCadFor);
 telaCadFor.Show;
@@ -232,7 +233,7 @@ Application.CreateForm(TtelaConfigSat, telaConfigSat);
 telaConfigSat.Show;
 end;
 
-procedure TtelaPrincipal.PNGButton5Click(Sender: TObject);
+procedure TtelaPrincipal.btnCompraClick(Sender: TObject);
 begin
 Application.CreateForm(TtelaLancCompras, telaLancCompras);
 telaLancCompras.Show;
@@ -251,13 +252,13 @@ begin
   telaConfigSat.Show;
 end;
 
-procedure TtelaPrincipal.PNGButton4Click(Sender: TObject);
+procedure TtelaPrincipal.btnVendaClick(Sender: TObject);
 begin
   Application.CreateForm(TtelaLancPedidos, telaLancPedidos);
   telaLancPedidos.Show;
 end;
 
-procedure TtelaPrincipal.PNGButton6Click(Sender: TObject);
+procedure TtelaPrincipal.btnProdClick(Sender: TObject);
 begin
   Application.CreateForm(TtelaCadProdutos, telaCadProdutos);
   telaCadProdutos.Show;

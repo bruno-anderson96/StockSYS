@@ -56,6 +56,8 @@ type
     ACBrCEP1: TACBrCEP;
     actEditar: TAction;
     btnEditar: TBitBtn;
+    Label14: TLabel;
+    edtFantasia: TDBEdit;
     procedure actCancelarExecute(Sender: TObject);
     procedure actConfirmarExecute(Sender: TObject);
     procedure actIncluirExecute(Sender: TObject);
@@ -95,6 +97,7 @@ begin
   editCnpj.Enabled := false;
   editInsc.Enabled := false;
   editEmail.Enabled := false;
+  edtFantasia.Enabled := false;
 
   actExcluir.Enabled := true;
   actConfirmar.Enabled := false;
@@ -173,6 +176,7 @@ end;
   editCnpj.Enabled := false;
   editInsc.Enabled := false;
   editEmail.Enabled := false;
+  edtFantasia.Enabled := false;
 
   actExcluir.Enabled := true;
   actConfirmar.Enabled := false;
@@ -215,6 +219,7 @@ begin
   editCnpj.Enabled := true;
   editInsc.Enabled := true;
   editEmail.Enabled := true;
+  edtFantasia.Enabled := true;
 
   editNome.SetFocus;
 
@@ -281,6 +286,7 @@ begin
   editCnpj.Enabled := true;
   editInsc.Enabled := true;
   editEmail.Enabled := true;
+  edtFantasia.Enabled := true;
 
   editNome.SetFocus;
 

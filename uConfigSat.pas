@@ -96,6 +96,7 @@ type
     procedure GetcodigoDeAtivacao(var Chave: AnsiString);
     procedure GetNumeroSessao(var Chave: Integer);
     procedure lerParams;
+    procedure cancelaCfe;
   public
     { Public declarations }
     num : integer;
@@ -123,7 +124,7 @@ end;
 procedure TtelaConfigSat.GetNumeroSessao(var Chave: Integer);
 begin
   Chave := 900000102;
-end; 
+end;
 
 procedure TtelaConfigSat.At(Sender: TObject);
 begin
@@ -148,6 +149,7 @@ begin
   Config.ide_CNPJ := '11.111.111/1111-11'; }
   config.ide_numeroCaixa := StrToInt(edtCaixa.Text);
   Config.ide_tpAmb := TpcnTipoAmbiente(cbxAmbiente.ItemIndex); {taHomologacao}
+
 
   case telaDados.tblEmitenteREGIME.Value of
   0:begin
@@ -404,7 +406,7 @@ begin
   end;
 
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
-  Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda; 
+  Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;
   
   
   end;
@@ -412,7 +414,7 @@ end;
 
 procedure TtelaConfigSat.SpeedButton5Click(Sender: TObject);
 begin
-  
+
   Memo1.Text := ACBrSAT1.AssociarAssinatura( '11111111111111' + '11111111111111','MD2Nof/O0tQMPKiYeeAydSjYt7YV9kU0nWKZGXHVdYIzR2W9Z6tgXni/Y5bnjmUAk8MkqlBJIiOOIskKCjJ086k7vAP0EU5cBRYj/nzHUiRdu9AVD7WRfVs00BDyb5fsnnKg7gAXXH6SBgCxG9yjAkxJ0l2E2idsWBAJ5peQEBZqtHytRUC+FLaSfd3+'+'66QNxIBlDwQIRzUGPaU6fvErVDSfMUf8WpkwnPz36fCQnyLypqe/5mbox9pt3RCbbXcYqnR/4poYGr9M9Kymj4/PyX9xGeiXwbgzOOHNIU5M/aAs0rulXz948bZla0eXABgEcp6mDkTzweLPZTbmOhX+eA==');
 end;
 
@@ -432,11 +434,11 @@ begin
   Memo1.Lines.Add('') ;                                                                                         {
   Memo1.Lines.Add('Tempo de Envio e Recebimento: '+ FormatFloat('##0.00',SecondSpan(tini,tfim))+' segundos' ) ;  }
   Memo1.Lines.Add('------------------------------------------------') ;
-   {
+        {
   if ACBrSAT1.Resposta.codigoDeRetorno = 6000 then
   begin
     LoadXML( ACBrSAT1.CFe.AsXMLString, Memo1 );
-    }
+           }
  end;
 
 
@@ -794,9 +796,29 @@ end;
 
 procedure TtelaConfigSat.FormShow(Sender: TObject);
 begin
+cancelaCfe;
   {edtSwHCNPJ.Clear;
   edtSwHCNPJ.DisplayFormat        := '00.000.000/0000-00;0';}
 
 end;
 
+procedure TtelaConfigSat.cancelaCfe;
+begin
+
+{
+ OpenDialog1.Filter := 'Arquivo XML|*.xml';
+  if OpenDialog1.Execute then
+    begin
+
+    ACBrSAT1.CFe.LoadFromFile( OpenDialog1.FileName );
+    ACBrSAT1.CFe2CFeCanc;
+
+    mCancelamentoEnviar.Lines.Text := ACBrSAT1.CFeCanc.GerarXML( True ) ;  // True = Gera apenas as TAGs da aplicação
+    edChaveCancelamento.Text := ACBrSAT1.CFeCanc.infCFe.chCanc;
+    PageControl1.ActivePage := tsCancelamento;
+
+
+    end; }
+end;
+ 
 end.

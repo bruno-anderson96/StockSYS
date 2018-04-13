@@ -300,7 +300,7 @@ object telaConfigSat: TtelaConfigSat
       Top = 6
       Width = 329
       Height = 337
-      ActivePage = TabSheet5
+      ActivePage = TabSheet1
       TabOrder = 1
       object TabSheet1: TTabSheet
         Caption = 'MFe'

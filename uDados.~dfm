@@ -556,6 +556,9 @@ object telaDados: TtelaDados
     object tblProdutosID_CSOSN: TIntegerField
       FieldName = 'ID_CSOSN'
     end
+    object tblProdutosID_CST: TIntegerField
+      FieldName = 'ID_CST'
+    end
   end
   object trnscProdutos: TIBTransaction
     Active = True
@@ -3622,6 +3625,7 @@ object telaDados: TtelaDados
   end
   object qryCst: TIBQuery
     Database = dbCst
+    Transaction = trnscCst
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsCst

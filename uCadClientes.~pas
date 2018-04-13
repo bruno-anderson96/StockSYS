@@ -532,7 +532,7 @@ telaDados.tblClientes.Cancel;
   Cancelar.Enabled  := false;
   Editar.Enabled    := true;
   Pesquisar.Enabled := true;
-    if editNome.Text = '' then begin
+    if editCpf.Text = '' then begin
       Excluir.Enabled := False;
     end else begin
       Excluir.Enabled := true;
