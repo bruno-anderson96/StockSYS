@@ -17,7 +17,6 @@ type
     GroupBox4: TGroupBox;
     btnIncItem: TBitBtn;
     btnExcItem: TBitBtn;
-    btnRetPed: TBitBtn;
     TabSheet2: TTabSheet;
     GroupBox5: TGroupBox;
     Label1: TLabel;
@@ -73,7 +72,6 @@ type
     Excluir: TAction;
     cbTpPg: TComboBox;
     GroupBox3: TGroupBox;
-    btnFinPed: TBitBtn;
     Label10: TLabel;
     btnIncluir: TBitBtn;
     StatusBar1: TStatusBar;
@@ -167,8 +165,7 @@ editEcep.Enabled := true;
 
 btnIncItem.Enabled := true;
 btnExcItem.Enabled := true;
-btnRetPed.Enabled := true;
-btnFinPed.Enabled := true;
+
 
 btnIncluir.Enabled := false;
 btnConfirmar.Enabled := true;
@@ -264,8 +261,7 @@ if editValProd.Text = '' then
 
   btnIncItem.Enabled := false;
   btnExcItem.Enabled := false;
-  btnRetPed.Enabled := false;
-  btnFinPed.Enabled := false;
+
 
   btnIncluir.Enabled := true;
   btnConfirmar.Enabled := false;
@@ -417,8 +413,7 @@ if editValProd.Text = '' then
 
   btnIncItem.Enabled := false;
   btnExcItem.Enabled := false;
-  btnRetPed.Enabled := false;
-  btnFinPed.Enabled := false;
+
 
   btnIncluir.Enabled := true;
   btnConfirmar.Enabled := false;
@@ -542,8 +537,7 @@ editEcep.Enabled := true;
 
 btnIncItem.Enabled := true;
 btnExcItem.Enabled := true;
-btnRetPed.Enabled := true;
-btnFinPed.Enabled := true;
+
 
 btnIncluir.Enabled := false;
 btnConfirmar.Enabled := true;
@@ -614,11 +608,8 @@ editEcidade.Enabled := false;
 editEuf.Enabled := false;
 editEcep.Enabled := false;
 
-
 btnIncItem.Enabled := false;
 btnExcItem.Enabled := false;
-btnRetPed.Enabled := false;
-btnFinPed.Enabled := false;
 
 btnIncluir.Enabled := true;
 btnConfirmar.Enabled := false;

@@ -265,8 +265,8 @@ object telaLancPedidos: TtelaLancPedidos
           end
         end
         object btnIncItem: TBitBtn
-          Left = 8
-          Top = 176
+          Left = 816
+          Top = 344
           Width = 145
           Height = 25
           Action = adicionarItem
@@ -275,22 +275,13 @@ object telaLancPedidos: TtelaLancPedidos
           TabOrder = 4
         end
         object btnExcItem: TBitBtn
-          Left = 156
-          Top = 176
+          Left = 820
+          Top = 312
           Width = 145
           Height = 25
           Caption = 'Excluir Item'
           Enabled = False
           TabOrder = 5
-        end
-        object btnRetPed: TBitBtn
-          Left = 456
-          Top = 176
-          Width = 145
-          Height = 25
-          Caption = 'Retornar Pedido Finalizado'
-          Enabled = False
-          TabOrder = 6
         end
         object btnExcluir: TBitBtn
           Left = 816
@@ -299,7 +290,7 @@ object telaLancPedidos: TtelaLancPedidos
           Height = 34
           Caption = 'F3 - &Excluir'
           Enabled = False
-          TabOrder = 7
+          TabOrder = 6
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -420,7 +411,7 @@ object telaLancPedidos: TtelaLancPedidos
           Height = 34
           Action = Confirmar
           Caption = 'F4 - &Confirmar'
-          TabOrder = 8
+          TabOrder = 7
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -541,7 +532,7 @@ object telaLancPedidos: TtelaLancPedidos
           Height = 34
           Action = Cancelar
           Caption = 'F5 - C&ancelar'
-          TabOrder = 9
+          TabOrder = 8
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -661,7 +652,7 @@ object telaLancPedidos: TtelaLancPedidos
           Width = 151
           Height = 34
           Caption = 'F9 - &Pesquisar'
-          TabOrder = 10
+          TabOrder = 9
           OnClick = btnPesquisarClick
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -782,7 +773,7 @@ object telaLancPedidos: TtelaLancPedidos
           Width = 151
           Height = 34
           Caption = 'F7 - I&mprimir'
-          TabOrder = 11
+          TabOrder = 10
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -903,7 +894,7 @@ object telaLancPedidos: TtelaLancPedidos
           Height = 34
           Action = Encerrar
           Caption = 'F10 - &Fechar'
-          TabOrder = 12
+          TabOrder = 11
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -1019,9 +1010,9 @@ object telaLancPedidos: TtelaLancPedidos
         end
         object DBGrid1: TDBGrid
           Left = 8
-          Top = 208
+          Top = 176
           Width = 614
-          Height = 305
+          Height = 337
           DataSource = telaDados.dsTempItens
           Enabled = False
           Font.Charset = ANSI_CHARSET
@@ -1030,7 +1021,7 @@ object telaLancPedidos: TtelaLancPedidos
           Font.Name = 'MS Serif'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 13
+          TabOrder = 12
           TitleFont.Charset = ANSI_CHARSET
           TitleFont.Color = clSilver
           TitleFont.Height = -13
@@ -1101,15 +1092,6 @@ object telaLancPedidos: TtelaLancPedidos
               '4 - Boleto')
           end
         end
-        object btnFinPed: TBitBtn
-          Left = 303
-          Top = 176
-          Width = 145
-          Height = 25
-          Caption = '&Finalizar Pedido'
-          Enabled = False
-          TabOrder = 14
-        end
         object btnIncluir: TBitBtn
           Left = 816
           Top = 24
@@ -1117,7 +1099,7 @@ object telaLancPedidos: TtelaLancPedidos
           Height = 34
           Action = Incluir
           Caption = 'F2 - &Incluir'
-          TabOrder = 15
+          TabOrder = 13
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -1268,7 +1250,7 @@ object telaLancPedidos: TtelaLancPedidos
           Items.Strings = (
             'Cupom Fiscal'
             'Nota Fiscal')
-          TabOrder = 17
+          TabOrder = 15
         end
       end
     end

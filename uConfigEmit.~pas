@@ -62,8 +62,6 @@ uses uCadEmit, DB;
 
 procedure TtelaConfigEmit.FormShow(Sender: TObject);
 begin
-
-
 //EMITENTE
   edtRazSoc.Text          := telaDados.tblEmitenteRAZ_SOC.AsString;
   edtNomeFan.Text         := telaDados.tblEmitenteFANTASIA.AsString;
