@@ -391,6 +391,7 @@ type
     dbCst: TIBDatabase;
     qryCst: TIBQuery;
     tblProdutosID_CST: TIntegerField;
+    tblFornecedoresFANTASIA: TIBStringField;
   private
     { Private declarations }
 

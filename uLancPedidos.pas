@@ -77,6 +77,17 @@ type
     StatusBar1: TStatusBar;
     adicionarItem: TAction;
     radDoc: TRadioGroup;
+    Dinheiro: TLabel;
+    Troco: TLabel;
+    edtTrc: TEdit;
+    Label12: TLabel;
+    edtCar: TEdit;
+    edtDin: TEdit;
+    Label14: TLabel;
+    Label21: TLabel;
+    PanelCalc: TPanel;
+    Label22: TLabel;
+    encPanel: TAction;
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnIncItemClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -92,9 +103,15 @@ type
     procedure editOutrasDespExit(Sender: TObject);
     procedure adicionarItemExecute(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
+    procedure edtDinExit(Sender: TObject);
+    procedure edtCarExit(Sender: TObject);
+    procedure edtTrcDragOver(Sender, Source: TObject; X, Y: Integer;
+      State: TDragState; var Accept: Boolean);
+    procedure encPanelExecute(Sender: TObject);
 
   private
     procedure calculaPedido();
+    procedure calculaTroco();
     { Private declarations }
   public
     { Public declarations }
@@ -302,10 +319,7 @@ if editValProd.Text = '' then
 
   end;
 
-  telaDados.tblPedidosItens.ApplyUpdates;
-
-
-
+  telaDados.tblPedidosItens.ApplyUpdates; 
 
 
 end;
@@ -315,6 +329,8 @@ begin
 telaDados.FormataCampos;
 telaDados.tblPedidos.Open;
 telaDados.tblPedidosItens.Open;
+
+
 end;
 
 procedure TtelaLancPedidos.FormClose(Sender: TObject;
@@ -382,6 +398,11 @@ if editValProd.Text = '' then
    ShowMessage('Selecione ao menos um produto');
    Abort;
   end;
+  
+  if (edtCar.Text = '') OR (edtDin.Text = '') then begin
+    PanelCalc.Visible := true;
+    edtDin.SetFocus;
+  end else begin
 
   telaDados.tblPedidos.Open;
   telaDados.tblPedidos.Edit;
@@ -481,6 +502,8 @@ if editValProd.Text = '' then
 
   end;
 
+
+
   if radDoc.ItemIndex = 0 then begin
 
   telaConfigSat.num := StrToInt(editId.Text);
@@ -493,9 +516,12 @@ if editValProd.Text = '' then
 
   end;
 
+  PanelCalc.Visible := False;
   telaDados.tblPedidosItens.ApplyUpdates;
   telaDados.tblProdutos.Close;
-  label10.Caption := 'Tecle F2 para Abrir Cupom'; 
+  label10.Caption := 'Tecle F2 para Abrir Cupom';
+
+  end;
 
 end;
 
@@ -553,7 +579,7 @@ cbTpPg.ItemIndex := 0;
 editDesc.Text := FloatToStr(d);
 editAsc.Text  := FloatToStr(a);
 editOutrasDesp.Text := FloatToStr(od);  
-         
+
                   {
 
         if editId.Text = ''  then begin
@@ -567,8 +593,8 @@ editOutrasDesp.Text := FloatToStr(od);
 
         telaDados.tblPedidos.Insert;
         telaDados.tblPedidosID.Value := id;
-        editDtCad.Text     := DateToStr(date()) + ' ' +  TimeToStr(time());
-        editDtEmissao.Text := DateToStr(date()) + ' ' +  TimeToStr(time());
+        telaDados.tblPedidosDATA_PEDIDO.AsString     := DateToStr(date()) + ' ' +  TimeToStr(time());
+        telaDados.tblPedidosDATA_ENTREGA.AsString := DateToStr(date()) + ' ' +  TimeToStr(time());
         telaLancPedidos.Refresh;
                                             {
         telaDados.tblPedidosID.Value := id;
@@ -651,6 +677,52 @@ procedure TtelaLancPedidos.btnPesquisarClick(Sender: TObject);
 begin
 Application.CreateForm(TtelaGerarNfe, telaGerarNfe);
 telaGerarNfe.Show;
+end;
+
+procedure TtelaLancPedidos.calculaTroco();
+var
+trc, din, car : currency;
+begin
+
+  if edtDin.Text = '' then edtDin.Text := '0';
+  if edtCar.Text = '' then edtCar.Text := '0';
+  if edtTrc.Text = '' then edtTrc.Text := '0';
+
+  din := StrToCurr(edtDin.Text);
+  car := StrToCurr(edtCar.Text);
+  edtDin.text:= FormatCurr('#,##0.00',din);
+  edtCar.text:= formatCurr('#,##0.00',car);
+
+  trc := (din + car) - StrToCurr(editVtotal.Text);
+
+  edtTrc.text:= FormatCurr('#,##0.00',trc);
+                                  
+
+end;
+
+procedure TtelaLancPedidos.edtDinExit(Sender: TObject);
+begin
+calculaTroco;
+end;
+
+procedure TtelaLancPedidos.edtCarExit(Sender: TObject);
+begin
+calculaTroco;
+end;
+
+procedure TtelaLancPedidos.edtTrcDragOver(Sender, Source: TObject; X,
+  Y: Integer; State: TDragState; var Accept: Boolean);
+begin
+edtDin.SetFocus;
+end;
+
+procedure TtelaLancPedidos.encPanelExecute(Sender: TObject);
+begin
+  if PanelCalc.Visible = true then begin
+     edtDin.Clear;
+     edtCar.Clear;
+     PanelCalc.Visible := false;
+  end;
 end;
 
 end.

@@ -1,6 +1,6 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 118
-  Top = 72
+  Left = 114
+  Top = 119
   Width = 998
   Height = 644
   Caption = 'Lan'#231'amento de Pedidos'
@@ -1252,6 +1252,138 @@ object telaLancPedidos: TtelaLancPedidos
             'Nota Fiscal')
           TabOrder = 15
         end
+        object PanelCalc: TPanel
+          Left = 296
+          Top = 64
+          Width = 377
+          Height = 353
+          Caption = 'PanelCalc'
+          TabOrder = 16
+          Visible = False
+          object Dinheiro: TLabel
+            Left = 56
+            Top = 65
+            Width = 75
+            Height = 25
+            Caption = 'Dinheiro'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -19
+            Font.Name = 'Palatino Linotype'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+          end
+          object Troco: TLabel
+            Left = 56
+            Top = 218
+            Width = 49
+            Height = 25
+            Caption = 'Troco'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -19
+            Font.Name = 'Palatino Linotype'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+          end
+          object Label12: TLabel
+            Left = 56
+            Top = 144
+            Width = 60
+            Height = 25
+            Caption = 'Cart'#227'o'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -19
+            Font.Name = 'Palatino Linotype'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+          end
+          object Label14: TLabel
+            Left = 104
+            Top = 284
+            Width = 198
+            Height = 24
+            Caption = 'F4 Para encerrar venda'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clYellow
+            Font.Height = -19
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label21: TLabel
+            Left = 136
+            Top = 8
+            Width = 92
+            Height = 20
+            Caption = 'Pagamento'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label22: TLabel
+            Left = 111
+            Top = 308
+            Width = 186
+            Height = 24
+            Caption = 'F1 Para voltar '#224' venda'
+            Color = clBtnFace
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -19
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+          end
+          object edtDin: TEdit
+            Left = 157
+            Top = 48
+            Width = 168
+            Height = 73
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -48
+            Font.Name = 'Nirmala UI'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 0
+            OnExit = edtDinExit
+          end
+          object edtTrc: TEdit
+            Left = 156
+            Top = 201
+            Width = 168
+            Height = 73
+            Enabled = False
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -48
+            Font.Name = 'Nirmala UI'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 2
+            OnDragOver = edtTrcDragOver
+          end
+          object edtCar: TEdit
+            Left = 156
+            Top = 124
+            Width = 168
+            Height = 73
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -48
+            Font.Name = 'Nirmala UI'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 1
+            OnExit = edtCarExit
+          end
+        end
       end
     end
     object TabSheet2: TTabSheet
@@ -1474,6 +1606,11 @@ object telaLancPedidos: TtelaLancPedidos
       Caption = 'Adicionar Item'
       ShortCut = 118
       OnExecute = adicionarItemExecute
+    end
+    object encPanel: TAction
+      Caption = 'EncerrarPanel'
+      ShortCut = 112
+      OnExecute = encPanelExecute
     end
   end
 end
