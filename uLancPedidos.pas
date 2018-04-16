@@ -88,6 +88,7 @@ type
     PanelCalc: TPanel;
     Label22: TLabel;
     encPanel: TAction;
+    excluirItem: TAction;
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnIncItemClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -108,6 +109,7 @@ type
     procedure edtTrcDragOver(Sender, Source: TObject; X, Y: Integer;
       State: TDragState; var Accept: Boolean);
     procedure encPanelExecute(Sender: TObject);
+    procedure excluirItemExecute(Sender: TObject);
 
   private
     procedure calculaPedido();
@@ -398,10 +400,16 @@ if editValProd.Text = '' then
    ShowMessage('Selecione ao menos um produto');
    Abort;
   end;
-  
+
   if (edtCar.Text = '') OR (edtDin.Text = '') then begin
     PanelCalc.Visible := true;
     edtDin.SetFocus;
+  end else begin
+  if edtTrc.Text = '0,00' then begin
+      edtDin.SetFocus;
+      ShowMessage('Valor pago deve ser maior ou igual ao valor total da compra');
+      abort;
+
   end else begin
 
   telaDados.tblPedidos.Open;
@@ -521,6 +529,8 @@ if editValProd.Text = '' then
   telaDados.tblProdutos.Close;
   label10.Caption := 'Tecle F2 para Abrir Cupom';
 
+  end;
+  
   end;
 
 end;
@@ -694,9 +704,11 @@ begin
   edtCar.text:= formatCurr('#,##0.00',car);
 
   trc := (din + car) - StrToCurr(editVtotal.Text);
-
-  edtTrc.text:= FormatCurr('#,##0.00',trc);
-                                  
+  if trc < 0 then begin
+    edtTrc.Text := '0,00';
+  end else begin
+    edtTrc.text:= FormatCurr('#,##0.00',trc);
+  end;
 
 end;
 
@@ -723,6 +735,15 @@ begin
      edtCar.Clear;
      PanelCalc.Visible := false;
   end;
+end;
+
+procedure TtelaLancPedidos.excluirItemExecute(Sender: TObject);
+
+begin
+  telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR.Value - DBGrid1.Columns.Items[5].Field.AsCurrency;
+  telaDados.tblPedidosVALOR_TOTAL.Value := telaDados.tblPedidosVALOR_TOTAL.Value - DBGrid1.Columns.Items[5].Field.AsCurrency;
+  telaDados.cdsTempItens.Delete;
+
 end;
 
 end.

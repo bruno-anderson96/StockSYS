@@ -1,6 +1,6 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 114
-  Top = 119
+  Left = 189
+  Top = 34
   Width = 998
   Height = 644
   Caption = 'Lan'#231'amento de Pedidos'
@@ -279,8 +279,8 @@ object telaLancPedidos: TtelaLancPedidos
           Top = 312
           Width = 145
           Height = 25
-          Caption = 'Excluir Item'
-          Enabled = False
+          Action = excluirItem
+          Caption = 'Excluir item'
           TabOrder = 5
         end
         object btnExcluir: TBitBtn
@@ -1014,12 +1014,12 @@ object telaLancPedidos: TtelaLancPedidos
           Width = 614
           Height = 337
           DataSource = telaDados.dsTempItens
-          Enabled = False
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
           Font.Name = 'MS Serif'
           Font.Style = [fsBold]
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           ParentFont = False
           TabOrder = 12
           TitleFont.Charset = ANSI_CHARSET
@@ -1253,8 +1253,8 @@ object telaLancPedidos: TtelaLancPedidos
           TabOrder = 15
         end
         object PanelCalc: TPanel
-          Left = 296
-          Top = 64
+          Left = 376
+          Top = 104
           Width = 377
           Height = 353
           Caption = 'PanelCalc'
@@ -1611,6 +1611,11 @@ object telaLancPedidos: TtelaLancPedidos
       Caption = 'EncerrarPanel'
       ShortCut = 112
       OnExecute = encPanelExecute
+    end
+    object excluirItem: TAction
+      Caption = 'Excluir item'
+      ShortCut = 117
+      OnExecute = excluirItemExecute
     end
   end
 end

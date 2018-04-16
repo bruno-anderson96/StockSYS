@@ -106,7 +106,7 @@ object telaLancItens: TtelaLancItens
       FocusControl = editVrt
     end
     object SpeedButton1: TSpeedButton
-      Left = 294
+      Left = 134
       Top = 20
       Width = 29
       Height = 30
@@ -241,7 +241,7 @@ object telaLancItens: TtelaLancItens
       TabOrder = 6
     end
     object editIdPedido: TDBEdit
-      Left = 152
+      Left = 344
       Top = 24
       Width = 134
       Height = 21

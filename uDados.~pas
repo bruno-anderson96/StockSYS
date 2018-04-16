@@ -623,8 +623,8 @@ begin
   tblFornecedoresCEP_END.EditMask        := '00000-000;0';
   tblFornecedoresTELEFONE.EditMask       := '(00)0000-0000;0';
   tblFornecedoresTELEFONE2.EditMask      := '(00)0000-0000;0';
-  tblFornecedoresCNPJ_CPF.EditMask         := '00.000.000/0000-00;0';
-  tblFornecedoresINSC_RG.EditMask          := '00000000-0;0';
+  tblFornecedoresCNPJ_CPF.EditMask       := '00.000.000/0000-00;0';
+  tblFornecedoresINSC_RG.EditMask        := '00000000-0;0';
 end;
 
 procedure TtelaDados.AtualizaConfigAcbr;
