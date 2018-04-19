@@ -31,7 +31,8 @@ uses
   uConfigSat in 'uConfigSat.pas' {telaConfigSat},
   configuraserial in 'configuraserial.pas',
   uConfigEmit in 'uConfigEmit.pas' {telaConfigEmit},
-  uCadEmit in 'uCadEmit.pas' {telaCadEmit};
+  uCadEmit in 'uCadEmit.pas' {telaCadEmit},
+  uCadCep in 'Imagens\Botões\Coleção 6 - BMP 24x24 habilitado-desabilitado\uCadCep.pas' {telaCadCep};
 
 {$R *.res}
 

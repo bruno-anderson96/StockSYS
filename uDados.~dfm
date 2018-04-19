@@ -1,8 +1,8 @@
 object telaDados: TtelaDados
-  Left = 205
-  Top = 164
-  Width = 886
-  Height = 560
+  Left = 158
+  Top = 92
+  Width = 1212
+  Height = 557
   Caption = 'Data m'#243'dulo'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -201,6 +201,58 @@ object telaDados: TtelaDados
     Width = 35
     Height = 20
     Caption = 'CST'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label15: TLabel
+    Left = 924
+    Top = 19
+    Width = 85
+    Height = 20
+    Caption = 'ESTADOS'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label17: TLabel
+    Left = 1092
+    Top = 19
+    Width = 82
+    Height = 20
+    Caption = 'BAIRROS'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label18: TLabel
+    Left = 940
+    Top = 163
+    Width = 51
+    Height = 20
+    Caption = 'RUAS'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label19: TLabel
+    Left = 932
+    Top = 347
+    Width = 81
+    Height = 20
+    Caption = 'CIDADES'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -2058,7 +2110,7 @@ object telaDados: TtelaDados
   end
   object dsEmitente: TDataSource
     DataSet = tblEmitente
-    Left = 96
+    Left = 99
     Top = 360
   end
   object ibdsEmitente: TIBDataSet
@@ -3642,5 +3694,356 @@ object telaDados: TtelaDados
       'select * from CST')
     Left = 776
     Top = 456
+  end
+  object dsEstados: TDataSource
+    DataSet = tblEstados
+    Left = 952
+    Top = 40
+  end
+  object trnscEstados: TIBTransaction
+    Active = True
+    DefaultDatabase = dbEstados
+    AutoStopAction = saNone
+    Left = 904
+    Top = 88
+  end
+  object qryEstados: TIBQuery
+    Database = dbEstados
+    Transaction = trnscEstados
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsEstados
+    SQL.Strings = (
+      'select * from ESTADOS')
+    Left = 952
+    Top = 128
+  end
+  object dbEstados: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    DefaultTransaction = trnscEstados
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 1000
+    Top = 88
+  end
+  object tblEstados: TIBTable
+    Database = dbEstados
+    Transaction = trnscEstados
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ESTADO'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'UF'
+        DataType = ftString
+        Size = 2
+      end
+      item
+        Name = 'IBGE_ESTADO'
+        DataType = ftInteger
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_ESTADOS_1'
+        Fields = 'ID'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'ESTADOS'
+    Left = 952
+    Top = 88
+    object tblEstadosID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object tblEstadosESTADO: TIBStringField
+      FieldName = 'ESTADO'
+      Size = 30
+    end
+    object tblEstadosUF: TIBStringField
+      FieldName = 'UF'
+      Size = 2
+    end
+    object tblEstadosIBGE_ESTADO: TIntegerField
+      FieldName = 'IBGE_ESTADO'
+    end
+  end
+  object dsRuas: TDataSource
+    DataSet = tblRuas
+    Left = 952
+    Top = 192
+  end
+  object dsCidades: TDataSource
+    Left = 952
+    Top = 376
+  end
+  object dsBairros: TDataSource
+    Left = 1112
+    Top = 40
+  end
+  object tblBairros: TIBTable
+    Database = dbBairros
+    Transaction = trnscBairros
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_CIDADES'
+        DataType = ftInteger
+      end
+      item
+        Name = 'BAIRROS'
+        DataType = ftString
+        Size = 80
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_BAIRROS_1'
+        Fields = 'ID'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'BAIRROS'
+    Left = 1112
+    Top = 80
+    object tblBairrosID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object tblBairrosID_CIDADES: TIntegerField
+      FieldName = 'ID_CIDADES'
+    end
+    object tblBairrosBAIRROS: TIBStringField
+      FieldName = 'BAIRROS'
+      Size = 80
+    end
+  end
+  object tblRuas: TIBTable
+    Database = dbRuas
+    Transaction = trnscRuas
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_BAIRRO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'RUA'
+        DataType = ftString
+        Size = 80
+      end
+      item
+        Name = 'CEP'
+        DataType = ftInteger
+      end
+      item
+        Name = 'TIPO'
+        DataType = ftString
+        Size = 30
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_RUAS_1'
+        Fields = 'ID'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'RUAS'
+    Left = 952
+    Top = 232
+    object tblRuasID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object tblRuasID_BAIRRO: TIntegerField
+      FieldName = 'ID_BAIRRO'
+    end
+    object tblRuasRUA: TIBStringField
+      FieldName = 'RUA'
+      Size = 80
+    end
+    object tblRuasCEP: TIntegerField
+      FieldName = 'CEP'
+    end
+    object tblRuasTIPO: TIBStringField
+      FieldName = 'TIPO'
+      Size = 30
+    end
+  end
+  object tblCidades: TIBTable
+    Database = dbCidades
+    Transaction = trnscCidades
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_ESTADO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CIDADE'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'IBGE_CIDADE'
+        DataType = ftInteger
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_CIDADES_1'
+        Fields = 'ID'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'CIDADES'
+    Left = 952
+    Top = 416
+    object tblCidadesID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object tblCidadesID_ESTADO: TIntegerField
+      FieldName = 'ID_ESTADO'
+    end
+    object tblCidadesCIDADE: TIBStringField
+      FieldName = 'CIDADE'
+      Size = 60
+    end
+    object tblCidadesIBGE_CIDADE: TIntegerField
+      FieldName = 'IBGE_CIDADE'
+    end
+  end
+  object qryRuas: TIBQuery
+    Database = dbRuas
+    Transaction = trnscRuas
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsRuas
+    SQL.Strings = (
+      'select * from RUAS')
+    Left = 952
+    Top = 272
+  end
+  object qryBairros: TIBQuery
+    Database = dbBairros
+    Transaction = trnscBairros
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsBairros
+    SQL.Strings = (
+      'select * from BAIRROS')
+    Left = 1112
+    Top = 120
+  end
+  object qryCidades: TIBQuery
+    Database = dbCidades
+    Transaction = trnscCidades
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsCidades
+    SQL.Strings = (
+      'select * from CIDADES')
+    Left = 952
+    Top = 456
+  end
+  object dbCidades: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 1000
+    Top = 416
+  end
+  object dbRuas: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 1000
+    Top = 232
+  end
+  object dbBairros: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 1160
+    Top = 80
+  end
+  object trnscBairros: TIBTransaction
+    Active = True
+    DefaultDatabase = dbBairros
+    AutoStopAction = saNone
+    Left = 1064
+    Top = 80
+  end
+  object trnscRuas: TIBTransaction
+    Active = True
+    DefaultDatabase = dbRuas
+    AutoStopAction = saNone
+    Left = 904
+    Top = 232
+  end
+  object trnscCidades: TIBTransaction
+    Active = True
+    DefaultDatabase = dbCidades
+    AutoStopAction = saNone
+    Left = 904
+    Top = 416
   end
 end

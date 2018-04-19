@@ -57,6 +57,7 @@ type
     GroupBox10: TGroupBox;
     Emitente1: TMenuItem;
     ActionList1: TActionList;
+    CEP1: TMenuItem;
     procedure Sair1Click(Sender: TObject);
     procedure StatusdeServio1Click(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
@@ -84,6 +85,8 @@ type
     procedure btnVendaClick(Sender: TObject);
     procedure btnProdClick(Sender: TObject);
     procedure Emitente1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure CEP1Click(Sender: TObject);
 
 
   private
@@ -102,7 +105,7 @@ implementation
 
 uses uGerarNfe, uDados, uValidaXml, uEnviarNfe, uCancelaNfe, uInutilizaNfe,
   uEmiteDanfe, uEnviaEmail, uCadFornecedor, uLancCompras, uGerarNfeEntrada, XPMan, uConfig,
-  uConfigSat, uConfigEmit;
+  uConfigSat, uConfigEmit, uCadCep;
 
 {$R *.dfm}
 
@@ -268,6 +271,18 @@ procedure TtelaPrincipal.Emitente1Click(Sender: TObject);
 begin
   Application.CreateForm(TtelaConfigEmit, telaConfigEmit);
   telaConfigEmit.Show;
+end;
+
+procedure TtelaPrincipal.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+Application.Terminate;
+end;
+
+procedure TtelaPrincipal.CEP1Click(Sender: TObject);
+begin
+Application.CreateForm(TtelaCadCep, telaCadCep);
+telaCadCep.Show;
 end;
 
 end.

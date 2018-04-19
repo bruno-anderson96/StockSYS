@@ -8,7 +8,6 @@ uses
 
 type
   TtelaLogin = class(TForm)
-    btnFechar: TSpeedButton;
     btnLogin: TSpeedButton;
     Label1: TLabel;
     DataSource1: TDataSource;
@@ -22,6 +21,7 @@ type
     procedure btnLoginClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure edtSenhaKeyPress(Sender: TObject; var Key: Char);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -62,6 +62,12 @@ end;
 procedure TtelaLogin.edtSenhaKeyPress(Sender: TObject; var Key: Char);
 begin
   if key =#13 then btnLogin.Click;
+end;
+
+procedure TtelaLogin.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+Application.Terminate;
+
 end;
 
 end.

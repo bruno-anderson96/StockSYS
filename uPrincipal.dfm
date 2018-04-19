@@ -1,6 +1,6 @@
 object telaPrincipal: TtelaPrincipal
-  Left = 154
-  Top = 253
+  Left = 148
+  Top = 160
   Width = 1040
   Height = 580
   Caption = 'Projeto NFe - ACBr'
@@ -14,6 +14,7 @@ object telaPrincipal: TtelaPrincipal
   Menu = MainMenu1
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -3928,6 +3929,7 @@ object telaPrincipal: TtelaPrincipal
       Width = 65
       Height = 57
       Cursor = crHandPoint
+      Visible = False
       ButtonLayout = pbsImageAbove
       Caption = 'Fechar'
       ImageNormal.Data = {
@@ -4615,6 +4617,10 @@ object telaPrincipal: TtelaPrincipal
         object Fornecedores1: TMenuItem
           Caption = 'Fornecedores'
           OnClick = Fornecedores1Click
+        end
+        object CEP1: TMenuItem
+          Caption = 'CEP'
+          OnClick = CEP1Click
         end
       end
       object LanamentodePedidos1: TMenuItem

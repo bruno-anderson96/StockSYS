@@ -9,6 +9,14 @@ uses
   DBLocal, DBLocalI, Provider, Math, ACBrDFeSSL, ACBrNFeDANFEClass,
   ACBrNFeDANFeRLClass, ACBrSocket, ACBrCEP, ACBrIBGE, IBUpdateSQL;
 
+ type
+  retornaEndereco = record
+  cep : String;
+  cidade : String;
+  endereco : String;
+  bairro : String;
+end;
+
 type
   TtelaDados = class(TForm)
     ACBrNFe1: TACBrNFe;
@@ -392,6 +400,47 @@ type
     qryCst: TIBQuery;
     tblProdutosID_CST: TIntegerField;
     tblFornecedoresFANTASIA: TIBStringField;
+    Label15: TLabel;
+    dsEstados: TDataSource;
+    trnscEstados: TIBTransaction;
+    qryEstados: TIBQuery;
+    dbEstados: TIBDatabase;
+    tblEstados: TIBTable;
+    Label17: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
+    dsRuas: TDataSource;
+    dsCidades: TDataSource;
+    dsBairros: TDataSource;
+    tblBairros: TIBTable;
+    tblRuas: TIBTable;
+    tblCidades: TIBTable;
+    qryRuas: TIBQuery;
+    qryBairros: TIBQuery;
+    qryCidades: TIBQuery;
+    dbCidades: TIBDatabase;
+    dbRuas: TIBDatabase;
+    dbBairros: TIBDatabase;
+    trnscBairros: TIBTransaction;
+    trnscRuas: TIBTransaction;
+    trnscCidades: TIBTransaction;
+    tblEstadosID: TIntegerField;
+    tblEstadosESTADO: TIBStringField;
+    tblEstadosUF: TIBStringField;
+    tblEstadosIBGE_ESTADO: TIntegerField;
+    tblRuasID: TIntegerField;
+    tblRuasID_BAIRRO: TIntegerField;
+    tblRuasRUA: TIBStringField;
+    tblRuasCEP: TIntegerField;
+    tblRuasTIPO: TIBStringField;
+    tblCidadesID: TIntegerField;
+    tblCidadesID_ESTADO: TIntegerField;
+    tblCidadesCIDADE: TIBStringField;
+    tblCidadesIBGE_CIDADE: TIntegerField;
+    tblBairrosID: TIntegerField;
+    tblBairrosID_CIDADES: TIntegerField;
+    tblBairrosBAIRROS: TIBStringField;
+
   private
     { Private declarations }
 
@@ -421,11 +470,14 @@ type
 
     procedure DesenhaBarras(SequenciaHexa: string; Imagem: TCanvas);
     procedure GeraBarrasEAN13(CodBarras: string; Imagem: TCanvas);
+
+    function BuscarPorCep(cep: String) : retornaEndereco;
     //
   end;
 
-var
+  var
   telaDados: TtelaDados;
+
 
 
 implementation
@@ -869,6 +921,40 @@ begin
 ACBrIBGE1.BuscarPorNome(cidade,uf,true);
 
 result := ACBrIBGE1.Cidades[0].CodMunicipio;
+
+end;
+
+function TtelaDados.BuscarPorCep(cep: String): retornaEndereco;
+begin
+    qryRuas.Close;
+    qryRuas.SQL.Clear;
+    qryRuas.SQL.Add('Select * from RUAS where cep like :pDados');
+    qryRuas.Params.ParamByName('pDados').asString := cep;
+    qryRuas.Open;
+
+    qryBairros.Close;
+    qryBairros.SQL.Clear;
+    qryBairros.SQL.Add('Select * from BAIRROS where ID = ');
+    qryBairros.SQL.Add(qryRuas.FieldByName('ID_BAIRRO').Value);
+    qryBairros.Open;
+
+    qryCidades.Close;
+    qryCidades.SQL.Clear;
+    qryCidades.SQL.Add('Select * from CIDADES where ID = ');
+    qryCidades.SQL.Add(qryBairros.FieldByName('ID_CIDADES').Value);
+    qryCidades.Open;
+
+    qryEstados.Close;
+    qryEstados.SQL.Clear;
+    qryEstados.SQL.Add('Select * from ESTADOS where ID = ');
+    qryEstados.SQL.Add(qryCidades.FieldByName('ID_ESTADO').Value);
+    qryEstados.Open;
+
+Result.cep := qryRuas.FieldByName('CEP').AsString;
+Result.endereco := Utf8ToAnsi(qryRuas.FieldByName('RUA').AsString);
+Result.cidade := qryCidades.FieldByName('CIDADE').AsString;
+Result.bairro := qryBairros.FieldByName('BAIRROS').AsString;
+
 
 end;
 

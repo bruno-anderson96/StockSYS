@@ -1,7 +1,7 @@
 object telaCadClientes: TtelaCadClientes
-  Left = 127
-  Top = 164
-  Width = 807
+  Left = 4
+  Top = 152
+  Width = 838
   Height = 448
   Caption = 'Cadastro de Cliente'
   Color = clBtnFace
@@ -18,7 +18,7 @@ object telaCadClientes: TtelaCadClientes
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 791
+    Width = 822
     Height = 352
     ActivePage = TabSheet1
     Align = alClient
@@ -424,9 +424,9 @@ object telaCadClientes: TtelaCadClientes
       end
       object RadioGroup1: TRadioGroup
         Left = 96
-        Top = 182
+        Top = 180
         Width = 201
-        Height = 30
+        Height = 33
         Columns = 2
         Enabled = False
         Items.Strings = (
@@ -796,7 +796,7 @@ object telaCadClientes: TtelaCadClientes
   object Panel1: TPanel
     Left = 0
     Top = 352
-    Width = 791
+    Width = 822
     Height = 58
     Align = alBottom
     TabOrder = 1
@@ -1048,7 +1048,7 @@ object telaCadClientes: TtelaCadClientes
       Width = 106
       Height = 57
       Action = Confirmar
-      Caption = 'F4 - &Confirmar'
+      Caption = 'F4 - &Salvar'
       TabOrder = 2
       Glyph.Data = {
         B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -1527,7 +1527,7 @@ object telaCadClientes: TtelaCadClientes
       NumGlyphs = 2
     end
     object btnFechar: TBitBtn
-      Left = 689
+      Left = 721
       Top = 0
       Width = 101
       Height = 57
@@ -1728,7 +1728,7 @@ object telaCadClientes: TtelaCadClientes
       OnExecute = ExcluirExecute
     end
     object Confirmar: TAction
-      Caption = 'F4 - Con&firmar'
+      Caption = 'F4 - &Salvar'
       Enabled = False
       ShortCut = 115
       OnExecute = ConfirmarExecute
