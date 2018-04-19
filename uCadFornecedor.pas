@@ -34,7 +34,6 @@ type
     Label11: TLabel;
     editInsc: TDBEdit;
     Label12: TLabel;
-    editUf: TDBEdit;
     Label13: TLabel;
     editEmail: TDBEdit;
     btnCep: TSpeedButton;
@@ -58,6 +57,7 @@ type
     btnEditar: TBitBtn;
     Label14: TLabel;
     edtFantasia: TDBEdit;
+    editUf: TComboBox;
     procedure actCancelarExecute(Sender: TObject);
     procedure actConfirmarExecute(Sender: TObject);
     procedure actIncluirExecute(Sender: TObject);
@@ -159,6 +159,7 @@ if not (telaDados.verificaCnpj(editCnpj.Text)) then begin
   Abort;
 end;
 
+  telaDados.tblFornecedoresUF_END.Value := editUf.Text;
   telaDados.tblFornecedores.Post;
 
    btnCep.Enabled := false;
@@ -234,6 +235,17 @@ begin
   btnCancelar.Enabled  := true;
   btnIncluir.Enabled   := false;
   btnEditar.Enabled    := false;
+
+  with telaDados.tblEstados do
+    begin
+      First;
+      while not Eof do
+        begin
+          editUf.Items.Add(telaDados.tblEstados.FieldByName('UF').AsString);
+          Next;
+        end;
+    end;
+
 end;
 
 procedure TtelaCadFor.actFecharExecute(Sender: TObject);
@@ -252,7 +264,7 @@ ACBrCEP1.BuscarPorCEP(editCep.Text);
     telaDados.tblFornecedoresENDERECO.AsString    := UpperCase(ACBrCEP1.Enderecos[i].Logradouro);
     telaDados.tblFornecedoresCOMPLEMENTO.AsString := UpperCase(ACBrCEP1.Enderecos[i].Complemento);
     telaDados.tblFornecedoresCIDADE_END.AsString  := UpperCase(ACBrCEP1.Enderecos[i].Municipio);
-    telaDados.tblFornecedoresUF_END.AsString      := UpperCase(ACBrCEP1.Enderecos[i].UF);
+    editUf.Text                                   := UpperCase(ACBrCEP1.Enderecos[i].UF);
     telaDados.tblFornecedoresBAIRRO_END.AsString  := UpperCase(ACBrCEP1.Enderecos[i].Bairro);
 
   end;

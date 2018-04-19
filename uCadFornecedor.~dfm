@@ -1,6 +1,6 @@
 object telaCadFor: TtelaCadFor
-  Left = 603
-  Top = 168
+  Left = 401
+  Top = 245
   Width = 756
   Height = 383
   Caption = 'Cadastro de Fornecedor'
@@ -117,7 +117,6 @@ object telaCadFor: TtelaCadFor
       Width = 14
       Height = 13
       Caption = 'UF'
-      FocusControl = editUf
     end
     object Label13: TLabel
       Left = 13
@@ -348,7 +347,7 @@ object telaCadFor: TtelaCadFor
       DataField = 'TELEFONE'
       DataSource = telaDados.dsFornecedores
       Enabled = False
-      TabOrder = 10
+      TabOrder = 9
     end
     object editTel2: TDBEdit
       Left = 304
@@ -359,7 +358,7 @@ object telaCadFor: TtelaCadFor
       DataField = 'TELEFONE2'
       DataSource = telaDados.dsFornecedores
       Enabled = False
-      TabOrder = 11
+      TabOrder = 10
     end
     object editCnpj: TDBEdit
       Left = 88
@@ -370,7 +369,7 @@ object telaCadFor: TtelaCadFor
       DataField = 'CNPJ_CPF'
       DataSource = telaDados.dsFornecedores
       Enabled = False
-      TabOrder = 12
+      TabOrder = 11
     end
     object editInsc: TDBEdit
       Left = 88
@@ -381,18 +380,7 @@ object telaCadFor: TtelaCadFor
       DataField = 'INSC_RG'
       DataSource = telaDados.dsFornecedores
       Enabled = False
-      TabOrder = 13
-    end
-    object editUf: TDBEdit
-      Left = 384
-      Top = 168
-      Width = 30
-      Height = 21
-      CharCase = ecUpperCase
-      DataField = 'UF_END'
-      DataSource = telaDados.dsFornecedores
-      Enabled = False
-      TabOrder = 9
+      TabOrder = 12
     end
     object editEmail: TDBEdit
       Left = 88
@@ -403,7 +391,7 @@ object telaCadFor: TtelaCadFor
       DataField = 'EMAIL'
       DataSource = telaDados.dsFornecedores
       Enabled = False
-      TabOrder = 14
+      TabOrder = 13
     end
     object editCompl: TDBEdit
       Left = 432
@@ -425,6 +413,16 @@ object telaCadFor: TtelaCadFor
       DataSource = telaDados.dsFornecedores
       Enabled = False
       TabOrder = 2
+    end
+    object editUf: TComboBox
+      Left = 383
+      Top = 166
+      Width = 58
+      Height = 21
+      CharCase = ecUpperCase
+      Enabled = False
+      ItemHeight = 13
+      TabOrder = 14
     end
   end
   object Panel1: TPanel
@@ -683,7 +681,7 @@ object telaCadFor: TtelaCadFor
       Width = 106
       Height = 45
       Action = actConfirmar
-      Caption = 'F4 - &Confirmar'
+      Caption = 'F4 - &Salvar'
       Enabled = False
       TabOrder = 2
       Glyph.Data = {
@@ -1299,7 +1297,7 @@ object telaCadFor: TtelaCadFor
       OnExecute = actExcluirExecute
     end
     object actConfirmar: TAction
-      Caption = 'F4 - &Confirmar'
+      Caption = 'F4 - &Salvar'
       ShortCut = 115
       OnExecute = actConfirmarExecute
     end

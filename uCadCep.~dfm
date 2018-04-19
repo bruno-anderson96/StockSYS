@@ -1,6 +1,6 @@
 object telaCadCep: TtelaCadCep
-  Left = 392
-  Top = 111
+  Left = 376
+  Top = 204
   Width = 460
   Height = 353
   Caption = 'Cadastro de Endere'#231'o'
@@ -11,6 +11,7 @@ object telaCadCep: TtelaCadCep
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -57,7 +58,6 @@ object telaCadCep: TtelaCadCep
       Width = 33
       Height = 13
       Caption = 'Cidade'
-      FocusControl = edtCidade
     end
     object Label5: TLabel
       Left = 138
@@ -65,7 +65,6 @@ object telaCadCep: TtelaCadCep
       Width = 14
       Height = 13
       Caption = 'UF'
-      FocusControl = edtUf
     end
     object Label6: TLabel
       Left = 8
@@ -73,7 +72,6 @@ object telaCadCep: TtelaCadCep
       Width = 27
       Height = 13
       Caption = 'Bairro'
-      FocusControl = edtBairro
     end
     object btnSalvar: TSpeedButton
       Left = 216
@@ -332,7 +330,7 @@ object telaCadCep: TtelaCadCep
       CharCase = ecUpperCase
       DataField = 'ENDERECO'
       Enabled = False
-      TabOrder = 4
+      TabOrder = 1
     end
     object edtCompl: TDBEdit
       Left = 8
@@ -342,37 +340,33 @@ object telaCadCep: TtelaCadCep
       CharCase = ecUpperCase
       DataField = 'COMPLEMENTO'
       Enabled = False
-      TabOrder = 5
-    end
-    object edtCidade: TDBEdit
-      Left = 8
-      Top = 96
-      Width = 420
-      Height = 21
-      CharCase = ecUpperCase
-      DataField = 'CIDADE_END'
-      Enabled = False
       TabOrder = 2
     end
-    object edtUf: TDBEdit
+    object cbUf: TComboBox
       Left = 136
       Top = 56
-      Width = 30
+      Width = 57
       Height = 21
       CharCase = ecUpperCase
-      DataField = 'UF_END'
-      Enabled = False
-      TabOrder = 1
+      ItemHeight = 13
+      TabOrder = 3
+      Text = 'CE'
     end
-    object edtBairro: TDBEdit
+    object cbCidade: TComboBox
+      Left = 8
+      Top = 96
+      Width = 421
+      Height = 21
+      ItemHeight = 13
+      TabOrder = 4
+    end
+    object cbBairro: TComboBox
       Left = 8
       Top = 136
       Width = 420
       Height = 21
-      CharCase = ecUpperCase
-      DataField = 'BAIRRO_END'
-      Enabled = False
-      TabOrder = 3
+      ItemHeight = 13
+      TabOrder = 5
     end
   end
   object ACBrCEP1: TACBrCEP

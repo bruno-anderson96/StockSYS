@@ -15,6 +15,7 @@ uses
   cidade : String;
   endereco : String;
   bairro : String;
+  estado : String;
 end;
 
 type
@@ -954,6 +955,7 @@ Result.cep := qryRuas.FieldByName('CEP').AsString;
 Result.endereco := Utf8ToAnsi(qryRuas.FieldByName('RUA').AsString);
 Result.cidade := qryCidades.FieldByName('CIDADE').AsString;
 Result.bairro := qryBairros.FieldByName('BAIRROS').AsString;
+Result.estado := qryEstados.FieldByName('ESTADO').AsString;
 
 
 end;

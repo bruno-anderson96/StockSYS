@@ -67,7 +67,6 @@ end;
 procedure TtelaLogin.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 Application.Terminate;
-
 end;
 
 end.

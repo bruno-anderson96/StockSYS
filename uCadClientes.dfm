@@ -111,7 +111,6 @@ object telaCadClientes: TtelaCadClientes
         Width = 14
         Height = 13
         Caption = 'UF'
-        FocusControl = editUf
       end
       object Label14: TLabel
         Left = 8
@@ -356,7 +355,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'TELEFONE'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 9
+        TabOrder = 8
       end
       object editCelular: TDBEdit
         Left = 296
@@ -366,18 +365,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'CELULAR'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 10
-      end
-      object editUf: TDBEdit
-        Left = 392
-        Top = 136
-        Width = 30
-        Height = 21
-        CharCase = ecUpperCase
-        DataField = 'UF_END'
-        DataSource = telaDados.dsClientes
-        Enabled = False
-        TabOrder = 8
+        TabOrder = 9
       end
       object editCpf: TDBEdit
         Left = 96
@@ -387,7 +375,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'CNPJ_CPF'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 11
+        TabOrder = 10
       end
       object editRg: TDBEdit
         Left = 96
@@ -397,7 +385,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'INSC_RG'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 12
+        TabOrder = 11
       end
       object editDtCad: TDBEdit
         Left = 96
@@ -407,7 +395,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'DATA_CAD'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 13
+        TabOrder = 12
       end
       object cbAtivo: TDBCheckBox
         Left = 96
@@ -418,7 +406,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'ATIVO'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 14
+        TabOrder = 13
         ValueChecked = 'True'
         ValueUnchecked = 'False'
       end
@@ -432,8 +420,18 @@ object telaCadClientes: TtelaCadClientes
         Items.Strings = (
           'F'#237'sica'
           'Jur'#237'dica')
-        TabOrder = 15
+        TabOrder = 14
         OnClick = RadioGroup1Click
+      end
+      object editUf: TComboBox
+        Left = 392
+        Top = 136
+        Width = 57
+        Height = 21
+        CharCase = ecUpperCase
+        Enabled = False
+        ItemHeight = 13
+        TabOrder = 15
       end
     end
     object TabSheet2: TTabSheet

@@ -3,7 +3,7 @@ object telaLogin: TtelaLogin
   Top = 161
   BiDiMode = bdLeftToRight
   BorderStyle = bsToolWindow
-  Caption = 'Login'
+  Caption = 'Acesso'
   ClientHeight = 237
   ClientWidth = 481
   Color = clWhite
@@ -4160,9 +4160,9 @@ object telaLogin: TtelaLogin
   object Label1: TLabel
     Left = 232
     Top = 56
-    Width = 26
+    Width = 28
     Height = 13
-    Caption = 'Login'
+    Caption = 'Nome'
   end
   object Label2: TLabel
     Left = 233
