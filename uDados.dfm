@@ -281,7 +281,6 @@ object telaDados: TtelaDados
   object tblProdutos: TIBTable
     Database = dbProdutos
     Transaction = trnscProdutos
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     FieldDefs = <
@@ -482,6 +481,7 @@ object telaDados: TtelaDados
     end
     object tblProdutosREFERENCIA: TIBStringField
       FieldName = 'REFERENCIA'
+      LookupDataSet = qryBairros
     end
     object tblProdutosEAN13: TIBStringField
       FieldName = 'EAN13'
@@ -502,6 +502,7 @@ object telaDados: TtelaDados
     end
     object tblProdutosUNIDADE: TIBStringField
       FieldName = 'UNIDADE'
+      LookupDataSet = qryBairros
       Size = 3
     end
     object tblProdutosQUANT_CAIXA: TIBBCDField
@@ -2189,24 +2190,8 @@ object telaDados: TtelaDados
     object cdsTempItensVRT: TFloatField
       FieldName = 'VRT'
     end
-    object cdsTempItensMARGEM: TFloatField
-      FieldName = 'MARGEM'
-    end
     object cdsTempItensVRR: TFloatField
       FieldName = 'VRR'
-    end
-    object cdsTempItensTIPOPROD: TIntegerField
-      FieldName = 'TIPOPROD'
-    end
-    object cdsTempItensCANCELADO: TBooleanField
-      FieldName = 'CANCELADO'
-    end
-    object cdsTempItensNUM_ITEM: TIntegerField
-      FieldName = 'NUM_ITEM'
-    end
-    object cdsTempItensEAN13: TStringField
-      FieldName = 'EAN13'
-      Size = 14
     end
   end
   object dspTempItens: TDataSetProvider

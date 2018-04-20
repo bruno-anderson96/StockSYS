@@ -1051,17 +1051,17 @@ object telaCadProdutos: TtelaCadProdutos
     object Label7: TLabel
       Left = 14
       Top = 104
-      Width = 59
+      Width = 52
       Height = 13
-      Caption = 'C'#243'd. EAN13'
+      Caption = 'C'#243'd.Barras'
       FocusControl = editEan
     end
     object Label8: TLabel
-      Left = 319
+      Left = 279
       Top = 103
-      Width = 36
+      Width = 77
       Height = 13
-      Caption = 'DUN14'
+      Caption = 'C'#243'd Embalagem'
       FocusControl = editDun
     end
     object btnPncm: TSpeedButton

@@ -222,10 +222,6 @@ type
     cdsTempItensVRT: TFloatField;
     cdsTempItensMARGEM: TFloatField;
     cdsTempItensVRR: TFloatField;
-    cdsTempItensTIPOPROD: TIntegerField;
-    cdsTempItensCANCELADO: TBooleanField;
-    cdsTempItensNUM_ITEM: TIntegerField;
-    cdsTempItensEAN13: TStringField;
     qryClientes: TIBQuery;
     dsNCMs: TDataSource;
     dspNCM: TDataSetProvider;
@@ -955,6 +951,7 @@ Result.cep := qryRuas.FieldByName('CEP').AsString;
 Result.endereco := Utf8ToAnsi(qryRuas.FieldByName('RUA').AsString);
 Result.cidade := qryCidades.FieldByName('CIDADE').AsString;
 Result.bairro := qryBairros.FieldByName('BAIRROS').AsString;
+Result.estado := qryEstados.FieldByName('ESTADO').AsString;
 
 
 end;

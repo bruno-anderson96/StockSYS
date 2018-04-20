@@ -2195,19 +2195,6 @@ object telaDados: TtelaDados
     object cdsTempItensVRR: TFloatField
       FieldName = 'VRR'
     end
-    object cdsTempItensTIPOPROD: TIntegerField
-      FieldName = 'TIPOPROD'
-    end
-    object cdsTempItensCANCELADO: TBooleanField
-      FieldName = 'CANCELADO'
-    end
-    object cdsTempItensNUM_ITEM: TIntegerField
-      FieldName = 'NUM_ITEM'
-    end
-    object cdsTempItensEAN13: TStringField
-      FieldName = 'EAN13'
-      Size = 14
-    end
   end
   object dspTempItens: TDataSetProvider
     DataSet = cdsTempItens

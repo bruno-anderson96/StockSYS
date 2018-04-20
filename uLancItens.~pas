@@ -43,6 +43,7 @@ type
     procedure editQuantExit(Sender: TObject);
     procedure BitBtn1Exit(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
      
   private
     { Private declarations }
@@ -141,11 +142,11 @@ begin
   telaDados.FormataCampos;
                                    {
   telaDados.tblPedidosItens.Insert; }
-  if tipo = 0 then begin
+  {if tipo = 0 then begin
   telaDados.cdsTempItens.Insert;
   end else begin
   telaDados.cdsCTempItens.Insert;
-  end;
+  end;}
   
   editDescnt.Text := '0';
   editAcr.Text := '0';
@@ -263,6 +264,13 @@ procedure TtelaLancItens.SpeedButton1Click(Sender: TObject);
 begin
 Application.CreateForm(TtelaPesItens, telaPesItens);
 telaPesItens.Show;
+end;
+
+procedure TtelaLancItens.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+pegaTipo();
+if tipo =0 then telaLancPedidos.edtItem.SetFocus;
 end;
 
 end.

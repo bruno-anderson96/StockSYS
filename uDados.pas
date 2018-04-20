@@ -220,12 +220,7 @@ type
     cdsTempItensDESCONTO: TFloatField;
     cdsTempItensACRESCIMO: TFloatField;
     cdsTempItensVRT: TFloatField;
-    cdsTempItensMARGEM: TFloatField;
     cdsTempItensVRR: TFloatField;
-    cdsTempItensTIPOPROD: TIntegerField;
-    cdsTempItensCANCELADO: TBooleanField;
-    cdsTempItensNUM_ITEM: TIntegerField;
-    cdsTempItensEAN13: TStringField;
     qryClientes: TIBQuery;
     dsNCMs: TDataSource;
     dspNCM: TDataSetProvider;
