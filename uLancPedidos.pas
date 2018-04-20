@@ -115,7 +115,9 @@ type
     procedure encPanelExecute(Sender: TObject);
     procedure excluirItemExecute(Sender: TObject);
     procedure edtItemKeyPress(Sender: TObject; var Key: Char);
-    procedure edtItemExit(Sender: TObject);
+    procedure edtItemKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+  
 
   private
     procedure calculaPedido();
@@ -688,7 +690,7 @@ Application.CreateForm(TtelaLancItens, telaLancItens);
 
 
 tipo := 0;
-telaDados.cdsTempItens.Insert;
+telaDados.cdsTempItens.Append;
 
 
 telaPesItens.Show;
@@ -793,33 +795,26 @@ begin
        ShowMessage('Nenhum produto com este código !');
        edtItem.SetFocus;
 
+    end;
   end;
-
-    
-end;
 end;
 end;
 
-procedure TtelaLancPedidos.edtItemExit(Sender: TObject);
+procedure TtelaLancPedidos.edtItemKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
 begin
-
-    if edtItem.Text <> '' then
+if key = vk_shift then
     begin
       Application.CreateForm(TtelaLancItens, telaLancItens);
 
-      telaDados.qryProdutos.Close;
-      telaDados.qryProdutos.SQL.Clear;
-      telaDados.qryProdutos.SQL.Add('Select * from produtos where EAN13 = ');
-      telaDados.qryProdutos.SQL.Add(edtItem.Text);
-      telaDados.qryProdutos.Open;
 
         if telaDados.qryProdutos.RecordCount < 1 then begin
           ShowMessage('Nenhum produto com este código !');
           edtItem.SetFocus;
           Abort;
         end;
-
-       telaDados.cdsTempItens.Append;
+        telaDados.cdsTempItens.Last;
+       telaDados.cdsTempItens.edit;{
        telaDados.tblPedidosItens.Open;
        telaDados.cdsTempItensDESC.Value := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
        telaDados.cdsTempItensIDPROD.Value := telaDados.qryProdutos.FieldByName('ID').AsInteger;
@@ -831,12 +826,9 @@ begin
        telaDados.cdsTempItensVRT.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
        telaDados.cdsTempItensVRR.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
 
+              }
 
-       telaDados.cdsTempItens.Post;
 
-       
-      telaDados.cdsTempItens.last;
-      telaDados.cdsTempItens.Edit;
 
       telaLancItens.Show;
       telaLancItens.pegaTipo(0);
@@ -844,16 +836,8 @@ begin
       edtItem.Clear;
 
 
-
-      end;
-          
-
-
   end;
-
-
-
-
-
+end;
 
 end.
+

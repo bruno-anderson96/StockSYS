@@ -1,6 +1,6 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 253
-  Top = 130
+  Left = 215
+  Top = 108
   Width = 1004
   Height = 655
   Caption = 'Lan'#231'amento de Pedidos'
@@ -1219,7 +1219,7 @@ object telaLancPedidos: TtelaLancPedidos
             Height = 21
             Enabled = False
             TabOrder = 0
-            OnExit = edtItemExit
+            OnKeyDown = edtItemKeyDown
             OnKeyPress = edtItemKeyPress
           end
           object btnIncItem: TBitBtn
@@ -1346,7 +1346,7 @@ object telaLancPedidos: TtelaLancPedidos
         end
         object PanelCalc: TPanel
           Left = 10
-          Top = 111
+          Top = 79
           Width = 799
           Height = 377
           Align = alCustom

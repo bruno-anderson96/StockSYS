@@ -152,7 +152,7 @@ begin
   editDescnt.Text := '0';
   editAcr.Text := '0';
 
-  editId.SetFocus;
+  editQuant.SetFocus;
 end;
 
 procedure TtelaLancItens.editAcrExit(Sender: TObject);
@@ -164,7 +164,7 @@ end;
 
 procedure TtelaLancItens.ConfirmarExecute(Sender: TObject);
 begin
-
+ 
 
   if tipo = 0 then
   begin
@@ -176,7 +176,7 @@ begin
   telaDados.cdsTempItens.Post;
 
 
-  telaDados.tblPedidosVALOR_TOTAL.Value := telaDados.tblPedidosVALOR_TOTAL.Value + telaDados.cdsTempItensVRT.Value;
+  telaDados.tblPedidosVALOR_TOTAL.Value := telaDados.tblPedidosVALOR_TOTAL.Value + telaDados.cdsTempItensVRT.Value - telaDados.cdsTempItensVALOR.Value;
   telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR_TOTAL.Value;
    
   {

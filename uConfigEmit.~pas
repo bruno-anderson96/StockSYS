@@ -75,7 +75,7 @@ begin
   edtUf.Text              := telaDados.tblEmitenteUF.AsString;
   edtTelefone.Text        := telaDados.tblEmitenteTELEFONE.AsString;
   edtCodMun.Text          := telaDados.tblEmitenteCODMUN.AsString;
-  cbEmpresa.ItemIndex     := telaDados.tblEmitenteTIPOEMP.Value;
+  cbEmpresa.ItemIndex     := telaDados.tblEmitenteTIPOEMP.AsInteger;
   radReg.ItemIndex        := telaDados.tblEmitenteREGIME.Value;
 end;
 
