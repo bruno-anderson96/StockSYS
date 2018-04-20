@@ -16,6 +16,7 @@ type
     DBGrid1: TDBGrid;
     procedure btnPesquisaClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -27,7 +28,7 @@ var
 
 implementation
 
-uses uDados, uLancItens;
+uses uDados, uLancItens, uCadProdutos, uPesProduto, uLancPedidos;
 
 {$R *.dfm}
 
@@ -75,12 +76,12 @@ begin
 
       telaLancItens.Refresh;
 
-      telaLancItens.editId.Text    :=  telaDados.qryProdutos.FieldByName('id').AsString;
-      telaLancItens.editDesc.Text  :=  telaDados.qryProdutos.FieldByName('descricao').AsString;
-      telaLancItens.editValor.Text :=  telaDados.qryProdutos.FieldByName('preco_venda').AsString;
+      telaLancPedidos.edtItem.Text := telaDados.qryProdutos.FieldByName('EAN13').AsString;
 
       telaPesItens.Close;
-      telaLancItens.editQuant.SetFocus;
+      telaLancPedidos.edtItem.SetFocus;
 end;
+
+
 
 end.

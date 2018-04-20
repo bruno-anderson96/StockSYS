@@ -1,6 +1,6 @@
 object telaLancItens: TtelaLancItens
-  Left = 207
-  Top = 192
+  Left = 331
+  Top = 215
   Width = 513
   Height = 287
   Caption = 'Lan'#231'amento de Itens(Pedido)'

@@ -52,6 +52,7 @@ type
   public
     { Public declarations }
      procedure pegaTipo(a: integer);
+
   end;
 
 var

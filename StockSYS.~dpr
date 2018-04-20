@@ -46,6 +46,5 @@ begin
   Application.CreateForm(TtelaConfigSat, telaConfigSat);
   Application.CreateForm(TtelaGerarNfe, telaGerarNfe);
   Application.CreateForm(TtelaConfigEmit, telaConfigEmit);
-  Application.CreateForm(TtelaCadCep, telaCadCep);
   Application.Run;
 end.

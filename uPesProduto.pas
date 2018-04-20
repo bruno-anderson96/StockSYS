@@ -30,7 +30,7 @@ var
 
 implementation
 
-uses uCadProdutos;
+uses uCadProdutos, uLancItens;
 
 {$R *.dfm}
 
@@ -73,13 +73,19 @@ end;
 procedure TtelaPesProduto.DBGrid1DblClick(Sender: TObject);
 var num : integer;
 begin
-  num := DBGrid1.Columns.Items[0].Field.AsInteger;
+
+    
+ num := DBGrid1.Columns.Items[0].Field.AsInteger;
+
 
   telaDados.tblProdutos.Locate('ID', num , []);
 
   telaDados.GeraBarrasEAN13(telaCadProdutos.editEan.Text, telaCadProdutos.Image1.Canvas);
 
+
+
   telaPesProduto.Close;
+
 end;
 
 procedure TtelaPesProduto.FormClose(Sender: TObject;

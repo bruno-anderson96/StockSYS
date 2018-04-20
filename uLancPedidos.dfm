@@ -1,8 +1,8 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 189
-  Top = 34
+  Left = 253
+  Top = 130
   Width = 1004
-  Height = 644
+  Height = 655
   Caption = 'Lan'#231'amento de Pedidos'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object telaLancPedidos: TtelaLancPedidos
     Left = 0
     Top = 0
     Width = 988
-    Height = 606
+    Height = 617
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
@@ -30,7 +30,7 @@ object telaLancPedidos: TtelaLancPedidos
         Left = 0
         Top = 0
         Width = 980
-        Height = 578
+        Height = 589
         Align = alClient
         Color = clSkyBlue
         ParentBackground = False
@@ -1173,7 +1173,7 @@ object telaLancPedidos: TtelaLancPedidos
         end
         object StatusBar1: TStatusBar
           Left = 2
-          Top = 557
+          Top = 568
           Width = 976
           Height = 19
           Panels = <
@@ -1345,16 +1345,16 @@ object telaLancPedidos: TtelaLancPedidos
           end
         end
         object PanelCalc: TPanel
-          Left = 626
-          Top = 447
-          Width = 976
+          Left = 10
+          Top = 111
+          Width = 799
           Height = 377
           Align = alCustom
           TabOrder = 13
           Visible = False
           object Dinheiro: TLabel
-            Left = 560
-            Top = 89
+            Left = 512
+            Top = 97
             Width = 75
             Height = 25
             Caption = 'Dinheiro'
@@ -1366,8 +1366,8 @@ object telaLancPedidos: TtelaLancPedidos
             ParentFont = False
           end
           object Troco: TLabel
-            Left = 560
-            Top = 242
+            Left = 512
+            Top = 250
             Width = 49
             Height = 25
             Caption = 'Troco'
@@ -1379,8 +1379,8 @@ object telaLancPedidos: TtelaLancPedidos
             ParentFont = False
           end
           object Label12: TLabel
-            Left = 560
-            Top = 168
+            Left = 512
+            Top = 176
             Width = 60
             Height = 25
             Caption = 'Cart'#227'o'
@@ -1405,8 +1405,8 @@ object telaLancPedidos: TtelaLancPedidos
             ParentFont = False
           end
           object Label21: TLabel
-            Left = 640
-            Top = 40
+            Left = 592
+            Top = 48
             Width = 92
             Height = 20
             Caption = 'Pagamento'
@@ -1446,8 +1446,8 @@ object telaLancPedidos: TtelaLancPedidos
             ParentFont = False
           end
           object edtDin: TEdit
-            Left = 661
-            Top = 72
+            Left = 613
+            Top = 80
             Width = 168
             Height = 73
             Font.Charset = ANSI_CHARSET
@@ -1460,8 +1460,8 @@ object telaLancPedidos: TtelaLancPedidos
             OnExit = edtDinExit
           end
           object edtTrc: TEdit
-            Left = 660
-            Top = 225
+            Left = 612
+            Top = 233
             Width = 168
             Height = 73
             Enabled = False
@@ -1475,8 +1475,8 @@ object telaLancPedidos: TtelaLancPedidos
             OnDragOver = edtTrcDragOver
           end
           object edtCar: TEdit
-            Left = 660
-            Top = 148
+            Left = 612
+            Top = 156
             Width = 168
             Height = 73
             Font.Charset = ANSI_CHARSET
@@ -1491,7 +1491,7 @@ object telaLancPedidos: TtelaLancPedidos
           object gbCli: TGroupBox
             Left = 16
             Top = 160
-            Width = 521
+            Width = 489
             Height = 57
             Caption = 'Cliente'
             TabOrder = 3
@@ -1506,7 +1506,7 @@ object telaLancPedidos: TtelaLancPedidos
             object editIdCliente: TDBEdit
               Left = 8
               Top = 24
-              Width = 57
+              Width = 37
               Height = 21
               DataField = 'ID_CLIENTE'
               DataSource = telaDados.dsPedidos
@@ -1514,7 +1514,7 @@ object telaLancPedidos: TtelaLancPedidos
               TabOrder = 0
             end
             object cbCliente: TDBLookupComboBox
-              Left = 72
+              Left = 51
               Top = 24
               Width = 433
               Height = 21

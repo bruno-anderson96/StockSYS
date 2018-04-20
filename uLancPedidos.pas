@@ -133,7 +133,7 @@ var
 
 implementation
 
-uses DB,uConfigSat, uGerarNfe;
+uses DB,uConfigSat, uGerarNfe, uPesItens;
 
 {$R *.dfm}
 
@@ -532,7 +532,6 @@ if editDtEmissao.Text = '' then
   telaDados.tblPedidosItens.ApplyUpdates;
   telaDados.tblProdutos.Close;
   label10.Caption := 'Tecle F2 para Abrir Cupom';
-
   end;  
   
 end;
@@ -684,14 +683,16 @@ end;
 
 procedure TtelaLancPedidos.adicionarItemExecute(Sender: TObject);
 begin
+Application.CreateForm(TtelaPesItens, telaPesItens);
 Application.CreateForm(TtelaLancItens, telaLancItens);
-telaLancItens.Show;
-telaLancItens.pegaTipo(0);
-  if tipo = 0 then begin
-  telaDados.cdsTempItens.Insert;
-  end else begin
-  telaDados.cdsCTempItens.Insert;
-  end;
+
+
+tipo := 0;
+telaDados.cdsTempItens.Insert;
+
+
+telaPesItens.Show;
+
 end;
 
 procedure TtelaLancPedidos.btnPesquisarClick(Sender: TObject);
@@ -769,7 +770,7 @@ begin
       telaDados.qryProdutos.Open;
 
       if telaDados.qryProdutos.RecordCount >0 then begin
-       telaDados.cdsTempItens.Insert;
+       telaDados.cdsTempItens.Append;
        telaDados.tblPedidosItens.Open;
        telaDados.cdsTempItensDESC.Value := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
        telaDados.cdsTempItensIDPROD.Value := telaDados.qryProdutos.FieldByName('ID').AsInteger;
@@ -818,7 +819,7 @@ begin
           Abort;
         end;
 
-       telaDados.cdsTempItens.Insert;
+       telaDados.cdsTempItens.Append;
        telaDados.tblPedidosItens.Open;
        telaDados.cdsTempItensDESC.Value := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
        telaDados.cdsTempItensIDPROD.Value := telaDados.qryProdutos.FieldByName('ID').AsInteger;

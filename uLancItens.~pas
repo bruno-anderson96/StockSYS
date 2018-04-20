@@ -52,12 +52,13 @@ type
   public
     { Public declarations }
      procedure pegaTipo(a: integer);
+      tipo : integer;
   end;
 
 var
   telaLancItens: TtelaLancItens;
   quant, valor, Acr, descnt: double;
-   tipo : integer;
+
 
 implementation
 
@@ -269,7 +270,7 @@ end;
 procedure TtelaLancItens.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-pegaTipo();
+
 if tipo =0 then telaLancPedidos.edtItem.SetFocus;
 end;
 
