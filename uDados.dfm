@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 158
-  Top = 92
+  Left = 156
+  Top = 152
   Width = 1212
   Height = 557
   Caption = 'Data m'#243'dulo'
@@ -286,7 +286,6 @@ object telaDados: TtelaDados
     FieldDefs = <
       item
         Name = 'ID'
-        Attributes = [faRequired]
         DataType = ftInteger
       end
       item
@@ -384,7 +383,6 @@ object telaDados: TtelaDados
       end
       item
         Name = 'ATIVO'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end
@@ -400,7 +398,6 @@ object telaDados: TtelaDados
       end
       item
         Name = 'CONTROLADOR_ESTOQUE'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end
@@ -410,7 +407,6 @@ object telaDados: TtelaDados
       end
       item
         Name = 'FRACIONADO'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end
@@ -2146,7 +2142,15 @@ object telaDados: TtelaDados
   end
   object cdsTempItens: TClientDataSet
     Active = True
-    Aggregates = <>
+    Aggregates = <
+      item
+        Active = True
+        AggregateName = 'Valor'
+        Expression = 'sum(VRT)'
+        IndexName = 'total'
+        Visible = False
+      end>
+    AggregatesActive = True
     MasterSource = dsPedidos
     PacketRecords = 0
     Params = <>
@@ -2196,6 +2200,7 @@ object telaDados: TtelaDados
   end
   object dspTempItens: TDataSetProvider
     DataSet = cdsTempItens
+    Options = [poAllowCommandText]
     Left = 48
     Top = 296
   end

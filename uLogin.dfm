@@ -4160,9 +4160,9 @@ object telaLogin: TtelaLogin
   object Label1: TLabel
     Left = 232
     Top = 56
-    Width = 28
+    Width = 36
     Height = 13
-    Caption = 'Nome'
+    Caption = 'Usu'#225'rio'
   end
   object Label2: TLabel
     Left = 233

@@ -985,6 +985,7 @@ object telaLancPedidos: TtelaLancPedidos
           TitleFont.Height = -13
           TitleFont.Name = 'Nirmala UI'
           TitleFont.Style = [fsBold]
+          OnDrawColumnCell = DBGrid1DrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -1346,7 +1347,7 @@ object telaLancPedidos: TtelaLancPedidos
         end
         object PanelCalc: TPanel
           Left = 10
-          Top = 79
+          Top = 199
           Width = 799
           Height = 377
           Align = alCustom

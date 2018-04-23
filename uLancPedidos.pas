@@ -117,6 +117,10 @@ type
     procedure edtItemKeyPress(Sender: TObject; var Key: Char);
     procedure edtItemKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+
+
   
 
   private
@@ -399,8 +403,11 @@ if editDtEmissao.Text = '' then
   end;
 
   if PanelCalc.Visible = false then begin
+
     PanelCalc.Visible := true;
+    telaDados.tblPedidosID_CLIENTE.Value := 1;
     edtDin.SetFocus;
+
   end else begin
       if edtTrc.Text = '0,00' then begin
       edtDin.SetFocus;
@@ -615,8 +622,7 @@ editOutrasDesp.Text := FloatToStr(od);
                                             {
         telaDados.tblPedidosID.Value := id;
         telaDados.tblPedidos.Refresh;
-        telaDados.tblPedidos.ApplyUpdates; } 
-      
+        telaDados.tblPedidos.ApplyUpdates; }
 
         editId.Text := IntToStr(id);
         edtItem.SetFocus;
@@ -661,6 +667,8 @@ btnCancelar.Enabled := false;
 Incluir.Enabled := true;
 Confirmar.Enabled := false;
 Cancelar.Enabled := false;
+
+ 
 
 telaDados.cdsTempItens.EmptyDataSet;
 label10.Caption := 'Tecle F2 para Abrir Cupom';  
@@ -782,13 +790,14 @@ begin
        telaDados.cdsTempItensDESCONTO.Value := 0;
        telaDados.cdsTempItensACRESCIMO.Value := 0;
        telaDados.cdsTempItensVRT.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
-       telaDados.cdsTempItensVRR.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
 
 
        telaDados.cdsTempItens.Post;
 
-       telaDados.tblPedidosVALOR_TOTAL.Value := telaDados.tblPedidosVALOR_TOTAL.Value + telaDados.cdsTempItensVRT.Value;
-       telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR_TOTAL.Value;
+
+       
+       {telaDados.tblPedidosVALOR_TOTAL.Value :=   telaDados.cdsTempItensVRT.Value;
+       telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR_TOTAL.Value;}
        telaLancPedidos.Refresh;
        edtItem.Clear;
        end else begin
@@ -826,7 +835,7 @@ if key = vk_shift then
        telaDados.cdsTempItensVRT.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
        telaDados.cdsTempItensVRR.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
 
-              }
+               }
 
 
 
@@ -839,5 +848,19 @@ if key = vk_shift then
   end;
 end;
 
+
+
+procedure TtelaLancPedidos.DBGrid1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+if telaDados.cdsTempItens.RecordCount < 1 then begin
+Abort;
+end else begin
+telaDados.tblPedidosVALOR_TOTAL.Value := telaDados.cdsTempItens.Aggregates.Items[0].Value;
+ end;
+end;
+
 end.
+
 

@@ -7,7 +7,8 @@ uses
   Dialogs, IniFiles, ACBrBase, ACBrDFe, ACBrNFe, pcnConversao, DB,
   IBDatabase, IBCustomDataSet, IBTable, StdCtrls, IBQuery, DBClient,
   DBLocal, DBLocalI, Provider, Math, ACBrDFeSSL, ACBrNFeDANFEClass,
-  ACBrNFeDANFeRLClass, ACBrSocket, ACBrCEP, ACBrIBGE, IBUpdateSQL;
+  ACBrNFeDANFeRLClass, ACBrSocket, ACBrCEP, ACBrIBGE, IBUpdateSQL, FMTBcd,
+  SqlExpr;
 
  type
   retornaEndereco = record

@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 158
-  Top = 92
+  Left = 156
+  Top = 152
   Width = 1212
   Height = 557
   Caption = 'Data m'#243'dulo'
@@ -281,13 +281,11 @@ object telaDados: TtelaDados
   object tblProdutos: TIBTable
     Database = dbProdutos
     Transaction = trnscProdutos
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     FieldDefs = <
       item
         Name = 'ID'
-        Attributes = [faRequired]
         DataType = ftInteger
       end
       item
@@ -385,7 +383,6 @@ object telaDados: TtelaDados
       end
       item
         Name = 'ATIVO'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end
@@ -401,7 +398,6 @@ object telaDados: TtelaDados
       end
       item
         Name = 'CONTROLADOR_ESTOQUE'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end
@@ -411,7 +407,6 @@ object telaDados: TtelaDados
       end
       item
         Name = 'FRACIONADO'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end
@@ -482,6 +477,7 @@ object telaDados: TtelaDados
     end
     object tblProdutosREFERENCIA: TIBStringField
       FieldName = 'REFERENCIA'
+      LookupDataSet = qryBairros
     end
     object tblProdutosEAN13: TIBStringField
       FieldName = 'EAN13'
@@ -502,6 +498,7 @@ object telaDados: TtelaDados
     end
     object tblProdutosUNIDADE: TIBStringField
       FieldName = 'UNIDADE'
+      LookupDataSet = qryBairros
       Size = 3
     end
     object tblProdutosQUANT_CAIXA: TIBBCDField
@@ -2145,7 +2142,15 @@ object telaDados: TtelaDados
   end
   object cdsTempItens: TClientDataSet
     Active = True
-    Aggregates = <>
+    Aggregates = <
+      item
+        Active = True
+        AggregateName = 'Valor'
+        Expression = 'sum(VALOR_TOTAL)'
+        IndexName = 'total'
+        Visible = False
+      end>
+    AggregatesActive = True
     MasterSource = dsPedidos
     PacketRecords = 0
     Params = <>
@@ -2189,15 +2194,13 @@ object telaDados: TtelaDados
     object cdsTempItensVRT: TFloatField
       FieldName = 'VRT'
     end
-    object cdsTempItensMARGEM: TFloatField
-      FieldName = 'MARGEM'
-    end
     object cdsTempItensVRR: TFloatField
       FieldName = 'VRR'
     end
   end
   object dspTempItens: TDataSetProvider
     DataSet = cdsTempItens
+    Options = [poAllowCommandText]
     Left = 48
     Top = 296
   end
