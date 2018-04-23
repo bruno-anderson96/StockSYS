@@ -28,7 +28,8 @@ var
 
 implementation
 
-uses uDados, uLancItens, uCadProdutos, uPesProduto, uLancPedidos;
+uses uDados, uLancItens, uCadProdutos, uPesProduto, uLancPedidos,
+  uLancCompras;
 
 {$R *.dfm}
 
@@ -66,6 +67,7 @@ end;
 procedure TtelaPesItens.DBGrid1DblClick(Sender: TObject);
 var cod : integer;
 begin
+
       cod := DBGrid1.Columns.Items[0].Field.AsInteger;
 
       telaDados.qryProdutos.Close;
@@ -75,11 +77,17 @@ begin
       telaDados.qryProdutos.Open;
 
       telaLancItens.Refresh;
-
-      telaLancPedidos.edtItem.Text := telaDados.qryProdutos.FieldByName('EAN13').AsString;
-
+          if tipo = 0 then begin
+            telaLancPedidos.edtItem.Text := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+            telaLancPedidos.edtItem.SetFocus;
+          end else begin
+            telaLancCompras.edtItem.Text := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+            telaLancCompras.edtItem.SetFocus;
+          end;
       telaPesItens.Close;
-      telaLancPedidos.edtItem.SetFocus;
+
+
+
 end;
 
 

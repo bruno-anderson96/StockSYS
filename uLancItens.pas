@@ -140,6 +140,7 @@ procedure TtelaLancItens.FormShow(Sender: TObject);
 var
 id : integer;
 begin
+
   telaDados.FormataCampos;
                                    {
   telaDados.tblPedidosItens.Insert; }
@@ -153,6 +154,7 @@ begin
   editAcr.Text := '0';
 
   editQuant.SetFocus;
+
 end;
 
 procedure TtelaLancItens.editAcrExit(Sender: TObject);
@@ -196,8 +198,9 @@ begin
    }
    end else begin
    telaDados.tblCompraItens.Open;
+    telaDados.cdsTempItensIDPED.Value := StrToInt(telaLancCompras.editId.Text);
   {telaDados.tblPedidosItensID_PEDIDO.Value := StrToInt(telaLancPedidos.editId.Text);
-   }
+
    telaDados.cdsCTempItensID_COMPRA.Value   := StrToInt(telaLancCompras.editId.Text);
    telaDados.cdsCTempItensID_PRODUTO.Value  := StrToInt(editId.Text);
    telaDados.cdsCTempItensDESCRICAO.Value   := editDesc.Text;
@@ -206,13 +209,10 @@ begin
    telaDados.cdsCTempItensDESCONTO.Value    := StrToFloat(editDescnt.Text);
    telaDados.cdsCTempItensACRESCIMO.Value   := StrToFloat(editAcr.Text);
    telaDados.cdsCTempItensVALOR_TOTAL.Value := StrToFloat(editVrt.Text);
-             {
-  telaDados.tblPedidosItens.Post;}
-  telaDados.cdsCTempItens.Post;
 
+  telaDados.tblPedidosItens.Post;                                       }
+  telaDados.cdsTempItens.Post;
 
-  telaDados.tblComprasVALOR_TOTAL.Value := telaDados.tblComprasVALOR_TOTAL.Value + telaDados.cdsCTempItensVALOR_TOTAL.Value;
-  telaDados.tblComprasVALOR.Value := telaDados.tblComprasVALOR_TOTAL.Value;
 
 
    end;

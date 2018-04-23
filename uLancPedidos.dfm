@@ -1745,8 +1745,8 @@ object telaLancPedidos: TtelaLancPedidos
     end
   end
   object ActionList1: TActionList
-    Left = 1324
-    Top = 352
+    Left = 12
+    Top = 40
     object Incluir: TAction
       Caption = 'F2 - &Incluir'
       ShortCut = 113

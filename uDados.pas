@@ -480,7 +480,7 @@ type
 
 implementation
 
-uses uLancPedidos;
+uses uLancPedidos, uLancItens, uLancCompras;
 
 {$R *.dfm}
 
@@ -962,12 +962,18 @@ end;
 
 procedure TtelaDados.cdsTempItensAfterPost(DataSet: TDataSet);
 begin
-if telaDados.cdsTempItens.RecordCount < 1 then begin
-Abort;
-end else begin
-telaDados.tblPedidosVALOR.Value := telaDados.cdsTempItens.Aggregates.Items[0].Value;
-telaLancPedidos.calculaPedido;
-end;
+  if telaDados.cdsTempItens.RecordCount < 1 then begin
+    Abort;
+  end else begin
+    if tipo = 0 then begin
+    telaDados.tblPedidosVALOR.Value := telaDados.cdsTempItens.Aggregates.Items[0].Value;
+    telaLancPedidos.calculaPedido;
+    end;
+    if tipo = 1 then begin
+     telaDados.tblComprasVALOR.Value := telaDados.cdsTempItens.Aggregates.Items[0].Value;
+     telaLancCompras.calculaPedido;
+    end;
+  end;
 end;
 
 end.

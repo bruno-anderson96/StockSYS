@@ -16,7 +16,7 @@ type
     DBGrid1: TDBGrid;
     procedure btnPesquisaClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
-    procedure FormDblClick(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -66,6 +66,7 @@ end;
 procedure TtelaPesItens.DBGrid1DblClick(Sender: TObject);
 var cod : integer;
 begin
+
       cod := DBGrid1.Columns.Items[0].Field.AsInteger;
 
       telaDados.qryProdutos.Close;
@@ -75,11 +76,16 @@ begin
       telaDados.qryProdutos.Open;
 
       telaLancItens.Refresh;
-
-      telaLancPedidos.edtItem.Text := telaDados.qryProdutos.FieldByName('EAN13').AsString;
-
+          if tipo = 0 then begin
+            telaLancPedidos.edtItem.Text := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+          end else begin
+            telaLancCompras.edtItem.Text := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+          end;
       telaPesItens.Close;
       telaLancPedidos.edtItem.SetFocus;
+
+
+
 end;
 
 
