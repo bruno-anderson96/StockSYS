@@ -105,7 +105,7 @@ implementation
 
 uses uGerarNfe, uDados, uValidaXml, uEnviarNfe, uCancelaNfe, uInutilizaNfe,
   uEmiteDanfe, uEnviaEmail, uCadFornecedor, uLancCompras, uGerarNfeEntrada, XPMan, uConfig,
-  uConfigSat, uConfigEmit;
+  uConfigSat, uConfigEmit, uCadCep;
 
 {$R *.dfm}
 

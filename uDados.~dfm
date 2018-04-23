@@ -2146,7 +2146,7 @@ object telaDados: TtelaDados
       item
         Active = True
         AggregateName = 'Valor'
-        Expression = 'sum(VALOR_TOTAL)'
+        Expression = 'sum(VRT)'
         IndexName = 'total'
         Visible = False
       end>
@@ -2154,6 +2154,7 @@ object telaDados: TtelaDados
     MasterSource = dsPedidos
     PacketRecords = 0
     Params = <>
+    AfterPost = cdsTempItensAfterPost
     Left = 48
     Top = 264
     Data = {

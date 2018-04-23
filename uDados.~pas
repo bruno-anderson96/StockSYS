@@ -437,6 +437,7 @@ type
     tblBairrosID: TIntegerField;
     tblBairrosID_CIDADES: TIntegerField;
     tblBairrosBAIRROS: TIBStringField;
+    procedure cdsTempItensAfterPost(DataSet: TDataSet);
 
   private
     { Private declarations }
@@ -956,5 +957,15 @@ Result.estado := qryEstados.FieldByName('ESTADO').AsString;
 
 end;
 
+
+procedure TtelaDados.cdsTempItensAfterPost(DataSet: TDataSet);
+begin
+if telaDados.cdsTempItens.RecordCount < 1 then begin
+Abort;
+end else begin
+telaDados.tblPedidosVALOR.Value := telaDados.cdsTempItens.Aggregates.Items[0].Value;
+telaLancPedidos.calculaPedido;
+end;
+end;
 
 end.

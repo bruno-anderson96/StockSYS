@@ -1,9 +1,11 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 215
-  Top = 108
-  Width = 1004
-  Height = 655
+  Left = 249
+  Top = 63
+  Align = alClient
+  BorderStyle = bsDialog
   Caption = 'Lan'#231'amento de Pedidos'
+  ClientHeight = 624
+  ClientWidth = 1009
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,8 +21,8 @@ object telaLancPedidos: TtelaLancPedidos
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 988
-    Height = 617
+    Width = 1009
+    Height = 624
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
@@ -29,16 +31,16 @@ object telaLancPedidos: TtelaLancPedidos
       object GroupBox1: TGroupBox
         Left = 0
         Top = 0
-        Width = 980
-        Height = 589
+        Width = 1001
+        Height = 596
         Align = alClient
         Color = clSkyBlue
         ParentBackground = False
         ParentColor = False
         TabOrder = 0
         object Label10: TLabel
-          Left = 280
-          Top = 525
+          Left = 552
+          Top = 621
           Width = 255
           Height = 24
           Caption = 'Tecle F2 para Abrir Cupom'
@@ -49,10 +51,23 @@ object telaLancPedidos: TtelaLancPedidos
           Font.Style = [fsBold]
           ParentFont = False
         end
+        object Label21: TLabel
+          Left = 664
+          Top = 8
+          Width = 105
+          Height = 35
+          Caption = 'CAIXA'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -32
+          Font.Name = 'MS Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
         object GroupBox2: TGroupBox
-          Left = 8
-          Top = 16
-          Width = 609
+          Left = 88
+          Top = 48
+          Width = 633
           Height = 57
           Color = clBtnFace
           ParentColor = False
@@ -115,8 +130,8 @@ object telaLancPedidos: TtelaLancPedidos
           end
         end
         object GroupBox4: TGroupBox
-          Left = 624
-          Top = 17
+          Left = 1024
+          Top = 169
           Width = 185
           Height = 341
           Color = clBtnFace
@@ -233,22 +248,24 @@ object telaLancPedidos: TtelaLancPedidos
           end
         end
         object btnExcItem: TBitBtn
-          Left = 820
-          Top = 312
+          Left = 876
+          Top = 16
           Width = 145
           Height = 25
           Action = excluirItem
           Caption = 'Excluir item'
           TabOrder = 3
+          Visible = False
         end
         object btnExcluir: TBitBtn
-          Left = 816
-          Top = 64
+          Left = 1192
+          Top = 56
           Width = 151
           Height = 34
           Caption = 'F3 - &Excluir'
           Enabled = False
           TabOrder = 4
+          Visible = False
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -363,13 +380,14 @@ object telaLancPedidos: TtelaLancPedidos
           NumGlyphs = 2
         end
         object btnConfirmar: TBitBtn
-          Left = 816
-          Top = 104
+          Left = 1192
+          Top = 96
           Width = 151
           Height = 34
           Action = Confirmar
           Caption = 'F4 - &Confirmar'
           TabOrder = 5
+          Visible = False
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -484,13 +502,14 @@ object telaLancPedidos: TtelaLancPedidos
           NumGlyphs = 2
         end
         object btnCancelar: TBitBtn
-          Left = 816
-          Top = 144
+          Left = 1200
+          Top = 128
           Width = 151
           Height = 34
           Action = Cancelar
           Caption = 'F5 - C&ancelar'
           TabOrder = 6
+          Visible = False
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -605,12 +624,13 @@ object telaLancPedidos: TtelaLancPedidos
           NumGlyphs = 2
         end
         object btnPesquisar: TBitBtn
-          Left = 816
-          Top = 184
+          Left = 1032
+          Top = 16
           Width = 151
           Height = 34
           Caption = 'F9 - &Pesquisar'
           TabOrder = 7
+          Visible = False
           OnClick = btnPesquisarClick
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -726,12 +746,13 @@ object telaLancPedidos: TtelaLancPedidos
           NumGlyphs = 2
         end
         object btnImprimir: TBitBtn
-          Left = 816
-          Top = 224
+          Left = 1032
+          Top = 56
           Width = 151
           Height = 34
           Caption = 'F7 - I&mprimir'
           TabOrder = 8
+          Visible = False
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -846,13 +867,14 @@ object telaLancPedidos: TtelaLancPedidos
           NumGlyphs = 2
         end
         object btnEncerrar: TBitBtn
-          Left = 816
-          Top = 264
+          Left = 1032
+          Top = 96
           Width = 151
           Height = 34
           Action = Encerrar
           Caption = 'F10 - &Fechar'
           TabOrder = 9
+          Visible = False
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -967,37 +989,40 @@ object telaLancPedidos: TtelaLancPedidos
           NumGlyphs = 2
         end
         object DBGrid1: TDBGrid
-          Left = 8
-          Top = 136
-          Width = 609
-          Height = 377
+          Left = 88
+          Top = 168
+          Width = 897
+          Height = 441
+          Color = clWhite
           DataSource = telaDados.dsTempItens
-          Font.Charset = ANSI_CHARSET
+          FixedColor = clWhite
+          Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'MS Serif'
-          Font.Style = [fsBold]
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           ParentFont = False
           TabOrder = 10
-          TitleFont.Charset = ANSI_CHARSET
-          TitleFont.Color = clSilver
-          TitleFont.Height = -13
-          TitleFont.Name = 'Nirmala UI'
-          TitleFont.Style = [fsBold]
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
           OnDrawColumnCell = DBGrid1DrawColumnCell
           Columns = <
             item
               Expanded = False
               FieldName = 'DESC'
               Title.Caption = 'Descri'#231#227'o'
-              Width = 216
+              Width = 461
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'QUANT'
               Title.Caption = 'Quantidade'
+              Width = 78
               Visible = True
             end
             item
@@ -1030,8 +1055,8 @@ object telaLancPedidos: TtelaLancPedidos
             end>
         end
         object GroupBox3: TGroupBox
-          Left = 624
-          Top = 368
+          Left = 1024
+          Top = 528
           Width = 185
           Height = 62
           Caption = 'Tipo de Pagamento'
@@ -1052,13 +1077,14 @@ object telaLancPedidos: TtelaLancPedidos
           end
         end
         object btnIncluir: TBitBtn
-          Left = 816
-          Top = 24
+          Left = 1192
+          Top = 16
           Width = 151
           Height = 34
           Action = Incluir
           Caption = 'F2 - &Incluir'
           TabOrder = 11
+          Visible = False
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -1174,8 +1200,8 @@ object telaLancPedidos: TtelaLancPedidos
         end
         object StatusBar1: TStatusBar
           Left = 2
-          Top = 568
-          Width = 976
+          Top = 575
+          Width = 997
           Height = 19
           Panels = <
             item
@@ -1200,9 +1226,9 @@ object telaLancPedidos: TtelaLancPedidos
             end>
         end
         object GroupBox6: TGroupBox
-          Left = 8
-          Top = 80
-          Width = 609
+          Left = 88
+          Top = 112
+          Width = 633
           Height = 49
           Caption = 'Item'
           TabOrder = 14
@@ -1346,81 +1372,33 @@ object telaLancPedidos: TtelaLancPedidos
           end
         end
         object PanelCalc: TPanel
-          Left = 10
-          Top = 199
-          Width = 799
-          Height = 377
+          Left = 314
+          Top = 159
+          Width = 842
+          Height = 338
           Align = alCustom
+          Color = clYellow
+          ParentBackground = False
           TabOrder = 13
           Visible = False
-          object Dinheiro: TLabel
-            Left = 512
-            Top = 97
-            Width = 75
-            Height = 25
-            Caption = 'Dinheiro'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -19
-            Font.Name = 'Palatino Linotype'
-            Font.Style = [fsBold, fsItalic]
-            ParentFont = False
-          end
-          object Troco: TLabel
-            Left = 512
-            Top = 250
-            Width = 49
-            Height = 25
-            Caption = 'Troco'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -19
-            Font.Name = 'Palatino Linotype'
-            Font.Style = [fsBold, fsItalic]
-            ParentFont = False
-          end
-          object Label12: TLabel
-            Left = 512
-            Top = 176
-            Width = 60
-            Height = 25
-            Caption = 'Cart'#227'o'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -19
-            Font.Name = 'Palatino Linotype'
-            Font.Style = [fsBold, fsItalic]
-            ParentFont = False
-          end
           object Label14: TLabel
-            Left = 288
-            Top = 316
+            Left = 128
+            Top = 252
             Width = 198
             Height = 24
             Caption = 'F4 Para encerrar venda'
+            Color = clBtnFace
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clYellow
+            Font.Color = clRed
             Font.Height = -19
             Font.Name = 'MS Sans Serif'
             Font.Style = []
-            ParentFont = False
-          end
-          object Label21: TLabel
-            Left = 592
-            Top = 48
-            Width = 92
-            Height = 20
-            Caption = 'Pagamento'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -16
-            Font.Name = 'MS Sans Serif'
-            Font.Style = [fsBold]
+            ParentColor = False
             ParentFont = False
           end
           object Label22: TLabel
-            Left = 295
-            Top = 340
+            Left = 135
+            Top = 276
             Width = 186
             Height = 24
             Caption = 'F1 Para voltar '#224' venda'
@@ -1446,56 +1424,13 @@ object telaLancPedidos: TtelaLancPedidos
             Font.Style = [fsBold]
             ParentFont = False
           end
-          object edtDin: TEdit
-            Left = 613
-            Top = 80
-            Width = 168
-            Height = 73
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -48
-            Font.Name = 'Nirmala UI'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 0
-            OnExit = edtDinExit
-          end
-          object edtTrc: TEdit
-            Left = 612
-            Top = 233
-            Width = 168
-            Height = 73
-            Enabled = False
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -48
-            Font.Name = 'Nirmala UI'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 2
-            OnDragOver = edtTrcDragOver
-          end
-          object edtCar: TEdit
-            Left = 612
-            Top = 156
-            Width = 168
-            Height = 73
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -48
-            Font.Name = 'Nirmala UI'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 1
-            OnExit = edtCarExit
-          end
           object gbCli: TGroupBox
-            Left = 16
-            Top = 160
+            Left = 0
+            Top = 152
             Width = 489
             Height = 57
             Caption = 'Cliente'
-            TabOrder = 3
+            TabOrder = 0
             object Label20: TLabel
               Left = 128
               Top = 24
@@ -1526,7 +1461,7 @@ object telaLancPedidos: TtelaLancPedidos
             end
           end
           object radDoc: TRadioGroup
-            Left = 16
+            Left = 144
             Top = 53
             Width = 186
             Height = 84
@@ -1535,7 +1470,97 @@ object telaLancPedidos: TtelaLancPedidos
             Items.Strings = (
               'Cupom Fiscal'
               'Nota Fiscal')
-            TabOrder = 4
+            TabOrder = 1
+          end
+          object GroupBox7: TGroupBox
+            Left = 496
+            Top = 48
+            Width = 289
+            Height = 265
+            Caption = 'Pagamento'
+            TabOrder = 2
+            object Dinheiro: TLabel
+              Left = 22
+              Top = 36
+              Width = 75
+              Height = 25
+              Caption = 'Dinheiro'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -19
+              Font.Name = 'Palatino Linotype'
+              Font.Style = [fsBold, fsItalic]
+              ParentFont = False
+            end
+            object Label12: TLabel
+              Left = 36
+              Top = 114
+              Width = 60
+              Height = 25
+              Caption = 'Cart'#227'o'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -19
+              Font.Name = 'Palatino Linotype'
+              Font.Style = [fsBold, fsItalic]
+              ParentFont = False
+            end
+            object Troco: TLabel
+              Left = 43
+              Top = 199
+              Width = 49
+              Height = 25
+              Caption = 'Troco'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -19
+              Font.Name = 'Palatino Linotype'
+              Font.Style = [fsBold, fsItalic]
+              ParentFont = False
+            end
+            object edtCar: TEdit
+              Left = 105
+              Top = 96
+              Width = 168
+              Height = 73
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -48
+              Font.Name = 'Nirmala UI'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 0
+              OnExit = edtCarExit
+            end
+            object edtDin: TEdit
+              Left = 105
+              Top = 16
+              Width = 168
+              Height = 73
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -48
+              Font.Name = 'Nirmala UI'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 1
+              OnExit = edtDinExit
+            end
+            object edtTrc: TEdit
+              Left = 105
+              Top = 176
+              Width = 168
+              Height = 73
+              Enabled = False
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -48
+              Font.Name = 'Nirmala UI'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 2
+              OnDragOver = edtTrcDragOver
+            end
           end
         end
       end
@@ -1720,8 +1745,8 @@ object telaLancPedidos: TtelaLancPedidos
     end
   end
   object ActionList1: TActionList
-    Left = 588
-    Top = 544
+    Left = 1324
+    Top = 352
     object Incluir: TAction
       Caption = 'F2 - &Incluir'
       ShortCut = 113

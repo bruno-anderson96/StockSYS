@@ -371,33 +371,39 @@ if (editNome.Text = '') then begin
   Abort;
 end;
 if (editCep.Text = '') then begin
-  ShowMessage('Por favor digite o CEP');
+  if  MessageDlg('CEP inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
   Abort;
+  end;
 end;
 if (editEndereco.GetTextLen < 2 ) then begin
-  ShowMessage('Digite um endereço Válido');
+  if  MessageDlg('Endereço inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
   editEndereco.SetFocus;
   Abort;
+  end;
 end;
 if (editBairro.GetTextLen < 2) then begin
-  ShowMessage('Por favor digite o Bairro');
+  if  MessageDlg('Bairro inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
   editBairro.SetFocus;
   Abort;
+  end;
 end;
 if (editNum.Text = '') then begin
-  ShowMessage('Por favor digite o Número');
+  if  MessageDlg('Número inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
   editNum.SetFocus;
   Abort;
+  end;
 end;
 if (editCidade.Text = '') then begin
-  ShowMessage('Por favor digite o Cidade');
+  if  MessageDlg('Cidade inválida, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
   editCidade.SetFocus;
   Abort;
+  end;
 end;
 if (editTelefone.Text = '') and (editCelular.Text = '') then begin
-  ShowMessage('Por favor digite um Telefone ou Celular');
+  if  MessageDlg('Telefone inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
   editNome.SetFocus;
   Abort;
+  end;
 end;
 if RadioGroup1.ItemIndex >=0 then begin
   if RadioGroup1.ItemIndex = 0 then

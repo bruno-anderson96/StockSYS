@@ -2154,6 +2154,7 @@ object telaDados: TtelaDados
     MasterSource = dsPedidos
     PacketRecords = 0
     Params = <>
+    AfterPost = cdsTempItensAfterPost
     Left = 48
     Top = 264
     Data = {

@@ -84,7 +84,6 @@ type
     edtCar: TEdit;
     edtDin: TEdit;
     Label14: TLabel;
-    Label21: TLabel;
     PanelCalc: TPanel;
     Label22: TLabel;
     encPanel: TAction;
@@ -93,6 +92,8 @@ type
     GroupBox6: TGroupBox;
     edtItem: TEdit;
     Label24: TLabel;
+    GroupBox7: TGroupBox;
+    Label21: TLabel;
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnIncItemClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -124,10 +125,11 @@ type
   
 
   private
-    procedure calculaPedido();
+
     procedure calculaTroco();
     { Private declarations }
   public
+    procedure calculaPedido();
     { Public declarations }
 
   end;
@@ -854,11 +856,12 @@ procedure TtelaLancPedidos.DBGrid1DrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-if telaDados.cdsTempItens.RecordCount < 1 then begin
+{if telaDados.cdsTempItens.RecordCount < 1 then begin
 Abort;
 end else begin
-telaDados.tblPedidosVALOR_TOTAL.Value := telaDados.cdsTempItens.Aggregates.Items[0].Value;
- end;
+telaDados.tblPedidosVALOR.Value := telaDados.cdsTempItens.Aggregates.Items[0].Value;
+calculaPedido;
+ end; }
 end;
 
 end.
