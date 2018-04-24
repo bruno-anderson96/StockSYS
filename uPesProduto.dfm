@@ -1,8 +1,8 @@
 object telaPesProduto: TtelaPesProduto
   Left = 195
-  Top = 201
+  Top = 203
   Width = 881
-  Height = 473
+  Height = 471
   Caption = 'Pesquisa Produto'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -24,8 +24,8 @@ object telaPesProduto: TtelaPesProduto
     Align = alTop
     TabOrder = 0
     object btnPesquisa: TSpeedButton
-      Left = 825
-      Top = 10
+      Left = 796
+      Top = 16
       Width = 31
       Height = 32
       Glyph.Data = {
@@ -143,38 +143,46 @@ object telaPesProduto: TtelaPesProduto
       OnClick = btnPesquisaClick
     end
     object editBusca: TEdit
-      Left = 200
-      Top = 16
+      Left = 173
+      Top = 22
       Width = 617
       Height = 21
       CharCase = ecUpperCase
       TabOrder = 0
     end
-    object cbCategoria: TComboBox
-      Left = 40
-      Top = 16
-      Width = 145
-      Height = 21
-      ItemHeight = 13
+    object GroupBox2: TGroupBox
+      Left = 4
+      Top = 6
+      Width = 157
+      Height = 47
+      Caption = 'Buscar Por .:'
       TabOrder = 1
-      Items.Strings = (
-        'C'#243'digo'
-        'Descri'#231#227'o'
-        'NCM')
+      object cbCategoria: TComboBox
+        Left = 9
+        Top = 18
+        Width = 145
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 0
+        Items.Strings = (
+          'C'#243'digo'
+          'Descri'#231#227'o'
+          'NCM')
+      end
     end
   end
   object GroupBox1: TGroupBox
     Left = 0
     Top = 57
     Width = 865
-    Height = 378
+    Height = 376
     Align = alClient
     TabOrder = 1
     object DBGrid1: TDBGrid
       Left = 2
       Top = 15
       Width = 861
-      Height = 361
+      Height = 359
       Align = alClient
       DataSource = telaDados.dsPesProdutos
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]

@@ -1,7 +1,7 @@
 object telaPesCliente: TtelaPesCliente
   Left = 192
   Top = 163
-  Width = 1109
+  Width = 1108
   Height = 480
   Caption = 'Pesquisa Cliente'
   Color = clBtnFace
@@ -19,7 +19,7 @@ object telaPesCliente: TtelaPesCliente
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1093
+    Width = 1092
     Height = 57
     Align = alTop
     TabOrder = 0
@@ -167,14 +167,14 @@ object telaPesCliente: TtelaPesCliente
   object GroupBox1: TGroupBox
     Left = 0
     Top = 57
-    Width = 1093
+    Width = 1092
     Height = 385
     Align = alClient
     TabOrder = 1
     object DBGrid1: TDBGrid
       Left = 2
       Top = 15
-      Width = 1089
+      Width = 1088
       Height = 368
       Align = alClient
       DataSource = telaDados.dsPesClientes

@@ -14,10 +14,12 @@ type
     cbCategoria: TComboBox;
     GroupBox1: TGroupBox;
     DBGrid1: TDBGrid;
+    GroupBox2: TGroupBox;
     procedure btnPesquisaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnCadProdClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -67,7 +69,7 @@ end;
 
 procedure TtelaPesProduto.FormShow(Sender: TObject);
 begin
-cbCategoria.ItemIndex := 0;
+cbCategoria.ItemIndex := 1;
 end;
 
 procedure TtelaPesProduto.DBGrid1DblClick(Sender: TObject);
@@ -92,6 +94,12 @@ procedure TtelaPesProduto.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   telaCadProdutos.Show;
+end;
+
+procedure TtelaPesProduto.btnCadProdClick(Sender: TObject);
+begin
+Application.CreateForm(TtelaCadProdutos, telaCadProdutos);
+telaCadProdutos.Show;
 end;
 
 end.

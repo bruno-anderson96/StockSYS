@@ -14,8 +14,11 @@ type
     cbCategoria: TComboBox;
     GroupBox1: TGroupBox;
     DBGrid1: TDBGrid;
+    GroupBox2: TGroupBox;
+    btnCadProd: TSpeedButton;
     procedure btnPesquisaClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
+    procedure btnCadProdClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -28,7 +31,8 @@ var
 
 implementation
 
-uses uDados, uLancItens, uCadProdutos, uPesProduto, uLancPedidos;
+uses uDados, uLancItens, uCadProdutos, uPesProduto, uLancPedidos,
+  uLancCompras;
 
 {$R *.dfm}
 
@@ -78,16 +82,23 @@ begin
       telaLancItens.Refresh;
           if tipo = 0 then begin
             telaLancPedidos.edtItem.Text := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+            telaLancPedidos.edtItem.SetFocus;
           end else begin
             telaLancCompras.edtItem.Text := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+            telaLancCompras.edtItem.SetFocus;
           end;
       telaPesItens.Close;
-      telaLancPedidos.edtItem.SetFocus;
 
 
 
 end;
 
 
+
+procedure TtelaPesItens.btnCadProdClick(Sender: TObject);
+begin
+  Application.CreateForm(TtelaCadProdutos, telaCadProdutos);
+  telaCadProdutos.Show;
+end;
 
 end.

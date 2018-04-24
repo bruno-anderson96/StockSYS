@@ -23,7 +23,6 @@ type
     Label20: TLabel;
     editIdFornecedor: TDBEdit;
     cbFornecedor: TDBLookupComboBox;
-    radTpPg: TRadioGroup;
     GroupBox4: TGroupBox;
     Label15: TLabel;
     Label16: TLabel;
@@ -78,6 +77,7 @@ type
     GroupBox6: TGroupBox;
     Label24: TLabel;
     edtItem: TEdit;
+    StatusBar1: TStatusBar;
     procedure IncluirExecute(Sender: TObject);
     procedure CancelarExecute(Sender: TObject);
     procedure EncerrarExecute(Sender: TObject);
@@ -121,7 +121,7 @@ editDtEmissao.Enabled := true; {
 editHrEmissao.Enabled := true; }
 editIdFornecedor.Enabled := true;
 cbFornecedor.Enabled := true;
-radTpPg.Enabled := true;
+{radTpPg.Enabled := true;}
 {editValProd.Enabled := true;}
 editDesc.Enabled := true;
 editAsc.Enabled := true;
@@ -152,7 +152,7 @@ Incluir.Enabled := false;
 Confirmar.Enabled := true;
 Cancelar.Enabled := true; 
 
-radTpPg.ItemIndex := 0;
+{radTpPg.ItemIndex := 0;  }
 
 editDesc.Text := FloatToStr(d);
 editAsc.Text  := FloatToStr(a);
@@ -163,10 +163,12 @@ editOutrasDesp.Text := FloatToStr(od);
 
         telaDados.tblCompras.Insert;
         telaDados.tblComprasID.Value := id;
-        editDtCad.Text := DateToStr(date()) + ' ' +  TimeToStr(time());
+        telaDados.tblComprasDATA_COMPRA.AsString := DateToStr(date()) + ' ' +  TimeToStr(time());
+        telaDados.tblComprasDATA_ENTREGA.AsString := DateToStr(date()) + ' ' +  TimeToStr(time());
         telaLancCompras.Refresh;
 
         editId.Text := IntToStr(id);
+        cbFornecedor.SetFocus;
 
 
 end;
@@ -182,7 +184,7 @@ editDtEmissao.Enabled := false; {
 editHrEmissao.Enabled := true; }
 editIdFornecedor.Enabled := false;
 cbFornecedor.Enabled := false;
-radTpPg.Enabled := false;
+{radTpPg.Enabled := false; }
 {editValProd.Enabled := true;}
 editDesc.Enabled := false;
 editAsc.Enabled := false;
@@ -252,7 +254,7 @@ if editValProd.Text = '' then
   begin
    ShowMessage('Selecione ao menos um produto');
    Abort;
-  end;
+end;
 
   telaDados.tblCompras.Open;
   telaDados.tblCompras.Edit;
@@ -266,7 +268,7 @@ if editValProd.Text = '' then
   editHrEmissao.Enabled := false; }
   editIdFornecedor.Enabled := false;
   cbFornecedor.Enabled := false;
-  radTpPg.Enabled := false;
+  {radTpPg.Enabled := false;}
   editValProd.Enabled := false;
   editDesc.Enabled := false;
   editAsc.Enabled := false;
@@ -303,19 +305,19 @@ if editValProd.Text = '' then
     telaDados.tblCompraItens.Append;
 
     telaDados.tblCompraItens.FieldByName('DESCRICAO').Value :=
-      telaDados.cdsTempItens.FieldByName('DESCRICAO').Value;
+      telaDados.cdsTempItens.FieldByName('DESC').Value;
 
     telaDados.tblCompraItens.FieldByName('ID_PRODUTO').Value :=
-      telaDados.cdsTempItens.FieldByName('ID_PRODUTO').Value;
+      telaDados.cdsTempItens.FieldByName('IDPROD').Value;
 
     telaDados.tblCompraItens.FieldByName('ID_COMPRA').Value :=
-      telaDados.cdsTempItens.FieldByName('ID_COMPRA').Value;
+      telaDados.cdsTempItens.FieldByName('IDPED').Value;
 
     telaDados.tblCompraItens.FieldByName('VALOR').Value :=
       telaDados.cdsTempItens.FieldByName('VALOR').Value;
 
     telaDados.tblCompraItens.FieldByName('QUANTIDADE').Value :=
-      telaDados.cdsTempItens.FieldByName('QUANTIDADE').Value;
+      telaDados.cdsTempItens.FieldByName('QUANT').Value;
 
     telaDados.tblProdutos.Open;
     telaDados.tblProdutos.Edit;
@@ -335,7 +337,7 @@ if editValProd.Text = '' then
     telaDados.qryProdutos.Open;
 
     telaDados.tblProdutos.FieldByName('ESTOQUE').Value := telaDados.tblProdutos.FieldByName('ESTOQUE').Value +
-      telaDados.cdsTempItens.FieldByName('QUANTIDADE').Value;
+      telaDados.cdsTempItens.FieldByName('QUANT').Value;
 
     telaDados.tblProdutos.Close;
 
@@ -346,7 +348,7 @@ if editValProd.Text = '' then
       telaDados.cdsTempItens.FieldByName('ACRESCIMO').Value;
 
     telaDados.tblCompraItens.FieldByName('VALOR_TOTAL').Value :=
-      telaDados.cdsTempItens.FieldByName('VALOR_TOTAL').Value;
+      telaDados.cdsTempItens.FieldByName('VRT').Value;
 
       telaDados.tblCompraItens.Post;
       telaDados.cdsTempItens.Delete;
@@ -361,8 +363,7 @@ end;
 procedure TtelaLancCompras.adicionarItemExecute(Sender: TObject);
 begin
 Application.CreateForm(TtelaPesItens, telaPesItens);
-Application.CreateForm(TtelaLancItens, telaLancItens);
-
+Application.CreateForm(TtelaLancItens, telaLancItens); 
 
 tipo := 1;
 telaDados.cdsTempItens.Append;

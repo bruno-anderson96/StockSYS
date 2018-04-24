@@ -66,7 +66,7 @@ end;
 
 procedure TtelaPesCliente.FormShow(Sender: TObject);
 begin
-cbCategoria.ItemIndex := 0;
+cbCategoria.ItemIndex := 1;
 end;
 
 procedure TtelaPesCliente.DBGrid1DblClick(Sender: TObject);

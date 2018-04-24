@@ -14,8 +14,12 @@ type
     cbCategoria: TComboBox;
     GroupBox1: TGroupBox;
     DBGrid1: TDBGrid;
+    GroupBox2: TGroupBox;
+    btnCadProd: TSpeedButton;
     procedure btnPesquisaClick(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
+    procedure btnCadProdClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
 
   private
     { Private declarations }
@@ -91,5 +95,16 @@ begin
 end;
 
 
+
+procedure TtelaPesItens.btnCadProdClick(Sender: TObject);
+begin
+  Application.CreateForm(TtelaCadProdutos, telaCadProdutos);
+  telaCadProdutos.Show;
+end;
+
+procedure TtelaPesItens.FormShow(Sender: TObject);
+begin
+cbCategoria.ItemIndex := 1;
+end;
 
 end.
