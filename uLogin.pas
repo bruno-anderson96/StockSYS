@@ -56,7 +56,7 @@ end;
 
 procedure TtelaLogin.btnFecharClick(Sender: TObject);
 begin
-Application.Terminate;
+  Application.Terminate;
 end;
 
 procedure TtelaLogin.edtSenhaKeyPress(Sender: TObject; var Key: Char);
@@ -66,7 +66,7 @@ end;
 
 procedure TtelaLogin.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-Application.Terminate;
+  Application.Terminate;
 end;
 
 end.

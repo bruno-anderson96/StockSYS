@@ -356,6 +356,7 @@ object telaCadClientes: TtelaCadClientes
         DataSource = telaDados.dsClientes
         Enabled = False
         TabOrder = 8
+        OnKeyPress = editTelefoneKeyPress
       end
       object editCelular: TDBEdit
         Left = 296
@@ -366,6 +367,7 @@ object telaCadClientes: TtelaCadClientes
         DataSource = telaDados.dsClientes
         Enabled = False
         TabOrder = 9
+        OnKeyPress = editCelularKeyPress
       end
       object editCpf: TDBEdit
         Left = 96
@@ -376,6 +378,7 @@ object telaCadClientes: TtelaCadClientes
         DataSource = telaDados.dsClientes
         Enabled = False
         TabOrder = 10
+        OnKeyPress = editCpfKeyPress
       end
       object editRg: TDBEdit
         Left = 96
@@ -386,6 +389,7 @@ object telaCadClientes: TtelaCadClientes
         DataSource = telaDados.dsClientes
         Enabled = False
         TabOrder = 11
+        OnKeyPress = editRgKeyPress
       end
       object editDtCad: TDBEdit
         Left = 96

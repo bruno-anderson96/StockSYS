@@ -67,6 +67,11 @@ type
     procedure actPesquisarExecute(Sender: TObject);
     procedure actEditarExecute(Sender: TObject);
     procedure actExcluirExecute(Sender: TObject);
+    procedure editCepKeyPress(Sender: TObject; var Key: Char);
+    procedure editTel1KeyPress(Sender: TObject; var Key: Char);
+    procedure editTel2KeyPress(Sender: TObject; var Key: Char);
+    procedure editCnpjKeyPress(Sender: TObject; var Key: Char);
+    procedure editInscKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -264,7 +269,7 @@ ACBrCEP1.BuscarPorCEP(editCep.Text);
     telaDados.tblFornecedoresENDERECO.AsString    := UpperCase(ACBrCEP1.Enderecos[i].Logradouro);
     telaDados.tblFornecedoresCOMPLEMENTO.AsString := UpperCase(ACBrCEP1.Enderecos[i].Complemento);
     telaDados.tblFornecedoresCIDADE_END.AsString  := UpperCase(ACBrCEP1.Enderecos[i].Municipio);
-    telaDados.tblFornecedoresUF_END.AsString      := UpperCase(ACBrCEP1.Enderecos[i].UF);
+    editUf.Text                                   := UpperCase(ACBrCEP1.Enderecos[i].UF);
     telaDados.tblFornecedoresBAIRRO_END.AsString  := UpperCase(ACBrCEP1.Enderecos[i].Bairro);
 
   end;
@@ -324,6 +329,41 @@ begin
   telaDados.qryFornecedores.Open;
 
   telaDados.tblFornecedores.Refresh;
+end;
+
+procedure TtelaCadFor.editCepKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not( key in['0'..'9',#08,#13,#27,#42] ) then
+    key:=#0;
+  end;
+end;
+
+procedure TtelaCadFor.editTel1KeyPress(Sender: TObject; var Key: Char);
+begin
+  if not( key in['0'..'9',#08,#13,#27,#42] ) then
+    key:=#0;
+  end;
+end;
+
+procedure TtelaCadFor.editTel2KeyPress(Sender: TObject; var Key: Char);
+begin
+  if not( key in['0'..'9',#08,#13,#27,#42] ) then
+    key:=#0;
+  end;
+end;
+
+procedure TtelaCadFor.editCnpjKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not( key in['0'..'9',#08,#13,#27,#42] ) then
+    key:=#0;
+  end;
+end;
+
+procedure TtelaCadFor.editInscKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not( key in['0'..'9',#08,#13,#27,#42] ) then
+    key:=#0;
+  end;
 end;
 
 end.

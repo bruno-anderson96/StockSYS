@@ -112,97 +112,97 @@ uses uGerarNfe, uDados, uValidaXml, uEnviarNfe, uCancelaNfe, uInutilizaNfe,
 
 procedure TtelaPrincipal.Sair1Click(Sender: TObject);
 begin
-Application.Terminate;
+  Application.Terminate;
 end;
 
 procedure TtelaPrincipal.StatusdeServio1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaStatus, telaStatus);
-telaStatus.Show;
+  Application.CreateForm(TtelaStatus, telaStatus);
+  telaStatus.Show;
 end;
 
 procedure TtelaPrincipal.Clientes1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaCadClientes, telaCadClientes);
-telaCadClientes.Show;
+  Application.CreateForm(TtelaCadClientes, telaCadClientes);
+  telaCadClientes.Show;
 end;
 
 procedure TtelaPrincipal.Produtos1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaCadProdutos, telaCadProdutos);
-telaCadProdutos.Show;
+  Application.CreateForm(TtelaCadProdutos, telaCadProdutos);
+  telaCadProdutos.Show;
 end;
 
 procedure TtelaPrincipal.LanamentodePedidos1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaLancPedidos, telaLancPedidos);
-telaLancPedidos.Show;
+  Application.CreateForm(TtelaLancPedidos, telaLancPedidos);
+  telaLancPedidos.Show;
 end;
 
 procedure TtelaPrincipal.Unidade1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaCadUnidade, telaCadUnidade);
-telaCadUnidade.Show;
+  Application.CreateForm(TtelaCadUnidade, telaCadUnidade);
+  telaCadUnidade.Show;
 end;
 
 procedure TtelaPrincipal.GErarNfe1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaGerarNfe, telaGerarNfe);
-telaGerarNfe.Show;
+  Application.CreateForm(TtelaGerarNfe, telaGerarNfe);
+  telaGerarNfe.Show;
 end;
 
 procedure TtelaPrincipal.ValidarXML1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaValidaXml, telaValidaXml);
-telaValidaXml.Show;
+  Application.CreateForm(TtelaValidaXml, telaValidaXml);
+  telaValidaXml.Show;
 end;
 
 procedure TtelaPrincipal.CriareEnviarNFe1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaEnviarNfe, telaEnviarNfe);
-telaEnviarNfe.Show;
+  Application.CreateForm(TtelaEnviarNfe, telaEnviarNfe);
+  telaEnviarNfe.Show;
 end;
 
 procedure TtelaPrincipal.CancelamentoNFe1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaCancelaNFe, telaCancelaNFe);
-telaCancelaNFe.Show;
+  Application.CreateForm(TtelaCancelaNFe, telaCancelaNFe);
+  telaCancelaNFe.Show;
 end;
 
 procedure TtelaPrincipal.InutilizarNumerao1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaInutilizaNFe, telaInutilizaNFe);
-telaInutilizaNFe.Show;
+  Application.CreateForm(TtelaInutilizaNFe, telaInutilizaNFe);
+  telaInutilizaNFe.Show;
 end;
 
 procedure TtelaPrincipal.ImprimirDanfe1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaEmiteDanfe, telaEmiteDanfe);
-telaEmiteDanfe.Show;
+  Application.CreateForm(TtelaEmiteDanfe, telaEmiteDanfe);
+  telaEmiteDanfe.Show;
 end;
 
 procedure TtelaPrincipal.EnviarEmailNFe1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaEnviaEmail, telaEnviaEmail);
-telaEnviaEmail.Show;
+  Application.CreateForm(TtelaEnviaEmail, telaEnviaEmail);
+  telaEnviaEmail.Show;
 end;
 
 procedure TtelaPrincipal.Fornecedores1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaCadFor, telaCadFor);
-telaCadFor.Show;
+  Application.CreateForm(TtelaCadFor, telaCadFor);
+  telaCadFor.Show;
 end;
 
 procedure TtelaPrincipal.LanamentodeCompras1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaLancCompras, telaLancCompras);
-telaLancCompras.Show;
+  Application.CreateForm(TtelaLancCompras, telaLancCompras);
+  telaLancCompras.Show;
 end;
 
 procedure TtelaPrincipal.GerarNFeEntrada1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaGerarNfeEntrada, telaGerarNfeEntrada);
-telaGerarNfeEntrada.Show;
+  Application.CreateForm(TtelaGerarNfeEntrada, telaGerarNfeEntrada);
+  telaGerarNfeEntrada.Show;
 end;
 
 procedure TtelaPrincipal.PNGButton1Click(Sender: TObject);
@@ -212,34 +212,33 @@ end;
 
 procedure TtelaPrincipal.btnCliClick(Sender: TObject);
 begin
-Application.CreateForm(TtelaCadClientes, telaCadClientes);
-telaCadClientes.Show;
+  Application.CreateForm(TtelaCadClientes, telaCadClientes);
+  telaCadClientes.Show;
 end;
 
 procedure TtelaPrincipal.btnForClick(Sender: TObject);
 begin
-Application.CreateForm(TtelaCadFor, telaCadFor);
-telaCadFor.Show;
+  Application.CreateForm(TtelaCadFor, telaCadFor);
+  telaCadFor.Show;
 end;
 
 procedure TtelaPrincipal.FormShow(Sender: TObject);
-
 begin
-StatusBar1.Panels[0].Text := telaConfigEmit.edtRazSoc.Text;
-StatusBar1.Panels[2].Text := DateToStr(Date);
-StatusBar1.Panels[3].Text := TimeToStr(Time);
+  StatusBar1.Panels[0].Text := telaConfigEmit.edtRazSoc.Text;
+  StatusBar1.Panels[2].Text := DateToStr(Date);
+  StatusBar1.Panels[3].Text := TimeToStr(Time);
 end;
 
 procedure TtelaPrincipal.SAT1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaConfigSat, telaConfigSat);
-telaConfigSat.Show;
+  Application.CreateForm(TtelaConfigSat, telaConfigSat);
+  telaConfigSat.Show;
 end;
 
 procedure TtelaPrincipal.btnCompraClick(Sender: TObject);
 begin
-Application.CreateForm(TtelaLancCompras, telaLancCompras);
-telaLancCompras.Show;
+  Application.CreateForm(TtelaLancCompras, telaLancCompras);
+  telaLancCompras.Show;
 end;
 
 procedure TtelaPrincipal.C1Click(Sender: TObject);
@@ -276,13 +275,13 @@ end;
 procedure TtelaPrincipal.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-Application.Terminate;
+  Application.Terminate;
 end;
 
 procedure TtelaPrincipal.CEP1Click(Sender: TObject);
 begin
 Application.CreateForm(TtelaCadCep, telaCadCep);
-telaCadCep.Show;
+  telaCadCep.Show;
 end;
 
 end.

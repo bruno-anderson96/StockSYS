@@ -480,7 +480,7 @@ type
 
 implementation
 
-uses uLancPedidos, uLancItens;
+uses uLancPedidos, uLancItens, uLancCompras;
 
 {$R *.dfm}
 

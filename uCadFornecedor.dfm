@@ -337,6 +337,7 @@ object telaCadFor: TtelaCadFor
       DataSource = telaDados.dsFornecedores
       Enabled = False
       TabOrder = 3
+      OnKeyPress = editCepKeyPress
     end
     object editTel1: TDBEdit
       Left = 88
@@ -348,6 +349,7 @@ object telaCadFor: TtelaCadFor
       DataSource = telaDados.dsFornecedores
       Enabled = False
       TabOrder = 9
+      OnKeyPress = editTel1KeyPress
     end
     object editTel2: TDBEdit
       Left = 304
@@ -359,6 +361,7 @@ object telaCadFor: TtelaCadFor
       DataSource = telaDados.dsFornecedores
       Enabled = False
       TabOrder = 10
+      OnKeyPress = editTel2KeyPress
     end
     object editCnpj: TDBEdit
       Left = 88
@@ -370,6 +373,7 @@ object telaCadFor: TtelaCadFor
       DataSource = telaDados.dsFornecedores
       Enabled = False
       TabOrder = 11
+      OnKeyPress = editCnpjKeyPress
     end
     object editInsc: TDBEdit
       Left = 88
@@ -381,6 +385,7 @@ object telaCadFor: TtelaCadFor
       DataSource = telaDados.dsFornecedores
       Enabled = False
       TabOrder = 12
+      OnKeyPress = editInscKeyPress
     end
     object editEmail: TDBEdit
       Left = 88

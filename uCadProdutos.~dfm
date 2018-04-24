@@ -1621,6 +1621,7 @@ object telaCadProdutos: TtelaCadProdutos
         DataSource = telaDados.dsProdutos
         Enabled = False
         TabOrder = 2
+        OnKeyPress = edtCfopKeyPress
       end
       object cbCst: TComboBox
         Left = 64

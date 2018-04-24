@@ -117,6 +117,10 @@ type
     procedure btnPesEntClick(Sender: TObject);
     procedure EditarExecute(Sender: TObject);
     procedure ExcluirExecute(Sender: TObject);
+    procedure editTelefoneKeyPress(Sender: TObject; var Key: Char);
+    procedure editCelularKeyPress(Sender: TObject; var Key: Char);
+    procedure editCpfKeyPress(Sender: TObject; var Key: Char);
+    procedure editRgKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -179,106 +183,92 @@ begin
    btnConfirmar.Enabled := true;
    btnCancelar.Enabled := true;
 
-  
-
    id := telaDados.tblClientesID.AsInteger + 1;
-
-
 
    telaDados.tblClientes.Insert;
 
    editId.Text := IntToStr(id);
    editNome.SetFocus;
 
-
    telaDados.tblClientes.FieldByName('ativo').AsBoolean := True;
-   cbAtivo.Checked := true;
-
-
-
-
+   cbAtivo.Checked := true; 
 end;
 
 procedure TtelaCadClientes.btnConfirmarClick(Sender: TObject);
 begin
 
-if (editNome.Text = '') then begin
-  ShowMessage('Por favor digite o Nome');
-  editNome.SetFocus;
-end
-else
-if (editCep.Text = '') then begin
-  ShowMessage('Por favor digite o CEP');
-  editCep.SetFocus;
-end
-else
-if (editEndereco.Text = '') then begin
-  ShowMessage('Por favor digite o Endereço');
-  editEndereco.SetFocus;
-end
-else
-if (editBairro.Text = '') then begin
-  ShowMessage('Por favor digite o Bairro');
-  editBairro.SetFocus;
-end
-else
-if (editNum.Text = '') then begin
-  ShowMessage('Por favor digite o Número');
-  editNum.SetFocus;
-end
-else
-if (editCidade.Text = '') then begin
-  ShowMessage('Por favor digite o Cidade');
-  editCidade.SetFocus;
-end
-else
-if (editTelefone.Text = '') and (editCelular.Text = '') then begin
-  ShowMessage('Por favor digite um Telefone ou Celular');
-  editNome.SetFocus;
-end
-else
-if not (telaDados.verificaCpf(editCpf.Text)) then begin
-  ShowMessage('Cpf Inválido');
-  editCpf.SetFocus;
-end
-else
-if (editRg.Text = '') then begin
-  ShowMessage('Por favor digite o RG');
-  editRg.SetFocus;
-end
-else
-begin
-  telaDados.tblClientes.Post;
+  if (editNome.Text = '') then begin
+    ShowMessage('Por favor digite o Nome');
+    editNome.SetFocus;
+  end
+  else
+  if (editCep.Text = '') then begin
+    ShowMessage('Por favor digite o CEP');
+    editCep.SetFocus;
+  end
+  else
+  if (editEndereco.Text = '') then begin
+    ShowMessage('Por favor digite o Endereço');
+    editEndereco.SetFocus;
+  end
+  else
+  if (editBairro.Text = '') then begin
+    ShowMessage('Por favor digite o Bairro');
+    editBairro.SetFocus;
+  end
+  else
+  if (editNum.Text = '') then begin
+    ShowMessage('Por favor digite o Número');
+    editNum.SetFocus;
+  end
+  else
+  if (editCidade.Text = '') then begin
+    ShowMessage('Por favor digite o Cidade');
+    editCidade.SetFocus;
+  end
+  else
+  if (editTelefone.Text = '') and (editCelular.Text = '') then begin
+    ShowMessage('Por favor digite um Telefone ou Celular');
+    editNome.SetFocus;
+  end
+  else
+  if not (telaDados.verificaCpf(editCpf.Text)) then begin
+    ShowMessage('Cpf Inválido');
+    editCpf.SetFocus;
+  end
+  else
+  if (editRg.Text = '') then begin
+    ShowMessage('Por favor digite o RG');
+    editRg.SetFocus;
+  end
+  else
+  begin
+    telaDados.tblClientes.Post;
 
-  btnIncluir.Enabled := true;
-  btnConfirmar.Enabled := false;
-  btnCancelar.Enabled := false;
+    btnIncluir.Enabled := true;
+    btnConfirmar.Enabled := false;
+    btnCancelar.Enabled := false;
 
-  Confirmar.Enabled := False;
-
-end; 
-
+    Confirmar.Enabled := False;
+  end; 
 end;
 
 procedure TtelaCadClientes.btnFecharClick(Sender: TObject);
 begin
-Close;
-telaDados.tblClientes.Open;
+  Close;
+  telaDados.tblClientes.Open;
 end;
 
 procedure TtelaCadClientes.FormShow(Sender: TObject);
 begin
   telaDados.tblClientes.Open;
-
   telaDados.FormataCampos;
 
   if editNome.Text = '' then begin
-  Excluir.Enabled := False;
+    Excluir.Enabled := False;
   end else begin
-  Excluir.Enabled := true;
+    Excluir.Enabled := true;
   end;
-
-
 end;
 
 procedure TtelaCadClientes.IncluirExecute(Sender: TObject);
@@ -286,140 +276,140 @@ var
 id:integer;
 begin
 
- PageControl1.TabIndex := 0;
+  PageControl1.TabIndex := 0;
 
- telaDados.tblClientes.Last;
+  telaDados.tblClientes.Last;
 
-   editNome.Enabled := true;
-   editCep.Enabled := true;
-   editEndereco.Enabled := true;
-   editNum.Enabled := true;
-   editBairro.Enabled := true;
-   editCompl.Enabled := true;
-   editCidade.Enabled := true;
-   editUf.Enabled := true;
-   editTelefone.Enabled := true;
-   editCelular.Enabled := true;
-   editCpf.Enabled := true;
-   editRg.Enabled := true;
-   editDtCad.Enabled := true;
-   cbAtivo.Enabled := true;
+  editNome.Enabled := true;
+  editCep.Enabled := true;
+  editEndereco.Enabled := true;
+  editNum.Enabled := true;
+  editBairro.Enabled := true;
+  editCompl.Enabled := true;
+  editCidade.Enabled := true;
+  editUf.Enabled := true;
+  editTelefone.Enabled := true;
+  editCelular.Enabled := true;
+  editCpf.Enabled := true;
+  editRg.Enabled := true;
+  editDtCad.Enabled := true;
+  cbAtivo.Enabled := true;
 
-   editEntCep.Enabled := true;
-   editEntEnd.Enabled := true;
-   editEntNum.Enabled := true;
-   editEntCompl.Enabled := true;
-   editEntBairro.Enabled := true;
-   editEntCidade.Enabled := true;
-   editEntUf.Enabled := true;
+  editEntCep.Enabled := true;
+  editEntEnd.Enabled := true;
+  editEntNum.Enabled := true;
+  editEntCompl.Enabled := true;
+  editEntBairro.Enabled := true;
+  editEntCidade.Enabled := true;
+  editEntUf.Enabled := true;
 
-   editODLoc.Enabled := true;
-   editODEnd.Enabled := true;
-   editODTel.Enabled := true;
-   editODPai.Enabled := true;
-   editODMae.Enabled := true;
-   editODNasc.Enabled := true;
-   editODLim.Enabled := true;
-   editODContato.Enabled := true;
-   editODEmail.Enabled := true;
-   editODSite.Enabled := true;
-   editODObs.Enabled := true;
+  editODLoc.Enabled := true;
+  editODEnd.Enabled := true;
+  editODTel.Enabled := true;
+  editODPai.Enabled := true;
+  editODMae.Enabled := true;
+  editODNasc.Enabled := true;
+  editODLim.Enabled := true;
+  editODContato.Enabled := true;
+  editODEmail.Enabled := true;
+  editODSite.Enabled := true;
+  editODObs.Enabled := true;
 
-   RadioGroup1.Enabled := true;
+  RadioGroup1.Enabled := true;
+  btnIncluir.Enabled := false;
+  btnConfirmar.Enabled := true;
+  btnCancelar.Enabled := true;
+  btnEditar.Enabled := false;
+  btnPes.Enabled := true;
+  btnPesEnt.Enabled := true;
 
-   btnIncluir.Enabled := false;
-   btnConfirmar.Enabled := true;
-   btnCancelar.Enabled := true;
-   btnEditar.Enabled := false;
-   btnPes.Enabled := true;
-   btnPesEnt.Enabled := true;
+  Confirmar.Enabled := True;
+  Incluir.Enabled := False;
+  Cancelar.Enabled := True;
+  Editar.Enabled := false;
+  Pesquisar.Enabled := false;
 
-   Confirmar.Enabled := True;
-   Incluir.Enabled := False;
-   Cancelar.Enabled := True;
-   Editar.Enabled := false;
-   Pesquisar.Enabled := false;
+  id := telaDados.tblClientesID.AsInteger + 1;
+  telaDados.tblClientes.Insert;
 
-   id := telaDados.tblClientesID.AsInteger + 1;
-   telaDados.tblClientes.Insert;
+  telaDados.tblClientesID.Value := id;
 
-   telaDados.tblClientesID.Value := id;
-
-   with telaDados.tblEstados do
-    begin 
-      First;
-      while not Eof do
-        begin 
-          editUf.Items.Add(telaDados.tblEstados.FieldByName('UF').AsString);
-          Next; 
-        end;
+  with telaDados.tblEstados do
+  begin
+    First;
+    while not Eof do
+    begin
+      editUf.Items.Add(telaDados.tblEstados.FieldByName('UF').AsString);
+      Next;
     end;
+  end;
 
-   telaDados.tblClientes.FieldByName('ativo').AsBoolean := True;
-   cbAtivo.Checked := true;
-   RadioGroup1.ItemIndex := 0;
-   telaDados.tblClientesDATA_CAD.AsString := DateTimeToStr(Now);
-   editNome.SetFocus;
-   
+  telaDados.tblClientes.FieldByName('ativo').AsBoolean := True;
+  cbAtivo.Checked := true;
+  RadioGroup1.ItemIndex := 0;
+  telaDados.tblClientesDATA_CAD.AsString := DateTimeToStr(Now);
+  editNome.SetFocus;
+  
 end;
 
 procedure TtelaCadClientes.ConfirmarExecute(Sender: TObject);
 begin
-if (editNome.Text = '') then begin
-  ShowMessage('Por favor digite o Nome');
-  editNome.SetFocus;
-  Abort;
-end;
-if (editCep.Text = '') then begin
-  if  MessageDlg('CEP inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
-  Abort;
+  if (editNome.Text = '') then begin
+    ShowMessage('Por favor digite o Nome');
+    editNome.SetFocus;
+    Abort;
   end;
-end;
-if (editEndereco.GetTextLen < 2 ) then begin
-  if  MessageDlg('Endereço inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
-  editEndereco.SetFocus;
-  Abort;
+  if (editCep.Text = '') then begin
+    if  MessageDlg('CEP inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
+      Abort;
+    end;
   end;
-end;
-if (editBairro.GetTextLen < 2) then begin
-  if  MessageDlg('Bairro inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
-  editBairro.SetFocus;
-  Abort;
+  if (editEndereco.GetTextLen < 2 ) then begin
+    if  MessageDlg('Endereço inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
+      editEndereco.SetFocus;
+      Abort;
+    end;
   end;
-end;
-if (editNum.Text = '') then begin
-  if  MessageDlg('Número inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
-  editNum.SetFocus;
-  Abort;
+  if (editBairro.GetTextLen < 2) then begin
+    if  MessageDlg('Bairro inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
+      editBairro.SetFocus;
+      Abort;
+    end;
   end;
-end;
-if (editCidade.Text = '') then begin
-  if  MessageDlg('Cidade inválida, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
-  editCidade.SetFocus;
-  Abort;
+  if (editNum.Text = '') then begin
+    if  MessageDlg('Número inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
+    editNum.SetFocus;
+    Abort;
+    end;
   end;
-end;
-if (editTelefone.Text = '') and (editCelular.Text = '') then begin
-  if  MessageDlg('Telefone inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
-  editNome.SetFocus;
-  Abort;
+  if (editCidade.Text = '') then begin
+    if  MessageDlg('Cidade inválida, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
+    editCidade.SetFocus;
+    Abort;
+    end;
   end;
-end;
-if RadioGroup1.ItemIndex >=0 then begin
-  if RadioGroup1.ItemIndex = 0 then
-  begin
-  {  telaDados.qryClientes.Close;
+  if (editTelefone.Text = '') and (editCelular.Text = '') then begin
+    if  MessageDlg('Telefone inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
+    editNome.SetFocus;
+    Abort;
+    end;
+  end;
+  if RadioGroup1.ItemIndex >=0 then begin
+    {telaDados.qryClientes.Close;
     telaDados.qryClientes.SQL.Clear;
-    telaDados.qryClientes.SQL.Add('Select * from clientes where ');
+    telaDados.qryClientes.SQL.Add('Select * from CLIENTE where CNPJ_CPF = ');
     telaDados.qryClientes.SQL.Add(editCpf.Text);
     telaDados.qryClientes.Open;
-    if telaDados.qryClientes.Params.Count > 0 then begin
-      ShowMessage('Cpf já cadastrado');
+    }
+    if RadioGroup1.ItemIndex = 0 then
+    begin 
+    {if telaDados.qryClientes.RecordCount > 0 then begin
+      ShowMessage('CPF/CNPJ já cadastrado');
       editCpf.SetFocus;
       Abort;
     end;}
     if not (telaDados.verificaCpf(editCpf.Text)) then begin
-      ShowMessage('Cpf Inválido');
+      ShowMessage('CPF Inválido');
       editCpf.SetFocus;
       Abort;
     end;
@@ -427,17 +417,17 @@ if RadioGroup1.ItemIndex >=0 then begin
   else
   begin
      if not (telaDados.verificaCnpj(editCpf.Text)) then begin
-      ShowMessage('Cnpj Inválido');
+      ShowMessage('CNPJ Inválido');
       editCpf.SetFocus;
       Abort;
      end;
   end;
 end;
-if (editRg.Text = '') then begin
-  ShowMessage('Por favor digite o RG / Inscrição Estadual');
-  editRg.SetFocus;
-  Abort;
-end;
+  if (editRg.Text = '') then begin
+    ShowMessage('Por favor digite o RG / Inscrição Estadual');
+    editRg.SetFocus;
+    Abort;
+  end;
 
   telaDados.tblClientesUF_END.Value := editUf.Text;
   telaDados.tblClientes.Post;
@@ -454,131 +444,130 @@ end;
   Cancelar.Enabled := false;
   Editar.Enabled := true;
 
-   editNome.Enabled := false;
-   editCep.Enabled := false;
-   editEndereco.Enabled := false;
-   editNum.Enabled := false;
-   editBairro.Enabled := false;
-   editCompl.Enabled := false;
-   editCidade.Enabled := false;
-   editUf.Enabled := false;
-   editTelefone.Enabled := false;
-   editCelular.Enabled := false;
-   editCpf.Enabled := false;
-   editRg.Enabled := false;
-   editDtCad.Enabled := false;
-   cbAtivo.Enabled := false;
+  editNome.Enabled := false;
+  editCep.Enabled := false;
+  editEndereco.Enabled := false;
+  editNum.Enabled := false;
+  editBairro.Enabled := false;
+  editCompl.Enabled := false;
+  editCidade.Enabled := false;
+  editUf.Enabled := false;
+  editTelefone.Enabled := false;
+  editCelular.Enabled := false;
+  editCpf.Enabled := false;
+  editRg.Enabled := false;
+  editDtCad.Enabled := false;
+  cbAtivo.Enabled := false;
 
-   editEntCep.Enabled := false;
-   editEntEnd.Enabled := false;
-   editEntNum.Enabled := false;
-   editEntCompl.Enabled := false;
-   editEntBairro.Enabled := false;
-   editEntCidade.Enabled := false;
-   editEntUf.Enabled := false;
+  editEntCep.Enabled := false;
+  editEntEnd.Enabled := false;
+  editEntNum.Enabled := false;
+  editEntCompl.Enabled := false;
+  editEntBairro.Enabled := false;
+  editEntCidade.Enabled := false;
+  editEntUf.Enabled := false;
 
-   editODLoc.Enabled := false;
-   editODEnd.Enabled := false;
-   editODTel.Enabled := false;
-   editODPai.Enabled := false;
-   editODMae.Enabled := false;
-   editODNasc.Enabled := false;
-   editODLim.Enabled := false;
-   editODContato.Enabled := false;
-   editODEmail.Enabled := false;
-   editODSite.Enabled := false;
-   editODObs.Enabled := false;
+  editODLoc.Enabled := false;
+  editODEnd.Enabled := false;
+  editODTel.Enabled := false;
+  editODPai.Enabled := false;
+  editODMae.Enabled := false;
+  editODNasc.Enabled := false;
+  editODLim.Enabled := false;
+  editODContato.Enabled := false;
+  editODEmail.Enabled := false;
+  editODSite.Enabled := false;
+  editODObs.Enabled := false;
 
-   RadioGroup1.Enabled := false;
-
+  RadioGroup1.Enabled := false;
 
 end;
 
 procedure TtelaCadClientes.FecharExecute(Sender: TObject);
 begin
-Close;
-telaDados.tblClientes.Open;
+  Close;
+  telaDados.tblClientes.Open;
 end;
 
 procedure TtelaCadClientes.CancelarExecute(Sender: TObject);
 begin
-telaDados.tblClientes.Cancel;
+  telaDados.tblClientes.Cancel;
 
-   editNome.Enabled := false;
-   editCep.Enabled := false;
-   editEndereco.Enabled := false;
-   editNum.Enabled := false;
-   editBairro.Enabled := false;
-   editCompl.Enabled := false;
-   editCidade.Enabled := false;
-   editUf.Enabled := false;
-   editTelefone.Enabled := false;
-   editCelular.Enabled := false;
-   editCpf.Enabled := false;
-   editRg.Enabled := false;
-   editDtCad.Enabled := false;
-   cbAtivo.Enabled := false;
+  editNome.Enabled := false;
+  editCep.Enabled := false;
+  editEndereco.Enabled := false;
+  editNum.Enabled := false;
+  editBairro.Enabled := false;
+  editCompl.Enabled := false;
+  editCidade.Enabled := false;
+  editUf.Enabled := false;
+  editTelefone.Enabled := false;
+  editCelular.Enabled := false;
+  editCpf.Enabled := false;
+  editRg.Enabled := false;
+  editDtCad.Enabled := false;
+  cbAtivo.Enabled := false;
 
-   editEntCep.Enabled := false;
-   editEntEnd.Enabled := false;
-   editEntNum.Enabled := false;
-   editEntCompl.Enabled := false;
-   editEntBairro.Enabled := false;
-   editEntCidade.Enabled := false;
-   editEntUf.Enabled := false;
+  editEntCep.Enabled := false;
+  editEntEnd.Enabled := false;
+  editEntNum.Enabled := false;
+  editEntCompl.Enabled := false;
+  editEntBairro.Enabled := false;
+  editEntCidade.Enabled := false;
+  editEntUf.Enabled := false;
 
-   editODLoc.Enabled := false;
-   editODEnd.Enabled := false;
-   editODTel.Enabled := false;
-   editODPai.Enabled := false;
-   editODMae.Enabled := false;
-   editODNasc.Enabled := false;
-   editODLim.Enabled := false;
-   editODContato.Enabled := false;
-   editODEmail.Enabled := false;
-   editODSite.Enabled := false;
-   editODObs.Enabled := false;
+  editODLoc.Enabled := false;
+  editODEnd.Enabled := false;
+  editODTel.Enabled := false;
+  editODPai.Enabled := false;
+  editODMae.Enabled := false;
+  editODNasc.Enabled := false;
+  editODLim.Enabled := false;
+  editODContato.Enabled := false;
+  editODEmail.Enabled := false;
+  editODSite.Enabled := false;
+  editODObs.Enabled := false;
 
-   RadioGroup1.Enabled := false;
+  RadioGroup1.Enabled := false;
 
-   btnPes.Enabled := false;
-   btnPesEnt.Enabled := false;
+  btnPes.Enabled := false;
+  btnPesEnt.Enabled := false;
 
   Incluir.Enabled   := true;
   Confirmar.Enabled := false;
   Cancelar.Enabled  := false;
   Editar.Enabled    := true;
   Pesquisar.Enabled := true;
-    if editCpf.Text = '' then begin
-      Excluir.Enabled := False;
-    end else begin
-      Excluir.Enabled := true;
-    end;
-  
+  if editCpf.Text = '' then begin
+    Excluir.Enabled := False;
+  end else begin
+    Excluir.Enabled := true;
+  end;
+
 end;
 
 procedure TtelaCadClientes.RadioGroup1Click(Sender: TObject);
 begin
- if RadioGroup1.ItemIndex = 0 then
- begin
+  if RadioGroup1.ItemIndex = 0 then
+  begin
     telaDados.FormataCamposF;
- end else
- begin
+  end else
+  begin
     telaDados.FormataCamposJ;
- end;
-  editCpf.SetFocus;
+  end;
+    editCpf.SetFocus;
 end;
 
 procedure TtelaCadClientes.PesquisarExecute(Sender: TObject);
 begin
-Application.CreateForm(TtelaPesCliente, telaPesCliente);
-telaPesCliente.Show;
+  Application.CreateForm(TtelaPesCliente, telaPesCliente);
+  telaPesCliente.Show;
 end;
 
 procedure TtelaCadClientes.btnPesClick(Sender: TObject);
 var i : integer;
 begin
-ACBrCEP1.BuscarPorCEP(editCep.Text);
+  ACBrCEP1.BuscarPorCEP(editCep.Text);
 
   for i := 0 to ACBrCEP1.Enderecos.Count -1 do
   begin
@@ -588,15 +577,13 @@ ACBrCEP1.BuscarPorCEP(editCep.Text);
     telaDados.tblClientesCIDADE_END.AsString := UpperCase(ACBrCEP1.Enderecos[i].Municipio);
     editUf.Text                              := UpperCase(ACBrCEP1.Enderecos[i].UF);
     telaDados.tblClientesBAIRRO_END.AsString := UpperCase(ACBrCEP1.Enderecos[i].Bairro);
-    
   end;
 end;
 
 procedure TtelaCadClientes.btnPesEntClick(Sender: TObject);
-VAR i : integer;
+var i : integer;
 begin
-
-ACBrCEP1.BuscarPorCEP(editCep.Text);
+  ACBrCEP1.BuscarPorCEP(editCep.Text);
 
   for i := 0 to ACBrCEP1.Enderecos.Count -1 do
   begin
@@ -607,7 +594,6 @@ ACBrCEP1.BuscarPorCEP(editCep.Text);
     telaDados.tblClientesUF_END_ENT.AsString := ACBrCEP1.Enderecos[i].UF;
     telaDados.tblClientesBAIRRO_END_ENTREGA.AsString := ACBrCEP1.Enderecos[i].Bairro;
   end;
-
 end;
 
 procedure TtelaCadClientes.EditarExecute(Sender: TObject);
@@ -627,42 +613,42 @@ begin
   btnPesEnt.Enabled := true;
 
 
-   editNome.Enabled := true;
-   editCep.Enabled := true;
-   editEndereco.Enabled := true;
-   editNum.Enabled := true;
-   editBairro.Enabled := true;
-   editCompl.Enabled := true;
-   editCidade.Enabled := true;
-   editUf.Enabled := true;
-   editTelefone.Enabled := true;
-   editCelular.Enabled := true;
-   editCpf.Enabled := true;
-   editRg.Enabled := true;
-   editDtCad.Enabled := true;
-   cbAtivo.Enabled := true;
+  editNome.Enabled := true;
+  editCep.Enabled := true;
+  editEndereco.Enabled := true;
+  editNum.Enabled := true;
+  editBairro.Enabled := true;
+  editCompl.Enabled := true;
+  editCidade.Enabled := true;
+  editUf.Enabled := true;
+  editTelefone.Enabled := true;
+  editCelular.Enabled := true;
+  editCpf.Enabled := true;
+  editRg.Enabled := true;
+  editDtCad.Enabled := true;
+  cbAtivo.Enabled := true;
 
-   editEntCep.Enabled := true;
-   editEntEnd.Enabled := true;
-   editEntNum.Enabled := true;
-   editEntCompl.Enabled := true;
-   editEntBairro.Enabled := true;
-   editEntCidade.Enabled := true;
-   editEntUf.Enabled := true;
+  editEntCep.Enabled := true;
+  editEntEnd.Enabled := true;
+  editEntNum.Enabled := true;
+  editEntCompl.Enabled := true;
+  editEntBairro.Enabled := true;
+  editEntCidade.Enabled := true;
+  editEntUf.Enabled := true;
 
-   editODLoc.Enabled := true;
-   editODEnd.Enabled := true;
-   editODTel.Enabled := true;
-   editODPai.Enabled := true;
-   editODMae.Enabled := true;
-   editODNasc.Enabled := true;
-   editODLim.Enabled := true;
-   editODContato.Enabled := true;
-   editODEmail.Enabled := true;
-   editODSite.Enabled := true;
-   editODObs.Enabled := true;
+  editODLoc.Enabled := true;
+  editODEnd.Enabled := true;
+  editODTel.Enabled := true;
+  editODPai.Enabled := true;
+  editODMae.Enabled := true;
+  editODNasc.Enabled := true;
+  editODLim.Enabled := true;
+  editODContato.Enabled := true;
+  editODEmail.Enabled := true;
+  editODSite.Enabled := true;
+  editODObs.Enabled := true;
 
-   RadioGroup1.Enabled := true;
+  RadioGroup1.Enabled := true;
 
   telaDados.tblClientes.Edit;
 end;
@@ -676,6 +662,36 @@ begin
   telaDados.qryClientes.Open;
 
   telaDados.tblClientes.Refresh;
+end;
+
+procedure TtelaCadClientes.editTelefoneKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not( key in['0'..'9',#08,#13,#27,#42] ) then begin
+    key:=#0;
+  end;
+end;
+
+procedure TtelaCadClientes.editCelularKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not( key in['0'..'9',#08,#13,#27,#42] ) then begin
+    key:=#0;
+  end;
+end;
+
+procedure TtelaCadClientes.editCpfKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not( key in['0'..'9',#08,#13,#27,#42] ) then begin
+    key:=#0;
+  end;
+end;
+
+procedure TtelaCadClientes.editRgKeyPress(Sender: TObject; var Key: Char);
+begin
+  if not( key in['0'..'9',#08,#13,#27,#42] ) then begin
+    key:=#0;
+  end;
 end;
 
 end.
