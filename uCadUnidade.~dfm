@@ -1,7 +1,7 @@
 object telaCadUnidade: TtelaCadUnidade
   Left = 539
   Top = 259
-  Width = 431
+  Width = 428
   Height = 369
   Caption = 'Cadastro de Unidades'
   Color = clBtnFace
@@ -18,7 +18,7 @@ object telaCadUnidade: TtelaCadUnidade
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
-    Width = 415
+    Width = 412
     Height = 331
     Align = alClient
     TabOrder = 0
@@ -38,7 +38,7 @@ object telaCadUnidade: TtelaCadUnidade
       FocusControl = editNome
     end
     object btnExcluir: TSpeedButton
-      Left = 318
+      Left = 316
       Top = 288
       Width = 91
       Height = 36
@@ -289,9 +289,9 @@ object telaCadUnidade: TtelaCadUnidade
       NumGlyphs = 2
     end
     object btnSair: TBitBtn
-      Left = 312
+      Left = 304
       Top = 12
-      Width = 100
+      Width = 101
       Height = 37
       Action = actSair
       Caption = 'F10 - &Fechar'
@@ -665,7 +665,7 @@ object telaCadUnidade: TtelaCadUnidade
     object DBGrid1: TDBGrid
       Left = 6
       Top = 112
-      Width = 403
+      Width = 399
       Height = 169
       DataSource = telaDados.dsUnidade
       Enabled = False

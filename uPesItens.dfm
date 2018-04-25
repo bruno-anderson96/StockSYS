@@ -157,6 +157,7 @@ object telaPesItens: TtelaPesItens
       Height = 21
       CharCase = ecUpperCase
       TabOrder = 0
+      OnKeyPress = editBuscaKeyPress
     end
     object GroupBox2: TGroupBox
       Left = 4

@@ -55,8 +55,8 @@ implementation
 
 procedure TtelaCadUnidade.btnSairClick(Sender: TObject);
 begin
-Close;
-end;   
+  Close;
+end;
 
 procedure TtelaCadUnidade.btnCadastrarClick(Sender: TObject);
 begin
@@ -70,7 +70,6 @@ begin
   if telaDados.qryUnidade.RecordCount>0 then begin
      ShowMessage('sigla já cadastrada');
      editSigla.SetFocus;
-     
   end
   else begin
     telaDados.tblUnidade.Post;
@@ -85,51 +84,32 @@ begin
 
      btnInserir.Enabled := true;
      btnInserir.SetFocus;
-
   end;
-
-
-
 end;
 
 
 procedure TtelaCadUnidade.FormShow(Sender: TObject);
 begin     
   btnInserir.SetFocus;
-
 end;
 
 procedure TtelaCadUnidade.btnInserirClick(Sender: TObject);
 var id : integer;
 begin
+  telaDados.tblUnidade.Last;
 
-    telaDados.tblUnidade.Last;
+  id := telaDados.tblUnidadeID.Value + 1;
 
-    id := telaDados.tblUnidadeID.Value + 1;
+  telaDados.tblUnidade.Insert;
+  telaDados.tblUnidadeID.Value := id;
 
-    {
-    telaDados.tblUnidade.Last;
+  editSigla.Enabled := true;
+  editNome.Enabled := true;
+  editSigla.SetFocus;
 
-    if editId.Text = ''  then begin
-      id := 0;
-    end else begin
-      id := StrToInt(editId.Text) +1;
-    end;
-   }
-   telaDados.tblUnidade.Insert;
-   telaDados.tblUnidadeID.Value := id;
+  btnInserir.Enabled := false;
 
-   {editId.Text := IntToStr(id);}
-
-   editSigla.Enabled := true;
-   editNome.Enabled := true;
-   editSigla.SetFocus;
-
-   btnInserir.Enabled := false;
-
-   DBGrid1.Enabled := False;
-
-
+  DBGrid1.Enabled := False;
 end;
 
 procedure TtelaCadUnidade.actIncluirExecute(Sender: TObject);
@@ -140,19 +120,8 @@ begin
 
     id := telaDados.tblUnidadeID.Value + 1;
 
-    {
-    telaDados.tblUnidade.Last;
-
-    if editId.Text = ''  then begin
-      id := 0;
-    end else begin
-      id := StrToInt(editId.Text) +1;
-    end;
-   }
    telaDados.tblUnidade.Insert;
    telaDados.tblUnidadeID.Value := id;
-
-   {editId.Text := IntToStr(id);}
 
    editSigla.Enabled := true;
    editNome.Enabled := true;
@@ -160,9 +129,7 @@ begin
 
    btnInserir.Enabled := false;
 
-   DBGrid1.Enabled := False;
-
-
+   DBGrid1.Enabled := False; 
 end;
 
 
@@ -178,8 +145,7 @@ begin
   if telaDados.qryUnidade.RecordCount>0 then begin
      ShowMessage('sigla já cadastrada');
      editSigla.SetFocus;
-     Abort;
-     
+     Abort;      
   end
   else begin
      editSigla.Enabled := false;
@@ -195,29 +161,25 @@ begin
 
     editSigla.Clear;
     editNome.Clear;
-
-
   end;
-
 end;
 
 procedure TtelaCadUnidade.actSairExecute(Sender: TObject);
 begin
-Close;
+  Close;
 end;
 
 procedure TtelaCadUnidade.actEditarExecute(Sender: TObject);
 begin
-
-telaDados.tblUnidade.Edit;
-DBGrid1.Enabled := true;
-editSigla.Enabled := true;
-editNome.Enabled := true;
+  telaDados.tblUnidade.Edit;
+  DBGrid1.Enabled := true;
+  editSigla.Enabled := true;
+  editNome.Enabled := true;
 end;
 
 procedure TtelaCadUnidade.actExcluirExecute(Sender: TObject);
 begin
-telaDados.tblUnidade.Delete;
+  telaDados.tblUnidade.Delete;
 end;
 
 end.

@@ -109,6 +109,7 @@ type
     procedure ExcluirExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure edtCfopKeyPress(Sender: TObject; var Key: Char);
+    procedure btnCadUniClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -121,6 +122,8 @@ var
   telaCadProdutos: TtelaCadProdutos;
 
 implementation
+
+uses uCadUnidade;
 
 {$R *.dfm}
 
@@ -148,8 +151,7 @@ begin
    editRedBas.Text  := '0,00';
    editCompra.Text  := '0,00';
    editLucro.Text   := '0,00';
-   editVenda.Text   := '0,00';     
-
+   editVenda.Text   := '0,00';
 end;
 
 procedure TtelaCadProdutos.btnFecharClick(Sender: TObject);
@@ -540,7 +542,7 @@ end;
 
 procedure TtelaCadProdutos.editCompraExit(Sender: TObject);
 begin
-  calculaValProd;
+  {calculaValProd;}
   editVenda.Text := FloatToStr(StrToFloat(editCompra.Text) + StrToFloat(editLucro.Text));
   telaDados.FormataCampos;
 end;
@@ -745,6 +747,12 @@ begin
   if not( key in['0'..'9',#08,#13,#27,#42] ) then begin
     key:=#0;
   end;
+end;
+
+procedure TtelaCadProdutos.btnCadUniClick(Sender: TObject);
+begin
+  Application.CreateForm(TtelaCadUnidade, telaCadUnidade);
+  telaCadUnidade.Show;
 end;
 
 end.

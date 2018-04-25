@@ -62,7 +62,7 @@ uses uCadEmit, DB;
 
 procedure TtelaConfigEmit.FormShow(Sender: TObject);
 begin
-//EMITENTE
+  //EMITENTE
   edtRazSoc.Text          := telaDados.tblEmitenteRAZ_SOC.AsString;
   edtNomeFan.Text         := telaDados.tblEmitenteFANTASIA.AsString;
   edtCnpj.Text            := telaDados.tblEmitenteCNPJ.AsString;
@@ -81,8 +81,6 @@ end;
 
 procedure TtelaConfigEmit.FormCreate(Sender: TObject);
 begin
-
-
   telaDados.qryEmitente.Close;
   telaDados.qryEmitente.SQL.Clear;
   telaDados.qryEmitente.SQL.Add('Select * from Emitente where id_login = ');
@@ -90,13 +88,12 @@ begin
   if telaDados.tblLogin.FieldByName('ADM').AsInteger = 1 then begin
     btnCadastrar.Visible := true;
   end;
-  
+
   if telaDados.qryEmitente.RecordCount > 0 then begin
     telaDados.qryEmitente.Open;
   end else begin
     telaDados.qryEmitente.Close;
   end;
-
 end;
 
 procedure TtelaConfigEmit.btnCadastrarClick(Sender: TObject);

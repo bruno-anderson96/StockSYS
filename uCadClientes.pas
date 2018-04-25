@@ -358,42 +358,42 @@ begin
     ShowMessage('Por favor digite o Nome');
     editNome.SetFocus;
     Abort;
-  end;
+  end else
   if (editCep.Text = '') then begin
     if  MessageDlg('CEP inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
       Abort;
     end;
-  end;
+  end else
   if (editEndereco.GetTextLen < 2 ) then begin
     if  MessageDlg('Endereço inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
       editEndereco.SetFocus;
       Abort;
     end;
-  end;
+  end else
   if (editBairro.GetTextLen < 2) then begin
     if  MessageDlg('Bairro inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
       editBairro.SetFocus;
       Abort;
     end;
-  end;
+  end else
   if (editNum.Text = '') then begin
     if  MessageDlg('Número inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
     editNum.SetFocus;
     Abort;
     end;
-  end;
+  end else
   if (editCidade.Text = '') then begin
     if  MessageDlg('Cidade inválida, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
     editCidade.SetFocus;
     Abort;
     end;
-  end;
+  end else
   if (editTelefone.Text = '') and (editCelular.Text = '') then begin
     if  MessageDlg('Telefone inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
     editNome.SetFocus;
     Abort;
     end;
-  end;
+  end else
   if RadioGroup1.ItemIndex >=0 then begin
     {telaDados.qryClientes.Close;
     telaDados.qryClientes.SQL.Clear;
@@ -422,7 +422,7 @@ begin
       Abort;
      end;
   end;
-end;
+end else
   if (editRg.Text = '') then begin
     ShowMessage('Por favor digite o RG / Inscrição Estadual');
     editRg.SetFocus;

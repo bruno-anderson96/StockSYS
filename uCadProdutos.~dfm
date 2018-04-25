@@ -1519,6 +1519,7 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 13
       ValueChecked = 'True'
       ValueUnchecked = 'False'
+      Visible = False
     end
     object cbCtrlEstoque: TDBCheckBox
       Left = 88
@@ -1532,6 +1533,7 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 14
       ValueChecked = 'True'
       ValueUnchecked = 'False'
+      Visible = False
     end
     object cbFracionada: TDBCheckBox
       Left = 215
@@ -1545,6 +1547,7 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 15
       ValueChecked = 'True'
       ValueUnchecked = 'False'
+      Visible = False
     end
     object radTipoProduto: TRadioGroup
       Left = 643

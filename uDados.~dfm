@@ -281,11 +281,13 @@ object telaDados: TtelaDados
   object tblProdutos: TIBTable
     Database = dbProdutos
     Transaction = trnscProdutos
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     FieldDefs = <
       item
         Name = 'ID'
+        Attributes = [faRequired]
         DataType = ftInteger
       end
       item
@@ -383,6 +385,7 @@ object telaDados: TtelaDados
       end
       item
         Name = 'ATIVO'
+        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end
@@ -398,6 +401,7 @@ object telaDados: TtelaDados
       end
       item
         Name = 'CONTROLADOR_ESTOQUE'
+        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end
@@ -407,6 +411,7 @@ object telaDados: TtelaDados
       end
       item
         Name = 'FRACIONADO'
+        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end

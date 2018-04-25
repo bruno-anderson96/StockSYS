@@ -12,6 +12,7 @@ object telaPesFor: TtelaPesFor
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
@@ -214,6 +215,7 @@ object telaPesFor: TtelaPesFor
       Height = 21
       CharCase = ecUpperCase
       TabOrder = 0
+      OnKeyPress = editBuscaKeyPress
     end
     object cbCategoria: TComboBox
       Left = 40

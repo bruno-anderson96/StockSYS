@@ -128,27 +128,26 @@ end;
 
 procedure TtelaConfigSat.At(Sender: TObject);
 begin
-memo1.Text := acbrSat1.AtivarSAT(1,'11.111.111/1111-11',23);
+  memo1.Text := acbrSat1.AtivarSAT(1,'11.111.111/1111-11',23);
 end;
 
 procedure TtelaConfigSat.SpeedButton6Click(Sender: TObject);
 begin
-Memo1.Text := ACBrSAT1.ConsultarSAT + ACBrSAT1.ConsultarStatusOperacional;
+  Memo1.Text := ACBrSAT1.ConsultarSAT + ACBrSAT1.ConsultarStatusOperacional;
 end;
 
 procedure TtelaConfigSat.AjustarCfe;
 begin
-
- with ACBrSAT1 do
- begin
-  NomeDLL := edtNomeDLL.Text;
-  Modelo := TACBrSATModelo( cbxModelo.ItemIndex ) ;
-  Config.ide_CNPJ := edtSwHCNPJ.Text{'11111111111111'};
-  {
-  Config.ide_CNPJ := '08490295000133';
-  Config.ide_CNPJ := '11.111.111/1111-11'; }
-  config.ide_numeroCaixa := StrToInt(edtCaixa.Text);
-  Config.ide_tpAmb := TpcnTipoAmbiente(cbxAmbiente.ItemIndex); {taHomologacao}
+  with ACBrSAT1 do
+  begin
+    NomeDLL := edtNomeDLL.Text;
+    Modelo := TACBrSATModelo( cbxModelo.ItemIndex ) ;
+    Config.ide_CNPJ := edtSwHCNPJ.Text{'11111111111111'};
+    {
+    Config.ide_CNPJ := '08490295000133';
+    Config.ide_CNPJ := '11.111.111/1111-11'; }
+    config.ide_numeroCaixa := StrToInt(edtCaixa.Text);
+    Config.ide_tpAmb := TpcnTipoAmbiente(cbxAmbiente.ItemIndex); {taHomologacao}
 
 
   case telaDados.tblEmitenteREGIME.Value of
@@ -177,25 +176,21 @@ begin
   Config.emit_IE := telaConfigEmit.edtInscEst.Text{telaConfig.edtInscEst.Text};
   Config.emit_IM := '';
   Config.emit_CNPJ := telaConfigEmit.edtCnpj.Text{telaConfig.edtCnpj.Text};
-
-
   {ACBrSAT1.OnGetNumeroSessao := GetNumeroSessao;}
-
   end;
 
   ACBrSAT1.Inicializar;
 
-ACBrSAT1.OnGetcodigoDeAtivacao := GetcodigoDeAtivacao;
-ACBrSAT1.OnGetsignAC := GetsignAC;
-
-{'12373349000158'}
+  ACBrSAT1.OnGetcodigoDeAtivacao := GetcodigoDeAtivacao;
+  ACBrSAT1.OnGetsignAC := GetsignAC;
+  {'12373349000158'}
 end;
 
 procedure TtelaConfigSat.gerarVenda;
 var
-  TotalItem, TotalGeral, Pagto1: Double;
-  A, aNumItem: Integer;
-  Loops: Integer;
+TotalItem, TotalGeral, Pagto1: Double;
+A, aNumItem: Integer;
+Loops: Integer;
 begin
   Memo1.Clear;{
   TotalGeral := 0;
@@ -232,7 +227,6 @@ begin
   // Montando uma Venda //
   with ACBrSAT1.CFe do
   begin
-
     ide.numeroCaixa := 1;
     ide.cNF := Random(999999);
 
@@ -246,12 +240,11 @@ begin
     Entrega.xMun := telaDados.qryClientes.FieldByName('CIDADE_END').AsString;
     Entrega.UF := telaDados.qryClientes.FieldByName('UF_END').AsString;
 
-
     telaDados.tblPedidosItens.Open;
     telaDados.qryPedidosItens.First;
     {Loops := telaDados.qryPedidosItens.RecordCount;  // Ajuste aqui para vender mais itens
     For A := 1 to Loops do}
-     while not telaDados.qryPedidosItens.Eof do
+      while not telaDados.qryPedidosItens.Eof do
       begin
         
         telaDados.qryProdutos.Close;
@@ -307,9 +300,9 @@ begin
 
       end;
     telaDados.qryPedidosItens.Next;
-     {
-    with Det.Add do
-    begin
+       {
+      with Det.Add do
+      begin
       nItem := 2 + (A * 3);
       Prod.cProd := '6291041500213';
       Prod.cEAN := '6291041500213';
@@ -414,7 +407,6 @@ end;
 
 procedure TtelaConfigSat.SpeedButton5Click(Sender: TObject);
 begin
-
   Memo1.Text := ACBrSAT1.AssociarAssinatura( '11111111111111' + '11111111111111','MD2Nof/O0tQMPKiYeeAydSjYt7YV9kU0nWKZGXHVdYIzR2W9Z6tgXni/Y5bnjmUAk8MkqlBJIiOOIskKCjJ086k7vAP0EU5cBRYj/nzHUiRdu9AVD7WRfVs00BDyb5fsnnKg7gAXXH6SBgCxG9yjAkxJ0l2E2idsWBAJ5peQEBZqtHytRUC+FLaSfd3+'+'66QNxIBlDwQIRzUGPaU6fvErVDSfMUf8WpkwnPz36fCQnyLypqe/5mbox9pt3RCbbXcYqnR/4poYGr9M9Kymj4/PyX9xGeiXwbgzOOHNIU5M/aAs0rulXz948bZla0eXABgEcp6mDkTzweLPZTbmOhX+eA==');
 end;
 
@@ -439,10 +431,7 @@ begin
   begin
     LoadXML( ACBrSAT1.CFe.AsXMLString, Memo1 );
            }
- end;
-
-
-
+end;
 
 procedure TtelaConfigSat.FormCreate(Sender: TObject);
 var I : TACBrSATModelo;
@@ -450,15 +439,15 @@ var I : TACBrSATModelo;
     N : TACBrPosPrinterModelo;
     z : Integer;
 begin
-{AjustarCfe; }
+  {AjustarCfe; }
   cbxModelo.Items.Clear ;
   For I := Low(TACBrSATModelo) to High(TACBrSATModelo) do
-     cbxModelo.Items.Add( GetEnumName(TypeInfo(TACBrSATModelo), integer(I) ) ) ;
+    cbxModelo.Items.Add( GetEnumName(TypeInfo(TACBrSATModelo), integer(I) ) ) ;
   cbxModelo.ItemIndex := 3;
 
   cbxPagCodigo.Items.Clear ;
   For O := Low(TACBrPosPaginaCodigo) to High(TACBrPosPaginaCodigo) do
-     cbxPagCodigo.Items.Add( GetEnumName(TypeInfo(TACBrPosPaginaCodigo), integer(O) ) ) ;
+    cbxPagCodigo.Items.Add( GetEnumName(TypeInfo(TACBrPosPaginaCodigo), integer(O) ) ) ;
   cbxPagCodigo.ItemIndex := 2;
 
   cbxModeloPosPrinter.Items.Clear ;
@@ -471,13 +460,11 @@ begin
     }
 lerParams;
 
-
   {z := Printer.Printers.Count;
   while z>0 do begin
     cbxPorta.Items.Add(Printer.Printers.ValueFromIndex[z-1]);
     z := z-1;
   end;  }
-
 end;
 
 
@@ -534,15 +521,15 @@ begin
   {if ACBrSAT1.Extrato = ACBrSATExtratoESCPOS1 then
   begin                          }
 
-    ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModeloPosPrinter.ItemIndex );
-    ACBrPosPrinter1.PaginaDeCodigo := TACBrPosPaginaCodigo( cbxPagCodigo.ItemIndex );
-    ACBrPosPrinter1.Porta := btnImp.Caption;
-    ACBrPosPrinter1.ColunasFonteNormal := StrToInt(edtCol.Text);
-    ACBrPosPrinter1.LinhasEntreCupons := StrToInt(edtLin.Text);
-    ACBrPosPrinter1.EspacoEntreLinhas := StrToInt(edtEsp.Text);
-    ACBrSATExtratoESCPOS1.ImprimeQRCode := True;
-    ACBrSATExtratoESCPOS1.MostrarPreview := true;
-    ACBrSATExtratoESCPOS1.ImprimeEmUmaLinha := false;
+  ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModeloPosPrinter.ItemIndex );
+  ACBrPosPrinter1.PaginaDeCodigo := TACBrPosPaginaCodigo( cbxPagCodigo.ItemIndex );
+  ACBrPosPrinter1.Porta := btnImp.Caption;
+  ACBrPosPrinter1.ColunasFonteNormal := StrToInt(edtCol.Text);
+  ACBrPosPrinter1.LinhasEntreCupons := StrToInt(edtLin.Text);
+  ACBrPosPrinter1.EspacoEntreLinhas := StrToInt(edtEsp.Text);
+  ACBrSATExtratoESCPOS1.ImprimeQRCode := True;
+  ACBrSATExtratoESCPOS1.MostrarPreview := true;
+  ACBrSATExtratoESCPOS1.ImprimeEmUmaLinha := false;
     {if cbImprimirChaveUmaLinha.Checked then
       ACBrSATExtratoESCPOS1.ImprimeChaveEmUmaLinha := rSim
     else
@@ -560,7 +547,6 @@ begin
 
     ACBrSATExtratoFortes1.PrinterName := lImpressora.Caption;
      }
-  
 end;
 
 
@@ -569,7 +555,7 @@ var
   tini, tfim: TDateTime;
 begin
   PrepararImpressao;
-   ACBrSAT1.ImprimirExtrato;
+  ACBrSAT1.ImprimirExtrato;
    {
   tini := now;
   Memo1.Lines.Add(ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe);
@@ -580,8 +566,8 @@ end;
 
 procedure TtelaConfigSat.SpeedButton8Click(Sender: TObject);
 begin
- PrepararImpressao;
- ACBrSAT1.ImprimirExtrato;
+  PrepararImpressao;
+  ACBrSAT1.ImprimirExtrato;
 
 end;
 
@@ -590,7 +576,6 @@ begin
   if PrintDialog1.Execute then
     lImpressora.Caption := Printer.Printers[Printer.PrinterIndex] ;
     btnImp.Caption := Printer.Printers[Printer.PrinterIndex];
-  
 end;
 
 procedure TtelaConfigSat.btnSalvarClick(Sender: TObject);
@@ -774,22 +759,18 @@ end;
 
 procedure TtelaConfigSat.SpeedButton1Click(Sender: TObject);
 begin
-
   OpenDialog1.Execute;
   edtNomeDLL.Text := OpenDialog1.FileName;
-  
 end;
 
 procedure TtelaConfigSat.SpeedButton2Click(Sender: TObject);
 begin
-
   OpenDialog1.Execute;
   edtMFEInput.Text := OpenDialog1.FileName;
 end;
 
 procedure TtelaConfigSat.SpeedButton3Click(Sender: TObject);
 begin
-
   OpenDialog1.Execute;
   edtMFEOutput.Text := OpenDialog1.FileName;
 end;
@@ -799,12 +780,10 @@ begin
 cancelaCfe;
   {edtSwHCNPJ.Clear;
   edtSwHCNPJ.DisplayFormat        := '00.000.000/0000-00;0';}
-
 end;
 
 procedure TtelaConfigSat.cancelaCfe;
 begin
-
 {
  OpenDialog1.Filter := 'Arquivo XML|*.xml';
   if OpenDialog1.Execute then

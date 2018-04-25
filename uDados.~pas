@@ -515,10 +515,11 @@ begin
 end;
 
 Function TtelaDados.verificaCpf(cpf:string):boolean;
-var i:integer;
-    Want:char;
-    Wvalid:boolean;
-    Wdigit1,Wdigit2:integer;
+var
+i:integer;
+Want:char;
+Wvalid:boolean;
+Wdigit1,Wdigit2:integer;
 begin
     Wdigit1:=0;
     Wdigit2:=0;
@@ -587,14 +588,14 @@ end;
 
 procedure TtelaDados.GravaChaveNFePedido(pChaveNfe, pNumPed :String);
 begin
-    qryPedidos.Close;
-    qryPedidos.SQL.Clear;
-    qryPedidos.SQL.Add('update pedido set');
-    qryPedidos.SQL.Add('CHAVENFE = :pChave');
-    qryPedidos.SQL.Add('where PEDIDO_NUM = :pNumPed');
-    qryPedidos.Params.ParamByName('pChave').AsString := pChaveNfe;
-    qryPedidos.Params.ParamByName('pNumPed').AsString := pNumPed;
-    qryPedidos.Open;
+  qryPedidos.Close;
+  qryPedidos.SQL.Clear;
+  qryPedidos.SQL.Add('update pedido set');
+  qryPedidos.SQL.Add('CHAVENFE = :pChave');
+  qryPedidos.SQL.Add('where PEDIDO_NUM = :pNumPed');
+  qryPedidos.Params.ParamByName('pChave').AsString := pChaveNfe;
+  qryPedidos.Params.ParamByName('pNumPed').AsString := pNumPed;
+  qryPedidos.Open;
 end;
 
 procedure TtelaDados.FormataCamposF;
@@ -608,15 +609,11 @@ end;
 
 procedure TtelaDados.FormataCamposJ;
 begin
-
   tblClientesCNPJ_CPF.Clear;
   tblClientesINSC_RG.Clear;
   tblClientesCNPJ_CPF.EditMask         := '00.000.000/0000-00;0';
   tblClientesINSC_RG.EditMask          := '00000000-0;0';
-
 end;
-
-
 
 procedure TtelaDados.FormataCampos;
 begin
@@ -721,7 +718,6 @@ end;
 procedure TtelaDados.GravaArquivoIni;
 var ArqINI : TIniFile;
 begin
-
   ArqINI := TInifile.Create(ExtractFilePath(Application.ExeName) + 'config.ini');
   //GERAL
   ArqINI.WriteInteger('GERAL', 'FORMA_EMISSAO',sFormas);
@@ -767,8 +763,6 @@ begin
   ArqINI.WriteString('Email','Senha', sESenha);
   //
   ArqINI.Free;
-
-
 end;
 
 procedure TtelaDados.LerArquivoIni;
@@ -906,15 +900,7 @@ begin
   end;
 
 end;
-
-
-
-
-
 { TtelaDados }
-
-
-
 
 function TtelaDados.pegaCodMun(cidade, uf: String): Integer;
 begin
@@ -926,37 +912,35 @@ end;
 
 function TtelaDados.BuscarPorCep(cep: String): retornaEndereco;
 begin
-    qryRuas.Close;
-    qryRuas.SQL.Clear;
-    qryRuas.SQL.Add('Select * from RUAS where cep like :pDados');
-    qryRuas.Params.ParamByName('pDados').asString := cep;
-    qryRuas.Open;
+  qryRuas.Close;
+  qryRuas.SQL.Clear;
+  qryRuas.SQL.Add('Select * from RUAS where cep like :pDados');
+  qryRuas.Params.ParamByName('pDados').asString := cep;
+  qryRuas.Open;
 
-    qryBairros.Close;
-    qryBairros.SQL.Clear;
-    qryBairros.SQL.Add('Select * from BAIRROS where ID = ');
-    qryBairros.SQL.Add(qryRuas.FieldByName('ID_BAIRRO').Value);
-    qryBairros.Open;
+  qryBairros.Close;
+  qryBairros.SQL.Clear;
+  qryBairros.SQL.Add('Select * from BAIRROS where ID = ');
+  qryBairros.SQL.Add(qryRuas.FieldByName('ID_BAIRRO').Value);
+  qryBairros.Open;
 
-    qryCidades.Close;
-    qryCidades.SQL.Clear;
-    qryCidades.SQL.Add('Select * from CIDADES where ID = ');
-    qryCidades.SQL.Add(qryBairros.FieldByName('ID_CIDADES').Value);
-    qryCidades.Open;
+  qryCidades.Close;
+  qryCidades.SQL.Clear;
+  qryCidades.SQL.Add('Select * from CIDADES where ID = ');
+  qryCidades.SQL.Add(qryBairros.FieldByName('ID_CIDADES').Value);
+  qryCidades.Open;
 
-    qryEstados.Close;
-    qryEstados.SQL.Clear;
-    qryEstados.SQL.Add('Select * from ESTADOS where ID = ');
-    qryEstados.SQL.Add(qryCidades.FieldByName('ID_ESTADO').Value);
-    qryEstados.Open;
+  qryEstados.Close;
+  qryEstados.SQL.Clear;
+  qryEstados.SQL.Add('Select * from ESTADOS where ID = ');
+  qryEstados.SQL.Add(qryCidades.FieldByName('ID_ESTADO').Value);
+  qryEstados.Open;
 
-Result.cep := qryRuas.FieldByName('CEP').AsString;
-Result.endereco := Utf8ToAnsi(qryRuas.FieldByName('RUA').AsString);
-Result.cidade := qryCidades.FieldByName('CIDADE').AsString;
-Result.bairro := qryBairros.FieldByName('BAIRROS').AsString;
-Result.estado := qryEstados.FieldByName('ESTADO').AsString;
-
-
+  Result.cep := qryRuas.FieldByName('CEP').AsString;
+  Result.endereco := Utf8ToAnsi(qryRuas.FieldByName('RUA').AsString);
+  Result.cidade := qryCidades.FieldByName('CIDADE').AsString;
+  Result.bairro := qryBairros.FieldByName('BAIRROS').AsString;
+  Result.estado := qryEstados.FieldByName('ESTADO').AsString;
 end;
 
 

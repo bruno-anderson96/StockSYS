@@ -18,6 +18,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure editBuscaKeyPress(Sender: TObject; var Key: Char);
     
   private
     { Private declarations }
@@ -49,43 +50,40 @@ begin
     telaDados.qryClientes.Close;
     telaDados.qryClientes.SQL.Clear;
     telaDados.qryClientes.SQL.Add('select * from cliente where ');
-
-      case cbCategoria.ItemIndex of
-        0:telaDados.qryClientes.SQL.Add('NOME like :pDados');
-        1:telaDados.qryClientes.SQL.Add('CNPJ_cpf like :pDados ');
-        2:telaDados.qryClientes.SQL.Add('INSC_RG like :pDados ');
-        3:telaDados.qryClientes.SQL.Add('CIDADE_END like :pDados');
-      end;
+    case cbCategoria.ItemIndex of
+      0:telaDados.qryClientes.SQL.Add('NOME like :pDados');
+      1:telaDados.qryClientes.SQL.Add('CNPJ_cpf like :pDados ');
+      2:telaDados.qryClientes.SQL.Add('INSC_RG like :pDados ');
+      3:telaDados.qryClientes.SQL.Add('CIDADE_END like :pDados');
+    end;
     telaDados.qryClientes.Params.ParamByName('pDados').asString := editBusca.Text + '%';
-
     telaDados.qryClientes.Open;
-
-  end;
-
+  end;                         
 end;
 
 procedure TtelaPesCliente.FormShow(Sender: TObject);
 begin
-cbCategoria.ItemIndex := 1;
+  cbCategoria.ItemIndex := 1;
 end;
 
 procedure TtelaPesCliente.DBGrid1DblClick(Sender: TObject);
-
 var num : String;
 begin
   num := DBGrid1.Columns.Items[6].Field.AsString;
-                              
   telaDados.tblClientes.Locate('INSC_RG', num , []);
-
-  telaPesCliente.Close;;
-
-
+  telaPesCliente.Close;
 end;
 
 procedure TtelaPesCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   telaCadClientes.Show;
+end;
+
+procedure TtelaPesCliente.editBuscaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if key =#13 then btnPesquisa.Click;
 end;
 
 end.

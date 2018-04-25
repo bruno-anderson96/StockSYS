@@ -119,10 +119,7 @@ type
     procedure edtItemKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
-
-
-  
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);  
 
   private
 
@@ -147,18 +144,16 @@ uses DB,uConfigSat, uGerarNfe, uPesItens;
 
 procedure TtelaLancPedidos.btnEncerrarClick(Sender: TObject);
 begin
-telaLancPedidos.Close;
-telaDados.tblPedidos.Close;
-
-telaDados.cdsTempItens.EmptyDataSet;
-
+  telaLancPedidos.Close;
+  telaDados.tblPedidos.Close;
+  telaDados.cdsTempItens.EmptyDataSet;
 end;
 
 procedure TtelaLancPedidos.btnIncItemClick(Sender: TObject);
 begin
-Application.CreateForm(TtelaLancItens, telaLancItens);
-telaLancItens.Show;
-telaLancItens.pegaTipo(0);
+  Application.CreateForm(TtelaLancItens, telaLancItens);
+  telaLancItens.Show;
+  telaLancItens.pegaTipo(0);
 end;
 
 procedure TtelaLancPedidos.btnIncluirClick(Sender: TObject);
@@ -166,103 +161,86 @@ var
 id: Integer;
 d,a,od : Double;
 begin
-d  := 0.00;
-a  := 0.00;
-od := 0.00;
+  d  := 0.00;
+  a  := 0.00;
+  od := 0.00;
 
-telaDados.tblPedidos.Last;
+  telaDados.tblPedidos.Last;
 
-{editNumPed.Enabled := true;}
-editDtCad.Enabled := true;{
-editHrCad.Enabled := true; }
-editDtEmissao.Enabled := true; {
-editHrEmissao.Enabled := true; }
-editIdCliente.Enabled := true;
-cbCliente.Enabled := true;
-cbTpPg.Enabled := true;
-{editValProd.Enabled := true;}
-editDesc.Enabled := true;
-editAsc.Enabled := true;
-editOutrasDesp.Enabled := true;
-{editVtotal.Enabled := true; }
+  {editNumPed.Enabled := true;}
+  editDtCad.Enabled := true;{
+  editHrCad.Enabled := true; }
+  editDtEmissao.Enabled := true; {
+  editHrEmissao.Enabled := true; }
+  editIdCliente.Enabled := true;
+  cbCliente.Enabled := true;
+  cbTpPg.Enabled := true;
+  {editValProd.Enabled := true;}
+  editDesc.Enabled := true;
+  editAsc.Enabled := true;
+  editOutrasDesp.Enabled := true;
+  {editVtotal.Enabled := true; }
 
-editEcliente.Enabled := true;
-editEendereco.Enabled := true;
-editEnum.Enabled := true;
-editEcompl.Enabled := true;
-editEbairro.Enabled := true;
-editEcidade.Enabled := true;
-editEuf.Enabled := true;
-editEcep.Enabled := true;
+  editEcliente.Enabled := true;
+  editEendereco.Enabled := true;
+  editEnum.Enabled := true;
+  editEcompl.Enabled := true;
+  editEbairro.Enabled := true;
+  editEcidade.Enabled := true;
+  editEuf.Enabled := true;
+  editEcep.Enabled := true;
 
+  btnIncItem.Enabled := true;
+  btnExcItem.Enabled := true;
 
-btnIncItem.Enabled := true;
-btnExcItem.Enabled := true;
+  btnIncluir.Enabled := false;
+  btnConfirmar.Enabled := true;
+  btnCancelar.Enabled := true;
 
+  cbTpPg.ItemIndex := 0;
 
-btnIncluir.Enabled := false;
-btnConfirmar.Enabled := true;
-btnCancelar.Enabled := true;
+  editDesc.Text := FloatToStr(d);
+  editAsc.Text  := FloatToStr(a);
+  editOutrasDesp.Text := FloatToStr(od);
 
-cbTpPg.ItemIndex := 0;
+  id := telaDados.tblPedidosID.asInteger + 1;
 
-editDesc.Text := FloatToStr(d);
-editAsc.Text  := FloatToStr(a);
-editOutrasDesp.Text := FloatToStr(od);
-
-
-         
-                  {
-
-        if editId.Text = ''  then begin
-          id := 0;
-        end else begin
-          id := StrToInt(editId.Text) +1;
-        end;
-
-        }
-        id := telaDados.tblPedidosID.asInteger + 1;
-
-        telaDados.tblPedidos.Insert;
-        telaDados.tblPedidosID.Value := id;
-        telaLancPedidos.Refresh;
+  telaDados.tblPedidos.Insert;
+  telaDados.tblPedidosID.Value := id;
+  telaLancPedidos.Refresh;
                                             {
-        telaDados.tblPedidosID.Value := id;
-        telaDados.tblPedidos.Refresh;
-        telaDados.tblPedidos.ApplyUpdates; } 
-      
+  telaDados.tblPedidosID.Value := id;
+  telaDados.tblPedidos.Refresh;
+  telaDados.tblPedidos.ApplyUpdates; }
 
-        editId.Text := IntToStr(id);
-
+  editId.Text := IntToStr(id);
 end;
 
 procedure TtelaLancPedidos.btnConfirmarClick(Sender: TObject);
 begin
-
-if editDtCad.Text = '' then
- begin
-  ShowMessage('Preencha a data de cadastro');
-  editDtCad.SetFocus;
-  Abort;
- end;
-if editDtEmissao.Text = '' then
+  if editDtCad.Text = '' then
+  begin
+    ShowMessage('Preencha a data de cadastro');
+    editDtCad.SetFocus;
+    Abort;
+  end;
+  if editDtEmissao.Text = '' then
   begin
     ShowMessage('Preencha a data de emissão');
     editDtEmissao.SetFocus;
     Abort;
   end;
-if cbCliente.Text = '' then
+  if cbCliente.Text = '' then
   begin
     ShowMessage('Selecione o cliente');
     cbCliente.SetFocus;
     Abort;
   end;
-if editValProd.Text = '' then
+  if editValProd.Text = '' then
   begin
    ShowMessage('Selecione ao menos um produto');
    Abort;
   end;
-
 
   telaDados.tblPedidos.Open;
   telaDados.tblPedidos.Edit;
@@ -303,7 +281,6 @@ if editValProd.Text = '' then
   telaDados.cdsTempItens.First;
   while not (telaDados.cdsTempItens.Eof) do
   begin
-
     telaDados.tblPedidosItens.Append;
 
     telaDados.tblPedidosItens.FieldByName('DESCRICAO').Value :=
@@ -330,31 +307,25 @@ if editValProd.Text = '' then
     telaDados.tblPedidosItens.FieldByName('VALOR_TOTAL').Value :=
       telaDados.cdsTempItens.FieldByName('VRT').Value;
 
-      telaDados.tblPedidosItens.Post;
-      telaDados.cdsTempItens.Delete;
-
+    telaDados.tblPedidosItens.Post;
+    telaDados.cdsTempItens.Delete;
   end;
-
-  telaDados.tblPedidosItens.ApplyUpdates; 
-
-
+  telaDados.tblPedidosItens.ApplyUpdates;
 end;
 
 procedure TtelaLancPedidos.FormShow(Sender: TObject);
 begin
-telaDados.FormataCampos;
-telaDados.tblPedidos.Open;
-telaDados.tblPedidosItens.Open;
-
-
+  telaDados.FormataCampos;
+  telaDados.tblPedidos.Open;
+  telaDados.tblPedidosItens.Open;
 end;
 
 procedure TtelaLancPedidos.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-telaDados.tblPedidos.Cancel;
-telaDados.tblPedidos.Close;
-telaDados.tblPedidosItens.Close;
+  telaDados.tblPedidos.Cancel;
+  telaDados.tblPedidos.Close;
+  telaDados.tblPedidosItens.Close;
 end;
 
 procedure TtelaLancPedidos.calculaPedido();
@@ -369,8 +340,7 @@ begin
   if editOutrasDesp.Text = '' then editOutrasDesp.Text := '0';
     outrasDesp := StrToFloat(editOutrasDesp.Text);
 
-  vProd := StrToFloat(editValProd.Text);
-
+  vProd := StrToFloat(editValProd.Text); 
 
   telaDados.tblPedidosVALOR_TOTAL.Value := vProd - dsc + acr + outrasDesp;
 
@@ -381,23 +351,22 @@ end;
 
 procedure TtelaLancPedidos.EncerrarExecute(Sender: TObject);
 begin
-telaLancPedidos.Close;
-telaDados.tblPedidos.Close;
-
-telaDados.cdsTempItens.EmptyDataSet;
+  telaLancPedidos.Close;
+  telaDados.tblPedidos.Close;
+  telaDados.cdsTempItens.EmptyDataSet;
 end;
 
 procedure TtelaLancPedidos.ConfirmarExecute(Sender: TObject);
 var estoque : integer;
 begin
 
-if editDtCad.Text = '' then
- begin
-  ShowMessage('Preencha a data de cadastro');
-  editDtCad.SetFocus;
-  Abort;
- end;
-if editDtEmissao.Text = '' then
+  if editDtCad.Text = '' then
+  begin
+    ShowMessage('Preencha a data de cadastro');
+    editDtCad.SetFocus;
+    Abort;
+  end;
+  if editDtEmissao.Text = '' then
   begin
     ShowMessage('Preencha a data de emissão');
     editDtEmissao.SetFocus;
@@ -405,25 +374,23 @@ if editDtEmissao.Text = '' then
   end;
 
   if PanelCalc.Visible = false then begin
-
     PanelCalc.Visible := true;
     telaDados.tblPedidosID_CLIENTE.Value := 1;
     edtDin.SetFocus;
-
   end else begin
-      if edtTrc.Text = '0,00' then begin
+    if edtTrc.Text = '0,00' then begin
       edtDin.SetFocus;
       ShowMessage('Valor pago deve ser maior ou igual ao valor total da compra');
       abort;
-      end;
-      if cbCliente.Text = '' then begin
-        ShowMessage('Selecione o cliente');
-        cbCliente.SetFocus;
-        Abort;
-      end;
-      if editValProd.Text = '' then begin
-        ShowMessage('Selecione ao menos um produto');
-        Abort;
+    end;
+    if cbCliente.Text = '' then begin
+      ShowMessage('Selecione o cliente');
+      cbCliente.SetFocus;
+      Abort;
+    end;
+    if editValProd.Text = '' then begin
+      ShowMessage('Selecione ao menos um produto');
+      Abort;
   end else begin
 
   telaDados.tblPedidos.Open;
@@ -458,7 +425,6 @@ if editDtEmissao.Text = '' then
   btnIncItem.Enabled := false;
   btnExcItem.Enabled := false;
 
-
   btnIncluir.Enabled := true;
   btnConfirmar.Enabled := false;
   btnCancelar.Enabled := false;
@@ -466,7 +432,6 @@ if editDtEmissao.Text = '' then
   Incluir.Enabled := true;
   Confirmar.Enabled := false;
   Cancelar.Enabled := false;
-
 
   telaDados.cdsTempItens.First;
   while not (telaDados.cdsTempItens.Eof) do
@@ -520,32 +485,23 @@ if editDtEmissao.Text = '' then
     telaDados.tblPedidosItens.FieldByName('VALOR_TOTAL').Value :=
       telaDados.cdsTempItens.FieldByName('VRT').Value;
 
-      telaDados.tblPedidosItens.Post;
-      telaDados.cdsTempItens.Delete;
-
+    telaDados.tblPedidosItens.Post;
+    telaDados.cdsTempItens.Delete;
   end;
-
-
 
   if radDoc.ItemIndex = 0 then begin
-
-  telaConfigSat.num := StrToInt(editId.Text);
-  telaConfigSat.gerarVenda;
-
+    telaConfigSat.num := StrToInt(editId.Text);
+    telaConfigSat.gerarVenda;
   end else begin
-
-  telaGerarNfe.numN := StrToInt(editId.Text);
-  telaGerarNfe.btnGeraNfe.Click;
-
+    telaGerarNfe.numN := StrToInt(editId.Text);
+    telaGerarNfe.btnGeraNfe.Click;
   end;
-
   PanelCalc.Visible := False;
   telaDados.tblPedidosItens.ApplyUpdates;
   telaDados.tblProdutos.Close;
   label10.Caption := 'Tecle F2 para Abrir Cupom';
-  end;  
-  
-end;
+  end;
+  end;
 end;
 
 
@@ -554,163 +510,139 @@ var
 id: Integer;
 d,a,od : Double;
 begin
-label10.Caption := 'Tecle F7 Para incluir um item';
+  label10.Caption := 'Tecle F7 Para incluir um item';
 
-d  := 0.00;
-a  := 0.00;
-od := 0.00;
-telaDados.tblPedidos.Open;
-telaDados.tblPedidos.Last;
-{editNumPed.Enabled := true;}
-editDtCad.Enabled := true;{
-editHrCad.Enabled := true; }
-editDtEmissao.Enabled := true; {
-editHrEmissao.Enabled := true; }
-editIdCliente.Enabled := true;
-cbCliente.Enabled := true;
-cbTpPg.Enabled := true;
-{editValProd.Enabled := true;}
-editDesc.Enabled := true;
-editAsc.Enabled := true;
-editOutrasDesp.Enabled := true;
-{editVtotal.Enabled := true; }
+  d  := 0.00;
+  a  := 0.00;
+  od := 0.00;
+  telaDados.tblPedidos.Open;
+  telaDados.tblPedidos.Last;
+  {editNumPed.Enabled := true;}
+  editDtCad.Enabled := true;{
+  editHrCad.Enabled := true; }
+  editDtEmissao.Enabled := true; {
+  editHrEmissao.Enabled := true; }
+  editIdCliente.Enabled := true;
+  cbCliente.Enabled := true;
+  cbTpPg.Enabled := true;
+  {editValProd.Enabled := true;}
+  editDesc.Enabled := true;
+  editAsc.Enabled := true;
+  editOutrasDesp.Enabled := true;
+  {editVtotal.Enabled := true; }
 
-editEcliente.Enabled := true;
-editEendereco.Enabled := true;
-editEnum.Enabled := true;
-editEcompl.Enabled := true;
-editEbairro.Enabled := true;
-editEcidade.Enabled := true;
-editEuf.Enabled := true;
-editEcep.Enabled := true;
-edtItem.Enabled := true;
+  editEcliente.Enabled := true;
+  editEendereco.Enabled := true;
+  editEnum.Enabled := true;
+  editEcompl.Enabled := true;
+  editEbairro.Enabled := true;
+  editEcidade.Enabled := true;
+  editEuf.Enabled := true;
+  editEcep.Enabled := true;
+  edtItem.Enabled := true;
 
+  btnIncItem.Enabled := true;
+  btnExcItem.Enabled := true;
 
-btnIncItem.Enabled := true;
-btnExcItem.Enabled := true;
+  btnIncluir.Enabled := false;
+  btnConfirmar.Enabled := true;
+  btnCancelar.Enabled := true;
 
+  Incluir.Enabled := false;
+  Confirmar.Enabled := true;
+  Cancelar.Enabled := true;
+  adicionarItem.Enabled := true;
 
-btnIncluir.Enabled := false;
-btnConfirmar.Enabled := true;
-btnCancelar.Enabled := true;
+  cbTpPg.ItemIndex := 0;
 
-Incluir.Enabled := false;
-Confirmar.Enabled := true;
-Cancelar.Enabled := true;
-adicionarItem.Enabled := true;
+  editDesc.Text := FloatToStr(d);
+  editAsc.Text  := FloatToStr(a);
+  editOutrasDesp.Text := FloatToStr(od);
 
-cbTpPg.ItemIndex := 0;
+  id := telaDados.tblPedidosID.asInteger + 1;
 
-editDesc.Text := FloatToStr(d);
-editAsc.Text  := FloatToStr(a);
-editOutrasDesp.Text := FloatToStr(od);  
+  telaDados.tblPedidos.Insert;
+  telaDados.tblPedidosID.Value := id;
+  telaDados.tblPedidosDATA_PEDIDO.AsString     := DateToStr(date()) + ' ' +  TimeToStr(time());
+  telaDados.tblPedidosDATA_ENTREGA.AsString := DateToStr(date()) + ' ' +  TimeToStr(time());
+  telaLancPedidos.Refresh;
 
-                  {
-
-        if editId.Text = ''  then begin
-          id := 0;
-        end else begin
-          id := StrToInt(editId.Text) +1;
-        end;
-
-        }
-        id := telaDados.tblPedidosID.asInteger + 1;
-
-        telaDados.tblPedidos.Insert;
-        telaDados.tblPedidosID.Value := id;
-        telaDados.tblPedidosDATA_PEDIDO.AsString     := DateToStr(date()) + ' ' +  TimeToStr(time());
-        telaDados.tblPedidosDATA_ENTREGA.AsString := DateToStr(date()) + ' ' +  TimeToStr(time());
-        telaLancPedidos.Refresh;
-                                            {
-        telaDados.tblPedidosID.Value := id;
-        telaDados.tblPedidos.Refresh;
-        telaDados.tblPedidos.ApplyUpdates; }
-
-        editId.Text := IntToStr(id);
-        edtItem.SetFocus;
-
+  editId.Text := IntToStr(id);
+  edtItem.SetFocus;
 end;
 
 procedure TtelaLancPedidos.CancelarExecute(Sender: TObject);
 begin
-telaDados.tblPedidos.Cancel;
+  telaDados.tblPedidos.Cancel;
 
-{editNumPed.Enabled := false;}
-editDtCad.Enabled := false;{
-editHrCad.Enabled := true; }
-editDtEmissao.Enabled := false; {
-editHrEmissao.Enabled := true; }
-editIdCliente.Enabled := false;
-cbCliente.Enabled := false;
-cbTpPg.Enabled := false;
-{editValProd.Enabled := true;}
-editDesc.Enabled := false;
-editAsc.Enabled := false;
-editOutrasDesp.Enabled := false;
-{editVtotal.Enabled := true; }
-edtItem.Enabled := false;
+  {editNumPed.Enabled := false;}
+  editDtCad.Enabled := false;{
+  editHrCad.Enabled := true; }
+  editDtEmissao.Enabled := false; {
+  editHrEmissao.Enabled := true; }
+  editIdCliente.Enabled := false;
+  cbCliente.Enabled := false;
+  cbTpPg.Enabled := false;
+  {editValProd.Enabled := true;}
+  editDesc.Enabled := false;
+  editAsc.Enabled := false;
+  editOutrasDesp.Enabled := false;
+  {editVtotal.Enabled := true; }
+  edtItem.Enabled := false;
 
-editEcliente.Enabled := false;
-editEendereco.Enabled := false;
-editEnum.Enabled := false;
-editEcompl.Enabled := false;
-editEbairro.Enabled := false;
-editEcidade.Enabled := false;
-editEuf.Enabled := false;
-editEcep.Enabled := false;
+  editEcliente.Enabled := false;
+  editEendereco.Enabled := false;
+  editEnum.Enabled := false;
+  editEcompl.Enabled := false;
+  editEbairro.Enabled := false;
+  editEcidade.Enabled := false;
+  editEuf.Enabled := false;
+  editEcep.Enabled := false;
 
-btnIncItem.Enabled := false;
-btnExcItem.Enabled := false;
+  btnIncItem.Enabled := false;
+  btnExcItem.Enabled := false;
 
-btnIncluir.Enabled := true;
-btnConfirmar.Enabled := false;
-btnCancelar.Enabled := false;
+  btnIncluir.Enabled := true;
+  btnConfirmar.Enabled := false;
+  btnCancelar.Enabled := false;
 
-Incluir.Enabled := true;
-Confirmar.Enabled := false;
-Cancelar.Enabled := false;
+  Incluir.Enabled := true;
+  Confirmar.Enabled := false;
+  Cancelar.Enabled := false;
 
- 
-
-telaDados.cdsTempItens.EmptyDataSet;
-label10.Caption := 'Tecle F2 para Abrir Cupom';  
-
-
+  telaDados.cdsTempItens.EmptyDataSet;
+ label10.Caption := 'Tecle F2 para Abrir Cupom';
 end;
 
 procedure TtelaLancPedidos.editDescExit(Sender: TObject);
 begin
-calculaPedido();
+  calculaPedido();
 end;
 
 procedure TtelaLancPedidos.editAscExit(Sender: TObject);
 begin
-calculaPedido();
+  calculaPedido();
 end;
 
 procedure TtelaLancPedidos.editOutrasDespExit(Sender: TObject);
 begin
-calculaPedido();
+  calculaPedido();
 end;
 
 procedure TtelaLancPedidos.adicionarItemExecute(Sender: TObject);
 begin
-Application.CreateForm(TtelaPesItens, telaPesItens);
-Application.CreateForm(TtelaLancItens, telaLancItens);
+  Application.CreateForm(TtelaPesItens, telaPesItens);
+  Application.CreateForm(TtelaLancItens, telaLancItens);
 
-
-tipo := 0;
-telaDados.cdsTempItens.Append;
-
-
-telaPesItens.Show;
-
+  tipo := 0;
+  telaDados.cdsTempItens.Append;
+  telaPesItens.Show;
 end;
 
 procedure TtelaLancPedidos.btnPesquisarClick(Sender: TObject);
 begin
-Application.CreateForm(TtelaGerarNfe, telaGerarNfe);
-telaGerarNfe.Show;
+  Application.CreateForm(TtelaGerarNfe, telaGerarNfe);
+  telaGerarNfe.Show;
 end;
 
 procedure TtelaLancPedidos.calculaTroco();
@@ -733,23 +665,22 @@ begin
   end else begin
     edtTrc.text:= FormatCurr('#,##0.00',trc);
   end;
-
 end;
 
 procedure TtelaLancPedidos.edtDinExit(Sender: TObject);
 begin
-calculaTroco;
+  calculaTroco;
 end;
 
 procedure TtelaLancPedidos.edtCarExit(Sender: TObject);
 begin
-calculaTroco;
+  calculaTroco;
 end;
 
 procedure TtelaLancPedidos.edtTrcDragOver(Sender, Source: TObject; X,
   Y: Integer; State: TDragState; var Accept: Boolean);
 begin
-edtDin.SetFocus;
+  edtDin.SetFocus;
 end;
 
 procedure TtelaLancPedidos.encPanelExecute(Sender: TObject);
@@ -767,7 +698,6 @@ begin
   telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR.Value - DBGrid1.Columns.Items[5].Field.AsCurrency;
   telaDados.tblPedidosVALOR_TOTAL.Value := telaDados.tblPedidosVALOR_TOTAL.Value - DBGrid1.Columns.Items[5].Field.AsCurrency;
   telaDados.cdsTempItens.Delete;
-
 end;
 
 procedure TtelaLancPedidos.edtItemKeyPress(Sender: TObject; var Key: Char);
@@ -793,11 +723,8 @@ begin
        telaDados.cdsTempItensACRESCIMO.Value := 0;
        telaDados.cdsTempItensVRT.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
 
-
        telaDados.cdsTempItens.Post;
 
-
-       
        {telaDados.tblPedidosVALOR_TOTAL.Value :=   telaDados.cdsTempItensVRT.Value;
        telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR_TOTAL.Value;}
        telaLancPedidos.Refresh;
@@ -805,7 +732,6 @@ begin
        end else begin
        ShowMessage('Nenhum produto com este código !');
        edtItem.SetFocus;
-
     end;
   end;
 end;
@@ -814,54 +740,45 @@ end;
 procedure TtelaLancPedidos.edtItemKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-if key = vk_shift then
-    begin
-      Application.CreateForm(TtelaLancItens, telaLancItens);
+  if key = vk_shift then
+  begin
+  Application.CreateForm(TtelaLancItens, telaLancItens);
 
-
-        if telaDados.qryProdutos.RecordCount < 1 then begin
-          ShowMessage('Nenhum produto com este código !');
-          edtItem.SetFocus;
-          Abort;
-        end;
-        telaDados.cdsTempItens.Last;
-       telaDados.cdsTempItens.edit;{
-       telaDados.tblPedidosItens.Open;
-       telaDados.cdsTempItensDESC.Value := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
-       telaDados.cdsTempItensIDPROD.Value := telaDados.qryProdutos.FieldByName('ID').AsInteger;
-       telaDados.cdsTempItensIDPED.Value := StrToInt(editId.Text);
-       telaDados.cdsTempItensQUANT.Value := 1;
-       telaDados.cdsTempItensVALOR.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
-       telaDados.cdsTempItensDESCONTO.Value := 0;
-       telaDados.cdsTempItensACRESCIMO.Value := 0;
-       telaDados.cdsTempItensVRT.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
-       telaDados.cdsTempItensVRR.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
-
+    if telaDados.qryProdutos.RecordCount < 1 then begin
+      ShowMessage('Nenhum produto com este código !');
+      edtItem.SetFocus;
+      Abort;
+    end;
+  telaDados.cdsTempItens.Last;
+  telaDados.cdsTempItens.edit;{
+  telaDados.tblPedidosItens.Open;
+  telaDados.cdsTempItensDESC.Value := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
+  telaDados.cdsTempItensIDPROD.Value := telaDados.qryProdutos.FieldByName('ID').AsInteger;
+  telaDados.cdsTempItensIDPED.Value := StrToInt(editId.Text);
+  telaDados.cdsTempItensQUANT.Value := 1;
+  telaDados.cdsTempItensVALOR.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
+  telaDados.cdsTempItensDESCONTO.Value := 0;
+  telaDados.cdsTempItensACRESCIMO.Value := 0;
+  telaDados.cdsTempItensVRT.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
+  telaDados.cdsTempItensVRR.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
                }
 
-
-
-      telaLancItens.Show;
-      telaLancItens.pegaTipo(0);
-
-      edtItem.Clear;
-
-
+  telaLancItens.Show;
+  telaLancItens.pegaTipo(0);
+  edtItem.Clear;
   end;
-end;
-
-
+end; 
 
 procedure TtelaLancPedidos.DBGrid1DrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-{if telaDados.cdsTempItens.RecordCount < 1 then begin
-Abort;
-end else begin
-telaDados.tblPedidosVALOR.Value := telaDados.cdsTempItens.Aggregates.Items[0].Value;
-calculaPedido;
- end; }
+  {if telaDados.cdsTempItens.RecordCount < 1 then begin
+    Abort;
+  end else begin
+    telaDados.tblPedidosVALOR.Value := telaDados.cdsTempItens.Aggregates.Items[0].Value;
+    calculaPedido;
+  end; }
 end;
 
 end.

@@ -2,7 +2,7 @@ object telaCadProdutos: TtelaCadProdutos
   Left = 334
   Top = 132
   Width = 791
-  Height = 518
+  Height = 513
   Caption = 'Cadastro de Produtos'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object telaCadProdutos: TtelaCadProdutos
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 423
+    Top = 418
     Width = 775
     Height = 57
     Align = alBottom
@@ -998,7 +998,7 @@ object telaCadProdutos: TtelaCadProdutos
     Left = 0
     Top = 0
     Width = 775
-    Height = 423
+    Height = 418
     Align = alClient
     TabOrder = 1
     object Label1: TLabel
@@ -1519,6 +1519,7 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 13
       ValueChecked = 'True'
       ValueUnchecked = 'False'
+      Visible = False
     end
     object cbCtrlEstoque: TDBCheckBox
       Left = 88
@@ -1532,6 +1533,7 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 14
       ValueChecked = 'True'
       ValueUnchecked = 'False'
+      Visible = False
     end
     object cbFracionada: TDBCheckBox
       Left = 215
@@ -1545,6 +1547,7 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 15
       ValueChecked = 'True'
       ValueUnchecked = 'False'
+      Visible = False
     end
     object radTipoProduto: TRadioGroup
       Left = 643

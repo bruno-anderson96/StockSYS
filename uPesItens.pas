@@ -20,6 +20,7 @@ type
     procedure DBGrid1DblClick(Sender: TObject);
     procedure btnCadProdClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure editBuscaKeyPress(Sender: TObject; var Key: Char);
 
   private
     { Private declarations }
@@ -105,6 +106,11 @@ end;
 procedure TtelaPesItens.FormShow(Sender: TObject);
 begin
 cbCategoria.ItemIndex := 1;
+end;
+
+procedure TtelaPesItens.editBuscaKeyPress(Sender: TObject; var Key: Char);
+begin
+  if key =#13 then btnPesquisa.Click;
 end;
 
 end.

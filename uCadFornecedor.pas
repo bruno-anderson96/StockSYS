@@ -122,52 +122,51 @@ end;
 
 procedure TtelaCadFor.actConfirmarExecute(Sender: TObject);
 begin
-
-if (editNome.Text = '') then begin
-  ShowMessage('Por favor digite o Nome');
-  editNome.SetFocus;
-  Abort;
-end;
-if (editCep.Text = '') then begin
-  ShowMessage('Por favor digite o CEP');
-  editCep.SetFocus;
-  Abort;
-end;
-if (editEndereco.GetTextLen < 2 ) then begin
-  ShowMessage('Digite um endereço Válido');
-  editEndereco.SetFocus;
-  Abort;
-end;
-if (editBairro.GetTextLen < 2) then begin
-  ShowMessage('Por favor digite o Bairro');
-  editBairro.SetFocus;
-  Abort;
-end;
-if (editNum.Text = '') then begin
-  ShowMessage('Por favor digite o Número');
-  editNum.SetFocus;
-  Abort;
-end;
-if (editCidade.Text = '') then begin
-  ShowMessage('Por favor digite o Cidade');
-  editCidade.SetFocus;
-  Abort;
-end;
-if (editTel1.Text = '') and (editTel2.Text = '') then begin
-  ShowMessage('Por favor digite um Telefone');
-  editTel1.SetFocus;
-  Abort;
-end;
-if not (telaDados.verificaCnpj(editCnpj.Text)) then begin
-  ShowMessage('Cnpj Inválido');
-  editCnpj.SetFocus;
-  Abort;
-end;
+  if (editNome.Text = '') then begin
+    ShowMessage('Por favor digite o Nome');
+    editNome.SetFocus;
+    Abort;
+  end;
+  if (editCep.Text = '') then begin
+    ShowMessage('Por favor digite o CEP');
+    editCep.SetFocus;
+    Abort;
+  end;
+  if (editEndereco.GetTextLen < 2 ) then begin
+    ShowMessage('Digite um endereço Válido');
+    editEndereco.SetFocus;
+    Abort;
+  end;
+  if (editBairro.GetTextLen < 2) then begin
+    ShowMessage('Por favor digite o Bairro');
+    editBairro.SetFocus;
+    Abort;
+  end;
+  if (editNum.Text = '') then begin
+    ShowMessage('Por favor digite o Número');
+    editNum.SetFocus;
+    Abort;
+  end;
+  if (editCidade.Text = '') then begin
+    ShowMessage('Por favor digite o Cidade');
+    editCidade.SetFocus;
+    Abort;
+  end;
+  if (editTel1.Text = '') and (editTel2.Text = '') then begin
+    ShowMessage('Por favor digite um Telefone');
+    editTel1.SetFocus;
+    Abort;
+  end;
+  if not (telaDados.verificaCnpj(editCnpj.Text)) then begin
+    ShowMessage('Cnpj Inválido');
+    editCnpj.SetFocus;
+    Abort;
+  end;
 
   telaDados.tblFornecedoresUF_END.Value := editUf.Text;
   telaDados.tblFornecedores.Post;
 
-   btnCep.Enabled := false;
+  btnCep.Enabled := false;
 
   editNome.Enabled := false;
   editCep.Enabled := false;
@@ -195,7 +194,6 @@ end;
   btnCancelar.Enabled := false;
   btnIncluir.Enabled := true;
   btnEditar.Enabled := true;
-
 end;
 
 procedure TtelaCadFor.actIncluirExecute(Sender: TObject);
@@ -242,15 +240,14 @@ begin
   btnEditar.Enabled    := false;
 
   with telaDados.tblEstados do
+  begin
+    First;
+    while not Eof do
     begin
-      First;
-      while not Eof do
-        begin
-          editUf.Items.Add(telaDados.tblEstados.FieldByName('UF').AsString);
-          Next;
-        end;
+      editUf.Items.Add(telaDados.tblEstados.FieldByName('UF').AsString);
+      Next;
     end;
-
+  end;
 end;
 
 procedure TtelaCadFor.actFecharExecute(Sender: TObject);
@@ -261,7 +258,7 @@ end;
 procedure TtelaCadFor.btnCepClick(Sender: TObject);
 var i : integer;
 begin
-ACBrCEP1.BuscarPorCEP(editCep.Text);
+  ACBrCEP1.BuscarPorCEP(editCep.Text);
 
   for i := 0 to ACBrCEP1.Enderecos.Count -1 do
   begin
@@ -271,7 +268,6 @@ ACBrCEP1.BuscarPorCEP(editCep.Text);
     telaDados.tblFornecedoresCIDADE_END.AsString  := UpperCase(ACBrCEP1.Enderecos[i].Municipio);
     editUf.Text                                   := UpperCase(ACBrCEP1.Enderecos[i].UF);
     telaDados.tblFornecedoresBAIRRO_END.AsString  := UpperCase(ACBrCEP1.Enderecos[i].Bairro);
-
   end;
 end;
 
@@ -282,8 +278,8 @@ end;
 
 procedure TtelaCadFor.actPesquisarExecute(Sender: TObject);
 begin
-Application.CreateForm(TtelaPesFor, telaPesFor);
-telaPesFor.Show;
+  Application.CreateForm(TtelaPesFor, telaPesFor);
+  telaPesFor.Show;
 end;
 
 procedure TtelaCadFor.actEditarExecute(Sender: TObject);
