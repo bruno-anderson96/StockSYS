@@ -38,8 +38,8 @@ object telaCadUnidade: TtelaCadUnidade
       FocusControl = editNome
     end
     object btnExcluir: TSpeedButton
-      Left = 316
-      Top = 288
+      Left = 215
+      Top = 289
       Width = 91
       Height = 36
       Action = actExcluir
@@ -168,7 +168,7 @@ object telaCadUnidade: TtelaCadUnidade
       TabOrder = 1
     end
     object btnCadastrar: TBitBtn
-      Left = 113
+      Left = 308
       Top = 288
       Width = 100
       Height = 37
@@ -410,7 +410,7 @@ object telaCadUnidade: TtelaCadUnidade
       NumGlyphs = 2
     end
     object btnInserir: TBitBtn
-      Left = 10
+      Left = 7
       Top = 288
       Width = 100
       Height = 37
@@ -542,7 +542,7 @@ object telaCadUnidade: TtelaCadUnidade
       TabOrder = 0
     end
     object btnEdit: TBitBtn
-      Left = 214
+      Left = 111
       Top = 288
       Width = 100
       Height = 37

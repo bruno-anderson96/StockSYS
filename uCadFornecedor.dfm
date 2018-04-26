@@ -1,6 +1,6 @@
 object telaCadFor: TtelaCadFor
-  Left = 401
-  Top = 245
+  Left = 480
+  Top = 172
   Width = 756
   Height = 383
   Caption = 'Cadastro de Fornecedor'
@@ -559,7 +559,7 @@ object telaCadFor: TtelaCadFor
       NumGlyphs = 2
     end
     object btnExcluir: TBitBtn
-      Left = 89
+      Left = 179
       Top = 0
       Width = 90
       Height = 45
@@ -681,7 +681,7 @@ object telaCadFor: TtelaCadFor
       NumGlyphs = 2
     end
     object btnConfirmar: TBitBtn
-      Left = 178
+      Left = 474
       Top = 0
       Width = 106
       Height = 45
@@ -803,7 +803,7 @@ object telaCadFor: TtelaCadFor
       NumGlyphs = 2
     end
     object btnCancelar: TBitBtn
-      Left = 283
+      Left = 269
       Top = -1
       Width = 104
       Height = 46
@@ -925,7 +925,7 @@ object telaCadFor: TtelaCadFor
       NumGlyphs = 2
     end
     object btnPesquisar: TBitBtn
-      Left = 386
+      Left = 373
       Top = -1
       Width = 107
       Height = 46
@@ -1167,7 +1167,7 @@ object telaCadFor: TtelaCadFor
       NumGlyphs = 2
     end
     object btnEditar: TBitBtn
-      Left = 492
+      Left = 90
       Top = -1
       Width = 90
       Height = 46

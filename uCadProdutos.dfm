@@ -1,7 +1,7 @@
 object telaCadProdutos: TtelaCadProdutos
-  Left = 334
-  Top = 132
-  Width = 791
+  Left = 144
+  Top = 128
+  Width = 798
   Height = 513
   Caption = 'Cadastro de Produtos'
   Color = clBtnFace
@@ -20,7 +20,7 @@ object telaCadProdutos: TtelaCadProdutos
   object Panel1: TPanel
     Left = 0
     Top = 418
-    Width = 775
+    Width = 782
     Height = 57
     Align = alBottom
     TabOrder = 0
@@ -146,7 +146,7 @@ object telaCadProdutos: TtelaCadProdutos
       NumGlyphs = 2
     end
     object btnExcluir: TBitBtn
-      Left = 89
+      Left = 177
       Top = 0
       Width = 90
       Height = 57
@@ -267,7 +267,7 @@ object telaCadProdutos: TtelaCadProdutos
       NumGlyphs = 2
     end
     object btnConfirmar: TBitBtn
-      Left = 178
+      Left = 570
       Top = 0
       Width = 104
       Height = 57
@@ -389,7 +389,7 @@ object telaCadProdutos: TtelaCadProdutos
       NumGlyphs = 2
     end
     object btnCancelar: TBitBtn
-      Left = 281
+      Left = 267
       Top = 0
       Width = 100
       Height = 57
@@ -511,7 +511,7 @@ object telaCadProdutos: TtelaCadProdutos
       NumGlyphs = 2
     end
     object btnPesquisar: TBitBtn
-      Left = 380
+      Left = 367
       Top = 0
       Width = 103
       Height = 57
@@ -632,7 +632,7 @@ object telaCadProdutos: TtelaCadProdutos
       NumGlyphs = 2
     end
     object btnRelatorio: TBitBtn
-      Left = 482
+      Left = 470
       Top = 0
       Width = 101
       Height = 57
@@ -873,7 +873,7 @@ object telaCadProdutos: TtelaCadProdutos
       NumGlyphs = 2
     end
     object btnEditar: TBitBtn
-      Left = 582
+      Left = 89
       Top = 0
       Width = 90
       Height = 57
@@ -997,7 +997,7 @@ object telaCadProdutos: TtelaCadProdutos
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
-    Width = 775
+    Width = 782
     Height = 418
     Align = alClient
     TabOrder = 1
@@ -1190,6 +1190,14 @@ object telaCadProdutos: TtelaCadProdutos
       Width = 121
       Height = 73
     end
+    object btnEstoque: TSpeedButton
+      Left = 641
+      Top = 296
+      Width = 97
+      Height = 33
+      Caption = 'Controlar Estoque'
+      Enabled = False
+    end
     object editId: TDBEdit
       Left = 88
       Top = 24
@@ -1277,17 +1285,9 @@ object telaCadProdutos: TtelaCadProdutos
       ParentColor = False
       ParentCtl3D = False
       TabOrder = 9
-      object Label9: TLabel
-        Left = 8
-        Top = 26
-        Width = 39
-        Height = 13
-        Caption = 'Estoque'
-        FocusControl = editEstoque
-      end
       object Label10: TLabel
         Left = 8
-        Top = 54
+        Top = 22
         Width = 67
         Height = 13
         Caption = 'Desc. M'#225'ximo'
@@ -1295,38 +1295,46 @@ object telaCadProdutos: TtelaCadProdutos
       end
       object Label11: TLabel
         Left = 8
-        Top = 80
+        Top = 48
         Width = 45
         Height = 13
         Caption = 'Comiss'#227'o'
         FocusControl = editComissao
       end
-      object editEstoque: TDBEdit
-        Left = 80
-        Top = 24
-        Width = 107
-        Height = 19
-        DataField = 'ESTOQUE'
-        DataSource = telaDados.dsProdutos
-        Enabled = False
-        TabOrder = 0
+      object Label9: TLabel
+        Left = 8
+        Top = 74
+        Width = 39
+        Height = 13
+        Caption = 'Estoque'
+        FocusControl = editEstoque
       end
       object editDescMax: TDBEdit
         Left = 80
-        Top = 50
+        Top = 18
         Width = 106
         Height = 19
         DataField = 'PERC_DESC'
         DataSource = telaDados.dsProdutos
         Enabled = False
-        TabOrder = 1
+        TabOrder = 0
       end
       object editComissao: TDBEdit
         Left = 80
-        Top = 74
+        Top = 42
         Width = 106
         Height = 19
         DataField = 'PERC_COM'
+        DataSource = telaDados.dsProdutos
+        Enabled = False
+        TabOrder = 1
+      end
+      object editEstoque: TDBEdit
+        Left = 80
+        Top = 72
+        Width = 105
+        Height = 19
+        DataField = 'ESTOQUE'
         DataSource = telaDados.dsProdutos
         Enabled = False
         TabOrder = 2
@@ -1569,6 +1577,7 @@ object telaCadProdutos: TtelaCadProdutos
       Top = 77
       Width = 154
       Height = 21
+      CharCase = ecUpperCase
       DataField = 'UNIDADE'
       DataSource = telaDados.dsProdutos
       Enabled = False
@@ -1635,6 +1644,14 @@ object telaCadProdutos: TtelaCadProdutos
         ItemHeight = 13
         TabOrder = 1
       end
+    end
+    object Panel2: TPanel
+      Left = 784
+      Top = 152
+      Width = 233
+      Height = 161
+      TabOrder = 16
+      Visible = False
     end
   end
   object ActionList1: TActionList

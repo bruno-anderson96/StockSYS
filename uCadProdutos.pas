@@ -84,6 +84,8 @@ type
     edtCfop: TDBEdit;
     Label22: TLabel;
     cbCst: TComboBox;
+    btnEstoque: TSpeedButton;
+    Panel2: TPanel;
     procedure FormShow(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -361,6 +363,7 @@ end;
 procedure TtelaCadProdutos.ConfirmarExecute(Sender: TObject);
 var
 i : integer;
+iu : integer;
 begin
   telaDados.qryProdutos.Close;
   telaDados.qryProdutos.SQL.Clear;
@@ -376,6 +379,20 @@ begin
     ShowMessage('Preencha a unidade do produto');
     cbUnidade.SetFocus;
     Abort;
+  end else begin
+  telaDados.qryUnidade.Close;
+  telaDados.qryUnidade.SQL.Clear;
+  telaDados.qryUnidade.SQL.Add('Select * from UNIDADE where SIGLA =');
+  telaDados.qryUnidade.SQL.Add(QuotedStr(cbUnidade.Text));
+  telaDados.qryUnidade.Open;
+    if telaDados.qryUnidade.RecordCount < 1 then begin
+      telaDados.tblUnidade.Last;
+      iu := telaDados.tblUnidadeID.Value;
+      telaDados.tblUnidade.Insert;
+      telaDados.tblUnidadeID.Value := iu + 1;
+      telaDados.tblUnidadeSIGLA.Value := cbUnidade.Text;
+      telaDados.tblUnidade.Post;
+    end;
   end;
   if editNcm.Text = '' then begin
     ShowMessage('Código do produto inválido');

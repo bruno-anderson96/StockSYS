@@ -166,21 +166,20 @@ end;
 
 procedure TtelaCadUnidade.actSairExecute(Sender: TObject);
 begin
-Close;
+  Close;
 end;
 
 procedure TtelaCadUnidade.actEditarExecute(Sender: TObject);
 begin
-
-telaDados.tblUnidade.Edit;
-DBGrid1.Enabled := true;
-editSigla.Enabled := true;
-editNome.Enabled := true;
+  telaDados.tblUnidade.Edit;
+  DBGrid1.Enabled := true;
+  editSigla.Enabled := true;
+  editNome.Enabled := true;
 end;
 
 procedure TtelaCadUnidade.actExcluirExecute(Sender: TObject);
 begin
-telaDados.tblUnidade.Delete;
+  telaDados.tblUnidade.Delete;
 end;
 
 end.

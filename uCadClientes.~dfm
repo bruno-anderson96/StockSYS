@@ -1,6 +1,6 @@
 object telaCadClientes: TtelaCadClientes
-  Left = 4
-  Top = 152
+  Left = 148
+  Top = 100
   Width = 838
   Height = 448
   Caption = 'Cadastro de Cliente'
@@ -924,7 +924,7 @@ object telaCadClientes: TtelaCadClientes
       NumGlyphs = 2
     end
     object btnExcluir: TBitBtn
-      Left = 89
+      Left = 181
       Top = 0
       Width = 89
       Height = 57
@@ -1045,7 +1045,7 @@ object telaCadClientes: TtelaCadClientes
       NumGlyphs = 2
     end
     object btnConfirmar: TBitBtn
-      Left = 177
+      Left = 572
       Top = 0
       Width = 106
       Height = 57
@@ -1166,7 +1166,7 @@ object telaCadClientes: TtelaCadClientes
       NumGlyphs = 2
     end
     object btnCancelar: TBitBtn
-      Left = 282
+      Left = 270
       Top = 0
       Width = 97
       Height = 57
@@ -1288,7 +1288,7 @@ object telaCadClientes: TtelaCadClientes
       NumGlyphs = 2
     end
     object btnPesquisar: TBitBtn
-      Left = 378
+      Left = 367
       Top = 0
       Width = 105
       Height = 57
@@ -1409,7 +1409,7 @@ object telaCadClientes: TtelaCadClientes
       NumGlyphs = 2
     end
     object btnRelatorio: TBitBtn
-      Left = 482
+      Left = 472
       Top = 0
       Width = 101
       Height = 57
@@ -1595,7 +1595,7 @@ object telaCadClientes: TtelaCadClientes
         F2F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
     end
     object btnEditar: TBitBtn
-      Left = 582
+      Left = 90
       Top = 0
       Width = 93
       Height = 57
