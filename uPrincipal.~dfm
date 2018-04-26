@@ -3,7 +3,7 @@ object telaPrincipal: TtelaPrincipal
   Top = 94
   Width = 1040
   Height = 580
-  Caption = 'Projeto NFe - ACBr'
+  Caption = 'StockSYS - Automa'#231#227'o Comercial'
   Color = clGradientActiveCaption
   TransparentColorValue = clNone
   Font.Charset = DEFAULT_CHARSET

@@ -1,0 +1,14 @@
+Testes à serem feitos
+
+* 3 Cadastros de cliente de dados diferentes
+  1 Cadastro  de cliente com dados igual à um dos anteriores
+
+* 3 Cadastros de fornecedor de dados diferentes
+  1 Cadastro  de fornecedor com dados igual à um dos anteriores
+
+* 3 Cadastros de produtos de dados diferentes
+  1 Cadastro  de produto com dados igual à um dos anteriores
+
+* 3 Compras
+
+* 3 Vendas

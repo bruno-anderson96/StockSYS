@@ -3,7 +3,7 @@ object telaPrincipal: TtelaPrincipal
   Top = 94
   Width = 1040
   Height = 580
-  Caption = 'Projeto NFe - ACBr'
+  Caption = 'StockSYS - Automa'#231#227'o Comercial'
   Color = clGradientActiveCaption
   TransparentColorValue = clNone
   Font.Charset = DEFAULT_CHARSET
@@ -4633,6 +4633,7 @@ object telaPrincipal: TtelaPrincipal
       end
       object NFe1: TMenuItem
         Caption = 'NFe'
+        Visible = False
         object StatusdeServio1: TMenuItem
           Caption = 'Status de Servi'#231'o'
           OnClick = StatusdeServio1Click
@@ -4746,6 +4747,7 @@ object telaPrincipal: TtelaPrincipal
       end
       object C1: TMenuItem
         Caption = 'NFe'
+        Visible = False
         OnClick = C1Click
       end
     end

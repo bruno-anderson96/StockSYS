@@ -354,6 +354,8 @@ begin
   editCompra.Text := '0,00';
   editLucro.Text := '0,00';
   editVenda.Text := '0,00';
+
+  editDesc.SetFocus;
 end;
 
 procedure TtelaCadProdutos.ConfirmarExecute(Sender: TObject);

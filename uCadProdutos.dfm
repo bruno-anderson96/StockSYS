@@ -1002,32 +1002,32 @@ object telaCadProdutos: TtelaCadProdutos
     Align = alClient
     TabOrder = 1
     object Label1: TLabel
-      Left = 16
-      Top = 26
+      Left = 48
+      Top = 27
       Width = 33
       Height = 13
       Caption = 'C'#243'digo'
       FocusControl = editId
     end
     object Label2: TLabel
-      Left = 164
-      Top = 27
+      Left = 169
+      Top = 26
       Width = 48
       Height = 13
       Caption = 'Descri'#231#227'o'
       FocusControl = editDesc
     end
     object Label3: TLabel
-      Left = 16
-      Top = 56
-      Width = 52
+      Left = 6
+      Top = 54
+      Width = 76
       Height = 13
-      Caption = 'Refer'#234'ncia'
+      Caption = 'Desc. Reduzida'
       FocusControl = editRef
     end
     object Label4: TLabel
-      Left = 17
-      Top = 81
+      Left = 41
+      Top = 80
       Width = 40
       Height = 13
       Caption = 'Unidade'
@@ -1049,7 +1049,7 @@ object telaCadProdutos: TtelaCadProdutos
       FocusControl = editNcm
     end
     object Label7: TLabel
-      Left = 14
+      Left = 29
       Top = 104
       Width = 52
       Height = 13
@@ -1576,9 +1576,9 @@ object telaCadProdutos: TtelaCadProdutos
       TabOrder = 4
     end
     object GroupBox5: TGroupBox
-      Left = 16
-      Top = 128
-      Width = 585
+      Left = 17
+      Top = 130
+      Width = 583
       Height = 81
       Caption = 'Classifica'#231#227'o Tribut'#225'ria'
       TabOrder = 8

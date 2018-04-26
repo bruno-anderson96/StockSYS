@@ -38,6 +38,7 @@ uses
 
 begin
   Application.Initialize;
+  Application.Title := 'StockSYS';
   Application.CreateForm(TtelaLogin, telaLogin);
   Application.CreateForm(TtelaPrincipal, telaPrincipal);
   Application.CreateForm(TtelaDados, telaDados);
