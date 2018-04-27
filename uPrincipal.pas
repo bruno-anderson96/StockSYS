@@ -7,7 +7,7 @@ uses
   Dialogs, Menus, uStatus, uCadClientes, uCadProdutos, uCadUnidade, uLancPedidos,
   ACBrBase, ACBrPosPrinter, Buttons, ExtCtrls, pngextra, pngimage, StdCtrls, ComCtrls,
   ACBrSAT, TypInfo, ACBrSATClass, ACBrIntegrador, ACBrSATExtratoClass,
-  ACBrSATExtratoESCPOS, pcnConversao, ActnList;
+  ACBrSATExtratoESCPOS, pcnConversao, ActnList, jpeg;
 
 type
   TtelaPrincipal = class(TForm)
@@ -58,6 +58,7 @@ type
     Emitente1: TMenuItem;
     ActionList1: TActionList;
     CEP1: TMenuItem;
+    imgLogo: TImage;
     procedure Sair1Click(Sender: TObject);
     procedure StatusdeServio1Click(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
@@ -224,9 +225,13 @@ end;
 
 procedure TtelaPrincipal.FormShow(Sender: TObject);
 begin
+  PNGButton1.Left := telaPrincipal.Width - 83 ;
+
   StatusBar1.Panels[0].Text := telaConfigEmit.edtRazSoc.Text;
   StatusBar1.Panels[2].Text := DateToStr(Date);
   StatusBar1.Panels[3].Text := TimeToStr(Time);
+
+  imgLogo.Picture.LoadFromFile(telaDados.sLogoMarca);
 end;
 
 procedure TtelaPrincipal.SAT1Click(Sender: TObject);

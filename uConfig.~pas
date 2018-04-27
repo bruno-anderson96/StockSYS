@@ -72,6 +72,7 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
 
@@ -83,6 +84,8 @@ var
   telaConfig: TtelaConfig;
 
 implementation
+
+uses uPrincipal;
 
 {$R *.dfm}
 
@@ -107,7 +110,7 @@ end;
 
 procedure TtelaConfig.FormShow(Sender: TObject);
 begin
-  telaDados.tblEmitente.Open;
+  {telaDados.tblEmitente.Open;
   telaDados.LerArquivoIni;
   PageControl1.TabIndex := 0;
   telaDados.FormataCampos;
@@ -134,7 +137,7 @@ begin
   edtUf.Text              := telaDados.tblEmitenteUF.AsString;
   edtTelefone.Text        := telaDados.tblEmitenteTELEFONE.AsString;
   edtCodMun.Text          := telaDados.tblEmitenteCODMUN.AsString;
-  }
+  }{
 
 //WS
   edtUfws.Text            := telaDados.sUfws;
@@ -148,7 +151,7 @@ begin
   edtEPorta.Text          := telaDados.sEPorta;
   edtEUsuario.Text        := telaDados.sEUsuario;
   edtESenha.Text          := telaDados.sESenha;
-end;
+}end;
 
 procedure TtelaConfig.btnFecharClick(Sender: TObject);
 begin
@@ -199,18 +202,18 @@ end;
 
 procedure TtelaConfig.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-telaDados.tblEmitente.Close;
+  telaDados.tblEmitente.Close;
 end;
 
 procedure TtelaConfig.BitBtn1Click(Sender: TObject);
 begin
-telaDados.tblEmitente.Insert;
+  telaDados.tblEmitente.Insert;
 end;
 
 procedure TtelaConfig.SpeedButton1Click(Sender: TObject);
 begin
-OpenDialog1.Execute;
-edtCaminhoSchemas.Text := OpenDialog1.FileName;
+  OpenDialog1.Execute;
+  edtCaminhoSchemas.Text := OpenDialog1.FileName;
 end;
 
 procedure TtelaConfig.SpeedButton2Click(Sender: TObject);
@@ -227,6 +230,51 @@ begin
     telaDados.tblEmitenteBAIRRO.AsString := ACBrCEP1.Enderecos[i].Bairro;
     telaDados.tblEmitenteCODMUN.AsString := ACBrCEP1.Enderecos[i].IBGE_Municipio;
   end;}
+end;
+
+procedure TtelaConfig.FormCreate(Sender: TObject);
+begin
+  telaDados.tblEmitente.Open;
+  telaDados.LerArquivoIni;
+  PageControl1.TabIndex := 0;
+  telaDados.FormataCampos;
+
+  //GERAL
+  radioFormas.ItemIndex   := telaDados.sFormas;
+  edtLogomarca.Text       := telaDados.sLogoMarca;
+  chArquivos.Checked      := telaDados.sSalvarArq;
+  edtCaminhoArq.Text      := telaDados.sCaminhoArq;
+//CERTIFICADO
+  edtCaminhoCert.Text     := telaDados.sCertificado;
+  edtSenha.Text           := telaDados.sSenha;
+  edtNumSer.Text          := telaDados.sSerial;
+{//EMITENTE
+  edtRazSoc.Text          := telaDados.tblEmitenteRAZ_SOC.AsString;
+  edtNomeFan.Text         := telaDados.tblEmitenteFANTASIA.AsString;
+  edtCnpj.Text            := telaDados.tblEmitenteCNPJ.AsString;
+  edtInscEst.Text         := telaDados.tblEmitenteINSCEST.AsString;
+  edtEndereco.Text        := telaDados.tblEmitenteENDERECO.AsString;
+  edtNum.Text             := telaDados.tblEmitenteNUMERO.AsString;
+  edtBairro.Text          := telaDados.tblEmitenteBAIRRO.AsString;
+  edtCidade.Text          := telaDados.tblEmitenteCIDADE.AsString;
+  edtCep.Text             := telaDados.tblEmitenteCEP.AsString;
+  edtUf.Text              := telaDados.tblEmitenteUF.AsString;
+  edtTelefone.Text        := telaDados.tblEmitenteTELEFONE.AsString;
+  edtCodMun.Text          := telaDados.tblEmitenteCODMUN.AsString;
+  }
+
+//WS
+  edtUfws.Text            := telaDados.sUfws;
+  radioAmbiente.ItemIndex := telaDados.sAmbiente;
+  edtHost.Text            := telaDados.sHost;
+  edtPorta.Text           := telaDados.sPorta;
+  edtUsuario.Text         := telaDados.sUsuario;
+  edtSenhaws.Text         := telaDados.sSenhaws;
+//Email
+  edtEHost.Text           := telaDados.sEHost;
+  edtEPorta.Text          := telaDados.sEPorta;
+  edtEUsuario.Text        := telaDados.sEUsuario;
+  edtESenha.Text          := telaDados.sESenha;
 end;
 
 end.

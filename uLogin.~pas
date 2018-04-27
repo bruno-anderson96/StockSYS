@@ -48,6 +48,9 @@ begin
      telaDados.qryEmitente.SQL.Add('Select * From emitente where ID_LOGIN =');
      telaDados.qryEmitente.SQL.Add(telaDados.tblLoginID.AsString);
      telaDados.qryEmitente.Open;
+
+          ShowMessage(telaDados.sLogoMarca);
+  telaPrincipal.imgLogo.Picture.LoadFromFile(telaDados.sLogoMarca);
   end else begin
     ShowMessage('Login ou Senha incorreto!');
     edtLogin.SetFocus;
