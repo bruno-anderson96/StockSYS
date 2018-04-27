@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 156
-  Top = 152
+  Left = 137
+  Top = 98
   Width = 1212
   Height = 557
   Caption = 'Data m'#243'dulo'
@@ -222,7 +222,7 @@ object telaDados: TtelaDados
     ParentFont = False
   end
   object Label17: TLabel
-    Left = 1092
+    Left = 1089
     Top = 19
     Width = 82
     Height = 20
@@ -253,6 +253,19 @@ object telaDados: TtelaDados
     Width = 81
     Height = 20
     Caption = 'CIDADES'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label16: TLabel
+    Left = 1089
+    Top = 164
+    Width = 86
+    Height = 20
+    Caption = 'ESTOQUE'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -348,12 +361,6 @@ object telaDados: TtelaDados
       item
         Name = 'CLASSIFICACAO_FISCAL'
         DataType = ftInteger
-      end
-      item
-        Name = 'ESTOQUE'
-        DataType = ftBCD
-        Precision = 18
-        Size = 3
       end
       item
         Name = 'PRECO_COMPRA'
@@ -461,6 +468,10 @@ object telaDados: TtelaDados
       item
         Name = 'ID_CST'
         DataType = ftInteger
+      end
+      item
+        Name = 'ESTOQUE'
+        DataType = ftInteger
       end>
     IndexDefs = <
       item
@@ -492,7 +503,7 @@ object telaDados: TtelaDados
       FieldName = 'DUN14'
       Size = 14
     end
-    object tblProdutosGRUPO: TIntegerField
+    object esto: TIntegerField
       FieldName = 'GRUPO'
     end
     object tblProdutosSUBGRUPO1: TIntegerField
@@ -523,11 +534,6 @@ object telaDados: TtelaDados
     end
     object tblProdutosCLASSIFICACAO_FISCAL: TIntegerField
       FieldName = 'CLASSIFICACAO_FISCAL'
-    end
-    object tblProdutosESTOQUE: TIBBCDField
-      FieldName = 'ESTOQUE'
-      Precision = 18
-      Size = 3
     end
     object tblProdutosPRECO_COMPRA: TIBBCDField
       FieldName = 'PRECO_COMPRA'
@@ -612,6 +618,9 @@ object telaDados: TtelaDados
     end
     object tblProdutosID_CST: TIntegerField
       FieldName = 'ID_CST'
+    end
+    object tblProdutosESTOQUE: TIntegerField
+      FieldName = 'ESTOQUE'
     end
   end
   object trnscProdutos: TIBTransaction
@@ -4041,5 +4050,109 @@ object telaDados: TtelaDados
     AutoStopAction = saNone
     Left = 904
     Top = 416
+  end
+  object dsEstoque: TDataSource
+    DataSet = tblEstoque
+    Left = 1112
+    Top = 192
+  end
+  object qryEstoque: TIBQuery
+    Database = dbEstoque
+    Transaction = trnscEstoque
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsEstoque
+    SQL.Strings = (
+      'select * from ESTOQUE')
+    Left = 1112
+    Top = 272
+  end
+  object tblEstoque: TIBTable
+    Database = dbEstoque
+    Transaction = trnscEstoque
+    AfterPost = tblEstoqueAfterPost
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_PRODUTO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'QUANTIDADE'
+        DataType = ftInteger
+      end
+      item
+        Name = 'DATA'
+        DataType = ftDateTime
+      end
+      item
+        Name = 'TIPO'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_ESTOQUE'
+        Fields = 'ID'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'ESTOQUE'
+    Left = 1112
+    Top = 232
+    object tblEstoqueID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object tblEstoqueID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object tblEstoqueQUANTIDADE: TIntegerField
+      FieldName = 'QUANTIDADE'
+    end
+    object tblEstoqueDATA: TDateTimeField
+      FieldName = 'DATA'
+    end
+    object tblEstoqueTIPO: TIBStringField
+      FieldName = 'TIPO'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object dbEstoque: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    DefaultTransaction = trnscEstoque
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 1160
+    Top = 232
+  end
+  object trnscEstoque: TIBTransaction
+    Active = True
+    DefaultDatabase = dbEstoque
+    AutoStopAction = saNone
+    Left = 1064
+    Top = 232
+  end
+  object IBDataSet1: TIBDataSet
+    BufferChunks = 1000
+    CachedUpdates = False
+    Left = 1160
+    Top = 272
   end
 end

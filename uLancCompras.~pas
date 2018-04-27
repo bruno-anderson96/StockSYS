@@ -325,14 +325,14 @@ end;
     telaDados.qryProdutos.Close;
     telaDados.qryProdutos.SQL.Clear;
     telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID = ');
-    telaDados.qryProdutos.SQL.Add(telaDados.cdsTempItens.FieldByName('ID_PRODUTO').AsString);
-    estoque := telaDados.tblProdutosESTOQUE.AsInteger + telaDados.cdsTempItens.FieldByName('QUANTIDADE').AsInteger;
+    telaDados.qryProdutos.SQL.Add(telaDados.cdsTempItens.FieldByName('IDPROD').AsString);
+    estoque := telaDados.tblProdutosESTOQUE.AsInteger + telaDados.cdsTempItens.FieldByName('QUANT').AsInteger;
     telaDados.qryProdutos.Open; 
 
     telaDados.qryProdutos.Close;
     telaDados.qryProdutos.SQL.Clear;
     telaDados.qryProdutos.SQL.Add('Update PRODUTOS set ESTOQUE = :pDados Where ID = ');
-    telaDados.qryProdutos.SQL.Add(telaDados.cdsTempItens.FieldByName('ID_PRODUTO').AsString);
+    telaDados.qryProdutos.SQL.Add(telaDados.cdsTempItens.FieldByName('IDPROD').AsString);
     telaDados.qryProdutos.Params.ParamByName('pDados').AsInteger := estoque;
     telaDados.qryProdutos.Open;
 

@@ -85,7 +85,15 @@ type
     Label22: TLabel;
     cbCst: TComboBox;
     btnEstoque: TSpeedButton;
-    Panel2: TPanel;
+    panelEstoque: TPanel;
+    Label25: TLabel;
+    DBEdit3: TDBEdit;
+    Label26: TLabel;
+    DBEdit4: TDBEdit;
+    Label27: TLabel;
+    cbTipo: TComboBox;
+    SpeedButton1: TSpeedButton;
+    Label24: TLabel;
     procedure FormShow(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -112,6 +120,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure edtCfopKeyPress(Sender: TObject; var Key: Char);
     procedure btnCadUniClick(Sender: TObject);
+    procedure btnEstoqueClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -314,7 +324,7 @@ begin
   editNcm.Enabled := true;
   editEan.Enabled := true;
   editDun.Enabled := true;
-  editEstoque.Enabled := true;
+  {editEstoque.Enabled := true;}
   editDescMax.Enabled := true;
   editComissao.Enabled := true;
   editIcms.Enabled := true;
@@ -383,7 +393,7 @@ begin
   telaDados.qryUnidade.Close;
   telaDados.qryUnidade.SQL.Clear;
   telaDados.qryUnidade.SQL.Add('Select * from UNIDADE where SIGLA =');
-  telaDados.qryUnidade.SQL.Add(cbUnidade.Text);
+  telaDados.qryUnidade.SQL.Add(QuotedStr(cbUnidade.Text));
   telaDados.qryUnidade.Open;
     if telaDados.qryUnidade.RecordCount < 1 then begin
       telaDados.tblUnidade.Last;
@@ -437,7 +447,7 @@ begin
   editNcm.Enabled := false;
   editEan.Enabled := false;
   editDun.Enabled := false;
-  editEstoque.Enabled := false;
+  {editEstoque.Enabled := false;}
   editDescMax.Enabled := false;
   editComissao.Enabled := false;
   editIcms.Enabled := false;
@@ -522,7 +532,7 @@ begin
   editNcm.Enabled := false;
   editEan.Enabled := false;
   editDun.Enabled := false;
-  editEstoque.Enabled := false;
+  {editEstoque.Enabled := false;}
   editDescMax.Enabled := false;
   editComissao.Enabled := false;
   editIcms.Enabled := false;
@@ -703,7 +713,7 @@ begin
   editNcm.Enabled := true;
   editEan.Enabled := true;
   editDun.Enabled := true;
-  editEstoque.Enabled := true;
+  {editEstoque.Enabled := true;}
   editDescMax.Enabled := true;
   editComissao.Enabled := true;
   editIcms.Enabled := true;
@@ -772,6 +782,31 @@ procedure TtelaCadProdutos.btnCadUniClick(Sender: TObject);
 begin
   Application.CreateForm(TtelaCadUnidade, telaCadUnidade);
   telaCadUnidade.Show;
+end;
+
+procedure TtelaCadProdutos.btnEstoqueClick(Sender: TObject);
+var i : integer;
+begin
+  if editDesc.Text <> '' then begin
+    panelEstoque.Visible := true;
+    telaDados.tblEstoque.Last;
+    i := telaDados.tblEstoqueID.Value;
+    telaDados.tblEstoque.Insert;
+    telaDados.tblEstoqueID.Value := i + 1;
+  end else begin
+    ShowMessage('Selecione um produto!');
+  end;
+end;
+
+procedure TtelaCadProdutos.SpeedButton1Click(Sender: TObject);
+begin
+  telaDados.tblEstoqueID_PRODUTO.Value := StrToInt(editId.Text);
+  case cbTipo.ItemIndex of
+    0 : telaDados.tblEstoqueTIPO.Value := 'E';
+    1 : telaDados.tblEstoqueTIPO.Value := 'S';
+  end;
+  telaDados.tblEstoque.Post;
+  panelEstoque.Visible := false;
 end;
 
 end.

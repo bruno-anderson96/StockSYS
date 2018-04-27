@@ -42,7 +42,7 @@ type
     tblProdutosREFERENCIA: TIBStringField;
     tblProdutosEAN13: TIBStringField;
     tblProdutosDUN14: TIBStringField;
-    tblProdutosGRUPO: TIntegerField;
+    esto: TIntegerField;
     tblProdutosSUBGRUPO1: TIntegerField;
     tblProdutosSUBGRUPO2: TIntegerField;
     tblProdutosUNIDADE: TIBStringField;
@@ -50,7 +50,6 @@ type
     tblProdutosALIQUOTA_ICMS: TIBBCDField;
     tblProdutosALIQUOTA_IPI: TIBBCDField;
     tblProdutosCLASSIFICACAO_FISCAL: TIntegerField;
-    tblProdutosESTOQUE: TIBBCDField;
     tblProdutosPRECO_COMPRA: TIBBCDField;
     tblProdutosPRECO_VENDA: TIBBCDField;
     tblProdutosTIPOPROD: TIntegerField;
@@ -437,7 +436,21 @@ type
     tblBairrosID: TIntegerField;
     tblBairrosID_CIDADES: TIntegerField;
     tblBairrosBAIRROS: TIBStringField;
+    Label16: TLabel;
+    dsEstoque: TDataSource;
+    qryEstoque: TIBQuery;
+    tblEstoque: TIBTable;
+    dbEstoque: TIBDatabase;
+    trnscEstoque: TIBTransaction;
+    IBDataSet1: TIBDataSet;
+    tblEstoqueID: TIntegerField;
+    tblEstoqueID_PRODUTO: TIntegerField;
+    tblEstoqueQUANTIDADE: TIntegerField;
+    tblEstoqueDATA: TDateTimeField;
+    tblEstoqueTIPO: TIBStringField;
+    tblProdutosESTOQUE: TIntegerField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
+    procedure tblEstoqueAfterPost(DataSet: TDataSet);
 
   private
     { Private declarations }
@@ -958,6 +971,25 @@ begin
      telaLancCompras.calculaPedido;
     end;
   end;
+end;
+
+procedure TtelaDados.tblEstoqueAfterPost(DataSet: TDataSet);
+begin
+  tblEstoque.Last;
+  qryProdutos.Close;
+  qryProdutos.SQL.Clear;
+  qryProdutos.SQL.Add('Select * from PRODUTOS where ID = ');
+  qryProdutos.SQL.Add(tblEstoqueID_PRODUTO.AsString);
+  qryProdutos.Open;
+
+  if tblEstoqueTIPO.Value = 'E' then begin
+    tblProdutos.Edit;
+    tblProdutosESTOQUE.Value := tblProdutosEstoque.Value + tblEstoqueQUANTIDADE.Value;
+  end else begin
+    tblProdutos.Edit;
+    tblProdutosESTOQUE.Value := tblProdutosEstoque.Value - tblEstoqueQUANTIDADE.Value;
+  end;
+  tblProdutos.Post;
 end;
 
 end.

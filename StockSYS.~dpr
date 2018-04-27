@@ -40,10 +40,10 @@ begin
   Application.Initialize;
   Application.Title := 'StockSYS';
   Application.CreateForm(TtelaLogin, telaLogin);
-  Application.CreateForm(TtelaPrincipal, telaPrincipal);
   Application.CreateForm(TtelaDados, telaDados);
-  Application.CreateForm(TtelaEnviaEmail, telaEnviaEmail);
   Application.CreateForm(TtelaConfig, telaConfig);
+  Application.CreateForm(TtelaPrincipal, telaPrincipal);
+  Application.CreateForm(TtelaEnviaEmail, telaEnviaEmail);
   Application.CreateForm(TtelaConfigSat, telaConfigSat);
   Application.CreateForm(TtelaGerarNfe, telaGerarNfe);
   Application.CreateForm(TtelaConfigEmit, telaConfigEmit);
