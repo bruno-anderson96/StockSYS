@@ -43,7 +43,6 @@ type
     cbEmpresa: TComboBox;
     Label11: TLabel;
     procedure btnSalvarClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -72,12 +71,6 @@ begin
 
   telaConfigEmit.Show;
   telaCadEmit.Hide;
-end;
-
-procedure TtelaCadEmit.FormCreate(Sender: TObject);
-begin
-telaDados.tblLogin.Insert;
-telaDados.tblEmitente.Insert;
 end;
 
 end.

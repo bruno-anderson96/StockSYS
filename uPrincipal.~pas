@@ -275,6 +275,7 @@ procedure TtelaPrincipal.Emitente1Click(Sender: TObject);
 begin
   Application.CreateForm(TtelaConfigEmit, telaConfigEmit);
   telaConfigEmit.Show;
+  telaDados.tblEmitente.Open;
 end;
 
 procedure TtelaPrincipal.FormClose(Sender: TObject;

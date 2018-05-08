@@ -1,6 +1,6 @@
 object telaConfigSat: TtelaConfigSat
-  Left = 128
-  Top = 279
+  Left = 264
+  Top = 304
   Width = 863
   Height = 386
   Caption = 'Configura'#231#227'o SAT'
@@ -898,7 +898,7 @@ object telaConfigSat: TtelaConfigSat
   object ACBrSAT1: TACBrSAT
     Integrador = ACBrIntegrador1
     Extrato = ACBrSATExtratoESCPOS1
-    NomeDLL = 'C:\Users\Bruno\Documents\StockSYS\dll\elgin\mfe.dll'
+    NomeDLL = 'C:\Users\Bruno\Documents\StockSYS\mfe.dll'
     ValidarNumeroSessaoResposta = True
     NumeroTentativasValidarSessao = 2
     Config.infCFe_versaoDadosEnt = 0.070000000000000010

@@ -94,6 +94,11 @@ type
     Label24: TLabel;
     GroupBox7: TGroupBox;
     Label21: TLabel;
+    pnlEdtExc: TPanel;
+    btnEdt: TSpeedButton;
+    btnExc: TSpeedButton;
+    btnFec: TSpeedButton;
+    edtQt: TEdit;
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnIncItemClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -119,7 +124,12 @@ type
     procedure edtItemKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);  
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure btnEdtClick(Sender: TObject);
+    procedure btnExcClick(Sender: TObject);
+    procedure btnFecClick(Sender: TObject);
+    procedure edtQtKeyPress(Sender: TObject; var Key: Char);
 
   private
 
@@ -133,7 +143,8 @@ type
 
 var
   telaLancPedidos: TtelaLancPedidos;
-
+  prod: String;
+  qt: integer;
 
 
 implementation
@@ -703,8 +714,13 @@ end;
 procedure TtelaLancPedidos.edtItemKeyPress(Sender: TObject; var Key: Char);
 begin
   if key =#13 then begin
-    if edtItem.Text <> '' then
-    begin
+    if edtItem.Text <> '' then begin
+      if edtItem.Text = 'Q' then begin
+        edtQt.Visible := true;
+        edtQt.SetFocus;
+        edtItem.Clear;
+        abort;
+      end;
       telaDados.qryProdutos.Close;
       telaDados.qryProdutos.SQL.Clear;
       telaDados.qryProdutos.SQL.Add('Select * from produtos where EAN13 = ');
@@ -717,11 +733,14 @@ begin
        telaDados.cdsTempItensDESC.Value := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
        telaDados.cdsTempItensIDPROD.Value := telaDados.qryProdutos.FieldByName('ID').AsInteger;
        telaDados.cdsTempItensIDPED.Value := StrToInt(editId.Text);
-       telaDados.cdsTempItensQUANT.Value := 1;
+       if qt < 1 then begin
+        qt := 1;
+       end;
+       telaDados.cdsTempItensQUANT.Value := qt;
        telaDados.cdsTempItensVALOR.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
        telaDados.cdsTempItensDESCONTO.Value := 0;
        telaDados.cdsTempItensACRESCIMO.Value := 0;
-       telaDados.cdsTempItensVRT.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
+       telaDados.cdsTempItensVRT.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat * qt;
 
        telaDados.cdsTempItens.Post;
 
@@ -729,13 +748,15 @@ begin
        telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR_TOTAL.Value;}
        telaLancPedidos.Refresh;
        edtItem.Clear;
+       qt := 0;
        end else begin
-       ShowMessage('Nenhum produto com este código !');
-       edtItem.SetFocus;
+        ShowMessage('Nenhum produto com este código !');
+        edtItem.SetFocus;
+       end;
     end;
   end;
 end;
-end;
+
 
 procedure TtelaLancPedidos.edtItemKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
@@ -779,6 +800,46 @@ begin
     telaDados.tblPedidosVALOR.Value := telaDados.cdsTempItens.Aggregates.Items[0].Value;
     calculaPedido;
   end; }
+end;
+
+procedure TtelaLancPedidos.DBGrid1DblClick(Sender: TObject);
+begin
+pnlEdtExc.Visible := true;
+prod := DBGrid1.Columns[0].Field.AsString;
+end;
+
+procedure TtelaLancPedidos.btnEdtClick(Sender: TObject);
+begin
+pnlEdtExc.Visible := false;
+telaDados.cdsTempItens.CommandText := 'Select * from c:\tabela.dat where DESC =' + prod;
+telaDados.cdsTempItens.Open;
+telaDados.cdsTempItens.Edit;
+telaLancItens.Show;
+end;
+
+procedure TtelaLancPedidos.btnExcClick(Sender: TObject);
+begin
+  if MessageDlg('Deseja realmente excluir o produto?',mtinformation,[mbyes,mbno],0) = mryes then begin
+    telaDados.cdsTempItens.Edit;
+    pnlEdtExc.Visible := false;
+    telaDados.cdsTempItens.CommandText := 'Delete * from c:\tabela.dat where DESC =' + prod;
+    telaDados.cdsTempItens.Open;
+    telaDados.cdsTempItens.Delete;
+  end;
+end;
+
+procedure TtelaLancPedidos.btnFecClick(Sender: TObject);
+begin
+pnlEdtExc.Visible := false;
+end;
+
+procedure TtelaLancPedidos.edtQtKeyPress(Sender: TObject; var Key: Char);
+begin
+  if key =#13 then begin
+    qt := StrToInt(edtQt.Text);
+    edtItem.SetFocus;
+    edtQt.Visible := false;
+  end;
 end;
 
 end.

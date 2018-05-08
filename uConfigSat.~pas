@@ -133,7 +133,8 @@ end;
 
 procedure TtelaConfigSat.SpeedButton6Click(Sender: TObject);
 begin
-  Memo1.Text := ACBrSAT1.ConsultarSAT + ACBrSAT1.ConsultarStatusOperacional;
+  AjustarCfe;
+  Memo1.Text := ACBrSAT1.ConsultarSAT;
 end;
 
 procedure TtelaConfigSat.AjustarCfe;
@@ -260,7 +261,7 @@ begin
         {Prod.cEAN := telaDados.qryProdutos.FieldByName('EAN13').AsString; }
         Prod.xProd := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
         prod.NCM := telaDados.qryProdutos.FieldByName('CODIGO_NCM').AsString;
-        Prod.CFOP := '5102';
+        Prod.CFOP := telaDados.qryProdutos.FieldByName('CFOP').AsString;
         Prod.uCom := telaDados.qryProdutos.FieldByName('UNIDADE').AsString;
         Prod.qCom := telaDados.qryPedidosItens.FieldByName('QUANTIDADE').AsInteger;
         Prod.vUnCom := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
@@ -374,20 +375,19 @@ begin
     end;
       }
 
-    Total.DescAcrEntr.vDescSubtot := 5;
-    Total.vCFeLei12741 := 1.23;
-
-    Pagto1 := RoundABNT(TotalGeral/2,-2);
+    Total.DescAcrEntr.vDescSubtot := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsCurrency;
+    Total.vCFeLei12741 := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsCurrency;
+    {Pagto1 := RoundABNT(TotalGeral/2,-2);
     with Pagto.Add do
     begin
       cMP := mpCartaodeCredito;
       vMP := Pagto1;
-    end;
+    end;}
 
     with Pagto.Add do
     begin
       cMP := mpDinheiro;
-      vMP := TotalGeral - Pagto1 + 100;
+      vMP := TotalGeral + 100;
     end;
 
     InfAdic.infCpl := 'Acesse www.projetoacbr.com.br para obter mais;informações sobre o componente ACBrSAT;'+
@@ -584,7 +584,7 @@ Var
   INI : TIniFile ;
 begin
   ArqINI := ChangeFileExt( Application.ExeName,'.ini' ) ;
-
+  
   INI := TIniFile.Create(ArqINI);
   try
     INI.WriteInteger('SAT','Modelo',cbxModelo.ItemIndex);

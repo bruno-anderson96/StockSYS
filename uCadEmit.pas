@@ -76,8 +76,8 @@ end;
 
 procedure TtelaCadEmit.FormCreate(Sender: TObject);
 begin
-telaDados.tblLogin.Insert;
-telaDados.tblEmitente.Insert;
+  telaDados.tblLogin.Insert;
+  telaDados.tblEmitente.Insert;
 end;
 
 end.
