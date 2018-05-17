@@ -1,6 +1,6 @@
 object telaConfigEmit: TtelaConfigEmit
-  Left = 76
-  Top = 187
+  Left = 723
+  Top = 217
   Width = 468
   Height = 418
   Caption = 'Emitente'
@@ -487,35 +487,28 @@ object telaConfigEmit: TtelaConfigEmit
       DataSource = telaDados.dsEmitente
       TabOrder = 12
     end
-    object cbEmpresa: TDBComboBox
-      Left = 92
-      Top = 249
+    object radReg: TRadioGroup
+      Left = 264
+      Top = 248
       Width = 169
+      Height = 65
+      Caption = 'Regime Tribut'#225'rio'
+      Items.Strings = (
+        'Normal'
+        'Simples Nacional')
+      TabOrder = 13
+    end
+    object cbEmpresa: TComboBox
+      Left = 92
+      Top = 247
+      Width = 171
       Height = 21
-      DataField = 'TIPOEMP'
-      DataSource = telaDados.dsEmitente
       ItemHeight = 13
+      TabOrder = 14
       Items.Strings = (
         'Microempresa Municipal'
         'Microempreendedor Individual'
         'Empresa de Pequeno Porte')
-      TabOrder = 13
-    end
-    object radReg: TDBRadioGroup
-      Left = 264
-      Top = 244
-      Width = 167
-      Height = 77
-      Caption = 'Regime Tribut'#225'rio'
-      DataField = 'REGIME'
-      DataSource = telaDados.dsEmitente
-      Items.Strings = (
-        'Normal'
-        'Simples Nacional')
-      TabOrder = 14
-      Values.Strings = (
-        'Normal'
-        'Simples Nacional')
     end
   end
 end

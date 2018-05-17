@@ -495,7 +495,7 @@ object telaDados: TtelaDados
       FieldName = 'REFERENCIA'
       LookupDataSet = qryBairros
     end
-    object tblProdutosEAN13: TIBStringField
+    object t: TIBStringField
       FieldName = 'EAN13'
       Size = 13
     end
@@ -620,7 +620,9 @@ object telaDados: TtelaDados
       FieldName = 'ID_CST'
     end
     object tblProdutosESTOQUE: TIntegerField
+      FieldKind = fkCalculated
       FieldName = 'ESTOQUE'
+      Calculated = True
     end
   end
   object trnscProdutos: TIBTransaction

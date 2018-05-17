@@ -1,7 +1,7 @@
 object telaConfigSat: TtelaConfigSat
-  Left = 264
-  Top = 304
-  Width = 863
+  Left = 22
+  Top = 153
+  Width = 860
   Height = 386
   Caption = 'Configura'#231#227'o SAT'
   Color = clBtnFace
@@ -19,7 +19,7 @@ object telaConfigSat: TtelaConfigSat
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 847
+    Width = 844
     Height = 348
     Align = alClient
     TabOrder = 0
@@ -160,7 +160,7 @@ object telaConfigSat: TtelaConfigSat
       OnClick = SpeedButton8Click
     end
     object btnSalvar: TSpeedButton
-      Left = 136
+      Left = 384
       Top = 250
       Width = 114
       Height = 38
@@ -286,6 +286,14 @@ object telaConfigSat: TtelaConfigSat
       Height = 33
       Caption = 'Cancelar CFe'
     end
+    object Enviar: TSpeedButton
+      Left = 136
+      Top = 248
+      Width = 121
+      Height = 41
+      Caption = 'Enviar'
+      OnClick = EnviarClick
+    end
     object Memo1: TMemo
       Left = 16
       Top = 16
@@ -300,7 +308,7 @@ object telaConfigSat: TtelaConfigSat
       Top = 6
       Width = 329
       Height = 337
-      ActivePage = TabSheet1
+      ActivePage = TabSheet2
       TabOrder = 1
       object TabSheet1: TTabSheet
         Caption = 'MFe'
@@ -898,7 +906,7 @@ object telaConfigSat: TtelaConfigSat
   object ACBrSAT1: TACBrSAT
     Integrador = ACBrIntegrador1
     Extrato = ACBrSATExtratoESCPOS1
-    NomeDLL = 'C:\Users\Bruno\Documents\StockSYS\mfe.dll'
+    NomeDLL = 'C:\SAT\SAT.dll'
     ValidarNumeroSessaoResposta = True
     NumeroTentativasValidarSessao = 2
     Config.infCFe_versaoDadosEnt = 0.070000000000000010

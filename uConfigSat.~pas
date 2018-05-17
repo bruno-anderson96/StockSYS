@@ -71,10 +71,10 @@ type
     SpeedButton10: TSpeedButton;
     TabSheet4: TTabSheet;
     TabSheet5: TTabSheet;
+    Enviar: TSpeedButton;
     procedure At(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
-    procedure EnviarClick(Sender: TObject);
     procedure AjustarCfe;
     procedure FormCreate(Sender: TObject);
     procedure gerarVenda;
@@ -89,6 +89,7 @@ type
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure EnviarClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -139,6 +140,13 @@ end;
 
 procedure TtelaConfigSat.AjustarCfe;
 begin
+  telaDados.qryEmitente.Close;
+  telaDados.qryEmitente.SQL.Clear;
+  telaDados.qryEmitente.SQL.Add('Select * from Emitente where id_login = ');
+  telaDados.qryEmitente.SQL.Add(telaDados.tblLoginID.AsString);
+  telaDados.qryEmitente.Open;
+
+
   with ACBrSAT1 do
   begin
     NomeDLL := edtNomeDLL.Text;
@@ -174,9 +182,9 @@ begin
 
   Config.emit_indRatISSQN := irNao;    {
   Config.emit_CNPJ := '14200166000166'; }
-  Config.emit_IE := telaConfigEmit.edtInscEst.Text{telaConfig.edtInscEst.Text};
-  Config.emit_IM := '';
-  Config.emit_CNPJ := telaConfigEmit.edtCnpj.Text{telaConfig.edtCnpj.Text};
+  Config.emit_IE := telaDados.qryEmitente.FieldByName('INSCEST').AsString;
+  Config.emit_IM := '123123';
+  Config.emit_CNPJ := telaDados.qryEmitente.FieldByName('CNPJ').AsString;
   {ACBrSAT1.OnGetNumeroSessao := GetNumeroSessao;}
   end;
 
@@ -247,7 +255,6 @@ begin
     For A := 1 to Loops do}
       while not telaDados.qryPedidosItens.Eof do
       begin
-        
         telaDados.qryProdutos.Close;
         telaDados.qryProdutos.SQL.Clear;
         telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID =');
@@ -387,7 +394,7 @@ begin
     with Pagto.Add do
     begin
       cMP := mpDinheiro;
-      vMP := TotalGeral + 100;
+      vMP := TotalGeral;
     end;
 
     InfAdic.infCpl := 'Acesse www.projetoacbr.com.br para obter mais;informações sobre o componente ACBrSAT;'+
@@ -399,38 +406,13 @@ begin
   end;
 
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
-  Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;
-  
-  
+  {Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;}
   end;
 end;
 
 procedure TtelaConfigSat.SpeedButton5Click(Sender: TObject);
 begin
   Memo1.Text := ACBrSAT1.AssociarAssinatura( '11111111111111' + '11111111111111','MD2Nof/O0tQMPKiYeeAydSjYt7YV9kU0nWKZGXHVdYIzR2W9Z6tgXni/Y5bnjmUAk8MkqlBJIiOOIskKCjJ086k7vAP0EU5cBRYj/nzHUiRdu9AVD7WRfVs00BDyb5fsnnKg7gAXXH6SBgCxG9yjAkxJ0l2E2idsWBAJ5peQEBZqtHytRUC+FLaSfd3+'+'66QNxIBlDwQIRzUGPaU6fvErVDSfMUf8WpkwnPz36fCQnyLypqe/5mbox9pt3RCbbXcYqnR/4poYGr9M9Kymj4/PyX9xGeiXwbgzOOHNIU5M/aAs0rulXz948bZla0eXABgEcp6mDkTzweLPZTbmOhX+eA==');
-end;
-
-procedure TtelaConfigSat.EnviarClick(Sender: TObject);
-var
-  tini, tfim: TDateTime;
-begin
-{ if Memo1.Text = '' then
-    SpeedButton1.Click;}
-                       
-  tini := now;
-  ACBrSAT1.EnviarDadosVenda( Memo1.Text );
-  tfim := now;
-  Memo1.Lines.Add('------------------------------------------------') ;
-  Memo1.Lines.Add('Iniciado em: '+DateTimeToStr(tini)) ;
-  Memo1.Lines.Add('Finalizado em: '+DateTimeToStr(tFim)) ;
-  Memo1.Lines.Add('') ;                                                                                         {
-  Memo1.Lines.Add('Tempo de Envio e Recebimento: '+ FormatFloat('##0.00',SecondSpan(tini,tfim))+' segundos' ) ;  }
-  Memo1.Lines.Add('------------------------------------------------') ;
-        {
-  if ACBrSAT1.Resposta.codigoDeRetorno = 6000 then
-  begin
-    LoadXML( ACBrSAT1.CFe.AsXMLString, Memo1 );
-           }
 end;
 
 procedure TtelaConfigSat.FormCreate(Sender: TObject);
@@ -554,8 +536,10 @@ procedure TtelaConfigSat.SpeedButton7Click(Sender: TObject);
 var
   tini, tfim: TDateTime;
 begin
-  PrepararImpressao;
-  ACBrSAT1.ImprimirExtrato;
+  AjustarCfe;
+  Memo1.Text:= ACBrSAT1.AssociarAssinatura('04496789000174'+'07954597000152','+g/URBgyzvmtpp0dTuiHUzaGvPdcmGYpOxxwuQuZoSw9NYhzPcFqcTGdzZfeJJoulZcGLkMaMgKWocMD4keGSEf9M6fh51Auyo2Ofhct0XCjpvDkXGoaZoJ62kD/198syaUr7oOQ1fLSzzTVzzCRCStfPSkZmpbxrDkKVHrmbrUJk04p53lC9yGvxYxgnMDxzn'+'QdO6Z7BUlJcoXVaOKj/Ll71URJjo4/25R3izY8rvchfA1rhnxj/yWTStt9lPnTQ7qPXugdGUHB5QM4x0+EN7KUsMNHIu3dUN6cO7Acey/CvD3tAdHdn3Iyw==');
+  {PrepararImpressao;
+  ACBrSAT1.ImprimirExtrato;}
    {
   tini := now;
   Memo1.Lines.Add(ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe);
@@ -566,6 +550,7 @@ end;
 
 procedure TtelaConfigSat.SpeedButton8Click(Sender: TObject);
 begin
+
   PrepararImpressao;
   ACBrSAT1.ImprimirExtrato;
 
@@ -800,4 +785,27 @@ begin
     end; }
 end;
  
+procedure TtelaConfigSat.EnviarClick(Sender: TObject);
+var
+  tini, tfim: TDateTime;
+begin
+{ if Memo1.Text = '' then
+    SpeedButton1.Click;}
+                       
+  tini := now;
+  ACBrSAT1.EnviarDadosVenda( Memo1.Text );
+  tfim := now;
+  Memo1.Lines.Add('------------------------------------------------') ;
+  Memo1.Lines.Add('Iniciado em: '+DateTimeToStr(tini)) ;
+  Memo1.Lines.Add('Finalizado em: '+DateTimeToStr(tFim)) ;
+  Memo1.Lines.Add('') ;                                                                                         {
+  Memo1.Lines.Add('Tempo de Envio e Recebimento: '+ FormatFloat('##0.00',SecondSpan(tini,tfim))+' segundos' ) ;  }
+  Memo1.Lines.Add('------------------------------------------------') ;
+        {
+  if ACBrSAT1.Resposta.codigoDeRetorno = 6000 then
+  begin
+    LoadXML( ACBrSAT1.CFe.AsXMLString, Memo1 );
+           }
+end;
+
 end.

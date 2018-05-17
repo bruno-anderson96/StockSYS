@@ -40,7 +40,7 @@ type
     tblProdutosID: TIntegerField;
     tblProdutosDESCRICAO: TIBStringField;
     tblProdutosREFERENCIA: TIBStringField;
-    tblProdutosEAN13: TIBStringField;
+    t: TIBStringField;
     tblProdutosDUN14: TIBStringField;
     esto: TIntegerField;
     tblProdutosSUBGRUPO1: TIntegerField;
