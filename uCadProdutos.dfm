@@ -30,7 +30,7 @@ object telaCadProdutos: TtelaCadProdutos
       Width = 90
       Height = 57
       Action = Incluir
-      Caption = 'F2 - &Incluir'
+      Caption = 'F1 - &Incluir'
       TabOrder = 0
       Glyph.Data = {
         B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -272,7 +272,7 @@ object telaCadProdutos: TtelaCadProdutos
       Width = 104
       Height = 57
       Action = Confirmar
-      Caption = 'F4 - &Salvar'
+      Caption = 'F7 - &Salvar'
       Enabled = False
       TabOrder = 2
       Glyph.Data = {
@@ -394,7 +394,7 @@ object telaCadProdutos: TtelaCadProdutos
       Width = 100
       Height = 57
       Action = Cancelar
-      Caption = 'F5 - C&ancelar'
+      Caption = 'F4 - C&ancelar'
       Enabled = False
       TabOrder = 3
       Glyph.Data = {
@@ -516,7 +516,7 @@ object telaCadProdutos: TtelaCadProdutos
       Width = 103
       Height = 57
       Action = Pesquisar
-      Caption = 'F6 - &Pesquisar'
+      Caption = 'F5 - &Pesquisar'
       TabOrder = 4
       Glyph.Data = {
         B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -878,7 +878,7 @@ object telaCadProdutos: TtelaCadProdutos
       Width = 90
       Height = 57
       Action = Editar
-      Caption = 'F8 - E&ditar'
+      Caption = 'F2 - E&ditar'
       TabOrder = 7
       Glyph.Data = {
         B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -1957,8 +1957,8 @@ object telaCadProdutos: TtelaCadProdutos
     Left = 307
     Top = 384
     object Incluir: TAction
-      Caption = 'F2 - &Incluir'
-      ShortCut = 113
+      Caption = 'F1 - &Incluir'
+      ShortCut = 112
       OnExecute = IncluirExecute
     end
     object Excluir: TAction
@@ -1967,23 +1967,23 @@ object telaCadProdutos: TtelaCadProdutos
       OnExecute = ExcluirExecute
     end
     object Confirmar: TAction
-      Caption = 'F4 - &Salvar'
-      ShortCut = 115
+      Caption = 'F7 - &Salvar'
+      ShortCut = 118
       OnExecute = ConfirmarExecute
     end
     object Cancelar: TAction
-      Caption = 'F5 - C&ancelar'
-      ShortCut = 116
+      Caption = 'F4 - C&ancelar'
+      ShortCut = 115
       OnExecute = CancelarExecute
     end
     object Pesquisar: TAction
-      Caption = 'F6 - &Pesquisar'
-      ShortCut = 117
+      Caption = 'F5 - &Pesquisar'
+      ShortCut = 116
       OnExecute = PesquisarExecute
     end
     object Relatorio: TAction
-      Caption = 'F7 - &Relat'#243'rio'
-      ShortCut = 118
+      Caption = 'F6 - &Relat'#243'rio'
+      ShortCut = 117
     end
     object Fechar: TAction
       Caption = 'F10 - &Fechar'
@@ -1991,8 +1991,8 @@ object telaCadProdutos: TtelaCadProdutos
       OnExecute = FecharExecute
     end
     object Editar: TAction
-      Caption = 'F8 - E&ditar'
-      ShortCut = 119
+      Caption = 'F2 - E&ditar'
+      ShortCut = 113
       OnExecute = EditarExecute
     end
   end

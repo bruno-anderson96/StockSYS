@@ -538,6 +538,7 @@ begin
   Cancelar.Enabled  := false;
   Editar.Enabled    := true;
   Pesquisar.Enabled := true;
+  Relatorio.Enabled := true;
   if editCpf.Text = '' then begin
     Excluir.Enabled := False;
   end else begin

@@ -1207,23 +1207,19 @@ object telaLancPedidos: TtelaLancPedidos
           Panels = <
             item
               Text = 'F4 - Finaliza Venda'
-              Width = 115
+              Width = 210
             end
             item
               Text = 'F5 - Cancela Venda'
-              Width = 115
-            end
-            item
-              Text = 'F7 - Adicionar Item'
-              Width = 115
+              Width = 210
             end
             item
               Text = 'F9 - Consulta Cupom'
-              Width = 125
+              Width = 210
             end
             item
               Text = 'F10 - Fecha Tela de Venda'
-              Width = 50
+              Width = 200
             end>
         end
         object GroupBox6: TGroupBox

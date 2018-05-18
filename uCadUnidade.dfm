@@ -173,7 +173,7 @@ object telaCadUnidade: TtelaCadUnidade
       Width = 100
       Height = 37
       Action = actConfirmar
-      Caption = 'F4 - &Confirmar'
+      Caption = 'F7 - &Salvar'
       TabOrder = 2
       Glyph.Data = {
         B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -415,7 +415,7 @@ object telaCadUnidade: TtelaCadUnidade
       Width = 100
       Height = 37
       Action = actIncluir
-      Caption = 'F2 - &Incluir'
+      Caption = 'F1 - &Incluir'
       TabOrder = 4
       Glyph.Data = {
         B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -547,7 +547,7 @@ object telaCadUnidade: TtelaCadUnidade
       Width = 100
       Height = 37
       Action = actEditar
-      Caption = 'F8 - E&ditar'
+      Caption = 'F2 - E&ditar'
       TabOrder = 5
       Glyph.Data = {
         B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -680,20 +680,21 @@ object telaCadUnidade: TtelaCadUnidade
     end
   end
   object ActionList1: TActionList
-    Left = 224
+    Left = 272
+    Top = 16
     object actIncluir: TAction
-      Caption = 'F2 - &Incluir'
-      ShortCut = 113
+      Caption = 'F1 - &Incluir'
+      ShortCut = 112
       OnExecute = actIncluirExecute
     end
     object actConfirmar: TAction
-      Caption = 'F4 - &Confirmar'
-      ShortCut = 115
+      Caption = 'F7 - &Salvar'
+      ShortCut = 118
       OnExecute = actConfirmarExecute
     end
     object actEditar: TAction
-      Caption = 'F8 - E&ditar'
-      ShortCut = 119
+      Caption = 'F2 - E&ditar'
+      ShortCut = 113
       OnExecute = actEditarExecute
     end
     object actSair: TAction
@@ -702,8 +703,8 @@ object telaCadUnidade: TtelaCadUnidade
       OnExecute = actSairExecute
     end
     object actExcluir: TAction
-      Caption = 'F5 - E&xcluir'
-      ShortCut = 116
+      Caption = 'F3 - E&xcluir'
+      ShortCut = 114
       OnExecute = actExcluirExecute
     end
   end

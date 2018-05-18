@@ -443,7 +443,7 @@ object telaCadFor: TtelaCadFor
       Width = 90
       Height = 45
       Action = actIncluir
-      Caption = 'F2 - &Incluir'
+      Caption = 'F1 - &Incluir'
       TabOrder = 0
       Glyph.Data = {
         B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -565,7 +565,6 @@ object telaCadFor: TtelaCadFor
       Height = 45
       Action = actExcluir
       Caption = 'F3 - &Excluir'
-      Enabled = False
       TabOrder = 1
       Glyph.Data = {
         B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -686,7 +685,7 @@ object telaCadFor: TtelaCadFor
       Width = 106
       Height = 45
       Action = actConfirmar
-      Caption = 'F4 - &Salvar'
+      Caption = 'F7 - &Salvar'
       Enabled = False
       TabOrder = 2
       Glyph.Data = {
@@ -808,7 +807,7 @@ object telaCadFor: TtelaCadFor
       Width = 104
       Height = 46
       Action = actCancelar
-      Caption = 'F5 - C&ancelar'
+      Caption = 'F4 - C&ancelar'
       Enabled = False
       TabOrder = 3
       Glyph.Data = {
@@ -930,7 +929,7 @@ object telaCadFor: TtelaCadFor
       Width = 107
       Height = 46
       Action = actPesquisar
-      Caption = 'F6 - &Pesquisar'
+      Caption = 'F5 - &Pesquisar'
       TabOrder = 4
       Glyph.Data = {
         B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -1172,7 +1171,7 @@ object telaCadFor: TtelaCadFor
       Width = 90
       Height = 46
       Action = actEditar
-      Caption = 'F8 - E&ditar'
+      Caption = 'F2 - E&ditar'
       TabOrder = 6
       Glyph.Data = {
         B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -1292,8 +1291,8 @@ object telaCadFor: TtelaCadFor
     Left = 704
     Top = 136
     object actIncluir: TAction
-      Caption = 'F2 - &Incluir'
-      ShortCut = 113
+      Caption = 'F1 - &Incluir'
+      ShortCut = 112
       OnExecute = actIncluirExecute
     end
     object actExcluir: TAction
@@ -1302,13 +1301,13 @@ object telaCadFor: TtelaCadFor
       OnExecute = actExcluirExecute
     end
     object actConfirmar: TAction
-      Caption = 'F4 - &Salvar'
-      ShortCut = 115
+      Caption = 'F7 - &Salvar'
+      ShortCut = 118
       OnExecute = actConfirmarExecute
     end
     object actCancelar: TAction
-      Caption = 'F5 - C&ancelar'
-      ShortCut = 116
+      Caption = 'F4 - C&ancelar'
+      ShortCut = 115
       OnExecute = actCancelarExecute
     end
     object actPesquisar: TAction
@@ -1322,8 +1321,8 @@ object telaCadFor: TtelaCadFor
       OnExecute = actFecharExecute
     end
     object actEditar: TAction
-      Caption = 'F8 - E&ditar'
-      ShortCut = 119
+      Caption = 'F2 - E&ditar'
+      ShortCut = 113
       OnExecute = actEditarExecute
     end
   end
