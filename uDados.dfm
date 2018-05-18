@@ -3545,10 +3545,6 @@ object telaDados: TtelaDados
     Left = 736
     Top = 80
   end
-  object qryLogin: TIBUpdateSQL
-    Left = 784
-    Top = 120
-  end
   object ibdsLogin: TIBDataSet
     Database = dbLogin
     Transaction = trnscLogin
@@ -4156,5 +4152,37 @@ object telaDados: TtelaDados
     CachedUpdates = False
     Left = 1160
     Top = 272
+  end
+  object qryLogin: TIBQuery
+    Database = dbLogin
+    Transaction = trnscLogin
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsLogin
+    SQL.Strings = (
+      'select * from LOGIN')
+    Left = 784
+    Top = 120
+    object qryLoginID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'LOGIN.ID'
+      Required = True
+    end
+    object qryLoginLOGIN: TIBStringField
+      FieldName = 'LOGIN'
+      Origin = 'LOGIN.LOGIN'
+      Required = True
+      Size = 18
+    end
+    object qryLoginSENHA: TIBStringField
+      FieldName = 'SENHA'
+      Origin = 'LOGIN.SENHA'
+      Required = True
+    end
+    object qryLoginADM: TIntegerField
+      FieldName = 'ADM'
+      Origin = 'LOGIN.ADM'
+    end
   end
 end

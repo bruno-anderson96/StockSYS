@@ -9,7 +9,7 @@ uses
   ACBrIntegrador, pcnConversao, Math, ACBrUtil, RLPrinters, Printers, ACBrSATMFe_integrador, pcnVFPe,
   ACBrDFeSSL, ExtCtrls, uConfig, uDados, uLancPedidos, IniFiles,
   ACBrSATExtratoReportClass, ACBrSATExtratoFortesFr, RLFilters, RLPDFFilter, uGerarNfe,
-  ComCtrls, uConfigEmit;
+  ComCtrls, uConfigEmit, ACBrValidador;
 
 type
   TtelaConfigSat = class(TForm)
@@ -404,6 +404,7 @@ begin
                         '</ce><e><n>SENHA XXX</n></e>;'+
                         '</linha_simples>';}
   end;
+  ACBrIntegrador1.EnviarPagamento();
 
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
   {Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;}

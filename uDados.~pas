@@ -371,7 +371,6 @@ type
     tblLogin: TIBTable;
     dbLogin: TIBDatabase;
     trnscLogin: TIBTransaction;
-    qryLogin: TIBUpdateSQL;
     ibdsLogin: TIBDataSet;
     tblLoginID: TIntegerField;
     tblLoginLOGIN: TIBStringField;
@@ -449,6 +448,11 @@ type
     tblEstoqueDATA: TDateTimeField;
     tblEstoqueTIPO: TIBStringField;
     tblProdutosESTOQUE: TIntegerField;
+    qryLogin: TIBQuery;
+    qryLoginID: TIntegerField;
+    qryLoginLOGIN: TIBStringField;
+    qryLoginSENHA: TIBStringField;
+    qryLoginADM: TIntegerField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
 
@@ -679,8 +683,8 @@ begin
   //Emitente
   tblEmitenteCEP.EditMask                := '00000-000;0';
   tblEmitenteTelefone.EditMask           := '(00)0000-0000;0';
-  tblEmitenteCNPJ.EditMask               := '000.000.000-00;0';
-  tblEmitenteINSCEST.EditMask            := '0000000000-0;0';
+  tblEmitenteCNPJ.EditMask               := '00.000.000/0000-00;0';
+  tblEmitenteINSCEST.EditMask            := '00000000-0;0';
   //Fornecedor
   tblFornecedoresCEP_END.EditMask        := '00000-000;0';
   tblFornecedoresTELEFONE.EditMask       := '(00)0000-0000;0';

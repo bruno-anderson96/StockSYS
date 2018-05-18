@@ -39,18 +39,24 @@ uses uDados, uPrincipal;
 
 procedure TtelaLogin.btnLoginClick(Sender: TObject);
 begin
-  if telaDados.tblLogin.Locate('login', edtLogin.Text, []) and
-     telaDados.tblLogin.Locate('senha', edtSenha.Text, []) then begin
-     telaPrincipal.Show;
-     telaLogin.Hide;
-     telaDados.qryEmitente.Close;
-     telaDados.qryEmitente.SQL.Clear;
-     telaDados.qryEmitente.SQL.Add('Select * From emitente where ID_LOGIN =');
-     telaDados.qryEmitente.SQL.Add(telaDados.tblLoginID.AsString);
-     telaDados.qryEmitente.Open;
+  {telaDados.qryLogin.Close;
+  telaDados.qryLogin.SQL.Clear;
+  telaDados.qryLogin.SQL.Add('Select * from LOGIN where login like ');
+  telaDados.qryLogin.SQL.Add(edtLogin.Text);
+  telaDados.qryLogin.Open;
+ }
+  if (telaDados.tblLogin.Locate('LOGIN', edtLogin.Text,[loCaseInsensitive])) and
+     (telaDados.tblLogin.Locate('SENHA', edtSenha.Text,[loCaseInsensitive])) then begin
+    telaPrincipal.Show;
+    telaLogin.Hide;
+    telaDados.qryEmitente.Close;
+    telaDados.qryEmitente.SQL.Clear;
+    telaDados.qryEmitente.SQL.Add('Select * From emitente where ID_LOGIN =');
+    telaDados.qryEmitente.SQL.Add(telaDados.tblLoginID.AsString);
+    telaDados.qryEmitente.Open;
   end else begin
     ShowMessage('Login ou Senha incorreto!');
-    edtLogin.SetFocus;
+    edtSenha.SetFocus;
   end;
 end;
 
