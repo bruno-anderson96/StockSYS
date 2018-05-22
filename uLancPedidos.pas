@@ -389,7 +389,7 @@ begin
     telaDados.tblPedidosID_CLIENTE.Value := 1;
     edtDin.SetFocus;
   end else begin
-    if edtTrc.Text = '0,00' then begin
+    if StrToFloat(edtTrc.Text) < 0 then begin
       edtDin.SetFocus;
       ShowMessage('Valor pago deve ser maior ou igual ao valor total da compra');
       abort;
@@ -671,11 +671,8 @@ begin
   edtCar.text:= formatCurr('#,##0.00',car);
 
   trc := (din + car) - StrToCurr(editVtotal.Text);
-  if trc < 0 then begin
-    edtTrc.Text := '0,00';
-  end else begin
     edtTrc.text:= FormatCurr('#,##0.00',trc);
-  end;
+  
 end;
 
 procedure TtelaLancPedidos.edtDinExit(Sender: TObject);
