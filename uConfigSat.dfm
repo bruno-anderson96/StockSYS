@@ -308,7 +308,7 @@ object telaConfigSat: TtelaConfigSat
       Top = 6
       Width = 329
       Height = 337
-      ActivePage = TabSheet2
+      ActivePage = TabSheet1
       TabOrder = 1
       object TabSheet1: TTabSheet
         Caption = 'MFe'
@@ -460,7 +460,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 15
           Width = 145
           Height = 21
-          ItemHeight = 0
+          ItemHeight = 13
           TabOrder = 0
         end
         object cbxPagCodigo: TComboBox
@@ -468,7 +468,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 78
           Width = 145
           Height = 21
-          ItemHeight = 0
+          ItemHeight = 13
           TabOrder = 1
         end
         object cbxModeloPosPrinter: TComboBox
@@ -476,7 +476,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 46
           Width = 145
           Height = 21
-          ItemHeight = 0
+          ItemHeight = 13
           TabOrder = 2
         end
       end

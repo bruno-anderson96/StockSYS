@@ -98,6 +98,7 @@ type
     procedure GetNumeroSessao(var Chave: Integer);
     procedure lerParams;
     procedure cancelaCfe;
+    procedure EnviaPagamento;
   public
     { Public declarations }
     num : integer;
@@ -390,11 +391,20 @@ begin
       cMP := mpCartaodeCredito;
       vMP := Pagto1;
     end;}
-
+    if StrToFloat(telaLancPedidos.edtCar.Text) > 0 then begin
+      with Pagto.Add do
+      begin
+        cMP := mpCartaodeCredito;
+        vMP := StrToFloat(telaLancPedidos.edtCar.Text);
+        cAdmC := 999;
+      end;
+    end;
+    if StrToFloat(telaLancPedidos.edtDin.Text) > 0 then begin
     with Pagto.Add do
-    begin
-      cMP := mpDinheiro;
-      vMP := TotalGeral;
+      begin
+        cMP := mpDinheiro;
+        vMP := StrToFloat(telaLancPedidos.edtDin.Text);
+      end;
     end;
 
     InfAdic.infCpl := 'Acesse www.projetoacbr.com.br para obter mais;informações sobre o componente ACBrSAT;'+
@@ -405,9 +415,9 @@ begin
                         '</linha_simples>';}
   end;
   {ACBrIntegrador1.EnviarPagamento(); }
-
+  EnviaPagamento;
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
-  Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;
+  {Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;}
   end;
 end;
 
@@ -806,6 +816,36 @@ begin
   begin
     LoadXML( ACBrSAT1.CFe.AsXMLString, Memo1 );
            }
+end;
+
+procedure TtelaCOnfigSat.EnviaPagamento;
+var
+  PagamentoMFe : TEnviarPagamento;
+  RespostaPagamentoMFe : TRespostaPagamento;
+begin
+  PagamentoMFe := TEnviarPagamento.Create;
+  try
+    with PagamentoMFe do
+    begin
+      Clear;
+      ChaveAcessoValidador := '25CFE38D-3B92-46C0-91CA-CFF751A82D3D';
+      ChaveRequisicao := '26359854-5698-1365-9856-965478231456';
+      Estabelecimento := '1';
+      SerialPOS := InputBox('SerialPOS','Informe o Serial do POS','ACBr-'+RandomName(8));
+      CNPJ := telaDados.tblEmitenteCNPJ.Text;
+      IcmsBase := 0.18;
+      ValorTotalVenda := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsCurrency;;
+      HabilitarMultiplosPagamentos := True;
+      HabilitarControleAntiFraude := False;
+      CodigoMoeda := 'BRL';
+      EmitirCupomNFCE := False;
+      OrigemPagamento := 'Caixa 1';
+    end;
+    RespostaPagamentoMFe := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).EnviarPagamento(PagamentoMFe);
+    ShowMessage(IntToStr(RespostaPagamentoMFe.IDPagamento));
+  finally
+    PagamentoMFe.Free;
+  end;
 end;
 
 end.

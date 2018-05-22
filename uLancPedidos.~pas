@@ -623,6 +623,8 @@ begin
 
   telaDados.cdsTempItens.EmptyDataSet;
  label10.Caption := 'Tecle F2 para Abrir Cupom';
+
+  if PanelCalc.Visible = true then PanelCalc.Visible := false;
 end;
 
 procedure TtelaLancPedidos.editDescExit(Sender: TObject);

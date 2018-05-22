@@ -1537,7 +1537,7 @@ object telaLancPedidos: TtelaLancPedidos
               Font.Name = 'Nirmala UI'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 0
+              TabOrder = 1
               OnExit = edtCarExit
             end
             object edtDin: TEdit
@@ -1551,7 +1551,7 @@ object telaLancPedidos: TtelaLancPedidos
               Font.Name = 'Nirmala UI'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 1
+              TabOrder = 0
               OnExit = edtDinExit
             end
             object edtTrc: TEdit
