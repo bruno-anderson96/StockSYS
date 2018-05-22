@@ -407,7 +407,7 @@ begin
   {ACBrIntegrador1.EnviarPagamento(); }
 
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
-  {Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;}
+  Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;
   end;
 end;
 
