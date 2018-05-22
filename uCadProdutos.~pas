@@ -77,13 +77,11 @@ type
     Image1: TImage;
     btnEditar: TBitBtn;
     Editar: TAction;
-    cbCsosn: TComboBox;
     Label20: TLabel;
     GroupBox5: TGroupBox;
     Label21: TLabel;
     edtCfop: TDBEdit;
     Label22: TLabel;
-    cbCst: TComboBox;
     btnEstoque: TSpeedButton;
     panelEstoque: TPanel;
     Label25: TLabel;
@@ -94,6 +92,8 @@ type
     cbTipo: TComboBox;
     SpeedButton1: TSpeedButton;
     Label24: TLabel;
+    cbCsosn: TComboBox;
+    cbCst: TComboBox;
     procedure FormShow(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -164,6 +164,25 @@ begin
    editCompra.Text  := '0,00';
    editLucro.Text   := '0,00';
    editVenda.Text   := '0,00';
+
+   if editId.Text <> '' then begin
+
+    telaDados.qryCsosn.Close;
+    telaDados.qryCsosn.SQL.Clear;
+    telaDados.qryCsosn.SQL.Add('Select * from CSOSN where id = ');
+    telaDados.qryCsosn.SQL.Add(telaDados.tblProdutosID_CSOSN.AsString);
+    telaDados.qryCsosn.Open;
+
+    telaDados.qryCst.Close;
+    telaDados.qryCst.SQL.Clear;
+    telaDados.qryCst.SQL.Add('Select * from CST where id =');
+    telaDados.qryCst.SQL.Add(telaDados.tblProdutosID_CST.AsString);
+    telaDados.qryCst.Open;
+
+    cbCsosn.ItemIndex := telaDados.qryCsosn.FieldByName('ID').Value;
+    cbCst.ItemIndex := telaDados.qryCst.FieldByName('ID').Value;
+
+   end;
 end;
 
 procedure TtelaCadProdutos.btnFecharClick(Sender: TObject);

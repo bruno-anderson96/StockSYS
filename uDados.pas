@@ -447,12 +447,18 @@ type
     tblEstoqueQUANTIDADE: TIntegerField;
     tblEstoqueDATA: TDateTimeField;
     tblEstoqueTIPO: TIBStringField;
-    tblProdutosESTOQUE: TIntegerField;
     qryLogin: TIBQuery;
     qryLoginID: TIntegerField;
     qryLoginLOGIN: TIBStringField;
     qryLoginSENHA: TIBStringField;
     qryLoginADM: TIntegerField;
+    tblProdutosESTOQUE: TIntegerField;
+    tblCstID: TIntegerField;
+    tblCstCODIGO: TIntegerField;
+    tblCstDESCRICAO: TIBStringField;
+    tblCsosnID: TIntegerField;
+    tblCsosnCODIGO: TIntegerField;
+    tblCsosnDESCRICAO: TMemoField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
 

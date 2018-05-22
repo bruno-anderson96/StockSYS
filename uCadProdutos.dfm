@@ -1727,15 +1727,6 @@ object telaCadProdutos: TtelaCadProdutos
         Caption = 'CST'
         FocusControl = editEan
       end
-      object cbCsosn: TComboBox
-        Left = 64
-        Top = 20
-        Width = 281
-        Height = 21
-        Enabled = False
-        ItemHeight = 13
-        TabOrder = 0
-      end
       object edtCfop: TDBEdit
         Left = 400
         Top = 48
@@ -1744,22 +1735,31 @@ object telaCadProdutos: TtelaCadProdutos
         DataField = 'CFOP'
         DataSource = telaDados.dsProdutos
         Enabled = False
-        TabOrder = 2
+        TabOrder = 0
         OnKeyPress = edtCfopKeyPress
       end
-      object cbCst: TComboBox
-        Left = 64
-        Top = 48
-        Width = 281
+      object cbCsosn: TComboBox
+        Left = 72
+        Top = 16
+        Width = 273
         Height = 21
         Enabled = False
         ItemHeight = 13
         TabOrder = 1
       end
+      object cbCst: TComboBox
+        Left = 72
+        Top = 48
+        Width = 273
+        Height = 21
+        Enabled = False
+        ItemHeight = 13
+        TabOrder = 2
+      end
     end
     object panelEstoque: TPanel
-      Left = 208
-      Top = 120
+      Left = 520
+      Top = 200
       Width = 257
       Height = 210
       TabOrder = 16

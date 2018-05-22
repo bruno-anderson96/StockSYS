@@ -906,7 +906,7 @@ object telaConfigSat: TtelaConfigSat
   object ACBrSAT1: TACBrSAT
     Integrador = ACBrIntegrador1
     Extrato = ACBrSATExtratoESCPOS1
-    NomeDLL = 'C:\SAT\SAT.dll'
+    NomeDLL = 'C:\Users\Bruno\Documents\StockSYS\mfe.dll'
     ValidarNumeroSessaoResposta = True
     NumeroTentativasValidarSessao = 2
     Config.infCFe_versaoDadosEnt = 0.070000000000000010

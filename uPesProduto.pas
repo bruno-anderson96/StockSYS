@@ -85,6 +85,21 @@ begin
 
   telaDados.GeraBarrasEAN13(telaCadProdutos.editEan.Text, telaCadProdutos.Image1.Canvas);
 
+  telaDados.qryCsosn.Close;
+  telaDados.qryCsosn.SQL.Clear;
+  telaDados.qryCsosn.SQL.Add('Select * from CSOSN where id = ');
+  telaDados.qryCsosn.SQL.Add(telaDados.tblProdutosID_CSOSN.AsString);
+  telaDados.qryCsosn.Open;
+
+  telaDados.qryCst.Close;
+  telaDados.qryCst.SQL.Clear;
+  telaDados.qryCst.SQL.Add('Select * from CST where id =');
+  telaDados.qryCst.SQL.Add(telaDados.tblProdutosID_CST.AsString);
+  telaDados.qryCst.Open;
+
+  telaCadProdutos.cbCsosn.ItemIndex := telaDados.qryCsosn.FieldByName('ID').Value;
+  telaCadProdutos.cbCst.ItemIndex := telaDados.qryCst.FieldByName('ID').Value;
+
 
 
   telaPesProduto.Close;

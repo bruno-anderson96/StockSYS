@@ -183,7 +183,7 @@ begin
   Config.emit_indRatISSQN := irNao;    {
   Config.emit_CNPJ := '14200166000166'; }
   Config.emit_IE := telaDados.qryEmitente.FieldByName('INSCEST').AsString;
-  Config.emit_IM := '123123';
+  Config.emit_IM := '';
   Config.emit_CNPJ := telaDados.qryEmitente.FieldByName('CNPJ').AsString;
   {ACBrSAT1.OnGetNumeroSessao := GetNumeroSessao;}
   end;
@@ -404,10 +404,10 @@ begin
                         '</ce><e><n>SENHA XXX</n></e>;'+
                         '</linha_simples>';}
   end;
-  ACBrIntegrador1.EnviarPagamento();
+  {ACBrIntegrador1.EnviarPagamento(); }
 
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
-  {Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;}
+  Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda; 
   end;
 end;
 
@@ -538,9 +538,8 @@ var
   tini, tfim: TDateTime;
 begin
   AjustarCfe;
-  Memo1.Text:= ACBrSAT1.AssociarAssinatura('04496789000174'+'07954597000152','+g/URBgyzvmtpp0dTuiHUzaGvPdcmGYpOxxwuQuZoSw9NYhzPcFqcTGdzZfeJJoulZcGLkMaMgKWocMD4keGSEf9M6fh51Auyo2Ofhct0XCjpvDkXGoaZoJ62kD/198syaUr7oOQ1fLSzzTVzzCRCStfPSkZmpbxrDkKVHrmbrUJk04p53lC9yGvxYxgnMDxzn'+'QdO6Z7BUlJcoXVaOKj/Ll71URJjo4/25R3izY8rvchfA1rhnxj/yWTStt9lPnTQ7qPXugdGUHB5QM4x0+EN7KUsMNHIu3dUN6cO7Acey/CvD3tAdHdn3Iyw==');
-  {PrepararImpressao;
-  ACBrSAT1.ImprimirExtrato;}
+  PrepararImpressao;
+  ACBrSAT1.ImprimirExtrato;
    {
   tini := now;
   Memo1.Lines.Add(ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe);

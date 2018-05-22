@@ -1,8 +1,8 @@
 object telaDados: TtelaDados
-  Left = 137
-  Top = 98
+  Left = 167
+  Top = 147
   Width = 1212
-  Height = 557
+  Height = 783
   Caption = 'Data m'#243'dulo'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -620,9 +620,7 @@ object telaDados: TtelaDados
       FieldName = 'ID_CST'
     end
     object tblProdutosESTOQUE: TIntegerField
-      FieldKind = fkCalculated
       FieldName = 'ESTOQUE'
-      Calculated = True
     end
   end
   object trnscProdutos: TIBTransaction
@@ -3596,6 +3594,19 @@ object telaDados: TtelaDados
     TableName = 'CSOSN'
     Left = 784
     Top = 224
+    object tblCsosnID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object tblCsosnCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object tblCsosnDESCRICAO: TMemoField
+      FieldName = 'DESCRICAO'
+      BlobType = ftMemo
+      Size = 8
+    end
   end
   object qryCsosn: TIBQuery
     Database = dbCsosn
@@ -3631,6 +3642,7 @@ object telaDados: TtelaDados
     Top = 224
   end
   object dsCst: TDataSource
+    DataSet = tblCst
     Left = 776
     Top = 376
   end
@@ -3665,6 +3677,17 @@ object telaDados: TtelaDados
     TableName = 'CST'
     Left = 776
     Top = 416
+    object tblCstID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object tblCstCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+    end
+    object tblCstDESCRICAO: TIBStringField
+      FieldName = 'DESCRICAO'
+      Size = 150
+    end
   end
   object trnscCst: TIBTransaction
     Active = True
@@ -3690,6 +3713,7 @@ object telaDados: TtelaDados
   object qryCst: TIBQuery
     Database = dbCst
     Transaction = trnscCst
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsCst
