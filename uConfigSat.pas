@@ -415,9 +415,13 @@ begin
                         '</linha_simples>';}
   end;
   {ACBrIntegrador1.EnviarPagamento(); }
-  EnviaPagamento;
+  if StrToFloat(telaLancPedidos.edtCar.Text) > 0 then begin
+    EnviaPagamento;
+  end;
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
   {Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;}
+  ShowMessage(ACBrSAT1.CFe.infCFe.ID);
+  
   end;
 end;
 

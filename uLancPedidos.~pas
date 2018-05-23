@@ -130,6 +130,7 @@ type
     procedure btnExcClick(Sender: TObject);
     procedure btnFecClick(Sender: TObject);
     procedure edtQtKeyPress(Sender: TObject; var Key: Char);
+    procedure PesquisarExecute(Sender: TObject);
 
   private
 
@@ -386,6 +387,9 @@ begin
 
   if PanelCalc.Visible = false then begin
     PanelCalc.Visible := true;
+    edtTrc.Clear;
+    edtDin.Clear;
+    edtCar.Clear;
     telaDados.tblPedidosID_CLIENTE.Value := 1;
     edtDin.SetFocus;
   end else begin
@@ -839,6 +843,11 @@ begin
     edtItem.SetFocus;
     edtQt.Visible := false;
   end;
+end;
+
+procedure TtelaLancPedidos.PesquisarExecute(Sender: TObject);
+begin
+  telaGerarNfe.Show;
 end;
 
 end.

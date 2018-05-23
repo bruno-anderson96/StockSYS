@@ -1972,6 +1972,7 @@ object telaLancPedidos: TtelaLancPedidos
     object Pesquisar: TAction
       Caption = 'F9 - &Pesquisar'
       ShortCut = 120
+      OnExecute = PesquisarExecute
     end
     object Imprimir: TAction
       Caption = 'F7 - I&mprimir'
