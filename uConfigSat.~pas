@@ -99,6 +99,7 @@ type
     procedure lerParams;
     procedure cancelaCfe;
     procedure EnviaPagamento;
+    procedure VerificaStatusValidador;
   public
     { Public declarations }
     num : integer;
@@ -417,6 +418,7 @@ begin
   {ACBrIntegrador1.EnviarPagamento(); }
   if StrToFloat(telaLancPedidos.edtCar.Text) > 0 then begin
     EnviaPagamento;
+    VerificaStatusValidador;
   end;
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
   {Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;}
@@ -822,7 +824,7 @@ begin
            }
 end;
 
-procedure TtelaCOnfigSat.EnviaPagamento;
+procedure TtelaConfigSat.EnviaPagamento;
 var
   PagamentoMFe : TEnviarPagamento;
   RespostaPagamentoMFe : TRespostaPagamento;
@@ -857,11 +859,42 @@ begin
     telaDados.tblPedidos.Edit;
     telaDados.tblPedidos.FieldByName('IDPagamento').Value := RespostaPagamentoMFe.IDPagamento;
     telaDados.tblPedidos.Post;
+    telaDados.tblPedidos.ApplyUpdates;
     telaDados.tblPedidos.Close;
+    ShowMessage(IntToStr(RespostaPagamentoMfe.IDPagamento));
   finally
     PagamentoMFe.Free;
     telaDados.tblEmitente.Close;
   end;
+end;
+
+procedure TtelaConfigSat.VerificaStatusValidador;
+var
+  VerificarStatusValidador : TVerificarStatusValidador;
+  RespostaVerificarStatusValidador : TRespostaVerificarStatusValidador;
+begin
+  VerificarStatusValidador := TVerificarStatusValidador.Create;
+  telaDados.tblPedidos.Open;
+  telaDados.tblPedidos.Last;
+  telaDados.tblEmitente.Open;
+  telaDados.tblEmitente.Last;
+  try
+    with VerificarStatusValidador do
+    begin
+      Clear;
+      ChaveAcessoValidador := '25CFE38D-3B92-46C0-91CA-CFF751A82D3D';
+      IDFila := telaDados.tblPedidosIDPAGAMENTO.AsInteger;
+      CNPJ:= telaDados.tblEmitenteCNPJ.Text;
+    end;
+    ACBrIntegrador1.VerificarStatusValidador(VerificarStatusValidador);
+    RespostaVerificarStatusValidador := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).VerificarStatusValidador(VerificarStatusValidador) ;
+  finally
+    VerificarStatusValidador.Free;
+  end;
+  telaDados.tblEmitente.Close;
+  telaDados.tblPedidos.Close;
+
+  ShowMessage(RespostaVerificarStatusValidador.CodigoAutorizacao);
 end;
 
 end.
