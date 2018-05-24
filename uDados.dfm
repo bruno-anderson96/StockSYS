@@ -1171,6 +1171,15 @@ object telaDados: TtelaDados
         Name = 'CHAVENFE'
         DataType = ftString
         Size = 50
+      end
+      item
+        Name = 'CHAVECFE'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'IDPAGAMENTO'
+        DataType = ftInteger
       end>
     IndexDefs = <
       item
@@ -1340,6 +1349,13 @@ object telaDados: TtelaDados
     object tblPedidosCHAVENFE: TIBStringField
       FieldName = 'CHAVENFE'
       Size = 50
+    end
+    object tblPedidosCHAVECFE: TIBStringField
+      FieldName = 'CHAVECFE'
+      Size = 50
+    end
+    object tblPedidosIDPAGAMENTO: TIntegerField
+      FieldName = 'IDPAGAMENTO'
     end
   end
   object dbClientes: TIBDatabase

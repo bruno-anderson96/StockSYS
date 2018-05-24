@@ -827,14 +827,16 @@ var
   PagamentoMFe : TEnviarPagamento;
   RespostaPagamentoMFe : TRespostaPagamento;
 begin
+  telaDados.tblEmitente.Open;
+  telaDados.tblEmitente.Last;
   PagamentoMFe := TEnviarPagamento.Create;
   try
     with PagamentoMFe do
     begin
       Clear;
       ChaveAcessoValidador := '25CFE38D-3B92-46C0-91CA-CFF751A82D3D';
-      ChaveRequisicao := 'yhY3mGrXrkySDjjDfELXEw==';
-      Estabelecimento := '1';
+      ChaveRequisicao := '26359854-5698-1365-9856-965478231456';
+      Estabelecimento := '10';
       SerialPOS := InputBox('SerialPOS','Informe o Serial do POS','ACBr-'+RandomName(8));
       CNPJ := telaDados.tblEmitenteCNPJ.Text;
       IcmsBase := 0.18;
@@ -845,10 +847,13 @@ begin
       EmitirCupomNFCE := False;
       OrigemPagamento := 'Caixa 1';
     end;
+    ACBrIntegrador1.EnviarPagamento(PagamentoMFe);
     RespostaPagamentoMFe := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).EnviarPagamento(PagamentoMFe);
+    Memo1.Lines.Text := RespostaPagamentoMFe.StatusPagamento + ' ' + RespostaPagamentoMFe.IntegradorResposta.Codigo;
     ShowMessage(IntToStr(RespostaPagamentoMFe.IDPagamento));
   finally
     PagamentoMFe.Free;
+    telaDados.tblEmitente.Close;
   end;
 end;
 

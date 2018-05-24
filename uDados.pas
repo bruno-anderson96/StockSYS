@@ -459,6 +459,8 @@ type
     tblCsosnID: TIntegerField;
     tblCsosnCODIGO: TIntegerField;
     tblCsosnDESCRICAO: TMemoField;
+    tblPedidosCHAVECFE: TIBStringField;
+    tblPedidosIDPAGAMENTO: TIntegerField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
 
