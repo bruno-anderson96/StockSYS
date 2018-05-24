@@ -100,6 +100,7 @@ type
     procedure cancelaCfe;
     procedure EnviaPagamento;
     procedure VerificaStatusValidador;
+    procedure RespostaFiscal;
   public
     { Public declarations }
     num : integer;
@@ -419,11 +420,11 @@ begin
   if StrToFloat(telaLancPedidos.edtCar.Text) > 0 then begin
     EnviaPagamento;
     VerificaStatusValidador;
+    RespostaFiscal;
   end;
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
-  {Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;}
-  ShowMessage(ACBrSAT1.CFe.infCFe.ID);
-  
+  Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;
+
   end;
 end;
 
@@ -851,7 +852,7 @@ begin
       EmitirCupomNFCE := False;
       OrigemPagamento := 'Caixa 1';
     end;
-    ACBrIntegrador1.EnviarPagamento(PagamentoMFe);
+    {ACBrIntegrador1.EnviarPagamento(PagamentoMFe);}
     RespostaPagamentoMFe := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).EnviarPagamento(PagamentoMFe);
     {Memo1.Lines.Text := RespostaPagamentoMFe.StatusPagamento + ' ' + RespostaPagamentoMFe.IntegradorResposta.Codigo;}
     telaDados.tblPedidos.Open;
@@ -888,6 +889,7 @@ begin
     end;
     ACBrIntegrador1.VerificarStatusValidador(VerificarStatusValidador);
     RespostaVerificarStatusValidador := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).VerificarStatusValidador(VerificarStatusValidador) ;
+    ShowMessage(IntToStr(RespostaVerificarStatusValidador.IDFila));
   finally
     VerificarStatusValidador.Free;
   end;
@@ -895,6 +897,35 @@ begin
   telaDados.tblPedidos.Close;
 
   ShowMessage(RespostaVerificarStatusValidador.CodigoAutorizacao);
+end;
+
+procedure TtelaConfigSat.RespostaFiscal;
+var
+ RespostaFiscal : TRespostaFiscal;
+ RetornoRespostaFiscal : TRetornoRespostaFiscal;
+Begin
+  RespostaFiscal := TRespostaFiscal.Create;
+    try
+      with RespostaFiscal do
+      begin
+        Clear;
+        ChaveAcessoValidador := '25CFE38D-3B92-46C0-91CA-CFF751A82D3D';
+        IDFila := 0;
+        ChaveAcesso := '35170408723218000186599000113100000279731880';
+        Nsu := '1674068';
+        NumerodeAprovacao := '1234';
+        Bandeira := 'VISA';
+        Adquirente := 'STONE';
+        {if Assigned(ACBrSAT1.CFe) then
+          ImpressaoFiscal := '<![CDATA['+ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe+']]>';}
+        NumeroDocumento := '1674068';
+        CNPJ:= telaDados.tblEmitenteCNPJ.Text;
+      end;
+      RetornoRespostaFiscal := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).RespostaFiscal(RespostaFiscal);
+      ShowMessage('IDFILA: '+RetornoRespostaFiscal.IdRespostaFiscal);
+    finally
+      RespostaFiscal.Free;
+    end;
 end;
 
 end.
