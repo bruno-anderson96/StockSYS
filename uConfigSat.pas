@@ -829,6 +829,8 @@ var
 begin
   telaDados.tblEmitente.Open;
   telaDados.tblEmitente.Last;
+  telaDados.tblPedidos.ApplyUpdates;
+  telaDados.tblPedidos.Close;
   PagamentoMFe := TEnviarPagamento.Create;
   try
     with PagamentoMFe do
@@ -850,7 +852,12 @@ begin
     ACBrIntegrador1.EnviarPagamento(PagamentoMFe);
     RespostaPagamentoMFe := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).EnviarPagamento(PagamentoMFe);
     {Memo1.Lines.Text := RespostaPagamentoMFe.StatusPagamento + ' ' + RespostaPagamentoMFe.IntegradorResposta.Codigo;}
-    ShowMessage(IntToStr(RespostaPagamentoMFe.IDPagamento));
+    telaDados.tblPedidos.Open;
+    telaDados.tblPedidos.Last;
+    telaDados.tblPedidos.Edit;
+    telaDados.tblPedidos.FieldByName('IDPagamento').Value := RespostaPagamentoMFe.IDPagamento;
+    telaDados.tblPedidos.Post;
+    telaDados.tblPedidos.Close;
   finally
     PagamentoMFe.Free;
     telaDados.tblEmitente.Close;
