@@ -1,8 +1,8 @@
 object telaDados: TtelaDados
-  Left = 167
-  Top = 147
-  Width = 1212
-  Height = 783
+  Left = 140
+  Top = 91
+  Width = 1193
+  Height = 622
   Caption = 'Data m'#243'dulo'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -266,6 +266,19 @@ object telaDados: TtelaDados
     Width = 86
     Height = 20
     Caption = 'ESTOQUE'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object CIDADES: TLabel
+    Left = 1060
+    Top = 347
+    Width = 123
+    Height = 20
+    Caption = 'PAGAMENTOS'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -3943,31 +3956,11 @@ object telaDados: TtelaDados
       Size = 30
     end
   end
-  object tblCidades: TIBTable
-    Database = dbCidades
+  object tblPagamentos: TIBTable
+    Database = dbPagamentos
     Transaction = trnscCidades
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
-    FieldDefs = <
-      item
-        Name = 'ID'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'ID_ESTADO'
-        DataType = ftInteger
-      end
-      item
-        Name = 'CIDADE'
-        DataType = ftString
-        Size = 60
-      end
-      item
-        Name = 'IBGE_CIDADE'
-        DataType = ftInteger
-      end>
     IndexDefs = <
       item
         Name = 'PK_CIDADES_1'
@@ -3975,21 +3968,21 @@ object telaDados: TtelaDados
         Options = [ixUnique]
       end>
     StoreDefs = True
-    TableName = 'CIDADES'
+    TableName = 'PAGAMENTOS'
     Left = 952
     Top = 416
-    object tblCidadesID: TIntegerField
+    object tblPagamentosID: TIntegerField
       FieldName = 'ID'
       Required = True
     end
-    object tblCidadesID_ESTADO: TIntegerField
+    object tblPagamentosID_ESTADO: TIntegerField
       FieldName = 'ID_ESTADO'
     end
-    object tblCidadesCIDADE: TIBStringField
+    object tblPagamentosCIDADE: TIBStringField
       FieldName = 'CIDADE'
       Size = 60
     end
-    object tblCidadesIBGE_CIDADE: TIntegerField
+    object tblPagamentosIBGE_CIDADE: TIntegerField
       FieldName = 'IBGE_CIDADE'
     end
   end
@@ -4224,5 +4217,137 @@ object telaDados: TtelaDados
       FieldName = 'ADM'
       Origin = 'LOGIN.ADM'
     end
+  end
+  object qryPagamentos: TIBQuery
+    Database = dbPagamentos
+    Transaction = trnscPagamento
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsPagamentos
+    SQL.Strings = (
+      'select * from PAGAMENTO')
+    Left = 1112
+    Top = 456
+  end
+  object dbPagamentos: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    DefaultTransaction = trnscPagamento
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 1160
+    Top = 416
+  end
+  object tblPagamento: TIBTable
+    Database = dbPagamentos
+    Transaction = trnscPagamento
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CODAUT'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'INSTFIN'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'DONOCARTAO'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'PARCELAS'
+        DataType = ftInteger
+      end
+      item
+        Name = 'QTRDIG'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CODPAG'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'VRPAG'
+        DataType = ftBCD
+        Precision = 18
+        Size = 2
+      end
+      item
+        Name = 'IDRESPFISC'
+        DataType = ftInteger
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_PAGAMENTO'
+        Fields = 'ID'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'PAGAMENTO'
+    Left = 1112
+    Top = 416
+    object tblPagamentoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object tblPagamentoCODAUT: TIBStringField
+      FieldName = 'CODAUT'
+      Size = 15
+    end
+    object tblPagamentoINSTFIN: TIBStringField
+      FieldName = 'INSTFIN'
+      Size = 30
+    end
+    object tblPagamentoDONOCARTAO: TIBStringField
+      FieldName = 'DONOCARTAO'
+      Size = 50
+    end
+    object tblPagamentoPARCELAS: TIntegerField
+      FieldName = 'PARCELAS'
+    end
+    object tblPagamentoQTRDIG: TIntegerField
+      FieldName = 'QTRDIG'
+    end
+    object tblPagamentoCODPAG: TIBStringField
+      FieldName = 'CODPAG'
+    end
+    object tblPagamentoVRPAG: TIBBCDField
+      FieldName = 'VRPAG'
+      Precision = 18
+      Size = 2
+    end
+    object tblPagamentoIDRESPFISC: TIntegerField
+      FieldName = 'IDRESPFISC'
+    end
+  end
+  object trnscPagamento: TIBTransaction
+    Active = True
+    DefaultDatabase = dbPagamentos
+    AutoStopAction = saNone
+    Left = 1064
+    Top = 416
+  end
+  object dsPagamentos: TDataSource
+    DataSet = tblPagamento
+    Left = 1112
+    Top = 376
   end
 end

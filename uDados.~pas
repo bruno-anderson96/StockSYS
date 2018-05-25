@@ -409,7 +409,7 @@ type
     dsBairros: TDataSource;
     tblBairros: TIBTable;
     tblRuas: TIBTable;
-    tblCidades: TIBTable;
+    tblPagamentos: TIBTable;
     qryRuas: TIBQuery;
     qryBairros: TIBQuery;
     qryCidades: TIBQuery;
@@ -428,10 +428,10 @@ type
     tblRuasRUA: TIBStringField;
     tblRuasCEP: TIntegerField;
     tblRuasTIPO: TIBStringField;
-    tblCidadesID: TIntegerField;
-    tblCidadesID_ESTADO: TIntegerField;
-    tblCidadesCIDADE: TIBStringField;
-    tblCidadesIBGE_CIDADE: TIntegerField;
+    tblPagamentosID: TIntegerField;
+    tblPagamentosID_ESTADO: TIntegerField;
+    tblPagamentosCIDADE: TIBStringField;
+    tblPagamentosIBGE_CIDADE: TIntegerField;
     tblBairrosID: TIntegerField;
     tblBairrosID_CIDADES: TIntegerField;
     tblBairrosBAIRROS: TIBStringField;
@@ -461,6 +461,21 @@ type
     tblCsosnDESCRICAO: TMemoField;
     tblPedidosCHAVECFE: TIBStringField;
     tblPedidosIDPAGAMENTO: TIntegerField;
+    CIDADES: TLabel;
+    qryPagamentos: TIBQuery;
+    dbPagamentos: TIBDatabase;
+    tblPagamento: TIBTable;
+    trnscPagamento: TIBTransaction;
+    dsPagamentos: TDataSource;
+    tblPagamentoID: TIntegerField;
+    tblPagamentoCODAUT: TIBStringField;
+    tblPagamentoINSTFIN: TIBStringField;
+    tblPagamentoDONOCARTAO: TIBStringField;
+    tblPagamentoPARCELAS: TIntegerField;
+    tblPagamentoQTRDIG: TIntegerField;
+    tblPagamentoCODPAG: TIBStringField;
+    tblPagamentoVRPAG: TIBBCDField;
+    tblPagamentoIDRESPFISC: TIntegerField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
 

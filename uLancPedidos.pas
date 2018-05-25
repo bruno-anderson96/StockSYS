@@ -371,7 +371,6 @@ end;
 procedure TtelaLancPedidos.ConfirmarExecute(Sender: TObject);
 var estoque : integer;
 begin
-
   if editDtCad.Text = '' then
   begin
     ShowMessage('Preencha a data de cadastro');

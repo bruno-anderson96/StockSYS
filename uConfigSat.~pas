@@ -829,6 +829,7 @@ procedure TtelaConfigSat.EnviaPagamento;
 var
   PagamentoMFe : TEnviarPagamento;
   RespostaPagamentoMFe : TRespostaPagamento;
+  nv : String;
 begin
   telaDados.tblEmitente.Open;
   telaDados.tblEmitente.Last;
@@ -839,13 +840,20 @@ begin
     with PagamentoMFe do
     begin
       Clear;
+      ValorTotalVenda := StrToCurr(telaLancPedidos.edtCar.Text);
+        if ValorTotalVenda <> telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsCurrency then begin
+          if MessageDlg('Valor pago diferente do valor total da nota, Deseja Prosseguir?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
+            nv := InputBox('ValorTotalVenda', 'Valor à ser pago', telaLancPedidos.edtCar.Text);
+            ValorTotalVenda := StrToFloat(nv);
+          end;
+       end;
       ChaveAcessoValidador := '25CFE38D-3B92-46C0-91CA-CFF751A82D3D';
       ChaveRequisicao := '26359854-5698-1365-9856-965478231456';
-      Estabelecimento := '10';
+      Estabelecimento := '1';
       SerialPOS := InputBox('SerialPOS','Informe o Serial do POS','ACBr-'+RandomName(8));
       CNPJ := telaDados.tblEmitenteCNPJ.Text;
       IcmsBase := 0.18;
-      ValorTotalVenda := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsCurrency;;
+
       HabilitarMultiplosPagamentos := True;
       HabilitarControleAntiFraude := False;
       CodigoMoeda := 'BRL';
@@ -887,16 +895,34 @@ begin
       IDFila := telaDados.tblPedidosIDPAGAMENTO.AsInteger;
       CNPJ:= telaDados.tblEmitenteCNPJ.Text;
     end;
+
     ACBrIntegrador1.VerificarStatusValidador(VerificarStatusValidador);
     RespostaVerificarStatusValidador := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).VerificarStatusValidador(VerificarStatusValidador) ;
+    telaDados.tblPagamento.Open;
+    telaDados.tblPagamento.Insert;
+    telaDados.tblPagamentoID.Value := RespostaVerificarStatusValidador.IDFila;
+    telaDados.tblPagamentoCODAUT.Value := RespostaVerificarStatusValidador.CodigoAutorizacao;
+    telaDados.tblPagamentoINSTFIN.Value := RespostaVerificarStatusValidador.InstituicaoFinanceira;
+    telaDados.tblPagamentoDONOCARTAO.Value := RespostaVerificarStatusValidador.DonoCartao;
+    telaDados.tblPagamentoPARCELAS.Value := RespostaVerificarStatusValidador.Parcelas;
+    telaDados.tblPagamentoQTRDIG.Value := RespostaVerificarStatusValidador.UltimosQuatroDigitos;
+    telaDados.tblPagamentoCODPAG.Value := RespostaVerificarStatusValidador.CodigoPagamento;
+    telaDados.tblPagamentoVRPAG.Value := RespostaVerificarStatusValidador.ValorPagamento;
+
     ShowMessage(IntToStr(RespostaVerificarStatusValidador.IDFila));
+    ShowMessage('Codigo autorizacao: ' + RespostaVerificarStatusValidador.CodigoAutorizacao);
+    ShowMessage('Instituicao: ' +RespostaVerificarStatusValidador.InstituicaoFinanceira);
+    ShowMessage('Dono do cartao: ' +RespostaVerificarStatusValidador.DonoCartao);
+    ShowMessage('Parcelas: ' + intToStr(RespostaVerificarStatusValidador.Parcelas));
+    ShowMessage('4 dig: ' + intToStr(RespostaVerificarStatusValidador.UltimosQuatroDigitos));
+    ShowMessage('codigo pagamento: ' + RespostaVerificarStatusValidador.CodigoPagamento);
+    ShowMessage('Valor Pagamento: ' + FloatToStr(RespostaVerificarStatusValidador.ValorPagamento));
   finally
     VerificarStatusValidador.Free;
   end;
   telaDados.tblEmitente.Close;
   telaDados.tblPedidos.Close;
 
-  ShowMessage(RespostaVerificarStatusValidador.CodigoAutorizacao);
 end;
 
 procedure TtelaConfigSat.RespostaFiscal;
@@ -922,7 +948,10 @@ Begin
         CNPJ:= telaDados.tblEmitenteCNPJ.Text;
       end;
       RetornoRespostaFiscal := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).RespostaFiscal(RespostaFiscal);
-      ShowMessage('IDFILA: '+RetornoRespostaFiscal.IdRespostaFiscal);
+      telaDados.tblPagamentoIDRESPFISC.Value := StrToInt(RetornoRespostaFiscal.IdRespostaFiscal);
+      telaDados.tblPagamento.Post;
+      telaDados.tblPagamento.Close;
+      ShowMessage('IDUNICO: '+RetornoRespostaFiscal.IdRespostaFiscal);
     finally
       RespostaFiscal.Free;
     end;
