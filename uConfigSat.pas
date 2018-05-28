@@ -429,7 +429,7 @@ begin
   {telaDados.tblPedidosPATH.Value := ExtractFilePath(Application.ExeName) + 'Enviado\CFe\20' + FormatDateTime('yy',Date)+ '\' + FormatDateTime('mm', Date) +'\'+ FormatDateTime('dd', Date)+ '\' + ACBrSAT1.CFe.infCFe.ID +'.xml';
   }
   telaDados.tblPedidosPATH.Value := ACBrSAT1.NomeBancoCfe;
-  telaDados.tblPedidosCHAVECFE.Value := 'Cfe' + ACBrSAT1.CFe.infCFe.ID;
+  telaDados.tblPedidosCHAVECFE.Value := 'CFe' + ACBrSAT1.CFe.infCFe.ID;
   telaDados.tblPedidos.Post;
 
 

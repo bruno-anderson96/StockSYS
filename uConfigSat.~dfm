@@ -1,6 +1,6 @@
 object telaConfigSat: TtelaConfigSat
-  Left = 23
-  Top = 153
+  Left = 92
+  Top = 270
   Width = 860
   Height = 386
   Caption = 'Configura'#231#227'o SAT'
