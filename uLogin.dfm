@@ -1,5 +1,5 @@
 object telaLogin: TtelaLogin
-  Left = 272
+  Left = 273
   Top = 161
   BiDiMode = bdLeftToRight
   BorderStyle = bsToolWindow

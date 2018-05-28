@@ -476,6 +476,7 @@ type
     tblPagamentoCODPAG: TIBStringField;
     tblPagamentoVRPAG: TIBBCDField;
     tblPagamentoIDRESPFISC: TIntegerField;
+    tblPedidosPATH: TIBStringField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
 

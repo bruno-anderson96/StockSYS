@@ -1,5 +1,5 @@
 object telaGerarNfe: TtelaGerarNfe
-  Left = 175
+  Left = 157
   Top = 163
   Width = 1133
   Height = 481

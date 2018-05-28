@@ -36,8 +36,8 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure btnGeraNfeClick(Sender: TObject);
     procedure btnGeraCfeClick(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
    
   private
     { Private declarations }
@@ -76,7 +76,7 @@ begin
   telaDados.qryPedidos.Open;
                                  
   numN := DBGrid1.Columns.Items[1].Field.AsInteger;
-
+  telaDados.tblPedidos.Open;
   telaDados.tblPedidos.Locate('ID', numN , []);
 
   {telaGerarNfe.Close;             }
@@ -418,19 +418,6 @@ begin
   telaConfigSat.gerarVenda;
 end;
 
-procedure TtelaGerarNfe.SpeedButton1Click(Sender: TObject);
-begin
-  OpenDialog1.Filter := 'Arquivo XML|*.xml';
-  if OpenDialog1.Execute then
-  begin
-    ACBrSAT1.CFe.LoadFromFile( OpenDialog1.FileName );
-    ACBrSAT1.CFe2CFeCanc;
-
-    telaConfigSat.Memo1.Lines.Text := ACBrSAT1.CFeCanc.GerarXML( False ) ;  // True = Gera apenas as TAGs da aplicação
-    edChaveCancelamento.Text := ACBrSAT1.CFeCanc.infCFe.chCanc;
-  end;
-end;
-
 procedure TtelaGerarNfe.LoadXML(AXML: String; MyWebBrowser: TWebBrowser);
 begin
   WriteToTXT( PathWithDelim(ExtractFileDir(application.ExeName))+MyWebBrowser.Name+'-temp.xml',
@@ -439,27 +426,37 @@ begin
 end;
 
 procedure TtelaGerarNfe.SpeedButton2Click(Sender: TObject);
+var
+num : integer;
 begin
-if telaConfigSat.Memo1.Lines.Count < 1 then
-  begin
-    ACBrSAT1.CancelarUltimaVenda;
-    telaConfigSat.Memo1.Lines.Text := ACBrSAT1.CFeCanc.GerarXML(True);
-  end
-  else
-  begin
-    if edChaveCancelamento.Text = '' then
-    begin
-      ACBrSAT1.CFeCanc.AsXMLString := telaConfigSat.Memo1.Lines.Text;
-      edChaveCancelamento.Text := ACBrSAT1.CFeCanc.infCFe.chCanc;
-    end;
-    ACBrSAT1.CancelarUltimaVenda( edChaveCancelamento.Text, telaConfigSat.Memo1.Lines.Text );
-  end ;
+  num := DBGrid1.Columns.Items[1].Field.AsInteger;
+  telaDados.qryPedidos.Close;
+  telaDados.qryPedidos.SQL.Clear;
+  telaDados.qryPedidos.SQL.Add('Select * from PEDIDO where id = ');
+  telaDados.qryPedidos.SQL.Add(IntToStr(num));
+  telaDados.qryPedidos.Open;
+  telaConfigSat.AjustarCfe;
+  telaConfigSat.ACBrSAT1.CFe.LoadFromFile(telaDados.qryPedidos.FieldByName('PATH').AsString);
+  
+ telaConfigSat.ACBrSAT1.CFe2CFeCanc;
+  telaConfigSat.ACBrSAT1.CFeCanc.infCFe.chCanc := telaDados.qryPedidos.FieldByName('CHAVECFE').AsString;
+ telaConfigSat.Memo1.Lines.Text := telaConfigSat.ACBrSAT1.CFeCanc.GerarXML(True);
+ telaConfigSat.ACBrSAT1.CancelarUltimaVenda(telaDados.qryPedidos.FieldByName('CHAVECFE').AsString, telaConfigSat.Memo1.Lines.Text);
 
-  if ACBrSAT1.Resposta.codigoDeRetorno = 7000 then
+end;
+
+procedure TtelaGerarNfe.SpeedButton1Click(Sender: TObject);
+begin
+  OpenDialog1.Filter := 'Arquivo XML|*.xml';
+  if OpenDialog1.Execute then
   begin
-    LoadXML( ACBrSAT1.CFeCanc.AsXMLString, mRecebido );
-    ShowMessage('Recebido');
-  end;
+    {telaConfigSat.ACBrSAT1.CFe.LoadFromFile( OpenDialog1.FileName );}
+    telaConfigSat.ACBrSAT1.CFe2CFeCanc;
+
+    telaConfigSat.Memo1.Lines.Text := telaConfigSat.ACBrSAT1.CFeCanc.GerarXML( True ) ;  // True = Gera apenas as TAGs da aplicação
+    telaConfigSat.ACBrSAT1.CancelarUltimaVenda;
+
+  end ;
 end;
 
 end.

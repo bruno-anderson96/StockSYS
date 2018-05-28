@@ -1,7 +1,7 @@
 object telaDados: TtelaDados
-  Left = 140
+  Left = 138
   Top = 91
-  Width = 1193
+  Width = 1214
   Height = 622
   Caption = 'Data m'#243'dulo'
   Color = clBtnFace
@@ -1193,6 +1193,11 @@ object telaDados: TtelaDados
       item
         Name = 'IDPAGAMENTO'
         DataType = ftInteger
+      end
+      item
+        Name = 'PATH'
+        DataType = ftString
+        Size = 200
       end>
     IndexDefs = <
       item
@@ -1369,6 +1374,10 @@ object telaDados: TtelaDados
     end
     object tblPedidosIDPAGAMENTO: TIntegerField
       FieldName = 'IDPAGAMENTO'
+    end
+    object tblPedidosPATH: TIBStringField
+      FieldName = 'PATH'
+      Size = 200
     end
   end
   object dbClientes: TIBDatabase

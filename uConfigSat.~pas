@@ -149,7 +149,6 @@ begin
   telaDados.qryEmitente.SQL.Add(telaDados.tblLoginID.AsString);
   telaDados.qryEmitente.Open;
 
-
   with ACBrSAT1 do
   begin
     NomeDLL := edtNomeDLL.Text;
@@ -160,7 +159,6 @@ begin
     Config.ide_CNPJ := '11.111.111/1111-11'; }
     config.ide_numeroCaixa := StrToInt(edtCaixa.Text);
     Config.ide_tpAmb := TpcnTipoAmbiente(cbxAmbiente.ItemIndex); {taHomologacao}
-
 
   case telaDados.tblEmitenteREGIME.Value of
   0:begin
@@ -424,6 +422,16 @@ begin
   end;
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
   Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;
+  telaDados.tblPedidos.Close;
+  telaDados.tblPedidos.Open;
+  telaDados.tblPedidos.Last;
+  telaDados.tblPedidos.Edit;
+  {telaDados.tblPedidosPATH.Value := ExtractFilePath(Application.ExeName) + 'Enviado\CFe\20' + FormatDateTime('yy',Date)+ '\' + FormatDateTime('mm', Date) +'\'+ FormatDateTime('dd', Date)+ '\' + ACBrSAT1.CFe.infCFe.ID +'.xml';
+  }
+  telaDados.tblPedidosPATH.Value := ACBrSAT1.NomeBancoCfe;
+  telaDados.tblPedidosCHAVECFE.Value := 'Cfe' + ACBrSAT1.CFe.infCFe.ID;
+  telaDados.tblPedidos.Post;
+
 
   end;
 end;
