@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 136
-  Top = 91
+  Left = 189
+  Top = 251
   Width = 1216
   Height = 622
   Caption = 'Data m'#243'dulo'
@@ -1198,6 +1198,12 @@ object telaDados: TtelaDados
         Name = 'PATH'
         DataType = ftString
         Size = 200
+      end
+      item
+        Name = 'STATUS'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
       end>
     IndexDefs = <
       item
@@ -1378,6 +1384,11 @@ object telaDados: TtelaDados
     object tblPedidosPATH: TIBStringField
       FieldName = 'PATH'
       Size = 200
+    end
+    object tblPedidosSTATUS: TIBStringField
+      FieldName = 'STATUS'
+      FixedChar = True
+      Size = 1
     end
   end
   object dbClientes: TIBDatabase

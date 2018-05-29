@@ -27,10 +27,9 @@ type
     btnGeraCfe: TSpeedButton;
     SpeedButton1: TSpeedButton;
     ACBrSAT1: TACBrSAT;
-    edChaveCancelamento: TEdit;
     OpenDialog1: TOpenDialog;
-    mRecebido: TWebBrowser;
     SpeedButton2: TSpeedButton;
+    mRecebido: TMemo;
     procedure BitBtn2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -38,6 +37,8 @@ type
     procedure btnGeraCfeClick(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
    
   private
     { Private declarations }
@@ -437,12 +438,33 @@ begin
   telaDados.qryPedidos.Open;
   telaConfigSat.AjustarCfe;
   telaConfigSat.ACBrSAT1.CFe.LoadFromFile(telaDados.qryPedidos.FieldByName('PATH').AsString);
-  
- telaConfigSat.ACBrSAT1.CFe2CFeCanc;
-  telaConfigSat.ACBrSAT1.CFeCanc.infCFe.chCanc := telaDados.qryPedidos.FieldByName('CHAVECFE').AsString;
- telaConfigSat.Memo1.Lines.Text := telaConfigSat.ACBrSAT1.CFeCanc.GerarXML(True);
- telaConfigSat.ACBrSAT1.CancelarUltimaVenda(telaDados.qryPedidos.FieldByName('CHAVECFE').AsString, telaConfigSat.Memo1.Lines.Text);
 
+  telaConfigSat.ACBrSAT1.CFe2CFeCanc;
+  telaConfigSat.ACBrSAT1.CFeCanc.infCFe.chCanc := telaDados.qryPedidos.FieldByName('CHAVECFE').AsString;
+  mRecebido.Lines.Text := telaConfigSat.ACBrSAT1.CFeCanc.GerarXML(True);
+  telaConfigSat.ACBrSAT1.CancelarUltimaVenda(telaDados.qryPedidos.FieldByName('CHAVECFE').AsString, mRecebido.Lines.Text);
+
+  if telaConfigSat.ACBrSAT1.Resposta.codigoDeRetorno = 07000 then begin
+    ShowMessage('Cupom cancelado com sucesso!');
+
+    telaDados.tblPedidos.Locate('ID' , num,[loCaseInsensitive]);
+    telaDados.tblPedidos.Open;
+    telaDados.tblPedidos.Edit;
+    telaDados.tblPedidosSTATUS.AsString := 'F';
+    telaDados.tblPedidos.Post;
+    {
+    telaDados.qryPedidos.Close;
+    telaDados.qryPedidos.SQL.Clear;
+    telaDados.qryPedidos.SQL.Add('UPDATE PEDIDO');
+    telaDados.qryPedidos.SQL.Add(' SET STATUS = '+QuotedStr('F'));
+    telaDados.qryPedidos.SQL.Add(' WHERE ID = ');
+    telaDados.qryPedidos.SQL.Add(IntToStr(num));
+    telaDados.qryPedidos.Open; }
+
+  end else begin
+    ShowMessage('Cupom não pode ser cancelado! ' + ' Verifique se o período já passou do prazo máximo permitido(30 minutos) desde a emissão do cupom.' );
+  end;
+  
 end;
 
 procedure TtelaGerarNfe.SpeedButton1Click(Sender: TObject);
@@ -457,6 +479,28 @@ begin
     telaConfigSat.ACBrSAT1.CancelarUltimaVenda;
 
   end ;
+end;
+
+procedure TtelaGerarNfe.DBGrid1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if Column.Field.FieldName = 'STATUS' then begin
+    if (DBGrid1.Columns.Items[4].Field.AsString = 'V') then begin
+       DBGrid1.Canvas.Brush.Color := clGreen;
+       DBGrid1.Canvas.FillRect(Rect);
+    end;
+    if (DBGrid1.Columns.Items[4].Field.AsString = 'F') then begin
+       DBGrid1.Canvas.Brush.Color := clRed;
+       DBGrid1.Canvas.FillRect(Rect);
+    end;
+    if (DBGrid1.Columns.Items[4].Field.AsString = 'T') then begin
+       DBGrid1.Canvas.Brush.Color := clYellow;
+       DBGrid1.Canvas.FillRect(Rect);
+    end;
+
+    DBGrid1.DefaultDrawColumnCell(Rect,DataCol,Column, State);
+    end;
 end;
 
 end.

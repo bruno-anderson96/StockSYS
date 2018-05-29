@@ -430,6 +430,7 @@ begin
   }
   telaDados.tblPedidosPATH.Value := ACBrSAT1.NomeBancoCfe;
   telaDados.tblPedidosCHAVECFE.Value := 'CFe' + ACBrSAT1.CFe.infCFe.ID;
+  telaDados.tblPedidosSTATUS.Value := 'V';
   telaDados.tblPedidos.Post;
 
 
@@ -878,7 +879,7 @@ begin
     telaDados.tblPedidos.Post;
     telaDados.tblPedidos.ApplyUpdates;
     telaDados.tblPedidos.Close;
-    ShowMessage(IntToStr(RespostaPagamentoMfe.IDPagamento));
+    ShowMessage('ID PAGAMENTO: ' +IntToStr(RespostaPagamentoMfe.IDPagamento));
   finally
     PagamentoMFe.Free;
     telaDados.tblEmitente.Close;

@@ -878,7 +878,7 @@ begin
     telaDados.tblPedidos.Post;
     telaDados.tblPedidos.ApplyUpdates;
     telaDados.tblPedidos.Close;
-    ShowMessage(IntToStr(RespostaPagamentoMfe.IDPagamento));
+    ShowMessage('ID PAGAMENTO: ' +IntToStr(RespostaPagamentoMfe.IDPagamento));
   finally
     PagamentoMFe.Free;
     telaDados.tblEmitente.Close;
