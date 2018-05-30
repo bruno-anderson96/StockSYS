@@ -1,8 +1,8 @@
 object telaGerarNfe: TtelaGerarNfe
-  Left = 157
-  Top = 163
+  Left = 187
+  Top = 117
   Width = 713
-  Height = 472
+  Height = 542
   Align = alRight
   BorderStyle = bsSizeToolWin
   Caption = 'Gerar NFe'
@@ -377,14 +377,14 @@ object telaGerarNfe: TtelaGerarNfe
     Left = 0
     Top = 129
     Width = 697
-    Height = 305
+    Height = 375
     Align = alClient
     TabOrder = 1
     object DBGrid1: TDBGrid
       Left = 2
       Top = 15
       Width = 693
-      Height = 288
+      Height = 339
       Align = alClient
       DataSource = dsConsultaPedidos
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -417,14 +417,50 @@ object telaGerarNfe: TtelaGerarNfe
         item
           Expanded = False
           FieldName = 'CLIENTE'
-          Width = 255
+          Width = 261
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'STATUS'
+          Width = 46
           Visible = True
         end>
+    end
+    object StatusBar1: TStatusBar
+      Left = 2
+      Top = 354
+      Width = 693
+      Height = 19
+      Panels = <
+        item
+          Style = psOwnerDraw
+          Text = 'TEX'
+          Width = 20
+        end
+        item
+          Text = 'Transmitido'
+          Width = 215
+        end
+        item
+          Style = psOwnerDraw
+          Text = 'TEX'
+          Width = 20
+        end
+        item
+          Text = #192' Transmitir'
+          Width = 215
+        end
+        item
+          Style = psOwnerDraw
+          Text = 'TEX'
+          Width = 20
+        end
+        item
+          Text = 'Cancelado'
+          Width = 215
+        end>
+      OnDrawPanel = StatusBar1DrawPanel
     end
   end
   object dsConsultaPedidos: TDataSource

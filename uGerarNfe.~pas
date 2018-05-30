@@ -30,6 +30,7 @@ type
     OpenDialog1: TOpenDialog;
     SpeedButton2: TSpeedButton;
     mRecebido: TMemo;
+    StatusBar1: TStatusBar;
     procedure BitBtn2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -39,6 +40,8 @@ type
     procedure SpeedButton1Click(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure StatusBar1DrawPanel(StatusBar: TStatusBar;
+      Panel: TStatusPanel; const Rect: TRect);
    
   private
     { Private declarations }
@@ -488,19 +491,48 @@ begin
   if Column.Field.FieldName = 'STATUS' then begin
     if (DBGrid1.Columns.Items[4].Field.AsString = 'V') then begin
        DBGrid1.Canvas.Brush.Color := clGreen;
+       DBGrid1.Canvas.Font.Color := clGreen;
        DBGrid1.Canvas.FillRect(Rect);
     end;
     if (DBGrid1.Columns.Items[4].Field.AsString = 'F') then begin
        DBGrid1.Canvas.Brush.Color := clRed;
+       DBGrid1.Canvas.Font.Color := clRed;
        DBGrid1.Canvas.FillRect(Rect);
     end;
     if (DBGrid1.Columns.Items[4].Field.AsString = 'T') then begin
        DBGrid1.Canvas.Brush.Color := clYellow;
+       DBGrid1.Canvas.Font.Color := clYellow;
        DBGrid1.Canvas.FillRect(Rect);
     end;
 
     DBGrid1.DefaultDrawColumnCell(Rect,DataCol,Column, State);
     end;
+end;
+
+procedure TtelaGerarNfe.StatusBar1DrawPanel(StatusBar: TStatusBar;
+  Panel: TStatusPanel; const Rect: TRect);
+begin
+ if Panel.Index = 0 then
+  begin
+    StatusBar1.Canvas.FillRect(Rect);
+    StatusBar1.Canvas.Brush.Color := clGreen;
+    StatusBar1.Canvas.Font.Color := clGreen;
+    StatusBar1.Canvas.TextOut(Rect.Left, Rect.Top, Panel.Text);
+  end;
+   if Panel.Index = 2 then
+  begin
+    StatusBar1.Canvas.FillRect(Rect);
+    StatusBar1.Canvas.Brush.Color := clYellow;
+    StatusBar1.Canvas.Font.Color := clYellow;
+    StatusBar1.Canvas.TextOut(Rect.Left , Rect.Top, Panel.Text);
+  end;
+  if Panel.Index = 4 then
+  begin
+    StatusBar1.Canvas.FillRect(Rect);
+    StatusBar1.Canvas.Brush.Color := clRed;
+    StatusBar1.Canvas.Font.Color := clRed;
+    StatusBar1.Canvas.TextOut(Rect.Left , Rect.Top, Panel.Text);
+  end;
 end;
 
 end.

@@ -80,8 +80,6 @@ type
     Dinheiro: TLabel;
     Troco: TLabel;
     edtTrc: TEdit;
-    Label12: TLabel;
-    edtCar: TEdit;
     edtDin: TEdit;
     Label14: TLabel;
     PanelCalc: TPanel;
@@ -99,6 +97,8 @@ type
     btnExc: TSpeedButton;
     btnFec: TSpeedButton;
     edtQt: TEdit;
+    GroupBox8: TGroupBox;
+    ComboBox1: TComboBox;
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnIncItemClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -131,6 +131,7 @@ type
     procedure btnFecClick(Sender: TObject);
     procedure edtQtKeyPress(Sender: TObject; var Key: Char);
     procedure PesquisarExecute(Sender: TObject);
+    procedure editIdChange(Sender: TObject);
 
   private
 
@@ -625,7 +626,7 @@ begin
   Cancelar.Enabled := false;
 
   telaDados.cdsTempItens.EmptyDataSet;
- label10.Caption := 'Tecle F2 para Abrir Cupom';
+  label10.Caption := 'Tecle F2 para Abrir Cupom';
 
   if PanelCalc.Visible = true then PanelCalc.Visible := false;
 end;
@@ -665,7 +666,6 @@ procedure TtelaLancPedidos.calculaTroco();
 var
 trc, din, car : currency;
 begin
-
   if edtDin.Text = '' then edtDin.Text := '0';
   if edtCar.Text = '' then edtCar.Text := '0';
   if edtTrc.Text = '' then edtTrc.Text := '0';
@@ -676,8 +676,7 @@ begin
   edtCar.text:= formatCurr('#,##0.00',car);
 
   trc := (din + car) - StrToCurr(editVtotal.Text);
-    edtTrc.text:= FormatCurr('#,##0.00',trc);
-  
+  edtTrc.text:= FormatCurr('#,##0.00',trc);
 end;
 
 procedure TtelaLancPedidos.edtDinExit(Sender: TObject);
@@ -806,17 +805,17 @@ end;
 
 procedure TtelaLancPedidos.DBGrid1DblClick(Sender: TObject);
 begin
-pnlEdtExc.Visible := true;
-prod := DBGrid1.Columns[0].Field.AsString;
+  pnlEdtExc.Visible := true;
+  prod := DBGrid1.Columns[0].Field.AsString;
 end;
 
 procedure TtelaLancPedidos.btnEdtClick(Sender: TObject);
 begin
-pnlEdtExc.Visible := false;
-telaDados.cdsTempItens.CommandText := 'Select * from c:\tabela.dat where DESC =' + prod;
-telaDados.cdsTempItens.Open;
-telaDados.cdsTempItens.Edit;
-telaLancItens.Show;
+  pnlEdtExc.Visible := false;
+  telaDados.cdsTempItens.CommandText := 'Select * from c:\tabela.dat where DESC =' + prod;
+  telaDados.cdsTempItens.Open;
+  telaDados.cdsTempItens.Edit;
+  telaLancItens.Show;
 end;
 
 procedure TtelaLancPedidos.btnExcClick(Sender: TObject);
@@ -847,6 +846,47 @@ end;
 procedure TtelaLancPedidos.PesquisarExecute(Sender: TObject);
 begin
   telaGerarNfe.Show;
+end;
+
+procedure TtelaLancPedidos.editIdChange(Sender: TObject);
+begin  
+  // LOCALIZAR PRODUTOS DE PEDIDO
+  {telaDados.tblPedidosItens.Locate('ID', editId.Text, [loCaseInsensitive]);
+
+  telaDados.tblPedidosItens.First;
+  while not (telaDados.tblPedidosItens.Eof) do
+  begin
+
+    telaDados.cdsTempItens.Append;
+
+    telaDados.cdsTempItens.FieldByName('DESC').Value :=
+      telaDados.tblPedidosItens.FieldByName('DESCRICAO').Value;
+
+    telaDados.cdsTempItens.FieldByName('IDPROD').Value :=
+      telaDados.tblPedidosItens.FieldByName('ID_PRODUTO').Value;
+
+    telaDados.cdsTempItens.FieldByName('IDPED').Value :=
+      telaDados.tblPedidosItens.FieldByName('ID_PEDIDO').Value;
+
+    telaDados.cdsTempItens.FieldByName('VALOR').Value :=
+      telaDados.tblPedidosItens.FieldByName('VALOR').Value;
+
+    telaDados.cdsTempItens.FieldByName('QUANT').Value :=
+      telaDados.tblPedidosItens.FieldByName('QUANTIDADE').Value;
+
+    telaDados.cdsTempItens.FieldByName('DESCONTO').Value :=
+      telaDados.tblPedidosItens.FieldByName('DESCONTO').Value;
+
+    telaDados.cdsTempItens.FieldByName('ACRESCIMO').Value :=
+      telaDados.tblPedidosItens.FieldByName('ACRESCIMO').Value;
+
+    telaDados.cdsTempItens.FieldByName('VRT').Value :=
+      telaDados.tblPedidosItens.FieldByName('VALOR_TOTAL').Value;
+
+    telaDados.cdsTempItens.Post;
+    telaDados.tblPedidosItens.Next;
+  end;
+    }
 end;
 
 end.

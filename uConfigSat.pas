@@ -391,18 +391,33 @@ begin
       cMP := mpCartaodeCredito;
       vMP := Pagto1;
     end;}
-    if StrToFloat(telaLancPedidos.edtCar.Text) > 0 then begin
+    if telaLancPedidos.cbPagamento.ItemIndex = 0 then begin
       with Pagto.Add do
       begin
-        cMP := mpCartaodeCredito;
+        cMP := mpDinheiro;
         vMP := StrToFloat(telaLancPedidos.edtCar.Text);
+      end;
+    end;
+    if telaLancPedidos.cbPagamento.ItemIndex = 1 then begin
+    with Pagto.Add do
+      begin
+        cMP := mpCartaodeCredito;
+        vMP := StrToFloat(telaLancPedidos.edtDin.Text);
         cAdmC := 999;
       end;
     end;
-    if StrToFloat(telaLancPedidos.edtDin.Text) > 0 then begin
+    if telaLancPedidos.cbPagamento.ItemIndex = 2 then begin
     with Pagto.Add do
       begin
-        cMP := mpDinheiro;
+        cMP := mpCartaodeDebito;
+        vMP := StrToFloat(telaLancPedidos.edtDin.Text);
+        cAdmC := 999;
+      end;
+    end;
+    if telaLancPedidos.cbPagamento.ItemIndex = 3 then begin
+    with Pagto.Add do
+      begin
+        cMP := mpCheque;
         vMP := StrToFloat(telaLancPedidos.edtDin.Text);
       end;
     end;

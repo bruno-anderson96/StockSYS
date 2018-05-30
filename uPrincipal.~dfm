@@ -5486,7 +5486,7 @@ object telaPrincipal: TtelaPrincipal
       6F776E000078DA5300000021002114F714E20000000049454E44AE426082}
   end
   object imgLogo: TImage
-    Left = 16
+    Left = 848
     Top = 72
     Width = 497
     Height = 257
@@ -6115,10 +6115,11 @@ object telaPrincipal: TtelaPrincipal
         Text = 'AEBTec Automa'#231#227'o Comercial'
         Width = 50
       end>
+    OnDrawPanel = StatusBar1DrawPanel
   end
   object MainMenu1: TMainMenu
-    Left = 896
-    Top = 88
+    Left = 624
+    Top = 72
     object Arquivo1: TMenuItem
       Bitmap.Data = {
         F6060000424DF606000000000000360000002800000018000000180000000100
@@ -6391,7 +6392,7 @@ object telaPrincipal: TtelaPrincipal
     end
   end
   object ActionList1: TActionList
-    Left = 896
-    Top = 120
+    Left = 656
+    Top = 72
   end
 end
