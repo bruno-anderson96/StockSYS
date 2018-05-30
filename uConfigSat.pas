@@ -430,7 +430,7 @@ begin
                         '</linha_simples>';}
   end;
   {ACBrIntegrador1.EnviarPagamento(); }
-  if StrToFloat(telaLancPedidos.edtCar.Text) > 0 then begin
+  if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex = 2) then begin
     EnviaPagamento;
     VerificaStatusValidador;
     RespostaFiscal;
@@ -864,10 +864,10 @@ begin
     with PagamentoMFe do
     begin
       Clear;
-      ValorTotalVenda := StrToCurr(telaLancPedidos.edtCar.Text);
+      ValorTotalVenda := StrToCurr(telaLancPedidos.edtDin.Text);
         if ValorTotalVenda <> telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsCurrency then begin
           if MessageDlg('Valor pago diferente do valor total da nota, Deseja Prosseguir?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
-            nv := InputBox('ValorTotalVenda', 'Valor à ser pago', telaLancPedidos.edtCar.Text);
+            nv := InputBox('ValorTotalVenda', 'Valor à ser pago', telaLancPedidos.edtDin.Text);
             ValorTotalVenda := StrToFloat(nv);
           end;
        end;
@@ -878,7 +878,7 @@ begin
       CNPJ := telaDados.tblEmitenteCNPJ.Text;
       IcmsBase := 0.18;
 
-      HabilitarMultiplosPagamentos := True;
+      HabilitarMultiplosPagamentos := True; //FALSE?
       HabilitarControleAntiFraude := False;
       CodigoMoeda := 'BRL';
       EmitirCupomNFCE := False;
