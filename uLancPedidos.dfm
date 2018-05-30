@@ -1,11 +1,11 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 85
-  Top = 46
+  Left = 82
+  Top = 112
   Align = alClient
   BorderStyle = bsDialog
   Caption = 'Lan'#231'amento de Pedidos'
-  ClientHeight = 620
-  ClientWidth = 1143
+  ClientHeight = 635
+  ClientWidth = 1225
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,8 +21,8 @@ object telaLancPedidos: TtelaLancPedidos
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 1143
-    Height = 620
+    Width = 1225
+    Height = 635
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
@@ -31,8 +31,8 @@ object telaLancPedidos: TtelaLancPedidos
       object GroupBox1: TGroupBox
         Left = 0
         Top = 0
-        Width = 1135
-        Height = 592
+        Width = 1217
+        Height = 607
         Align = alClient
         Color = clSkyBlue
         ParentBackground = False
@@ -1202,8 +1202,8 @@ object telaLancPedidos: TtelaLancPedidos
         end
         object StatusBar1: TStatusBar
           Left = 2
-          Top = 571
-          Width = 1131
+          Top = 586
+          Width = 1213
           Height = 19
           Panels = <
             item
@@ -1381,8 +1381,8 @@ object telaLancPedidos: TtelaLancPedidos
           end
         end
         object PanelCalc: TPanel
-          Left = 330
-          Top = 183
+          Left = 170
+          Top = 167
           Width = 842
           Height = 338
           Align = alCustom
@@ -1434,8 +1434,8 @@ object telaLancPedidos: TtelaLancPedidos
             ParentFont = False
           end
           object gbCli: TGroupBox
-            Left = 0
-            Top = 152
+            Left = 24
+            Top = 136
             Width = 489
             Height = 57
             Caption = 'Cliente'
@@ -1470,7 +1470,7 @@ object telaLancPedidos: TtelaLancPedidos
             end
           end
           object radDoc: TRadioGroup
-            Left = 24
+            Left = 8
             Top = 53
             Width = 186
             Height = 60
@@ -1480,13 +1480,13 @@ object telaLancPedidos: TtelaLancPedidos
               'Cupom Fiscal')
             TabOrder = 1
           end
-          object GroupBox7: TGroupBox
-            Left = 496
+          object gpValores: TGroupBox
+            Left = 544
             Top = 48
             Width = 289
             Height = 265
             Caption = 'Pagamento'
-            TabOrder = 2
+            TabOrder = 4
             object Dinheiro: TLabel
               Left = 7
               Top = 36
@@ -1543,26 +1543,50 @@ object telaLancPedidos: TtelaLancPedidos
               OnDragOver = edtTrcDragOver
             end
           end
-          object GroupBox8: TGroupBox
-            Left = 240
+          object gpPagamento: TGroupBox
+            Left = 200
             Top = 53
             Width = 185
             Height = 61
-            Caption = 'Pagamento'
-            TabOrder = 3
+            Caption = 'Tipo de Pagamento'
+            TabOrder = 2
             object cbPagamento: TComboBox
               Left = 16
               Top = 24
               Width = 145
               Height = 21
               ItemHeight = 13
-              ItemIndex = 0
               TabOrder = 0
               Text = '0 - Dinheiro'
+              OnChange = cbPagamentoChange
               Items.Strings = (
                 '0 - Dinheiro'
-                '1 - Cart'#227'o'
-                '2 - Cheque')
+                '1 - Cart'#227'o de cr'#233'dito'
+                '2 - Cart'#227'o de d'#233'bito'
+                '3 - Cheque')
+            end
+          end
+          object gpBandeira: TGroupBox
+            Left = 392
+            Top = 53
+            Width = 147
+            Height = 61
+            Caption = 'Bandeira'
+            TabOrder = 3
+            Visible = False
+            object cbBandeira: TComboBox
+              Left = 8
+              Top = 24
+              Width = 129
+              Height = 21
+              CharCase = ecUpperCase
+              ItemHeight = 13
+              ItemIndex = 0
+              TabOrder = 0
+              Text = 'MASTERCARD'
+              Items.Strings = (
+                'MASTERCARD'
+                'VISA')
             end
           end
         end

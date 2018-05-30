@@ -72,6 +72,9 @@ type
     TabSheet4: TTabSheet;
     TabSheet5: TTabSheet;
     Enviar: TSpeedButton;
+    edtChReq: TEdit;
+    SpeedButton4: TSpeedButton;
+    Label13: TLabel;
     procedure At(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
@@ -90,6 +93,7 @@ type
     procedure SpeedButton3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure EnviarClick(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -395,7 +399,7 @@ begin
       with Pagto.Add do
       begin
         cMP := mpDinheiro;
-        vMP := StrToFloat(telaLancPedidos.edtCar.Text);
+        vMP := StrToFloat(telaLancPedidos.edtDin.Text);
       end;
     end;
     if telaLancPedidos.cbPagamento.ItemIndex = 1 then begin
@@ -433,10 +437,13 @@ begin
   if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex = 2) then begin
     EnviaPagamento;
     VerificaStatusValidador;
-    RespostaFiscal;
   end;
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
   Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;
+
+  if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex =2) then begin
+     RespostaFiscal;
+  end;
   telaDados.tblPedidos.Close;
   telaDados.tblPedidos.Open;
   telaDados.tblPedidos.Last;
@@ -617,6 +624,7 @@ begin
     {INI.WriteString('SAT','ArqLog',edLog.Text);}
     INI.WriteString('SAT','NomeDLL',edtNomeDLL.Text);
     INI.WriteString('SAT','CodigoAtivacao',edtCodAtiv.Text);
+    INI.WriteString('SAT', 'ChaveReq', edtChReq.Text);
     {INI.WriteString('SAT','CodigoUF',edtCodUF.Text);}
     INI.WriteInteger('SAT','NumeroCaixa',StrToInt(edtCaixa.Text));
     INI.WriteInteger('SAT','Ambiente',cbxAmbiente.ItemIndex);
@@ -687,6 +695,8 @@ begin
     INI.WriteString('MFE','Input',edtMFEInput.Text);
     INI.WriteString('MFE','Output',edtMFEOutput.Text);
     INI.WriteInteger('MFE','Timeout',StrToInt(edtMFETimeout.Text));
+
+
   finally
      INI.Free ;
   end ;
@@ -702,9 +712,10 @@ begin
   INI := TIniFile.Create(ArqINI);
   try
     cbxModelo.ItemIndex    := INI.ReadInteger('SAT','Modelo',0);
-    {edLog.Text             := INI.ReadString('SAT','ArqLog','ACBrSAT.log');}
-    edtNomeDLL.Text         := INI.ReadString('SAT','NomeDLL','C:\SAT\MFE.DLL');
-    edtCodAtiv.Text := INI.ReadString('SAT','CodigoAtivacao','123456');
+    {edLog.Text            := INI.ReadString('SAT','ArqLog','ACBrSAT.log');}
+    edtNomeDLL.Text        := INI.ReadString('SAT','NomeDLL','C:\SAT\MFE.DLL');
+    edtCodAtiv.Text        := INI.ReadString('SAT','CodigoAtivacao','123456');
+    edtChReq.Text          := INI.ReadString('SAT','ChaveReq','');
     {edtCodUF.Text          := INI.ReadString('SAT','CodigoUF','323');}
     edtCaixa.Text    := INI.ReadString('SAT','NumeroCaixa','1');
     cbxAmbiente.ItemIndex  := INI.ReadInteger('SAT','Ambiente',1);
@@ -864,17 +875,17 @@ begin
     with PagamentoMFe do
     begin
       Clear;
-      ValorTotalVenda := StrToCurr(telaLancPedidos.edtDin.Text);
-        if ValorTotalVenda <> telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsCurrency then begin
+      ValorTotalVenda := StrToFloat(telaLancPedidos.edtDin.Text);
+        if ValorTotalVenda <> telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
           if MessageDlg('Valor pago diferente do valor total da nota, Deseja Prosseguir?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
             nv := InputBox('ValorTotalVenda', 'Valor à ser pago', telaLancPedidos.edtDin.Text);
             ValorTotalVenda := StrToFloat(nv);
           end;
        end;
       ChaveAcessoValidador := '25CFE38D-3B92-46C0-91CA-CFF751A82D3D';
-      ChaveRequisicao := '26359854-5698-1365-9856-965478231456';
+      ChaveRequisicao := edtChReq.Text;
       Estabelecimento := '1';
-      SerialPOS := InputBox('SerialPOS','Informe o Serial do POS','ACBr-'+RandomName(8));
+      SerialPOS := InputBox('SerialPOS','Informe o Serial do POS','ACBr-'+RandomName(8)); //Serial da maquineta
       CNPJ := telaDados.tblEmitenteCNPJ.Text;
       IcmsBase := 0.18;
 
@@ -882,7 +893,7 @@ begin
       HabilitarControleAntiFraude := False;
       CodigoMoeda := 'BRL';
       EmitirCupomNFCE := False;
-      OrigemPagamento := 'Caixa 1';
+      OrigemPagamento := edtCaixa.Text;
     end;
     {ACBrIntegrador1.EnviarPagamento(PagamentoMFe);}
     RespostaPagamentoMFe := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).EnviarPagamento(PagamentoMFe);
@@ -932,7 +943,7 @@ begin
     telaDados.tblPagamentoQTRDIG.Value := RespostaVerificarStatusValidador.UltimosQuatroDigitos;
     telaDados.tblPagamentoCODPAG.Value := RespostaVerificarStatusValidador.CodigoPagamento;
     telaDados.tblPagamentoVRPAG.Value := RespostaVerificarStatusValidador.ValorPagamento;
-
+    
     ShowMessage(IntToStr(RespostaVerificarStatusValidador.IDFila));
     ShowMessage('Codigo autorizacao: ' + RespostaVerificarStatusValidador.CodigoAutorizacao);
     ShowMessage('Instituicao: ' +RespostaVerificarStatusValidador.InstituicaoFinanceira);
@@ -961,14 +972,14 @@ Begin
         Clear;
         ChaveAcessoValidador := '25CFE38D-3B92-46C0-91CA-CFF751A82D3D';
         IDFila := 0;
-        ChaveAcesso := '35170408723218000186599000113100000279731880';
-        Nsu := '1674068';
+        ChaveAcesso := telaDados.tblPedidosCHAVECFE.AsString;
+        Nsu := telaDados.tblPagamentosID.AsString;
         NumerodeAprovacao := '1234';
-        Bandeira := 'VISA';
-        Adquirente := 'STONE';
+        Bandeira := telaLancPedidos.cbBandeira.Text; //DIGITADA PELO CAIXA
+        Adquirente := 'CONSUMIDOR';
         {if Assigned(ACBrSAT1.CFe) then
           ImpressaoFiscal := '<![CDATA['+ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe+']]>';}
-        NumeroDocumento := '1674068';
+        NumeroDocumento := IntToStr(ACBrSAT1.CFe.ide.nCFe) {'1674068'};
         CNPJ:= telaDados.tblEmitenteCNPJ.Text;
       end;
       RetornoRespostaFiscal := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).RespostaFiscal(RespostaFiscal);
@@ -979,6 +990,13 @@ Begin
     finally
       RespostaFiscal.Free;
     end;
+end;
+
+procedure TtelaConfigSat.SpeedButton4Click(Sender: TObject);
+var
+  ID: TGUID;
+begin
+  edtChReq.Text := GUIDToString(ID);
 end;
 
 end.

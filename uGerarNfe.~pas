@@ -94,7 +94,7 @@ begin
   telaDados.qryPedidos.SQL.Add('Where cast(pedido.data_pedido as date) between :pDatai and :pDataf');
     case radOpt.ItemIndex of
       0: telaDados.qryPedidos.SQL.Add('and pedido.id = :pDados');
-      1: telaDados.qryPedidos.SQL.Add('and pedido.idCliente = :pDados');
+      1: telaDados.qryPedidos.SQL.Add('and pedido.id_Cliente = :pDados');
       2: telaDados.qryPedidos.SQL.Add('and upper(pedido.cliente) like :pDados');
     end;
     //Parâmetros

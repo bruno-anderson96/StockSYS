@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 136
-  Top = 91
+  Left = 207
+  Top = 116
   Width = 1216
   Height = 622
   Caption = 'Data m'#243'dulo'

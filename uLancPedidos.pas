@@ -90,15 +90,17 @@ type
     GroupBox6: TGroupBox;
     edtItem: TEdit;
     Label24: TLabel;
-    GroupBox7: TGroupBox;
+    gpValores: TGroupBox;
     Label21: TLabel;
     pnlEdtExc: TPanel;
     btnEdt: TSpeedButton;
     btnExc: TSpeedButton;
     btnFec: TSpeedButton;
     edtQt: TEdit;
-    GroupBox8: TGroupBox;
+    gpPagamento: TGroupBox;
     cbPagamento: TComboBox;
+    gpBandeira: TGroupBox;
+    cbBandeira: TComboBox;
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnIncItemClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -132,6 +134,7 @@ type
     procedure edtQtKeyPress(Sender: TObject; var Key: Char);
     procedure PesquisarExecute(Sender: TObject);
     procedure editIdChange(Sender: TObject);
+    procedure cbPagamentoChange(Sender: TObject);
 
   private
 
@@ -389,9 +392,11 @@ begin
     PanelCalc.Visible := true;
     edtTrc.Clear;
     edtDin.Clear;
-    edtCar.Clear;
+    {edtCar.Clear;}
     telaDados.tblPedidosID_CLIENTE.Value := 1;
-    edtDin.SetFocus;
+    cbPagamento.ItemIndex := 0;
+      if gpBandeira.Visible = true then gpBandeira.Visible := false;  //Correção de bugx
+    cbPagamento.SetFocus;
   end else begin
     if StrToFloat(edtTrc.Text) < 0 then begin
       edtDin.SetFocus;
@@ -667,15 +672,15 @@ var
 trc, din, car : currency;
 begin
   if edtDin.Text = '' then edtDin.Text := '0';
-  if edtCar.Text = '' then edtCar.Text := '0';
+  {if edtCar.Text = '' then edtCar.Text := '0';}
   if edtTrc.Text = '' then edtTrc.Text := '0';
 
   din := StrToCurr(edtDin.Text);
-  car := StrToCurr(edtCar.Text);
+  {car := StrToCurr(edtCar.Text);}
   edtDin.text:= FormatCurr('#,##0.00',din);
-  edtCar.text:= formatCurr('#,##0.00',car);
+  {edtCar.text:= formatCurr('#,##0.00',car);}
 
-  trc := (din + car) - StrToCurr(editVtotal.Text);
+  trc := (din) - StrToCurr(editVtotal.Text);
   edtTrc.text:= FormatCurr('#,##0.00',trc);
 end;
 
@@ -699,7 +704,7 @@ procedure TtelaLancPedidos.encPanelExecute(Sender: TObject);
 begin
   if PanelCalc.Visible = true then begin
      edtDin.Clear;
-     edtCar.Clear;
+     {edtCar.Clear;}
      PanelCalc.Visible := false;
   end;
 end;
@@ -887,6 +892,15 @@ begin
     telaDados.tblPedidosItens.Next;
   end;
     }
+end;
+
+procedure TtelaLancPedidos.cbPagamentoChange(Sender: TObject);
+begin
+  If (cbPagamento.ItemIndex = 1) or (cbPagamento.ItemIndex = 2) then begin
+    gpBandeira.Visible := true;
+  end else begin
+    gpBandeira.Visible := false;
+  end;
 end;
 
 end.

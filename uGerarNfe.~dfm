@@ -1,8 +1,8 @@
 object telaGerarNfe: TtelaGerarNfe
-  Left = 187
-  Top = 117
+  Left = 318
+  Top = 94
   Width = 713
-  Height = 542
+  Height = 551
   Align = alRight
   BorderStyle = bsSizeToolWin
   Caption = 'Gerar NFe'
@@ -377,14 +377,14 @@ object telaGerarNfe: TtelaGerarNfe
     Left = 0
     Top = 129
     Width = 697
-    Height = 375
+    Height = 384
     Align = alClient
     TabOrder = 1
     object DBGrid1: TDBGrid
       Left = 2
       Top = 15
       Width = 693
-      Height = 339
+      Height = 348
       Align = alClient
       DataSource = dsConsultaPedidos
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -429,7 +429,7 @@ object telaGerarNfe: TtelaGerarNfe
     end
     object StatusBar1: TStatusBar
       Left = 2
-      Top = 354
+      Top = 363
       Width = 693
       Height = 19
       Panels = <
