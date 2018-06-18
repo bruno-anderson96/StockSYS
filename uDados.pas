@@ -478,6 +478,26 @@ type
     tblPagamentoIDRESPFISC: TIntegerField;
     tblPedidosPATH: TIBStringField;
     tblPedidosSTATUS: TIBStringField;
+    Label20: TLabel;
+    dsContador: TDataSource;
+    tblContador: TIBTable;
+    qryContador: TIBQuery;
+    trnscContador: TIBTransaction;
+    dbContador: TIBDatabase;
+    tblContadorID: TIntegerField;
+    tblContadorNOME: TIBStringField;
+    tblContadorENDERECO: TIBStringField;
+    tblContadorNUM: TIBStringField;
+    tblContadorCOMPL: TIBStringField;
+    tblContadorBAIRRO: TIBStringField;
+    tblContadorEMAIL: TIBStringField;
+    tblContadorCNPJ: TIBStringField;
+    tblContadorCEP: TIBStringField;
+    tblContadorCOD_MUN: TIBStringField;
+    tblContadorCPF: TIBStringField;
+    tblContadorCELULAR: TIBStringField;
+    tblContadorCELULAR2: TIBStringField;
+    ibdsContador: TIBDataSet;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
 

@@ -1,6 +1,6 @@
 object telaCadClientes: TtelaCadClientes
-  Left = 148
-  Top = 100
+  Left = 223
+  Top = 619
   Width = 838
   Height = 448
   Caption = 'Cadastro de Cliente'

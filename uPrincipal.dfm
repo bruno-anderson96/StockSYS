@@ -6196,6 +6196,10 @@ object telaPrincipal: TtelaPrincipal
           Caption = 'Fornecedores'
           OnClick = Fornecedores1Click
         end
+        object Contador1: TMenuItem
+          Caption = 'Contador'
+          OnClick = Contador1Click
+        end
         object CEP1: TMenuItem
           Caption = 'CEP'
           OnClick = CEP1Click

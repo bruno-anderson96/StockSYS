@@ -1,8 +1,8 @@
 object telaDados: TtelaDados
-  Left = 207
-  Top = 116
+  Left = 131
+  Top = 24
   Width = 1216
-  Height = 622
+  Height = 699
   Caption = 'Data m'#243'dulo'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -196,7 +196,7 @@ object telaDados: TtelaDados
     ParentFont = False
   end
   object Label14: TLabel
-    Left = 768
+    Left = 790
     Top = 344
     Width = 35
     Height = 20
@@ -286,6 +286,19 @@ object telaDados: TtelaDados
     Font.Style = [fsBold]
     ParentFont = False
   end
+  object Label20: TLabel
+    Left = 64
+    Top = 520
+    Width = 99
+    Height = 20
+    Caption = 'CONTADOR'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object ACBrNFe1: TACBrNFe
     Configuracoes.Geral.SSLLib = libNone
     Configuracoes.Geral.SSLCryptLib = cryNone
@@ -297,7 +310,7 @@ object telaDados: TtelaDados
     Configuracoes.WebServices.AguardarConsultaRet = 0
     Configuracoes.WebServices.QuebradeLinha = '|'
     Left = 8
-    Top = 480
+    Top = 16
   end
   object dsProdutos: TDataSource
     DataSet = tblProdutos
@@ -3508,8 +3521,8 @@ object telaDados: TtelaDados
   object ACBrIBGE1: TACBrIBGE
     ProxyPort = '8080'
     CacheArquivo = 'ACBrIBGE.txt'
-    Left = 40
-    Top = 480
+    Left = 8
+    Top = 48
   end
   object dsLogin: TDataSource
     DataSet = tblLogin
@@ -3692,7 +3705,7 @@ object telaDados: TtelaDados
   end
   object dsCst: TDataSource
     DataSet = tblCst
-    Left = 776
+    Left = 792
     Top = 376
   end
   object tblCst: TIBTable
@@ -3724,7 +3737,7 @@ object telaDados: TtelaDados
       end>
     StoreDefs = True
     TableName = 'CST'
-    Left = 776
+    Left = 792
     Top = 416
     object tblCstID: TIntegerField
       FieldName = 'ID'
@@ -3742,7 +3755,7 @@ object telaDados: TtelaDados
     Active = True
     DefaultDatabase = dbCst
     AutoStopAction = saNone
-    Left = 728
+    Left = 744
     Top = 416
   end
   object dbCst: TIBDatabase
@@ -3756,7 +3769,7 @@ object telaDados: TtelaDados
     IdleTimer = 0
     SQLDialect = 3
     TraceFlags = []
-    Left = 824
+    Left = 840
     Top = 416
   end
   object qryCst: TIBQuery
@@ -3768,7 +3781,7 @@ object telaDados: TtelaDados
     DataSource = dsCst
     SQL.Strings = (
       'select * from CST')
-    Left = 776
+    Left = 792
     Top = 456
   end
   object dsEstados: TDataSource
@@ -4369,5 +4382,189 @@ object telaDados: TtelaDados
     DataSet = tblPagamento
     Left = 1112
     Top = 376
+  end
+  object dsContador: TDataSource
+    DataSet = tblContador
+    Left = 107
+    Top = 544
+  end
+  object tblContador: TIBTable
+    Database = dbContador
+    Transaction = trnscContador
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'NOME'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'ENDERECO'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'NUM'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'COMPL'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'BAIRRO'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'EMAIL'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'CNPJ'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'CEP'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'COD_MUN'
+        DataType = ftString
+        Size = 7
+      end
+      item
+        Name = 'CPF'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'CELULAR'
+        DataType = ftString
+        Size = 12
+      end
+      item
+        Name = 'CELULAR2'
+        DataType = ftString
+        Size = 12
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_CONTADOR'
+        Fields = 'ID'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'CONTADOR'
+    Left = 104
+    Top = 584
+    object tblContadorID: TIntegerField
+      FieldName = 'ID'
+    end
+    object tblContadorNOME: TIBStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object tblContadorENDERECO: TIBStringField
+      FieldName = 'ENDERECO'
+      Size = 60
+    end
+    object tblContadorNUM: TIBStringField
+      FieldName = 'NUM'
+      Size = 10
+    end
+    object tblContadorCOMPL: TIBStringField
+      FieldName = 'COMPL'
+      Size = 100
+    end
+    object tblContadorBAIRRO: TIBStringField
+      FieldName = 'BAIRRO'
+      Size = 60
+    end
+    object tblContadorEMAIL: TIBStringField
+      FieldName = 'EMAIL'
+      Size = 30
+    end
+    object tblContadorCNPJ: TIBStringField
+      FieldName = 'CNPJ'
+    end
+    object tblContadorCEP: TIBStringField
+      FieldName = 'CEP'
+      Size = 10
+    end
+    object tblContadorCOD_MUN: TIBStringField
+      FieldName = 'COD_MUN'
+      Size = 7
+    end
+    object tblContadorCPF: TIBStringField
+      FieldName = 'CPF'
+      Size = 10
+    end
+    object tblContadorCELULAR: TIBStringField
+      FieldName = 'CELULAR'
+      Size = 12
+    end
+    object tblContadorCELULAR2: TIBStringField
+      FieldName = 'CELULAR2'
+      Size = 12
+    end
+  end
+  object qryContador: TIBQuery
+    Database = dbContador
+    Transaction = trnscContador
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsContador
+    SQL.Strings = (
+      'select * from CONTADOR')
+    Left = 104
+    Top = 624
+  end
+  object trnscContador: TIBTransaction
+    Active = True
+    DefaultDatabase = dbContador
+    AutoStopAction = saNone
+    Left = 64
+    Top = 584
+  end
+  object dbContador: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    DefaultTransaction = trnscContador
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 144
+    Top = 584
+  end
+  object ibdsContador: TIBDataSet
+    Database = dbContador
+    Transaction = trnscContador
+    BufferChunks = 1000
+    CachedUpdates = False
+    SelectSQL.Strings = (
+      'select * from CONTADOR')
+    GeneratorField.Field = 'ID'
+    GeneratorField.Generator = 'GEN_CONTADOR_ID'
+    DataSource = dsContador
+    Left = 144
+    Top = 624
   end
 end

@@ -32,7 +32,9 @@ uses
   configuraserial in 'configuraserial.pas',
   uConfigEmit in 'uConfigEmit.pas' {telaConfigEmit},
   uCadEmit in 'uCadEmit.pas' {telaCadEmit},
-  uCadCep in 'uCadCep.pas' {telaCadCep};
+  uCadCep in 'uCadCep.pas' {telaCadCep},
+  uSped in 'uSped.pas' {telaSped},
+  uContador in 'uContador.pas' {telaContador};
 
 {$R *.res}
 
@@ -47,5 +49,7 @@ begin
   Application.CreateForm(TtelaConfigSat, telaConfigSat);
   Application.CreateForm(TtelaGerarNfe, telaGerarNfe);
   Application.CreateForm(TtelaConfigEmit, telaConfigEmit);
+  Application.CreateForm(TtelaSped, telaSped);
+  Application.CreateForm(TtelaContador, telaContador);
   Application.Run;
 end.

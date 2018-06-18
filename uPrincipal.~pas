@@ -59,6 +59,7 @@ type
     ActionList1: TActionList;
     CEP1: TMenuItem;
     imgLogo: TImage;
+    Contador1: TMenuItem;
     procedure Sair1Click(Sender: TObject);
     procedure StatusdeServio1Click(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
@@ -88,8 +89,7 @@ type
     procedure Emitente1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure CEP1Click(Sender: TObject);
-    procedure StatusBar1DrawPanel(StatusBar: TStatusBar;
-      Panel: TStatusPanel; const Rect: TRect);
+    procedure Contador1Click(Sender: TObject);
 
 
   private
@@ -292,22 +292,10 @@ Application.CreateForm(TtelaCadCep, telaCadCep);
   telaCadCep.Show;
 end;
 
-procedure TtelaPrincipal.StatusBar1DrawPanel(StatusBar: TStatusBar;
-  Panel: TStatusPanel; const Rect: TRect);
+procedure TtelaPrincipal.Contador1Click(Sender: TObject);
 begin
- if Panel.Index = 0 then //O
-  begin
-    StatusBar1.Canvas.FillRect(Rect);
-    StatusBar1.Canvas.Brush.Color := clRed;
-    StatusBar1.Canvas.TextOut(Rect.Left, Rect.Top, Panel.Text);
-  end;
-   if Panel.Index = 2 then //O
-  begin
-    StatusBar1.Canvas.FillRect(Rect);
-    StatusBar1.Canvas.Brush.Color := clGreen;
-    StatusBar1.Canvas.Font.Color := clWhite;
-    StatusBar1.Canvas.TextOut(Rect.Left + Font.Size , Rect.Top + 1, Panel.Text);
-  end;
+  Application.CreateForm(TtelaContador, telaContador);
+  telaCadContador.Show;
 end;
 
 end.

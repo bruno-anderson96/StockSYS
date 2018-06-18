@@ -6115,7 +6115,6 @@ object telaPrincipal: TtelaPrincipal
         Text = 'AEBTec Automa'#231#227'o Comercial'
         Width = 50
       end>
-    OnDrawPanel = StatusBar1DrawPanel
   end
   object MainMenu1: TMainMenu
     Left = 624
@@ -6196,6 +6195,10 @@ object telaPrincipal: TtelaPrincipal
         object Fornecedores1: TMenuItem
           Caption = 'Fornecedores'
           OnClick = Fornecedores1Click
+        end
+        object Contador1: TMenuItem
+          Caption = 'Contador'
+          OnClick = Contador1Click
         end
         object CEP1: TMenuItem
           Caption = 'CEP'
