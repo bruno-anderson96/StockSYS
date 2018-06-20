@@ -43,6 +43,10 @@ type
     btnEditar: TSpeedButton;
     btnBuscaCep: TSpeedButton;
     ACBrCEP1: TACBrCEP;
+    Label14: TLabel;
+    edtCidade: TDBEdit;
+    Label15: TLabel;
+    cbUf: TComboBox;
     procedure FormShow(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
@@ -64,6 +68,8 @@ uses uDados;
 
 procedure TtelaContador.FormShow(Sender: TObject);
 begin
+  telaDados.FormataCampos;
+
   if edtNome.Text = '' then begin
     btnEditar.Enabled := false;
     btnSalvar.Enabled := true;
@@ -80,6 +86,8 @@ begin
     edtEmail.Enabled := true;
     edtCel1.Enabled := true;
     edtCel2.Enabled := true;
+    edtCidade.Enabled := true;
+    cbUf.Enabled := true;
   end else begin
     btnEditar.Enabled := true;
     btnSalvar.Enabled := false;
@@ -96,7 +104,21 @@ begin
     edtEmail.Enabled := false;
     edtCel1.Enabled := false;
     edtCel2.Enabled := false;
+    edtCidade.Enabled := false;
+    cbUf.Enabled    := false;
   end;
+
+  with telaDados.tblEstados do
+  begin
+    First;
+    while not Eof do
+    begin
+      cbUf.Items.Add(telaDados.tblEstados.FieldByName('UF').AsString);
+      Next;
+    end;
+  end;
+
+
 end;
 
 procedure TtelaContador.btnEditarClick(Sender: TObject);
@@ -116,6 +138,8 @@ begin
   edtEmail.Enabled := true;
   edtCel1.Enabled := true;
   edtCel2.Enabled := true;
+  edtCidade.Enabled := true;
+  cbUf.Enabled := true;
   telaDados.tblContador.Edit;
 end;
 
@@ -136,6 +160,11 @@ begin
   edtEmail.Enabled := false;
   edtCel1.Enabled := false;
   edtCel2.Enabled := false;
+  edtCidade.Enabled := false;
+  cbUf.Enabled := false;
+
+  telaDados.tblContadorID_LOGIN.Value := telaDados.tblLoginID.Value;
+
   telaDados.tblContador.Post;
 end;
 
@@ -147,10 +176,12 @@ begin
 
   for i := 0 to ACBrCEP1.Enderecos.Count -1 do
   begin
-    telaDados.tblContadorCEP.AsString    := UpperCase(ACBrCEP1.Enderecos[i].CEP);
+    telaDados.tblContadorCEP.AsString        := UpperCase(ACBrCEP1.Enderecos[i].CEP);
     telaDados.tblContadorENDERECO.AsString   := UpperCase(ACBrCEP1.Enderecos[i].Logradouro);
-    telaDados.tblContadorCOMPL.AsString:= UpperCase(ACBrCEP1.Enderecos[i].Complemento);
-    telaDados.tblContadorBAIRRO.AsString := UpperCase(ACBrCEP1.Enderecos[i].Bairro);
+    telaDados.tblContadorCOMPL.AsString      := UpperCase(ACBrCEP1.Enderecos[i].Complemento);
+    telaDados.tblContadorBAIRRO.AsString     := UpperCase(ACBrCEP1.Enderecos[i].Bairro);
+    telaDados.tblContadorCIDADE.AsString := UpperCase(ACBrCEP1.Enderecos[i].Municipio);
+    cbUf.Text                                := UpperCase(ACBrCEP1.Enderecos[i].UF);
   end;
 end;
 

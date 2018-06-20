@@ -1,7 +1,7 @@
 object telaContador: TtelaContador
-  Left = 224
-  Top = 108
-  Width = 671
+  Left = 12
+  Top = 126
+  Width = 677
   Height = 520
   Caption = 'Contador'
   Color = clBtnFace
@@ -17,7 +17,7 @@ object telaContador: TtelaContador
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 655
+    Width = 661
     Height = 482
     Align = alClient
     TabOrder = 0
@@ -264,7 +264,7 @@ object telaContador: TtelaContador
     object GroupBox1: TGroupBox
       Left = 16
       Top = 8
-      Width = 625
+      Width = 633
       Height = 105
       Caption = 'Dados Principais'
       TabOrder = 0
@@ -344,7 +344,7 @@ object telaContador: TtelaContador
     object GroupBox2: TGroupBox
       Left = 16
       Top = 120
-      Width = 625
+      Width = 633
       Height = 201
       Caption = 'Dados de Endere'#231'o'
       TabOrder = 1
@@ -397,7 +397,7 @@ object telaContador: TtelaContador
         FocusControl = edtCodMun
       end
       object btnBuscaCep: TSpeedButton
-        Left = 223
+        Left = 183
         Top = 19
         Width = 32
         Height = 28
@@ -460,10 +460,25 @@ object telaContador: TtelaContador
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
         OnClick = btnBuscaCepClick
       end
+      object Label14: TLabel
+        Left = 222
+        Top = 27
+        Width = 33
+        Height = 13
+        Caption = 'Cidade'
+        FocusControl = edtCidade
+      end
+      object Label15: TLabel
+        Left = 560
+        Top = 27
+        Width = 14
+        Height = 13
+        Caption = 'UF'
+      end
       object edtEndereco: TDBEdit
         Left = 83
         Top = 52
-        Width = 513
+        Width = 342
         Height = 21
         CharCase = ecUpperCase
         DataField = 'ENDERECO'
@@ -493,7 +508,7 @@ object telaContador: TtelaContador
       object edtBairro: TDBEdit
         Left = 83
         Top = 80
-        Width = 528
+        Width = 534
         Height = 21
         CharCase = ecUpperCase
         DataField = 'BAIRRO'
@@ -503,7 +518,7 @@ object telaContador: TtelaContador
       object edtCep: TDBEdit
         Left = 83
         Top = 24
-        Width = 134
+        Width = 94
         Height = 21
         CharCase = ecUpperCase
         DataField = 'CEP'
@@ -520,11 +535,28 @@ object telaContador: TtelaContador
         DataSource = telaDados.dsContador
         TabOrder = 5
       end
+      object edtCidade: TDBEdit
+        Left = 259
+        Top = 24
+        Width = 297
+        Height = 21
+        DataField = 'CIDADE'
+        DataSource = telaDados.dsContador
+        TabOrder = 6
+      end
+      object cbUf: TComboBox
+        Left = 576
+        Top = 24
+        Width = 44
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 7
+      end
     end
     object GroupBox3: TGroupBox
       Left = 16
       Top = 328
-      Width = 625
+      Width = 633
       Height = 89
       Caption = 'Dados de Contato'
       TabOrder = 2

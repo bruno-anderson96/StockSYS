@@ -498,6 +498,9 @@ type
     tblContadorCELULAR: TIBStringField;
     tblContadorCELULAR2: TIBStringField;
     ibdsContador: TIBDataSet;
+    tblContadorCIDADE: TIBStringField;
+    tblContadorUF: TIBStringField;
+    tblContadorID_LOGIN: TIntegerField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
 
@@ -736,6 +739,12 @@ begin
   tblFornecedoresTELEFONE2.EditMask      := '(00)0000-0000;0';
   tblFornecedoresCNPJ_CPF.EditMask       := '00.000.000/0000-00;0';
   tblFornecedoresINSC_RG.EditMask        := '00000000-0;0';
+  //Contador
+  tblContadorCEP.EditMask                := '00000-000;0';
+  tblContadorCELULAR.EditMask            := '(00)00000-0000;0';
+  tblContadorCELULAR2.EditMask           := '(00)0000-0000;0';
+  tblContadorCPF.EditMask                := '000.000.000-00;0';
+
 end;
 
 procedure TtelaDados.AtualizaConfigAcbr;

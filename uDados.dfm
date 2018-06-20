@@ -4448,7 +4448,7 @@ object telaDados: TtelaDados
       item
         Name = 'CPF'
         DataType = ftString
-        Size = 10
+        Size = 20
       end
       item
         Name = 'CELULAR'
@@ -4459,6 +4459,21 @@ object telaDados: TtelaDados
         Name = 'CELULAR2'
         DataType = ftString
         Size = 12
+      end
+      item
+        Name = 'CIDADE'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'UF'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 2
+      end
+      item
+        Name = 'ID_LOGIN'
+        DataType = ftInteger
       end>
     IndexDefs = <
       item
@@ -4519,6 +4534,17 @@ object telaDados: TtelaDados
     object tblContadorCELULAR2: TIBStringField
       FieldName = 'CELULAR2'
       Size = 12
+    end
+    object tblContadorCIDADE: TIBStringField
+      FieldName = 'CIDADE'
+    end
+    object tblContadorUF: TIBStringField
+      FieldName = 'UF'
+      FixedChar = True
+      Size = 2
+    end
+    object tblContadorID_LOGIN: TIntegerField
+      FieldName = 'ID_LOGIN'
     end
   end
   object qryContador: TIBQuery
