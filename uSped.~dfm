@@ -1,6 +1,6 @@
 object telaSped: TtelaSped
-  Left = 642
-  Top = 98
+  Left = 394
+  Top = 96
   Width = 422
   Height = 363
   Caption = 'Sped Fiscal'
@@ -84,6 +84,7 @@ object telaSped: TtelaSped
         F3F1EAF3F1EAF3F1EAF3F1EAB47C51FFFFFFFFFFFFB57D52B57D52B57D52B57D
         52B57D52B57D52B57D52B57D52B57E52B57E52B57D52B57D52B57D52B57D52B5
         7D52B57D52B57D52B57D52B57D52B57D52B57D52B57D52FFFFFF}
+      OnClick = btnGeraSpedClick
     end
     object GroupBox1: TGroupBox
       Left = 13

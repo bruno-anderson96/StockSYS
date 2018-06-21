@@ -1,6 +1,6 @@
 object telaSped: TtelaSped
-  Left = 642
-  Top = 98
+  Left = 394
+  Top = 96
   Width = 422
   Height = 363
   Caption = 'Sped Fiscal'
