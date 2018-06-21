@@ -60,6 +60,8 @@ type
     CEP1: TMenuItem;
     imgLogo: TImage;
     Contador1: TMenuItem;
+    Fiscal1: TMenuItem;
+    GerarSped1: TMenuItem;
     procedure Sair1Click(Sender: TObject);
     procedure StatusdeServio1Click(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
@@ -90,6 +92,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure CEP1Click(Sender: TObject);
     procedure Contador1Click(Sender: TObject);
+    procedure GerarSped1Click(Sender: TObject);
 
 
   private
@@ -108,7 +111,7 @@ implementation
 
 uses uGerarNfe, uDados, uValidaXml, uEnviarNfe, uCancelaNfe, uInutilizaNfe,
   uEmiteDanfe, uEnviaEmail, uCadFornecedor, uLancCompras, uGerarNfeEntrada, XPMan, uConfig,
-  uConfigSat, uConfigEmit, uCadCep, uContador;
+  uConfigSat, uConfigEmit, uCadCep, uContador, uSped;
 
 {$R *.dfm}
 
@@ -288,7 +291,7 @@ end;
 
 procedure TtelaPrincipal.CEP1Click(Sender: TObject);
 begin
-Application.CreateForm(TtelaCadCep, telaCadCep);
+  Application.CreateForm(TtelaCadCep, telaCadCep);
   telaCadCep.Show;
 end;
 
@@ -296,6 +299,12 @@ procedure TtelaPrincipal.Contador1Click(Sender: TObject);
 begin
   Application.CreateForm(TtelaContador, telaContador);
   telaContador.Show;
+end;
+
+procedure TtelaPrincipal.GerarSped1Click(Sender: TObject);
+begin
+  Application.CreateForm(TtelaSped, telaSped);
+  telaSped.Show;
 end;
 
 end.

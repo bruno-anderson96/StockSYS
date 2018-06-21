@@ -6259,6 +6259,13 @@ object telaPrincipal: TtelaPrincipal
           OnClick = GerarNFeEntrada1Click
         end
       end
+      object Fiscal1: TMenuItem
+        Caption = 'Fiscal'
+        object GerarSped1: TMenuItem
+          Caption = 'Gerar Sped'
+          OnClick = GerarSped1Click
+        end
+      end
     end
     object Configuraes1: TMenuItem
       Bitmap.Data = {
