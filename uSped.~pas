@@ -38,7 +38,8 @@ var
 
 implementation
 
-uses ACBrEFDBloco_K_Class, ACBrEFDBloco_K, ACBrEFDBloco_0, ACBrEFDBloco_0_Class;
+uses ACBrEFDBloco_K_Class, ACBrEFDBloco_K, ACBrEFDBloco_0, ACBrEFDBloco_0_Class,
+  DB;
 
 {$R *.dfm}
 
@@ -94,7 +95,7 @@ end;
 
 
 procedure TtelaSped.GerarDadosBloco(pBloco: String);
-var Int1, Int2, Notas : Integer;
+var Int1, Int2, Notas, id, idP : Integer;
     aTotalICMS : Double;
 begin
 
@@ -112,15 +113,26 @@ begin
 
   telaDados.qryClientes.Close;
   telaDados.qryClientes.SQL.Clear;
-  telaDados.qryClientes.SQL.Add('Select * from Clientes where id_login = '); //CORRIGIR POR DATA?
-  telaDados.qryClientes.SQL.Add(telaDados.tblLoginID.AsString); //CORRIGIR POR DATA?
+  telaDados.qryClientes.SQL.Add('Select * from Cliente'); //CORRIGIR POR DATA?
+  //telaDados.qryClientes.SQL.Add(telaDados.tblLoginID.AsString); //CORRIGIR POR DATA?
   telaDados.qryClientes.Open;
 
   telaDados.qryUnidade.Close;
   telaDados.qryUnidade.SQL.Clear;
-  telaDados.qryUnidade.SQL.Add('Select * from Unidade where id_login = '); //CORRIGIR POR DATA?
-  telaDados.qryUnidade.SQL.Add(telaDados.tblLoginID.AsString); //CORRIGIR POR DATA?
+  telaDados.qryUnidade.SQL.Add('Select * from Unidade'); //CORRIGIR POR DATA?
+  //telaDados.qryUnidade.SQL.Add(telaDados.tblLoginID.AsString); //CORRIGIR POR DATA?
   telaDados.qryUnidade.Open;
+
+  telaDados.qryPedidos.Close;
+  telaDados.qryPedidos.SQL.Clear;
+  telaDados.qryPedidos.SQL.Add('Select * from PEDIDO');
+  telaDados.qryPedidos.SQL.Add('Where cast(pedido.data_pedido as date) between :pDataI and :pDataF');
+
+  telaDados.qryPedidos.Params.ParamByName('pDataI').AsDate := DateTimePicker1.Date;
+  telaDados.qryPedidos.Params.ParamByName('pDataF').AsDate := DateTimePicker2.Date;
+  telaDados.qryPedidos.Open;
+  telaDados.qryPedidos.First;
+
 
   aTotalICMS := 0;
   if pBloco = '0' then begin
@@ -130,13 +142,13 @@ begin
       with Registro0000New do
       begin
          COD_VER    := StrToCodVer('012');
-         COD_FIN    := raOriginal;.tblEmitente
+         COD_FIN    := raOriginal;
          NOME       := telaDados.qryEmitente.FieldByName('RAZ_SOC').AsString;
          CNPJ       := telaDados.qryEmitente.FieldByName('CNPJ').AsString;
          CPF        := '12345678901'; // Deve ser uma informação valida
          UF         := telaDados.qryEmitente.FieldByName('UF').AsString;
-         IE         := telaDados.qryEmitente.FieldByName('INCEST').AsString;
-         COD_MUN    := telaDados.qryEmitente.FieldByName('COD_MUN').AsString;
+         IE         := telaDados.qryEmitente.FieldByName('INSCEST').AsString;
+         COD_MUN    := telaDados.qryEmitente.FieldByName('CODMUN').AsInteger;
          IM         := '';
          SUFRAMA    := '';
          IND_PERFIL := pfPerfilA;
@@ -170,33 +182,68 @@ begin
           NUM        := telaDados.qryContador.FieldByName('NUM').AsString;
           COMPL      := telaDados.qryContador.FieldByName('COMPL').AsString;
           BAIRRO     := telaDados.qryContador.FieldByName('BAIRRO').AsString;
-          FONE       := telaDados.qryContador.FieldByName('CELULAR1').AsString;
+          FONE       := telaDados.qryContador.FieldByName('CELULAR').AsString;
           FAX        := telaDados.qryContador.FieldByName('CELULAR2').AsString;
           EMAIL      := telaDados.qryContador.FieldByName('EMAIL').AsString;
-          COD_MUN    := telaDados.qryContador.FieldByName('COD_MUN').AsString;
+          COD_MUN    := telaDados.qryContador.FieldByName('COD_MUN').AsInteger;
        end;
        // Clientes
        with Registro0150New do
        begin
-         COD_PART := telaDados.qryContador.FieldByName('ID').AsString;
-         NOME     := telaDados.qryContador.FieldByName('NOME').AsString;
+         COD_PART := telaDados.qryClientes.FieldByName('ID').AsString;
+         NOME     := telaDados.qryClientes.FieldByName('NOME').AsString;
          COD_PAIS := '001';
          CNPJ     := '';
-         CPF      := telaDados.qryContador.FieldByName('CNPJ_CPF').AsString;
-         IE       := telaDados.qryContador.FieldByName('INSC_RG').AsString;
-         COD_MUN  := '';
+         CPF      := telaDados.qryClientes.FieldByName('CNPJ_CPF').AsString;
+         IE       := telaDados.qryClientes.FieldByName('INSC_RG').AsString;
+         COD_MUN  := telaDados.qryContador.FieldByName('COD_MUN').AsInteger;
          SUFRAMA  := '';
-         ENDERECO := telaDados.qryContador.FieldByName('ENDERECO').AsString;
-         NUM      := telaDados.qryContador.FieldByName('NUM').AsString;
-         COMPL    := telaDados.qryContador.FieldByName('COMPLEMENTO').AsString;
-         BAIRRO   := telaDados.qryContador.FieldByName('BAIRRO').AsString;
+         ENDERECO := telaDados.qryClientes.FieldByName('ENDERECO').AsString;
+         NUM      := telaDados.qryClientes.FieldByName('NUM_END').AsString;
+         COMPL    := telaDados.qryClientes.FieldByName('COMPLEMENTO').AsString;
+         BAIRRO   := telaDados.qryClientes.FieldByName('BAIRRO_END').AsString;
        end;
        with Registro0190New do
         begin
           UNID  := telaDados.qryUnidade.FieldByName('SIGLA').AsString;
           DESCR := telaDados.qryUnidade.FieldByName('NOME').AsString;
         end;
-       for Int1 := 1 to 6 do
+
+       while not telaDados.qryPedidos.Eof do begin
+
+          id := telaDados.qryPedidos.FieldByName('ID').AsInteger;
+          telaDados.qryPedidosItens.Close;
+          telaDados.qryPedidosItens.SQL.Clear;
+          telaDados.qryPedidosItens.SQL.Add('Select * from PEDIDO_ITENS Where ID_PEDIDO = ');
+          telaDados.qryPedidosItens.SQL.Add(IntToStr(id));
+          telaDados.qryPedidosItens.Open;
+          telaDados.qryPedidosItens.First;
+          while not telaDados.qryPedidosItens.Eof do begin
+            idP := telaDados.qryPedidosItens.FieldByName('ID_PRODUTO').AsInteger;
+
+            telaDados.qryProdutos.Close;
+            telaDados.qryProdutos.SQL.Clear;
+            telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID = ');
+            telaDados.qryProdutos.SQL.Add(IntToStr(idP));
+            telaDados.qryProdutos.Open;
+            with Registro0200New do begin
+              COD_ITEM     := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+              DESCR_ITEM   := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
+              COD_BARRA    := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+              COD_ANT_ITEM := '';
+              UNID_INV     := telaDados.qryProdutos.FieldByName('UNIDADE').AsString;
+              TIPO_ITEM    := tiMercadoriaRevenda;
+              COD_NCM      := telaDados.qryProdutos.FieldByName('CODIGO_NCM').AsString;
+              EX_IPI       := '';
+              COD_GEN      := '';
+              COD_LST      := '';
+              ALIQ_ICMS    := 18;
+            end;
+            telaDados.qryPedidosItens.Next;
+          end;
+          telaDados.qryPedidos.Next;
+       end;
+       {for Int1 := 1 to 6 do
          begin
           if not Registro0200.LocalizaRegistro(IntToStrZero(Int1,6)) then
             begin
@@ -215,7 +262,7 @@ begin
                  ALIQ_ICMS    := 18;
               end;
             end;
-         end;
+         end; }
       end;
     end;
   end
@@ -260,33 +307,50 @@ begin
              VL_PIS_ST     := 0;
              VL_COFINS_ST  := 0;
              //c170
-             for Int2 := 1 to 6 do
-             begin
+             telaDados.qryPedidos.First;
+               while not telaDados.qryPedidos.Eof do begin
+                 
+                 id := telaDados.qryPedidos.FieldByName('ID').AsInteger;
+                 telaDados.qryPedidosItens.Close;
+                 telaDados.qryPedidosItens.SQL.Clear;
+                 telaDados.qryPedidosItens.SQL.Add('Select * from PEDIDO_ITENS Where ID_PEDIDO = ');
+                 telaDados.qryPedidosItens.SQL.Add(IntToStr(id));
+                 telaDados.qryPedidosItens.Open;
+                 telaDados.qryPedidosItens.First;
+                while not telaDados.qryPedidosItens.Eof do begin
+                  idP := telaDados.qryPedidosItens.FieldByName('ID_PRODUTO').AsInteger;
+
+                  telaDados.qryProdutos.Close;
+                  telaDados.qryProdutos.SQL.Clear;
+                  telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID = ');
+                  telaDados.qryProdutos.SQL.Add(IntToStr(idP));
+                  telaDados.qryProdutos.Open;
+
                with RegistroC170New do   //Inicio Adicionar os Itens:
                begin
                   NUM_ITEM    := IntToStrZero(Int2,3);
-                  COD_ITEM    := IntToStrZero(Int2,6);
-                  DESCR_COMPL := 'Descricao do item '+IntToStrZero(Int2,6);
-                  QTD         := 1;
-                  UNID        := 'UN';
-                  VL_ITEM     := 10;
-                  VL_DESC     := 0;
+                  COD_ITEM    := telaDados.qryProdutos.FieldByName('ID').AsString;
+                  DESCR_COMPL := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
+                  QTD         := telaDados.qryPedidosItens.FieldByName('QUANTIDADE').AsInteger;
+                  UNID        := telaDados.qryProdutos.FieldByName('UNIDADE').AsString;
+                  VL_ITEM     := telaDados.qryPedidosItens.FieldByName('VALOR').AsFloat;
+                  VL_DESC     := telaDados.qryPedidosItens.FieldByName('DESCONTO').AsFloat;
                   IND_MOV     := mfNao;
                   CST_ICMS    := '000';
-                  CFOP        := '5102';
+                  CFOP        := telaDados.qryProdutos.FieldByName('CFOP').AsString;
                   COD_NAT     := '';
-                  VL_BC_ICMS  := 10;
-                  ALIQ_ICMS   := 18;
-                  VL_ICMS     := 1.8;
+                  VL_BC_ICMS  := telaDados.qryProdutos.FieldByName('VAL_ICMS').AsFloat;
+                  ALIQ_ICMS   := telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMS').AsFloat;
+                  VL_ICMS     := telaDados.qryProdutos.FieldByName('VAL_ICMS').AsFloat;
                   VL_BC_ICMS_ST := 0;
                   ALIQ_ST       := 0;
                   VL_ICMS_ST    := 0;
                   IND_APUR      := iaMensal;
                   CST_IPI       := 'teste';
                   COD_ENQ       := '';
-                  VL_BC_IPI     := 0;
-                  ALIQ_IPI      := 0;
-                  VL_IPI        := 0;
+                  VL_BC_IPI     := telaDados.qryProdutos.FieldByName('VAL_IPI').AsFloat;
+                  ALIQ_IPI      := telaDados.qryProdutos.FieldByName('ALIQUOTA_IPI').AsFloat;
+                  VL_IPI        := telaDados.qryProdutos.FieldByName('VAL_IPI').AsFloat;
                   CST_PIS       :='teste';
                   VL_BC_PIS     := 0;
                   ALIQ_PIS_PERC := 0;
@@ -301,6 +365,9 @@ begin
                   VL_COFINS        := 0;
                   COD_CTA          := '000';
                 end;
+                telaDados.qryPedidosItens.Next;
+               end;
+               telaDados.qryPedidos.Next;
              end;
              //c190
              with RegistroC190New do
