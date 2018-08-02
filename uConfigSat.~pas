@@ -387,8 +387,8 @@ begin
     end;
       }
 
-    Total.DescAcrEntr.vDescSubtot := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsCurrency;
-    Total.vCFeLei12741 := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsCurrency;
+    Total.DescAcrEntr.vDescSubtot := telaDados.qryPedidos.FieldByName('DESCONTO').AsCurrency;
+    Total.vCFeLei12741 := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsCurrency; //clocar aqui valor do imposto
     {Pagto1 := RoundABNT(TotalGeral/2,-2);
     with Pagto.Add do
     begin
@@ -548,11 +548,11 @@ begin {
 end;
 
 procedure TtelaConfigSat.PrepararImpressao;
-begin
-  {if ACBrSAT1.Extrato = ACBrSATExtratoESCPOS1 then
+{begin
+  if ACBrSAT1.Extrato = ACBrSATExtratoESCPOS1 then
   begin                          }
 
-  ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModeloPosPrinter.ItemIndex );
+  {ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModeloPosPrinter.ItemIndex );
   ACBrPosPrinter1.PaginaDeCodigo := TACBrPosPaginaCodigo( cbxPagCodigo.ItemIndex );
   ACBrPosPrinter1.Porta := btnImp.Caption;
   ACBrPosPrinter1.ColunasFonteNormal := StrToInt(edtCol.Text);
@@ -560,15 +560,15 @@ begin
   ACBrPosPrinter1.EspacoEntreLinhas := StrToInt(edtEsp.Text);
   ACBrSATExtratoESCPOS1.ImprimeQRCode := True;
   ACBrSATExtratoESCPOS1.MostrarPreview := true;
-  ACBrSATExtratoESCPOS1.ImprimeEmUmaLinha := false;
+  ACBrSATExtratoESCPOS1.ImprimeEmUmaLinha := false; }  //aqui pra impressora
     {if cbImprimirChaveUmaLinha.Checked then
       ACBrSATExtratoESCPOS1.ImprimeChaveEmUmaLinha := rSim
     else
       ACBrSATExtratoESCPOS1.ImprimeChaveEmUmaLinha := rAuto;
   end
-  else
+  else }
   begin
-    ACBrSATExtratoFortes1.LarguraBobina    := 210;
+    ACBrSATExtratoFortes1.LarguraBobina    := 200;
     ACBrSATExtratoFortes1.Margens.Topo     := 3 ;
     ACBrSATExtratoFortes1.Margens.Fundo    := 5 ;
     ACBrSATExtratoFortes1.Margens.Esquerda := 3 ;
@@ -577,7 +577,7 @@ begin
 
 
     ACBrSATExtratoFortes1.PrinterName := lImpressora.Caption;
-     }
+
 end;
 
 

@@ -395,7 +395,7 @@ begin
     {edtCar.Clear;}
     telaDados.tblPedidosID_CLIENTE.Value := 1;
     cbPagamento.ItemIndex := 0;
-      if gpBandeira.Visible = true then gpBandeira.Visible := false;  //Correção de bug
+      if gpBandeira.Visible = true then gpBandeira.Visible := false;  //Correção de bugx
     cbPagamento.SetFocus;
   end else begin
     if StrToFloat(edtTrc.Text) < 0 then begin
@@ -712,8 +712,8 @@ end;
 procedure TtelaLancPedidos.excluirItemExecute(Sender: TObject);
 
 begin
-  telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR.Value - DBGrid1.Columns.Items[5].Field.AsCurrency;
-  telaDados.tblPedidosVALOR_TOTAL.Value := telaDados.tblPedidosVALOR_TOTAL.Value - DBGrid1.Columns.Items[5].Field.AsCurrency;
+  telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR.Value - DBGrid1.Columns.Items[3].Field.AsCurrency;
+  telaDados.tblPedidosVALOR_TOTAL.Value := telaDados.tblPedidosVALOR_TOTAL.Value - DBGrid1.Columns.Items[3].Field.AsCurrency;
   telaDados.cdsTempItens.Delete;
 end;
 

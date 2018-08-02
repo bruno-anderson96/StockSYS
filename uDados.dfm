@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 802
-  Top = 58
+  Left = 178
+  Top = 368
   Width = 1216
   Height = 699
   Caption = 'Data m'#243'dulo'
@@ -4474,6 +4474,11 @@ object telaDados: TtelaDados
       item
         Name = 'ID_LOGIN'
         DataType = ftInteger
+      end
+      item
+        Name = 'CRC'
+        DataType = ftString
+        Size = 10
       end>
     IndexDefs = <
       item
