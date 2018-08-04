@@ -6215,7 +6215,6 @@ object telaPrincipal: TtelaPrincipal
       end
       object NFe1: TMenuItem
         Caption = 'NFe'
-        Visible = False
         object StatusdeServio1: TMenuItem
           Caption = 'Status de Servi'#231'o'
           OnClick = StatusdeServio1Click

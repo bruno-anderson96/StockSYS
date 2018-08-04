@@ -45,8 +45,16 @@ begin
   telaDados.qryLogin.SQL.Add(edtLogin.Text);
   telaDados.qryLogin.Open;
  }
-  if (telaDados.tblLogin.Locate('LOGIN', edtLogin.Text,[loCaseInsensitive])) and
-     (telaDados.tblLogin.Locate('SENHA', edtSenha.Text,[loCaseInsensitive])) then begin
+    telaDados.tblLogin.Locate('LOGIN', edtLogin.Text,[loCaseInsensitive]);{ and
+     (telaDados.tblLogin.Locate('SENHA', edtSenha.Text,[loCaseInsensitive])) then begin }
+
+    telaDados.qryLogin.Close;
+    telaDados.qryLogin.SQL.Clear;
+    telaDados.qryLogin.SQL.Add('Select * From login where ID =');
+    telaDados.qryLogin.SQL.Add(telaDados.tblLoginID.AsString);
+    telaDados.qryLogin.Open;
+
+  if (edtSenha.Text = telaDados.qryLogin.FieldByName('senha').AsString) then begin
     telaPrincipal.Show;
     telaLogin.Hide;
     telaDados.qryEmitente.Close;

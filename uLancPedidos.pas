@@ -520,6 +520,9 @@ begin
   telaDados.tblPedidosItens.ApplyUpdates;
   telaDados.tblProdutos.Close;
   label10.Caption := 'Tecle F2 para Abrir Cupom';
+
+  telaConfigSat.PrepararImpressao;
+  telaConfigSat.ACBrSAT1.ImprimirExtrato;
   end;
   end;
 end;

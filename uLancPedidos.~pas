@@ -520,6 +520,9 @@ begin
   telaDados.tblPedidosItens.ApplyUpdates;
   telaDados.tblProdutos.Close;
   label10.Caption := 'Tecle F2 para Abrir Cupom';
+
+  telaConfigSat.PrepararImpressao;
+  telaConfigSat.ACBrSAT1.ImprimirExtrato;
   end;
   end;
 end;
@@ -712,8 +715,8 @@ end;
 procedure TtelaLancPedidos.excluirItemExecute(Sender: TObject);
 
 begin
-  telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR.Value - DBGrid1.Columns.Items[3].Field.AsCurrency;
-  telaDados.tblPedidosVALOR_TOTAL.Value := telaDados.tblPedidosVALOR_TOTAL.Value - DBGrid1.Columns.Items[3].Field.AsCurrency;
+  telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR.Value - DBGrid1.Columns.Items[5].Field.AsCurrency;
+  telaDados.tblPedidosVALOR_TOTAL.Value := telaDados.tblPedidosVALOR_TOTAL.Value - DBGrid1.Columns.Items[5].Field.AsCurrency;
   telaDados.cdsTempItens.Delete;
 end;
 

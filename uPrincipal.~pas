@@ -111,7 +111,7 @@ implementation
 
 uses uGerarNfe, uDados, uValidaXml, uEnviarNfe, uCancelaNfe, uInutilizaNfe,
   uEmiteDanfe, uEnviaEmail, uCadFornecedor, uLancCompras, uGerarNfeEntrada, XPMan, uConfig,
-  uConfigSat, uConfigEmit, uCadCep, uContador;
+  uConfigSat, uConfigEmit, uCadCep, uContador, uSped;
 
 {$R *.dfm}
 
