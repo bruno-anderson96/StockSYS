@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 802
-  Top = 58
+  Left = 178
+  Top = 368
   Width = 1216
   Height = 699
   Caption = 'Data m'#243'dulo'
@@ -300,6 +300,7 @@ object telaDados: TtelaDados
     ParentFont = False
   end
   object ACBrNFe1: TACBrNFe
+    Integrador = ACBrIntegrador1
     Configuracoes.Geral.SSLLib = libNone
     Configuracoes.Geral.SSLCryptLib = cryNone
     Configuracoes.Geral.SSLHttpLib = httpNone
@@ -4474,6 +4475,11 @@ object telaDados: TtelaDados
       item
         Name = 'ID_LOGIN'
         DataType = ftInteger
+      end
+      item
+        Name = 'CRC'
+        DataType = ftString
+        Size = 10
       end>
     IndexDefs = <
       item
@@ -4592,5 +4598,11 @@ object telaDados: TtelaDados
     DataSource = dsContador
     Left = 144
     Top = 624
+  end
+  object ACBrIntegrador1: TACBrIntegrador
+    PastaInput = 'C:\Integrador\Input\'
+    PastaOutput = 'C:\Integrador\Output\'
+    Left = 8
+    Top = 80
   end
 end

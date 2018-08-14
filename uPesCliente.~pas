@@ -69,15 +69,18 @@ end;
 procedure TtelaPesCliente.DBGrid1DblClick(Sender: TObject);
 var num : String;
 begin
-  num := DBGrid1.Columns.Items[6].Field.AsString;
-  telaDados.tblClientes.Locate('INSC_RG', num , []);
+  num := DBGrid1.Columns.Items[5].Field.AsString;
+  telaDados.tblClientes.Locate('CNPJ_CPF', num , []);
   telaPesCliente.Close;
+
+  telaCadClientes.Excluir.Enabled := true;
 end;
 
 procedure TtelaPesCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   telaCadClientes.Show;
+  
 end;
 
 procedure TtelaPesCliente.editBuscaKeyPress(Sender: TObject;

@@ -100,7 +100,7 @@ begin
   telaCadProdutos.cbCsosn.ItemIndex := telaDados.qryCsosn.FieldByName('ID').Value;
   telaCadProdutos.cbCst.ItemIndex := telaDados.qryCst.FieldByName('ID').Value;
 
-
+  telaCadProdutos.Excluir.Enabled := true;
 
   telaPesProduto.Close;
 

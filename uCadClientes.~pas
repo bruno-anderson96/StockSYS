@@ -132,7 +132,7 @@ var
 
 implementation
 
-uses Contnrs;
+uses Contnrs, Math;
 
 {$R *.dfm}
 
@@ -275,6 +275,7 @@ procedure TtelaCadClientes.IncluirExecute(Sender: TObject);
 var
 id:integer;
 begin
+  telaDados.tblClientes.Open;
 
   PageControl1.TabIndex := 0;
 
@@ -431,18 +432,21 @@ end else
 
   telaDados.tblClientesUF_END.Value := editUf.Text;
   telaDados.tblClientes.Post;
+  telaDados.tblClientes.Close;
+
 
   btnIncluir.Enabled := true;
   btnConfirmar.Enabled := false;
   btnCancelar.Enabled := false;
   btnEditar.Enabled := true;
-  btnPes.Enabled := false;
+  btnPes.Enabled := true;
   btnPesEnt.Enabled := false;
 
   Confirmar.Enabled := false;
   Incluir.Enabled := true;
   Cancelar.Enabled := false;
   Editar.Enabled := true;
+  Pesquisar.Enabled := true;
 
   editNome.Enabled := false;
   editCep.Enabled := false;
@@ -491,8 +495,9 @@ end;
 
 procedure TtelaCadClientes.CancelarExecute(Sender: TObject);
 begin
-  telaDados.tblClientes.Cancel;
 
+  telaDados.tblClientes.Cancel;
+  telaDados.tblClientes.Close;
   editNome.Enabled := false;
   editCep.Enabled := false;
   editEndereco.Enabled := false;
@@ -561,6 +566,7 @@ end;
 
 procedure TtelaCadClientes.PesquisarExecute(Sender: TObject);
 begin
+  telaDados.tblClientes.Open;
   Application.CreateForm(TtelaPesCliente, telaPesCliente);
   telaPesCliente.Show;
 end;
@@ -599,6 +605,7 @@ end;
 
 procedure TtelaCadClientes.EditarExecute(Sender: TObject);
 begin
+  telaDados.tblClientes.Open;
   Incluir.Enabled := false;
   Excluir.Enabled := true;
   Cancelar.Enabled := true;
@@ -656,6 +663,8 @@ end;
 
 procedure TtelaCadClientes.ExcluirExecute(Sender: TObject);
 begin
+  telaDados.tblClientes.Open;  
+
   telaDados.qryClientes.Close;
   telaDados.qryClientes.SQL.Clear;
   telaDados.qryClientes.SQL.Add('Delete from cliente where id = ');
@@ -663,6 +672,12 @@ begin
   telaDados.qryClientes.Open;
 
   telaDados.tblClientes.Refresh;
+  telaDados.tblClientes.Close;
+
+  If editId.Text <> '' then begin
+  Excluir.Enabled := true;
+  end; 
+
 end;
 
 procedure TtelaCadClientes.editTelefoneKeyPress(Sender: TObject;

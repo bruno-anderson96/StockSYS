@@ -87,6 +87,9 @@ implementation
 
 procedure TtelaCadFor.actCancelarExecute(Sender: TObject);
 begin
+  telaDados.tblFornecedores.Cancel;
+  telaDados.tblFornecedores.Close;
+
   btnCep.Enabled := false;
 
   editNome.Enabled := false;
@@ -115,8 +118,6 @@ begin
   btnCancelar.Enabled := false;
   btnIncluir.Enabled := true;
   btnEditar.Enabled := true;
-
-  telaDados.tblFornecedores.Cancel;
 
 end;
 
@@ -165,6 +166,7 @@ begin
 
   telaDados.tblFornecedoresUF_END.Value := editUf.Text;
   telaDados.tblFornecedores.Post;
+  telaDados.tblFornecedores.Close;
 
   btnCep.Enabled := false;
 
@@ -200,7 +202,7 @@ procedure TtelaCadFor.actIncluirExecute(Sender: TObject);
 var
 id : integer;
 begin
-
+  telaDados.tblFornecedores.Open;
   telaDados.tblFornecedores.Last;
 
   id := telaDados.tblFornecedoresID.Value + 1;
@@ -280,10 +282,13 @@ procedure TtelaCadFor.actPesquisarExecute(Sender: TObject);
 begin
   Application.CreateForm(TtelaPesFor, telaPesFor);
   telaPesFor.Show;
+  telaDados.tblFornecedores.Open;
 end;
 
 procedure TtelaCadFor.actEditarExecute(Sender: TObject);
 begin
+  telaDados.tblFornecedores.Open;
+
   btnCep.Enabled := true;
 
   editNome.Enabled := true;
@@ -318,6 +323,8 @@ end;
 
 procedure TtelaCadFor.actExcluirExecute(Sender: TObject);
 begin
+  telaDados.tblFornecedores.Open;
+
   telaDados.qryFornecedores.Close;
   telaDados.qryFornecedores.SQL.Clear;
   telaDados.qryFornecedores.SQL.Add('Delete from fornecedor where id = ');
@@ -325,6 +332,8 @@ begin
   telaDados.qryFornecedores.Open;
 
   telaDados.tblFornecedores.Refresh;
+
+  telaDados.tblFornecedores.Close;
 end;
 
 procedure TtelaCadFor.editCepKeyPress(Sender: TObject; var Key: Char);

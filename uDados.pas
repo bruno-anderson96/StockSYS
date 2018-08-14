@@ -8,7 +8,7 @@ uses
   IBDatabase, IBCustomDataSet, IBTable, StdCtrls, IBQuery, DBClient,
   DBLocal, DBLocalI, Provider, Math, ACBrDFeSSL, ACBrNFeDANFEClass,
   ACBrNFeDANFeRLClass, ACBrSocket, ACBrCEP, ACBrIBGE, IBUpdateSQL, FMTBcd,
-  SqlExpr;
+  SqlExpr, ACBrIntegrador;
 
  type
   retornaEndereco = record
@@ -501,6 +501,8 @@ type
     tblContadorCIDADE: TIBStringField;
     tblContadorUF: TIBStringField;
     tblContadorID_LOGIN: TIntegerField;
+    ACBrIntegrador1: TACBrIntegrador;
+    ACBrNFeDANFeRL1: TACBrNFeDANFeRL;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
 

@@ -31,6 +31,8 @@ implementation
 
 {$R *.dfm}
 
+uses uCadFornecedor;
+
 procedure TtelaPesFor.btnPesquisaClick(Sender: TObject);
 begin
   if editBusca.Text = '' then
@@ -60,7 +62,8 @@ var num : string;
 begin
   num := DBGrid1.Columns.Items[5].Field.AsString;
   telaDados.tblFornecedores.Locate('CNPJ_CPF', num , []);
-  telaPesFor.Close;;
+  telaPesFor.Close;
+  telaCadFor.actExcluir.Enabled := true;
 end;
 
 procedure TtelaPesFor.FormShow(Sender: TObject);

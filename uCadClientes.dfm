@@ -355,7 +355,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'TELEFONE'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 8
+        TabOrder = 9
         OnKeyPress = editTelefoneKeyPress
       end
       object editCelular: TDBEdit
@@ -366,7 +366,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'CELULAR'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 9
+        TabOrder = 10
         OnKeyPress = editCelularKeyPress
       end
       object editCpf: TDBEdit
@@ -377,7 +377,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'CNPJ_CPF'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 10
+        TabOrder = 11
         OnKeyPress = editCpfKeyPress
       end
       object editRg: TDBEdit
@@ -388,7 +388,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'INSC_RG'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 11
+        TabOrder = 12
         OnKeyPress = editRgKeyPress
       end
       object editDtCad: TDBEdit
@@ -399,7 +399,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'DATA_CAD'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 12
+        TabOrder = 13
       end
       object cbAtivo: TDBCheckBox
         Left = 96
@@ -410,7 +410,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'ATIVO'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 13
+        TabOrder = 14
         ValueChecked = 'True'
         ValueUnchecked = 'False'
       end
@@ -424,7 +424,7 @@ object telaCadClientes: TtelaCadClientes
         Items.Strings = (
           'F'#237'sica'
           'Jur'#237'dica')
-        TabOrder = 14
+        TabOrder = 15
         OnClick = RadioGroup1Click
       end
       object editUf: TComboBox
@@ -435,7 +435,7 @@ object telaCadClientes: TtelaCadClientes
         CharCase = ecUpperCase
         Enabled = False
         ItemHeight = 13
-        TabOrder = 15
+        TabOrder = 8
       end
     end
     object TabSheet2: TTabSheet

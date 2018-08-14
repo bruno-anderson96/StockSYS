@@ -162,7 +162,7 @@ with telaDados.tblBairros do
           cbBairro.Items.Add(telaDados.tblBairros.FieldByName('BAIRROS').AsString);
           Next;
         end;
-    end;
+    end;}
 end;
 
 end.

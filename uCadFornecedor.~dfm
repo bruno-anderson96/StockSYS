@@ -267,6 +267,7 @@ object telaCadFor: TtelaCadFor
       Top = 23
       Width = 65
       Height = 21
+      CharCase = ecUpperCase
       DataField = 'ID'
       DataSource = telaDados.dsFornecedores
       Enabled = False
@@ -348,7 +349,7 @@ object telaCadFor: TtelaCadFor
       DataField = 'TELEFONE'
       DataSource = telaDados.dsFornecedores
       Enabled = False
-      TabOrder = 9
+      TabOrder = 10
       OnKeyPress = editTel1KeyPress
     end
     object editTel2: TDBEdit
@@ -360,7 +361,7 @@ object telaCadFor: TtelaCadFor
       DataField = 'TELEFONE2'
       DataSource = telaDados.dsFornecedores
       Enabled = False
-      TabOrder = 10
+      TabOrder = 11
       OnKeyPress = editTel2KeyPress
     end
     object editCnpj: TDBEdit
@@ -372,7 +373,7 @@ object telaCadFor: TtelaCadFor
       DataField = 'CNPJ_CPF'
       DataSource = telaDados.dsFornecedores
       Enabled = False
-      TabOrder = 11
+      TabOrder = 12
       OnKeyPress = editCnpjKeyPress
     end
     object editInsc: TDBEdit
@@ -384,7 +385,7 @@ object telaCadFor: TtelaCadFor
       DataField = 'INSC_RG'
       DataSource = telaDados.dsFornecedores
       Enabled = False
-      TabOrder = 12
+      TabOrder = 13
       OnKeyPress = editInscKeyPress
     end
     object editEmail: TDBEdit
@@ -396,7 +397,7 @@ object telaCadFor: TtelaCadFor
       DataField = 'EMAIL'
       DataSource = telaDados.dsFornecedores
       Enabled = False
-      TabOrder = 13
+      TabOrder = 14
     end
     object editCompl: TDBEdit
       Left = 432
@@ -414,6 +415,7 @@ object telaCadFor: TtelaCadFor
       Top = 72
       Width = 640
       Height = 21
+      CharCase = ecUpperCase
       DataField = 'FANTASIA'
       DataSource = telaDados.dsFornecedores
       Enabled = False
@@ -427,7 +429,7 @@ object telaCadFor: TtelaCadFor
       CharCase = ecUpperCase
       Enabled = False
       ItemHeight = 13
-      TabOrder = 14
+      TabOrder = 9
     end
   end
   object Panel1: TPanel
@@ -565,7 +567,6 @@ object telaCadFor: TtelaCadFor
       Height = 45
       Action = actExcluir
       Caption = 'F3 - &Excluir'
-      Enabled = False
       TabOrder = 1
       Glyph.Data = {
         B60D0000424DB60D000000000000360000002800000030000000180000000100

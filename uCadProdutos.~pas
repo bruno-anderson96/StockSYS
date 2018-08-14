@@ -329,6 +329,7 @@ var
 id : Integer;
 
 begin
+  telaDados.tblProdutos.Open;
   telaDados.tblProdutos.Last;
 
   id := telaDados.tblProdutosID.Value + 1;
@@ -459,6 +460,8 @@ begin
   telaDados.tblProdutosID_CST.Value   := cbCst.ItemIndex;
   telaDados.tblProdutos.Post;
 
+  telaDados.tblFornecedores.Close;
+
   editDesc.Enabled := false;
   editRef.Enabled := false;
   cbUnidade.Enabled := false;
@@ -543,6 +546,7 @@ end;
 procedure TtelaCadProdutos.CancelarExecute(Sender: TObject);
 begin
   telaDados.tblProdutos.Cancel;
+  telaDados.tblProdutos.Close;
 
   editDesc.Enabled := false;
   editRef.Enabled := false;
@@ -620,6 +624,7 @@ procedure TtelaCadProdutos.PesquisarExecute(Sender: TObject);
 begin
   Application.CreateForm(TtelaPesProduto, telaPesProduto);
   telaPesProduto.Show;
+  telaDados.tblFornecedores.Open;
 end;
 
 procedure TtelaCadProdutos.calculaValProd();
@@ -711,6 +716,7 @@ end;
 
 procedure TtelaCadProdutos.EditarExecute(Sender: TObject);
 begin
+  telaDados.tblProdutos.Open;
   telaDados.tblProdutos.Edit;
 
   Incluir.Enabled := false;
@@ -759,6 +765,8 @@ end;
 
 procedure TtelaCadProdutos.ExcluirExecute(Sender: TObject);
 begin
+  telaDados.tblProdutos.Open;
+
   telaDados.qryProdutos.Close;
   telaDados.qryProdutos.SQL.Clear;
   telaDados.qryProdutos.SQL.Add('Delete from produtos where id = ');
@@ -766,6 +774,7 @@ begin
   telaDados.qryProdutos.Open;
 
   telaDados.tblProdutos.Refresh;
+  telaDados.tblProdutos.Close;
 end;
 
 procedure TtelaCadProdutos.FormCreate(Sender: TObject);

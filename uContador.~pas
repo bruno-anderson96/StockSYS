@@ -68,7 +68,7 @@ uses uDados;
 
 procedure TtelaContador.FormShow(Sender: TObject);
 begin
-  telaDados.FormataCamposF;
+  telaDados.FormataCampos;
 
   if edtNome.Text = '' then begin
     btnEditar.Enabled := false;
