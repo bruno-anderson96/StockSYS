@@ -765,16 +765,19 @@ end;
 
 procedure TtelaCadProdutos.ExcluirExecute(Sender: TObject);
 begin
-  telaDados.tblProdutos.Open;
+  if MessageBox(Handle, 'Deseja excluir este cadastro?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
 
-  telaDados.qryProdutos.Close;
-  telaDados.qryProdutos.SQL.Clear;
-  telaDados.qryProdutos.SQL.Add('Delete from produtos where id = ');
-  telaDados.qryProdutos.SQL.Add(editId.Text);
-  telaDados.qryProdutos.Open;
+    telaDados.tblProdutos.Open;
 
-  telaDados.tblProdutos.Refresh;
-  telaDados.tblProdutos.Close;
+    telaDados.qryProdutos.Close;
+    telaDados.qryProdutos.SQL.Clear;
+    telaDados.qryProdutos.SQL.Add('Delete from produtos where id = ');
+    telaDados.qryProdutos.SQL.Add(editId.Text);
+    telaDados.qryProdutos.Open;
+
+    telaDados.tblProdutos.Refresh;
+    telaDados.tblProdutos.Close;
+  end;
 end;
 
 procedure TtelaCadProdutos.FormCreate(Sender: TObject);

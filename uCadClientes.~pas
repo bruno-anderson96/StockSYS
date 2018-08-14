@@ -360,37 +360,43 @@ begin
     editNome.SetFocus;
     Abort;
   end else
-  if (editCep.Text = '') then begin
-    if  MessageDlg('CEP inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
+  if (editCep.Text = '_____-___') then begin
+    if MessageBox(Handle, 'CEP inválido, deseja cadastrar mesmo assim?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_NO then begin
+    //if  MessageDlg('CEP inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
       Abort;
     end;
   end else
   if (editEndereco.GetTextLen < 2 ) then begin
-    if  MessageDlg('Endereço inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
+    if MessageBox(Handle, 'Endereço inválido, deseja cadastrar mesmo assim?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_NO then begin
+    //if  MessageDlg('Endereço inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
       editEndereco.SetFocus;
       Abort;
     end;
   end else
   if (editBairro.GetTextLen < 2) then begin
-    if  MessageDlg('Bairro inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
+     if MessageBox(Handle, 'Bairro inválido, deseja cadastrar mesmo assim?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_NO then begin
+    //if  MessageDlg('Bairro inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
       editBairro.SetFocus;
       Abort;
     end;
   end else
   if (editNum.Text = '') then begin
-    if  MessageDlg('Número inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
+    if MessageBox(Handle, 'Número inválido, deseja cadastrar mesmo assim?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_NO then begin
+    //if  MessageDlg('Número inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
     editNum.SetFocus;
     Abort;
     end;
   end else
   if (editCidade.Text = '') then begin
-    if  MessageDlg('Cidade inválida, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
+    if MessageBox(Handle, 'Cidade inválida, deseja cadastrar mesmo assim?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_NO then begin
+    //if  MessageDlg('Cidade inválida, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
     editCidade.SetFocus;
     Abort;
     end;
   end else
   if (editTelefone.Text = '') and (editCelular.Text = '') then begin
-    if  MessageDlg('Telefone inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
+    if MessageBox(Handle, 'Telefone inválido, deseja cadastrar mesmo assim?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_NO then begin
+    //if  MessageDlg('Telefone inválido, deseja cadastrar mesmo assim?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
     editNome.SetFocus;
     Abort;
     end;
@@ -403,7 +409,7 @@ begin
     telaDados.qryClientes.Open;
     }
     if RadioGroup1.ItemIndex = 0 then
-    begin 
+    begin
     {if telaDados.qryClientes.RecordCount > 0 then begin
       ShowMessage('CPF/CNPJ já cadastrado');
       editCpf.SetFocus;
@@ -663,21 +669,20 @@ end;
 
 procedure TtelaCadClientes.ExcluirExecute(Sender: TObject);
 begin
-  telaDados.tblClientes.Open;  
+  if MessageBox(Handle, 'Telefone inválido, deseja cadastrar mesmo assim?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
 
-  telaDados.qryClientes.Close;
-  telaDados.qryClientes.SQL.Clear;
-  telaDados.qryClientes.SQL.Add('Delete from cliente where id = ');
-  telaDados.qryClientes.SQL.Add(editId.Text);
-  telaDados.qryClientes.Open;
+    telaDados.tblClientes.Open;
 
-  telaDados.tblClientes.Refresh;
-  telaDados.tblClientes.Close;
+    telaDados.qryClientes.Close;
+    telaDados.qryClientes.SQL.Clear;
+    telaDados.qryClientes.SQL.Add('Delete from cliente where id = ');
+    telaDados.qryClientes.SQL.Add(editId.Text);
+    telaDados.qryClientes.Open;
 
-  If editId.Text <> '' then begin
-  Excluir.Enabled := true;
-  end; 
+    telaDados.tblClientes.Refresh;
+    telaDados.tblClientes.Close;
 
+  end;
 end;
 
 procedure TtelaCadClientes.editTelefoneKeyPress(Sender: TObject;

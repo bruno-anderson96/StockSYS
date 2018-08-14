@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uDados, StdCtrls, ExtCtrls, Buttons, Grids, DBGrids, ComCtrls,
-  Mask, DBCtrls, uLancItens, ActnList, ActnMan, ActnColorMaps;
+  Mask, DBCtrls, uLancItens, ActnList, ActnMan, ActnColorMaps, pngimage;
 
 type
   TtelaLancPedidos = class(TForm)
@@ -101,6 +101,7 @@ type
     cbPagamento: TComboBox;
     gpBandeira: TGroupBox;
     cbBandeira: TComboBox;
+    Image1: TImage;
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnIncItemClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);

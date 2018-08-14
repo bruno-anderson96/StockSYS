@@ -5746,7 +5746,7 @@ object telaPrincipal: TtelaPrincipal
       OnClick = btnVendaClick
     end
     object btnFor: TPNGButton
-      Left = 75
+      Left = 74
       Top = 0
       Width = 73
       Height = 57
@@ -6215,6 +6215,7 @@ object telaPrincipal: TtelaPrincipal
       end
       object NFe1: TMenuItem
         Caption = 'NFe'
+        Visible = False
         object StatusdeServio1: TMenuItem
           Caption = 'Status de Servi'#231'o'
           OnClick = StatusdeServio1Click
@@ -6329,13 +6330,13 @@ object telaPrincipal: TtelaPrincipal
         Caption = 'Emitente'
         OnClick = Emitente1Click
       end
+      object C1: TMenuItem
+        Caption = 'Configura'#231#245'es'
+        OnClick = C1Click
+      end
       object MFe1: TMenuItem
         Caption = 'MFe'
         OnClick = MFe1Click
-      end
-      object C1: TMenuItem
-        Caption = 'NFe'
-        OnClick = C1Click
       end
     end
     object Sair1: TMenuItem

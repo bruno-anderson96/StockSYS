@@ -323,17 +323,21 @@ end;
 
 procedure TtelaCadFor.actExcluirExecute(Sender: TObject);
 begin
-  telaDados.tblFornecedores.Open;
+  if MessageBox(Handle, 'Deseja excluir este cadastro?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
 
-  telaDados.qryFornecedores.Close;
-  telaDados.qryFornecedores.SQL.Clear;
-  telaDados.qryFornecedores.SQL.Add('Delete from fornecedor where id = ');
-  telaDados.qryFornecedores.SQL.Add(editId.Text);
-  telaDados.qryFornecedores.Open;
+    telaDados.tblFornecedores.Open;
 
-  telaDados.tblFornecedores.Refresh;
+    telaDados.qryFornecedores.Close;
+    telaDados.qryFornecedores.SQL.Clear;
+    telaDados.qryFornecedores.SQL.Add('Delete from fornecedor where id = ');
+    telaDados.qryFornecedores.SQL.Add(editId.Text);
+    telaDados.qryFornecedores.Open;
 
-  telaDados.tblFornecedores.Close;
+    telaDados.tblFornecedores.Refresh;
+
+    telaDados.tblFornecedores.Close;
+
+  end;
 end;
 
 procedure TtelaCadFor.editCepKeyPress(Sender: TObject; var Key: Char);
