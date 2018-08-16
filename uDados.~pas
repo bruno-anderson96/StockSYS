@@ -502,6 +502,19 @@ type
     tblContadorUF: TIBStringField;
     tblContadorID_LOGIN: TIntegerField;
     ACBrIntegrador1: TACBrIntegrador;
+    ACBrNFeDANFeRL1: TACBrNFeDANFeRL;
+    Label21: TLabel;
+    dsOrigem: TDataSource;
+    tblOrigem: TIBTable;
+    qryOrigem: TIBQuery;
+    trnscOrigem: TIBTransaction;
+    dbOrigem: TIBDatabase;
+    tblOrigemID: TIntegerField;
+    tblOrigemCODIGO: TIntegerField;
+    tblProdutosPRECO_VENDAP: TIBBCDField;
+    tblProdutosMARGEM_LUCROP: TIBBCDField;
+    tblOrigemDESCRICAO: TIBStringField;
+    labelibpt: TLabel;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
 
@@ -725,6 +738,8 @@ begin
   tblProdutosPRECO_COMPRA.DisplayFormat  := '###,###,##0.00';
   tblProdutosPRECO_VENDA.DisplayFormat   := '###,###,##0.00';
   tblProdutosBASE_ST.DisplayFormat       := '###,###,##0.00';
+  tblProdutosPRECO_VENDAP.DisplayFormat  := '###,###,##0.00';
+  tblProdutosMARGEM_LUCROP.DisplayFormat := '##,##0.00';
   tblProdutosALIQUOTA_ICMS.DisplayFormat := '##,##0.00';
   tblProdutosALIQUOTA_IPI.DisplayFormat  := '##,##0.00';
   tblProdutosMARGEM_LUCRO.DisplayFormat  := '##,##0.00';

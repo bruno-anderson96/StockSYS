@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, uDados, DB, Mask, DBCtrls, Buttons, ActnList,
   ACBrBase, ACBrSocket, ACBrNCMs, Grids, DBGrids, uPesNCM, uPesProduto,
-  ACBrETQ, ACBrInStore, ACBrBarCode;
+  ACBrETQ, ACBrInStore, ACBrBarCode, ACBrIBPTax;
 
 type
   TtelaCadProdutos = class(TForm)
@@ -60,9 +60,7 @@ type
     btnConfirmar: TBitBtn;
     btnCancelar: TBitBtn;
     btnPesquisar: TBitBtn;
-    btnRelatorio: TBitBtn;
     btnFechar: TBitBtn;
-    radTipoProduto: TRadioGroup;
     ActionList1: TActionList;
     Incluir: TAction;
     Excluir: TAction;
@@ -85,7 +83,7 @@ type
     btnEstoque: TSpeedButton;
     panelEstoque: TPanel;
     Label25: TLabel;
-    DBEdit3: TDBEdit;
+    editEstQtd: TDBEdit;
     Label26: TLabel;
     DBEdit4: TDBEdit;
     Label27: TLabel;
@@ -94,6 +92,25 @@ type
     Label24: TLabel;
     cbCsosn: TComboBox;
     cbCst: TComboBox;
+    cbOrigem: TComboBox;
+    labelOrigem: TLabel;
+    Label23: TLabel;
+    editVendaP: TDBEdit;
+    Label28: TLabel;
+    editLucroP: TDBEdit;
+    ACBrIBPTax1: TACBrIBPTax;
+    edArquivo: TEdit;
+    btnTeste: TSpeedButton;
+    OpenDialog1: TOpenDialog;
+    SpeedButton2: TSpeedButton;
+    lblIbptM: TLabel;
+    lblIbptE: TLabel;
+    lblIbptN: TLabel;
+    Label29: TLabel;
+    Label30: TLabel;
+    Label31: TLabel;
+    cbTrib: TComboBox;
+    Label32: TLabel;
     procedure FormShow(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -122,6 +139,9 @@ type
     procedure btnCadUniClick(Sender: TObject);
     procedure btnEstoqueClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure editLucroPExit(Sender: TObject);
+    procedure btnTesteClick(Sender: TObject);
+    procedure editNcmExit(Sender: TObject);
 
   private
     { Private declarations }
@@ -219,7 +239,7 @@ begin
   editCompra.Enabled := true;
   editLucro.Enabled := true;
   editVenda.Enabled := true;
-  radTipoProduto.Enabled := true;
+  cbTrib.Enabled := true;
   cbAtivo.Enabled := true;
   cbCtrlEstoque.Enabled := true;
   cbFracionada.Enabled := true;
@@ -275,13 +295,7 @@ begin
 
   i := 0;
   telaDados.tblProdutosUNIDADE.Value := cbUnidade.Text;
-  Case radTipoProduto.ItemIndex of
-    0 : i := 0;
-    1 : i := 1;
-    2 : i := 2;
-    3 : i := 3;
-    4 : i := 4;
-  end;
+
   telaDados.tblProdutosTIPOPROD.Value := i;
 
   telaDados.tblProdutos.Post;
@@ -304,7 +318,7 @@ begin
   editCompra.Enabled := false;
   editLucro.Enabled := false;
   editVenda.Enabled := false;
-  radTipoProduto.Enabled := false;
+  cbTrib.Enabled := false;
   cbAtivo.Enabled := false;
   cbCtrlEstoque.Enabled := false;
   cbFracionada.Enabled := false;
@@ -354,15 +368,17 @@ begin
   editMva.Enabled := true;
   editCompra.Enabled := true;
   editLucro.Enabled := true;
-  radTipoProduto.Enabled := true;
+  cbTrib.Enabled := true;
   cbAtivo.Enabled := true;
   cbCtrlEstoque.Enabled := true;
   cbFracionada.Enabled := true;
   cbCst.Enabled := true;
   cbCsosn.Enabled := true;
   edtCfop.Enabled := true;
-  btnPncm.Enabled := true;
+  editLucroP.Enabled := true;
+  cbOrigem.Enabled := true;
 
+  btnPncm.Enabled := true;
   btnIncluir.Enabled := false;
   btnConfirmar.Enabled := true;
   btnCancelar.Enabled := true;
@@ -378,14 +394,20 @@ begin
   cbCtrlEstoque.Checked := false;
 
 
-  editIcms.Text := '0,00';
-  editIpi.Text := '0,00';
-  editMva.Text := '0,00';
+  editIcms.Text   := '0,00';
+  editIpi.Text    := '0,00';
+  editMva.Text    := '0,00';
   editBaseST.Text := '0,00';
   editRedBas.Text := '0,00';
   editCompra.Text := '0,00';
-  editLucro.Text := '0,00';
-  editVenda.Text := '0,00';
+  editLucro.Text  := '0,00';
+  editVenda.Text  := '0,00';
+  editLucroP.Text := '0,00';
+  editVendaP.Text := '0,00';
+
+  cbCsosn.ItemIndex  := -1;
+  cbCst.ItemIndex    := -1;
+  cbOrigem.ItemIndex := -1;
 
   editDesc.SetFocus;
 end;
@@ -447,16 +469,10 @@ begin
 
   i := 0;
   telaDados.tblProdutosUNIDADE.Value := cbUnidade.Text;
-  Case radTipoProduto.ItemIndex of
-    0 : i := 0;
-    1 : i := 1;
-    2 : i := 2;
-    3 : i := 3;
-    4 : i := 4;
-  end;
+
   telaDados.tblProdutosTIPOPROD.Value := i;
   telaDados.tblProdutosID_CSOSN.Value := cbCsosn.ItemIndex;
-  telaDados.tblProdutosTIPOPROD.Value := radTipoProduto.ItemIndex;
+  telaDados.tblProdutosTIPOPROD.Value := cbTrib.ItemIndex;
   telaDados.tblProdutosID_CST.Value   := cbCst.ItemIndex;
   telaDados.tblProdutos.Post;
 
@@ -480,13 +496,16 @@ begin
   editCompra.Enabled := false;
   editLucro.Enabled := false;
   editVenda.Enabled := false;
-  radTipoProduto.Enabled := false;
+  cbTrib.Enabled := false;
   cbAtivo.Enabled := false;
   cbCtrlEstoque.Enabled := false;
   cbFracionada.Enabled := false;
   cbCst.Enabled := false;
   cbCsosn.Enabled := false;
   edtCfop.Enabled := false;
+  editLucroP.Enabled := false;
+  editVendaP.Enabled := false;
+  cbOrigem.Enabled := false;
 
   btnPncm.Enabled := false;
 
@@ -503,7 +522,7 @@ end;
 
 procedure TtelaCadProdutos.editLucroExit(Sender: TObject);
 begin
-  editVenda.Text := FloatToStr(StrToFloat(editCompra.Text) + StrToFloat(editLucro.Text));
+  editVenda.Text := FloatToStr(StrToFloat(editCompra.Text) + (StrToFloat(editCompra.Text) * StrToFloat(editLucro.Text))/100);
   telaDados.FormataCampos;
 end;
 
@@ -529,7 +548,7 @@ begin
   editCompra.Enabled := false;
   editLucro.Enabled := false;
   editVenda.Enabled := false;
-  radTipoProduto.Enabled := false;
+  cbTrib.Enabled := false;
   cbAtivo.Enabled := false;
   cbCtrlEstoque.Enabled := false;
   cbFracionada.Enabled := false;
@@ -566,13 +585,16 @@ begin
   editCompra.Enabled := false;
   editLucro.Enabled := false;
   editVenda.Enabled := false;
-  radTipoProduto.Enabled := false;
+  cbTrib.Enabled := false;
   cbAtivo.Enabled := false;
   cbCtrlEstoque.Enabled := false;
   cbFracionada.Enabled := false;
   cbCst.Enabled := false;
   cbCsosn.Enabled := false;
   edtCfop.Enabled := false;
+  editLucroP.Enabled := false;
+  editVendaP.Enabled := false;
+  cbOrigem.Enabled := false;
 
   btnPncm.Enabled := false;
 
@@ -624,7 +646,7 @@ procedure TtelaCadProdutos.PesquisarExecute(Sender: TObject);
 begin
   Application.CreateForm(TtelaPesProduto, telaPesProduto);
   telaPesProduto.Show;
-  telaDados.tblFornecedores.Open;
+  telaDados.tblProdutos.Open;
 end;
 
 procedure TtelaCadProdutos.calculaValProd();
@@ -748,13 +770,15 @@ begin
   editMva.Enabled := true;
   editCompra.Enabled := true;
   editLucro.Enabled := true;
-  radTipoProduto.Enabled := true;
+  cbTrib.Enabled := true;
   cbAtivo.Enabled := true;
   cbCtrlEstoque.Enabled := true;
   cbFracionada.Enabled := true;
   cbCst.Enabled := true;
   cbCsosn.Enabled := true;
   edtCfop.Enabled := true;
+  editLucroP.Enabled := true;
+  cbOrigem.Enabled := true;
 
   cbAtivo.Checked := false;
   cbFracionada.Checked := false;
@@ -782,6 +806,15 @@ end;
 
 procedure TtelaCadProdutos.FormCreate(Sender: TObject);
 begin
+  with telaDados.tblOrigem do
+  begin
+    First;
+    while not Eof do
+    begin
+      cbOrigem.Items.Add(telaDados.tblOrigem.FieldByName('CODIGO').AsString + ' - ' + telaDados.tblOrigem.FieldByName('DESCRICAO').AsString);
+      Next;
+     end;
+  end;
   with telaDados.tblCsosn do
   begin
     First;
@@ -818,11 +851,16 @@ end;
 procedure TtelaCadProdutos.btnEstoqueClick(Sender: TObject);
 var i : integer;
 begin
+  telaDados.tblEstoqueDATA.DisplayFormat               := 'dd/mm/yyyy hh:mm:ss';
+  telaDados.tblEstoque.FieldByName('DATA').EditMask    := '!99/99/0000 00:00:00;1; ';
+
   if editDesc.Text <> '' then begin
     panelEstoque.Visible := true;
+    editEstQtd.SetFocus;
     telaDados.tblEstoque.Last;
     i := telaDados.tblEstoqueID.Value;
     telaDados.tblEstoque.Insert;
+    telaDados.tblEstoqueDATA.AsString := DateToStr(date()) + ' ' +  TimeToStr(time());
     telaDados.tblEstoqueID.Value := i + 1;
   end else begin
     ShowMessage('Selecione um produto!');
@@ -839,5 +877,87 @@ begin
   telaDados.tblEstoque.Post;
   panelEstoque.Visible := false;
 end;
+
+procedure TtelaCadProdutos.editLucroPExit(Sender: TObject);
+begin
+ editVendaP.Text := FloatToStr(StrToFloat(editVenda.Text) + (StrToFloat(editVenda.Text) * StrToFloat(editLucroP.Text))/100);  
+end;
+
+procedure TtelaCadProdutos.btnTesteClick(Sender: TObject);
+var I: integer;
+begin
+
+  if OpenDialog1.Execute then
+  begin
+    edArquivo.Text := OpenDialog1.FileName;
+
+    // se o path do arquivo não for passado, então o componente vai tentar baixar
+    // a tabela no URL informado
+
+    try
+      if ACBrIBPTax1.AbrirTabela(edArquivo.Text) then
+      begin
+        {lVersao.Caption := 'Versão: ' + ACBrIBPTax1.VersaoArquivo;
+        lbVigencia.Caption := 'Vigência: ' + Format('%s a %s', [DateToStr(ACBrIBPTax1.VigenciaInicio), DateToStr(ACBrIBPTax1.VigenciaFim)]);
+        lblChave.Caption := 'Chave: ' + ACBrIBPTax1.ChaveArquivo;
+        lblFonte.Caption := 'Fonte: ' + ACBrIBPTax1.Fonte;  }
+
+        telaDados.tblIbpt.Open;
+  
+        try
+          for I := 0 to ACBrIBPTax1.Itens.Count - 1 do
+          begin
+            telaDados.tblIbpt.Insert;
+            telaDados.tblIbptNCM.AsString             := ACBrIBPTax1.Itens[I].NCM;
+            telaDados.tblIbptDESCRICAO.AsString       := ACBrIBPTax1.Itens[I].Descricao;
+            telaDados.tblIbptEXC.AsString             := ACBrIBPTax1.Itens[I].Excecao;
+            telaDados.tblIbptTABELA.AsInteger         := Integer(ACBrIBPTax1.Itens[I].Tabela);
+            telaDados.tblIbptNACIONAL.AsFloat         := ACBrIBPTax1.Itens[I].FederalNacional;
+            telaDados.tblIbptIMPORTADO.AsFloat        := ACBrIBPTax1.Itens[I].FederalImportado;
+            telaDados.tblIbptESTADUAL.AsFloat         := ACBrIBPTax1.Itens[I].Estadual;
+            telaDados.tblIbptMUNICIPAL.AsFloat        := ACBrIBPTax1.Itens[I].Municipal;
+            telaDados.tblIbpt.Post;
+          end;
+        finally
+          telaDados.tblIbpt.First;
+
+        end;
+      end;
+    finally
+      ShowMessage('Tabela baixada com sucesso');
+    end;
+  end;
+end;
+
+procedure TtelaCadProdutos.editNcmExit(Sender: TObject);
+var
+  ex, descricao: String;
+  tabela: Integer;
+  aliqFedNac, aliqFedImp, aliqEst, aliqMun: Double;
+begin
+  ACBrIBPTax1.AbrirTabela('C:\Users\Bruno\Documents\IBPT\18.1.A\TabelaIBPTaxCE18.1.A.csv');     //LEMBRAR DE ALTERAR
+  if ACBrIBPTax1.Procurar(editNcm.Text, ex, descricao, tabela, aliqFedNac, aliqFedImp, aliqEst, aliqMun) then
+  begin
+      lblIbptE.caption :=  FloatToStr(aliqEst);
+      lblIbptM.Caption :=  FloatToStr(aliqMun);
+      lblIbptN.Caption :=  FloatToStr(aliqFedNac);
+      {ShowMessage(
+      'Código: '    + edArquivo.Text  + sLineBreak +
+      'Exceção: '   + ex + sLineBreak +
+      'Descrição: ' + descricao + sLineBreak +
+      'Tabela: '    + IntToStr(tabela) + sLineBreak +
+      'Aliq Federal Nacional: '  + FloatToStr(aliqFedNac) + sLineBreak +
+      'Aliq Federal Importado: '  + FloatToStr(aliqFedImp) + sLineBreak +
+      'Aliq Estadual: '  + FloatToStr(aliqEst) + sLineBreak +
+      'Aliq Municipal: '  + FloatToStr(aliqMun)
+      ) }
+  end
+  else begin
+    showmessage('Código não encontrado!');
+    editNcm.SetFocus;
+  end;
+end;
+
+
 
 end.

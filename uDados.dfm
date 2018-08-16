@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 178
-  Top = 368
+  Left = 114
+  Top = 19
   Width = 1216
   Height = 699
   Caption = 'Data m'#243'dulo'
@@ -299,6 +299,32 @@ object telaDados: TtelaDados
     Font.Style = [fsBold]
     ParentFont = False
   end
+  object Label21: TLabel
+    Left = 280
+    Top = 520
+    Width = 73
+    Height = 20
+    Caption = 'ORIGEM'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object labelibpt: TLabel
+    Left = 447
+    Top = 520
+    Width = 40
+    Height = 20
+    Caption = 'IBPT'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object ACBrNFe1: TACBrNFe
     Integrador = ACBrIntegrador1
     Configuracoes.Geral.SSLLib = libNone
@@ -404,6 +430,12 @@ object telaDados: TtelaDados
         Size = 2
       end
       item
+        Name = 'PRECO_VENDAP'
+        DataType = ftBCD
+        Precision = 9
+        Size = 3
+      end
+      item
         Name = 'TIPOPROD'
         DataType = ftInteger
       end
@@ -431,6 +463,12 @@ object telaDados: TtelaDados
       end
       item
         Name = 'MARGEM_LUCRO'
+        DataType = ftBCD
+        Precision = 9
+        Size = 3
+      end
+      item
+        Name = 'MARGEM_LUCROP'
         DataType = ftBCD
         Precision = 9
         Size = 3
@@ -650,6 +688,16 @@ object telaDados: TtelaDados
     end
     object tblProdutosESTOQUE: TIntegerField
       FieldName = 'ESTOQUE'
+    end
+    object tblProdutosPRECO_VENDAP: TIBBCDField
+      FieldName = 'PRECO_VENDAP'
+      Precision = 9
+      Size = 3
+    end
+    object tblProdutosMARGEM_LUCROP: TIBBCDField
+      FieldName = 'MARGEM_LUCROP'
+      Precision = 9
+      Size = 3
     end
   end
   object trnscProdutos: TIBTransaction
@@ -4648,5 +4696,200 @@ object telaDados: TtelaDados
     ImprimirDadosDocReferenciados = True
     Left = 8
     Top = 112
+  end
+  object dsOrigem: TDataSource
+    DataSet = tblOrigem
+    Left = 304
+    Top = 544
+  end
+  object tblOrigem: TIBTable
+    Database = dbOrigem
+    Transaction = trnscOrigem
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CODIGO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        Size = 120
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_ORIGEM'
+        Fields = 'ID'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'ORIGEM'
+    Left = 304
+    Top = 584
+    object tblOrigemID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object tblOrigemCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+    end
+    object tblOrigemDESCRICAO: TIBStringField
+      FieldName = 'DESCRICAO'
+      Size = 120
+    end
+  end
+  object qryOrigem: TIBQuery
+    Database = dbOrigem
+    Transaction = trnscOrigem
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsOrigem
+    SQL.Strings = (
+      'select * from ORIGEM')
+    Left = 304
+    Top = 624
+  end
+  object trnscOrigem: TIBTransaction
+    Active = True
+    DefaultDatabase = dbOrigem
+    AutoStopAction = saNone
+    Left = 256
+    Top = 584
+  end
+  object dbOrigem: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    Params.Strings = (
+      'password=masterkey'
+      'user_name=SYSDBA')
+    LoginPrompt = False
+    DefaultTransaction = trnscOrigem
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 352
+    Top = 584
+  end
+  object dsIbpt: TDataSource
+    DataSet = tblIbpt
+    Left = 456
+    Top = 544
+  end
+  object tblIbpt: TIBTable
+    Database = dbIbpt
+    Transaction = trnscIbpt
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'NCM'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'EXC'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'TABELA'
+        DataType = ftInteger
+      end
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        Size = 120
+      end
+      item
+        Name = 'NACIONAL'
+        DataType = ftFloat
+      end
+      item
+        Name = 'IMPORTADO'
+        DataType = ftFloat
+      end
+      item
+        Name = 'ESTADUAL'
+        DataType = ftFloat
+      end
+      item
+        Name = 'MUNICIPAL'
+        DataType = ftFloat
+      end>
+    StoreDefs = True
+    TableName = 'IBPT'
+    Left = 456
+    Top = 584
+    object tblIbptNCM: TIBStringField
+      FieldName = 'NCM'
+      Required = True
+      Size = 10
+    end
+    object tblIbptEXC: TIBStringField
+      FieldName = 'EXC'
+      Size = 30
+    end
+    object tblIbptTABELA: TIntegerField
+      FieldName = 'TABELA'
+    end
+    object tblIbptDESCRICAO: TIBStringField
+      FieldName = 'DESCRICAO'
+      Size = 120
+    end
+    object tblIbptNACIONAL: TFloatField
+      FieldName = 'NACIONAL'
+    end
+    object tblIbptIMPORTADO: TFloatField
+      FieldName = 'IMPORTADO'
+    end
+    object tblIbptESTADUAL: TFloatField
+      FieldName = 'ESTADUAL'
+    end
+    object tblIbptMUNICIPAL: TFloatField
+      FieldName = 'MUNICIPAL'
+    end
+  end
+  object qryIbpt: TIBQuery
+    Database = dbIbpt
+    Transaction = trnscIbpt
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsIbpt
+    SQL.Strings = (
+      'select * from IBPT')
+    Left = 456
+    Top = 624
+  end
+  object trnscIbpt: TIBTransaction
+    Active = True
+    DefaultDatabase = dbIbpt
+    AutoStopAction = saNone
+    Left = 408
+    Top = 584
+  end
+  object dbIbpt: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    DefaultTransaction = trnscIbpt
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 504
+    Top = 584
   end
 end
