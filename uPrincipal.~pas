@@ -62,6 +62,7 @@ type
     Contador1: TMenuItem;
     Fiscal1: TMenuItem;
     GerarSped1: TMenuItem;
+    POS1: TMenuItem;
     procedure Sair1Click(Sender: TObject);
     procedure StatusdeServio1Click(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
@@ -93,6 +94,7 @@ type
     procedure CEP1Click(Sender: TObject);
     procedure Contador1Click(Sender: TObject);
     procedure GerarSped1Click(Sender: TObject);
+    procedure POS1Click(Sender: TObject);
 
 
   private
@@ -305,6 +307,12 @@ procedure TtelaPrincipal.GerarSped1Click(Sender: TObject);
 begin
   Application.CreateForm(TtelaSped, telaSped);
   telaSped.Show;
+end;
+
+procedure TtelaPrincipal.POS1Click(Sender: TObject);
+begin
+  Application.CreateForm(TtelaCadPos, telaCadPos);
+  telaCadPos.Show;
 end;
 
 end.

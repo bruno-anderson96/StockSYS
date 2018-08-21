@@ -9,7 +9,8 @@ uses
   ACBrIntegrador, pcnConversao, Math, ACBrUtil, RLPrinters, Printers, ACBrSATMFe_integrador, pcnVFPe,
   ACBrDFeSSL, ExtCtrls, uConfig, uDados, uLancPedidos, IniFiles,
   ACBrSATExtratoReportClass, ACBrSATExtratoFortesFr, RLFilters, RLPDFFilter, uGerarNfe,
-  ComCtrls, uConfigEmit, ACBrValidador;
+  ComCtrls, uConfigEmit, ACBrValidador,
+  ACBrSocket, ACBrIBPTax;
 
 type
   TtelaConfigSat = class(TForm)
@@ -75,6 +76,7 @@ type
     edtChReq: TEdit;
     SpeedButton4: TSpeedButton;
     Label13: TLabel;
+    ACBrIBPTax1: TACBrIBPTax;
     procedure At(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
@@ -205,7 +207,14 @@ var
 TotalItem, TotalGeral, Pagto1: Double;
 A, aNumItem: Integer;
 Loops: Integer;
+tEstadual, tFederal, tMunicipal: Double;
+ex, descricao: String;
+tabela: Integer;
+aliqFedNac, aliqFedImp, aliqEst, aliqMun: Double;
 begin
+  tEstadual := 0;
+  tFederal  := 0;
+  tMunicipal:= 0;
   Memo1.Clear;{
   TotalGeral := 0;
   PageControl1.ActivePage := tsGerado;  } 
@@ -265,11 +274,19 @@ begin
         telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID =');
         telaDados.qryProdutos.SQL.Add(telaDados.qryPedidosItens.FieldByName('ID_PRODUTO').Value);
         telaDados.qryProdutos.Open;
+
+
+        ACBrIBPTax1.AbrirTabela('C:\Users\Bruno\Documents\IBPT\18.1.A\TabelaIBPTaxCE18.1.A.csv');     //LEMBRAR DE ALTERAR
+        ACBrIBPTax1.Procurar(telaDados.qryProdutos.FieldByName('CODIGO_NCM').AsString, ex, descricao, tabela, aliqFedNac, aliqFedImp, aliqEst, aliqMun);
+        tEstadual :=  (telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat * telaDados.qryPedidosItens.FieldByName('QUANTIDADE').AsInteger * (aliqEst/100)) +tEstadual;
+        tMunicipal :=  (telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat * telaDados.qryPedidosItens.FieldByName('QUANTIDADE').AsInteger * (aliqMun/100)) +tMunicipal;
+        tFederal :=  (telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat * telaDados.qryPedidosItens.FieldByName('QUANTIDADE').AsInteger * (aliqFedNac/100)) +tFederal;
+
       with Det.Add do
         begin
         nItem := telaDados.qryPedidosItens.RecordCount;
         {nItem := 1 + (A * 3);}
-        Prod.cProd := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+        Prod.cProd := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
         {Prod.cEAN := telaDados.qryProdutos.FieldByName('EAN13').AsString; }
         Prod.xProd := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
         prod.NCM := telaDados.qryProdutos.FieldByName('CODIGO_NCM').AsString;
@@ -282,13 +299,13 @@ begin
 
         with Prod.obsFiscoDet.Add do
           begin
-          xCampoDet := 'campo';
-          xTextoDet := 'texto';
+          xCampoDet := 'Campo';
+          xTextoDet := 'Texto';
         end;
 
         TotalItem := RoundABNT((Prod.qCom * Prod.vUnCom) + Prod.vOutro - Prod.vDesc, -2);
         TotalGeral := TotalGeral + TotalItem;
-        Imposto.vItem12741 := TotalItem * 0.12;
+        Imposto.vItem12741 := tEstadual + tFederal + tMunicipal;
 
         Imposto.ICMS.orig := oeNacional;
           if Emit.cRegTrib = RTSimplesNacional then
@@ -313,82 +330,10 @@ begin
 
       end;
     telaDados.qryPedidosItens.Next;
-       {
-      with Det.Add do
-      begin
-      nItem := 2 + (A * 3);
-      Prod.cProd := '6291041500213';
-      Prod.cEAN := '6291041500213';
-      Prod.xProd := 'Outro produto Qualquer, com a Descrição Grande';
-      Prod.CFOP := '5529';
-      Prod.uCom := 'un';
-      Prod.qCom := 1.1205;
-      Prod.vUnCom := 1.210;
-      Prod.indRegra := irTruncamento;
-      Prod.vOutro := 2;
-
-      TotalItem := RoundABNT((Prod.qCom * Prod.vUnCom) + Prod.vOutro - Prod.vDesc, -2);
-      TotalGeral := TotalGeral + TotalItem;
-      Imposto.vItem12741 := TotalItem * 0.30;
-
-      Imposto.ICMS.orig := oeNacional;
-      if Emit.cRegTrib = RTSimplesNacional then
-        Imposto.ICMS.CSOSN := csosn400
-      else
-        Imposto.ICMS.CST := cst40;
-
-      Imposto.PIS.CST := pis49;
-      Imposto.PIS.qBCProd := TotalItem;
-      Imposto.PIS.vAliqProd := 1.0223;
-
-      Imposto.PISST.qBCProd := TotalItem;
-      Imposto.PISST.vAliqProd := 1.0223;
-
-      Imposto.COFINS.CST := cof49;
-      Imposto.COFINS.qBCProd := TotalItem;
-      Imposto.COFINS.vAliqProd := 1.0223;
-
-      //Imposto.COFINSST.qBCProd := 503.6348;
-      //Imposto.COFINSST.vAliqProd := 779.4577;
     end;
-
-    with Det.Add do
-    begin
-      nItem := 3 + (A * 3);
-      Prod.cProd := 'abc123';
-      Prod.cEAN := '6291041500213';
-      Prod.xProd := 'ACBrSAT rules';
-      Prod.NCM := '99';
-      Prod.CFOP := '5844';
-      Prod.uCom := 'un';
-      Prod.qCom := 1.1205;
-      Prod.vUnCom := 1.210;
-      Prod.indRegra := irTruncamento;
-
-      TotalItem := RoundABNT((Prod.qCom * Prod.vUnCom) + Prod.vOutro - Prod.vDesc, -2);
-      TotalGeral := TotalGeral + TotalItem;
-
-      Imposto.ICMS.orig := oeEstrangeiraImportacaoDireta;
-      if Emit.cRegTrib = RTSimplesNacional then
-        Imposto.ICMS.CSOSN := csosn102
-      else
-        Imposto.ICMS.CST := cst60;
-
-      Imposto.PIS.CST := pis49;
-
-      Imposto.PISST.qBCProd := TotalItem;
-      Imposto.PISST.vAliqProd := 1.1826;
-
-      Imposto.COFINS.CST := cof49;
-
-      infAdProd := 'Informacoes adicionais';
-    end;
-
-    end;
-      }
 
     Total.DescAcrEntr.vDescSubtot := telaDados.qryPedidos.FieldByName('DESCONTO').AsCurrency;
-    Total.vCFeLei12741 := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsCurrency; //clocar aqui valor do imposto
+    Total.vCFeLei12741 := tEstadual + tFederal + tMunicipal; //clocar aqui valor do imposto
     {Pagto1 := RoundABNT(TotalGeral/2,-2);
     with Pagto.Add do
     begin
@@ -426,8 +371,12 @@ begin
       end;
     end;
 
-    InfAdic.infCpl := 'Acesse www.projetoacbr.com.br para obter mais;informações sobre o componente ACBrSAT;'+
-                      'Precisa de um PAF-ECF homologado?;Conheça o DJPDV - www.djpdv.com.br';
+
+
+    InfAdic.infCpl := 'Tributos Federais '+ FloatToStr(tFederal) + #13+
+                      'Tributos Estaduais '+ FloatToStr(tEstadual)+ #13+
+                      'Tributos Municipais '+ FloatToStr(tMunicipal);
+
 
    { InfAdic.infCpl := '</linha_simples>;'+
                         '</ce><e><n>SENHA XXX</n></e>;'+
@@ -455,8 +404,6 @@ begin
   telaDados.tblPedidosSTATUS.Value := 'V';
   telaDados.tblPedidos.Post;
 
-
-  end;
 end;
 
 procedure TtelaConfigSat.SpeedButton5Click(Sender: TObject);

@@ -162,7 +162,7 @@ uses uCadUnidade;
 procedure TtelaCadProdutos.FormShow(Sender: TObject);
 begin
 
-
+  
   //Formatando Campos
   telaDados.FormataCampos;
 
@@ -187,22 +187,42 @@ begin
 
    if editId.Text <> '' then begin
 
+   if telaDados.tblProdutosID_CSOSN.Value >= 1 then begin
     telaDados.qryCsosn.Close;
     telaDados.qryCsosn.SQL.Clear;
     telaDados.qryCsosn.SQL.Add('Select * from CSOSN where id = ');
     telaDados.qryCsosn.SQL.Add(telaDados.tblProdutosID_CSOSN.AsString);
     telaDados.qryCsosn.Open;
+    telaCadProdutos.cbCsosn.ItemIndex := telaDados.qryCsosn.FieldByName('ID').Value;
+   end else begin
+    telaCadProdutos.cbCsosn.ItemIndex := -1;
+   end;
 
+   if telaDados.tblProdutosID_CST.Value >= 1 then begin
     telaDados.qryCst.Close;
     telaDados.qryCst.SQL.Clear;
     telaDados.qryCst.SQL.Add('Select * from CST where id =');
     telaDados.qryCst.SQL.Add(telaDados.tblProdutosID_CST.AsString);
     telaDados.qryCst.Open;
-
-    cbCsosn.ItemIndex := telaDados.qryCsosn.FieldByName('ID').Value;
-    cbCst.ItemIndex := telaDados.qryCst.FieldByName('ID').Value;
-
+    telaCadProdutos.cbCst.ItemIndex := telaDados.qryCst.FieldByName('ID').Value;
+   end else begin
+    telaCadProdutos.cbCst.ItemIndex := -1;
    end;
+
+   if telaDados.tblProdutosID_ORIGEM.Value >= 1 then begin
+    telaDados.qryOrigem.Close;
+    telaDados.qryOrigem.SQL.Clear;
+    telaDados.qryOrigem.SQL.Add('Select * from ORIGEM where id =');
+    telaDados.qryOrigem.SQL.Add(telaDados.tblProdutosID_ORIGEM.AsString);
+    telaDados.qryOrigem.Open;
+    telaCadProdutos.cbOrigem.ItemIndex := telaDados.qryOrigem.FieldByName('ID').Value;
+   end else begin
+    telaCadProdutos.cbOrigem.ItemIndex := -1;
+   end;
+
+  telaCadProdutos.Excluir.Enabled := true;
+
+   end; 
 end;
 
 procedure TtelaCadProdutos.btnFecharClick(Sender: TObject);
@@ -471,9 +491,27 @@ begin
   telaDados.tblProdutosUNIDADE.Value := cbUnidade.Text;
 
   telaDados.tblProdutosTIPOPROD.Value := i;
-  telaDados.tblProdutosID_CSOSN.Value := cbCsosn.ItemIndex;
+
+  if cbCsosn.ItemIndex >= 1 then begin
+    telaDados.tblProdutosID_CSOSN.Value := cbCsosn.ItemIndex;
+  end else begin
+    telaDados.tblProdutosID_CSOSN.Value := 0;
+  end;
+
   telaDados.tblProdutosTIPOPROD.Value := cbTrib.ItemIndex;
-  telaDados.tblProdutosID_CST.Value   := cbCst.ItemIndex;
+
+  if cbCst.ItemIndex >= 1 then begin
+    telaDados.tblProdutosID_CST.Value   := cbCst.ItemIndex;
+  end else begin
+    telaDados.tblProdutosID_CST.Value := 0;
+  end;
+
+  if cbOrigem.ItemIndex >= 1 then begin
+    telaDados.tblProdutosID_ORIGEM.Value:= cbOrigem.ItemIndex;
+  end else begin
+    telaDados.tblProdutosID_ORIGEM.Value := 0;
+  end;
+
   telaDados.tblProdutos.Post;
 
   telaDados.tblFornecedores.Close;

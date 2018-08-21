@@ -1,9 +1,9 @@
 object telaPesProduto: TtelaPesProduto
-  Left = 195
-  Top = 203
+  Left = 65
+  Top = 339
   Width = 881
   Height = 471
-  Caption = 'Pesquisa Produto'
+  Caption = 't'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

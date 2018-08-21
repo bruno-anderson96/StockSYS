@@ -1,6 +1,6 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = -94
-  Top = 32
+  Left = 55
+  Top = 18
   Align = alClient
   BorderStyle = bsDialog
   Caption = 'Lan'#231'amento de Pedidos'
@@ -1874,7 +1874,7 @@ object telaLancPedidos: TtelaLancPedidos
           Height = 25
           Action = excluirItem
           Caption = 'Excluir item'
-          TabOrder = 3
+          TabOrder = 2
           Visible = False
         end
         object btnExcluir: TBitBtn
@@ -1884,7 +1884,7 @@ object telaLancPedidos: TtelaLancPedidos
           Height = 34
           Caption = 'F3 - &Excluir'
           Enabled = False
-          TabOrder = 4
+          TabOrder = 3
           Visible = False
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -2006,7 +2006,7 @@ object telaLancPedidos: TtelaLancPedidos
           Height = 34
           Action = Confirmar
           Caption = 'F4 - &Confirmar'
-          TabOrder = 5
+          TabOrder = 4
           Visible = False
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -2128,7 +2128,7 @@ object telaLancPedidos: TtelaLancPedidos
           Height = 34
           Action = Cancelar
           Caption = 'F5 - C&ancelar'
-          TabOrder = 6
+          TabOrder = 5
           Visible = False
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -2249,7 +2249,7 @@ object telaLancPedidos: TtelaLancPedidos
           Width = 151
           Height = 34
           Caption = 'F9 - &Pesquisar'
-          TabOrder = 7
+          TabOrder = 6
           Visible = False
           OnClick = btnPesquisarClick
           Glyph.Data = {
@@ -2371,7 +2371,7 @@ object telaLancPedidos: TtelaLancPedidos
           Width = 151
           Height = 34
           Caption = 'F7 - I&mprimir'
-          TabOrder = 8
+          TabOrder = 7
           Visible = False
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -2493,7 +2493,7 @@ object telaLancPedidos: TtelaLancPedidos
           Height = 34
           Action = Encerrar
           Caption = 'F10 - &Fechar'
-          TabOrder = 9
+          TabOrder = 8
           Visible = False
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -2623,7 +2623,7 @@ object telaLancPedidos: TtelaLancPedidos
           Font.Style = []
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           ParentFont = False
-          TabOrder = 10
+          TabOrder = 9
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
@@ -2675,28 +2675,6 @@ object telaLancPedidos: TtelaLancPedidos
               Visible = True
             end>
         end
-        object GroupBox3: TGroupBox
-          Left = 1024
-          Top = 528
-          Width = 185
-          Height = 62
-          Caption = 'Tipo de Pagamento'
-          TabOrder = 2
-          object cbTpPg: TComboBox
-            Left = 21
-            Top = 23
-            Width = 145
-            Height = 21
-            ItemHeight = 13
-            TabOrder = 0
-            Text = '1 - Dinheiro'
-            Items.Strings = (
-              '1 - Dinheiro'
-              '2 - Cheque'
-              '3 - Cart'#227'o'
-              '4 - Boleto')
-          end
-        end
         object btnIncluir: TBitBtn
           Left = 1192
           Top = 16
@@ -2704,7 +2682,7 @@ object telaLancPedidos: TtelaLancPedidos
           Height = 34
           Action = Incluir
           Caption = 'F2 - &Incluir'
-          TabOrder = 11
+          TabOrder = 10
           Visible = False
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -2848,7 +2826,7 @@ object telaLancPedidos: TtelaLancPedidos
           Width = 633
           Height = 49
           Caption = 'Item'
-          TabOrder = 14
+          TabOrder = 13
           object Label24: TLabel
             Left = 16
             Top = 20
@@ -3007,7 +2985,7 @@ object telaLancPedidos: TtelaLancPedidos
           Align = alCustom
           Color = clYellow
           ParentBackground = False
-          TabOrder = 13
+          TabOrder = 12
           Visible = False
           object Label14: TLabel
             Left = 128
@@ -3208,13 +3186,30 @@ object telaLancPedidos: TtelaLancPedidos
                 'VISA')
             end
           end
+          object gpPos: TGroupBox
+            Left = 336
+            Top = 208
+            Width = 185
+            Height = 68
+            Caption = 'POS'
+            TabOrder = 5
+            Visible = False
+            object cbPos: TComboBox
+              Left = 15
+              Top = 24
+              Width = 153
+              Height = 21
+              ItemHeight = 13
+              TabOrder = 0
+            end
+          end
         end
         object pnlEdtExc: TPanel
           Left = 432
           Top = 360
           Width = 225
           Height = 65
-          TabOrder = 15
+          TabOrder = 14
           Visible = False
           object btnEdt: TSpeedButton
             Left = 24

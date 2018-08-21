@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 114
-  Top = 19
+  Left = 139
+  Top = 24
   Width = 1216
   Height = 699
   Caption = 'Data m'#243'dulo'
@@ -313,11 +313,24 @@ object telaDados: TtelaDados
     ParentFont = False
   end
   object labelibpt: TLabel
-    Left = 447
+    Left = 450
     Top = 520
     Width = 40
     Height = 20
     Caption = 'IBPT'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label22: TLabel
+    Left = 612
+    Top = 520
+    Width = 37
+    Height = 20
+    Caption = 'POS'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -539,6 +552,10 @@ object telaDados: TtelaDados
       item
         Name = 'ESTOQUE'
         DataType = ftInteger
+      end
+      item
+        Name = 'ID_ORIGEM'
+        DataType = ftInteger
       end>
     IndexDefs = <
       item
@@ -698,6 +715,9 @@ object telaDados: TtelaDados
       FieldName = 'MARGEM_LUCROP'
       Precision = 9
       Size = 3
+    end
+    object tblProdutosID_ORIGEM: TIntegerField
+      FieldName = 'ID_ORIGEM'
     end
   end
   object trnscProdutos: TIBTransaction
@@ -1905,54 +1925,8 @@ object telaDados: TtelaDados
         DataType = ftInteger
       end
       item
-        Name = 'TIPOPROD'
+        Name = 'TIPOTRIB'
         DataType = ftInteger
-      end
-      item
-        Name = 'ALIQUOTA_ICMS'
-        DataType = ftBCD
-        Precision = 9
-        Size = 2
-      end
-      item
-        Name = 'ALIQUOTA_IPI'
-        DataType = ftBCD
-        Precision = 9
-        Size = 2
-      end
-      item
-        Name = 'BASE_ST'
-        DataType = ftBCD
-        Precision = 18
-        Size = 2
-      end
-      item
-        Name = 'REDUCAO_BASE'
-        DataType = ftBCD
-        Precision = 9
-        Size = 2
-      end
-      item
-        Name = 'MVA'
-        DataType = ftBCD
-        Precision = 9
-        Size = 2
-      end
-      item
-        Name = 'QUANT'
-        DataType = ftInteger
-      end
-      item
-        Name = 'VALOR'
-        DataType = ftBCD
-        Precision = 9
-        Size = 2
-      end
-      item
-        Name = 'VAL_ICMS'
-        DataType = ftBCD
-        Precision = 9
-        Size = 2
       end>
     IndexDefs = <
       item
@@ -1965,47 +1939,6 @@ object telaDados: TtelaDados
     TableName = 'TRIBUTO'
     Left = 440
     Top = 224
-    object tblTributosTIPOPROD: TIntegerField
-      FieldName = 'TIPOPROD'
-    end
-    object tblTributosALIQUOTA_ICMS: TIBBCDField
-      FieldName = 'ALIQUOTA_ICMS'
-      Precision = 9
-      Size = 2
-    end
-    object tblTributosALIQUOTA_IPI: TIBBCDField
-      FieldName = 'ALIQUOTA_IPI'
-      Precision = 9
-      Size = 2
-    end
-    object tblTributosBASE_ST: TIBBCDField
-      FieldName = 'BASE_ST'
-      Precision = 18
-      Size = 2
-    end
-    object tblTributosREDUCAO_BASE: TIBBCDField
-      FieldName = 'REDUCAO_BASE'
-      Precision = 9
-      Size = 2
-    end
-    object tblTributosMVA: TIBBCDField
-      FieldName = 'MVA'
-      Precision = 9
-      Size = 2
-    end
-    object tblTributosQUANT: TIntegerField
-      FieldName = 'QUANT'
-    end
-    object tblTributosVALOR: TIBBCDField
-      FieldName = 'VALOR'
-      Precision = 9
-      Size = 2
-    end
-    object tblTributosVAL_ICMS: TIBBCDField
-      FieldName = 'VAL_ICMS'
-      Precision = 9
-      Size = 2
-    end
   end
   object trnscTributos: TIBTransaction
     Active = True
@@ -2406,7 +2339,7 @@ object telaDados: TtelaDados
     IdleTimer = 0
     SQLDialect = 3
     TraceFlags = []
-    Left = 264
+    Left = 328
     Top = 440
   end
   object tblNCM: TIBTable
@@ -2438,7 +2371,7 @@ object telaDados: TtelaDados
       end>
     StoreDefs = True
     TableName = 'NCM'
-    Left = 328
+    Left = 296
     Top = 440
     object tblNCMCODNCM: TIBStringField
       FieldName = 'CODNCM'
@@ -2463,8 +2396,8 @@ object telaDados: TtelaDados
     Active = True
     DefaultDatabase = dbNCM
     AutoStopAction = saNone
-    Left = 296
-    Top = 472
+    Left = 264
+    Top = 440
   end
   object dsPesClientes: TDataSource
     DataSet = qryClientes
@@ -4891,5 +4824,114 @@ object telaDados: TtelaDados
     TraceFlags = []
     Left = 504
     Top = 584
+  end
+  object dsPos: TDataSource
+    DataSet = tblPos
+    Left = 616
+    Top = 544
+  end
+  object tblPos: TIBTable
+    Database = dbPos
+    Transaction = trnscPos
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'SERIAL'
+        DataType = ftString
+        Size = 12
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_POS'
+        Fields = 'ID'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'POS'
+    Left = 616
+    Top = 584
+    object tblPosID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object tblPosDESCRICAO: TIBStringField
+      FieldName = 'DESCRICAO'
+    end
+    object tblPosSERIAL: TIBStringField
+      FieldName = 'SERIAL'
+      Size = 12
+    end
+  end
+  object qryPos: TIBQuery
+    Database = dbPos
+    Transaction = trnscPos
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsPos
+    SQL.Strings = (
+      'select * from POS')
+    Left = 616
+    Top = 624
+  end
+  object dbPos: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    DefaultTransaction = trnscPos
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 664
+    Top = 584
+  end
+  object trnscPos: TIBTransaction
+    Active = True
+    DefaultDatabase = dbPos
+    AutoStopAction = saNone
+    Left = 568
+    Top = 584
+  end
+  object ibdsPos: TIBDataSet
+    Database = dbPos
+    Transaction = trnscPos
+    BufferChunks = 1000
+    CachedUpdates = False
+    SelectSQL.Strings = (
+      'select * from POS')
+    GeneratorField.Field = 'ID'
+    GeneratorField.Generator = 'GEN_POS_ID'
+    GeneratorField.ApplyEvent = gamOnPost
+    Active = True
+    DataSource = dsPos
+    Left = 664
+    Top = 624
+  end
+  object qryNcm: TIBQuery
+    Database = dbNCM
+    Transaction = trnscNCM
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsNCM
+    SQL.Strings = (
+      'select * from NCM')
+    Left = 296
+    Top = 472
   end
 end

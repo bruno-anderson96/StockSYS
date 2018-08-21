@@ -280,8 +280,8 @@ object telaConfigSat: TtelaConfigSat
       OnClick = btnSalvarClick
     end
     object SpeedButton10: TSpeedButton
-      Left = 272
-      Top = 312
+      Left = 520
+      Top = 304
       Width = 73
       Height = 33
       Caption = 'Cancelar CFe'
@@ -538,7 +538,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 15
           Width = 145
           Height = 21
-          ItemHeight = 0
+          ItemHeight = 13
           TabOrder = 0
         end
         object cbxPagCodigo: TComboBox
@@ -546,7 +546,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 78
           Width = 145
           Height = 21
-          ItemHeight = 0
+          ItemHeight = 13
           TabOrder = 1
         end
         object cbxModeloPosPrinter: TComboBox
@@ -554,7 +554,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 46
           Width = 145
           Height = 21
-          ItemHeight = 0
+          ItemHeight = 13
           TabOrder = 2
         end
       end
@@ -1071,6 +1071,11 @@ object telaConfigSat: TtelaConfigSat
       'ortes Inform'#225'tica'
     DisplayName = 'Documento PDF'
     Left = 176
+    Top = 312
+  end
+  object ACBrIBPTax1: TACBrIBPTax
+    ProxyPort = '8080'
+    Left = 272
     Top = 312
   end
 end

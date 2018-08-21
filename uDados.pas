@@ -176,15 +176,6 @@ type
     tblTributos: TIBTable;
     trnscTributos: TIBTransaction;
     qryTributos: TIBQuery;
-    tblTributosTIPOPROD: TIntegerField;
-    tblTributosALIQUOTA_ICMS: TIBBCDField;
-    tblTributosALIQUOTA_IPI: TIBBCDField;
-    tblTributosBASE_ST: TIBBCDField;
-    tblTributosREDUCAO_BASE: TIBBCDField;
-    tblTributosMVA: TIBBCDField;
-    tblTributosQUANT: TIntegerField;
-    tblTributosVALOR: TIBBCDField;
-    tblTributosVAL_ICMS: TIBBCDField;
     tblEmitente: TIBTable;
     dbEmitente: TIBDatabase;
     trnscEmitente: TIBTransaction;
@@ -528,6 +519,18 @@ type
     tblIbptIMPORTADO: TFloatField;
     tblIbptESTADUAL: TFloatField;
     tblIbptMUNICIPAL: TFloatField;
+    tblProdutosID_ORIGEM: TIntegerField;
+    Label22: TLabel;
+    dsPos: TDataSource;
+    tblPos: TIBTable;
+    qryPos: TIBQuery;
+    dbPos: TIBDatabase;
+    trnscPos: TIBTransaction;
+    tblPosID: TIntegerField;
+    tblPosDESCRICAO: TIBStringField;
+    tblPosSERIAL: TIBStringField;
+    ibdsPos: TIBDataSet;
+    qryNcm: TIBQuery;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
 

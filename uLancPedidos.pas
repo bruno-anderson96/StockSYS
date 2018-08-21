@@ -70,8 +70,6 @@ type
     Encerrar: TAction;
     Confirmar: TAction;
     Excluir: TAction;
-    cbTpPg: TComboBox;
-    GroupBox3: TGroupBox;
     Label10: TLabel;
     btnIncluir: TBitBtn;
     StatusBar1: TStatusBar;
@@ -94,7 +92,7 @@ type
     Label21: TLabel;
     pnlEdtExc: TPanel;
     btnEdt: TSpeedButton;
-    btnExc: TSpeedButton;
+    btnExc: TSpeedButton;                                                         
     btnFec: TSpeedButton;
     edtQt: TEdit;
     gpPagamento: TGroupBox;
@@ -102,6 +100,8 @@ type
     gpBandeira: TGroupBox;
     cbBandeira: TComboBox;
     Image1: TImage;
+    gpPos: TGroupBox;
+    cbPos: TComboBox;
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnIncItemClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -191,7 +191,7 @@ begin
   editHrEmissao.Enabled := true; }
   editIdCliente.Enabled := true;
   cbCliente.Enabled := true;
-  cbTpPg.Enabled := true;
+  {cbTpPg.Enabled := true;}
   {editValProd.Enabled := true;}
   editDesc.Enabled := true;
   editAsc.Enabled := true;
@@ -214,7 +214,7 @@ begin
   btnConfirmar.Enabled := true;
   btnCancelar.Enabled := true;
 
-  cbTpPg.ItemIndex := 0;
+  {cbTpPg.ItemIndex := 0; }
 
   editDesc.Text := FloatToStr(d);
   editAsc.Text  := FloatToStr(a);
@@ -271,7 +271,7 @@ begin
   editHrEmissao.Enabled := false; }
   editIdCliente.Enabled := false;
   cbCliente.Enabled := false;
-  cbTpPg.Enabled := false;
+  {cbTpPg.Enabled := false;}
   editValProd.Enabled := false;
   editDesc.Enabled := false;
   editAsc.Enabled := false;
@@ -426,7 +426,7 @@ begin
   editHrEmissao.Enabled := false; }
   editIdCliente.Enabled := false;
   cbCliente.Enabled := false;
-  cbTpPg.Enabled := false;
+  {cbTpPg.Enabled := false;}
   editValProd.Enabled := false;
   editDesc.Enabled := false;
   editAsc.Enabled := false;
@@ -523,6 +523,7 @@ begin
   label10.Caption := 'Tecle F2 para Abrir Cupom';
 
   telaConfigSat.PrepararImpressao;
+  telaConfigSat.gerarVenda;
   telaConfigSat.ACBrSAT1.ImprimirExtrato;
   end;
   end;
@@ -548,7 +549,7 @@ begin
   editHrEmissao.Enabled := true; }
   editIdCliente.Enabled := true;
   cbCliente.Enabled := true;
-  cbTpPg.Enabled := true;
+  {cbTpPg.Enabled := true;}
   {editValProd.Enabled := true;}
   editDesc.Enabled := true;
   editAsc.Enabled := true;
@@ -577,7 +578,7 @@ begin
   Cancelar.Enabled := true;
   adicionarItem.Enabled := true;
 
-  cbTpPg.ItemIndex := 0;
+  {cbTpPg.ItemIndex := 0;}
 
   editDesc.Text := FloatToStr(d);
   editAsc.Text  := FloatToStr(a);
@@ -606,7 +607,7 @@ begin
   editHrEmissao.Enabled := true; }
   editIdCliente.Enabled := false;
   cbCliente.Enabled := false;
-  cbTpPg.Enabled := false;
+  {cbTpPg.Enabled := false;}
   {editValProd.Enabled := true;}
   editDesc.Enabled := false;
   editAsc.Enabled := false;
@@ -902,8 +903,19 @@ procedure TtelaLancPedidos.cbPagamentoChange(Sender: TObject);
 begin
   If (cbPagamento.ItemIndex = 1) or (cbPagamento.ItemIndex = 2) then begin
     gpBandeira.Visible := true;
+    {gpPos.Visible := true;
+     with telaDados.tblPos do
+     begin
+      First;
+     while not Eof do
+     begin
+      cbPos.Items.Add(telaDados.tblPos.FieldByName('DESCRICAO').AsString);
+      Next;
+     end;
+  end; }
   end else begin
     gpBandeira.Visible := false;
+    {gpPos.Visible := false; }
   end;
 end;
 

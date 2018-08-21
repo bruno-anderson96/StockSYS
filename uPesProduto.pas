@@ -85,21 +85,38 @@ begin
 
   telaDados.GeraBarrasEAN13(telaCadProdutos.editEan.Text, telaCadProdutos.Image1.Canvas);
 
-  telaDados.qryCsosn.Close;
-  telaDados.qryCsosn.SQL.Clear;
-  telaDados.qryCsosn.SQL.Add('Select * from CSOSN where id = ');
-  telaDados.qryCsosn.SQL.Add(telaDados.tblProdutosID_CSOSN.AsString);
-  telaDados.qryCsosn.Open;
+     if telaDados.tblProdutosID_CSOSN.Value >= 1 then begin
+    telaDados.qryCsosn.Close;
+    telaDados.qryCsosn.SQL.Clear;
+    telaDados.qryCsosn.SQL.Add('Select * from CSOSN where id = ');
+    telaDados.qryCsosn.SQL.Add(telaDados.tblProdutosID_CSOSN.AsString);
+    telaDados.qryCsosn.Open;
+    telaCadProdutos.cbCsosn.ItemIndex := telaDados.qryCsosn.FieldByName('ID').Value;
+   end else begin
+    telaCadProdutos.cbCsosn.ItemIndex := -1;
+   end;
 
-  telaDados.qryCst.Close;
-  telaDados.qryCst.SQL.Clear;
-  telaDados.qryCst.SQL.Add('Select * from CST where id =');
-  telaDados.qryCst.SQL.Add(telaDados.tblProdutosID_CST.AsString);
-  telaDados.qryCst.Open;
+   if telaDados.tblProdutosID_CST.Value >= 1 then begin
+    telaDados.qryCst.Close;
+    telaDados.qryCst.SQL.Clear;
+    telaDados.qryCst.SQL.Add('Select * from CST where id =');
+    telaDados.qryCst.SQL.Add(telaDados.tblProdutosID_CST.AsString);
+    telaDados.qryCst.Open;
+    telaCadProdutos.cbCst.ItemIndex := telaDados.qryCst.FieldByName('ID').Value;
+   end else begin
+    telaCadProdutos.cbCst.ItemIndex := -1;
+   end;
 
-  telaCadProdutos.cbCsosn.ItemIndex := telaDados.qryCsosn.FieldByName('ID').Value;
-  telaCadProdutos.cbCst.ItemIndex := telaDados.qryCst.FieldByName('ID').Value;
-
+   if telaDados.tblProdutosID_ORIGEM.Value >= 1 then begin
+    telaDados.qryOrigem.Close;
+    telaDados.qryOrigem.SQL.Clear;
+    telaDados.qryOrigem.SQL.Add('Select * from ORIGEM where id =');
+    telaDados.qryOrigem.SQL.Add(telaDados.tblProdutosID_ORIGEM.AsString);
+    telaDados.qryOrigem.Open;
+    telaCadProdutos.cbOrigem.ItemIndex := telaDados.qryOrigem.FieldByName('ID').Value;
+   end else begin
+    telaCadProdutos.cbOrigem.ItemIndex := -1;
+   end;
   telaCadProdutos.Excluir.Enabled := true;
 
   telaPesProduto.Close;

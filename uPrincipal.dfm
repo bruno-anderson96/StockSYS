@@ -1,6 +1,6 @@
 object telaPrincipal: TtelaPrincipal
-  Left = -8
-  Top = -8
+  Left = 200
+  Top = 396
   Width = 1382
   Height = 744
   Align = alClient
@@ -6203,6 +6203,10 @@ object telaPrincipal: TtelaPrincipal
         object CEP1: TMenuItem
           Caption = 'CEP'
           OnClick = CEP1Click
+        end
+        object POS1: TMenuItem
+          Caption = 'POS'
+          OnClick = POS1Click
         end
       end
       object LanamentodePedidos1: TMenuItem
