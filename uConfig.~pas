@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Buttons, ExtCtrls, IniFiles, uDados, DB,
-  Mask, DBCtrls, ACBrBase, ACBrSocket, ACBrCEP, ACBrIBGE;
+  Mask, DBCtrls, ACBrBase, ACBrSocket, ACBrCEP, ACBrIBGE, Grids, DBGrids,
+  ActnList;
 
 type
   TtelaConfig = class(TForm)
@@ -62,6 +63,19 @@ type
     edtEPorta: TEdit;
     edtEUsuario: TEdit;
     edtESenha: TEdit;
+    TabSheet3: TTabSheet;
+    Label2: TLabel;
+    editTributo: TDBEdit;
+    DBGrid1: TDBGrid;
+    ActionList1: TActionList;
+    actInserir: TAction;
+    actEditar: TAction;
+    actDeletar: TAction;
+    actConfirmar: TAction;
+    btnInserir: TSpeedButton;
+    btnEditar: TSpeedButton;
+    btnExcluir: TSpeedButton;
+    btnSalvar: TSpeedButton;
     procedure btnEscolherCaminhoClick(Sender: TObject);
     procedure btnEscolherCaminho2Click(Sender: TObject);
     procedure btnCaminhoCertClick(Sender: TObject);
@@ -71,8 +85,11 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn1Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure actDeletarExecute(Sender: TObject);
+    procedure actInserirExecute(Sender: TObject);
+    procedure actEditarExecute(Sender: TObject);
+    procedure actConfirmarExecute(Sender: TObject);
   private
     { Private declarations }
 
@@ -216,22 +233,6 @@ begin
   edtCaminhoSchemas.Text := OpenDialog1.FileName;
 end;
 
-procedure TtelaConfig.SpeedButton2Click(Sender: TObject);
-var i : integer;
-begin
-{ACBrCEP1.BuscarPorCEP(edtCep.Text);
-
-  for i := 0 to ACBrCEP1.Enderecos.Count -1 do
-  begin
-    telaDados.tblEmitenteCEP.AsString := ACBrCEP1.Enderecos[i].CEP;
-    telaDados.tblEmitenteENDERECO.AsString := ACBrCEP1.Enderecos[i].Logradouro;
-    telaDados.tblEmitenteCIDADE.AsString := ACBrCEP1.Enderecos[i].Municipio;
-    telaDados.tblEmitenteUF.AsString := ACBrCEP1.Enderecos[i].UF;
-    telaDados.tblEmitenteBAIRRO.AsString := ACBrCEP1.Enderecos[i].Bairro;
-    telaDados.tblEmitenteCODMUN.AsString := ACBrCEP1.Enderecos[i].IBGE_Municipio;
-  end;}
-end;
-
 procedure TtelaConfig.FormCreate(Sender: TObject);
 begin
   telaDados.tblEmitente.Open;
@@ -275,6 +276,62 @@ begin
   edtEPorta.Text          := telaDados.sEPorta;
   edtEUsuario.Text        := telaDados.sEUsuario;
   edtESenha.Text          := telaDados.sESenha;
+end;
+
+procedure TtelaConfig.actDeletarExecute(Sender: TObject);
+begin
+  telaDados.tblTributos.Delete;
+end;
+
+procedure TtelaConfig.actInserirExecute(Sender: TObject);
+var id : integer;
+begin
+   telaDados.tblTributos.Last;
+
+    id := telaDados.tblTributosID.Value + 1;
+
+   telaDados.tblTributos.Insert;
+   telaDados.tblTributosID.Value := id;
+
+   editTributo.Enabled := true;
+   editTributo.SetFocus;
+
+   btnInserir.Enabled := false;
+
+   DBGrid1.Enabled := false; 
+end;
+
+procedure TtelaConfig.actEditarExecute(Sender: TObject);
+begin
+  telaDados.tblTributos.Edit;
+  DBGrid1.Enabled := true;
+  editTributo.Enabled := true;
+end;
+
+procedure TtelaConfig.actConfirmarExecute(Sender: TObject);
+begin
+  telaDados.qryTributos.Close;
+  telaDados.qryTributos.SQL.Clear;
+  telaDados.qryTributos.SQL.Add('Select * from TRIBUTO where TIPOTRIB = ');
+  telaDados.qryTributos.SQL.Add(QuotedStr(editTributo.Text));
+  telaDados.qryTributos.Open;
+
+  if telaDados.qryTributos.RecordCount>0 then begin
+     ShowMessage('Tributo já cadastrado');
+     editTributo.SetFocus;
+     Abort;      
+  end
+  else begin
+     editTributo.Enabled := false;
+
+     btnInserir.Enabled := true;
+
+    telaDados.tblTributos.Post;
+    telaDados.tblTributos.ApplyUpdates();
+    telaDados.tblTributos.Refresh;
+
+    editTributo.Clear;
+  end;
 end;
 
 end.

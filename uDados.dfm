@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 139
-  Top = 24
+  Left = 104
+  Top = 41
   Width = 1216
   Height = 699
   Caption = 'Data m'#243'dulo'
@@ -1895,6 +1895,7 @@ object telaDados: TtelaDados
     Top = 264
   end
   object dsTributos: TDataSource
+    DataSet = tblTributos
     Left = 440
     Top = 184
   end
@@ -1910,34 +1911,6 @@ object telaDados: TtelaDados
     SQLDialect = 3
     TraceFlags = []
     Left = 488
-    Top = 224
-  end
-  object tblTributos: TIBTable
-    Database = dbTributos
-    Transaction = trnscTributos
-    Active = True
-    BufferChunks = 1000
-    CachedUpdates = False
-    FieldDefs = <
-      item
-        Name = 'ID'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'TIPOTRIB'
-        DataType = ftInteger
-      end>
-    IndexDefs = <
-      item
-        Name = 'PK_TRIBUTO'
-        Fields = 'ID'
-        Options = [ixUnique]
-      end>
-    MasterSource = dsTributos
-    StoreDefs = True
-    TableName = 'TRIBUTO'
-    Left = 440
     Top = 224
   end
   object trnscTributos: TIBTransaction
@@ -4933,5 +4906,56 @@ object telaDados: TtelaDados
       'select * from NCM')
     Left = 296
     Top = 472
+  end
+  object tblTributos: TIBTable
+    Database = dbTributos
+    Transaction = trnscTributos
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'TIPOTRIB'
+        DataType = ftString
+        Size = 25
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_TRIBUTO'
+        Fields = 'ID'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'TRIBUTO'
+    Left = 440
+    Top = 224
+    object tblTributosID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object tblTributosTIPOTRIB: TIBStringField
+      FieldName = 'TIPOTRIB'
+      Size = 25
+    end
+  end
+  object ibdsTributos: TIBDataSet
+    Database = dbTributos
+    Transaction = trnscTributos
+    BufferChunks = 1000
+    CachedUpdates = False
+    SelectSQL.Strings = (
+      'select * from TRIBUTO')
+    GeneratorField.Field = 'ID'
+    GeneratorField.Generator = 'GEN_TRIBUTO_ID'
+    GeneratorField.ApplyEvent = gamOnPost
+    Active = True
+    DataSource = dsTributos
+    Left = 488
+    Top = 264
   end
 end

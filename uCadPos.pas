@@ -98,8 +98,6 @@ begin
      editSerial.Enabled := false;
 
      btnInserir.Enabled := true;
-     btnInserir.Enabled := true;
-
 
     telaDados.tblPos.Post;
     telaDados.tblPos.ApplyUpdates();

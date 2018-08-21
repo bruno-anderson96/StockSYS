@@ -92,7 +92,7 @@ type
     Label21: TLabel;
     pnlEdtExc: TPanel;
     btnEdt: TSpeedButton;
-    btnExc: TSpeedButton;
+    btnExc: TSpeedButton;                                                         
     btnFec: TSpeedButton;
     edtQt: TEdit;
     gpPagamento: TGroupBox;
@@ -155,7 +155,7 @@ var
 
 implementation
 
-uses DB,uConfigSat, uGerarNfe, uPesItens;
+uses DB,uConfigSat, uGerarNfe, uPesItens, Math;
 
 {$R *.dfm}
 
@@ -505,6 +505,7 @@ begin
 
     telaDados.tblPedidosItens.FieldByName('VALOR_TOTAL').Value :=
       telaDados.cdsTempItens.FieldByName('VRT').Value;
+
 
     telaDados.tblPedidosItens.Post;
     telaDados.cdsTempItens.Delete;

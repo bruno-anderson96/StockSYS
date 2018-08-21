@@ -1,6 +1,6 @@
 object telaCadUnidade: TtelaCadUnidade
-  Left = 539
-  Top = 259
+  Left = 623
+  Top = 170
   Width = 428
   Height = 369
   Caption = 'Cadastro de Unidades'

@@ -155,7 +155,7 @@ var
 
 implementation
 
-uses DB,uConfigSat, uGerarNfe, uPesItens;
+uses DB,uConfigSat, uGerarNfe, uPesItens, Math;
 
 {$R *.dfm}
 

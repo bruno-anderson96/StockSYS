@@ -173,7 +173,6 @@ type
     Label5: TLabel;
     dsTributos: TDataSource;
     dbTributos: TIBDatabase;
-    tblTributos: TIBTable;
     trnscTributos: TIBTransaction;
     qryTributos: TIBQuery;
     tblEmitente: TIBTable;
@@ -531,6 +530,10 @@ type
     tblPosSERIAL: TIBStringField;
     ibdsPos: TIBDataSet;
     qryNcm: TIBQuery;
+    tblTributos: TIBTable;
+    tblTributosID: TIntegerField;
+    ibdsTributos: TIBDataSet;
+    tblTributosTIPOTRIB: TIBStringField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
 
