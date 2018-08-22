@@ -511,20 +511,25 @@ begin
   end;
 
   if radDoc.ItemIndex = 0 then begin
-    telaConfigSat.num := StrToInt(editId.Text);
+    telaConfigSat.num := StrToInt(editIdCliente.Text);
+    telaConfigSat.PrepararImpressao;
     telaConfigSat.gerarVenda;
+    telaConfigSat.ACBrSAT1.ImprimirExtrato;
   end else begin
     telaGerarNfe.numN := StrToInt(editId.Text);
     telaGerarNfe.btnGeraNfe.Click;
   end;
+
+
   PanelCalc.Visible := False;
   telaDados.tblPedidosItens.ApplyUpdates;
   telaDados.tblProdutos.Close;
   label10.Caption := 'Tecle F2 para Abrir Cupom';
 
-  telaConfigSat.PrepararImpressao;
+  {telaConfigSat.PrepararImpressao;
   telaConfigSat.gerarVenda;
-  telaConfigSat.ACBrSAT1.ImprimirExtrato;
+  telaConfigSat.ACBrSAT1.ImprimirExtrato;}
+
   end;
   end;
 end;

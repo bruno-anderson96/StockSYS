@@ -1715,6 +1715,7 @@ object telaCadProdutos: TtelaCadProdutos
         Enabled = False
         ItemHeight = 13
         TabOrder = 1
+        OnChange = cbCsosnChange
       end
       object cbCst: TComboBox
         Left = 62

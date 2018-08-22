@@ -142,6 +142,7 @@ type
     procedure editLucroPExit(Sender: TObject);
     procedure btnTesteClick(Sender: TObject);
     procedure editNcmExit(Sender: TObject);
+    procedure cbCsosnChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -428,7 +429,7 @@ begin
   cbCsosn.ItemIndex  := -1;
   cbCst.ItemIndex    := -1;
   cbOrigem.ItemIndex := -1;
-
+  cbTrib.ItemIndex   := -1;
   editDesc.SetFocus;
 end;
 
@@ -487,29 +488,30 @@ begin
     Abort;
   end;
 
-  i := 0;
   telaDados.tblProdutosUNIDADE.Value := cbUnidade.Text;
 
-  telaDados.tblProdutosTIPOPROD.Value := i;
-
-  if cbCsosn.ItemIndex >= 1 then begin
-    telaDados.tblProdutosID_CSOSN.Value := cbCsosn.ItemIndex;
+  if cbCsosn.ItemIndex >= 0 then begin
+    telaDados.tblProdutosID_CSOSN.Value := cbCsosn.ItemIndex + 1;
   end else begin
-    telaDados.tblProdutosID_CSOSN.Value := 0;
+    telaDados.tblProdutosID_CSOSN.Value := -1;
   end;
 
-  telaDados.tblProdutosTIPOPROD.Value := cbTrib.ItemIndex;
-
-  if cbCst.ItemIndex >= 1 then begin
-    telaDados.tblProdutosID_CST.Value   := cbCst.ItemIndex;
+  if cbTrib.ItemIndex >= 0 then begin
+    telaDados.tblProdutosID_TRIB.Value := cbTrib.ItemIndex + 1;
   end else begin
-    telaDados.tblProdutosID_CST.Value := 0;
+    telaDados.tblProdutosID_TRIB.Value := -1;
   end;
 
-  if cbOrigem.ItemIndex >= 1 then begin
-    telaDados.tblProdutosID_ORIGEM.Value:= cbOrigem.ItemIndex;
+  if cbCst.ItemIndex >= 0 then begin
+    telaDados.tblProdutosID_CST.Value   := cbCst.ItemIndex + 1;
   end else begin
-    telaDados.tblProdutosID_ORIGEM.Value := 0;
+    telaDados.tblProdutosID_CST.Value := -1;
+  end;
+
+  if cbOrigem.ItemIndex >= 0 then begin
+    telaDados.tblProdutosID_ORIGEM.Value:= cbOrigem.ItemIndex + 1;
+  end else begin
+    telaDados.tblProdutosID_ORIGEM.Value := -1;
   end;
 
   telaDados.tblProdutos.Post;
@@ -645,6 +647,11 @@ begin
   Incluir.Enabled := true;
   Cancelar.Enabled := false;
   Editar.Enabled := true;
+
+  cbCsosn.ItemIndex  := -1;
+  cbCst.ItemIndex    := -1;
+  cbOrigem.ItemIndex := -1;
+  cbTrib.ItemIndex   := -1;
 end;
 
 procedure TtelaCadProdutos.FecharExecute(Sender: TObject);
@@ -844,6 +851,15 @@ end;
 
 procedure TtelaCadProdutos.FormCreate(Sender: TObject);
 begin
+  with telaDados.tblTributos do
+  begin
+    First;
+    while not Eof do
+    begin
+      cbTrib.Items.Add(telaDados.tblTributos.FieldByName('ID').AsString + ' - ' + telaDados.tblTributos.FieldByName('TIPOTRIB').AsString);
+      Next;
+     end;
+  end;
   with telaDados.tblOrigem do
   begin
     First;
@@ -997,5 +1013,10 @@ begin
 end;
 
 
+
+procedure TtelaCadProdutos.cbCsosnChange(Sender: TObject);
+begin
+ShowMessage(IntToStr(cbCsosn.ItemIndex));
+end;
 
 end.

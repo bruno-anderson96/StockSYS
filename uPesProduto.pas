@@ -85,35 +85,46 @@ begin
 
   telaDados.GeraBarrasEAN13(telaCadProdutos.editEan.Text, telaCadProdutos.Image1.Canvas);
 
-     if telaDados.tblProdutosID_CSOSN.Value >= 1 then begin
+   if telaDados.tblProdutosID_TRIB.Value >= 0 then begin
+    telaDados.qryTributos.Close;
+    telaDados.qryTributos.SQL.Clear;
+    telaDados.qryTributos.SQL.Add('Select * from TRIBUTO where id = ');
+    telaDados.qryTributos.SQL.Add(telaDados.tblProdutosID_CSOSN.AsString);
+    telaDados.qryTributos.Open;
+    telaCadProdutos.cbTrib.ItemIndex := telaDados.qryTributos.FieldByName('ID').Value - 1;
+   end else begin
+    telaCadProdutos.cbTrib.ItemIndex := -1;
+   end;
+
+   if telaDados.tblProdutosID_CSOSN.Value >= 0 then begin
     telaDados.qryCsosn.Close;
     telaDados.qryCsosn.SQL.Clear;
     telaDados.qryCsosn.SQL.Add('Select * from CSOSN where id = ');
     telaDados.qryCsosn.SQL.Add(telaDados.tblProdutosID_CSOSN.AsString);
     telaDados.qryCsosn.Open;
-    telaCadProdutos.cbCsosn.ItemIndex := telaDados.qryCsosn.FieldByName('ID').Value;
+    telaCadProdutos.cbCsosn.ItemIndex := telaDados.qryCsosn.FieldByName('ID').Value - 1;
    end else begin
     telaCadProdutos.cbCsosn.ItemIndex := -1;
    end;
 
-   if telaDados.tblProdutosID_CST.Value >= 1 then begin
+   if telaDados.tblProdutosID_CST.Value >= 0 then begin
     telaDados.qryCst.Close;
     telaDados.qryCst.SQL.Clear;
     telaDados.qryCst.SQL.Add('Select * from CST where id =');
     telaDados.qryCst.SQL.Add(telaDados.tblProdutosID_CST.AsString);
     telaDados.qryCst.Open;
-    telaCadProdutos.cbCst.ItemIndex := telaDados.qryCst.FieldByName('ID').Value;
+    telaCadProdutos.cbCst.ItemIndex := telaDados.qryCst.FieldByName('ID').Value - 1;
    end else begin
     telaCadProdutos.cbCst.ItemIndex := -1;
    end;
 
-   if telaDados.tblProdutosID_ORIGEM.Value >= 1 then begin
+   if telaDados.tblProdutosID_ORIGEM.Value >= 0 then begin
     telaDados.qryOrigem.Close;
     telaDados.qryOrigem.SQL.Clear;
     telaDados.qryOrigem.SQL.Add('Select * from ORIGEM where id =');
     telaDados.qryOrigem.SQL.Add(telaDados.tblProdutosID_ORIGEM.AsString);
     telaDados.qryOrigem.Open;
-    telaCadProdutos.cbOrigem.ItemIndex := telaDados.qryOrigem.FieldByName('ID').Value;
+    telaCadProdutos.cbOrigem.ItemIndex := telaDados.qryOrigem.FieldByName('ID').Value - 1;
    end else begin
     telaCadProdutos.cbOrigem.ItemIndex := -1;
    end;

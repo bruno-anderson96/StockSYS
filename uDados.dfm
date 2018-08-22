@@ -362,7 +362,6 @@ object telaDados: TtelaDados
   object tblProdutos: TIBTable
     Database = dbProdutos
     Transaction = trnscProdutos
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     FieldDefs = <
@@ -493,7 +492,7 @@ object telaDados: TtelaDados
         Size = 1
       end
       item
-        Name = 'TRIBUTACAO'
+        Name = 'ID_TRIB'
         DataType = ftInteger
       end
       item
@@ -658,9 +657,6 @@ object telaDados: TtelaDados
       FieldName = 'CONTROLADOR_ESTOQUE'
       Size = 1
     end
-    object tblProdutosTRIBUTACAO: TIntegerField
-      FieldName = 'TRIBUTACAO'
-    end
     object tblProdutosFRACIONADO: TIBStringField
       FieldName = 'FRACIONADO'
       Size = 1
@@ -718,6 +714,9 @@ object telaDados: TtelaDados
     end
     object tblProdutosID_ORIGEM: TIntegerField
       FieldName = 'ID_ORIGEM'
+    end
+    object tblProdutosID_TRIB: TIntegerField
+      FieldName = 'ID_TRIB'
     end
   end
   object trnscProdutos: TIBTransaction

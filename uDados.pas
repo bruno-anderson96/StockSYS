@@ -59,7 +59,6 @@ type
     tblProdutosTIPO_PRODUTO: TIntegerField;
     tblProdutosMARGEM_LUCRO: TIBBCDField;
     tblProdutosCONTROLADOR_ESTOQUE: TIBStringField;
-    tblProdutosTRIBUTACAO: TIntegerField;
     tblProdutosFRACIONADO: TIBStringField;
     tblProdutosCODIGO_NCM: TIBStringField;
     tblProdutosREDUCAO_BASE: TIBBCDField;
@@ -534,6 +533,7 @@ type
     tblTributosID: TIntegerField;
     ibdsTributos: TIBDataSet;
     tblTributosTIPOTRIB: TIBStringField;
+    tblProdutosID_TRIB: TIntegerField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
 

@@ -3343,7 +3343,7 @@ object telaLancPedidos: TtelaLancPedidos
           end
           object btnFec: TSpeedButton
             Left = 192
-            Top = 0
+            Top = 3
             Width = 31
             Height = 25
             Flat = True

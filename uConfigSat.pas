@@ -211,6 +211,7 @@ tEstadual, tFederal, tMunicipal: Double;
 ex, descricao: String;
 tabela: Integer;
 aliqFedNac, aliqFedImp, aliqEst, aliqMun: Double;
+idD : integer;
 begin
   tEstadual := 0;
   tFederal  := 0;
@@ -377,18 +378,47 @@ begin
                       'Tributos Estaduais '+ FloatToStr(tEstadual)+ #13+
                       'Tributos Municipais '+ FloatToStr(tMunicipal);
 
-
-   { InfAdic.infCpl := '</linha_simples>;'+
-                        '</ce><e><n>SENHA XXX</n></e>;'+
-                        '</linha_simples>';}
   end;
-  {ACBrIntegrador1.EnviarPagamento(); }
+
   if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex = 2) then begin
+    {If StrToFloat(telaLancPedidos.edtDin.Text) < StrToFloat(telaLancPedidos.editVtotal.Text) then begin
+      if MessageBox(Handle, 'O valor está incompleto, , 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
+
+      end;
+    end; }
+
     EnviaPagamento;
     VerificaStatusValidador;
   end;
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
+  try
   Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;
+  except
+    ShowMessage('integrador offline!');
+    {telaDados.tblPedidos.Close;
+    telaDados.tblPedidos.Open;
+    telaDados.tblPedidos.Last;
+    telaDados.tblPedidos.Edit;
+    telaDados.tblPedidosPATH.Value := ACBrSAT1.NomeBancoCfe;
+    telaDados.tblPedidosCHAVECFE.Value := 'CFe' + ACBrSAT1.CFe.infCFe.ID;
+    telaDados.tblPedidosSTATUS.Value := 'T';
+    telaDados.tblPedidos.Post; } //Caso queira transmitir depois a cfe
+    
+    telaDados.tblPedidos.Close;
+    telaDados.tblPedidos.Open;
+    telaDados.tblPedidos.Last;
+    idD := telaDados.tblPedidosID.AsInteger;
+    telaDados.tblPedidos.Delete;
+    telaDados.tblPedidosItens.Last;
+    telaDados.qryPedidosItens.Close;
+    telaDados.qryPedidosItens.SQL.Clear;
+    telaDados.qryPedidosItens.SQL.Add('Delete from PEDIDO_ITENS where ID_PEDIDO =');
+    telaDados.qryPedidosItens.SQL.Add(IntToStr(idD));
+    telaDados.qryPedidosItens.Open;
+
+    Abort;
+  end;
+
 
   if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex =2) then begin
      RespostaFiscal;
