@@ -407,6 +407,13 @@ begin
         abort;
       end;
     end;
+    if (cbPagamento.ItemIndex = 1) or (cbPagamento.ItemIndex = 2) then begin
+      if StrToFloat(edtDin.Text) > telaDados.tblPedidosVALOR_TOTAL.AsFloat then begin
+        edtDin.SetFocus;
+        ShowMessage('Valor pago deve ser igual ao valor total da compra');
+        abort;
+      end;
+    end;
     if cbCliente.Text = '' then begin
       ShowMessage('Selecione o cliente');
       cbCliente.SetFocus;

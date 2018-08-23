@@ -108,6 +108,7 @@ type
     procedure VerificaStatusValidador;
     procedure RespostaFiscal;
     procedure cancelaVenda;
+    function GuidCreate: string;
   public
     { Public declarations }
     num : integer;
@@ -156,6 +157,25 @@ end;
 procedure TtelaConfigSat.At(Sender: TObject);
 begin
   memo1.Text := acbrSat1.AtivarSAT(1,'11.111.111/1111-11',23);
+end;
+
+function TtelaConfigSat.GuidCreate: string;
+var
+  ID: TGUID;
+  IDn : String;
+
+begin
+
+  Result := '';
+  if CreateGuid(ID) = S_OK then
+    IDn := GUIDToString(ID);
+
+  while Pos('{', IDn) > 0 do
+    IDn[Pos('{', IDn)] := ' ';
+  while Pos('}', IDn) > 0 do
+    IDn[Pos('}', IDn)] := ' ';
+
+  Result := Trim(IDn);
 end;
 
 procedure TtelaConfigSat.SpeedButton6Click(Sender: TObject);
@@ -922,6 +942,16 @@ begin
     telaDados.tblPagamentoPARCELAS.Value := RespostaVerificarStatusValidador.Parcelas;
     telaDados.tblPagamentoQTRDIG.Value := RespostaVerificarStatusValidador.UltimosQuatroDigitos;
     telaDados.tblPagamentoCODPAG.Value := RespostaVerificarStatusValidador.CodigoPagamento;
+    {if RespostaVerificarStatusValidador.ValorPagamento > telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
+      inputbox('Valor incorreto', 'Digite o valor corretamente', FloatToStr(nv));
+      if nv <> telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
+        ShowMessage('Venda cancelada, valores incorretos, por favor refaça a venda');
+        cancelaVenda;
+        ACBrSAT1.CFe.Clear;
+        Abort;
+      end;
+      RespostaVerificarStatusValidador.ValorPagamento := nv;
+    end else}
     if RespostaVerificarStatusValidador.ValorPagamento < telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
       nv := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat - RespostaVerificarStatusValidador.ValorPagamento;
       if MessageBox(Handle,pansichar('Valor Pago está diferente do valor total da nota, deseja completar o valor da nota com pagamento em dinheiro? Faltando: R$ ' + FloatToStr(nv)), 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
@@ -934,7 +964,7 @@ begin
       end;
     end;
     telaDados.tblPagamentoVRPAG.Value := RespostaVerificarStatusValidador.ValorPagamento;
-    
+
     ShowMessage(IntToStr(RespostaVerificarStatusValidador.IDFila));
     ShowMessage('Codigo autorizacao: ' + RespostaVerificarStatusValidador.CodigoAutorizacao);
     ShowMessage('Instituicao: ' +RespostaVerificarStatusValidador.InstituicaoFinanceira);
@@ -984,10 +1014,8 @@ Begin
 end;
 
 procedure TtelaConfigSat.SpeedButton4Click(Sender: TObject);
-var
-  ID: TGUID;
 begin
-  edtChReq.Text := GUIDToString(ID);
+  edtChReq.Text := GuidCreate;
 end;
 
 end.
