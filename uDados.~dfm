@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 104
-  Top = 41
+  Left = 101
+  Top = 245
   Width = 1216
   Height = 699
   Caption = 'Data m'#243'dulo'
@@ -362,13 +362,11 @@ object telaDados: TtelaDados
   object tblProdutos: TIBTable
     Database = dbProdutos
     Transaction = trnscProdutos
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     FieldDefs = <
       item
         Name = 'ID'
-        Attributes = [faRequired]
         DataType = ftInteger
       end
       item
@@ -466,7 +464,6 @@ object telaDados: TtelaDados
       end
       item
         Name = 'ATIVO'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end
@@ -488,17 +485,15 @@ object telaDados: TtelaDados
       end
       item
         Name = 'CONTROLADOR_ESTOQUE'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end
       item
-        Name = 'TRIBUTACAO'
+        Name = 'ID_TRIB'
         DataType = ftInteger
       end
       item
         Name = 'FRACIONADO'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end
@@ -658,9 +653,6 @@ object telaDados: TtelaDados
       FieldName = 'CONTROLADOR_ESTOQUE'
       Size = 1
     end
-    object tblProdutosTRIBUTACAO: TIntegerField
-      FieldName = 'TRIBUTACAO'
-    end
     object tblProdutosFRACIONADO: TIBStringField
       FieldName = 'FRACIONADO'
       Size = 1
@@ -718,6 +710,9 @@ object telaDados: TtelaDados
     end
     object tblProdutosID_ORIGEM: TIntegerField
       FieldName = 'ID_ORIGEM'
+    end
+    object tblProdutosID_TRIB: TIntegerField
+      FieldName = 'ID_TRIB'
     end
   end
   object trnscProdutos: TIBTransaction

@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 104
-  Top = 41
+  Left = 101
+  Top = 245
   Width = 1216
   Height = 699
   Caption = 'Data m'#243'dulo'
@@ -367,7 +367,6 @@ object telaDados: TtelaDados
     FieldDefs = <
       item
         Name = 'ID'
-        Attributes = [faRequired]
         DataType = ftInteger
       end
       item
@@ -465,7 +464,6 @@ object telaDados: TtelaDados
       end
       item
         Name = 'ATIVO'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end
@@ -487,7 +485,6 @@ object telaDados: TtelaDados
       end
       item
         Name = 'CONTROLADOR_ESTOQUE'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end
@@ -497,7 +494,6 @@ object telaDados: TtelaDados
       end
       item
         Name = 'FRACIONADO'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end

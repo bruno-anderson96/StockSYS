@@ -107,6 +107,7 @@ type
     procedure EnviaPagamento;
     procedure VerificaStatusValidador;
     procedure RespostaFiscal;
+    procedure cancelaVenda;
   public
     { Public declarations }
     num : integer;
@@ -120,6 +121,22 @@ implementation
 uses pcnCFe, DB;
 
 {$R *.dfm}
+
+procedure TtelaConfigSat.cancelaVenda;
+var idD: integer;
+begin
+  telaDados.tblPedidos.Close;
+  telaDados.tblPedidos.Open;
+  telaDados.tblPedidos.Last;
+  idD := telaDados.tblPedidosID.AsInteger;
+  telaDados.tblPedidos.Delete;
+  telaDados.tblPedidosItens.Last;
+  telaDados.qryPedidosItens.Close;
+  telaDados.qryPedidosItens.SQL.Clear;
+  telaDados.qryPedidosItens.SQL.Add('Delete from PEDIDO_ITENS where ID_PEDIDO =');
+  telaDados.qryPedidosItens.SQL.Add(IntToStr(idD));
+  telaDados.qryPedidosItens.Open;
+end;
 
 procedure TtelaConfigSat.GetsignAC(var Chave: AnsiString);
 begin
@@ -270,12 +287,12 @@ begin
     For A := 1 to Loops do}
       while not telaDados.qryPedidosItens.Eof do
       begin
+
         telaDados.qryProdutos.Close;
         telaDados.qryProdutos.SQL.Clear;
         telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID =');
         telaDados.qryProdutos.SQL.Add(telaDados.qryPedidosItens.FieldByName('ID_PRODUTO').Value);
         telaDados.qryProdutos.Open;
-
 
         ACBrIBPTax1.AbrirTabela('C:\Users\Bruno\Documents\IBPT\18.1.A\TabelaIBPTaxCE18.1.A.csv');     //LEMBRAR DE ALTERAR
         ACBrIBPTax1.Procurar(telaDados.qryProdutos.FieldByName('CODIGO_NCM').AsString, ex, descricao, tabela, aliqFedNac, aliqFedImp, aliqEst, aliqMun);
@@ -334,13 +351,19 @@ begin
     end;
 
     Total.DescAcrEntr.vDescSubtot := telaDados.qryPedidos.FieldByName('DESCONTO').AsCurrency;
-    Total.vCFeLei12741 := tEstadual + tFederal + tMunicipal; //clocar aqui valor do imposto
+    Total.vCFeLei12741 := tEstadual + tFederal + tMunicipal; //clocar aqui valor do imposto}
     {Pagto1 := RoundABNT(TotalGeral/2,-2);
     with Pagto.Add do
     begin
       cMP := mpCartaodeCredito;
       vMP := Pagto1;
     end;}
+
+    if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex = 2) then begin
+      EnviaPagamento;
+      VerificaStatusValidador;
+    end;
+
     if telaLancPedidos.cbPagamento.ItemIndex = 0 then begin
       with Pagto.Add do
       begin
@@ -380,16 +403,11 @@ begin
 
   end;
 
-  if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex = 2) then begin
-    {If StrToFloat(telaLancPedidos.edtDin.Text) < StrToFloat(telaLancPedidos.editVtotal.Text) then begin
-      if MessageBox(Handle, 'O valor está incompleto, , 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
-
-      end;
-    end; }
-
+ { if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex = 2) then begin
     EnviaPagamento;
     VerificaStatusValidador;
-  end;
+  end; }
+
   Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
   try
   Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;
@@ -404,17 +422,7 @@ begin
     telaDados.tblPedidosSTATUS.Value := 'T';
     telaDados.tblPedidos.Post; } //Caso queira transmitir depois a cfe
     
-    telaDados.tblPedidos.Close;
-    telaDados.tblPedidos.Open;
-    telaDados.tblPedidos.Last;
-    idD := telaDados.tblPedidosID.AsInteger;
-    telaDados.tblPedidos.Delete;
-    telaDados.tblPedidosItens.Last;
-    telaDados.qryPedidosItens.Close;
-    telaDados.qryPedidosItens.SQL.Clear;
-    telaDados.qryPedidosItens.SQL.Add('Delete from PEDIDO_ITENS where ID_PEDIDO =');
-    telaDados.qryPedidosItens.SQL.Add(IntToStr(idD));
-    telaDados.qryPedidosItens.Open;
+    cancelaVenda;
 
     Abort;
   end;
@@ -841,7 +849,7 @@ procedure TtelaConfigSat.EnviaPagamento;
 var
   PagamentoMFe : TEnviarPagamento;
   RespostaPagamentoMFe : TRespostaPagamento;
-  nv : String;
+  nv : Double;
 begin
   telaDados.tblEmitente.Open;
   telaDados.tblEmitente.Last;
@@ -853,12 +861,6 @@ begin
     begin
       Clear;
       ValorTotalVenda := StrToFloat(telaLancPedidos.edtDin.Text);
-        if ValorTotalVenda <> telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
-          if MessageDlg('Valor pago diferente do valor total da nota, Deseja Prosseguir?',mtConfirmation,[mbyes,mbno],0) = mrno then begin
-            nv := InputBox('ValorTotalVenda', 'Valor à ser pago', telaLancPedidos.edtDin.Text);
-            ValorTotalVenda := StrToFloat(nv);
-          end;
-       end;
       ChaveAcessoValidador := '25CFE38D-3B92-46C0-91CA-CFF751A82D3D';
       ChaveRequisicao := edtChReq.Text;
       Estabelecimento := '1';
@@ -893,6 +895,7 @@ procedure TtelaConfigSat.VerificaStatusValidador;
 var
   VerificarStatusValidador : TVerificarStatusValidador;
   RespostaVerificarStatusValidador : TRespostaVerificarStatusValidador;
+  nv: Double;
 begin
   VerificarStatusValidador := TVerificarStatusValidador.Create;
   telaDados.tblPedidos.Open;
@@ -919,6 +922,17 @@ begin
     telaDados.tblPagamentoPARCELAS.Value := RespostaVerificarStatusValidador.Parcelas;
     telaDados.tblPagamentoQTRDIG.Value := RespostaVerificarStatusValidador.UltimosQuatroDigitos;
     telaDados.tblPagamentoCODPAG.Value := RespostaVerificarStatusValidador.CodigoPagamento;
+    if RespostaVerificarStatusValidador.ValorPagamento < telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
+      nv := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat - RespostaVerificarStatusValidador.ValorPagamento;
+      if MessageBox(Handle,pansichar('Valor Pago está diferente do valor total da nota, deseja completar o valor da nota com pagamento em dinheiro? Faltando: R$ ' + FloatToStr(nv)), 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
+        RespostaVerificarStatusValidador.ValorPagamento := StrToFloat(telaLancPedidos.edtDin.Text) + nv;
+        with ACBrSAT1.CFe.Pagto.Add do
+        begin
+          cMP := mpDinheiro;
+          vMP := nv;
+        end;
+      end;
+    end;
     telaDados.tblPagamentoVRPAG.Value := RespostaVerificarStatusValidador.ValorPagamento;
     
     ShowMessage(IntToStr(RespostaVerificarStatusValidador.IDFila));

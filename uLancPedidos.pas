@@ -361,6 +361,7 @@ begin
 
   telaDados.tblPedidosVALOR_TOTAL.Value := vProd - dsc + acr + outrasDesp;
 
+
   telaLancPedidos.Refresh;
 
   telaDados.FormataCampos;
@@ -399,10 +400,12 @@ begin
       if gpBandeira.Visible = true then gpBandeira.Visible := false;  //Correção de bugx
     cbPagamento.SetFocus;
   end else begin
-    if StrToFloat(edtTrc.Text) < 0 then begin
-      edtDin.SetFocus;
-      ShowMessage('Valor pago deve ser maior ou igual ao valor total da compra');
-      abort;
+    if cbPagamento.ItemIndex = 0 then begin
+      if StrToFloat(edtTrc.Text) < 0 then begin
+        edtDin.SetFocus;
+        ShowMessage('Valor pago deve ser maior ou igual ao valor total da compra');
+        abort;
+      end;
     end;
     if cbCliente.Text = '' then begin
       ShowMessage('Selecione o cliente');
@@ -412,7 +415,11 @@ begin
     if editValProd.Text = '' then begin
       ShowMessage('Selecione ao menos um produto');
       Abort;
-  end else begin
+    end else begin
+    {if StrToFloat(edtDin.Text) <> telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
+      ShowMessage('Valor pago diferente do valor da nota!');
+      Abort;}
+
 
   telaDados.tblPedidos.Open;
   telaDados.tblPedidos.Edit;
@@ -511,7 +518,7 @@ begin
   end;
 
   if radDoc.ItemIndex = 0 then begin
-    telaConfigSat.num := StrToInt(editIdCliente.Text);
+    telaConfigSat.num := StrToInt(editId.Text);
     telaConfigSat.PrepararImpressao;
     telaConfigSat.gerarVenda;
     telaConfigSat.ACBrSAT1.ImprimirExtrato;
