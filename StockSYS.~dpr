@@ -34,7 +34,8 @@ uses
   uCadEmit in 'uCadEmit.pas' {telaCadEmit},
   uCadCep in 'uCadCep.pas' {telaCadCep},
   uSped in 'uSped.pas' {telaSped},
-  uContador in 'uContador.pas' {telaContador};
+  uContador in 'uContador.pas' {telaContador},
+  uCadPos in 'uCadPos.pas' {telaCadPos};
 
 {$R *.res}
 

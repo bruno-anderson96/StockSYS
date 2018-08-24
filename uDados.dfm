@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 83
-  Top = 38
+  Left = 56
+  Top = 206
   Width = 1216
   Height = 699
   Caption = 'Data m'#243'dulo'
@@ -1090,16 +1090,24 @@ object telaDados: TtelaDados
         DataType = ftInteger
       end
       item
+        Name = 'ID_CLASSIFICACAO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_FORMAPAG'
+        DataType = ftInteger
+      end
+      item
+        Name = 'IDPAGAMENTO'
+        DataType = ftInteger
+      end
+      item
         Name = 'DATA_PEDIDO'
         DataType = ftDateTime
       end
       item
         Name = 'DATA_ENTREGA'
         DataType = ftDateTime
-      end
-      item
-        Name = 'ID_CLASSIFICACAO'
-        DataType = ftInteger
       end
       item
         Name = 'CONFIRMADA'
@@ -1148,10 +1156,6 @@ object telaDados: TtelaDados
         Attributes = [faFixed]
         DataType = ftString
         Size = 1
-      end
-      item
-        Name = 'ID_FORMAPAG'
-        DataType = ftInteger
       end
       item
         Name = 'END_ENTREGA'
@@ -1268,10 +1272,6 @@ object telaDados: TtelaDados
         Name = 'CHAVECFE'
         DataType = ftString
         Size = 50
-      end
-      item
-        Name = 'IDPAGAMENTO'
-        DataType = ftInteger
       end
       item
         Name = 'PATH'

@@ -102,17 +102,6 @@ type
     Image1: TImage;
     gpPos: TGroupBox;
     cbPos: TComboBox;
-    pnlSpos: TPanel;
-    edtOCar: TEdit;
-    edtNomCar: TEdit;
-    edtQdig: TEdit;
-    edtCodAut: TEdit;
-    Label25: TLabel;
-    Label26: TLabel;
-    Label27: TLabel;
-    Label28: TLabel;
-    Label29: TLabel;
-    btnEnviaDados: TSpeedButton;
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnIncItemClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -147,6 +136,7 @@ type
     procedure PesquisarExecute(Sender: TObject);
     procedure editIdChange(Sender: TObject);
     procedure cbPagamentoChange(Sender: TObject);
+    procedure edtDinChange(Sender: TObject);
 
   private
 
@@ -346,6 +336,7 @@ begin
   telaDados.FormataCampos;
   telaDados.tblPedidos.Open;
   telaDados.tblPedidosItens.Open;
+
 end;
 
 procedure TtelaLancPedidos.FormClose(Sender: TObject;
@@ -947,6 +938,13 @@ begin
     gpBandeira.Visible := false;
     {gpPos.Visible := false; }
   end;
+end;
+
+procedure TtelaLancPedidos.edtDinChange(Sender: TObject);
+begin
+  edtDin.Text := telaDados.Mascara(edtDin.Text);
+  edtDin.SelStart := Length(edtDin.Text);
+  calculaTroco;
 end;
 
 end.

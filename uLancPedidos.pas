@@ -136,6 +136,7 @@ type
     procedure PesquisarExecute(Sender: TObject);
     procedure editIdChange(Sender: TObject);
     procedure cbPagamentoChange(Sender: TObject);
+    procedure edtDinChange(Sender: TObject);
 
   private
 
@@ -335,6 +336,7 @@ begin
   telaDados.FormataCampos;
   telaDados.tblPedidos.Open;
   telaDados.tblPedidosItens.Open;
+
 end;
 
 procedure TtelaLancPedidos.FormClose(Sender: TObject;
@@ -936,6 +938,13 @@ begin
     gpBandeira.Visible := false;
     {gpPos.Visible := false; }
   end;
+end;
+
+procedure TtelaLancPedidos.edtDinChange(Sender: TObject);
+begin
+  edtDin.Text := telaDados.Mascara(edtDin.Text);
+  edtDin.SelStart := Length(edtDin.Text);
+  calculaTroco;
 end;
 
 end.

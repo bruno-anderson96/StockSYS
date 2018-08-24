@@ -1,6 +1,6 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 78
-  Top = 164
+  Left = 34
+  Top = 252
   Align = alClient
   BorderStyle = bsDialog
   Caption = 'Lan'#231'amento de Pedidos'
@@ -3122,6 +3122,7 @@ object telaLancPedidos: TtelaLancPedidos
               Font.Style = [fsBold]
               ParentFont = False
               TabOrder = 0
+              OnChange = edtDinChange
               OnExit = edtDinExit
             end
             object edtTrc: TEdit

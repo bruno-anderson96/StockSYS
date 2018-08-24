@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, uDados, Grids, DBGrids, ActnList, Buttons, StdCtrls,
-  Mask, DBCtrls;
+  Mask, DBCtrls, DB;
 
 type
   TtelaCadPos = class(TForm)
@@ -88,12 +88,13 @@ begin
   telaDados.qryPos.SQL.Add(QuotedStr(editDesc.Text));
   telaDados.qryPos.Open;
 
-  if telaDados.qryPos.RecordCount>0 then begin
+  if (telaDados.tblPos.State = dsInsert) then begin
+    if telaDados.qryPos.RecordCount>0 then begin
      ShowMessage('POS já cadastrado');
      editDesc.SetFocus;
-     Abort;      
-  end
-  else begin
+     Abort;
+    end;
+  end;
      editDesc.Enabled := false;
      editSerial.Enabled := false;
 
@@ -103,9 +104,10 @@ begin
     telaDados.tblPos.ApplyUpdates();
     telaDados.tblPos.Refresh;
 
+    DBGrid1.Enabled := false;
+
     editDesc.Clear;
     editSerial.Clear;
-  end;
 
 end;
 
