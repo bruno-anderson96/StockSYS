@@ -77,9 +77,10 @@ type
     SpeedButton4: TSpeedButton;
     Label13: TLabel;
     ACBrIBPTax1: TACBrIBPTax;
+    edtChAv: TEdit;
+    btnEdChAv: TSpeedButton;
     procedure At(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
-    procedure SpeedButton5Click(Sender: TObject);
     procedure AjustarCfe;
     procedure FormCreate(Sender: TObject);
     procedure gerarVenda;
@@ -96,22 +97,26 @@ type
     procedure FormShow(Sender: TObject);
     procedure EnviarClick(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
+    procedure btnEdChAvClick(Sender: TObject);
+    procedure edtChAvExit(Sender: TObject);
 
   private
     { Private declarations }
     procedure GetsignAC(var Chave: AnsiString);
     procedure GetcodigoDeAtivacao(var Chave: AnsiString);
-    procedure GetNumeroSessao(var Chave: Integer);
     procedure lerParams;
     procedure cancelaCfe;
-    procedure EnviaPagamento;
-    procedure VerificaStatusValidador;
-    procedure RespostaFiscal;
     procedure cancelaVenda;
     function GuidCreate: string;
+    procedure cadastraPagamento;
   public
     { Public declarations }
     num : integer;
+    Spos : Boolean;
+    procedure GetNumeroSessao(var Chave: Integer);
+    procedure EnviaPagamento;
+    procedure VerificaStatusValidador;
+    procedure RespostaFiscal;
   end;
 
 var
@@ -151,7 +156,7 @@ end;
 
 procedure TtelaConfigSat.GetNumeroSessao(var Chave: Integer);
 begin
-  Chave := 900000102;
+  Chave := ACBrSAT1.numeroSessao;
 end;
 
 procedure TtelaConfigSat.At(Sender: TObject);
@@ -181,7 +186,9 @@ end;
 procedure TtelaConfigSat.SpeedButton6Click(Sender: TObject);
 begin
   AjustarCfe;
-  Memo1.Text := ACBrSAT1.ConsultarSAT;
+  //Memo1.Text := ACBrSAT1.ConsultarSAT;
+  Memo1.Text := IntToStr(ACBrSAT1.numeroSessao);
+  //ACBrSAT1.ConsultarNumeroSessao( ACBrSAT1.numeroSessao );
 end;
 
 procedure TtelaConfigSat.AjustarCfe;
@@ -191,7 +198,7 @@ begin
   telaDados.qryEmitente.SQL.Add('Select * from Emitente where id_login = ');
   telaDados.qryEmitente.SQL.Add(telaDados.tblLoginID.AsString);
   telaDados.qryEmitente.Open;
-
+                                              
   with ACBrSAT1 do
   begin
     NomeDLL := edtNomeDLL.Text;
@@ -232,10 +239,19 @@ begin
   {ACBrSAT1.OnGetNumeroSessao := GetNumeroSessao;}
   end;
 
-  ACBrSAT1.Inicializar;
-
   ACBrSAT1.OnGetcodigoDeAtivacao := GetcodigoDeAtivacao;
   ACBrSAT1.OnGetsignAC := GetsignAC;
+  ACBrSAT1.OnGetNumeroSessao := telaConfigSat.GetNumeroSessao;
+
+  {if ACBrSAT1.numeroSessao = 0 then begin
+    ACBrSAT1.GerarnumeroSessao;
+  end;}
+     {ShowMessage(IntToStr(ACBrSAT1.numeroSessao));
+     if ACBrSAT1.numeroSessao < 1 then begin
+      ACBrSAT1.GerarnumeroSessao;
+     end;  }
+ { ACBrSAT1.OnGetNumeroSessao := GetNumeroSessao;
+   ShowMessage(IntToStr(ACBrSAT1.numeroSessao)); }
   {'12373349000158'}
 end;
 
@@ -265,6 +281,7 @@ begin
    }
   // Trasnferindo Informações de Config para o CFe //
   AjustarCfe;
+  ACBrSAT1.Inicializar;
   ACBrSAT1.InicializaCFe;
 
   telaDados.qryPedidos.Close;
@@ -380,8 +397,19 @@ begin
     end;}
 
     if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex = 2) then begin
-      EnviaPagamento;
-      VerificaStatusValidador;
+      try
+        //telaDados.qryPedidos.Last;
+        EnviaPagamento;
+        if Spos then begin
+          VerificaStatusValidador;
+        end else begin
+          cadastraPagamento;
+        end;
+      except
+        ShowMessage('Erro na venda');
+        cancelaVenda;
+        Abort;
+      end;
     end;
 
     if telaLancPedidos.cbPagamento.ItemIndex = 0 then begin
@@ -415,8 +443,6 @@ begin
       end;
     end;
 
-
-
     InfAdic.infCpl := 'Tributos Federais '+ FloatToStr(tFederal) + #13+
                       'Tributos Estaduais '+ FloatToStr(tEstadual)+ #13+
                       'Tributos Municipais '+ FloatToStr(tMunicipal);
@@ -441,15 +467,15 @@ begin
     telaDados.tblPedidosCHAVECFE.Value := 'CFe' + ACBrSAT1.CFe.infCFe.ID;
     telaDados.tblPedidosSTATUS.Value := 'T';
     telaDados.tblPedidos.Post; } //Caso queira transmitir depois a cfe
-    
     cancelaVenda;
-
     Abort;
   end;
 
 
   if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex =2) then begin
-     RespostaFiscal;
+    if Spos then begin
+       RespostaFiscal;
+    end;
   end;
   telaDados.tblPedidos.Close;
   telaDados.tblPedidos.Open;
@@ -459,14 +485,12 @@ begin
   }
   telaDados.tblPedidosPATH.Value := ACBrSAT1.NomeBancoCfe;
   telaDados.tblPedidosCHAVECFE.Value := 'CFe' + ACBrSAT1.CFe.infCFe.ID;
-  telaDados.tblPedidosSTATUS.Value := 'V';
+  if telaDados.tblPedidosSTATUS.Value = '' then begin
+    telaDados.tblPedidosSTATUS.Value := 'V';
+  end;
   telaDados.tblPedidos.Post;
+  Spos := False;
 
-end;
-
-procedure TtelaConfigSat.SpeedButton5Click(Sender: TObject);
-begin
-  Memo1.Text := ACBrSAT1.AssociarAssinatura( '11111111111111' + '11111111111111','MD2Nof/O0tQMPKiYeeAydSjYt7YV9kU0nWKZGXHVdYIzR2W9Z6tgXni/Y5bnjmUAk8MkqlBJIiOOIskKCjJ086k7vAP0EU5cBRYj/nzHUiRdu9AVD7WRfVs00BDyb5fsnnKg7gAXXH6SBgCxG9yjAkxJ0l2E2idsWBAJ5peQEBZqtHytRUC+FLaSfd3+'+'66QNxIBlDwQIRzUGPaU6fvErVDSfMUf8WpkwnPz36fCQnyLypqe/5mbox9pt3RCbbXcYqnR/4poYGr9M9Kymj4/PyX9xGeiXwbgzOOHNIU5M/aAs0rulXz948bZla0eXABgEcp6mDkTzweLPZTbmOhX+eA==');
 end;
 
 procedure TtelaConfigSat.FormCreate(Sender: TObject);
@@ -630,6 +654,7 @@ begin
     INI.WriteString('SAT','NomeDLL',edtNomeDLL.Text);
     INI.WriteString('SAT','CodigoAtivacao',edtCodAtiv.Text);
     INI.WriteString('SAT', 'ChaveReq', edtChReq.Text);
+    INI.WriteString('SAT', 'ChaveAv', edtChAv.Text);
     {INI.WriteString('SAT','CodigoUF',edtCodUF.Text);}
     INI.WriteInteger('SAT','NumeroCaixa',StrToInt(edtCaixa.Text));
     INI.WriteInteger('SAT','Ambiente',cbxAmbiente.ItemIndex);
@@ -721,6 +746,7 @@ begin
     edtNomeDLL.Text        := INI.ReadString('SAT','NomeDLL','C:\SAT\MFE.DLL');
     edtCodAtiv.Text        := INI.ReadString('SAT','CodigoAtivacao','123456');
     edtChReq.Text          := INI.ReadString('SAT','ChaveReq','');
+    edtChAv.Text          := INI.ReadString('SAT','ChaveAv','');
     {edtCodUF.Text          := INI.ReadString('SAT','CodigoUF','323');}
     edtCaixa.Text    := INI.ReadString('SAT','NumeroCaixa','1');
     cbxAmbiente.ItemIndex  := INI.ReadInteger('SAT','Ambiente',1);
@@ -870,6 +896,7 @@ var
   PagamentoMFe : TEnviarPagamento;
   RespostaPagamentoMFe : TRespostaPagamento;
   nv : Double;
+  idR : integer;
 begin
   telaDados.tblEmitente.Open;
   telaDados.tblEmitente.Last;
@@ -880,7 +907,7 @@ begin
     with PagamentoMFe do
     begin
       Clear;
-      ValorTotalVenda := StrToFloat(telaLancPedidos.edtDin.Text);
+      ValorTotalVenda := StrToFloat(telaLancPedidos.edtDin.Text) {telaDados.qryPedidos.FieldByName('VALOR_TOTAL').Value};
       ChaveAcessoValidador := '25CFE38D-3B92-46C0-91CA-CFF751A82D3D';
       ChaveRequisicao := edtChReq.Text;
       Estabelecimento := '1';
@@ -905,10 +932,29 @@ begin
     telaDados.tblPedidos.ApplyUpdates;
     telaDados.tblPedidos.Close;
     ShowMessage('ID PAGAMENTO: ' +IntToStr(RespostaPagamentoMfe.IDPagamento));
-  finally
-    PagamentoMFe.Free;
-    telaDados.tblEmitente.Close;
+    Spos := True;
+  except
+     idR := RANDOM(99999999);
+     telaDados.tblPedidos.Open;
+     telaDados.tblPedidos.Locate('IDPagamento', idR,[loCaseInsensitive]);
+
+     while telaDados.tblPedidos.RecordCount > 0 do begin
+      idR := RANDOM(99999999);
+      telaDados.tblPedidos.Locate('IDPagamento', idR,[loCaseInsensitive]);
+     end;
+
+    telaDados.tblPedidos.Last;
+    telaDados.tblPedidos.Edit;
+    telaDados.tblPedidos.FieldByName('IDPagamento').Value := idR;
+    telaDados.tblPedidosSTATUS.Value := 'T';
+    telaDados.tblPedidos.Post;
+    telaDados.tblPedidos.ApplyUpdates;
+    telaDados.tblPedidos.Close;
+
+    SPos := False;
   end;
+  PagamentoMFe.Free;
+  telaDados.tblEmitente.Close;
 end;
 
 procedure TtelaConfigSat.VerificaStatusValidador;
@@ -994,10 +1040,10 @@ Begin
         ChaveAcessoValidador := '25CFE38D-3B92-46C0-91CA-CFF751A82D3D';
         IDFila := 0;
         ChaveAcesso := telaDados.tblPedidosCHAVECFE.AsString;
-        Nsu := telaDados.tblPagamentosID.AsString;
+        Nsu := telaDados.qryPagamentos.FieldByName('ID').AsString;
         NumerodeAprovacao := '1234';
-        Bandeira := telaLancPedidos.cbBandeira.Text; //DIGITADA PELO CAIXA
-        Adquirente := 'CONSUMIDOR';
+        Bandeira := telaDados.qryPagamentos.FieldByName('INSTFIN').Value; //DIGITADA PELO CAIXA
+        Adquirente := telaDados.qryClientes.FieldByName('NOME').Value;
         {if Assigned(ACBrSAT1.CFe) then
           ImpressaoFiscal := '<![CDATA['+ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe+']]>';}
         NumeroDocumento := IntToStr(ACBrSAT1.CFe.ide.nCFe) {'1674068'};
@@ -1013,9 +1059,36 @@ Begin
     end;
 end;
 
+
+
 procedure TtelaConfigSat.SpeedButton4Click(Sender: TObject);
 begin
   edtChReq.Text := GuidCreate;
+end;
+
+procedure TtelaConfigSat.cadastraPagamento;
+begin
+    telaDados.tblPagamento.Open;
+    telaDados.tblPagamento.Insert;
+    telaDados.tblPagamentoID.Value := telaDados.qryPedidos.FieldByName('IDPAGAMENTO').AsInteger;
+    telaDados.tblPagamentoCODAUT.Value := inputbox('Código de autorização', 'Digite o Código de autorização(3 dig.)', '');
+    telaDados.tblPagamentoINSTFIN.Value := inputbox('Instituição Financeira', 'Digite a Operadora do cartão', '');;
+    telaDados.tblPagamentoDONOCARTAO.Value := inputbox('Dono do cartão', 'Digite o nome do proprietário do cartão', '');;
+    telaDados.tblPagamentoPARCELAS.Value := 1;
+    telaDados.tblPagamentoQTRDIG.AsString := inputbox('Quatro dígitos', 'Digite os últimos quatro dígitos do cartão', '');
+    telaDados.tblPagamentoCODPAG.Value := IntToStr(RANDOM(99999));
+    telaDados.tblPagamento.Post;
+    telaDados.tblPagamento.Close;
+end;
+
+procedure TtelaConfigSat.btnEdChAvClick(Sender: TObject);
+begin
+  edtChAv.Enabled := true;
+end;
+
+procedure TtelaConfigSat.edtChAvExit(Sender: TObject);
+begin
+  edtChAv.Enabled := False;
 end;
 
 end.

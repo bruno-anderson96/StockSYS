@@ -1056,7 +1056,6 @@ begin
     Abort;
   end else begin
     if tipo = 0 then begin
-    ShowMessage(cdsTempItensQUANT.AsString);
     telaDados.tblPedidosVALOR.Value := telaDados.cdsTempItens.Aggregates.Items[0].Value;
     telaLancPedidos.calculaPedido;
     end;

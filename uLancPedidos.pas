@@ -377,6 +377,7 @@ end;
 procedure TtelaLancPedidos.ConfirmarExecute(Sender: TObject);
 var estoque : integer;
 begin
+
   if editDtCad.Text = '' then
   begin
     ShowMessage('Preencha a data de cadastro');
@@ -408,9 +409,9 @@ begin
       end;
     end;
     if (cbPagamento.ItemIndex = 1) or (cbPagamento.ItemIndex = 2) then begin
-      if StrToFloat(edtDin.Text) > telaDados.tblPedidosVALOR_TOTAL.AsFloat then begin
+      if StrToFloat(edtDin.Text) > StrToFloat(editVtotal.Text) then begin
         edtDin.SetFocus;
-        ShowMessage('Valor pago deve ser igual ao valor total da compra');
+        ShowMessage('Valor pago deve ser igual ou menor ao valor total da compra');
         abort;
       end;
     end;
@@ -532,14 +533,13 @@ begin
   end else begin
     telaGerarNfe.numN := StrToInt(editId.Text);
     telaGerarNfe.btnGeraNfe.Click;
-  end;
-
+  end;                                  
 
   PanelCalc.Visible := False;
   telaDados.tblPedidosItens.ApplyUpdates;
   telaDados.tblProdutos.Close;
   label10.Caption := 'Tecle F2 para Abrir Cupom';
-
+  telaConfigSat.ACBrSAT1.DesInicializar;
   {telaConfigSat.PrepararImpressao;
   telaConfigSat.gerarVenda;
   telaConfigSat.ACBrSAT1.ImprimirExtrato;}
