@@ -924,7 +924,7 @@ begin
     {ACBrIntegrador1.EnviarPagamento(PagamentoMFe);}
     RespostaPagamentoMFe := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).EnviarPagamento(PagamentoMFe);
     {Memo1.Lines.Text := RespostaPagamentoMFe.StatusPagamento + ' ' + RespostaPagamentoMFe.IntegradorResposta.Codigo;}
-    if telaDados.tblPedidosIDPAGAMENTO.AsString = '' then begin
+
       telaDados.tblPedidos.Open;
       telaDados.tblPedidos.Last;
       telaDados.tblPedidos.Edit;
@@ -932,9 +932,9 @@ begin
       telaDados.tblPedidos.Post;
       telaDados.tblPedidos.ApplyUpdates;
       telaDados.tblPedidos.Close;
-    end else begin
+
       telaGerarNfe.idPg := RespostaPagamentoMFe.IDPagamento;
-    end;
+
 
     ShowMessage('ID PAGAMENTO: ' +IntToStr(RespostaPagamentoMfe.IDPagamento));
 
