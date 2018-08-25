@@ -674,7 +674,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 15
           Width = 145
           Height = 21
-          ItemHeight = 13
+          ItemHeight = 0
           TabOrder = 0
         end
         object cbxPagCodigo: TComboBox
@@ -682,7 +682,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 78
           Width = 145
           Height = 21
-          ItemHeight = 13
+          ItemHeight = 0
           TabOrder = 1
         end
         object cbxModeloPosPrinter: TComboBox
@@ -690,7 +690,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 46
           Width = 145
           Height = 21
-          ItemHeight = 13
+          ItemHeight = 0
           TabOrder = 2
         end
       end

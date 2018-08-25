@@ -631,6 +631,12 @@ object telaCadPos: TtelaCadPos
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       NumGlyphs = 2
     end
+    object SpeedButton1: TSpeedButton
+      Left = 272
+      Top = 64
+      Width = 81
+      Height = 25
+    end
     object DBGrid1: TDBGrid
       Left = 4
       Top = 104

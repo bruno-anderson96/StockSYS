@@ -26,6 +26,7 @@ type
     actExcluir: TAction;
     actCadastrar: TAction;
     actSair: TAction;
+    SpeedButton1: TSpeedButton;
     procedure actInserirExecute(Sender: TObject);
     procedure actEditarExecute(Sender: TObject);
     procedure actExcluirExecute(Sender: TObject);

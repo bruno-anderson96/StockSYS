@@ -10,7 +10,7 @@ uses
   ACBrDFeSSL, ExtCtrls, uConfig, uDados, uLancPedidos, IniFiles,
   ACBrSATExtratoReportClass, ACBrSATExtratoFortesFr, RLFilters, RLPDFFilter, uGerarNfe,
   ComCtrls, uConfigEmit, ACBrValidador,
-  ACBrSocket, ACBrIBPTax;
+  ACBrSocket, ACBrIBPTax, DB;
 
 type
   TtelaConfigSat = class(TForm)
@@ -125,7 +125,7 @@ var
 
 implementation
 
-uses pcnCFe, DB;
+uses pcnCFe;
 
 {$R *.dfm}
 
@@ -143,6 +143,7 @@ begin
   telaDados.qryPedidosItens.SQL.Add('Delete from PEDIDO_ITENS where ID_PEDIDO =');
   telaDados.qryPedidosItens.SQL.Add(IntToStr(idD));
   telaDados.qryPedidosItens.Open;
+  telaLancPedidos.PanelCalc.Visible := false;
 end;
 
 procedure TtelaConfigSat.GetsignAC(var Chave: AnsiString);
@@ -403,8 +404,6 @@ begin
         EnviaPagamento;
         if Spos then begin
           VerificaStatusValidador;
-        end else begin
-          cadastraPagamento;
         end;
       except
         ShowMessage('Erro na venda');
@@ -898,7 +897,7 @@ var
   RespostaPagamentoMFe : TRespostaPagamento;
   nv : Double;
   idR : integer;
-begin
+begin               
   telaDados.tblEmitente.Open;
   telaDados.tblEmitente.Last;
   telaDados.tblPedidos.ApplyUpdates;
@@ -908,8 +907,8 @@ begin
     with PagamentoMFe do
     begin
       Clear;
-      ValorTotalVenda := StrToFloat(telaLancPedidos.edtDin.Text) {telaDados.qryPedidos.FieldByName('VALOR_TOTAL').Value};
-      ChaveAcessoValidador := '25CFE38D-3B92-46C0-91CA-CFF751A82D3D';
+      ValorTotalVenda := telaLancPedidos.Ddin {telaDados.qryPedidos.FieldByName('VALOR_TOTAL').Value};
+      ChaveAcessoValidador := edtChAv.Text;
       ChaveRequisicao := edtChReq.Text;
       Estabelecimento := '1';
       SerialPOS := InputBox('SerialPOS','Informe o Serial do POS','ACBr-'+RandomName(8)); //Serial da maquineta
@@ -925,19 +924,25 @@ begin
     {ACBrIntegrador1.EnviarPagamento(PagamentoMFe);}
     RespostaPagamentoMFe := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).EnviarPagamento(PagamentoMFe);
     {Memo1.Lines.Text := RespostaPagamentoMFe.StatusPagamento + ' ' + RespostaPagamentoMFe.IntegradorResposta.Codigo;}
-    telaDados.tblPedidos.Open;
-    telaDados.tblPedidos.Last;
-    telaDados.tblPedidos.Edit;
-    telaDados.tblPedidos.FieldByName('IDPagamento').Value := RespostaPagamentoMFe.IDPagamento;
-    telaDados.tblPedidos.Post;
-    telaDados.tblPedidos.ApplyUpdates;
-    telaDados.tblPedidos.Close;
+    if telaDados.tblPedidosIDPAGAMENTO.AsString = '' then begin
+      telaDados.tblPedidos.Open;
+      telaDados.tblPedidos.Last;
+      telaDados.tblPedidos.Edit;
+      telaDados.tblPedidos.FieldByName('IDPagamento').Value := RespostaPagamentoMFe.IDPagamento;
+      telaDados.tblPedidos.Post;
+      telaDados.tblPedidos.ApplyUpdates;
+      telaDados.tblPedidos.Close;
+    end else begin
+      telaGerarNfe.idPg := RespostaPagamentoMFe.IDPagamento;
+    end;
+
     ShowMessage('ID PAGAMENTO: ' +IntToStr(RespostaPagamentoMfe.IDPagamento));
-    Spos := True;
-  except
-     idR := RANDOM(99999999);
-     telaDados.tblPedidos.Open;
-     telaDados.tblPedidos.Locate('IDPagamento', idR,[loCaseInsensitive]);
+
+    Spos := true;
+    except
+      idR := RANDOM(99999999);
+      telaDados.tblPedidos.Open;
+      telaDados.tblPedidos.Locate('IDPagamento', idR,[loCaseInsensitive]);
 
      while telaDados.tblPedidos.RecordCount > 0 do begin
       idR := RANDOM(99999999);
@@ -952,8 +957,10 @@ begin
     telaDados.tblPedidos.ApplyUpdates;
     telaDados.tblPedidos.Close;
 
-    SPos := False;
+    Spos := False;
+
   end;
+
   PagamentoMFe.Free;
   telaDados.tblEmitente.Close;
 end;
@@ -973,13 +980,14 @@ begin
     with VerificarStatusValidador do
     begin
       Clear;
-      ChaveAcessoValidador := '25CFE38D-3B92-46C0-91CA-CFF751A82D3D';
+      ChaveAcessoValidador := edtChAv.Text;
       IDFila := telaDados.tblPedidosIDPAGAMENTO.AsInteger;
       CNPJ:= telaDados.tblEmitenteCNPJ.Text;
     end;
 
     ACBrIntegrador1.VerificarStatusValidador(VerificarStatusValidador);
     RespostaVerificarStatusValidador := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).VerificarStatusValidador(VerificarStatusValidador) ;
+
     telaDados.tblPagamento.Open;
     telaDados.tblPagamento.Insert;
     telaDados.tblPagamentoID.Value := RespostaVerificarStatusValidador.IDFila;
@@ -999,17 +1007,27 @@ begin
       end;
       RespostaVerificarStatusValidador.ValorPagamento := nv;
     end else}
+    if RespostaVerificarStatusValidador.InstituicaoFinanceira = '' then begin
+      ShowMessage('Pagamento cancelado');
+      Spos := false;
+      telaDados.tblPagamento.Cancel;
+      cadastraPagamento;
+    end;
+
+
+    if RespostaVerificarStatusValidador.ValorPagamento > 0 then begin
     if RespostaVerificarStatusValidador.ValorPagamento < telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
       nv := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat - RespostaVerificarStatusValidador.ValorPagamento;
       if MessageBox(Handle,pansichar('Valor Pago está diferente do valor total da nota, deseja completar o valor da nota com pagamento em dinheiro? Faltando: R$ ' + FloatToStr(nv)), 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
-        RespostaVerificarStatusValidador.ValorPagamento := StrToFloat(telaLancPedidos.edtDin.Text) + nv;
+        RespostaVerificarStatusValidador.ValorPagamento := StrToFloat(telaLancPedidos.edtDin.Text);
         with ACBrSAT1.CFe.Pagto.Add do
         begin
           cMP := mpDinheiro;
           vMP := nv;
         end;
       end;
-    end;
+     end;
+
     telaDados.tblPagamentoVRPAG.Value := RespostaVerificarStatusValidador.ValorPagamento;
 
     ShowMessage(IntToStr(RespostaVerificarStatusValidador.IDFila));
@@ -1020,6 +1038,8 @@ begin
     ShowMessage('4 dig: ' + intToStr(RespostaVerificarStatusValidador.UltimosQuatroDigitos));
     ShowMessage('codigo pagamento: ' + RespostaVerificarStatusValidador.CodigoPagamento);
     ShowMessage('Valor Pagamento: ' + FloatToStr(RespostaVerificarStatusValidador.ValorPagamento));
+    end;
+
   finally
     VerificarStatusValidador.Free;
   end;
@@ -1035,15 +1055,17 @@ var
 Begin
   RespostaFiscal := TRespostaFiscal.Create;
     try
+
       with RespostaFiscal do
       begin
         Clear;
-        ChaveAcessoValidador := '25CFE38D-3B92-46C0-91CA-CFF751A82D3D';
+        ChaveAcessoValidador := edtChAv.Text;
         IDFila := 0;
         ChaveAcesso := telaDados.tblPedidosCHAVECFE.AsString;
-        Nsu := telaDados.qryPagamentos.FieldByName('ID').AsString;
+        telaDados.tblPagamento.Open;
+        Nsu := telaDados.tblPagamentoID.AsString; {telaDados.qryPagamentos.FieldByName('ID').Value};
         NumerodeAprovacao := '1234';
-        Bandeira := telaDados.qryPagamentos.FieldByName('INSTFIN').Value; //DIGITADA PELO CAIXA
+        Bandeira := telaDados.tblPagamentoID.AsString {telaDados.qryPagamentos.FieldByName('INSTFIN').Value}; //DIGITADA PELO CAIXA
         Adquirente := telaDados.qryClientes.FieldByName('NOME').Value;
         {if Assigned(ACBrSAT1.CFe) then
           ImpressaoFiscal := '<![CDATA['+ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe+']]>';}
@@ -1051,6 +1073,11 @@ Begin
         CNPJ:= telaDados.tblEmitenteCNPJ.Text;
       end;
       RetornoRespostaFiscal := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).RespostaFiscal(RespostaFiscal);
+      if not (telaDados.tblPagamento.State = dsInsert) then begin
+        telaDados.tblPagamento.Open;
+        telaDados.tblPagamento.Locate('ID', telaGerarNfe.idPg,[loCaseInsensitive]);
+        telaDados.tblPagamento.Edit;
+      end;
       telaDados.tblPagamentoIDRESPFISC.Value := StrToInt(RetornoRespostaFiscal.IdRespostaFiscal);
       telaDados.tblPagamento.Post;
       telaDados.tblPagamento.Close;
@@ -1068,6 +1095,7 @@ begin
 end;
 
 procedure TtelaConfigSat.cadastraPagamento;
+var nv : double;
 begin
     telaDados.tblPagamento.Open;
     telaDados.tblPagamento.Insert;
@@ -1078,8 +1106,32 @@ begin
     telaDados.tblPagamentoPARCELAS.Value := 1;
     telaDados.tblPagamentoQTRDIG.AsString := inputbox('Quatro dígitos', 'Digite os últimos quatro dígitos do cartão', '');
     telaDados.tblPagamentoCODPAG.Value := IntToStr(RANDOM(99999));
+    telaDados.tblPagamentoVRPAG.Value := telaLancPedidos.Ddin;
+    if telaDados.tblPagamentoVRPAG.Value < telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
+      nv := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat - telaDados.tblPagamentoVRPAG.Value;
+      if MessageBox(Handle,pansichar('Valor Pago está diferente do valor total da nota, deseja completar o valor da nota com pagamento em dinheiro? Faltando: R$ ' + FloatToStr(nv)), 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
+        with ACBrSAT1.CFe.Pagto.Add do
+        begin
+          cMP := mpDinheiro;
+          vMP := nv;
+        end;
+      end;
+    end;
+
     telaDados.tblPagamento.Post;
     telaDados.tblPagamento.Close;
+
+    telaDados.tblPedidos.Close;
+    telaDados.tblPedidos.Open;
+    telaDados.tblPedidos.Last;
+    telaDados.tblPedidos.Edit;
+    telaDados.tblPedidosPATH.Value := ACBrSAT1.NomeBancoCfe;
+    telaDados.tblPedidosCHAVECFE.Value := 'CFe' + ACBrSAT1.CFe.infCFe.ID;
+    telaDados.tblPedidosSTATUS.Value := 'T';
+    telaDados.tblPedidos.Post;  //Caso queira transmitir depois a cfe
+
+    Spos := false;
+
 end;
 
 procedure TtelaConfigSat.btnEdChAvClick(Sender: TObject);

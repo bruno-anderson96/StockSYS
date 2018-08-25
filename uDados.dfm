@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 56
-  Top = 206
+  Left = 79
+  Top = 53
   Width = 1216
   Height = 699
   Caption = 'Data m'#243'dulo'
@@ -4206,7 +4206,6 @@ object telaDados: TtelaDados
   object qryPagamentos: TIBQuery
     Database = dbPagamentos
     Transaction = trnscPagamento
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsPagamentos

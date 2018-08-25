@@ -470,7 +470,7 @@ object telaConfigSat: TtelaConfigSat
         end
         object btnEdChAv: TSpeedButton
           Left = 268
-          Top = 252
+          Top = 254
           Width = 30
           Height = 29
           Glyph.Data = {
@@ -587,6 +587,13 @@ object telaConfigSat: TtelaConfigSat
           NumGlyphs = 2
           OnClick = btnEdChAvClick
         end
+        object Label14: TLabel
+          Left = 24
+          Top = 240
+          Width = 116
+          Height = 13
+          Caption = 'Chave Acesso Validador'
+        end
         object edtNomeDLL: TEdit
           Left = 88
           Top = 16
@@ -629,7 +636,7 @@ object telaConfigSat: TtelaConfigSat
         end
         object edtChAv: TEdit
           Left = 32
-          Top = 256
+          Top = 258
           Width = 225
           Height = 21
           Enabled = False
@@ -667,7 +674,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 15
           Width = 145
           Height = 21
-          ItemHeight = 13
+          ItemHeight = 0
           TabOrder = 0
         end
         object cbxPagCodigo: TComboBox
@@ -675,7 +682,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 78
           Width = 145
           Height = 21
-          ItemHeight = 13
+          ItemHeight = 0
           TabOrder = 1
         end
         object cbxModeloPosPrinter: TComboBox
@@ -683,7 +690,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 46
           Width = 145
           Height = 21
-          ItemHeight = 13
+          ItemHeight = 0
           TabOrder = 2
         end
       end

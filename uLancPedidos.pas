@@ -143,15 +143,20 @@ type
     procedure calculaTroco();
     { Private declarations }
   public
+    Ddin : Double;
     procedure calculaPedido();
     { Public declarations }
+
+
 
   end;
 
 var
+
   telaLancPedidos: TtelaLancPedidos;
   prod: String;
   qt: integer;
+
 
 
 implementation
@@ -945,6 +950,9 @@ begin
   edtDin.Text := telaDados.Mascara(edtDin.Text);
   edtDin.SelStart := Length(edtDin.Text);
   calculaTroco;
+  if edtDin.Text <> '0,00' then begin
+    Ddin := StrToFloat(edtDin.Text);
+  end;
 end;
 
 end.
