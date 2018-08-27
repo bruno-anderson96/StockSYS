@@ -1,6 +1,6 @@
 object telaCadProdutos: TtelaCadProdutos
-  Left = 153
-  Top = 110
+  Left = 164
+  Top = 87
   Width = 792
   Height = 544
   Caption = 'Cadastro de Produtos'
@@ -1561,6 +1561,7 @@ object telaCadProdutos: TtelaCadProdutos
         DataSource = telaDados.dsProdutos
         Enabled = False
         TabOrder = 2
+        OnExit = editVendaExit
       end
       object editLucro: TDBEdit
         Left = 85
@@ -1582,6 +1583,7 @@ object telaCadProdutos: TtelaCadProdutos
         DataSource = telaDados.dsProdutos
         Enabled = False
         TabOrder = 4
+        OnExit = editVendaPExit
       end
       object editLucroP: TDBEdit
         Left = 85
@@ -1745,8 +1747,8 @@ object telaCadProdutos: TtelaCadProdutos
       end
     end
     object panelEstoque: TPanel
-      Left = 512
-      Top = 232
+      Left = 688
+      Top = 240
       Width = 257
       Height = 210
       TabOrder = 15

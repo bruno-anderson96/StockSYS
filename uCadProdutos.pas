@@ -142,6 +142,8 @@ type
     procedure editLucroPExit(Sender: TObject);
     procedure btnTesteClick(Sender: TObject);
     procedure editNcmExit(Sender: TObject);
+    procedure editVendaExit(Sender: TObject);
+    procedure editVendaPExit(Sender: TObject);
 
   private
     { Private declarations }
@@ -173,8 +175,10 @@ begin
     telaDados.qryUnidade.Next;
   end;
 
+  telaDados.tblProdutos.Close;
+
   //Abrindo Banco
-  telaDados.tblProdutos.Open;
+ { telaDados.tblProdutos.Open;
 
    editIcms.Text    := '0,00';
    editIpi.Text     := '0,00';
@@ -186,6 +190,20 @@ begin
    editVenda.Text   := '0,00';
 
    if editId.Text <> '' then begin
+
+   telaDados.GeraBarrasEAN13(editEan.Text, telaCadProdutos.Image1.Canvas);
+
+
+   if telaDados.tblProdutosID_TRIB.Value >= 0 then begin
+    telaDados.qryTributos.Close;
+    telaDados.qryTributos.SQL.Clear;
+    telaDados.qryTributos.SQL.Add('Select * from TRIBUTO where id = ');
+    telaDados.qryTributos.SQL.Add(telaDados.tblProdutosID_CSOSN.AsString);
+    telaDados.qryTributos.Open;
+    telaCadProdutos.cbTrib.ItemIndex := telaDados.qryTributos.FieldByName('ID').AsInteger ;
+   end else begin
+    telaCadProdutos.cbTrib.ItemIndex := -1;
+   end;
 
    if telaDados.tblProdutosID_CSOSN.Value >= 1 then begin
     telaDados.qryCsosn.Close;
@@ -222,7 +240,7 @@ begin
 
   telaCadProdutos.Excluir.Enabled := true;
 
-   end; 
+   end;}
 end;
 
 procedure TtelaCadProdutos.btnFecharClick(Sender: TObject);
@@ -397,6 +415,8 @@ begin
   edtCfop.Enabled := true;
   editLucroP.Enabled := true;
   cbOrigem.Enabled := true;
+  editVenda.Enabled := true;
+  editVendaP.Enabled := true;
 
   btnPncm.Enabled := true;
   btnIncluir.Enabled := false;
@@ -408,6 +428,7 @@ begin
   Incluir.Enabled := False;
   Cancelar.Enabled := True;
   Editar.Enabled := false;
+  Pesquisar.Enabled := false;
 
   cbAtivo.Checked := false;
   cbFracionada.Checked := false;
@@ -490,25 +511,25 @@ begin
   telaDados.tblProdutosUNIDADE.Value := cbUnidade.Text;
 
   if cbCsosn.ItemIndex >= 0 then begin
-    telaDados.tblProdutosID_CSOSN.Value := cbCsosn.ItemIndex + 1;
+    telaDados.tblProdutosID_CSOSN.Value := cbCsosn.ItemIndex;
   end else begin
     telaDados.tblProdutosID_CSOSN.Value := -1;
   end;
 
   if cbTrib.ItemIndex >= 0 then begin
-    telaDados.tblProdutosID_TRIB.Value := cbTrib.ItemIndex + 1;
+    telaDados.tblProdutosID_TRIB.Value := cbTrib.ItemIndex;
   end else begin
     telaDados.tblProdutosID_TRIB.Value := -1;
   end;
 
   if cbCst.ItemIndex >= 0 then begin
-    telaDados.tblProdutosID_CST.Value   := cbCst.ItemIndex + 1;
+    telaDados.tblProdutosID_CST.Value   := cbCst.ItemIndex;
   end else begin
     telaDados.tblProdutosID_CST.Value := -1;
   end;
 
   if cbOrigem.ItemIndex >= 0 then begin
-    telaDados.tblProdutosID_ORIGEM.Value:= cbOrigem.ItemIndex + 1;
+    telaDados.tblProdutosID_ORIGEM.Value:= cbOrigem.ItemIndex;
   end else begin
     telaDados.tblProdutosID_ORIGEM.Value := -1;
   end;
@@ -561,8 +582,13 @@ end;
 
 procedure TtelaCadProdutos.editLucroExit(Sender: TObject);
 begin
-  editVenda.Text := FloatToStr(StrToFloat(editCompra.Text) + (StrToFloat(editCompra.Text) * StrToFloat(editLucro.Text))/100);
-  telaDados.FormataCampos;
+  if editLucro.Text = '' then begin
+    editLucro.Text := '0,00';
+  end else begin
+
+    telaDados.tblProdutosPRECO_VENDA.AsString := FloatToStr(StrToFloat(editCompra.Text) + (StrToFloat(editCompra.Text) * StrToFloat(editLucro.Text))/100);
+    {telaDados.FormataCampos; }
+  end;
 end;
 
 procedure TtelaCadProdutos.btnCancelarClick(Sender: TObject);
@@ -634,6 +660,8 @@ begin
   editLucroP.Enabled := false;
   editVendaP.Enabled := false;
   cbOrigem.Enabled := false;
+  editVenda.Enabled := false;
+  editVendaP.Enabled := false;
 
   btnPncm.Enabled := false;
 
@@ -646,6 +674,7 @@ begin
   Incluir.Enabled := true;
   Cancelar.Enabled := false;
   Editar.Enabled := true;
+  Pesquisar.Enabled := true;
 
   cbCsosn.ItemIndex  := -1;
   cbCst.ItemIndex    := -1;
@@ -661,8 +690,8 @@ end;
 procedure TtelaCadProdutos.editCompraExit(Sender: TObject);
 begin
   {calculaValProd;}
-  editVenda.Text := FloatToStr(StrToFloat(editCompra.Text) + StrToFloat(editLucro.Text));
-  telaDados.FormataCampos;
+  {editVenda.Text := FloatToStr(StrToFloat(editCompra.Text) + StrToFloat(editLucro.Text));
+  telaDados.FormataCampos;}
 end;
 
 procedure TtelaCadProdutos.btnPncmClick(Sender: TObject);
@@ -823,6 +852,8 @@ begin
   edtCfop.Enabled := true;
   editLucroP.Enabled := true;
   cbOrigem.Enabled := true;
+  editVenda.Enabled := true;
+  editVendaP.Enabled := true;
 
   cbAtivo.Checked := false;
   cbFracionada.Checked := false;
@@ -933,7 +964,12 @@ end;
 
 procedure TtelaCadProdutos.editLucroPExit(Sender: TObject);
 begin
- editVendaP.Text := FloatToStr(StrToFloat(editVenda.Text) + (StrToFloat(editVenda.Text) * StrToFloat(editLucroP.Text))/100);  
+  if editLucroP.Text = '' then begin
+    editLucroP.Text := '0,00';
+  end else begin
+
+  telaDados.tblProdutosPRECO_VENDAP.AsString := FloatToStr(StrToFloat(editVenda.Text) + (StrToFloat(editVenda.Text) * StrToFloat(editLucroP.Text))/100);  
+  end;
 end;
 
 procedure TtelaCadProdutos.btnTesteClick(Sender: TObject);
@@ -1012,5 +1048,26 @@ begin
 end;
 
 
+
+procedure TtelaCadProdutos.editVendaExit(Sender: TObject);
+begin
+  telaDados.tblProdutosMARGEM_LUCRO.AsString :=  FloatToStr(((StrToFloat(editVenda.Text) - StrToFloat(editCompra.Text)) / StrToFloat(editCompra.Text) )* 100);
+
+  if editVenda.Text = '' then begin
+    editVenda.Text := '0,00';
+  end;
+
+end;
+
+procedure TtelaCadProdutos.editVendaPExit(Sender: TObject);
+begin
+
+  telaDados.tblProdutosMARGEM_LUCROP.AsString :=  FloatToStr(((StrToFloat(editVendaP.Text) - StrToFloat(editVenda.Text)) / StrToFloat(editVenda.Text) )* 100);
+
+
+  if editVenda.Text = '' then begin
+    editVenda.Text := '0,00';
+  end;
+end;
 
 end.

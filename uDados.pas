@@ -40,7 +40,7 @@ type
     tblProdutosID: TIntegerField;
     tblProdutosDESCRICAO: TIBStringField;
     tblProdutosREFERENCIA: TIBStringField;
-    t: TIBStringField;
+    tblProdutosEAN13: TIBStringField;
     tblProdutosDUN14: TIBStringField;
     esto: TIntegerField;
     tblProdutosSUBGRUPO1: TIntegerField;
@@ -764,6 +764,8 @@ begin
   tblProdutosALIQUOTA_IPI.DisplayFormat  := '##,##0.00';
   tblProdutosMARGEM_LUCRO.DisplayFormat  := '##,##0.00';
   tblProdutosREDUCAO_BASE.DisplayFormat  := '##,##0.00';
+  tblProdutosPRECO_VENDA.DisplayFormat   := '##,##0.00';
+  tblProdutosPRECO_VENDAP.DisplayFormat  := '##,##0.00';
   //Emitente
   tblEmitenteCEP.EditMask                := '00000-000;0';
   tblEmitenteTelefone.EditMask           := '(00)0000-0000;0';

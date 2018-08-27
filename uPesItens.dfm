@@ -202,6 +202,7 @@ object telaPesItens: TtelaPesItens
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
       OnDblClick = DBGrid1DblClick
+      OnKeyPress = DBGrid1KeyPress
       Columns = <
         item
           Expanded = False

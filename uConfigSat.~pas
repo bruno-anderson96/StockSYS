@@ -110,6 +110,7 @@ type
     procedure cancelaVenda;
     function GuidCreate: string;
     procedure cadastraPagamento;
+    procedure EnviaPagamentoOff;
   public
     { Public declarations }
     num : integer;
@@ -924,7 +925,7 @@ begin
     {ACBrIntegrador1.EnviarPagamento(PagamentoMFe);}
     RespostaPagamentoMFe := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).EnviarPagamento(PagamentoMFe);
     {Memo1.Lines.Text := RespostaPagamentoMFe.StatusPagamento + ' ' + RespostaPagamentoMFe.IntegradorResposta.Codigo;}
-    if telaDados.tblPedidosIDPAGAMENTO.AsString = '' then begin
+
       telaDados.tblPedidos.Open;
       telaDados.tblPedidos.Last;
       telaDados.tblPedidos.Edit;
@@ -932,9 +933,9 @@ begin
       telaDados.tblPedidos.Post;
       telaDados.tblPedidos.ApplyUpdates;
       telaDados.tblPedidos.Close;
-    end else begin
+
       telaGerarNfe.idPg := RespostaPagamentoMFe.IDPagamento;
-    end;
+
 
     ShowMessage('ID PAGAMENTO: ' +IntToStr(RespostaPagamentoMfe.IDPagamento));
 
@@ -988,15 +989,18 @@ begin
     ACBrIntegrador1.VerificarStatusValidador(VerificarStatusValidador);
     RespostaVerificarStatusValidador := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).VerificarStatusValidador(VerificarStatusValidador) ;
 
+
     telaDados.tblPagamento.Open;
     telaDados.tblPagamento.Insert;
-    telaDados.tblPagamentoID.Value := RespostaVerificarStatusValidador.IDFila;
-    telaDados.tblPagamentoCODAUT.Value := RespostaVerificarStatusValidador.CodigoAutorizacao;
-    telaDados.tblPagamentoINSTFIN.Value := RespostaVerificarStatusValidador.InstituicaoFinanceira;
-    telaDados.tblPagamentoDONOCARTAO.Value := RespostaVerificarStatusValidador.DonoCartao;
-    telaDados.tblPagamentoPARCELAS.Value := RespostaVerificarStatusValidador.Parcelas;
-    telaDados.tblPagamentoQTRDIG.Value := RespostaVerificarStatusValidador.UltimosQuatroDigitos;
-    telaDados.tblPagamentoCODPAG.Value := RespostaVerificarStatusValidador.CodigoPagamento;
+
+      telaDados.tblPagamentoID.Value := RespostaVerificarStatusValidador.IDFila;
+      telaDados.tblPagamentoCODAUT.Value := RespostaVerificarStatusValidador.CodigoAutorizacao;
+      telaDados.tblPagamentoINSTFIN.Value := RespostaVerificarStatusValidador.InstituicaoFinanceira;
+      telaDados.tblPagamentoDONOCARTAO.Value := RespostaVerificarStatusValidador.DonoCartao;
+      telaDados.tblPagamentoPARCELAS.Value := RespostaVerificarStatusValidador.Parcelas;
+      telaDados.tblPagamentoQTRDIG.Value := RespostaVerificarStatusValidador.UltimosQuatroDigitos;
+      telaDados.tblPagamentoCODPAG.Value := RespostaVerificarStatusValidador.CodigoPagamento;
+
     {if RespostaVerificarStatusValidador.ValorPagamento > telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
       inputbox('Valor incorreto', 'Digite o valor corretamente', FloatToStr(nv));
       if nv <> telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
@@ -1007,11 +1011,13 @@ begin
       end;
       RespostaVerificarStatusValidador.ValorPagamento := nv;
     end else}
-    if RespostaVerificarStatusValidador.InstituicaoFinanceira = '' then begin
-      ShowMessage('Pagamento cancelado');
-      Spos := false;
-      telaDados.tblPagamento.Cancel;
-      cadastraPagamento;
+    if (RespostaVerificarStatusValidador.InstituicaoFinanceira = '') then begin
+      if telaDados.tblPagamentoINSTFIN.Value = '' then begin
+        ShowMessage('Pagamento cancelado');
+        Spos := false;
+        telaDados.tblPagamento.Cancel;
+        cadastraPagamento;
+    end;
     end;
 
 
@@ -1026,10 +1032,9 @@ begin
           vMP := nv;
         end;
       end;
-     end;
-
     telaDados.tblPagamentoVRPAG.Value := RespostaVerificarStatusValidador.ValorPagamento;
-
+    end;
+    
     ShowMessage(IntToStr(RespostaVerificarStatusValidador.IDFila));
     ShowMessage('Codigo autorizacao: ' + RespostaVerificarStatusValidador.CodigoAutorizacao);
     ShowMessage('Instituicao: ' +RespostaVerificarStatusValidador.InstituicaoFinanceira);
@@ -1040,8 +1045,10 @@ begin
     ShowMessage('Valor Pagamento: ' + FloatToStr(RespostaVerificarStatusValidador.ValorPagamento));
     end;
 
+
   finally
     VerificarStatusValidador.Free;
+
   end;
   telaDados.tblEmitente.Close;
   telaDados.tblPedidos.Close;
@@ -1095,7 +1102,6 @@ begin
 end;
 
 procedure TtelaConfigSat.cadastraPagamento;
-var nv : double;
 begin
     telaDados.tblPagamento.Open;
     telaDados.tblPagamento.Insert;
@@ -1107,6 +1113,15 @@ begin
     telaDados.tblPagamentoQTRDIG.AsString := inputbox('Quatro dígitos', 'Digite os últimos quatro dígitos do cartão', '');
     telaDados.tblPagamentoCODPAG.Value := IntToStr(RANDOM(99999));
     telaDados.tblPagamentoVRPAG.Value := telaLancPedidos.Ddin;
+
+    telaConfigSat.EnviaPagamentoOff;
+
+end;
+
+procedure TtelaConfigSat.EnviaPagamentoOff;
+var nv : double;
+begin
+
     if telaDados.tblPagamentoVRPAG.Value < telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
       nv := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat - telaDados.tblPagamentoVRPAG.Value;
       if MessageBox(Handle,pansichar('Valor Pago está diferente do valor total da nota, deseja completar o valor da nota com pagamento em dinheiro? Faltando: R$ ' + FloatToStr(nv)), 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin

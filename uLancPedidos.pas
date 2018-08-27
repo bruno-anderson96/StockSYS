@@ -145,6 +145,7 @@ type
   public
     Ddin : Double;
     procedure calculaPedido();
+    procedure IncluirItem();
     { Public declarations }
 
 
@@ -339,8 +340,8 @@ end;
 procedure TtelaLancPedidos.FormShow(Sender: TObject);
 begin
   telaDados.FormataCampos;
-  telaDados.tblPedidos.Open;
-  telaDados.tblPedidosItens.Open;
+  telaDados.tblPedidos.Close;
+  telaDados.tblPedidosItens.Close;
 
 end;
 
@@ -408,10 +409,16 @@ begin
       if gpBandeira.Visible = true then gpBandeira.Visible := false;  //Correção de bugx
     cbPagamento.SetFocus;
   end else begin
-    if cbPagamento.ItemIndex = 0 then begin
+    if (cbPagamento.ItemIndex = 0) or (cbPagamento.ItemIndex = 3) then begin
       if StrToFloat(edtTrc.Text) < 0 then begin
         edtDin.SetFocus;
         ShowMessage('Valor pago deve ser maior ou igual ao valor total da compra');
+        abort;
+      end;
+    end else begin
+      if StrToFloat(edtDin.Text) <= 0 then begin
+        edtDin.SetFocus;
+        ShowMessage('Campo valor não pode estar zerado!');
         abort;
       end;
     end;
@@ -550,6 +557,8 @@ begin
   {telaConfigSat.PrepararImpressao;
   telaConfigSat.gerarVenda;
   telaConfigSat.ACBrSAT1.ImprimirExtrato;}
+  telaDados.tblPedidos.Close;
+  telaDados.tblPedidosItens.Close;
 
   end;
   end;
@@ -561,6 +570,9 @@ var
 id: Integer;
 d,a,od : Double;
 begin
+  telaDados.tblPedidos.Open;
+  telaDados.tblPedidosItens.Open;
+
   label10.Caption := 'Tecle F7 Para incluir um item';
 
   d  := 0.00;
@@ -661,6 +673,9 @@ begin
   Confirmar.Enabled := false;
   Cancelar.Enabled := false;
 
+  telaDados.tblPedidos.Close;
+  telaDados.tblPedidosItens.Close;
+
   telaDados.cdsTempItens.EmptyDataSet;
   label10.Caption := 'Tecle F2 para Abrir Cupom';
 
@@ -751,6 +766,13 @@ end;
 procedure TtelaLancPedidos.edtItemKeyPress(Sender: TObject; var Key: Char);
 begin
   if key =#13 then begin
+    IncluirItem;
+  end;
+end;
+
+procedure TtelaLancPedidos.IncluirItem;
+begin
+
     if edtItem.Text <> '' then begin
       if edtItem.Text = 'Q' then begin
         edtQt.Visible := true;
@@ -791,7 +813,6 @@ begin
         edtItem.SetFocus;
        end;
     end;
-  end;
 end;
 
 

@@ -21,6 +21,7 @@ type
     procedure btnCadProdClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure editBuscaKeyPress(Sender: TObject; var Key: Char);
+    procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
 
   private
     { Private declarations }
@@ -91,8 +92,6 @@ begin
           end;
       telaPesItens.Close;
 
-
-
 end;
 
 
@@ -111,6 +110,33 @@ end;
 procedure TtelaPesItens.editBuscaKeyPress(Sender: TObject; var Key: Char);
 begin
   if key =#13 then btnPesquisa.Click;
+end;
+
+procedure TtelaPesItens.DBGrid1KeyPress(Sender: TObject; var Key: Char);
+var cod : integer;
+begin
+
+   if key =#13 then begin
+
+      cod := DBGrid1.Columns.Items[0].Field.AsInteger;
+
+      telaDados.qryProdutos.Close;
+      telaDados.qryProdutos.SQL.Clear;
+      telaDados.qryProdutos.SQL.Add('Select * from produtos where id = ');
+      telaDados.qryProdutos.SQL.Add(IntToStr(cod));
+      telaDados.qryProdutos.Open;
+
+      telaLancItens.Refresh;
+          if tipo = 0 then begin
+            telaLancPedidos.edtItem.Text := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+            telaLancPedidos.edtItem.SetFocus;
+            telaLancPedidos.IncluirItem;
+          end else begin
+            telaLancCompras.edtItem.Text := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+            telaLancCompras.edtItem.SetFocus;
+          end;
+      telaPesItens.Close;
+   end;
 end;
 
 end.

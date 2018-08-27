@@ -1,6 +1,6 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 34
-  Top = 252
+  Left = 55
+  Top = 155
   Align = alClient
   BorderStyle = bsDialog
   Caption = 'Lan'#231'amento de Pedidos'
@@ -39,14 +39,14 @@ object telaLancPedidos: TtelaLancPedidos
         ParentColor = False
         TabOrder = 0
         object Label10: TLabel
-          Left = 552
-          Top = 621
-          Width = 255
-          Height = 24
+          Left = 541
+          Top = 607
+          Width = 415
+          Height = 37
           Caption = 'Tecle F2 para Abrir Cupom'
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clYellow
-          Font.Height = -19
+          Font.Color = clBlue
+          Font.Height = -32
           Font.Name = 'MS Sans Serif'
           Font.Style = [fsBold]
           ParentFont = False
@@ -2610,9 +2610,9 @@ object telaLancPedidos: TtelaLancPedidos
         end
         object DBGrid1: TDBGrid
           Left = 88
-          Top = 168
+          Top = 166
           Width = 897
-          Height = 441
+          Height = 439
           Color = clWhite
           DataSource = telaDados.dsTempItens
           FixedColor = clWhite

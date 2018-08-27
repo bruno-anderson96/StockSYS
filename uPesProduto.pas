@@ -33,7 +33,7 @@ var
 
 implementation
 
-uses uCadProdutos, uLancItens;
+uses uCadProdutos, uLancItens, DB;
 
 {$R *.dfm}
 
@@ -77,21 +77,24 @@ procedure TtelaPesProduto.DBGrid1DblClick(Sender: TObject);
 var num : integer;
 begin
 
-    
+
  num := DBGrid1.Columns.Items[0].Field.AsInteger;
 
 
   telaDados.tblProdutos.Locate('ID', num , []);
 
-  telaDados.GeraBarrasEAN13(telaCadProdutos.editEan.Text, telaCadProdutos.Image1.Canvas);
+  if Length(telaDados.tblProdutosEAN13.Value) >12  then begin
+    telaDados.GeraBarrasEAN13(telaCadProdutos.editEan.Text, telaCadProdutos.Image1.Canvas);
+   end;
 
    if telaDados.tblProdutosID_TRIB.Value >= 0 then begin
     telaDados.qryTributos.Close;
     telaDados.qryTributos.SQL.Clear;
     telaDados.qryTributos.SQL.Add('Select * from TRIBUTO where id = ');
-    telaDados.qryTributos.SQL.Add(telaDados.tblProdutosID_CSOSN.AsString);
+    telaDados.qryTributos.SQL.Add(telaDados.tblProdutosID_TRIB.AsString);
     telaDados.qryTributos.Open;
-    telaCadProdutos.cbTrib.ItemIndex := telaDados.qryTributos.FieldByName('ID').Value - 1;
+    telaCadProdutos.cbTrib.ItemIndex := telaDados.qryTributos.FieldByName('ID').AsInteger ;
+
    end else begin
     telaCadProdutos.cbTrib.ItemIndex := -1;
    end;
@@ -102,7 +105,7 @@ begin
     telaDados.qryCsosn.SQL.Add('Select * from CSOSN where id = ');
     telaDados.qryCsosn.SQL.Add(telaDados.tblProdutosID_CSOSN.AsString);
     telaDados.qryCsosn.Open;
-    telaCadProdutos.cbCsosn.ItemIndex := telaDados.qryCsosn.FieldByName('ID').Value - 1;
+    telaCadProdutos.cbCsosn.ItemIndex := telaDados.qryCsosn.FieldByName('ID').Value ;
    end else begin
     telaCadProdutos.cbCsosn.ItemIndex := -1;
    end;
@@ -113,7 +116,7 @@ begin
     telaDados.qryCst.SQL.Add('Select * from CST where id =');
     telaDados.qryCst.SQL.Add(telaDados.tblProdutosID_CST.AsString);
     telaDados.qryCst.Open;
-    telaCadProdutos.cbCst.ItemIndex := telaDados.qryCst.FieldByName('ID').Value - 1;
+    telaCadProdutos.cbCst.ItemIndex := telaDados.qryCst.FieldByName('ID').Value ;
    end else begin
     telaCadProdutos.cbCst.ItemIndex := -1;
    end;
@@ -124,7 +127,7 @@ begin
     telaDados.qryOrigem.SQL.Add('Select * from ORIGEM where id =');
     telaDados.qryOrigem.SQL.Add(telaDados.tblProdutosID_ORIGEM.AsString);
     telaDados.qryOrigem.Open;
-    telaCadProdutos.cbOrigem.ItemIndex := telaDados.qryOrigem.FieldByName('ID').Value - 1;
+    telaCadProdutos.cbOrigem.ItemIndex := telaDados.qryOrigem.FieldByName('ID').AsInteger;
    end else begin
     telaCadProdutos.cbOrigem.ItemIndex := -1;
    end;
