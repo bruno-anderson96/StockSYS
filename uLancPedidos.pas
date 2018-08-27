@@ -732,7 +732,9 @@ end;
 
 procedure TtelaLancPedidos.edtDinExit(Sender: TObject);
 begin
-  calculaTroco;
+  if edtDin.Text <>'' then begin
+    calculaTroco;
+  end;
 end;
 
 procedure TtelaLancPedidos.edtCarExit(Sender: TObject);
@@ -971,7 +973,7 @@ begin
   edtDin.Text := telaDados.Mascara(edtDin.Text);
   edtDin.SelStart := Length(edtDin.Text);
   calculaTroco;
-  if edtDin.Text <> '0,00' then begin
+  if (edtDin.Text <> '0,00') and (edtDin.Text <>'') then begin
     Ddin := StrToFloat(edtDin.Text);
   end;
 end;

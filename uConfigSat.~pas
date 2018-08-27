@@ -403,9 +403,13 @@ begin
       try
         //telaDados.qryPedidos.Last;
         EnviaPagamento;
+if MessageBox(Handle, 'Deseja digita dados manualmente?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
+cadastraPagamento;
+end else begin
         if Spos then begin
           VerificaStatusValidador;
         end;
+end;
       except
         ShowMessage('Erro na venda');
         cancelaVenda;
@@ -1102,6 +1106,7 @@ begin
 end;
 
 procedure TtelaConfigSat.cadastraPagamento;
+var nv : double;
 begin
     telaDados.tblPagamento.Open;
     telaDados.tblPagamento.Insert;
@@ -1114,14 +1119,6 @@ begin
     telaDados.tblPagamentoCODPAG.Value := IntToStr(RANDOM(99999));
     telaDados.tblPagamentoVRPAG.Value := telaLancPedidos.Ddin;
 
-    telaConfigSat.EnviaPagamentoOff;
-
-end;
-
-procedure TtelaConfigSat.EnviaPagamentoOff;
-var nv : double;
-begin
-
     if telaDados.tblPagamentoVRPAG.Value < telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
       nv := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat - telaDados.tblPagamentoVRPAG.Value;
       if MessageBox(Handle,pansichar('Valor Pago está diferente do valor total da nota, deseja completar o valor da nota com pagamento em dinheiro? Faltando: R$ ' + FloatToStr(nv)), 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
@@ -1132,6 +1129,15 @@ begin
         end;
       end;
     end;
+
+    Spos := true;
+
+end;
+
+procedure TtelaConfigSat.EnviaPagamentoOff;
+begin
+
+
 
     telaDados.tblPagamento.Post;
     telaDados.tblPagamento.Close;
