@@ -732,7 +732,9 @@ end;
 
 procedure TtelaLancPedidos.edtDinExit(Sender: TObject);
 begin
-  calculaTroco;
+  if edtDin.Text <>'' then begin
+    calculaTroco;
+  end;
 end;
 
 procedure TtelaLancPedidos.edtCarExit(Sender: TObject);

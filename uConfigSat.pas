@@ -403,13 +403,13 @@ begin
       try
         //telaDados.qryPedidos.Last;
         EnviaPagamento;
-if MessageBox(Handle, 'Deseja digita dados manualmente?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
-cadastraPagamento;
-end else begin
+        if MessageBox(Handle, 'Deseja digita dados manualmente?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
+          cadastraPagamento;
+        end else begin
         if Spos then begin
           VerificaStatusValidador;
         end;
-end;
+        end;
       except
         ShowMessage('Erro na venda');
         cancelaVenda;
@@ -938,6 +938,8 @@ begin
       telaDados.tblPedidos.ApplyUpdates;
       telaDados.tblPedidos.Close;
 
+      ShowMessage('RESPOSTA DO IDPAGAMENTO' + IntToStr(RespostaPagamentoMFe.IDPagamento));
+
       telaGerarNfe.idPg := RespostaPagamentoMFe.IDPagamento;
 
 
@@ -1017,7 +1019,7 @@ begin
     end else}
     if (RespostaVerificarStatusValidador.InstituicaoFinanceira = '') then begin
       if telaDados.tblPagamentoINSTFIN.Value = '' then begin
-        ShowMessage('Pagamento cancelado');
+        ShowMessage('Pagamento cancelado, Lembrar de Enviar pagamento mais tarde!');
         Spos := false;
         telaDados.tblPagamento.Cancel;
         cadastraPagamento;
@@ -1072,13 +1074,15 @@ Begin
       begin
         Clear;
         ChaveAcessoValidador := edtChAv.Text;
-        IDFila := 0;
+        IDFila := telaDados.tblPagamentoID.AsInteger;
         ChaveAcesso := telaDados.tblPedidosCHAVECFE.AsString;
         telaDados.tblPagamento.Open;
         Nsu := telaDados.tblPagamentoID.AsString; {telaDados.qryPagamentos.FieldByName('ID').Value};
-        NumerodeAprovacao := '1234';
-        Bandeira := telaDados.tblPagamentoID.AsString {telaDados.qryPagamentos.FieldByName('INSTFIN').Value}; //DIGITADA PELO CAIXA
-        Adquirente := telaDados.qryClientes.FieldByName('NOME').Value;
+        NumerodeAprovacao := telaDados.tblPagamentoCODPAG.Value;
+        Bandeira := telaDados.tblPagamentoINSTFIN.AsString; {telaDados.qryPagamentos.FieldByName('INSTFIN').Value}; //DIGITADA PELO CAIXA
+        ShowMessage(telaDados.tblPagamentoINSTFIN.AsString);
+        ShowMessage(telaDados.tblPagamentoDONOCARTAO.AsString);
+        Adquirente := telaDados.tblPagamentoDONOCARTAO.AsString;
         {if Assigned(ACBrSAT1.CFe) then
           ImpressaoFiscal := '<![CDATA['+ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe+']]>';}
         NumeroDocumento := IntToStr(ACBrSAT1.CFe.ide.nCFe) {'1674068'};
