@@ -371,15 +371,15 @@ begin
           else
             Imposto.ICMS.CST := cst00;
 
-        Imposto.ICMS.pICMS := telaDados.qryProdutos.FieldByName('VAL_ICMS').AsInteger;
+        Imposto.ICMS.pICMS := telaDados.qryProdutos.FieldByName('VAL_ICMS').AsFloat;
 
         Imposto.PIS.CST := pis49;
         Imposto.PIS.vBC := TotalItem;
-        Imposto.PIS.pPIS := 0.0065;
+        Imposto.PIS.pPIS := telaDados.qryProdutos.FieldByName('PIS').AsFloat;
 
         Imposto.COFINS.CST := cof49;
         Imposto.COFINS.vBC := TotalItem;
-        Imposto.COFINS.pCOFINS := 0.0065;
+        Imposto.COFINS.pCOFINS := telaDados.qryProdutos.FieldByName('COFINS').AsFloat;
       //
       //Imposto.COFINSST.vBC := 87206.46;
       //Imposto.COFINSST.pCOFINS := 1.8457;

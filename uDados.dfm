@@ -2188,6 +2188,7 @@ object telaDados: TtelaDados
     PacketRecords = 0
     Params = <>
     AfterPost = cdsTempItensAfterPost
+    AfterDelete = cdsTempItensAfterDelete
     Left = 48
     Top = 264
     Data = {

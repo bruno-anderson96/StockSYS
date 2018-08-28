@@ -371,7 +371,7 @@ begin
           else
             Imposto.ICMS.CST := cst00;
 
-        Imposto.ICMS.pICMS := telaDados.qryProdutos.FieldByName('VAL_ICMS').AsInteger;
+        Imposto.ICMS.pICMS := telaDados.qryProdutos.FieldByName('VAL_ICMS').AsFloat;
 
         Imposto.PIS.CST := pis49;
         Imposto.PIS.vBC := TotalItem;
