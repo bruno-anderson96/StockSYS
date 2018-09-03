@@ -416,6 +416,7 @@ begin
     telaDados.tblPedidosID_CLIENTE.Value := 1;
     cbPagamento.ItemIndex := 0;
       if gpBandeira.Visible = true then gpBandeira.Visible := false;  //Correção de bugx
+      if gpPos.Visible = true then gpPos.Visible := false;
     cbPagamento.SetFocus;
   end else begin
     if (cbPagamento.ItemIndex = 0) or (cbPagamento.ItemIndex = 3) then begin
