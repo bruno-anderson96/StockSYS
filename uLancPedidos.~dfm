@@ -1,6 +1,6 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = -113
-  Top = 379
+  Left = 22
+  Top = 72
   Align = alClient
   BorderStyle = bsDialog
   Caption = 'Lan'#231'amento de Pedidos'
@@ -3067,15 +3067,15 @@ object telaLancPedidos: TtelaLancPedidos
             end
           end
           object radDoc: TRadioGroup
-            Left = 8
-            Top = 53
+            Left = 16
+            Top = 5
             Width = 186
             Height = 60
             Caption = 'Documento'
             ItemIndex = 0
             Items.Strings = (
               'Cupom Fiscal')
-            TabOrder = 1
+            TabOrder = 5
           end
           object gpValores: TGroupBox
             Left = 544
@@ -3142,12 +3142,12 @@ object telaLancPedidos: TtelaLancPedidos
             end
           end
           object gpPagamento: TGroupBox
-            Left = 200
-            Top = 53
+            Left = 16
+            Top = 69
             Width = 185
             Height = 61
             Caption = 'Tipo de Pagamento'
-            TabOrder = 2
+            TabOrder = 1
             object cbPagamento: TComboBox
               Left = 16
               Top = 24
@@ -3165,12 +3165,12 @@ object telaLancPedidos: TtelaLancPedidos
             end
           end
           object gpBandeira: TGroupBox
-            Left = 392
-            Top = 53
+            Left = 207
+            Top = 69
             Width = 147
             Height = 61
             Caption = 'Bandeira'
-            TabOrder = 3
+            TabOrder = 2
             Visible = False
             object cbBandeira: TComboBox
               Left = 8
@@ -3188,12 +3188,12 @@ object telaLancPedidos: TtelaLancPedidos
             end
           end
           object gpPos: TGroupBox
-            Left = 336
-            Top = 208
-            Width = 185
-            Height = 68
+            Left = 359
+            Top = 68
+            Width = 177
+            Height = 63
             Caption = 'POS'
-            TabOrder = 5
+            TabOrder = 3
             Visible = False
             object cbPos: TComboBox
               Left = 15
@@ -3207,7 +3207,7 @@ object telaLancPedidos: TtelaLancPedidos
         end
         object pnlEdtExc: TPanel
           Left = 432
-          Top = 360
+          Top = 376
           Width = 225
           Height = 65
           TabOrder = 14

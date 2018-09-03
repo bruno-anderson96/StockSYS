@@ -90,14 +90,14 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=C:\Users\Bruno\Documents\StockSYS - TESTES
-UnitOutputDir=C:\Users\Bruno\Documents\StockSYS - TESTES
-PackageDLLOutputDir=C:\Users\Bruno\Documents\StockSYS - TESTES
-PackageDCPOutputDir=C:\Users\Bruno\Documents\StockSYS - TESTES
-SearchPath=C:\Users\Bruno\Documents\StockSYS - TESTES
+OutputDir=C:\StockSYS2
+UnitOutputDir=C:\StockSYS2
+PackageDLLOutputDir=C:\StockSYS2
+PackageDCPOutputDir=C:\StockSYS2
+SearchPath=C:\StockSYS2
 Packages=vcl;rtl;vclx;indy;inet;xmlrtl;vclie;inetdbbde;inetdbxpress;dbrtl;dsnap;dsnapcon;vcldb;soaprtl;VclSmp;dbexpress;dbxcds;inetdb;bdertl;vcldbx;webdsnap;websnap;adortl;ibxpress;teeui;teedb;tee;dss;visualclx;visualdbclx;vclactnband;vclshlctrls;IntrawebDB_50_70;Intraweb_50_70;Rave50CLX;Rave50VCL;dclOfficeXP;ACBr_Comum;ACBr_synapse;ACBr_OpenSSL;ACBr_Diversos;ACBr_Serial;ACBr_Convenio115;ACBr_LFD;ACBr_TXTComum;ACBr_PAF;ACBr_SEF2;ACBr_PCNComum;ACBr_Sintegra;ACBr_SPED;ACBr_SPEDImportar;ACBR_DeSTDA;ACBr_Ponto;ACBr_TCP;ACBr_Boleto;ACBr_MTER;ACBr_NFe;ACBr_DFeComum;ACBr_NFCeECFVirtual;ACBr_NFeDanfeESCPOS;ACBr_CTe;ACBr_NFSe;ACBr_MDFe;ACBr_GNRE;ACBr_SAT;ACBr_SATECFVirtual;ACBr_SATExtratoESCPOS;ACBr_BlocoX;ACBr_TEFD;ACBr_SATWS;ACBr_Integrador;qrpt
 Conditionals=
-DebugSourceDirs=C:\Users\Bruno\Documents\StockSYS - TESTES
+DebugSourceDirs=C:\StockSYS2
 UsePackages=0
 [Parameters]
 RunParams=
@@ -138,26 +138,32 @@ Comments=
 C:\Program Files\FastReports\FastReport 4\LibD7\dclfrxBDE7.bpl=FastReport 4.0 BDE Components
 C:\Program Files\FastReports\FastReport 4\LibD7\dclfsBDE7.bpl=FastScript 1.9 BDE Components
 [HistoryLists\hlDebugSourcePath]
-Count=1
-Item0=C:\Users\Bruno\Documents\StockSYS - TESTES
+Count=2
+Item0=C:\StockSYS2
+Item1=C:\Users\Bruno\Documents\StockSYS - TESTES
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlSearchPath]
-Count=1
-Item0=C:\Users\Bruno\Documents\StockSYS - TESTES
+Count=2
+Item0=C:\StockSYS2
+Item1=C:\Users\Bruno\Documents\StockSYS - TESTES
 [HistoryLists\hlUnitOutputDirectory]
-Count=2
-Item0=C:\Users\Bruno\Documents\StockSYS - TESTES
-Item1=C:\Users\Bruno\Documents\StockSYS - TESTES\unit
+Count=3
+Item0=C:\StockSYS2
+Item1=C:\Users\Bruno\Documents\StockSYS - TESTES
+Item2=C:\Users\Bruno\Documents\StockSYS - TESTES\unit
 [HistoryLists\hlOutputDirectorry]
-Count=1
-Item0=C:\Users\Bruno\Documents\StockSYS - TESTES
+Count=2
+Item0=C:\StockSYS2
+Item1=C:\Users\Bruno\Documents\StockSYS - TESTES
 [HistoryLists\hlBPLOutput]
-Count=2
-Item0=C:\Users\Bruno\Documents\StockSYS - TESTES
-Item1=C:\Users\Bruno\Documents\StockSYS - TESTES\bpl
+Count=3
+Item0=C:\StockSYS2
+Item1=C:\Users\Bruno\Documents\StockSYS - TESTES
+Item2=C:\Users\Bruno\Documents\StockSYS - TESTES\bpl
 [HistoryLists\hlDCPOutput]
-Count=2
-Item0=C:\Users\Bruno\Documents\StockSYS - TESTES
-Item1=C:\Users\Bruno\Documents\StockSYS - TESTES\dcp
+Count=3
+Item0=C:\StockSYS2
+Item1=C:\Users\Bruno\Documents\StockSYS - TESTES
+Item2=C:\Users\Bruno\Documents\StockSYS - TESTES\dcp

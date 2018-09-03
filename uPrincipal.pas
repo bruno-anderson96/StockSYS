@@ -238,7 +238,9 @@ begin
   StatusBar1.Panels[2].Text := DateToStr(Date);
   StatusBar1.Panels[3].Text := TimeToStr(Time);
 
-  imgLogo.Picture.LoadFromFile(telaDados.sLogoMarca);
+  if telaDados.sLogoMarca <> '' then begin
+    imgLogo.Picture.LoadFromFile(telaDados.sLogoMarca);
+  end;
 end;
 
 procedure TtelaPrincipal.SAT1Click(Sender: TObject);

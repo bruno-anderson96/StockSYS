@@ -1,8 +1,8 @@
 object telaDados: TtelaDados
-  Left = 79
-  Top = 53
+  Left = 157
+  Top = 34
   Width = 1216
-  Height = 699
+  Height = 693
   Caption = 'Data m'#243'dulo'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -729,7 +729,7 @@ object telaDados: TtelaDados
   end
   object dbProdutos: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey'
@@ -1477,7 +1477,7 @@ object telaDados: TtelaDados
   end
   object dbClientes: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -1491,7 +1491,7 @@ object telaDados: TtelaDados
   end
   object dbPedidos: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -1692,7 +1692,7 @@ object telaDados: TtelaDados
   end
   object dbPedidosItens: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -1778,7 +1778,7 @@ object telaDados: TtelaDados
   end
   object dbUnidade: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey'
@@ -1844,7 +1844,6 @@ object telaDados: TtelaDados
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_UNIDADE_ID'
     GeneratorField.ApplyEvent = gamOnPost
-    Active = True
     DataSource = dsUnidade
     Left = 312
     Top = 264
@@ -1859,7 +1858,6 @@ object telaDados: TtelaDados
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_CLIENTE_ID'
     GeneratorField.ApplyEvent = gamOnPost
-    Active = True
     DataSource = dsClientes
     Left = 320
     Top = 120
@@ -1874,7 +1872,6 @@ object telaDados: TtelaDados
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_PRODUTOS_ID'
     GeneratorField.ApplyEvent = gamOnPost
-    Active = True
     DataSource = dsProdutos
     Left = 144
     Top = 120
@@ -1889,7 +1886,6 @@ object telaDados: TtelaDados
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_PEDIDO_ITENS_ID'
     GeneratorField.ApplyEvent = gamOnPost
-    Active = True
     DataSource = dsPedidosItens
     Left = 144
     Top = 264
@@ -1901,7 +1897,7 @@ object telaDados: TtelaDados
   end
   object dbTributos: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -2107,7 +2103,7 @@ object telaDados: TtelaDados
   end
   object dbEmitente: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -2153,7 +2149,6 @@ object telaDados: TtelaDados
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_EMITENTE_ID'
     GeneratorField.ApplyEvent = gamOnPost
-    Active = True
     DataSource = dsEmitente
     Left = 144
     Top = 448
@@ -2168,7 +2163,6 @@ object telaDados: TtelaDados
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_PEDIDO_ID'
     GeneratorField.ApplyEvent = gamOnPost
-    Active = True
     DataSource = dsPedidos
     Left = 488
     Top = 120
@@ -2188,7 +2182,6 @@ object telaDados: TtelaDados
     PacketRecords = 0
     Params = <>
     AfterPost = cdsTempItensAfterPost
-    AfterDelete = cdsTempItensAfterDelete
     Left = 48
     Top = 264
     Data = {
@@ -2304,7 +2297,7 @@ object telaDados: TtelaDados
   end
   object dbNCM: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -2441,7 +2434,7 @@ object telaDados: TtelaDados
   end
   object dbConta: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -2863,7 +2856,7 @@ object telaDados: TtelaDados
   end
   object dbCompras: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -2884,7 +2877,6 @@ object telaDados: TtelaDados
       'select * from COMPRA')
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_COMPRA_ID'
-    Active = True
     DataSource = dsCompras
     Left = 672
     Top = 120
@@ -3062,7 +3054,7 @@ object telaDados: TtelaDados
   end
   object dbCompraItens: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -3090,7 +3082,6 @@ object telaDados: TtelaDados
       'select * from COMPRA_ITENS')
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_COMPRA_ITENS_ID'
-    Active = True
     DataSource = dsCompraItens
     Left = 672
     Top = 264
@@ -3266,7 +3257,7 @@ object telaDados: TtelaDados
   end
   object dbFornecedores: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -3294,7 +3285,6 @@ object telaDados: TtelaDados
       'select * from FORNECEDOR')
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_FORNECEDOR_ID'
-    Active = True
     DataSource = dsFornecedores
     Left = 672
     Top = 456
@@ -3544,7 +3534,7 @@ object telaDados: TtelaDados
   end
   object dbLogin: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -3572,7 +3562,6 @@ object telaDados: TtelaDados
       'select * from LOGIN')
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_LOGIN_ID'
-    Active = True
     DataSource = dsLogin
     Left = 832
     Top = 120
@@ -3649,7 +3638,7 @@ object telaDados: TtelaDados
   end
   object dbCsosn: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -3718,7 +3707,7 @@ object telaDados: TtelaDados
   end
   object dbCst: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -3768,7 +3757,7 @@ object telaDados: TtelaDados
   end
   object dbEstados: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -3838,6 +3827,7 @@ object telaDados: TtelaDados
     Top = 192
   end
   object dsCidades: TDataSource
+    DataSet = tblCidades
     Left = 952
     Top = 376
   end
@@ -3947,11 +3937,31 @@ object telaDados: TtelaDados
       Size = 30
     end
   end
-  object tblPagamentos: TIBTable
-    Database = dbPagamentos
+  object tblCidades: TIBTable
+    Database = dbCidades
     Transaction = trnscCidades
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_ESTADO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CIDADE'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'IBGE_CIDADE'
+        DataType = ftInteger
+      end>
     IndexDefs = <
       item
         Name = 'PK_CIDADES_1'
@@ -3959,21 +3969,21 @@ object telaDados: TtelaDados
         Options = [ixUnique]
       end>
     StoreDefs = True
-    TableName = 'PAGAMENTOS'
+    TableName = 'CIDADES'
     Left = 952
     Top = 416
-    object tblPagamentosID: TIntegerField
+    object tblCidadesID: TIntegerField
       FieldName = 'ID'
       Required = True
     end
-    object tblPagamentosID_ESTADO: TIntegerField
+    object tblCidadesID_ESTADO: TIntegerField
       FieldName = 'ID_ESTADO'
     end
-    object tblPagamentosCIDADE: TIBStringField
+    object tblCidadesCIDADE: TIBStringField
       FieldName = 'CIDADE'
       Size = 60
     end
-    object tblPagamentosIBGE_CIDADE: TIntegerField
+    object tblCidadesIBGE_CIDADE: TIntegerField
       FieldName = 'IBGE_CIDADE'
     end
   end
@@ -4015,11 +4025,12 @@ object telaDados: TtelaDados
   end
   object dbCidades: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
     LoginPrompt = False
+    DefaultTransaction = trnscCidades
     IdleTimer = 0
     SQLDialect = 3
     TraceFlags = []
@@ -4028,7 +4039,7 @@ object telaDados: TtelaDados
   end
   object dbRuas: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4041,7 +4052,7 @@ object telaDados: TtelaDados
   end
   object dbBairros: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4152,7 +4163,7 @@ object telaDados: TtelaDados
   end
   object dbEstoque: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4212,6 +4223,7 @@ object telaDados: TtelaDados
   object qryPagamentos: TIBQuery
     Database = dbPagamentos
     Transaction = trnscPagamento
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsPagamentos
@@ -4222,7 +4234,7 @@ object telaDados: TtelaDados
   end
   object dbPagamentos: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4530,7 +4542,7 @@ object telaDados: TtelaDados
   end
   object dbContador: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4672,7 +4684,7 @@ object telaDados: TtelaDados
   end
   object dbOrigem: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'password=masterkey'
       'user_name=SYSDBA')
@@ -4786,7 +4798,7 @@ object telaDados: TtelaDados
   end
   object dbIbpt: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4861,7 +4873,7 @@ object telaDados: TtelaDados
   end
   object dbPos: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4890,7 +4902,6 @@ object telaDados: TtelaDados
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_POS_ID'
     GeneratorField.ApplyEvent = gamOnPost
-    Active = True
     DataSource = dsPos
     Left = 664
     Top = 624
@@ -4953,7 +4964,6 @@ object telaDados: TtelaDados
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_TRIBUTO_ID'
     GeneratorField.ApplyEvent = gamOnPost
-    Active = True
     DataSource = dsTributos
     Left = 488
     Top = 264

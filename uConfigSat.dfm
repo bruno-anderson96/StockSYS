@@ -713,33 +713,17 @@ object telaConfigSat: TtelaConfigSat
         end
         object edtSwHCNPJ: TEdit
           Left = 65
-          Top = 16
+          Top = 13
           Width = 239
           Height = 21
           TabOrder = 0
-        end
-        object ie: TEdit
-          Left = 96
-          Top = 240
-          Width = 121
-          Height = 21
-          TabOrder = 1
-          Text = 'ie'
-        end
-        object cnpjemit: TEdit
-          Left = 96
-          Top = 272
-          Width = 121
-          Height = 21
-          TabOrder = 2
-          Text = 'cnpjemit'
         end
         object edtSwHAss: TMemo
           Left = 23
           Top = 72
           Width = 281
-          Height = 129
-          TabOrder = 3
+          Height = 217
+          TabOrder = 1
         end
       end
       object TabSheet3: TTabSheet
@@ -1120,7 +1104,7 @@ object telaConfigSat: TtelaConfigSat
   object ACBrSAT1: TACBrSAT
     Integrador = ACBrIntegrador1
     Extrato = ACBrSATExtratoFortes1
-    NomeDLL = 'C:\Users\Bruno\Documents\StockSYS\mfe.dll'
+    NomeDLL = 'C:\StockSYS2\mfe.dll'
     ValidarNumeroSessaoResposta = True
     NumeroTentativasValidarSessao = 2
     Config.infCFe_versaoDadosEnt = 0.070000000000000010

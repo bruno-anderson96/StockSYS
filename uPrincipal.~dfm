@@ -1,6 +1,6 @@
 object telaPrincipal: TtelaPrincipal
-  Left = 266
-  Top = 525
+  Left = 200
+  Top = 396
   Width = 1382
   Height = 744
   Align = alClient

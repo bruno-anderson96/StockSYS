@@ -521,7 +521,7 @@ begin
     telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID = ');
     telaDados.qryProdutos.SQL.Add(telaDados.cdsTempItens.FieldByName('IDPROD').AsString);
     estoque := telaDados.tblProdutosESTOQUE.AsInteger - telaDados.cdsTempItens.FieldByName('QUANT').AsInteger;
-    telaDados.qryProdutos.Open; 
+    telaDados.qryProdutos.Open;
 
     telaDados.qryProdutos.Close;
     telaDados.qryProdutos.SQL.Clear;
@@ -898,6 +898,12 @@ begin
     telaDados.cdsTempItens.CommandText := 'Delete * from c:\tabela.dat where DESC =' + prod;
     telaDados.cdsTempItens.Open;
     telaDados.cdsTempItens.Delete;
+    if telaDados.cdsTempItens.RecordCount < 1 then begin
+      telaDados.tblPedidosVALOR.Value := 0;
+    end else begin
+    telaDados.tblPedidosVALOR.Value := telaDados.cdsTempItens.Aggregates.Items[0].Value;
+    telaLancPedidos.calculaPedido;
+    end;
   end;
 end;
 
@@ -965,7 +971,8 @@ procedure TtelaLancPedidos.cbPagamentoChange(Sender: TObject);
 begin
   If (cbPagamento.ItemIndex = 1) or (cbPagamento.ItemIndex = 2) then begin
     gpBandeira.Visible := true;
-    {gpPos.Visible := true;
+    gpPos.Visible := true;
+    if cbPos.Items.Count < 1 then begin
      with telaDados.tblPos do
      begin
       First;
@@ -974,10 +981,12 @@ begin
       cbPos.Items.Add(telaDados.tblPos.FieldByName('DESCRICAO').AsString);
       Next;
      end;
-  end; }
+    end;
+  end;
+  cbPos.ItemIndex := 0;
   end else begin
     gpBandeira.Visible := false;
-    {gpPos.Visible := false; }
+    gpPos.Visible := false; 
   end;
 end;
 

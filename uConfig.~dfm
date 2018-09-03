@@ -887,6 +887,7 @@ object telaConfig: TtelaConfig
         Top = 56
         Width = 134
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'TIPOTRIB'
         DataSource = telaDados.dsTributos
         Enabled = False

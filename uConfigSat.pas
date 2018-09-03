@@ -66,8 +66,6 @@ type
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
-    ie: TEdit;
-    cnpjemit: TEdit;
     edtSwHAss: TMemo;
     SpeedButton10: TSpeedButton;
     TabSheet4: TTabSheet;
@@ -189,8 +187,9 @@ end;
 procedure TtelaConfigSat.SpeedButton6Click(Sender: TObject);
 begin
   AjustarCfe;
+  ACBrSAT1.Inicializar;
   //Memo1.Text := ACBrSAT1.ConsultarSAT;
-  Memo1.Text := IntToStr(ACBrSAT1.numeroSessao);
+  Memo1.Text := ACBrSAT1.ConsultarSAT;
   //ACBrSAT1.ConsultarNumeroSessao( ACBrSAT1.numeroSessao );
 end;
 
@@ -475,7 +474,7 @@ begin
     cancelaVenda;
     Abort;
   end;
-
+      //ShowMessage('Ncfe: ' + intToStr(telaConfigSat.ACBrSAT1.CFe.ide.nCFe));
 
   if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex =2) then begin
     if Spos then begin
@@ -622,6 +621,7 @@ begin
   AjustarCfe;
   PrepararImpressao;
   ACBrSAT1.ImprimirExtrato;
+
    {
   tini := now;
   Memo1.Lines.Add(ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe);
@@ -902,22 +902,32 @@ var
   RespostaPagamentoMFe : TRespostaPagamento;
   nv : Double;
   idR : integer;
-begin               
+begin
   telaDados.tblEmitente.Open;
   telaDados.tblEmitente.Last;
   telaDados.tblPedidos.ApplyUpdates;
   telaDados.tblPedidos.Close;
+
+  telaDados.qryPos.Close;
+  telaDados.qryPos.SQL.Clear;
+  telaDados.qryPos.SQL.Add('select * from POS where ID = ');
+  telaDados.qryPos.SQL.Add(IntToStr(telaLancPedidos.cbPos.ItemIndex + 1));
+  telaDados.qryPos.Open;
+
+
   PagamentoMFe := TEnviarPagamento.Create;
   try
     with PagamentoMFe do
     begin
+      ShowMessage(telaConfigEmit.edtCnpj.Text);
       Clear;
       ValorTotalVenda := telaLancPedidos.Ddin {telaDados.qryPedidos.FieldByName('VALOR_TOTAL').Value};
       ChaveAcessoValidador := edtChAv.Text;
       ChaveRequisicao := edtChReq.Text;
       Estabelecimento := '1';
-      SerialPOS := InputBox('SerialPOS','Informe o Serial do POS','ACBr-'+RandomName(8)); //Serial da maquineta
-      CNPJ := telaDados.tblEmitenteCNPJ.Text;
+      SerialPOS:= telaDados.qryPos.FieldByName('SERIAL').AsString;
+      //SerialPOS := InputBox('SerialPOS','Informe o Serial do POS','ACBr-'+RandomName(8)); //Serial da maquineta
+      CNPJ := telaConfigEmit.edtCnpj.Text;
       IcmsBase := 0.18;
 
       HabilitarMultiplosPagamentos := True; //FALSE?
@@ -928,8 +938,8 @@ begin
     end;
     {ACBrIntegrador1.EnviarPagamento(PagamentoMFe);}
     RespostaPagamentoMFe := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).EnviarPagamento(PagamentoMFe);
+    ShowMessage('CNPJ DA VENDA!!! : ' + PagamentoMFe.CNPJ);
     {Memo1.Lines.Text := RespostaPagamentoMFe.StatusPagamento + ' ' + RespostaPagamentoMFe.IntegradorResposta.Codigo;}
-
       telaDados.tblPedidos.Open;
       telaDados.tblPedidos.Last;
       telaDados.tblPedidos.Edit;
@@ -1077,16 +1087,15 @@ Begin
         IDFila := telaDados.tblPagamentoID.AsInteger;
         ChaveAcesso := telaDados.tblPedidosCHAVECFE.AsString;
         telaDados.tblPagamento.Open;
-        Nsu := telaDados.tblPagamentoID.AsString; {telaDados.qryPagamentos.FieldByName('ID').Value};
-        NumerodeAprovacao := telaDados.tblPagamentoCODPAG.Value;
-        Bandeira := telaDados.tblPagamentoINSTFIN.AsString; {telaDados.qryPagamentos.FieldByName('INSTFIN').Value}; //DIGITADA PELO CAIXA
-        ShowMessage(telaDados.tblPagamentoINSTFIN.AsString);
-        ShowMessage(telaDados.tblPagamentoDONOCARTAO.AsString);
-        Adquirente := telaDados.tblPagamentoDONOCARTAO.AsString;
+        Nsu := telaDados.tblPagamentoCODPAG.AsString; {telaDados.qryPagamentos.FieldByName('ID').Value};
+        NumerodeAprovacao := telaDados.tblPagamentoCODAUT.Value;
+        ImpressaoFiscal := IntToStr(ACBrSAT1.CFe.ide.nCFe);
+        Bandeira := telaLancPedidos.cbBandeira.Text; {telaDados.qryPagamentos.FieldByName('INSTFIN').Value}; //DIGITADA PELO CAIXA
+        Adquirente := telaDados.tblPagamentoINSTFIN.AsString;
         {if Assigned(ACBrSAT1.CFe) then
           ImpressaoFiscal := '<![CDATA['+ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe+']]>';}
         NumeroDocumento := IntToStr(ACBrSAT1.CFe.ide.nCFe) {'1674068'};
-        CNPJ:= telaDados.tblEmitenteCNPJ.Text;
+        CNPJ:= telaConfigEmit.edtCnpj.Text;
       end;
       RetornoRespostaFiscal := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).RespostaFiscal(RespostaFiscal);
       if not (telaDados.tblPagamento.State = dsInsert) then begin
@@ -1095,6 +1104,14 @@ Begin
         telaDados.tblPagamento.Edit;
       end;
       telaDados.tblPagamentoIDRESPFISC.Value := StrToInt(RetornoRespostaFiscal.IdRespostaFiscal);
+      ShowMessage(RespostaFiscal.Nsu);
+      ShowMessage(RespostaFiscal.NumeroDocumento);
+      ShowMessage(RespostaFiscal.NumerodeAprovacao);
+      ShowMessage(RespostaFiscal.Bandeira);
+      ShowMessage(RespostaFiscal.Adquirente);
+      ShowMessage(RespostaFiscal.CNPJ);
+      ShowMessage(RespostaFiscal.ChaveAcesso);
+      ShowMessage(RespostaFiscal.ChaveAcessoValidador);
       telaDados.tblPagamento.Post;
       telaDados.tblPagamento.Close;
       ShowMessage('IDUNICO: '+RetornoRespostaFiscal.IdRespostaFiscal);

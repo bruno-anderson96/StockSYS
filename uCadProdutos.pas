@@ -458,11 +458,6 @@ var
 i : integer;
 iu : integer;
 begin
-  telaDados.qryProdutos.Close;
-  telaDados.qryProdutos.SQL.Clear;
-  telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where EAN13 =');
-  telaDados.qryProdutos.SQL.Add(editEan.Text);
-  telaDados.qryProdutos.Open;
   if editDesc.Text = '' then begin
     ShowMessage('Preencha o nome do produto');
     editDesc.SetFocus;
@@ -471,6 +466,11 @@ begin
   if cbUnidade.Text = '' then begin
     ShowMessage('Preencha a unidade do produto');
     cbUnidade.SetFocus;
+    Abort;
+  end;
+  if (cbCst.Text = '') or (cbCsosn.Text = '') or (edtCfop.Text = '') or (cbOrigem.Text = '') or (cbTrib.Text = '')  then begin
+    ShowMessage('Preencha toda classe tributária do produto');
+    cbTrib.SetFocus;
     Abort;
   end else begin
   telaDados.qryUnidade.Close;
@@ -488,22 +488,33 @@ begin
     end;
   end;
   if editNcm.Text = '' then begin
-    ShowMessage('Código do produto inválido');
+    ShowMessage('Código NCM do produto inválido');
     editNcm.SetFocus;
     Abort;
   end;
-  if telaDados.qryProdutos.RecordCount > 1 then begin
-    ShowMessage('Código EAN13 já existente');
-    editEan.SetFocus;
-    Abort;
+  if editEan.Text <> '' then begin
+    telaDados.qryProdutos.Close;
+    telaDados.qryProdutos.SQL.Clear;
+    telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where EAN13 = ');
+    telaDados.qryProdutos.SQL.Add(editEan.Text);
+    telaDados.qryProdutos.Open;
+    if telaDados.qryProdutos.RecordCount > 1 then begin
+      ShowMessage('Código de barras já existente');
+      editEan.SetFocus;
+      Abort;
+    end;
+    end else begin
+      ShowMessage('Código de barras não pode estar zerado!');
+      editEan.SetFocus;
+      Abort;
   end;
-  if editCompra.Text = '' then begin
+  if editCompra.Text = '0,00' then begin
     ShowMessage('Preencha o preço de compra do produto');
     editCompra.SetFocus;
     Abort;
   end;
-  if editLucro.Text = '' then begin
-    ShowMessage('Preencha a margem de lucro');
+  if editVenda.Text = '0,00' then begin
+    ShowMessage('Venda deve ter um valor!');
     editLucro.SetFocus;
     Abort;
   end;

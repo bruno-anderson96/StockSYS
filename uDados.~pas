@@ -398,7 +398,7 @@ type
     dsBairros: TDataSource;
     tblBairros: TIBTable;
     tblRuas: TIBTable;
-    tblPagamentos: TIBTable;
+    tblCidades: TIBTable;
     qryRuas: TIBQuery;
     qryBairros: TIBQuery;
     qryCidades: TIBQuery;
@@ -417,10 +417,10 @@ type
     tblRuasRUA: TIBStringField;
     tblRuasCEP: TIntegerField;
     tblRuasTIPO: TIBStringField;
-    tblPagamentosID: TIntegerField;
-    tblPagamentosID_ESTADO: TIntegerField;
-    tblPagamentosCIDADE: TIBStringField;
-    tblPagamentosIBGE_CIDADE: TIntegerField;
+    tblCidadesID: TIntegerField;
+    tblCidadesID_ESTADO: TIntegerField;
+    tblCidadesCIDADE: TIBStringField;
+    tblCidadesIBGE_CIDADE: TIntegerField;
     tblBairrosID: TIntegerField;
     tblBairrosID_CIDADES: TIntegerField;
     tblBairrosBAIRROS: TIBStringField;
@@ -536,7 +536,6 @@ type
     tblProdutosID_TRIB: TIntegerField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
-    procedure cdsTempItensAfterDelete(DataSet: TDataSet);
     
   private
     { Private declarations }
@@ -1132,12 +1131,12 @@ end;
 
 procedure TtelaDados.tblEstoqueAfterPost(DataSet: TDataSet);
 begin
-  tblEstoque.Last;
   qryProdutos.Close;
   qryProdutos.SQL.Clear;
   qryProdutos.SQL.Add('Select * from PRODUTOS where ID = ');
   qryProdutos.SQL.Add(tblEstoqueID_PRODUTO.AsString);
   qryProdutos.Open;
+  telaDados.tblEstoque.Locate('ID', telaDados.qryProdutos.FieldByName('ESTOQUE').AsInteger, []);
 
   if tblEstoqueTIPO.Value = 'E' then begin
     tblProdutos.Edit;
@@ -1147,22 +1146,6 @@ begin
     tblProdutosESTOQUE.Value := tblProdutosEstoque.Value - tblEstoqueQUANTIDADE.Value;
   end;
   tblProdutos.Post;
-end;
-
-procedure TtelaDados.cdsTempItensAfterDelete(DataSet: TDataSet);
-begin
-  if telaDados.cdsTempItens.RecordCount < 1 then begin
-    telaDados.tblPedidosVALOR.Value := 0;
-  end else begin
-    if tipo = 0 then begin
-    telaDados.tblPedidosVALOR.Value := telaDados.cdsTempItens.Aggregates.Items[0].Value;
-    telaLancPedidos.calculaPedido;
-    end;
-    if tipo = 1 then begin
-     telaDados.tblComprasVALOR.Value := telaDados.cdsTempItens.Aggregates.Items[0].Value;
-     telaLancCompras.calculaPedido;
-    end;
-  end;
 end;
 
 end.
