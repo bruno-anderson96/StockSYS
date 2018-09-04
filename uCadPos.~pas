@@ -26,14 +26,18 @@ type
     actExcluir: TAction;
     actCadastrar: TAction;
     actSair: TAction;
-    SpeedButton1: TSpeedButton;
+    Label1: TLabel;
+    edtChReq: TDBEdit;
+    btnGeraChave: TSpeedButton;
     procedure actInserirExecute(Sender: TObject);
     procedure actEditarExecute(Sender: TObject);
     procedure actExcluirExecute(Sender: TObject);
     procedure actCadastrarExecute(Sender: TObject);
     procedure actSairExecute(Sender: TObject);
+    procedure btnGeraChaveClick(Sender: TObject);
   private
     { Private declarations }
+    function GuidCreate: string;
   public
     { Public declarations }
   end;
@@ -59,6 +63,8 @@ begin
 
    editDesc.Enabled := true;
    editSerial.Enabled := true;
+   edtChReq.Enabled := true;
+   btnGeraChave.Enabled := true;
    editDesc.SetFocus;
 
    btnInserir.Enabled := false;
@@ -73,12 +79,34 @@ begin
   DBGrid1.Enabled := true;
   editDesc.Enabled := true;
   editSerial.Enabled := true;
+  edtChReq.Enabled := true;
+  btnGeraChave.Enabled := true;
 end;
 
 procedure TtelaCadPos.actExcluirExecute(Sender: TObject);
 begin
   telaDados.tblPos.Delete;
 end;
+
+function TtelaCadPos.GuidCreate: string;
+var
+  ID: TGUID;
+  IDn : String;
+
+begin
+
+  Result := '';
+  if CreateGuid(ID) = S_OK then
+    IDn := GUIDToString(ID);
+
+  while Pos('{', IDn) > 0 do
+    IDn[Pos('{', IDn)] := ' ';
+  while Pos('}', IDn) > 0 do
+    IDn[Pos('}', IDn)] := ' ';
+
+  Result := Trim(IDn);
+end;
+
 
 procedure TtelaCadPos.actCadastrarExecute(Sender: TObject);
 begin
@@ -98,6 +126,8 @@ begin
   end;
      editDesc.Enabled := false;
      editSerial.Enabled := false;
+     edtChReq.Enabled := false;
+     btnGeraChave.Enabled := false;
 
      btnInserir.Enabled := true;
 
@@ -109,12 +139,18 @@ begin
 
     editDesc.Clear;
     editSerial.Clear;
+    edtChReq.Clear;
 
 end;
 
 procedure TtelaCadPos.actSairExecute(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TtelaCadPos.btnGeraChaveClick(Sender: TObject);
+begin
+  edtChReq.Text := GuidCreate;
 end;
 
 end.

@@ -71,9 +71,6 @@ type
     TabSheet4: TTabSheet;
     TabSheet5: TTabSheet;
     Enviar: TSpeedButton;
-    edtChReq: TEdit;
-    SpeedButton4: TSpeedButton;
-    Label13: TLabel;
     ACBrIBPTax1: TACBrIBPTax;
     edtChAv: TEdit;
     btnEdChAv: TSpeedButton;
@@ -113,6 +110,7 @@ type
     { Public declarations }
     num : integer;
     Spos : Boolean;
+    vCartao : Double;
     procedure GetNumeroSessao(var Chave: Integer);
     procedure EnviaPagamento;
     procedure VerificaStatusValidador;
@@ -427,7 +425,7 @@ begin
     with Pagto.Add do
       begin
         cMP := mpCartaodeCredito;
-        vMP := StrToFloat(telaLancPedidos.edtDin.Text);
+        vMP := vCartao;
         cAdmC := 999;
       end;
     end;
@@ -435,7 +433,7 @@ begin
     with Pagto.Add do
       begin
         cMP := mpCartaodeDebito;
-        vMP := StrToFloat(telaLancPedidos.edtDin.Text);
+        vMP := vCartao;
         cAdmC := 999;
       end;
     end;
@@ -658,7 +656,6 @@ begin
     {INI.WriteString('SAT','ArqLog',edLog.Text);}
     INI.WriteString('SAT','NomeDLL',edtNomeDLL.Text);
     INI.WriteString('SAT','CodigoAtivacao',edtCodAtiv.Text);
-    INI.WriteString('SAT', 'ChaveReq', edtChReq.Text);
     INI.WriteString('SAT', 'ChaveAv', edtChAv.Text);
     {INI.WriteString('SAT','CodigoUF',edtCodUF.Text);}
     INI.WriteInteger('SAT','NumeroCaixa',StrToInt(edtCaixa.Text));
@@ -750,7 +747,6 @@ begin
     {edLog.Text            := INI.ReadString('SAT','ArqLog','ACBrSAT.log');}
     edtNomeDLL.Text        := INI.ReadString('SAT','NomeDLL','C:\SAT\MFE.DLL');
     edtCodAtiv.Text        := INI.ReadString('SAT','CodigoAtivacao','123456');
-    edtChReq.Text          := INI.ReadString('SAT','ChaveReq','');
     edtChAv.Text          := INI.ReadString('SAT','ChaveAv','');
     {edtCodUF.Text          := INI.ReadString('SAT','CodigoUF','323');}
     edtCaixa.Text    := INI.ReadString('SAT','NumeroCaixa','1');
@@ -922,7 +918,7 @@ begin
       Clear;
       ValorTotalVenda := telaLancPedidos.Ddin {telaDados.qryPedidos.FieldByName('VALOR_TOTAL').Value};
       ChaveAcessoValidador := edtChAv.Text;
-      ChaveRequisicao := edtChReq.Text;
+      ChaveRequisicao := telaDados.qryPos.FieldByName('CHREQ').AsString;
       Estabelecimento := '1';
       SerialPOS:= telaDados.qryPos.FieldByName('SERIAL').AsString;
       //SerialPOS := InputBox('SerialPOS','Informe o Serial do POS','ACBr-'+RandomName(8)); //Serial da maquineta
@@ -1035,18 +1031,24 @@ begin
 
 
     if RespostaVerificarStatusValidador.ValorPagamento > 0 then begin
+    while RespostaVerificarStatusValidador.ValorPagamento > telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat do begin
+        RespostaVerificarStatusValidador.ValorPagamento := StrToFLoat(inputbox('Valor pago maior que valor da nota', 'Digite um valor igual ou menor da nota!', FloatToStr(RespostaVerificarStatusValidador.ValorPagamento)));
+        if RespostaVerificarStatusValidador.ValorPagamento = 0 then begin
+           cancelaVenda;
+        end;
+    end;
     if RespostaVerificarStatusValidador.ValorPagamento < telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
       nv := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat - RespostaVerificarStatusValidador.ValorPagamento;
       if MessageBox(Handle,pansichar('Valor Pago está diferente do valor total da nota, deseja completar o valor da nota com pagamento em dinheiro? Faltando: R$ ' + FloatToStr(nv)), 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
-        RespostaVerificarStatusValidador.ValorPagamento := StrToFloat(telaLancPedidos.edtDin.Text);
+        //RespostaVerificarStatusValidador.ValorPagamento := StrToFloat(telaLancPedidos.edtDin.Text);
         with ACBrSAT1.CFe.Pagto.Add do
         begin
           cMP := mpDinheiro;
           vMP := nv;
         end;
       end;
-    telaDados.tblPagamentoVRPAG.Value := RespostaVerificarStatusValidador.ValorPagamento;
     end;
+    telaDados.tblPagamentoVRPAG.Value := RespostaVerificarStatusValidador.ValorPagamento;
 
     {ShowMessage(IntToStr(RespostaVerificarStatusValidador.IDFila));
     ShowMessage('Codigo autorizacao: ' + RespostaVerificarStatusValidador.CodigoAutorizacao);
@@ -1057,7 +1059,7 @@ begin
     ShowMessage('codigo pagamento: ' + RespostaVerificarStatusValidador.CodigoPagamento);
     ShowMessage('Valor Pagamento: ' + FloatToStr(RespostaVerificarStatusValidador.ValorPagamento)); }
     end;
-
+    vCartao := RespostaVerificarStatusValidador.ValorPagamento;
 
   finally
     VerificarStatusValidador.Free;
@@ -1112,6 +1114,7 @@ Begin
       ShowMessage(RespostaFiscal.CNPJ);
       ShowMessage(RespostaFiscal.ChaveAcesso);
       ShowMessage(RespostaFiscal.ChaveAcessoValidador);
+      ShowMessage(RespostaFiscal.ImpressaoFiscal);
       telaDados.tblPagamento.Post;
       telaDados.tblPagamento.Close;
       ShowMessage('IDUNICO: '+RetornoRespostaFiscal.IdRespostaFiscal);
@@ -1124,7 +1127,7 @@ end;
 
 procedure TtelaConfigSat.SpeedButton4Click(Sender: TObject);
 begin
-  edtChReq.Text := GuidCreate;
+  //edtChReq.Text := GuidCreate;
 end;
 
 procedure TtelaConfigSat.cadastraPagamento;
@@ -1133,7 +1136,7 @@ begin
     telaDados.tblPagamento.Open;
     telaDados.tblPagamento.Insert;
     telaDados.tblPagamentoID.Value := telaDados.qryPedidos.FieldByName('IDPAGAMENTO').AsInteger;
-    telaDados.tblPagamentoCODAUT.Value := inputbox('Código de autorização', 'Digite o Código de autorização(3 dig.)', '');
+    telaDados.tblPagamentoCODAUT.Value := inputbox('Código de autorização', 'Digite o Código de autorização', '');
     telaDados.tblPagamentoINSTFIN.Value := inputbox('Instituição Financeira', 'Digite a Operadora do cartão', '');;
     telaDados.tblPagamentoDONOCARTAO.Value := inputbox('Dono do cartão', 'Digite o nome do proprietário do cartão', '');;
     telaDados.tblPagamentoPARCELAS.Value := 1;

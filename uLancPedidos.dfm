@@ -3165,12 +3165,12 @@ object telaLancPedidos: TtelaLancPedidos
             end
           end
           object gpBandeira: TGroupBox
-            Left = 207
+            Left = 391
             Top = 69
             Width = 147
             Height = 61
             Caption = 'Bandeira'
-            TabOrder = 2
+            TabOrder = 3
             Visible = False
             object cbBandeira: TComboBox
               Left = 8
@@ -3188,12 +3188,12 @@ object telaLancPedidos: TtelaLancPedidos
             end
           end
           object gpPos: TGroupBox
-            Left = 359
+            Left = 207
             Top = 68
             Width = 177
             Height = 63
             Caption = 'POS'
-            TabOrder = 3
+            TabOrder = 2
             Visible = False
             object cbPos: TComboBox
               Left = 15
