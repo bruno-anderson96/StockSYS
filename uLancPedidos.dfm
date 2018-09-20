@@ -3020,9 +3020,9 @@ object telaLancPedidos: TtelaLancPedidos
           object Label23: TLabel
             Left = 296
             Top = 8
-            Width = 235
+            Width = 217
             Height = 29
-            Caption = 'Finalizando Compra'
+            Caption = 'Finalizando Venda'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -24

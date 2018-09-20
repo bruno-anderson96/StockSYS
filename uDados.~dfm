@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 115
-  Top = 298
+  Left = 98
+  Top = 64
   Width = 1216
   Height = 693
   Caption = 'Data m'#243'dulo'
@@ -4836,6 +4836,11 @@ object telaDados: TtelaDados
         Name = 'SERIAL'
         DataType = ftString
         Size = 12
+      end
+      item
+        Name = 'CHREQ'
+        DataType = ftString
+        Size = 40
       end>
     IndexDefs = <
       item
@@ -4857,6 +4862,10 @@ object telaDados: TtelaDados
     object tblPosSERIAL: TIBStringField
       FieldName = 'SERIAL'
       Size = 12
+    end
+    object tblPosCHREQ: TIBStringField
+      FieldName = 'CHREQ'
+      Size = 40
     end
   end
   object qryPos: TIBQuery
@@ -4902,6 +4911,7 @@ object telaDados: TtelaDados
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_POS_ID'
     GeneratorField.ApplyEvent = gamOnPost
+    Active = True
     DataSource = dsPos
     Left = 664
     Top = 624

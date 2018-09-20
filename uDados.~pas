@@ -534,6 +534,7 @@ type
     ibdsTributos: TIBDataSet;
     tblTributosTIPOTRIB: TIBStringField;
     tblProdutosID_TRIB: TIntegerField;
+    tblPosCHREQ: TIBStringField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
     

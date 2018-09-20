@@ -37,7 +37,7 @@ object telaCadPos: TtelaCadPos
       FocusControl = editSerial
     end
     object btnSair: TSpeedButton
-      Left = 356
+      Left = 388
       Top = 8
       Width = 100
       Height = 37

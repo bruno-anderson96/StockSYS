@@ -111,6 +111,8 @@ type
     num : integer;
     Spos : Boolean;
     vCartao : Double;
+    cM : Boolean;
+    repA : integer;
     procedure GetNumeroSessao(var Chave: Integer);
     procedure EnviaPagamento;
     procedure VerificaStatusValidador;
@@ -306,7 +308,8 @@ begin
   with ACBrSAT1.CFe do
   begin
     ide.numeroCaixa := 1;
-    ide.cNF := Random(999999);
+    //ide.nCFe:= RANDOM(99999);
+  
 
     Dest.CNPJCPF := telaDados.qryClientes.FieldByName('CNPJ_CPF').AsString;
     Dest.xNome := telaDados.qryClientes.FieldByName('NOME').AsString;
@@ -388,25 +391,26 @@ begin
     end;
 
     Total.DescAcrEntr.vDescSubtot := telaDados.qryPedidos.FieldByName('DESCONTO').AsCurrency;
-    Total.vCFeLei12741 := tEstadual + tFederal + tMunicipal; //clocar aqui valor do imposto}
+    Total.vCFeLei12741 := tEstadual + tFederal + tMunicipal; //colocar aqui valor do imposto}
     {Pagto1 := RoundABNT(TotalGeral/2,-2);
     with Pagto.Add do
     begin
       cMP := mpCartaodeCredito;
       vMP := Pagto1;
     end;}
-
+     cM := false;
     if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex = 2) then begin
       try
         //telaDados.qryPedidos.Last;
         EnviaPagamento;
         if MessageBox(Handle, 'Deseja digita dados manualmente?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
           cadastraPagamento;
-        end else begin
+          cM := true;
+        end;
         if Spos then begin
           VerificaStatusValidador;
         end;
-        end;
+
       except
         ShowMessage('Erro na venda');
         cancelaVenda;
@@ -472,6 +476,7 @@ begin
     cancelaVenda;
     Abort;
   end;
+  
       //ShowMessage('Ncfe: ' + intToStr(telaConfigSat.ACBrSAT1.CFe.ide.nCFe));
 
   if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex =2) then begin
@@ -492,7 +497,7 @@ begin
   end;
   telaDados.tblPedidos.Post;
   Spos := False;
-
+  
 end;
 
 procedure TtelaConfigSat.FormCreate(Sender: TObject);
@@ -817,7 +822,7 @@ begin
     edRedeProxyPorta.Value    := INI.ReadInteger('Rede','proxy_porta',0);
     edRedeProxyUser.Text      := INI.ReadString('Rede','proxy_user','');
     edRedeProxySenha.Text     := INI.ReadString('Rede','proxy_senha','');
-                }
+                }           
     edtMFEInput.Text    :=  INI.ReadString('MFE','Input','c:\Integrador\Input\');
     edtMFEOutput.Text   :=  INI.ReadString('MFE','Output','c:\Integrador\Output\');
     edtMFETimeout.Text :=  INI.ReadString('MFE','Timeout','30');
@@ -942,9 +947,9 @@ begin
       telaDados.tblPedidos.ApplyUpdates;
       telaDados.tblPedidos.Close;
 
-      ShowMessage('RESPOSTA DO IDPAGAMENTO' + IntToStr(RespostaPagamentoMFe.IDPagamento));
+      ShowMessage('AGUARDANDO PAGAMENTO: ' + IntToStr(RespostaPagamentoMFe.IDPagamento));
 
-      telaGerarNfe.idPg := RespostaPagamentoMFe.IDPagamento;
+     // telaGerarNfe.idPg := RespostaPagamentoMFe.IDPagamento;
 
 
     Spos := true;
@@ -997,9 +1002,11 @@ begin
     ACBrIntegrador1.VerificarStatusValidador(VerificarStatusValidador);
     RespostaVerificarStatusValidador := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).VerificarStatusValidador(VerificarStatusValidador) ;
 
-
-    telaDados.tblPagamento.Open;
-    telaDados.tblPagamento.Insert;
+    If cM = false then begin
+      if not (telaDados.tblPagamento.State = dsInsert) then begin
+        telaDados.tblPagamento.Open;
+        telaDados.tblPagamento.Insert;
+      end;
 
       telaDados.tblPagamentoID.Value := RespostaVerificarStatusValidador.IDFila;
       telaDados.tblPagamentoCODAUT.Value := RespostaVerificarStatusValidador.CodigoAutorizacao;
@@ -1008,6 +1015,15 @@ begin
       telaDados.tblPagamentoPARCELAS.Value := RespostaVerificarStatusValidador.Parcelas;
       telaDados.tblPagamentoQTRDIG.Value := RespostaVerificarStatusValidador.UltimosQuatroDigitos;
       telaDados.tblPagamentoCODPAG.Value := RespostaVerificarStatusValidador.CodigoPagamento;
+     end else begin
+      RespostaVerificarStatusValidador.IDFila := telaDados.tblPagamentoID.Value;
+      RespostaVerificarStatusValidador.CodigoAutorizacao :=  telaDados.tblPagamentoCODAUT.Value;
+      RespostaVerificarStatusValidador.InstituicaoFinanceira := telaDados.tblPagamentoINSTFIN.Value;
+      RespostaVerificarStatusValidador.DonoCartao := telaDados.tblPagamentoDONOCARTAO.Value;
+      RespostaVerificarStatusValidador.Parcelas := telaDados.tblPagamentoPARCELAS.Value;
+      RespostaVerificarStatusValidador.UltimosQuatroDigitos := telaDados.tblPagamentoQTRDIG.Value;
+      RespostaVerificarStatusValidador.CodigoPagamento := telaDados.tblPagamentoCODPAG.Value;
+     end;
 
     {if RespostaVerificarStatusValidador.ValorPagamento > telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
       inputbox('Valor incorreto', 'Digite o valor corretamente', FloatToStr(nv));
@@ -1026,6 +1042,8 @@ begin
         telaDados.tblPagamento.Cancel;
         cadastraPagamento;
         EnviaPagamentoOff;
+        RespostaVerificarStatusValidador.ValorPagamento := telaDados.tblPagamentoVRPAG.Value;
+        telaDados.tblPagamento.Post;
     end;
     end;
 
@@ -1048,7 +1066,10 @@ begin
         end;
       end;
     end;
-    telaDados.tblPagamentoVRPAG.Value := RespostaVerificarStatusValidador.ValorPagamento;
+    if (telaDados.tblPagamento.State = dsInsert) or (telaDados.tblPagamento.State = dsEdit) then begin
+      telaDados.tblPagamentoVRPAG.Value := RespostaVerificarStatusValidador.ValorPagamento;
+    end;
+
 
     {ShowMessage(IntToStr(RespostaVerificarStatusValidador.IDFila));
     ShowMessage('Codigo autorizacao: ' + RespostaVerificarStatusValidador.CodigoAutorizacao);
@@ -1078,7 +1099,6 @@ Begin
   telaDados.tblEmitente.Open;
   telaDados.tblEmitente.Last;
 
-
   RespostaFiscal := TRespostaFiscal.Create;
     try
 
@@ -1093,6 +1113,7 @@ Begin
         NumerodeAprovacao := telaDados.tblPagamentoCODAUT.Value;
         ImpressaoFiscal := IntToStr(ACBrSAT1.CFe.ide.nCFe);
         Bandeira := telaLancPedidos.cbBandeira.Text; {telaDados.qryPagamentos.FieldByName('INSTFIN').Value}; //DIGITADA PELO CAIXA
+        //ShowMessage(intToStr(ACBrSAT1.CFe.ide.cNF));
         Adquirente := telaDados.tblPagamentoINSTFIN.AsString;
         {if Assigned(ACBrSAT1.CFe) then
           ImpressaoFiscal := '<![CDATA['+ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe+']]>';}
@@ -1101,12 +1122,21 @@ Begin
       end;
       RetornoRespostaFiscal := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).RespostaFiscal(RespostaFiscal);
       if not (telaDados.tblPagamento.State = dsInsert) then begin
-        telaDados.tblPagamento.Open;
-        telaDados.tblPagamento.Locate('ID', telaGerarNfe.idPg,[loCaseInsensitive]);
+        //telaDados.tblPagamento.Open;
+        //telaDados.tblPagamento.Locate('ID', telaDados.tblPedidosIDPAGAMENTO.Value,[loCaseInsensitive]);
+        //telaDados.tblPagamento.Last;
+        //ShowMessage('VALOR DO ID PG' + intToStr(telaGerarNfe.idPg));
+        //ShowMessage('PRIMEIRO LOCATE ' + telaDados.tblPagamentoID.AsString);
         telaDados.tblPagamento.Edit;
       end;
+      //ShowMessage('TA PEGANDO QUAL?: ' + telaDados.tblPagamentoDONOCARTAO.AsString);
       telaDados.tblPagamentoIDRESPFISC.Value := StrToInt(RetornoRespostaFiscal.IdRespostaFiscal);
-      ShowMessage(RespostaFiscal.Nsu);
+      repA := StrToInt(RetornoRespostaFiscal.IdRespostaFiscal);
+      telaDados.tblPagamento.Post;
+      telaDados.tblPagamento.Close;
+      {ShowMessage('TEM QUE SALVAR NO ANTIGO: ' + telaDados.tblPagamentoID.AsString);
+      ShowMessage('TEM QUE SALVAR ESSE IDUNICO: '+RetornoRespostaFiscal.IdRespostaFiscal); }
+      {ShowMessage(RespostaFiscal.Nsu);
       ShowMessage(RespostaFiscal.NumeroDocumento);
       ShowMessage(RespostaFiscal.NumerodeAprovacao);
       ShowMessage(RespostaFiscal.Bandeira);
@@ -1114,11 +1144,11 @@ Begin
       ShowMessage(RespostaFiscal.CNPJ);
       ShowMessage(RespostaFiscal.ChaveAcesso);
       ShowMessage(RespostaFiscal.ChaveAcessoValidador);
-      ShowMessage(RespostaFiscal.ImpressaoFiscal);
-      telaDados.tblPagamento.Post;
-      telaDados.tblPagamento.Close;
-      ShowMessage('IDUNICO: '+RetornoRespostaFiscal.IdRespostaFiscal);
+      ShowMessage(RespostaFiscal.ImpressaoFiscal);}
+
+
     finally
+
       RespostaFiscal.Free;
     end;
 end;
@@ -1162,10 +1192,6 @@ end;
 procedure TtelaConfigSat.EnviaPagamentoOff;
 begin
 
-
-
-    telaDados.tblPagamento.Post;
-    telaDados.tblPagamento.Close;
 
     telaDados.tblPedidos.Close;
     telaDados.tblPedidos.Open;

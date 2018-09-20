@@ -4911,6 +4911,7 @@ object telaDados: TtelaDados
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_POS_ID'
     GeneratorField.ApplyEvent = gamOnPost
+    Active = True
     DataSource = dsPos
     Left = 664
     Top = 624

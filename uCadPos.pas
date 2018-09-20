@@ -53,10 +53,9 @@ procedure TtelaCadPos.actInserirExecute(Sender: TObject);
 var
 id : integer;
 begin
+   telaDados.tblPos.Last;
 
-    telaDados.tblPos.Last;
-
-    id := telaDados.tblPosID.Value + 1;
+   id := telaDados.tblPosID.Value + 1;
 
    telaDados.tblPos.Insert;
    telaDados.tblPosID.Value := id;
@@ -67,9 +66,9 @@ begin
    btnGeraChave.Enabled := true;
    editDesc.SetFocus;
 
-   btnInserir.Enabled := false;
 
    DBGrid1.Enabled := False;
+
 end;
 
 
@@ -85,7 +84,9 @@ end;
 
 procedure TtelaCadPos.actExcluirExecute(Sender: TObject);
 begin
+
   telaDados.tblPos.Delete;
+
 end;
 
 function TtelaCadPos.GuidCreate: string;
@@ -110,7 +111,6 @@ end;
 
 procedure TtelaCadPos.actCadastrarExecute(Sender: TObject);
 begin
-
   telaDados.qryPos.Close;
   telaDados.qryPos.SQL.Clear;
   telaDados.qryPos.SQL.Add('Select * from POS where DESCRICAO = ');
@@ -140,6 +140,7 @@ begin
     editDesc.Clear;
     editSerial.Clear;
     edtChReq.Clear;
+
 
 end;
 
