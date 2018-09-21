@@ -35,7 +35,8 @@ uses
   uCadCep in 'uCadCep.pas' {telaCadCep},
   uSped in 'uSped.pas' {telaSped},
   uContador in 'uContador.pas' {telaContador},
-  uCadPos in 'uCadPos.pas' {telaCadPos};
+  uCadPos in 'uCadPos.pas' {telaCadPos},
+  uPreviewCfe in 'uPreviewCfe.pas' {telaPreviewCfe};
 
 {$R *.res}
 
@@ -52,5 +53,6 @@ begin
   Application.CreateForm(TtelaConfigEmit, telaConfigEmit);
   Application.CreateForm(TtelaSped, telaSped);
   Application.CreateForm(TtelaContador, telaContador);
+  Application.CreateForm(TtelaPreviewCfe, telaPreviewCfe);
   Application.Run;
 end.

@@ -38,7 +38,7 @@ type
     Label3: TLabel;
     edtCol: TEdit;
     edtLin: TEdit;
-    edtEsp: TEdit;
+    edtEsp: TEdit;                                                                             
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
@@ -460,9 +460,11 @@ begin
     VerificaStatusValidador;
   end; }
 
-  Memo1.Lines.Text := ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
+  //Memo1.Lines.Text :=
+  ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
   try
-  Memo1.Lines.Text := ACBrSAT1.EnviarDadosVenda;
+  //Memo1.Lines.Text :=
+  ACBrSAT1.EnviarDadosVenda;
   except
     ShowMessage('integrador offline!');
     {telaDados.tblPedidos.Close;
@@ -584,11 +586,11 @@ begin {
 end;
 
 procedure TtelaConfigSat.PrepararImpressao;
-{begin
-  if ACBrSAT1.Extrato = ACBrSATExtratoESCPOS1 then
-  begin                          }
+begin
 
-  {ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModeloPosPrinter.ItemIndex );
+  if ACBrSAT1.Extrato = ACBrSATExtratoESCPOS1 then
+  begin
+  ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModeloPosPrinter.ItemIndex );
   ACBrPosPrinter1.PaginaDeCodigo := TACBrPosPaginaCodigo( cbxPagCodigo.ItemIndex );
   ACBrPosPrinter1.Porta := btnImp.Caption;
   ACBrPosPrinter1.ColunasFonteNormal := StrToInt(edtCol.Text);
@@ -596,23 +598,29 @@ procedure TtelaConfigSat.PrepararImpressao;
   ACBrPosPrinter1.EspacoEntreLinhas := StrToInt(edtEsp.Text);
   ACBrSATExtratoESCPOS1.ImprimeQRCode := True;
   ACBrSATExtratoESCPOS1.MostrarPreview := true;
-  ACBrSATExtratoESCPOS1.ImprimeEmUmaLinha := false; }  //aqui pra impressora
+  ACBrSATExtratoESCPOS1.ImprimeEmUmaLinha := false;   //aqui pra impressora
+
+  ACBrSATExtratoFortes1.LarguraBobina    := 200;
+  ACBrSATExtratoFortes1.Margens.Topo     := 3 ;
+  ACBrSATExtratoFortes1.Margens.Fundo    := 5 ;
+  ACBrSATExtratoFortes1.Margens.Esquerda := 3 ;
+  ACBrSATExtratoFortes1.Margens.Direita  := 3 ;
+  ACBrSATExtratoFortes1.MostrarPreview   := true;
+
+
+    ACBrSATExtratoFortes1.PrinterName := lImpressora.Caption;
+
     {if cbImprimirChaveUmaLinha.Checked then
       ACBrSATExtratoESCPOS1.ImprimeChaveEmUmaLinha := rSim
     else
       ACBrSATExtratoESCPOS1.ImprimeChaveEmUmaLinha := rAuto;
-  end
-  else }
+  end;}{
+  else
   begin
-    ACBrSATExtratoFortes1.LarguraBobina    := 200;
-    ACBrSATExtratoFortes1.Margens.Topo     := 3 ;
-    ACBrSATExtratoFortes1.Margens.Fundo    := 5 ;
-    ACBrSATExtratoFortes1.Margens.Esquerda := 3 ;
-    ACBrSATExtratoFortes1.Margens.Direita  := 3 ;
-    ACBrSATExtratoFortes1.MostrarPreview   := true;
 
-
-    ACBrSATExtratoFortes1.PrinterName := lImpressora.Caption;
+    }
+  end;
+  
 
 end;
 
@@ -631,6 +639,7 @@ begin
   tfim := now;
   Memo1.Lines.Add('Inciado em: '+DateTimeToStr(tini)) ;
   Memo1.Lines.Add('Finalizado em: '+DateTimeToStr(tFim)) ;}
+
 end;
 
 procedure TtelaConfigSat.SpeedButton8Click(Sender: TObject);
@@ -1111,12 +1120,16 @@ Begin
         telaDados.tblPagamento.Open;
         Nsu := telaDados.tblPagamentoCODPAG.AsString; {telaDados.qryPagamentos.FieldByName('ID').Value};
         NumerodeAprovacao := telaDados.tblPagamentoCODAUT.Value;
-        ImpressaoFiscal := IntToStr(ACBrSAT1.CFe.ide.nCFe);
+        ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
+        //ImpressaoFiscal := IntToStr(ACBrSAT1.CFe.ide.nCFe);
         Bandeira := telaLancPedidos.cbBandeira.Text; {telaDados.qryPagamentos.FieldByName('INSTFIN').Value}; //DIGITADA PELO CAIXA
-        //ShowMessage(intToStr(ACBrSAT1.CFe.ide.cNF));
+        ShowMessage(intToStr(ACBrSAT1.CFe.ide.cNF));
         Adquirente := telaDados.tblPagamentoINSTFIN.AsString;
-        {if Assigned(ACBrSAT1.CFe) then
-          ImpressaoFiscal := '<![CDATA['+ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe+']]>';}
+        if Assigned(ACBrSAT1.CFe) then begin
+          ImpressaoFiscal := '<![CDATA['+ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe+']]>';
+        end;
+        ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1; //Ver cupom na tela ter impressao fiscal
+        Memo1.Text := ImpressaoFiscal;
         NumeroDocumento := IntToStr(ACBrSAT1.CFe.ide.nCFe) {'1674068'};
         CNPJ:= telaDados.tblEmitenteCNPJ.AsString;
       end;
