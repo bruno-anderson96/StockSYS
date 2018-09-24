@@ -596,7 +596,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 15
           Width = 145
           Height = 21
-          ItemHeight = 13
+          ItemHeight = 0
           TabOrder = 0
         end
         object cbxPagCodigo: TComboBox
@@ -604,7 +604,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 78
           Width = 145
           Height = 21
-          ItemHeight = 13
+          ItemHeight = 0
           TabOrder = 1
         end
         object cbxModeloPosPrinter: TComboBox
@@ -612,7 +612,7 @@ object telaConfigSat: TtelaConfigSat
           Top = 46
           Width = 145
           Height = 21
-          ItemHeight = 13
+          ItemHeight = 0
           TabOrder = 2
         end
       end
@@ -1025,7 +1025,7 @@ object telaConfigSat: TtelaConfigSat
   end
   object ACBrSAT1: TACBrSAT
     Integrador = ACBrIntegrador1
-    Extrato = ACBrSATExtratoESCPOS1
+    Extrato = ACBrSATExtratoFortes1
     NomeDLL = 'C:\StockSYS2\mfe.dll'
     ValidarNumeroSessaoResposta = True
     NumeroTentativasValidarSessao = 2
@@ -1055,7 +1055,6 @@ object telaConfigSat: TtelaConfigSat
     Top = 312
   end
   object ACBrSATExtratoESCPOS1: TACBrSATExtratoESCPOS
-    ACBrSAT = ACBrSAT1
     Mask_qCom = ',0.0000'
     Mask_vUnCom = ',0.000'
     MostrarPreview = True
@@ -1090,6 +1089,7 @@ object telaConfigSat: TtelaConfigSat
     Top = 312
   end
   object ACBrSATExtratoFortes1: TACBrSATExtratoFortes
+    ACBrSAT = ACBrSAT1
     Mask_qCom = ',0.0000'
     Mask_vUnCom = ',0.000'
     MostrarPreview = True

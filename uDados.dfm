@@ -4295,6 +4295,11 @@ object telaDados: TtelaDados
       item
         Name = 'IDRESPFISC'
         DataType = ftInteger
+      end
+      item
+        Name = 'IMPFIS'
+        DataType = ftMemo
+        Size = 8
       end>
     IndexDefs = <
       item
@@ -4338,6 +4343,11 @@ object telaDados: TtelaDados
     end
     object tblPagamentoIDRESPFISC: TIntegerField
       FieldName = 'IDRESPFISC'
+    end
+    object tblPagamentoIMPFIS: TMemoField
+      FieldName = 'IMPFIS'
+      BlobType = ftMemo
+      Size = 8
     end
   end
   object trnscPagamento: TIBTransaction

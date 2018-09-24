@@ -75,14 +75,6 @@ end;
 
 procedure TtelaLogin.edtSenhaKeyPress(Sender: TObject; var Key: Char);
 begin
-  ShowMessage(telaDados.tblLoginLOGIN.AsString);
-  telaDados.tblLogin.Open;
-  ShowMessage(telaDados.tblLoginLOGIN.AsString);
-  telaDados.tblLogin.Locate('LOGIN', 'bruno', []);
-  ShowMessage(telaDados.tblLoginLOGIN.AsString);
-  telaDados.tblLogin.Open;
-    ShowMessage(telaDados.tblLoginLOGIN.AsString);
-
   if key =#13 then btnLogin.Click;
 end;
 

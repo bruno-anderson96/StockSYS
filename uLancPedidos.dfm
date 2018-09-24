@@ -1,6 +1,6 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 160
-  Top = 107
+  Left = -8
+  Top = 393
   Align = alClient
   BorderStyle = bsDialog
   Caption = 'Lan'#231'amento de Pedidos'
