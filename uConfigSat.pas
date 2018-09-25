@@ -414,11 +414,18 @@ begin
           cadastraPagamento;
           cM := true;
         end; }
-  
+
         if Spos then begin
           VerificaStatusValidador;
         end;
-
+        while vM = true do begin
+          EnviaPagamento;
+          telaDados.tblPagamento.Open;
+          telaDados.tblPagamento.Insert;
+          if Spos then begin
+            VerificaStatusValidador;
+          end;
+        end;
       except
         ShowMessage('Erro na venda');
         cancelaVenda;
@@ -929,7 +936,7 @@ var
 begin
   telaDados.tblEmitente.Open;
   telaDados.tblEmitente.Last;
-  telaDados.tblPedidos.ApplyUpdates;
+  //telaDados.tblPedidos.ApplyUpdates;
   telaDados.tblPedidos.Close;
 
   telaDados.qryPos.Close;
@@ -1097,6 +1104,8 @@ begin
     if RespostaVerificarStatusValidador.ValorPagamento > 0 then begin
     if RespostaVerificarStatusValidador.ValorPagamento > telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
         //RespostaVerificarStatusValidador.ValorPagamento := StrToFLoat(inputbox('Valor pago maior que valor da nota', 'Digite um valor igual ou menor da nota!', FloatToStr(RespostaVerificarStatusValidador.ValorPagamento)));
+        vM := true;
+        ShowMessage('Venda Cancelada, valor maior que a nota, efetuar novo pagamento!');
         if RespostaVerificarStatusValidador.ValorPagamento = 0 then begin
            cancelaVenda;
         end;
@@ -1127,7 +1136,11 @@ begin
     ShowMessage('Valor Pagamento: ' + FloatToStr(RespostaVerificarStatusValidador.ValorPagamento)); }
     end;
     vCartao := RespostaVerificarStatusValidador.ValorPagamento;
-
+    if RespostaVerificarStatusValidador.ValorPagamento > telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
+      vM := true;
+    end else begin
+      vM := false;
+    end;
   finally
     VerificarStatusValidador.Free;
 
