@@ -114,6 +114,9 @@ type
     cM : Boolean;   // Cadastro manual de dados do cartao
     repA : integer;
     posV : integer;  // Pegar Index de serial POS na tela de pagamento ou de pesquisa
+    idPgN : integer; // novo valor de novo pagamento
+    impFisS : String; // pegar impressao fiscal sem respostafiscal
+    vM : Boolean; //Detectar valor maior pago
     procedure GetNumeroSessao(var Chave: Integer);
     procedure EnviaPagamento;
     procedure VerificaStatusValidador;
@@ -172,7 +175,7 @@ var
   ID: TGUID;
   IDn : String;
 
-begin
+begin                                                                                 
 
   Result := '';
   if CreateGuid(ID) = S_OK then
@@ -246,7 +249,7 @@ begin
   ACBrSAT1.OnGetcodigoDeAtivacao := GetcodigoDeAtivacao;
   ACBrSAT1.OnGetsignAC := GetsignAC;
   ACBrSAT1.OnGetNumeroSessao := telaConfigSat.GetNumeroSessao;
-
+  ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
   {if ACBrSAT1.numeroSessao = 0 then begin
     ACBrSAT1.GerarnumeroSessao;
   end;}
@@ -270,6 +273,7 @@ tabela: Integer;
 aliqFedNac, aliqFedImp, aliqEst, aliqMun: Double;
 idD : integer;
 begin
+  ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
   tEstadual := 0;
   tFederal  := 0;
   tMunicipal:= 0;
@@ -404,11 +408,13 @@ begin
     if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex = 2) then begin
       try
         //telaDados.qryPedidos.Last;
+
         EnviaPagamento;
         {if MessageBox(Handle, 'Deseja digita dados manualmente?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
           cadastraPagamento;
           cM := true;
         end; }
+  
         if Spos then begin
           VerificaStatusValidador;
         end;
@@ -480,14 +486,19 @@ begin
     cancelaVenda;
     Abort;
   end;
-  
+
       //ShowMessage('Ncfe: ' + intToStr(telaConfigSat.ACBrSAT1.CFe.ide.nCFe));
+
 
   if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex =2) then begin
     if Spos then begin
        RespostaFiscal;
     end;
   end;
+
+
+  ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1;
+
   telaDados.tblPedidos.Close;
   telaDados.tblPedidos.Open;
   telaDados.tblPedidos.Last;
@@ -972,7 +983,7 @@ begin
       telaDados.tblPedidos.ApplyUpdates;
       telaDados.tblPedidos.Close;
       ShowMessage('Aguardando Pagamento : ' + IntTOStr(RespostaPagamentoMFe.IDPagamento));
-   
+      if posV = 0 then idPgN := RespostaPagamentoMFe.IDPagamento; //pegar valor para novo pagamento no banco
      // telaGerarNfe.idPg := RespostaPagamentoMFe.IDPagamento;
 
 
@@ -1084,8 +1095,8 @@ begin
 
 
     if RespostaVerificarStatusValidador.ValorPagamento > 0 then begin
-    while RespostaVerificarStatusValidador.ValorPagamento > telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat do begin
-        RespostaVerificarStatusValidador.ValorPagamento := StrToFLoat(inputbox('Valor pago maior que valor da nota', 'Digite um valor igual ou menor da nota!', FloatToStr(RespostaVerificarStatusValidador.ValorPagamento)));
+    if RespostaVerificarStatusValidador.ValorPagamento > telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
+        //RespostaVerificarStatusValidador.ValorPagamento := StrToFLoat(inputbox('Valor pago maior que valor da nota', 'Digite um valor igual ou menor da nota!', FloatToStr(RespostaVerificarStatusValidador.ValorPagamento)));
         if RespostaVerificarStatusValidador.ValorPagamento = 0 then begin
            cancelaVenda;
         end;
@@ -1116,7 +1127,7 @@ begin
     ShowMessage('Valor Pagamento: ' + FloatToStr(RespostaVerificarStatusValidador.ValorPagamento)); }
     end;
     vCartao := RespostaVerificarStatusValidador.ValorPagamento;
-    
+
   finally
     VerificarStatusValidador.Free;
 
@@ -1133,7 +1144,6 @@ var
 Begin
   telaDados.tblEmitente.Open;
   telaDados.tblEmitente.Last;
-
   RespostaFiscal := TRespostaFiscal.Create;
     try
 
@@ -1141,30 +1151,40 @@ Begin
       begin
         Clear;
         ChaveAcessoValidador := edtChAv.Text;
+        if posV =1 then begin
         IDFila := telaDados.tblPagamentoID.AsInteger;
+        end else begin
+        IDFila := idPgN;
+        end;
         ChaveAcesso := ACBrSAT1.CFe.infCFe.ID;
         telaDados.tblPagamento.Open;
         Nsu := telaDados.tblPagamentoCODPAG.AsString; {telaDados.qryPagamentos.FieldByName('ID').Value};
         NumerodeAprovacao := telaDados.tblPagamentoCODAUT.Value;
-        ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
+        //ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
         //ImpressaoFiscal := IntToStr(ACBrSAT1.CFe.ide.nCFe);
         Bandeira := telaLancPedidos.cbBandeira.Text; {telaDados.qryPagamentos.FieldByName('INSTFIN').Value}; //DIGITADA PELO CAIXA
         //ShowMessage(intToStr(ACBrSAT1.CFe.ide.cNF));
         Adquirente := telaDados.tblPagamentoINSTFIN.AsString;
         if Assigned(ACBrSAT1.CFe) then begin
-          if posV = 1 then begin
           ImpressaoFiscal := '<![CDATA['+ACBrSATExtratoESCPOS1.GerarImpressaoFiscalMFe+']]>';
-          telaDados.tblPagamentoIMPFIS.Value := ImpressaoFiscal;
-          end else begin
-          ImpressaoFiscal := telaDados.tblPagamentoIMPFIS.Value;
-          end;
+          //if not (telaDados.tblPagamento.State = dsInsert) or (telaDados.tblPagamento.State = dsEdit) then begin
+            if posV = 0 then begin
+              impFisS := ImpressaoFiscal;
+            end else begin
+            telaDados.tblPagamentoIMPFIS.Value := ImpressaoFiscal;
+             end;
+          //end;
         end;
-        ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1; //Ver cupom na tela ter impressao fiscal
+        //ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1; //Ver cupom na tela ter impressao fiscal
         Memo1.Text := ImpressaoFiscal;
         NumeroDocumento := IntToStr(ACBrSAT1.CFe.ide.nCFe) {'1674068'};
         CNPJ:= telaDados.tblEmitenteCNPJ.AsString;
       end;
       RetornoRespostaFiscal := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).RespostaFiscal(RespostaFiscal);
+      if posV = 0 then begin
+        repA := StrToInt(RetornoRespostaFiscal.IdRespostaFiscal);
+        abort;
+      end;
       if not (telaDados.tblPagamento.State = dsInsert) then begin
         //telaDados.tblPagamento.Open;
         //telaDados.tblPagamento.Locate('ID', telaDados.tblPedidosIDPAGAMENTO.Value,[loCaseInsensitive]);
@@ -1172,12 +1192,13 @@ Begin
         //ShowMessage('VALOR DO ID PG' + intToStr(telaGerarNfe.idPg));
         //ShowMessage('PRIMEIRO LOCATE ' + telaDados.tblPagamentoID.AsString);
         telaDados.tblPagamento.Edit;
+
       end;
       //ShowMessage('TA PEGANDO QUAL?: ' + telaDados.tblPagamentoDONOCARTAO.AsString);
-      telaDados.tblPagamentoIDRESPFISC.Value := StrToInt(RetornoRespostaFiscal.IdRespostaFiscal);
-      repA := StrToInt(RetornoRespostaFiscal.IdRespostaFiscal);
-      telaDados.tblPagamento.Post;
-      telaDados.tblPagamento.Close;
+        telaDados.tblPagamentoIDRESPFISC.Value := StrToInt(RetornoRespostaFiscal.IdRespostaFiscal);
+        telaDados.tblPagamento.Post;
+        telaDados.tblPagamento.Close;
+
       {ShowMessage('TEM QUE SALVAR NO ANTIGO: ' + telaDados.tblPagamentoID.AsString);
       ShowMessage('TEM QUE SALVAR ESSE IDUNICO: '+RetornoRespostaFiscal.IdRespostaFiscal); }
       {ShowMessage(RespostaFiscal.Nsu);
