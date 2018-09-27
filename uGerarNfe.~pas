@@ -25,31 +25,38 @@ type
     dsConsultaPedidos: TDataSource;
     btnGeraNfe: TBitBtn;
     btnGeraCfe: TSpeedButton;
-    SpeedButton1: TSpeedButton;
+    btS: TSpeedButton;
     ACBrSAT1: TACBrSAT;
     OpenDialog1: TOpenDialog;
     SpeedButton2: TSpeedButton;
     mRecebido: TMemo;
     StatusBar1: TStatusBar;
+    btnEnviaPagamento: TSpeedButton;
+    cbPos: TComboBox;
+    SpeedButton3: TSpeedButton;
     procedure BitBtn2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure btnGeraNfeClick(Sender: TObject);
     procedure btnGeraCfeClick(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
+    procedure btSClick(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure StatusBar1DrawPanel(StatusBar: TStatusBar;
       Panel: TStatusPanel; const Rect: TRect);
+    procedure btnEnviaPagamentoClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
    
   private
     { Private declarations }
     procedure LoadXML(AXML: String; MyWebBrowser: TWebBrowser);
+    function InputCombo(const ACaption, APrompt: string; const AList: TStrings): String;
   public
     { Public declarations }
 
     numN : integer;
+    idPg : integer;
   end;
 
 var
@@ -69,6 +76,18 @@ end;
 
 procedure TtelaGerarNfe.FormShow(Sender: TObject);
 begin
+  if cbPos.Items.Count < 1 then begin
+     with telaDados.tblPos do
+     begin
+      First;
+     while not Eof do
+     begin
+      cbPos.Items.Add(telaDados.tblPos.FieldByName('DESCRICAO').AsString);
+      Next;
+     end;
+    end;
+  end;
+
   dtInicial.Date := Date;
   dtFinal.Date   := Date;
   telaDados.AtualizaConfigAcbr;
@@ -414,12 +433,38 @@ begin
     MessageDlg('É necessário selecionar o pedido!', mtWarning, [mbOK], 0);
     Abort;
   end;
-  telaDados.ACBrNFe1.NotasFiscais.Clear;
+  {telaDados.ACBrNFe1.NotasFiscais.Clear;}
   //
+  
   num := DBGrid1.Columns.Items[1].Field.AsInteger;
 
   telaConfigSat.num := num;
-  telaConfigSat.gerarVenda;
+
+  telaDados.qryPedidos.Close;
+  telaDados.qryPedidos.SQL.Clear;
+  telaDados.qryPedidos.SQL.Add('Select * from PEDIDO where ID =');
+  telaDados.qryPedidos.SQL.Add(IntToStr(num));
+  telaDados.qryPedidos.Open;
+
+  telaDados.qryPagamentos.Close;
+  telaDados.qryPagamentos.SQL.Clear;
+  telaDados.qryPagamentos.SQL.Add('Select * from PAGAMENTO where ID =');
+  telaDados.qryPagamentos.SQL.Add(telaDados.qryPedidos.FieldByName('IDPAGAMENTO').AsString);
+  telaDados.qryPagamentos.Open;
+
+  telaDados.qryClientes.Close;
+  telaDados.qryClientes.SQL.Clear;
+  telaDados.qryClientes.SQL.Add('Select * from CLIENTE where ID =');
+  telaDados.qryClientes.SQL.Add(telaDados.qryPedidos.FieldByName('ID_Cliente').AsString);
+  telaDados.qryClientes.Open;
+
+  if telaDados.qryPedidos.FieldByName('STATUS').Value = 'T' then begin
+    telaConfigSat.EnviaPagamento;
+    telaConfigSat.RespostaFiscal;
+  end else begin
+    ShowMessage('Pagamento já foi efetuado!');
+  end;
+
 end;
 
 procedure TtelaGerarNfe.LoadXML(AXML: String; MyWebBrowser: TWebBrowser);
@@ -433,25 +478,28 @@ procedure TtelaGerarNfe.SpeedButton2Click(Sender: TObject);
 var
 num : integer;
 begin
+  telaConfigSat.AjustarCfe;
+  //telaConfigSat.AjustarCfeFortes;
+  //telaConfigSat.PrepararImpressao;
+  telaConfigSat.ACBrSAT1.Inicializar;
+
   num := DBGrid1.Columns.Items[1].Field.AsInteger;
   telaDados.qryPedidos.Close;
   telaDados.qryPedidos.SQL.Clear;
   telaDados.qryPedidos.SQL.Add('Select * from PEDIDO where id = ');
   telaDados.qryPedidos.SQL.Add(IntToStr(num));
   telaDados.qryPedidos.Open;
-  telaConfigSat.AjustarCfe;
+  //telaConfigSat.AjustarCfe;
   telaConfigSat.ACBrSAT1.CFe.LoadFromFile(telaDados.qryPedidos.FieldByName('PATH').AsString);
-
   telaConfigSat.ACBrSAT1.CFe2CFeCanc;
   telaConfigSat.ACBrSAT1.CFeCanc.infCFe.chCanc := telaDados.qryPedidos.FieldByName('CHAVECFE').AsString;
-  mRecebido.Lines.Text := telaConfigSat.ACBrSAT1.CFeCanc.GerarXML(True);
+  mRecebido.Text := telaConfigSat.ACBrSAT1.CFeCanc.GerarXML(True);
   telaConfigSat.ACBrSAT1.CancelarUltimaVenda(telaDados.qryPedidos.FieldByName('CHAVECFE').AsString, mRecebido.Lines.Text);
 
   if telaConfigSat.ACBrSAT1.Resposta.codigoDeRetorno = 07000 then begin
     ShowMessage('Cupom cancelado com sucesso!');
-
-    telaDados.tblPedidos.Locate('ID' , num,[loCaseInsensitive]);
     telaDados.tblPedidos.Open;
+    telaDados.tblPedidos.Locate('ID' , num,[loCaseInsensitive]);
     telaDados.tblPedidos.Edit;
     telaDados.tblPedidosSTATUS.AsString := 'F';
     telaDados.tblPedidos.Post;
@@ -463,25 +511,41 @@ begin
     telaDados.qryPedidos.SQL.Add(' WHERE ID = ');
     telaDados.qryPedidos.SQL.Add(IntToStr(num));
     telaDados.qryPedidos.Open; }
-
+    telaConfigSat.ACBrSAT1.ImprimirExtratoCancelamento;
   end else begin
     ShowMessage('Cupom não pode ser cancelado! ' + ' Verifique se o período já passou do prazo máximo permitido(30 minutos) desde a emissão do cupom.' );
   end;
   
 end;
 
-procedure TtelaGerarNfe.SpeedButton1Click(Sender: TObject);
+procedure TtelaGerarNfe.btSClick(Sender: TObject);
+var
+num : integer;
 begin
-  OpenDialog1.Filter := 'Arquivo XML|*.xml';
+{  OpenDialog1.Filter := 'Arquivo XML|*.xml';
   if OpenDialog1.Execute then
   begin
     {telaConfigSat.ACBrSAT1.CFe.LoadFromFile( OpenDialog1.FileName );}
-    telaConfigSat.ACBrSAT1.CFe2CFeCanc;
+    {telaConfigSat.ACBrSAT1.CFe2CFeCanc;
 
     telaConfigSat.Memo1.Lines.Text := telaConfigSat.ACBrSAT1.CFeCanc.GerarXML( True ) ;  // True = Gera apenas as TAGs da aplicação
     telaConfigSat.ACBrSAT1.CancelarUltimaVenda;
 
-  end ;
+  end ;}
+    telaConfigSat.AjustarCfe;
+  telaConfigSat.ACBrSAT1.Inicializar;
+
+  num := DBGrid1.Columns.Items[1].Field.AsInteger;
+  telaDados.qryPedidos.Close;
+  telaDados.qryPedidos.SQL.Clear;
+  telaDados.qryPedidos.SQL.Add('Select * from PEDIDO where id = ');
+  telaDados.qryPedidos.SQL.Add(IntToStr(num));
+  telaDados.qryPedidos.Open;
+  telaConfigSat.ACBrSAT1.CFe.LoadFromFile(telaDados.qryPedidos.FieldByName('PATH').AsString);
+  ShowMessage(telaConfigSat.ACBrSAT1.CFe.infCFe.ID);
+  ShowMessage(telaConfigSat.ACBrSAT1.CFe.NomeArquivo);
+  ShowMessage(telaConfigSat.ACBrSAT1.CFe.ide.CNPJ);
+  ShowMessage(FloatToStr(telaConfigSat.ACBrSAT1.CFe.Total.vCFe));
 end;
 
 procedure TtelaGerarNfe.DBGrid1DrawColumnCell(Sender: TObject;
@@ -533,6 +597,203 @@ begin
     StatusBar1.Canvas.Font.Color := clRed;
     StatusBar1.Canvas.TextOut(Rect.Left , Rect.Top, Panel.Text);
   end;
+end;
+
+procedure TtelaGerarNfe.btnEnviaPagamentoClick(Sender: TObject);
+var
+num : integer;
+pos : TStringList;
+codAutA : string;
+insFinA : string;
+donoCartaoA : String;
+parcelasA : integer;
+qtrDigA : integer;
+vrPagA : Double;
+impFisA : String;
+begin
+   if telaDados.qryPedidos.RecordCount = 0 then
+  begin
+    MessageDlg('É necessário selecionar o pedido!', mtWarning, [mbOK], 0);
+    Abort;
+  end;
+  {telaDados.ACBrNFe1.NotasFiscais.Clear;}
+  //
+  if cbPos.ItemIndex = -1 then begin
+    ShowMessage('Selecione um POS');
+    Abort;
+  end;
+  telaConfigSat.posV := 0;
+  num := DBGrid1.Columns.Items[1].Field.AsInteger;
+  telaConfigSat.ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
+  telaConfigSat.num := num;
+
+  telaDados.qryPedidos.Close;
+  telaDados.qryPedidos.SQL.Clear;
+  telaDados.qryPedidos.SQL.Add('Select * from PEDIDO where ID =');
+  telaDados.qryPedidos.SQL.Add(IntToStr(num));
+  telaDados.qryPedidos.Open;
+
+  telaDados.qryPagamentos.Close;
+  telaDados.qryPagamentos.SQL.Clear;
+  telaDados.qryPagamentos.SQL.Add('Select * from PAGAMENTO where ID =');
+  telaDados.qryPagamentos.SQL.Add(telaDados.qryPedidos.FieldByName('IDPAGAMENTO').AsString);
+  telaDados.qryPagamentos.Open;
+
+  idPg := telaDados.qryPagamentos.FieldByName('ID').AsInteger;
+  impFisA := telaDados.qryPagamentos.FieldByName('IMPFIS').Text;
+  codAutA := telaDados.qryPagamentos.FieldByName('CODAUT').AsString;
+  vrPagA := telaDados.qryPagamentos.FieldByName('VRPAG').AsCurrency;
+  qtrDigA := telaDados.qryPagamentos.FieldByName('QTRDIG').AsInteger;
+  insFinA := telaDados.qryPagamentos.FieldByName('INSTFIN').AsString;
+  donoCartaoA := telaDados.qryPagamentos.FieldByName('DONOCARTAO').AsString;
+  parcelasA := telaDados.qryPagamentos.FieldByName('PARCELAS').AsInteger;
+
+  telaDados.qryClientes.Close;
+  telaDados.qryClientes.SQL.Clear;
+  telaDados.qryClientes.SQL.Add('Select * from CLIENTE where ID =');
+  telaDados.qryClientes.SQL.Add(telaDados.qryPedidos.FieldByName('ID_Cliente').AsString);
+  telaDados.qryClientes.Open;
+
+  if telaDados.qryPedidos.FieldByName('STATUS').Value  = 'T' then begin
+    telaConfigSat.AjustarCfe;
+    telaConfigSat.ACBrSAT1.Inicializar;
+    telaConfigSat.ACBrSAT1.CFe.LoadFromFile(telaDados.qryPedidos.FieldByName('PATH').AsString);
+    telaConfigSat.ACBrSAT1.CFe.infCFe.ID := telaDados.qryPedidos.FieldByName('CHAVECFE').AsString;
+    telaConfigSat.Memo1.Lines.LoadFromFile(telaDados.qryPedidos.FieldByName('PATH').AsString);
+    ACBrSAT1.CFe.AsXMLString := telaConfigSat.Memo1.Lines.Text;
+
+      telaLancPedidos.Ddin := telaDados.qryPagamentos.FieldByName('VRPAG').Value;
+      try
+        telaConfigSat.EnviaPagamento;
+        telaDados.tblPagamento.Open;
+        telaDados.tblPagamento.Locate('ID', idPg, []);
+        telaConfigSat.RespostaFiscal;
+      finally
+        telaDados.tblPagamento.Open;
+        //telaDados.tblPagamento.Locate('ID', idPgN,[loCaseInsensitive]);
+        telaDados.tblPagamento.Insert;
+        //ShowMessage(IntTOStr(idPg));
+        //telaDados.tblPagamento.Edit;
+        telaDados.tblPagamentoID.Value := telaConfigSat.idPgN;
+        telaDados.tblPagamentoIDRESPFISC.Value := telaConfigSat.repA;
+        telaDados.tblPagamentoCODAUT.Value := codAutA;
+        telaDados.tblPagamentoIMPFIS.Value := telaConfigSat.impFisS;
+        telaDados.tblPagamentoINSTFIN.Value := insFinA;
+        telaDados.tblPagamentoDONOCARTAO.Value := donoCartaoA;
+        telaDados.tblPagamentoPARCELAS.Value := parcelasA;
+        telaDados.tblPagamentoQTRDIG.Value := qtrDigA;
+        telaDados.tblPagamentoCODPAG.Value := IntToStr(RANDOM(99999));
+        telaDados.tblPagamentoVRPAG.Value := vrPagA;
+        //telaDados.tblPagamentoID.Value := telaDados.qryPedidos.FieldByName('IDPAGAMENTO').Value;
+        telaDados.tblPagamento.Post;
+        //ShowMessage('TEM QUE SER O NOVO ' + telaDados.tblPagamentoID.AsString);
+        telaDados.tblPagamento.Close;
+
+        telaDados.tblPedidos.Open;
+        telaDados.tblPedidos.Locate('ID', num,[loCaseInsensitive]);
+        telaDados.tblPedidos.Edit;
+        //telaDados.tblPedidosIDPAGAMENTO.Value := idPg;
+        telaDados.tblPedidosSTATUS.Value := 'V';
+        try
+          telaDados.tblPedidos.Post;
+        except
+          ShowMessage('Erro na venda');
+        end;
+        //telaDados.tblPedidos.Close;
+        ShowMessage('Pagamento efetuado com sucesso!');
+      end;
+  end else begin
+    ShowMessage('Pagamento já foi efetuado!');
+  end;
+end;
+
+procedure TtelaGerarNfe.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  telaDados.tblPedidos.Close;
+  telaDados.tblPedidosItens.Close;
+end;
+
+function TtelaGerarNfe.InputCombo(const ACaption, APrompt: string; const AList: TStrings): string;
+ 
+  function GetCharSize(Canvas: TCanvas): TPoint;
+  var
+    I: Integer;
+    Buffer: array[0..51] of Char;
+  begin
+    for I := 0 to 25 do Buffer[I] := Chr(I + Ord('A'));
+    for I := 0 to 25 do Buffer[I + 26] := Chr(I + Ord('a'));
+    GetTextExtentPoint(Canvas.Handle, Buffer, 52, TSize(Result));
+    Result.X := Result.X div 52;
+  end;  
+ 
+var
+  Form: TForm;
+  Prompt: TLabel;
+  Combo: TComboBox;
+  DialogUnits: TPoint;
+  ButtonTop, ButtonWidth, ButtonHeight: Integer;
+begin
+  Result := '';
+  Form   := TForm.Create(Application);
+  with Form do
+    try
+      Canvas.Font := Font;
+      DialogUnits := GetCharSize(Canvas);
+      BorderStyle := bsDialog;
+      Caption     := ACaption;
+      ClientWidth := MulDiv(180, DialogUnits.X, 4);
+      Position    := poScreenCenter;
+      Prompt      := TLabel.Create(Form);
+      with Prompt do
+      begin
+        Parent   := Form;
+        Caption  := APrompt;
+        Left     := MulDiv(8, DialogUnits.X, 4);
+        Top      := MulDiv(8, DialogUnits.Y, 8);
+        Constraints.MaxWidth := MulDiv(164, DialogUnits.X, 4);
+        WordWrap := True;
+      end;
+      Combo := TComboBox.Create(Form);
+      with Combo do
+      begin
+        Parent := Form;
+        Style  := csDropDownList; // Caso o item possa ser digitado, altere aqui para csDropDowns
+        Items.Assign(AList);
+        ItemIndex := 0;
+        Left      := Prompt.Left;
+        Top       := Prompt.Top + Prompt.Height + 5;
+        Width     := MulDiv(164, DialogUnits.X, 4);
+      end;
+      ButtonTop    := Combo.Top + Combo.Height + 15;
+      ButtonWidth  := MulDiv(50, DialogUnits.X, 4);
+      ButtonHeight := MulDiv(14, DialogUnits.Y, 8);
+      with TButton.Create(Form) do
+      begin
+        Parent      := Form;
+        Caption     := 'OK';
+        ModalResult := mrOk;
+        default     := True;
+        SetBounds(MulDiv(38, DialogUnits.X, 4), ButtonTop, ButtonWidth,
+          ButtonHeight);
+      end;
+      with TButton.Create(Form) do
+      begin
+        Parent      := Form;
+        Caption     := 'Cancelar';
+        ModalResult := mrCancel;
+        Cancel      := True;
+        SetBounds(MulDiv(92, DialogUnits.X, 4), Combo.Top + Combo.Height + 15,
+          ButtonWidth, ButtonHeight);
+        Form.ClientHeight := Top + Height + 13;
+      end;
+      if ShowModal = mrOk then
+      begin
+        Result := Combo.Text;
+      end;
+    finally
+      Form.Free;
+    end;
 end;
 
 end.
