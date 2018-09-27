@@ -77,7 +77,6 @@ type
     Label14: TLabel;
     procedure At(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
-    procedure AjustarCfe;
     procedure FormCreate(Sender: TObject);
     procedure gerarVenda;
     procedure LeDadosRedeSat;
@@ -121,7 +120,8 @@ type
     procedure EnviaPagamento;
     procedure VerificaStatusValidador;
     procedure RespostaFiscal;
-
+    procedure AjustarCfeFortes;
+    procedure AjustarCfe;
   end;
 
 var
@@ -198,6 +198,11 @@ begin
   //ACBrSAT1.ConsultarNumeroSessao( ACBrSAT1.numeroSessao );
 end;
 
+procedure TtelaConfigSat.AjustarCfeFortes;
+begin
+ ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
+end;
+
 procedure TtelaConfigSat.AjustarCfe;
 begin
   telaDados.qryEmitente.Close;
@@ -205,7 +210,7 @@ begin
   telaDados.qryEmitente.SQL.Add('Select * from Emitente where id_login = ');
   telaDados.qryEmitente.SQL.Add(telaDados.tblLoginID.AsString);
   telaDados.qryEmitente.Open;
-                                              
+
   with ACBrSAT1 do
   begin
     NomeDLL := edtNomeDLL.Text;
@@ -249,7 +254,7 @@ begin
   ACBrSAT1.OnGetcodigoDeAtivacao := GetcodigoDeAtivacao;
   ACBrSAT1.OnGetsignAC := GetsignAC;
   ACBrSAT1.OnGetNumeroSessao := telaConfigSat.GetNumeroSessao;
-  ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
+  ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1;
   {if ACBrSAT1.numeroSessao = 0 then begin
     ACBrSAT1.GerarnumeroSessao;
   end;}
@@ -610,6 +615,7 @@ begin
 
   if ACBrSAT1.Extrato = ACBrSATExtratoESCPOS1 then
   begin
+
   ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModeloPosPrinter.ItemIndex );
   ACBrPosPrinter1.PaginaDeCodigo := TACBrPosPaginaCodigo( cbxPagCodigo.ItemIndex );
   ACBrPosPrinter1.Porta := btnImp.Caption;
@@ -639,7 +645,7 @@ begin
   begin
 
     }
-  end;
+ end;
   
 
 end;
@@ -1104,8 +1110,14 @@ begin
     if RespostaVerificarStatusValidador.ValorPagamento > 0 then begin
     if RespostaVerificarStatusValidador.ValorPagamento > telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
         //RespostaVerificarStatusValidador.ValorPagamento := StrToFLoat(inputbox('Valor pago maior que valor da nota', 'Digite um valor igual ou menor da nota!', FloatToStr(RespostaVerificarStatusValidador.ValorPagamento)));
-        vM := true;
+
         ShowMessage('Venda Cancelada, valor maior que a nota, efetuar novo pagamento!');
+        if MessageBox(Handle, 'Deseja efetuar uma nova tentativa de pagamento?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
+          vM := true;
+        end else begin
+          cancelaVenda;
+          Abort;
+        end;
         if RespostaVerificarStatusValidador.ValorPagamento = 0 then begin
            cancelaVenda;
         end;
@@ -1173,7 +1185,7 @@ Begin
         telaDados.tblPagamento.Open;
         Nsu := telaDados.tblPagamentoCODPAG.AsString; {telaDados.qryPagamentos.FieldByName('ID').Value};
         NumerodeAprovacao := telaDados.tblPagamentoCODAUT.Value;
-        //ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
+        ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
         //ImpressaoFiscal := IntToStr(ACBrSAT1.CFe.ide.nCFe);
         Bandeira := telaLancPedidos.cbBandeira.Text; {telaDados.qryPagamentos.FieldByName('INSTFIN').Value}; //DIGITADA PELO CAIXA
         //ShowMessage(intToStr(ACBrSAT1.CFe.ide.cNF));
@@ -1188,7 +1200,7 @@ Begin
              end;
           //end;
         end;
-        //ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1; //Ver cupom na tela ter impressao fiscal
+        ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1; //Ver cupom na tela ter impressao fiscal
         Memo1.Text := ImpressaoFiscal;
         NumeroDocumento := IntToStr(ACBrSAT1.CFe.ide.nCFe) {'1674068'};
         CNPJ:= telaDados.tblEmitenteCNPJ.AsString;
