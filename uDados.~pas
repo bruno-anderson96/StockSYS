@@ -535,6 +535,7 @@ type
     tblTributosTIPOTRIB: TIBStringField;
     tblProdutosID_TRIB: TIntegerField;
     tblPosCHREQ: TIBStringField;
+    tblPagamentoIMPFIS: TMemoField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
     

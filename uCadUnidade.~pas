@@ -75,6 +75,8 @@ begin
     telaDados.tblUnidade.Post;
     telaDados.tblUnidade.ApplyUpdates();
     telaDados.tblUnidade.Refresh;
+    telaDados.tblUnidade.Open;
+    telaDados.tblUnidade.Close;
 
      editSigla.Clear;
      editNome.Clear;
@@ -116,6 +118,20 @@ procedure TtelaCadUnidade.actIncluirExecute(Sender: TObject);
 var id : integer;
 begin
 
+    telaDados.tblUnidade.Last;
+
+    id := telaDados.tblUnidadeID.Value + 1;
+
+   telaDados.tblUnidade.Insert;
+   telaDados.tblUnidadeID.Value := id;
+
+   editSigla.Enabled := true;
+   editNome.Enabled := true;
+   editSigla.SetFocus;
+
+   btnInserir.Enabled := false;
+
+   DBGrid1.Enabled := False; 
 end;
 
 
@@ -144,6 +160,8 @@ begin
     telaDados.tblUnidade.Post;
     telaDados.tblUnidade.ApplyUpdates();
     telaDados.tblUnidade.Refresh;
+    telaDados.tblUnidade.Close;
+    telaDados.tblUnidade.Open;
 
     editSigla.Clear;
     editNome.Clear;

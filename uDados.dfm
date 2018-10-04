@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 98
-  Top = 64
+  Left = 106
+  Top = 85
   Width = 1216
   Height = 693
   Caption = 'Data m'#243'dulo'
@@ -1288,6 +1288,10 @@ object telaDados: TtelaDados
         Attributes = [faFixed]
         DataType = ftString
         Size = 1
+      end
+      item
+        Name = 'NCFE'
+        DataType = ftInteger
       end>
     IndexDefs = <
       item
@@ -1473,6 +1477,9 @@ object telaDados: TtelaDados
       FieldName = 'STATUS'
       FixedChar = True
       Size = 1
+    end
+    object tblPedidosNCFE: TIntegerField
+      FieldName = 'NCFE'
     end
   end
   object dbClientes: TIBDatabase

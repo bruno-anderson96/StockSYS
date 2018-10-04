@@ -550,6 +550,7 @@ begin
   end;
 
   if radDoc.ItemIndex = 0 then begin
+    telaConfigSat.posV := 1;
     telaConfigSat.num := StrToInt(editId.Text);
     telaConfigSat.PrepararImpressao;
     telaConfigSat.gerarVenda;

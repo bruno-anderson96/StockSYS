@@ -440,7 +440,6 @@ end else
   telaDados.tblClientes.Post;
   telaDados.tblClientes.Close;
 
-
   btnIncluir.Enabled := true;
   btnConfirmar.Enabled := false;
   btnCancelar.Enabled := false;

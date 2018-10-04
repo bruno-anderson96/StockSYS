@@ -1,6 +1,6 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 143
-  Top = 64
+  Left = 27
+  Top = 106
   Align = alClient
   BorderStyle = bsDialog
   Caption = 'Lan'#231'amento de Pedidos'
@@ -3181,10 +3181,10 @@ object telaLancPedidos: TtelaLancPedidos
               ItemHeight = 13
               ItemIndex = 0
               TabOrder = 0
-              Text = 'MASTERCARD'
+              Text = 'VISA'
               Items.Strings = (
-                'MASTERCARD'
-                'VISA')
+                'VISA'
+                'MASTERCARD')
             end
           end
           object gpPos: TGroupBox

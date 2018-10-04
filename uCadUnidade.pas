@@ -75,6 +75,8 @@ begin
     telaDados.tblUnidade.Post;
     telaDados.tblUnidade.ApplyUpdates();
     telaDados.tblUnidade.Refresh;
+    telaDados.tblUnidade.Close;
+    telaDados.tblUnidade.Open;
 
      editSigla.Clear;
      editNome.Clear;
@@ -158,6 +160,8 @@ begin
     telaDados.tblUnidade.Post;
     telaDados.tblUnidade.ApplyUpdates();
     telaDados.tblUnidade.Refresh;
+    telaDados.tblUnidade.Close;
+    telaDados.tblUnidade.Open;
 
     editSigla.Clear;
     editNome.Clear;

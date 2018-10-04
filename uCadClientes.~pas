@@ -279,7 +279,7 @@ begin
 
   PageControl1.TabIndex := 0;
 
-  {telaDados.tblClientes.Last;}
+  telaDados.tblClientes.Last;
 
   editNome.Enabled := true;
   editCep.Enabled := true;
@@ -330,10 +330,10 @@ begin
   Editar.Enabled := false;
   Pesquisar.Enabled := false;
 
-  {id := telaDados.tblClientesID.AsInteger + 1;}
+  id := telaDados.tblClientesID.AsInteger + 1;
   telaDados.tblClientes.Insert;
 
-  {telaDados.tblClientesID.Value := id;}
+  telaDados.tblClientesID.Value := id;
 
   with telaDados.tblEstados do
   begin

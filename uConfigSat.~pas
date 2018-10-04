@@ -133,6 +133,7 @@ uses pcnCFe;
 
 {$R *.dfm}
 
+
 procedure TtelaConfigSat.cancelaVenda;
 var idD: integer;
 begin
@@ -141,6 +142,7 @@ begin
   telaDados.tblPedidos.Last;
   idD := telaDados.tblPedidosID.AsInteger;
   telaDados.tblPedidos.Delete;
+  //telaDados.tblPedidos.Cancel;
   telaDados.tblPedidosItens.Last;
   telaDados.qryPedidosItens.Close;
   telaDados.qryPedidosItens.SQL.Clear;
@@ -320,7 +322,6 @@ begin
   begin
     ide.numeroCaixa := 1;
     //ide.nCFe:= RANDOM(99999);
-  
 
     Dest.CNPJCPF := telaDados.qryClientes.FieldByName('CNPJ_CPF').AsString;
     Dest.xNome := telaDados.qryClientes.FieldByName('NOME').AsString;
@@ -410,6 +411,7 @@ begin
       vMP := Pagto1;
     end;}
      cM := false;
+
     if (telaLancPedidos.cbPagamento.ItemIndex = 1) or (telaLancPedidos.cbPagamento.ItemIndex = 2) then begin
       try
         //telaDados.qryPedidos.Last;
@@ -498,7 +500,7 @@ begin
     cancelaVenda;
     Abort;
   end;
-
+      
       //ShowMessage('Ncfe: ' + intToStr(telaConfigSat.ACBrSAT1.CFe.ide.nCFe));
 
 
@@ -510,7 +512,6 @@ begin
 
 
   ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1;
-
   telaDados.tblPedidos.Close;
   telaDados.tblPedidos.Open;
   telaDados.tblPedidos.Last;
@@ -522,6 +523,7 @@ begin
   if telaDados.tblPedidosSTATUS.Value = '' then begin
     telaDados.tblPedidosSTATUS.Value := 'V';
   end;
+  telaDados.tblPedidosNCFE.Value := ACBrSAT1.CFe.ide.nCFe;
   telaDados.tblPedidos.Post;
   Spos := false;
   
@@ -1115,7 +1117,7 @@ begin
         if MessageBox(Handle, 'Deseja efetuar uma nova tentativa de pagamento?', 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
           vM := true;
         end else begin
-          cancelaVenda;
+          //cancelaVenda;
           Abort;
         end;
         if RespostaVerificarStatusValidador.ValorPagamento = 0 then begin
@@ -1202,7 +1204,11 @@ Begin
         end;
         ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1; //Ver cupom na tela ter impressao fiscal
         Memo1.Text := ImpressaoFiscal;
-        NumeroDocumento := IntToStr(ACBrSAT1.CFe.ide.nCFe) {'1674068'};
+        if telaGerarNfe.nCfe <> '' then begin
+          NumeroDocumento := telaGerarNfe.nCfe;
+        end else begin
+          NumeroDocumento := IntToStr(ACBrSAT1.CFe.ide.nCFe) {'1674068'};
+        end;
         CNPJ:= telaDados.tblEmitenteCNPJ.AsString;
       end;
       RetornoRespostaFiscal := TACBrSATMFe_integrador_XML(ACBrSAT1.SAT).RespostaFiscal(RespostaFiscal);
