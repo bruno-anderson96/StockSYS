@@ -3,7 +3,7 @@ unit uConfigSat;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,        
   Dialogs, StdCtrls, Buttons, ACBrPosPrinter, ACBrSATExtratoClass,
   ACBrSATExtratoESCPOS, ACBrSAT, ACBrBase,  TypInfo, ACBrSATClass,
   ACBrIntegrador, pcnConversao, Math, ACBrUtil, RLPrinters, Printers, ACBrSATMFe_integrador, pcnVFPe,
@@ -483,7 +483,7 @@ begin
   end; }
 
   //Memo1.Lines.Text :=
-  ACBrSAT1.CFe.GerarXML( True );    // True = Gera apenas as TAGs da aplicação
+  ACBrSAT1.CFe.GerarXML( false );    // True = Gera apenas as TAGs da aplicação
   try
   //Memo1.Lines.Text :=
   ACBrSAT1.EnviarDadosVenda;
@@ -1127,13 +1127,16 @@ begin
     if RespostaVerificarStatusValidador.ValorPagamento < telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat then begin
       nv := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat - RespostaVerificarStatusValidador.ValorPagamento;
       if MessageBox(Handle,pansichar('Valor Pago está diferente do valor total da nota, deseja completar o valor da nota com pagamento em dinheiro? Faltando: R$ ' + FloatToStr(nv)), 'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
+        //ShowMessage('Valor Pago está diferente do valor total da nota, o restante será pago em dinheiro, Faltando: R$ ' + FloatToStr(nv));
         //RespostaVerificarStatusValidador.ValorPagamento := StrToFloat(telaLancPedidos.edtDin.Text);
         with ACBrSAT1.CFe.Pagto.Add do
         begin
           cMP := mpDinheiro;
           vMP := nv;
         end;
-      end;
+      end else begin
+      Abort;
+      end;        
     end;
     if (telaDados.tblPagamento.State = dsInsert) or (telaDados.tblPagamento.State = dsEdit) then begin
       telaDados.tblPagamentoVRPAG.Value := RespostaVerificarStatusValidador.ValorPagamento;
