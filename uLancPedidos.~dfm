@@ -1,11 +1,11 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 27
-  Top = 106
+  Left = 21
+  Top = 0
   Align = alClient
   BorderStyle = bsDialog
   Caption = 'Lan'#231'amento de Pedidos'
-  ClientHeight = 635
-  ClientWidth = 1272
+  ClientHeight = 633
+  ClientWidth = 1262
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,8 +21,8 @@ object telaLancPedidos: TtelaLancPedidos
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 1272
-    Height = 635
+    Width = 1262
+    Height = 633
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
@@ -31,8 +31,8 @@ object telaLancPedidos: TtelaLancPedidos
       object GroupBox1: TGroupBox
         Left = 0
         Top = 0
-        Width = 1264
-        Height = 607
+        Width = 1254
+        Height = 605
         Align = alClient
         Color = clSkyBlue
         ParentBackground = False
@@ -2799,8 +2799,8 @@ object telaLancPedidos: TtelaLancPedidos
         end
         object StatusBar1: TStatusBar
           Left = 2
-          Top = 586
-          Width = 1260
+          Top = 584
+          Width = 1250
           Height = 19
           Panels = <
             item
