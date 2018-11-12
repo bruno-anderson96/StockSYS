@@ -6,7 +6,7 @@ uses
   uConfig in 'uConfig.pas' {telaConfig},
   uStatus in 'uStatus.pas' {telaStatus},
   uDados in 'uDados.pas' {telaDados},
-  uGerarNfe in '..\..\Videos\NF-e com acbr\Projeto\uGerarNfe.pas' {telaGerarNfe},
+  uGerarNfe in 'uGerarNfe.pas' {telaGerarNfe},
   uCadProdutos in 'uCadProdutos.pas' {telaCadProdutos},
   uCadClientes in 'uCadClientes.pas' {telaCadClientes},
   uLancItens in 'uLancItens.pas' {telaLancItens},
@@ -35,7 +35,8 @@ uses
   uCadCep in 'uCadCep.pas' {telaCadCep},
   uSped in 'uSped.pas' {telaSped},
   uContador in 'uContador.pas' {telaContador},
-  uCadPos in 'uCadPos.pas' {telaCadPos};
+  uCadPos in 'uCadPos.pas' {telaCadPos},
+  uPreviewCfe in 'uPreviewCfe.pas' {telaPreviewCfe};
 
 {$R *.res}
 
@@ -52,5 +53,6 @@ begin
   Application.CreateForm(TtelaConfigEmit, telaConfigEmit);
   Application.CreateForm(TtelaSped, telaSped);
   Application.CreateForm(TtelaContador, telaContador);
+  Application.CreateForm(TtelaPreviewCfe, telaPreviewCfe);
   Application.Run;
 end.

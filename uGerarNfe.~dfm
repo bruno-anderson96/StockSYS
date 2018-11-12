@@ -1,7 +1,7 @@
 object telaGerarNfe: TtelaGerarNfe
-  Left = 303
-  Top = 155
-  Width = 709
+  Left = 276
+  Top = 85
+  Width = 725
   Height = 551
   Align = alCustom
   BorderStyle = bsSizeToolWin
@@ -20,13 +20,13 @@ object telaGerarNfe: TtelaGerarNfe
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
-    Width = 693
+    Width = 709
     Height = 129
     Align = alTop
     TabOrder = 0
     object btnGeraCfe: TSpeedButton
-      Left = 696
-      Top = 80
+      Left = 712
+      Top = 72
       Width = 84
       Height = 41
       Caption = 'Gerar CFe'
@@ -90,15 +90,16 @@ object telaGerarNfe: TtelaGerarNfe
       OnClick = btnGeraCfeClick
     end
     object btS: TSpeedButton
-      Left = 408
-      Top = 56
+      Left = 344
+      Top = 8
       Width = 23
       Height = 22
       Caption = 'T'
+      Visible = False
       OnClick = btSClick
     end
     object SpeedButton2: TSpeedButton
-      Left = 456
+      Left = 448
       Top = 80
       Width = 100
       Height = 41
@@ -289,6 +290,13 @@ object telaGerarNfe: TtelaGerarNfe
       Height = 22
       Visible = False
     end
+    object Label3: TLabel
+      Left = 465
+      Top = 61
+      Width = 87
+      Height = 13
+      Caption = 'Selecione o POS.:'
+    end
     object radOpt: TRadioGroup
       Left = 8
       Top = 16
@@ -417,7 +425,7 @@ object telaGerarNfe: TtelaGerarNfe
     end
     object BitBtn2: TBitBtn
       Left = 610
-      Top = 16
+      Top = 8
       Width = 75
       Height = 41
       Caption = 'Fechar'
@@ -482,8 +490,8 @@ object telaGerarNfe: TtelaGerarNfe
         F2F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
     end
     object btnGeraNfe: TBitBtn
-      Left = 517
-      Top = -8
+      Left = 717
+      Top = 24
       Width = 75
       Height = 41
       Caption = 'Gerar NFe'
@@ -492,34 +500,41 @@ object telaGerarNfe: TtelaGerarNfe
       OnClick = btnGeraNfeClick
     end
     object mRecebido: TMemo
-      Left = 792
+      Left = 800
       Top = 8
       Width = 185
-      Height = 89
+      Height = 105
       Lines.Strings = (
         '')
       TabOrder = 6
     end
     object cbPos: TComboBox
-      Left = 440
+      Left = 552
       Top = 56
       Width = 145
       Height = 21
       ItemHeight = 13
       TabOrder = 7
     end
+    object edtCanc: TEdit
+      Left = 344
+      Top = 40
+      Width = 121
+      Height = 21
+      TabOrder = 8
+    end
   end
   object GroupBox3: TGroupBox
     Left = 0
     Top = 129
-    Width = 693
+    Width = 709
     Height = 384
     Align = alClient
     TabOrder = 1
     object DBGrid1: TDBGrid
       Left = 2
       Top = 15
-      Width = 689
+      Width = 705
       Height = 348
       Align = alClient
       DataSource = dsConsultaPedidos
@@ -566,7 +581,7 @@ object telaGerarNfe: TtelaGerarNfe
     object StatusBar1: TStatusBar
       Left = 2
       Top = 363
-      Width = 689
+      Width = 705
       Height = 19
       Panels = <
         item
@@ -605,6 +620,8 @@ object telaGerarNfe: TtelaGerarNfe
     Top = 9
   end
   object ACBrSAT1: TACBrSAT
+    Integrador = telaDados.ACBrIntegrador1
+    NomeDLL = 'C:\StockSYS2\mfe.dll'
     Config.infCFe_versaoDadosEnt = 0.070000000000000010
     Config.ide_numeroCaixa = 0
     Config.ide_tpAmb = taHomologacao

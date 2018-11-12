@@ -6,7 +6,7 @@ uses
   uConfig in 'uConfig.pas' {telaConfig},
   uStatus in 'uStatus.pas' {telaStatus},
   uDados in 'uDados.pas' {telaDados},
-  uGerarNfe in '..\..\Videos\NF-e com acbr\Projeto\uGerarNfe.pas' {telaGerarNfe},
+  uGerarNfe in 'uGerarNfe.pas' {telaGerarNfe},
   uCadProdutos in 'uCadProdutos.pas' {telaCadProdutos},
   uCadClientes in 'uCadClientes.pas' {telaCadClientes},
   uLancItens in 'uLancItens.pas' {telaLancItens},

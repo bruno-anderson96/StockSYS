@@ -6,7 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, StdCtrls, Buttons, ComCtrls, Grids, DBGrids, uDados,
   DB, IBDatabase, IBCustomDataSet, IBQuery, pcnConversao, pcnConversaoNFe, pcnAuxiliar,
-  ACBrBase, ACBrSAT, SHDocVw, ACBrUtil, OleCtrls;
+  ACBrBase, ACBrSAT, SHDocVw, ACBrUtil, OleCtrls,
+  ACBrSATExtratoReportClass, ACBrSATExtratoFortesFr, ACBrSATExtratoClass,
+  ACBrSATExtratoESCPOS;
 
 type
   TtelaGerarNfe = class(TForm)
@@ -34,6 +36,8 @@ type
     btnEnviaPagamento: TSpeedButton;
     cbPos: TComboBox;
     SpeedButton3: TSpeedButton;
+    Label3: TLabel;
+    edtCanc: TEdit;
     procedure BitBtn2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -54,7 +58,7 @@ type
     function InputCombo(const ACaption, APrompt: string; const AList: TStrings): String;
   public
     { Public declarations }
-
+    nCfe : String;    // pegar numero de documento
     numN : integer;
     idPg : integer;
   end;
@@ -65,7 +69,7 @@ var
 
 implementation
 
-uses pcnNFe, uConfigSat, uLancPedidos, pcnCFeCanc;
+uses pcnNFe, uConfigSat, uLancPedidos, pcnCFeCanc, pcnCFe;
 
 {$R *.dfm}
 
@@ -438,7 +442,7 @@ begin
   
   num := DBGrid1.Columns.Items[1].Field.AsInteger;
 
-  telaConfigSat.num := num;
+  {telaConfigSat.num := num;}
 
   telaDados.qryPedidos.Close;
   telaDados.qryPedidos.SQL.Clear;
@@ -446,7 +450,7 @@ begin
   telaDados.qryPedidos.SQL.Add(IntToStr(num));
   telaDados.qryPedidos.Open;
 
-  telaDados.qryPagamentos.Close;
+  {telaDados.qryPagamentos.Close;
   telaDados.qryPagamentos.SQL.Clear;
   telaDados.qryPagamentos.SQL.Add('Select * from PAGAMENTO where ID =');
   telaDados.qryPagamentos.SQL.Add(telaDados.qryPedidos.FieldByName('IDPAGAMENTO').AsString);
@@ -456,13 +460,19 @@ begin
   telaDados.qryClientes.SQL.Clear;
   telaDados.qryClientes.SQL.Add('Select * from CLIENTE where ID =');
   telaDados.qryClientes.SQL.Add(telaDados.qryPedidos.FieldByName('ID_Cliente').AsString);
-  telaDados.qryClientes.Open;
+  telaDados.qryClientes.Open;}
 
-  if telaDados.qryPedidos.FieldByName('STATUS').Value = 'T' then begin
-    telaConfigSat.EnviaPagamento;
-    telaConfigSat.RespostaFiscal;
+  if telaDados.qryPedidos.FieldByName('STATUS').Value = 'F' then begin
+    ShowMessage('Cupom cancelado ou não emitido!');
   end else begin
-    ShowMessage('Pagamento já foi efetuado!');
+    telaConfigSat.ACBrSAT1.DesInicializar;
+    telaConfigSat.AjustarCfe;
+    telaConfigSat.ACBrSAT1.Inicializar;
+    ShowMessage(telaDados.qryPedidos.FieldByName('PATH').AsString);
+    telaConfigSat.ACBrSAT1.CFe.LoadFromFile(telaDados.qryPedidos.FieldByName('PATH').AsString);
+    mRecebido.Text := telaDados.qryPedidos.FieldByName('PATH').AsString;
+    telaConfigSat.ACBrSATExtratoFortes1.ImprimirExtrato(telaConfigSat.ACBrSAT1.CFe);
+    
   end;
 
 end;
@@ -490,14 +500,22 @@ begin
   telaDados.qryPedidos.SQL.Add(IntToStr(num));
   telaDados.qryPedidos.Open;
   //telaConfigSat.AjustarCfe;
-  telaConfigSat.ACBrSAT1.CFe.LoadFromFile(telaDados.qryPedidos.FieldByName('PATH').AsString);
+  //telaConfigSat.ACBrSAT1.CFeCanc.infCFe.chCanc := telaDados.qryPedidos.FieldByName('CHAVECFE').AsString;
+  //mRecebido.Text := telaConfigSat.ACBrSAT1.CFe.
+  //ShowMessage(telaDados.qryPedidos.FieldByName('PATH').AsString);
+
   telaConfigSat.ACBrSAT1.CFe2CFeCanc;
   telaConfigSat.ACBrSAT1.CFeCanc.infCFe.chCanc := telaDados.qryPedidos.FieldByName('CHAVECFE').AsString;
-  mRecebido.Text := telaConfigSat.ACBrSAT1.CFeCanc.GerarXML(True);
-  telaConfigSat.ACBrSAT1.CancelarUltimaVenda(telaDados.qryPedidos.FieldByName('CHAVECFE').AsString, mRecebido.Lines.Text);
+  mRecebido.Text := telaConfigSat.ACBrSAT1.CFeCanc.GerarXML(true);
+  //ShowMessage(telaConfigSat.ACBrSAT1.CFeCanc.infCFe.chCanc);
+  edtCanc.Text := telaConfigSat.ACBrSAT1.CFeCanc.infCFe.chCanc;  
+  telaConfigSat.ACBrSAT1.CancelarUltimaVenda(edtCanc.Text, mRecebido.Lines.Text);
+
 
   if telaConfigSat.ACBrSAT1.Resposta.codigoDeRetorno = 07000 then begin
     ShowMessage('Cupom cancelado com sucesso!');
+    telaConfigSat.PrepararImpressao;
+    telaConfigSat.ACBrSAT1.ImprimirExtratoCancelamento;
     telaDados.tblPedidos.Open;
     telaDados.tblPedidos.Locate('ID' , num,[loCaseInsensitive]);
     telaDados.tblPedidos.Edit;
@@ -511,7 +529,7 @@ begin
     telaDados.qryPedidos.SQL.Add(' WHERE ID = ');
     telaDados.qryPedidos.SQL.Add(IntToStr(num));
     telaDados.qryPedidos.Open; }
-    telaConfigSat.ACBrSAT1.ImprimirExtratoCancelamento;
+
   end else begin
     ShowMessage('Cupom não pode ser cancelado! ' + ' Verifique se o período já passou do prazo máximo permitido(30 minutos) desde a emissão do cupom.' );
   end;
@@ -610,6 +628,7 @@ parcelasA : integer;
 qtrDigA : integer;
 vrPagA : Double;
 impFisA : String;
+
 begin
    if telaDados.qryPedidos.RecordCount = 0 then
   begin
@@ -632,6 +651,8 @@ begin
   telaDados.qryPedidos.SQL.Add('Select * from PEDIDO where ID =');
   telaDados.qryPedidos.SQL.Add(IntToStr(num));
   telaDados.qryPedidos.Open;
+
+  nCfe := telaDados.qryPedidos.FieldByName('NCFE').Value;
 
   telaDados.qryPagamentos.Close;
   telaDados.qryPagamentos.SQL.Clear;
@@ -705,6 +726,7 @@ begin
   end else begin
     ShowMessage('Pagamento já foi efetuado!');
   end;
+  nCfe := '';
 end;
 
 procedure TtelaGerarNfe.FormClose(Sender: TObject;
