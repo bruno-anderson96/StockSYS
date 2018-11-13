@@ -506,11 +506,11 @@ begin
 
   telaConfigSat.ACBrSAT1.CFe2CFeCanc;
   telaConfigSat.ACBrSAT1.CFeCanc.infCFe.chCanc := telaDados.qryPedidos.FieldByName('CHAVECFE').AsString;
+  telaConfigSat.ACBrSAT1.CFe.Total.vCFe := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsCurrency;
   mRecebido.Text := telaConfigSat.ACBrSAT1.CFeCanc.GerarXML(true);
   //ShowMessage(telaConfigSat.ACBrSAT1.CFeCanc.infCFe.chCanc);
   edtCanc.Text := telaConfigSat.ACBrSAT1.CFeCanc.infCFe.chCanc;  
   telaConfigSat.ACBrSAT1.CancelarUltimaVenda(edtCanc.Text, mRecebido.Lines.Text);
-
 
   if telaConfigSat.ACBrSAT1.Resposta.codigoDeRetorno = 07000 then begin
     ShowMessage('Cupom cancelado com sucesso!');
@@ -713,7 +713,7 @@ begin
         telaDados.tblPedidos.Open;
         telaDados.tblPedidos.Locate('ID', num,[loCaseInsensitive]);
         telaDados.tblPedidos.Edit;
-        //telaDados.tblPedidosIDPAGAMENTO.Value := idPg;
+        telaDados.tblPedidosIDPAGAMENTO.Value := telaConfigSat.idPgN;
         telaDados.tblPedidosSTATUS.Value := 'V';
         try
           telaDados.tblPedidos.Post;

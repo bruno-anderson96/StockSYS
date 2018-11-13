@@ -356,7 +356,7 @@ begin
         begin
         nItem := telaDados.qryPedidosItens.RecordCount;
         {nItem := 1 + (A * 3);}
-        Prod.cProd := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
+        Prod.cProd := telaDados.qryProdutos.FieldByName('EAN13').AsString;
         {Prod.cEAN := telaDados.qryProdutos.FieldByName('EAN13').AsString; }
         Prod.xProd := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
         prod.NCM := telaDados.qryProdutos.FieldByName('CODIGO_NCM').AsString;
@@ -990,6 +990,9 @@ begin
      ShowMessage(IntToStr(RespostaPagamentoMFe.IntegradorResposta.Identificador));
      ShowMessage(RespostaPagamentoMFe.IntegradorResposta.Valor); }
 
+     if posV = 0 then begin
+      idPgN := RespostaPagamentoMFe.IDPagamento; //pegar valor para novo pagamento no banco
+     end else begin
       telaDados.tblPedidos.Open;
       telaDados.tblPedidos.Last;
       telaDados.tblPedidos.Edit;
@@ -997,8 +1000,9 @@ begin
       telaDados.tblPedidos.Post;
       telaDados.tblPedidos.ApplyUpdates;
       telaDados.tblPedidos.Close;
-      ShowMessage('Aguardando Pagamento : ' + IntTOStr(RespostaPagamentoMFe.IDPagamento));
-      if posV = 0 then idPgN := RespostaPagamentoMFe.IDPagamento; //pegar valor para novo pagamento no banco
+     end;
+     ShowMessage('Aguardando Pagamento : ' + IntTOStr(RespostaPagamentoMFe.IDPagamento));
+
      // telaGerarNfe.idPg := RespostaPagamentoMFe.IDPagamento;
 
 

@@ -515,12 +515,15 @@ begin
       telaDados.cdsTempItens.FieldByName('QUANT').Value;
 
     telaDados.tblProdutos.Open;
+    telaDados.tblProdutos.Locate('DESCRICAO', telaDados.cdsTempItens.FieldByName('DESC').Text,[loCaseInsensitive]);
     telaDados.tblProdutos.Edit;
 
-    telaDados.qryProdutos.Close;
+
+    {telaDados.qryProdutos.Close;
     telaDados.qryProdutos.SQL.Clear;
     telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID = ');
     telaDados.qryProdutos.SQL.Add(telaDados.cdsTempItens.FieldByName('IDPROD').AsString);
+    }
     estoque := telaDados.tblProdutosESTOQUE.AsInteger - telaDados.cdsTempItens.FieldByName('QUANT').AsInteger;
     telaDados.qryProdutos.Open;
 
