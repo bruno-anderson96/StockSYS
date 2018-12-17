@@ -539,6 +539,7 @@ type
     tblPedidosNCFE: TIntegerField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
+    procedure tblClientesBeforePost(DataSet: TDataSet);
     
   private
     { Private declarations }
@@ -553,7 +554,7 @@ type
     sRazSoc, sFantasia, sCnpj, sInscEst, sEndereco, sNum,
     sBairro, sCidade, sCep, sUf, sCodMun, sUfws, sHost,
     sPorta, sUsuario, sSenhaws, sTelefone, sEmailEmitente : String;
-    sEHost, sEPorta, sEUsuario, sESenha : String;
+    sEHost, sEPorta, sEUsuario, sESenha, sPathServer, sServidor : String;
 
     procedure LerArquivoIni;
     procedure GravaArquivoIni;
@@ -933,6 +934,9 @@ begin
   ArqINI.WriteString('Email','Porta', sEPorta);
   ArqINI.WriteString('Email','Usuário', sEUsuario);
   ArqINI.WriteString('Email','Senha', sESenha);
+  //Servidor
+  ArqINI.WriteString('Servidor','Ip', sPathServer);
+  ArqINI.WriteString('Servidor','Servidor', sServidor);
   //
   ArqINI.Free;
 end;
@@ -980,6 +984,9 @@ begin
   sEPorta          := ArqINI.ReadString('Email','Porta', '');
   sEUsuario        := ArqINI.ReadString('Email','Usuário', '');
   sESenha          := ArqINI.ReadString('Email','Senha', '');
+  //Servidor
+  sPathServer      := ArqINI.ReadString('Servidor','Ip', '');
+  sServidor      := ArqINI.ReadString('Servidor','Servidor', '');
   //
   ArqINI.Free;
 
@@ -1149,6 +1156,17 @@ begin
     tblProdutosESTOQUE.Value := tblProdutosEstoque.Value - tblEstoqueQUANTIDADE.Value;
   end;
   tblProdutos.Post;
+end;
+
+procedure TtelaDados.tblClientesBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblClientes.state = dsInsert then begin
+    telaDados.qryClientes.Close;
+    telaDados.qryClientes.SQL.Clear;
+    telaDados.qryClientes.SQL.Add('Select COUNT(*) from CLIENTE');
+    telaDados.qryClientes.Open;
+    telaDados.tblClientesID.Value := telaDados.qryClientes.FieldByName('COUNT').AsInteger + 1;
+  end;
 end;
 
 end.

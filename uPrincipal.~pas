@@ -63,6 +63,10 @@ type
     Fiscal1: TMenuItem;
     GerarSped1: TMenuItem;
     POS1: TMenuItem;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    SpeedButton1: TSpeedButton;
+    Panel4: TPanel;
     procedure Sair1Click(Sender: TObject);
     procedure StatusdeServio1Click(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
@@ -95,6 +99,8 @@ type
     procedure Contador1Click(Sender: TObject);
     procedure GerarSped1Click(Sender: TObject);
     procedure POS1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
 
 
   private
@@ -238,7 +244,35 @@ begin
   StatusBar1.Panels[2].Text := DateToStr(Date);
   StatusBar1.Panels[3].Text := TimeToStr(Time);
 
-  imgLogo.Picture.LoadFromFile(telaDados.sLogoMarca);
+  if telaDados.sLogoMarca <> '' then begin
+    imgLogo.Picture.LoadFromFile(telaDados.sLogoMarca);
+  end;
+
+  telaDados.tblClientes.Open;
+  telaDados.tblProdutos.Open;
+  telaDados.tblPedidos.Open;
+  telaDados.tblPedidosItens.Open;
+  telaDados.tblUnidade.Open;
+  telaDados.tblTributos.Open;
+  telaDados.tblEmitente.Open;
+  telaDados.tblNCM.Open;
+  telaDados.tblConta.Open;
+  telaDados.tblCompras.Open;
+  telaDados.tblCompraItens.Open;
+  telaDados.tblFornecedores.Open;
+  telaDados.tblCsosn.Open;
+  telaDados.tblCst.Open;
+  telaDados.tblEstados.Open;
+  telaDados.tblCidades.Open;
+  telaDados.tblRuas.Open;
+  telaDados.tblBairros.Open;
+  telaDados.tblEstoque.Open;
+  telaDados.tblPagamento.Open;
+  telaDados.tblContador.Open;
+  telaDados.tblOrigem.Open;
+  telaDados.tblIbpt.Open;
+  telaDados.tblPos.Open;
+
 end;
 
 procedure TtelaPrincipal.SAT1Click(Sender: TObject);
@@ -313,6 +347,96 @@ procedure TtelaPrincipal.POS1Click(Sender: TObject);
 begin
   Application.CreateForm(TtelaCadPos, telaCadPos);
   telaCadPos.Show;
+end;
+
+procedure TtelaPrincipal.FormCreate(Sender: TObject);
+begin
+
+  telaDados.dbClientes.Close;
+  telaDados.dbProdutos.Close;
+  telaDados.dbPedidos.Close;
+  telaDados.dbPedidosItens.Close;
+  telaDados.dbUnidade.Close;
+  telaDados.dbTributos.Close;
+  telaDados.dbEmitente.Close;
+  telaDados.dbNCM.Close;
+  telaDados.dbConta.Close;
+  telaDados.dbCompras.Close;
+  telaDados.dbCompraItens.Close;
+  telaDados.dbFornecedores.Close;
+  telaDados.dbLogin.Close;
+  telaDados.dbCsosn.Close;
+  telaDados.dbCst.Close;
+  telaDados.dbEstados.Close;
+  telaDados.dbCidades.Close;
+  telaDados.dbRuas.Close;
+  telaDados.dbBairros.Close;
+  telaDados.dbEstoque.Close;
+  telaDados.dbPagamentos.Close;
+  telaDados.dbContador.Close;
+  telaDados.dbOrigem.Close;
+  telaDados.dbIbpt.Close;
+  telaDados.dbPos.Close; 
+
+  telaDados.dbClientes.DatabaseName    := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbProdutos.DatabaseName    := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbPedidos.DatabaseName     := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbPedidosItens.DatabaseName:= telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbUnidade.DatabaseName     := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbTributos.DatabaseName    := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbEmitente.DatabaseName    := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbNCM.DatabaseName         := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbConta.DatabaseName       := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbCompras.DatabaseName     := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbCompraItens.DatabaseName := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbFornecedores.DatabaseName:= telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbLogin.DatabaseName       := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbCsosn.DatabaseName       := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbCst.DatabaseName         := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbEstados.DatabaseName     := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbCidades.DatabaseName     := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbRuas.DatabaseName        := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbBairros.DatabaseName     := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbEstoque.DatabaseName     := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbPagamentos.DatabaseName  := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbContador.DatabaseName    := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbOrigem.DatabaseName      := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbIbpt.DatabaseName       := telaDados.sServidor + ':' + telaDados.sPathServer;
+  telaDados.dbPos.DatabaseName         := telaDados.sServidor + ':' + telaDados.sPathServer;
+
+
+  telaDados.dbClientes.Open;
+  telaDados.dbProdutos.Open;
+  telaDados.dbPedidos.Open;
+  telaDados.dbPedidosItens.Open;
+  telaDados.dbUnidade.Open;
+  telaDados.dbTributos.Open;
+  telaDados.dbEmitente.Open;
+  telaDados.dbNCM.Open;
+  telaDados.dbConta.Open;
+  telaDados.dbCompras.Open;
+  telaDados.dbCompraItens.Open;
+  telaDados.dbFornecedores.Open;
+  telaDados.dbLogin.Open;
+  telaDados.dbCsosn.Open;
+  telaDados.dbCst.Open;
+  telaDados.dbEstados.Open;
+  telaDados.dbCidades.Open;
+  telaDados.dbRuas.Open;
+  telaDados.dbBairros.Open;
+  telaDados.dbEstoque.Open;
+  telaDados.dbPagamentos.Open;
+  telaDados.dbContador.Open;
+  telaDados.dbOrigem.Open;
+  telaDados.dbIbpt.Open;
+  telaDados.dbPos.Open;
+
+
+end;
+
+procedure TtelaPrincipal.SpeedButton1Click(Sender: TObject);
+begin
+Application.Terminate;
 end;
 
 end.

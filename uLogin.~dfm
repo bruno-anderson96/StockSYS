@@ -3,7 +3,7 @@ object telaLogin: TtelaLogin
   Top = 161
   BiDiMode = bdLeftToRight
   BorderStyle = bsToolWindow
-  Caption = 'Acesso'
+  Caption = 'Automa'#231#227'o Comercial'
   ClientHeight = 237
   ClientWidth = 481
   Color = clWhite

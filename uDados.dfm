@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 106
-  Top = 85
+  Left = 260
+  Top = 379
   Width = 1216
   Height = 693
   Caption = 'Data m'#243'dulo'
@@ -755,6 +755,7 @@ object telaDados: TtelaDados
   object tblClientes: TIBTable
     Database = dbClientes
     Transaction = trnscClientes
+    BeforePost = tblClientesBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -1513,6 +1514,10 @@ object telaDados: TtelaDados
   object trnscClientes: TIBTransaction
     Active = True
     DefaultDatabase = dbClientes
+    Params.Strings = (
+      'read_committed'
+      'rec_version'
+      'nowait')
     AutoStopAction = saNone
     Left = 224
     Top = 80

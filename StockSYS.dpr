@@ -51,8 +51,5 @@ begin
   Application.CreateForm(TtelaConfigSat, telaConfigSat);
   Application.CreateForm(TtelaGerarNfe, telaGerarNfe);
   Application.CreateForm(TtelaConfigEmit, telaConfigEmit);
-  Application.CreateForm(TtelaSped, telaSped);
-  Application.CreateForm(TtelaContador, telaContador);
-  Application.CreateForm(TtelaPreviewCfe, telaPreviewCfe);
   Application.Run;
 end.

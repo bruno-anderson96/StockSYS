@@ -45,6 +45,7 @@ begin
   telaDados.qryLogin.SQL.Add(edtLogin.Text);
   telaDados.qryLogin.Open;
  }
+    telaDados.tblLogin.Open;
     telaDados.tblLogin.Locate('LOGIN', edtLogin.Text,[loCaseInsensitive]);{ and
      (telaDados.tblLogin.Locate('SENHA', edtSenha.Text,[loCaseInsensitive])) then begin }
 

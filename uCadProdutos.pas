@@ -169,6 +169,7 @@ begin
   telaDados.FormataCampos;
 
   //Preenchendo Combobox Unidades
+  telaDados.qryUnidade.Open;
   telaDados.qryUnidade.First;
   while not telaDados.qryUnidade.Eof do begin
     cbUnidade.Items.Add(telaDados.qryUnidade.FieldValues['SIGLA']);

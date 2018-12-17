@@ -39,6 +39,7 @@ implementation
 
 procedure TtelaPesCliente.btnPesquisaClick(Sender: TObject);
 begin
+  
   if editBusca.Text = '' then
   begin
     telaDados.qryClientes.Close;
@@ -58,7 +59,7 @@ begin
     end;
     telaDados.qryClientes.Params.ParamByName('pDados').asString := editBusca.Text + '%';
     telaDados.qryClientes.Open;
-  end;                         
+  end;
 end;
 
 procedure TtelaPesCliente.FormShow(Sender: TObject);

@@ -83,7 +83,7 @@ begin
 
   telaDados.tblProdutos.Locate('ID', num , []);
 
-  if telaDados.tblProdutosEAN13 >12  then begin
+  if Length(telaDados.tblProdutosEAN13.Value) >12  then begin
     telaDados.GeraBarrasEAN13(telaCadProdutos.editEan.Text, telaCadProdutos.Image1.Canvas);
    end;
 

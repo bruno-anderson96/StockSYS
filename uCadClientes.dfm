@@ -1,6 +1,6 @@
 object telaCadClientes: TtelaCadClientes
-  Left = 536
-  Top = 175
+  Left = 304
+  Top = 143
   Width = 838
   Height = 448
   Caption = 'Cadastro de Cliente'
@@ -1743,7 +1743,7 @@ object telaCadClientes: TtelaCadClientes
     end
     object Pesquisar: TAction
       Caption = 'F5 - &Pesquisar'
-      ShortCut = 117
+      ShortCut = 116
       OnExecute = PesquisarExecute
     end
     object Relatorio: TAction

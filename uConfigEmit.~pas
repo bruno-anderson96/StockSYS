@@ -92,6 +92,7 @@ begin
   if telaDados.qryEmitente.RecordCount > 0 then begin
     telaDados.qryEmitente.Open;
     radReg.ItemIndex := telaDados.qryEmitente.FieldByName('REGIME').Value;
+    cbEmpresa.ItemIndex := telaDados.qryEmitente.FieldByName('TIPOEMP').Value;
   end else begin
     telaDados.qryEmitente.Close;
   end;

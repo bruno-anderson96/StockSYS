@@ -438,6 +438,8 @@ end else
 
   telaDados.tblClientesUF_END.Value := editUf.Text;
   telaDados.tblClientes.Post;
+  telaDados.trnscClientes.CommitRetaining;
+  telaDados.tblClientes.ApplyUpdates;
   telaDados.tblClientes.Close;
 
   btnIncluir.Enabled := true;
@@ -488,8 +490,7 @@ end else
   editODSite.Enabled := false;
   editODObs.Enabled := false;
 
-  RadioGroup1.Enabled := false;
-
+  RadioGroup1.Enabled := false; 
 end;
 
 procedure TtelaCadClientes.FecharExecute(Sender: TObject);

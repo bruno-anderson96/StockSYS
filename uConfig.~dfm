@@ -1,6 +1,6 @@
 object telaConfig: TtelaConfig
-  Left = 621
-  Top = 95
+  Left = 612
+  Top = 54
   Width = 473
   Height = 688
   Caption = 'Configura'#231#227'o NFe'
@@ -56,7 +56,7 @@ object telaConfig: TtelaConfig
     Top = 0
     Width = 457
     Height = 609
-    ActivePage = TabSheet3
+    ActivePage = TabSheet6
     Align = alClient
     TabOrder = 1
     object TabSheet1: TTabSheet
@@ -906,6 +906,62 @@ object telaConfig: TtelaConfig
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
+      end
+    end
+    object TabSheet6: TTabSheet
+      Caption = '&6 - Servidor'
+      ImageIndex = 5
+      object Panel2: TPanel
+        Left = 0
+        Top = 0
+        Width = 449
+        Height = 581
+        Align = alClient
+        TabOrder = 0
+        object Label1: TLabel
+          Left = 24
+          Top = 91
+          Width = 92
+          Height = 13
+          Caption = 'Caminho Servidor .:'
+        end
+        object Label3: TLabel
+          Left = 168
+          Top = 24
+          Width = 107
+          Height = 13
+          Caption = 'Configura'#231#227'o de Rede'
+        end
+        object btnPathServer: TSpeedButton
+          Left = 408
+          Top = 83
+          Width = 23
+          Height = 22
+          Caption = '...'
+          OnClick = btnPathServerClick
+        end
+        object Label4: TLabel
+          Left = 69
+          Top = 67
+          Width = 48
+          Height = 13
+          Caption = 'Servidor .:'
+        end
+        object edtPathServer: TEdit
+          Left = 128
+          Top = 89
+          Width = 265
+          Height = 21
+          TabOrder = 0
+          Text = '127.0.0.1'
+        end
+        object edtServidor: TEdit
+          Left = 128
+          Top = 64
+          Width = 121
+          Height = 21
+          TabOrder = 1
+        end
       end
     end
   end

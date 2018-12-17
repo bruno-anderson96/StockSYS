@@ -3,7 +3,7 @@ unit uConfig;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,                        
   Dialogs, StdCtrls, ComCtrls, Buttons, ExtCtrls, IniFiles, uDados, DB,
   Mask, DBCtrls, ACBrBase, ACBrSocket, ACBrCEP, ACBrIBGE, Grids, DBGrids,
   ActnList;
@@ -76,6 +76,14 @@ type
     btnEditar: TSpeedButton;
     btnExcluir: TSpeedButton;
     btnSalvar: TSpeedButton;
+    TabSheet6: TTabSheet;
+    Panel2: TPanel;
+    Label1: TLabel;
+    Label3: TLabel;
+    edtPathServer: TEdit;
+    btnPathServer: TSpeedButton;
+    edtServidor: TEdit;
+    Label4: TLabel;
     procedure btnEscolherCaminhoClick(Sender: TObject);
     procedure btnEscolherCaminho2Click(Sender: TObject);
     procedure btnCaminhoCertClick(Sender: TObject);
@@ -90,6 +98,7 @@ type
     procedure actInserirExecute(Sender: TObject);
     procedure actEditarExecute(Sender: TObject);
     procedure actConfirmarExecute(Sender: TObject);
+    procedure btnPathServerClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -213,6 +222,9 @@ begin
   telaDados.sEHost        := edtEHost.Text;
   telaDados.sEUsuario     := edtEUsuario.Text;
   telaDados.sESenha       := edtESenha.Text;
+  //SERVIDOR
+  telaDados.sPathServer   := edtPathServer.Text;
+  telaDados.sServidor   := edtServidor.Text;
 
   telaDados.GravaArquivoIni;
 end;
@@ -239,6 +251,7 @@ begin
   telaDados.LerArquivoIni;
   PageControl1.TabIndex := 0;
   telaDados.FormataCampos;
+
 
   //GERAL
   radioFormas.ItemIndex   := telaDados.sFormas;
@@ -276,6 +289,9 @@ begin
   edtEPorta.Text          := telaDados.sEPorta;
   edtEUsuario.Text        := telaDados.sEUsuario;
   edtESenha.Text          := telaDados.sESenha;
+//Servidor
+  edtPathServer.Text      := telaDados.sPathServer;
+  edtServidor.Text        := telaDados.sServidor;
 end;
 
 procedure TtelaConfig.actDeletarExecute(Sender: TObject);
@@ -332,6 +348,12 @@ begin
 
     editTributo.Clear;
   end;
+end;
+
+procedure TtelaConfig.btnPathServerClick(Sender: TObject);
+begin
+  OpenDialog1.Execute;
+  edtPathServer.Text := OpenDialog1.FileName;
 end;
 
 end.
