@@ -1,7 +1,7 @@
 object telaDados: TtelaDados
-  Left = 260
-  Top = 379
-  Width = 1216
+  Left = 183
+  Top = 17
+  Width = 1215
   Height = 693
   Caption = 'Data m'#243'dulo'
   Color = clBtnFace
@@ -362,6 +362,7 @@ object telaDados: TtelaDados
   object tblProdutos: TIBTable
     Database = dbProdutos
     Transaction = trnscProdutos
+    BeforePost = tblProdutosBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -1078,6 +1079,7 @@ object telaDados: TtelaDados
   object tblPedidos: TIBTable
     Database = dbPedidos
     Transaction = trnscPedidos
+    BeforePost = tblPedidosBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -1537,6 +1539,7 @@ object telaDados: TtelaDados
   object tblPedidosItens: TIBTable
     Database = dbPedidosItens
     Transaction = trnscPedidosItens
+    BeforePost = tblPedidosItensBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -1743,6 +1746,7 @@ object telaDados: TtelaDados
   object tblUnidade: TIBTable
     Database = dbUnidade
     Transaction = trnscUnidade
+    BeforePost = tblUnidadeBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -1943,6 +1947,7 @@ object telaDados: TtelaDados
   object tblEmitente: TIBTable
     Database = dbEmitente
     Transaction = trnscEmitente
+    BeforePost = tblEmitenteBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -2324,6 +2329,7 @@ object telaDados: TtelaDados
   object tblNCM: TIBTable
     Database = dbNCM
     Transaction = trnscNCM
+    BeforePost = tblNCMBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -2395,6 +2401,7 @@ object telaDados: TtelaDados
   object tblConta: TIBTable
     Database = dbConta
     Transaction = trnscConta
+    BeforePost = tblContaBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -2498,6 +2505,7 @@ object telaDados: TtelaDados
   object tblCompras: TIBTable
     Database = dbCompras
     Transaction = trnscCompras
+    BeforePost = tblComprasBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -2896,6 +2904,7 @@ object telaDados: TtelaDados
   object tblCompraItens: TIBTable
     Database = dbCompraItens
     Transaction = trnscCompraItens
+    BeforePost = tblCompraItensBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -3101,6 +3110,7 @@ object telaDados: TtelaDados
   object tblFornecedores: TIBTable
     Database = dbFornecedores
     Transaction = trnscFornecedores
+    BeforePost = tblFornecedoresBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -3492,6 +3502,7 @@ object telaDados: TtelaDados
   object tblLogin: TIBTable
     Database = dbLogin
     Transaction = trnscLogin
+    BeforePost = tblLoginBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -3586,6 +3597,7 @@ object telaDados: TtelaDados
   object tblCsosn: TIBTable
     Database = dbCsosn
     Transaction = trnscCsosn
+    BeforePost = tblCsosnBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -3670,6 +3682,7 @@ object telaDados: TtelaDados
   object tblCst: TIBTable
     Database = dbCst
     Transaction = trnscCst
+    BeforePost = tblCstBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -3784,6 +3797,7 @@ object telaDados: TtelaDados
   object tblEstados: TIBTable
     Database = dbEstados
     Transaction = trnscEstados
+    BeforePost = tblEstadosBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -3850,6 +3864,7 @@ object telaDados: TtelaDados
   object tblBairros: TIBTable
     Database = dbBairros
     Transaction = trnscBairros
+    BeforePost = tblBairrosBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -3893,6 +3908,7 @@ object telaDados: TtelaDados
   object tblRuas: TIBTable
     Database = dbRuas
     Transaction = trnscRuas
+    BeforePost = tblRuasBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -3952,6 +3968,7 @@ object telaDados: TtelaDados
   object tblCidades: TIBTable
     Database = dbCidades
     Transaction = trnscCidades
+    BeforePost = tblCidadesBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -4117,6 +4134,7 @@ object telaDados: TtelaDados
     Database = dbEstoque
     Transaction = trnscEstoque
     AfterPost = tblEstoqueAfterPost
+    BeforePost = tblEstoqueBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -4261,6 +4279,7 @@ object telaDados: TtelaDados
   object tblPagamento: TIBTable
     Database = dbPagamentos
     Transaction = trnscPagamento
+    BeforePost = tblPagamentoBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -4382,6 +4401,7 @@ object telaDados: TtelaDados
   object tblContador: TIBTable
     Database = dbContador
     Transaction = trnscContador
+    BeforePost = tblContadorBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -4645,6 +4665,7 @@ object telaDados: TtelaDados
   object tblOrigem: TIBTable
     Database = dbOrigem
     Transaction = trnscOrigem
+    BeforePost = tblOrigemBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -4726,6 +4747,7 @@ object telaDados: TtelaDados
   object tblIbpt: TIBTable
     Database = dbIbpt
     Transaction = trnscIbpt
+    BeforePost = tblIbptBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -4840,6 +4862,7 @@ object telaDados: TtelaDados
   object tblPos: TIBTable
     Database = dbPos
     Transaction = trnscPos
+    BeforePost = tblPosBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False
@@ -4953,6 +4976,7 @@ object telaDados: TtelaDados
   object tblTributos: TIBTable
     Database = dbTributos
     Transaction = trnscTributos
+    BeforePost = tblTributosBeforePost
     Active = True
     BufferChunks = 1000
     CachedUpdates = False

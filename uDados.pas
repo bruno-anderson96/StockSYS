@@ -540,6 +540,30 @@ type
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
     procedure tblClientesBeforePost(DataSet: TDataSet);
+    procedure tblProdutosBeforePost(DataSet: TDataSet);
+    procedure tblPedidosBeforePost(DataSet: TDataSet);
+    procedure tblComprasBeforePost(DataSet: TDataSet);
+    procedure tblLoginBeforePost(DataSet: TDataSet);
+    procedure tblEstadosBeforePost(DataSet: TDataSet);
+    procedure tblBairrosBeforePost(DataSet: TDataSet);
+    procedure tblPedidosItensBeforePost(DataSet: TDataSet);
+    procedure tblUnidadeBeforePost(DataSet: TDataSet);
+    procedure tblTributosBeforePost(DataSet: TDataSet);
+    procedure tblCompraItensBeforePost(DataSet: TDataSet);
+    procedure tblCsosnBeforePost(DataSet: TDataSet);
+    procedure tblRuasBeforePost(DataSet: TDataSet);
+    procedure tblEstoqueBeforePost(DataSet: TDataSet);
+    procedure tblEmitenteBeforePost(DataSet: TDataSet);
+    procedure tblNCMBeforePost(DataSet: TDataSet);
+    procedure tblContaBeforePost(DataSet: TDataSet);
+    procedure tblFornecedoresBeforePost(DataSet: TDataSet);
+    procedure tblCstBeforePost(DataSet: TDataSet);
+    procedure tblCidadesBeforePost(DataSet: TDataSet);
+    procedure tblPagamentoBeforePost(DataSet: TDataSet);
+    procedure tblContadorBeforePost(DataSet: TDataSet);
+    procedure tblOrigemBeforePost(DataSet: TDataSet);
+    procedure tblIbptBeforePost(DataSet: TDataSet);
+    procedure tblPosBeforePost(DataSet: TDataSet);
     
   private
     { Private declarations }
@@ -1166,6 +1190,270 @@ begin
     telaDados.qryClientes.SQL.Add('Select COUNT(*) from CLIENTE');
     telaDados.qryClientes.Open;
     telaDados.tblClientesID.Value := telaDados.qryClientes.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblProdutosBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblProdutos.state = dsInsert then begin
+    telaDados.qryProdutos.Close;
+    telaDados.qryProdutos.SQL.Clear;
+    telaDados.qryProdutos.SQL.Add('Select COUNT(*) from PRODUTOS');
+    telaDados.qryProdutos.Open;
+    telaDados.tblProdutosID.Value := telaDados.qryProdutos.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblPedidosBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblPedidos.state = dsInsert then begin
+    telaDados.qryPedidos.Close;
+    telaDados.qryPedidos.SQL.Clear;
+    telaDados.qryPedidos.SQL.Add('Select COUNT(*) from PEDIDO');
+    telaDados.qryPedidos.Open;
+    telaDados.tblPedidosID.Value := telaDados.qryPedidos.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblComprasBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblCompras.state = dsInsert then begin
+    telaDados.qryCompras.Close;
+    telaDados.qryCompras.SQL.Clear;
+    telaDados.qryCompras.SQL.Add('Select COUNT(*) from COMPRA');
+    telaDados.qryCompras.Open;
+    telaDados.tblComprasID.Value := telaDados.qryCompras.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblLoginBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblLogin.state = dsInsert then begin
+    telaDados.qryLogin.Close;
+    telaDados.qryLogin.SQL.Clear;
+    telaDados.qryLogin.SQL.Add('Select COUNT(*) from LOGIN');
+    telaDados.qryLogin.Open;
+    telaDados.tblLoginID.Value := telaDados.qryLogin.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblEstadosBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblEstados.state = dsInsert then begin
+    telaDados.qryEstados.Close;
+    telaDados.qryEstados.SQL.Clear;
+    telaDados.qryEstados.SQL.Add('Select COUNT(*) from ESTADOS');
+    telaDados.qryEstados.Open;
+    telaDados.tblEstadosID.Value := telaDados.qryEstados.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblBairrosBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblBairros.state = dsInsert then begin
+    telaDados.qryBairros.Close;
+    telaDados.qryBairros.SQL.Clear;
+    telaDados.qryBairros.SQL.Add('Select COUNT(*) from BAIRROS');
+    telaDados.qryBairros.Open;
+    telaDados.tblBairrosID.Value := telaDados.qryBairros.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblPedidosItensBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblPedidosItens.state = dsInsert then begin
+    telaDados.qryPedidosItens.Close;
+    telaDados.qryPedidosItens.SQL.Clear;
+    telaDados.qryPedidosItens.SQL.Add('Select COUNT(*) from PEDIDO_ITENS');
+    telaDados.qryPedidosItens.Open;
+    telaDados.tblPedidosItensID.Value := telaDados.qryPedidosItens.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblUnidadeBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblUnidade.state = dsInsert then begin
+    telaDados.qryUnidade.Close;
+    telaDados.qryUnidade.SQL.Clear;
+    telaDados.qryUnidade.SQL.Add('Select COUNT(*) from UNIDADE');
+    telaDados.qryUnidade.Open;
+    telaDados.tblUnidadeID.Value := telaDados.qryUnidade.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblTributosBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblTributos.state = dsInsert then begin
+    telaDados.qryTributos.Close;
+    telaDados.qryTributos.SQL.Clear;
+    telaDados.qryTributos.SQL.Add('Select COUNT(*) from TRIBUTO');
+    telaDados.qryTributos.Open;
+    telaDados.tblTributosID.Value := telaDados.qryTributos.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblCompraItensBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblCompraItens.state = dsInsert then begin
+    telaDados.qryCompraItens.Close;
+    telaDados.qryCompraItens.SQL.Clear;
+    telaDados.qryCompraItens.SQL.Add('Select COUNT(*) from COMPRA_ITENS');
+    telaDados.qryCompraItens.Open;
+    telaDados.tblCompraItensID.Value := telaDados.qryCompraItens.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblCsosnBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblCsosn.state = dsInsert then begin
+    telaDados.qryCsosn.Close;
+    telaDados.qryCsosn.SQL.Clear;
+    telaDados.qryCsosn.SQL.Add('Select COUNT(*) from CSOSN');
+    telaDados.qryCsosn.Open;
+    telaDados.tblCsosnID.Value := telaDados.qryCsosn.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblRuasBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblRuas.state = dsInsert then begin
+    telaDados.qryRuas.Close;
+    telaDados.qryRuas.SQL.Clear;
+    telaDados.qryRuas.SQL.Add('Select COUNT(*) from RUAS');
+    telaDados.qryRuas.Open;
+    telaDados.tblRuasID.Value := telaDados.qryRuas.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblEstoqueBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblEstoque.state = dsInsert then begin
+    telaDados.qryEstoque.Close;
+    telaDados.qryEstoque.SQL.Clear;
+    telaDados.qryEstoque.SQL.Add('Select COUNT(*) from ESTOQUE');
+    telaDados.qryEstoque.Open;
+    telaDados.tblEstoqueID.Value := telaDados.qryEstoque.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblEmitenteBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblEmitente.state = dsInsert then begin
+    telaDados.qryEmitente.Close;
+    telaDados.qryEmitente.SQL.Clear;
+    telaDados.qryEmitente.SQL.Add('Select COUNT(*) from EMITENTE');
+    telaDados.qryEmitente.Open;
+    telaDados.tblEmitenteID.Value := telaDados.qryEmitente.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblNCMBeforePost(DataSet: TDataSet);
+begin
+  {if telaDados.tblNCM.state = dsInsert then begin
+    telaDados.qryNcm.Close;
+    telaDados.qryNcm.SQL.Clear;
+    telaDados.qryNcm.SQL.Add('Select COUNT(*) from NCM');
+    telaDados.qryNcm.Open;
+    telaDados.tblNCMCODNCM.Value := telaDados.qryNcm.FieldByName('COUNT').AsInteger + 1;
+  end;  }
+end;
+
+procedure TtelaDados.tblContaBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblConta.state = dsInsert then begin
+    telaDados.qryConta.Close;
+    telaDados.qryConta.SQL.Clear;
+    telaDados.qryConta.SQL.Add('Select COUNT(*) from CONTA');
+    telaDados.qryConta.Open;
+    telaDados.tblContaID.Value := telaDados.qryConta.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblFornecedoresBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblFornecedores.state = dsInsert then begin
+    telaDados.qryFornecedores.Close;
+    telaDados.qryFornecedores.SQL.Clear;
+    telaDados.qryFornecedores.SQL.Add('Select COUNT(*) from FORNECEDOR');
+    telaDados.qryFornecedores.Open;
+    telaDados.tblFornecedoresID.Value := telaDados.qryFornecedores.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblCstBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblCst.state = dsInsert then begin
+    telaDados.qryCst.Close;
+    telaDados.qryCst.SQL.Clear;
+    telaDados.qryCst.SQL.Add('Select COUNT(*) from CST');
+    telaDados.qryCst.Open;
+    telaDados.tblCstID.Value := telaDados.qryCst.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblCidadesBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblCidades.state = dsInsert then begin
+    telaDados.qryCidades.Close;
+    telaDados.qryCidades.SQL.Clear;
+    telaDados.qryCidades.SQL.Add('Select COUNT(*) from CIDADES');
+    telaDados.qryCidades.Open;
+    telaDados.tblCidadesID.Value := telaDados.qryCidades.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblPagamentoBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblPagamento.state = dsInsert then begin
+    telaDados.qryPagamentos.Close;
+    telaDados.qryPagamentos.SQL.Clear;
+    telaDados.qryPagamentos.SQL.Add('Select COUNT(*) from PAGAMENTO');
+    telaDados.qryPagamentos.Open;
+    telaDados.tblPagamentoID.Value := telaDados.qryPagamentos.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblContadorBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblContador.state = dsInsert then begin
+    telaDados.qryContador.Close;
+    telaDados.qryContador.SQL.Clear;
+    telaDados.qryContador.SQL.Add('Select COUNT(*) from CONTADOR');
+    telaDados.qryContador.Open;
+    telaDados.tblContadorID.Value := telaDados.qryContador.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblOrigemBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblOrigem.state = dsInsert then begin
+    telaDados.qryOrigem.Close;
+    telaDados.qryOrigem.SQL.Clear;
+    telaDados.qryOrigem.SQL.Add('Select COUNT(*) from ORIGEM');
+    telaDados.qryOrigem.Open;
+    telaDados.tblOrigemID.Value := telaDados.qryOrigem.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.tblIbptBeforePost(DataSet: TDataSet);
+begin
+ { if telaDados.tblIbpt.state = dsInsert then begin
+    telaDados.qryIbpt.Close;
+    telaDados.qryIbpt.SQL.Clear;
+    telaDados.qryIbpt.SQL.Add('Select COUNT(*) from IBPT');
+    telaDados.qryIbpt.Open;
+    telaDados.tblIbptID.Value := telaDados.qryIbpt.FieldByName('COUNT').AsInteger + 1;
+  end; }
+end;
+
+procedure TtelaDados.tblPosBeforePost(DataSet: TDataSet);
+begin
+  if telaDados.tblPos.state = dsInsert then begin
+    telaDados.qryPos.Close;
+    telaDados.qryPos.SQL.Clear;
+    telaDados.qryPos.SQL.Add('Select COUNT(*) from POS');
+    telaDados.qryPos.Open;
+    telaDados.tblPosID.Value := telaDados.qryPos.FieldByName('COUNT').AsInteger + 1;
   end;
 end;
 
