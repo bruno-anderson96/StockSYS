@@ -67,6 +67,12 @@ type
     Panel3: TPanel;
     SpeedButton1: TSpeedButton;
     Panel4: TPanel;
+    Relatrios1: TMenuItem;
+    Clientes2: TMenuItem;
+    Fornecedores2: TMenuItem;
+    Produtos2: TMenuItem;
+    Inventrio1: TMenuItem;
+    ransportadora1: TMenuItem;
     procedure Sair1Click(Sender: TObject);
     procedure StatusdeServio1Click(Sender: TObject);
     procedure Clientes1Click(Sender: TObject);
@@ -101,6 +107,8 @@ type
     procedure POS1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure Inventrio1Click(Sender: TObject);
+    procedure ransportadora1Click(Sender: TObject);
 
 
   private
@@ -119,7 +127,8 @@ implementation
 
 uses uGerarNfe, uDados, uValidaXml, uEnviarNfe, uCancelaNfe, uInutilizaNfe,
   uEmiteDanfe, uEnviaEmail, uCadFornecedor, uLancCompras, uGerarNfeEntrada, XPMan, uConfig,
-  uConfigSat, uConfigEmit, uCadCep, uContador, uSped, uCadPos;
+  uConfigSat, uConfigEmit, uCadCep, uContador, uSped, uCadPos, uInventario,
+  uCadTransportadora;
 
 {$R *.dfm}
 
@@ -436,7 +445,19 @@ end;
 
 procedure TtelaPrincipal.SpeedButton1Click(Sender: TObject);
 begin
-Application.Terminate;
+  Application.Terminate;
+end;
+
+procedure TtelaPrincipal.Inventrio1Click(Sender: TObject);
+begin
+  Application.CreateForm(TtelaInventario, telaInventario);
+  telaInventario.Show;
+end;
+
+procedure TtelaPrincipal.ransportadora1Click(Sender: TObject);
+begin
+  Application.CreateForm(TtelaCadTransportadora, telaCadTransportadora);
+  telaCadTransportadora.Show;
 end;
 
 end.

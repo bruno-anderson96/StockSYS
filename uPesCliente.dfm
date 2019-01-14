@@ -1,6 +1,6 @@
 object telaPesCliente: TtelaPesCliente
-  Left = 192
-  Top = 163
+  Left = 193
+  Top = 317
   Width = 1108
   Height = 480
   Caption = 'Pesquisa Cliente'
@@ -102,7 +102,9 @@ object telaPesCliente: TtelaPesCliente
       Width = 145
       Height = 21
       ItemHeight = 13
+      ItemIndex = 0
       TabOrder = 1
+      Text = 'Nome'
       Items.Strings = (
         'Nome'
         'CPF'
@@ -133,6 +135,11 @@ object telaPesCliente: TtelaPesCliente
       TitleFont.Style = []
       OnDblClick = DBGrid1DblClick
       Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID'
+          Visible = True
+        end
         item
           Expanded = False
           FieldName = 'NOME'

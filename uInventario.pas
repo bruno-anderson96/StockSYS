@@ -1,0 +1,39 @@
+unit uInventario;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls;
+
+type
+  TtelaInventario = class(TForm)
+    Panel1: TPanel;
+    btnVisualizar: TSpeedButton;
+    cbRelatorio: TComboBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    dtData: TDateTimePicker;
+    procedure btnVisualizarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  telaInventario: TtelaInventario;
+
+implementation
+
+uses urInventario;
+
+{$R *.dfm}
+
+procedure TtelaInventario.btnVisualizarClick(Sender: TObject);
+begin
+  Application.CreateForm(TrInventario, rInventario);
+  rInventario.qrInventario.Preview;
+end;
+
+end.

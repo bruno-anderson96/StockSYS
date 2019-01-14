@@ -103,6 +103,8 @@ type
     btnEditar: TBitBtn;
     Editar: TAction;
     editUf: TComboBox;
+    Label34: TLabel;
+    editFantasia: TDBEdit;
     procedure btnIncluirClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
@@ -262,7 +264,7 @@ end;
 procedure TtelaCadClientes.FormShow(Sender: TObject);
 begin
   telaDados.tblClientes.Open;
-  telaDados.FormataCampos;
+  telaDados.FormataCampos; 
 
   if editNome.Text = '' then begin
     Excluir.Enabled := False;
@@ -294,6 +296,8 @@ begin
   editCpf.Enabled := true;
   editRg.Enabled := true;
   editDtCad.Enabled := true;
+  editFantasia.Enabled := true;
+  
   cbAtivo.Enabled := true;
 
   editEntCep.Enabled := true;
@@ -440,7 +444,7 @@ end else
   telaDados.tblClientes.Post;
   telaDados.trnscClientes.CommitRetaining;
   telaDados.tblClientes.ApplyUpdates;
-  telaDados.tblClientes.Close;
+  //telaDados.tblClientes.Close;
 
   btnIncluir.Enabled := true;
   btnConfirmar.Enabled := false;
@@ -467,7 +471,8 @@ end else
   editCelular.Enabled := false;
   editCpf.Enabled := false;
   editRg.Enabled := false;
-  editDtCad.Enabled := false;
+  editDtCad.Enabled := false;  
+  editFantasia.Enabled := false;
   cbAtivo.Enabled := false;
 
   editEntCep.Enabled := false;
@@ -517,6 +522,7 @@ begin
   editCpf.Enabled := false;
   editRg.Enabled := false;
   editDtCad.Enabled := false;
+  editFantasia.Enabled := false;
   cbAtivo.Enabled := false;
 
   editEntCep.Enabled := false;
@@ -639,7 +645,8 @@ begin
   editCelular.Enabled := true;
   editCpf.Enabled := true;
   editRg.Enabled := true;
-  editDtCad.Enabled := true;
+  editDtCad.Enabled := true;   
+  editFantasia.Enabled := true;
   cbAtivo.Enabled := true;
 
   editEntCep.Enabled := true;

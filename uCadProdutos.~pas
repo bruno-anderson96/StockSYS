@@ -144,6 +144,7 @@ type
     procedure editNcmExit(Sender: TObject);
     procedure editVendaExit(Sender: TObject);
     procedure editVendaPExit(Sender: TObject);
+    procedure cbTribChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -920,7 +921,7 @@ begin
       Next;
      end;
   end;
-  with telaDados.tblCst do
+    with telaDados.tblCst do
   begin
     First;
     while not Eof do
@@ -1080,6 +1081,39 @@ begin
   if editVenda.Text = '' then begin
     editVenda.Text := '0,00';
   end;
+end;
+
+procedure TtelaCadProdutos.cbTribChange(Sender: TObject);
+begin
+  telaDados.qryTributos.Close;
+  telaDados.qryTributos.SQL.Clear;
+  telaDados.qryTributos.SQL.Add('Select * From TRIBUTO where ID = ');
+  telaDados.qryTributos.SQL.Add(intToStr(cbTrib.ItemIndex));
+  telaDados.qryTributos.Open;
+
+  telaDados.qryCsosn.Close;
+  telaDados.qryCsosn.SQL.Clear;
+  telaDados.qryCsosn.SQL.Add('Select * From CSOSN where CODIGO = ');
+  telaDados.qryCsosn.SQL.Add(intToStr(telaDados.qryTributos.FieldByName('CODCSOSN').asInteger));
+  telaDados.qryCsosn.Open;
+
+  telaDados.qryOrigem.Close;
+  telaDados.qryOrigem.SQL.Clear;
+  telaDados.qryOrigem.SQL.Add('Select * From ORIGEM where CODIGO = ');
+  telaDados.qryOrigem.SQL.Add(intToStr(telaDados.qryTributos.FieldByName('CODORIGEM').AsInteger));
+  telaDados.qryOrigem.Open;
+
+  telaDados.qryCst.Close;
+  telaDados.qryCst.SQL.Clear;
+  telaDados.qryCst.SQL.Add('Select * From CST where CODIGO = ');
+  telaDados.qryCst.SQL.Add(intToStr(telaDados.qryTributos.FieldByName('CODCST').AsInteger));
+  telaDados.qryCst.Open;
+
+
+  cbCsosn.ItemIndex := telaDados.qryCsosn.FieldByName('ID').AsInteger;
+  cbCst.ItemIndex   := telaDados.qryTributos.FieldByName('ID').AsInteger;
+  cbOrigem.ItemIndex:= telaDados.qryOrigem.FieldByName('ID').AsInteger;
+  edtCfop.Text      := telaDados.qryTributos.FieldByName('CODCFOP').AsString;
 end;
 
 end.

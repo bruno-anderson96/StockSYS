@@ -1,6 +1,6 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 267
-  Top = 163
+  Left = 148
+  Top = 108
   Align = alClient
   BorderStyle = bsDialog
   Caption = 'Lan'#231'amento de Pedidos'
@@ -3590,7 +3590,7 @@ object telaLancPedidos: TtelaLancPedidos
     end
   end
   object ActionList1: TActionList
-    Left = 12
+    Left = 16
     Top = 40
     object Incluir: TAction
       Caption = 'F2 - &Incluir'

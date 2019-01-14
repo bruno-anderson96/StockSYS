@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 183
-  Top = 17
+  Left = 865
+  Top = 283
   Width = 1215
   Height = 693
   Caption = 'Data m'#243'dulo'
@@ -331,6 +331,32 @@ object telaDados: TtelaDados
     Width = 37
     Height = 20
     Caption = 'POS'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label23: TLabel
+    Left = 752
+    Top = 520
+    Width = 170
+    Height = 20
+    Caption = 'TRANSPORTADORA'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label24: TLabel
+    Left = 1000
+    Top = 520
+    Width = 79
+    Height = 20
+    Caption = 'VEICULO'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -932,6 +958,11 @@ object telaDados: TtelaDados
         Name = 'EMAIL'
         DataType = ftString
         Size = 150
+      end
+      item
+        Name = 'FANTASIA'
+        DataType = ftString
+        Size = 50
       end>
     IndexDefs = <
       item
@@ -1074,6 +1105,10 @@ object telaDados: TtelaDados
     object tblClientesEMAIL: TIBStringField
       FieldName = 'EMAIL'
       Size = 150
+    end
+    object tblClientesFANTASIA: TIBStringField
+      FieldName = 'FANTASIA'
+      Size = 50
     end
   end
   object tblPedidos: TIBTable
@@ -2556,7 +2591,7 @@ object telaDados: TtelaDados
         Size = 2
       end
       item
-        Name = 'ACRESCIO'
+        Name = 'ACRESCIMO'
         DataType = ftBCD
         Precision = 18
         Size = 2
@@ -2657,23 +2692,6 @@ object telaDados: TtelaDados
         Size = 2
       end
       item
-        Name = 'COO'
-        DataType = ftInteger
-      end
-      item
-        Name = 'CCF'
-        DataType = ftInteger
-      end
-      item
-        Name = 'GNF'
-        DataType = ftInteger
-      end
-      item
-        Name = 'DAV'
-        DataType = ftString
-        Size = 1
-      end
-      item
         Name = 'CNPJ_CPF'
         DataType = ftString
         Size = 18
@@ -2693,6 +2711,26 @@ object telaDados: TtelaDados
         Name = 'CHAVENFE'
         DataType = ftString
         Size = 50
+      end
+      item
+        Name = 'NNOTA'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'NSERIE'
+        DataType = ftString
+        Size = 3
+      end
+      item
+        Name = 'CFOP'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'MODELO'
+        DataType = ftString
+        Size = 45
       end>
     IndexDefs = <
       item
@@ -2734,11 +2772,6 @@ object telaDados: TtelaDados
     end
     object tblComprasDESCONTO: TIBBCDField
       FieldName = 'DESCONTO'
-      Precision = 18
-      Size = 2
-    end
-    object tblComprasACRESCIO: TIBBCDField
-      FieldName = 'ACRESCIO'
       Precision = 18
       Size = 2
     end
@@ -2814,19 +2847,6 @@ object telaDados: TtelaDados
       Precision = 18
       Size = 2
     end
-    object tblComprasCOO: TIntegerField
-      FieldName = 'COO'
-    end
-    object tblComprasCCF: TIntegerField
-      FieldName = 'CCF'
-    end
-    object tblComprasGNF: TIntegerField
-      FieldName = 'GNF'
-    end
-    object tblComprasDAV: TIBStringField
-      FieldName = 'DAV'
-      Size = 1
-    end
     object tblComprasCNPJ_CPF: TIBStringField
       FieldName = 'CNPJ_CPF'
       Size = 18
@@ -2853,6 +2873,26 @@ object telaDados: TtelaDados
       KeyFields = 'ID_FORNECEDOR'
       Size = 60
       Lookup = True
+    end
+    object tblComprasACRESCIMO: TIBBCDField
+      FieldName = 'ACRESCIMO'
+      Precision = 18
+      Size = 2
+    end
+    object tblComprasNNOTA: TIBStringField
+      FieldName = 'NNOTA'
+    end
+    object tblComprasNSERIE: TIBStringField
+      FieldName = 'NSERIE'
+      Size = 3
+    end
+    object tblComprasCFOP: TIBStringField
+      FieldName = 'CFOP'
+      Size = 5
+    end
+    object tblComprasMODELO: TIBStringField
+      FieldName = 'MODELO'
+      Size = 45
     end
   end
   object qryCompras: TIBQuery
@@ -3195,6 +3235,11 @@ object telaDados: TtelaDados
         Name = 'COMPLEMENTO'
         DataType = ftString
         Size = 20
+      end
+      item
+        Name = 'CONTATO'
+        DataType = ftString
+        Size = 50
       end>
     IndexDefs = <
       item
@@ -3263,6 +3308,10 @@ object telaDados: TtelaDados
     object tblFornecedoresFANTASIA: TIBStringField
       FieldName = 'FANTASIA'
       Size = 60
+    end
+    object tblFornecedoresCONTATO: TIBStringField
+      FieldName = 'CONTATO'
+      Size = 50
     end
   end
   object qryFornecedores: TIBQuery
@@ -4977,19 +5026,37 @@ object telaDados: TtelaDados
     Database = dbTributos
     Transaction = trnscTributos
     BeforePost = tblTributosBeforePost
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     FieldDefs = <
       item
         Name = 'ID'
-        Attributes = [faRequired]
         DataType = ftInteger
       end
       item
         Name = 'TIPOTRIB'
         DataType = ftString
         Size = 25
+      end
+      item
+        Name = 'CODCST'
+        DataType = ftString
+        Size = 2
+      end
+      item
+        Name = 'CODCFOP'
+        DataType = ftString
+        Size = 4
+      end
+      item
+        Name = 'CODORIGEM'
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'CODCSOSN'
+        DataType = ftString
+        Size = 3
       end>
     IndexDefs = <
       item
@@ -5003,11 +5070,26 @@ object telaDados: TtelaDados
     Top = 224
     object tblTributosID: TIntegerField
       FieldName = 'ID'
-      Required = True
     end
     object tblTributosTIPOTRIB: TIBStringField
       FieldName = 'TIPOTRIB'
       Size = 25
+    end
+    object tblTributosCODCST: TIBStringField
+      FieldName = 'CODCST'
+      Size = 2
+    end
+    object tblTributosCODCFOP: TIBStringField
+      FieldName = 'CODCFOP'
+      Size = 4
+    end
+    object tblTributosCODORIGEM: TIBStringField
+      FieldName = 'CODORIGEM'
+      Size = 1
+    end
+    object tblTributosCODCSOSN: TIBStringField
+      FieldName = 'CODCSOSN'
+      Size = 3
     end
   end
   object ibdsTributos: TIBDataSet
@@ -5023,5 +5105,337 @@ object telaDados: TtelaDados
     DataSource = dsTributos
     Left = 488
     Top = 264
+  end
+  object dsTransportadora: TDataSource
+    DataSet = tblTransportadora
+    Left = 824
+    Top = 544
+  end
+  object dsVeiculo: TDataSource
+    DataSet = tblVeiculo
+    Left = 1024
+    Top = 544
+  end
+  object qryTransportadora: TIBQuery
+    Database = dbTransportadora
+    Transaction = trnscTransportadora
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsTransportadora
+    SQL.Strings = (
+      'select * from TRANSPORTADORA')
+    Left = 824
+    Top = 624
+  end
+  object qryVeiculo: TIBQuery
+    Database = dbVeiculo
+    Transaction = trnscVeiculo
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    DataSource = dsVeiculo
+    SQL.Strings = (
+      'select * from VEICULO')
+    Left = 1024
+    Top = 624
+  end
+  object tblTransportadora: TIBTable
+    Database = dbTransportadora
+    Transaction = trnscTransportadora
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ENDERECO'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'CIDADE'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'UF'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 2
+      end
+      item
+        Name = 'BAIRRO'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'TELEFONE'
+        DataType = ftString
+        Size = 11
+      end
+      item
+        Name = 'TELEFONE2'
+        DataType = ftString
+        Size = 11
+      end
+      item
+        Name = 'CNPJ_CPF'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'INSC_RG'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'OBS'
+        DataType = ftBlob
+        Size = 8
+      end
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        Size = 50
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_TRANSPORTADORA'
+        Fields = 'ID'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'TRANSPORTADORA'
+    Left = 824
+    Top = 584
+    object tblTransportadoraID: TIntegerField
+      FieldName = 'ID'
+    end
+    object tblTransportadoraDESCRICAO: TIBStringField
+      FieldName = 'DESCRICAO'
+      Size = 50
+    end
+    object tblTransportadoraENDERECO: TIBStringField
+      FieldName = 'ENDERECO'
+      Size = 50
+    end
+    object tblTransportadoraCIDADE: TIBStringField
+      FieldName = 'CIDADE'
+      Size = 30
+    end
+    object tblTransportadoraUF: TIBStringField
+      FieldName = 'UF'
+      Size = 2
+    end
+    object tblTransportadoraBAIRRO: TIBStringField
+      FieldName = 'BAIRRO'
+      Size = 40
+    end
+    object tblTransportadoraTELEFONE: TIBStringField
+      FieldName = 'TELEFONE'
+      Size = 11
+    end
+    object tblTransportadoraTELEFONE2: TIBStringField
+      FieldName = 'TELEFONE2'
+      Size = 11
+    end
+    object tblTransportadoraCNPJ_CPF: TIBStringField
+      FieldName = 'CNPJ_CPF'
+    end
+    object tblTransportadoraINSC_RG: TIBStringField
+      FieldName = 'INSC_RG'
+    end
+    object tblTransportadoraOBS: TBlobField
+      FieldName = 'OBS'
+      Size = 8
+    end
+  end
+  object tblVeiculo: TIBTable
+    Database = dbVeiculo
+    Transaction = trnscVeiculo
+    Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'MODELO'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'PLACA'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'UF'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 2
+      end
+      item
+        Name = 'ANTT'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'CHASSI'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'RENAVAM'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'TIPO_VEIC'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'TIPO_ROD'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'TIPO_CARROC'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'TARA'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'CAP_CARGA'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'CAP_M3'
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'IDT'
+        DataType = ftInteger
+      end>
+    IndexDefs = <
+      item
+        Name = 'PK_VEICULO'
+        Fields = 'ID'
+        Options = [ixUnique]
+      end>
+    StoreDefs = True
+    TableName = 'VEICULO'
+    Left = 1024
+    Top = 584
+    object tblVeiculoID: TIntegerField
+      FieldName = 'ID'
+    end
+    object tblVeiculoIDT: TIntegerField
+      FieldName = 'IDT'
+    end
+    object tblVeiculoMODELO: TIBStringField
+      FieldName = 'MODELO'
+      Size = 50
+    end
+    object tblVeiculoPLACA: TIBStringField
+      FieldName = 'PLACA'
+      Size = 10
+    end
+    object tblVeiculoUF: TIBStringField
+      FieldName = 'UF'
+      Size = 2
+    end
+    object tblVeiculoANTT: TIBStringField
+      FieldName = 'ANTT'
+    end
+    object tblVeiculoCHASSI: TIBStringField
+      FieldName = 'CHASSI'
+    end
+    object tblVeiculoRENAVAM: TIBStringField
+      FieldName = 'RENAVAM'
+    end
+    object tblVeiculoTIPO_VEIC: TIBStringField
+      FieldName = 'TIPO_VEIC'
+    end
+    object tblVeiculoTIPO_ROD: TIBStringField
+      FieldName = 'TIPO_ROD'
+    end
+    object tblVeiculoTIPO_CARROC: TIBStringField
+      FieldName = 'TIPO_CARROC'
+    end
+    object tblVeiculoTARA: TIBStringField
+      FieldName = 'TARA'
+      Size = 10
+    end
+    object tblVeiculoCAP_CARGA: TIBStringField
+      FieldName = 'CAP_CARGA'
+      Size = 15
+    end
+    object tblVeiculoCAP_M3: TIBStringField
+      FieldName = 'CAP_M3'
+      Size = 15
+    end
+  end
+  object dbTransportadora: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    DefaultTransaction = trnscTransportadora
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 864
+    Top = 584
+  end
+  object dbVeiculo: TIBDatabase
+    Connected = True
+    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    Params.Strings = (
+      'user_name=SYSDBA'
+      'password=masterkey')
+    LoginPrompt = False
+    DefaultTransaction = trnscVeiculo
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
+    Left = 1064
+    Top = 584
+  end
+  object trnscTransportadora: TIBTransaction
+    Active = True
+    DefaultDatabase = dbTransportadora
+    AutoStopAction = saNone
+    Left = 784
+    Top = 584
+  end
+  object trnscVeiculo: TIBTransaction
+    Active = True
+    DefaultDatabase = dbVeiculo
+    AutoStopAction = saNone
+    Left = 984
+    Top = 584
+  end
+  object dsPesTransportadora: TDataSource
+    DataSet = qryTransportadora
+    Left = 784
+    Top = 544
   end
 end

@@ -78,6 +78,41 @@ type
     Label24: TLabel;
     edtItem: TEdit;
     StatusBar1: TStatusBar;
+    btnAddFor: TSpeedButton;
+    Label10: TLabel;
+    edtnNota: TDBEdit;
+    Label12: TLabel;
+    edtnSerie: TDBEdit;
+    Label14: TLabel;
+    edtCfop: TDBEdit;
+    Label21: TLabel;
+    edtChaveNfe: TDBEdit;
+    cbModelo: TComboBox;
+    Label22: TLabel;
+    Label23: TLabel;
+    edtIDesc: TDBEdit;
+    Label25: TLabel;
+    edtICfop: TDBEdit;
+    Label26: TLabel;
+    edtIEan: TDBEdit;
+    Label27: TLabel;
+    edtIVrUnit: TDBEdit;
+    Label28: TLabel;
+    edtIPcusto: TDBEdit;
+    Label29: TLabel;
+    edtIQtd: TDBEdit;
+    Label30: TLabel;
+    Label31: TLabel;
+    Label32: TLabel;
+    edtIVrTotal: TDBEdit;
+    Label33: TLabel;
+    edtIMargem: TDBEdit;
+    Label34: TLabel;
+    edtIVenda: TDBEdit;
+    Label35: TLabel;
+    edtIMargemP: TDBEdit;
+    Label36: TLabel;
+    edtIVendaP: TDBEdit;
     procedure IncluirExecute(Sender: TObject);
     procedure CancelarExecute(Sender: TObject);
     procedure EncerrarExecute(Sender: TObject);
@@ -86,19 +121,24 @@ type
     procedure edtItemKeyPress(Sender: TObject; var Key: Char);
     procedure edtItemKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure btnAddForClick(Sender: TObject);
+    procedure edtCfopChange(Sender: TObject);
+    procedure edtCfopExit(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
         procedure calculaPedido();
+        
   end;
 
 var
   telaLancCompras: TtelaLancCompras;
+   vCfop : integer;
 
 implementation
 
-uses uLancItens, uPesItens, uLancPedidos;
+uses uLancItens, uPesItens, uLancPedidos, uCadFornecedor;
 
 {$R *.dfm}
 
@@ -259,6 +299,7 @@ end;
   telaDados.tblCompras.Open;
   telaDados.tblCompras.Edit;
   telaDados.tblComprasFORNECEDOR.value := telaDados.tblComprasnFor.Value;
+  telaDados.tblComprasMODELO.Value := cbModelo.Text;
   telaDados.tblCompras.Post;
 
   {editNumPed.Enabled := false;}
@@ -474,7 +515,33 @@ if key = vk_shift then
 
 
   end;
+end;
 
+procedure TtelaLancCompras.btnAddForClick(Sender: TObject);
+begin
+  Application.CreateForm(TtelaCadFor, telaCadFor);
+  telaCadFor.Show;
+end;
+
+procedure TtelaLancCompras.edtCfopChange(Sender: TObject);
+  var cfop : string;
+begin
+if edtCfop.Text <> '' then begin
+  cfop := edtCfop.Text;
+    if cfop[1] = '5' then begin
+      cfop[1] := '1';
+    end;
+    if cfop[1] = '6' then begin
+      cfop[1] := '2';
+    end;
+    edtCfop.Text := cfop;
+  end;
+end;
+
+
+procedure TtelaLancCompras.edtCfopExit(Sender: TObject);
+begin
+vCfop := 0 ;
 end;
 
 end.

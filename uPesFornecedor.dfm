@@ -40,6 +40,11 @@ object telaPesFor: TtelaPesFor
       Columns = <
         item
           Expanded = False
+          FieldName = 'ID'
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'NOME'
           Title.Caption = 'Nome'
           Visible = True
@@ -223,7 +228,9 @@ object telaPesFor: TtelaPesFor
       Width = 145
       Height = 21
       ItemHeight = 13
+      ItemIndex = 0
       TabOrder = 1
+      Text = 'Nome'
       Items.Strings = (
         'Nome'
         'CNPJ'

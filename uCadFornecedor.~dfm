@@ -26,9 +26,9 @@ object telaCadFor: TtelaCadFor
     object Label1: TLabel
       Left = 8
       Top = 24
-      Width = 36
+      Width = 33
       Height = 13
-      Caption = #180'C'#243'digo'
+      Caption = 'C'#243'digo'
       FocusControl = editId
     end
     object Label2: TLabel
@@ -48,11 +48,11 @@ object telaCadFor: TtelaCadFor
       FocusControl = editEndereco
     end
     object Label4: TLabel
-      Left = 488
+      Left = 504
       Top = 120
-      Width = 25
+      Width = 12
       Height = 13
-      Caption = 'Num.'
+      Caption = 'N'#186
       FocusControl = editNum
     end
     object Label5: TLabel
@@ -260,7 +260,14 @@ object telaCadFor: TtelaCadFor
       Width = 40
       Height = 13
       Caption = 'Fantasia'
-      FocusControl = edtFantasia
+      FocusControl = editFantasia
+    end
+    object Label15: TLabel
+      Left = 464
+      Top = 192
+      Width = 43
+      Height = 13
+      Caption = 'Contato.:'
     end
     object editId: TDBEdit
       Left = 88
@@ -287,7 +294,7 @@ object telaCadFor: TtelaCadFor
     object editEndereco: TDBEdit
       Left = 88
       Top = 120
-      Width = 394
+      Width = 406
       Height = 21
       CharCase = ecUpperCase
       DataField = 'ENDERECO'
@@ -410,7 +417,7 @@ object telaCadFor: TtelaCadFor
       Enabled = False
       TabOrder = 7
     end
-    object edtFantasia: TDBEdit
+    object editFantasia: TDBEdit
       Left = 88
       Top = 72
       Width = 640
@@ -430,6 +437,16 @@ object telaCadFor: TtelaCadFor
       Enabled = False
       ItemHeight = 13
       TabOrder = 9
+    end
+    object editContato: TDBEdit
+      Left = 512
+      Top = 192
+      Width = 207
+      Height = 21
+      DataField = 'CONTATO'
+      DataSource = telaDados.dsFornecedores
+      Enabled = False
+      TabOrder = 15
     end
   end
   object Panel1: TPanel
@@ -1291,7 +1308,7 @@ object telaCadFor: TtelaCadFor
   end
   object ActionList1: TActionList
     Left = 704
-    Top = 136
+    Top = 80
     object actIncluir: TAction
       Caption = 'F1 - &Incluir'
       ShortCut = 112
@@ -1333,6 +1350,6 @@ object telaCadFor: TtelaCadFor
     WebService = wsRepublicaVirtual
     PesquisarIBGE = True
     Left = 706
-    Top = 168
+    Top = 112
   end
 end

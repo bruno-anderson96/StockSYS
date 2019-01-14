@@ -56,8 +56,10 @@ type
     actEditar: TAction;
     btnEditar: TBitBtn;
     Label14: TLabel;
-    edtFantasia: TDBEdit;
+    editFantasia: TDBEdit;
     editUf: TComboBox;
+    Label15: TLabel;
+    editContato: TDBEdit;
     procedure actCancelarExecute(Sender: TObject);
     procedure actConfirmarExecute(Sender: TObject);
     procedure actIncluirExecute(Sender: TObject);
@@ -105,7 +107,8 @@ begin
   editCnpj.Enabled := false;
   editInsc.Enabled := false;
   editEmail.Enabled := false;
-  edtFantasia.Enabled := false;
+  editFantasia.Enabled := false;
+  editContato.Enabled := false;
 
   actExcluir.Enabled := true;
   actConfirmar.Enabled := false;
@@ -166,7 +169,9 @@ begin
 
   telaDados.tblFornecedoresUF_END.Value := editUf.Text;
   telaDados.tblFornecedores.Post;
-  telaDados.tblFornecedores.Close;
+  telaDados.trnscFornecedores.CommitRetaining;
+  telaDados.tblFornecedores.ApplyUpdates;
+  //telaDados.tblFornecedores.Close;
 
   btnCep.Enabled := false;
 
@@ -183,7 +188,8 @@ begin
   editCnpj.Enabled := false;
   editInsc.Enabled := false;
   editEmail.Enabled := false;
-  edtFantasia.Enabled := false;
+  editFantasia.Enabled := false;
+  editContato.Enabled := false;
 
   actExcluir.Enabled := true;
   actConfirmar.Enabled := false;
@@ -225,7 +231,8 @@ begin
   editCnpj.Enabled := true;
   editInsc.Enabled := true;
   editEmail.Enabled := true;
-  edtFantasia.Enabled := true;
+  editFantasia.Enabled := true;
+  editContato.Enabled := true;
 
   editNome.SetFocus;
 
@@ -304,7 +311,8 @@ begin
   editCnpj.Enabled := true;
   editInsc.Enabled := true;
   editEmail.Enabled := true;
-  edtFantasia.Enabled := true;
+  editFantasia.Enabled := true;
+  editContato.Enabled := true;
 
   editNome.SetFocus;
 

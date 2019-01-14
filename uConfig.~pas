@@ -84,6 +84,8 @@ type
     btnPathServer: TSpeedButton;
     edtServidor: TEdit;
     Label4: TLabel;
+    actCancelar: TAction;
+    btnCancelar: TSpeedButton;
     procedure btnEscolherCaminhoClick(Sender: TObject);
     procedure btnEscolherCaminho2Click(Sender: TObject);
     procedure btnCaminhoCertClick(Sender: TObject);
@@ -99,6 +101,7 @@ type
     procedure actEditarExecute(Sender: TObject);
     procedure actConfirmarExecute(Sender: TObject);
     procedure btnPathServerClick(Sender: TObject);
+    procedure actCancelarExecute(Sender: TObject);
   private
     { Private declarations }
 
@@ -177,7 +180,13 @@ begin
   edtEPorta.Text          := telaDados.sEPorta;
   edtEUsuario.Text        := telaDados.sEUsuario;
   edtESenha.Text          := telaDados.sESenha;
-}end;
+}
+  telaDados.qryCst.Close;
+  telaDados.qryCst.SQL.Clear;
+  telaDados.qryCst.SQL.Add('Select CODIGO, DESCRICAO from CST');
+  telaDados.qryCst.Open;
+
+end;
 
 procedure TtelaConfig.btnFecharClick(Sender: TObject);
 begin
@@ -247,6 +256,36 @@ end;
 
 procedure TtelaConfig.FormCreate(Sender: TObject);
 begin
+  with telaDados.tblOrigem do
+  begin
+    First;
+    while not Eof do
+    begin
+      DBGrid1.Columns[4].PickList.Append(telaDados.tblOrigem.FieldByName('CODIGO').AsString + ' - ' + telaDados.tblOrigem.FieldByName('DESCRICAO').AsString);
+      Next;
+     end;
+  end;
+  with telaDados.tblCsosn do
+  begin
+    First;
+    while not Eof do
+    begin
+      DBGrid1.Columns[5].PickList.Append(telaDados.tblCsosn.FieldByName('CODIGO').AsString + ' - ' + telaDados.tblCsosn.FieldByName('DESCRICAO').AsString);
+      Next;
+     end;
+  end;
+  with telaDados.tblCst do
+  begin
+    First;
+    while not Eof do
+    begin
+      DBGrid1.Columns[2].PickList.Append(telaDados.tblCst.FieldByName('CODIGO').AsString + ' - ' + telaDados.tblCst.FieldByName('DESCRICAO').AsString);
+      Next;
+     end;
+  end;
+
+
+
   telaDados.tblEmitente.Open;
   telaDados.LerArquivoIni;
   PageControl1.TabIndex := 0;
@@ -314,7 +353,8 @@ begin
 
    btnInserir.Enabled := false;
 
-   DBGrid1.Enabled := false; 
+   DBGrid1.Enabled := false;
+   telaDados.tblCst.Open;
 end;
 
 procedure TtelaConfig.actEditarExecute(Sender: TObject);
@@ -335,7 +375,6 @@ begin
   if telaDados.qryTributos.RecordCount>0 then begin
      ShowMessage('Tributo já cadastrado');
      editTributo.SetFocus;
-     Abort;      
   end
   else begin
      editTributo.Enabled := false;
@@ -348,12 +387,20 @@ begin
 
     editTributo.Clear;
   end;
+  DBGrid1.Enabled := False;
 end;
 
 procedure TtelaConfig.btnPathServerClick(Sender: TObject);
 begin
   OpenDialog1.Execute;
   edtPathServer.Text := OpenDialog1.FileName;
+end;
+
+procedure TtelaConfig.actCancelarExecute(Sender: TObject);
+begin
+DBGrid1.Enabled := false;
+telaDados.tblTributos.Cancel;
+btnInserir.Enabled := true;
 end;
 
 end.

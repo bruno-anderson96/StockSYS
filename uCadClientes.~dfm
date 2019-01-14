@@ -1,8 +1,8 @@
 object telaCadClientes: TtelaCadClientes
-  Left = 304
-  Top = 143
+  Left = 485
+  Top = 161
   Width = 838
-  Height = 448
+  Height = 479
   Caption = 'Cadastro de Cliente'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,12 +19,12 @@ object telaCadClientes: TtelaCadClientes
     Left = 0
     Top = 0
     Width = 822
-    Height = 352
+    Height = 383
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
-      Caption = 'Dados Pessoais'
+      Caption = 'Dados'
       object Label1: TLabel
         Left = 8
         Top = 16
@@ -35,7 +35,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object Label2: TLabel
         Left = 8
-        Top = 40
+        Top = 43
         Width = 28
         Height = 13
         Caption = 'Nome'
@@ -43,23 +43,23 @@ object telaCadClientes: TtelaCadClientes
       end
       object Label3: TLabel
         Left = 8
-        Top = 88
+        Top = 115
         Width = 46
         Height = 13
         Caption = 'Endere'#231'o'
         FocusControl = editEndereco
       end
       object Label4: TLabel
-        Left = 495
-        Top = 87
-        Width = 25
+        Left = 511
+        Top = 114
+        Width = 12
         Height = 13
-        Caption = 'Num.'
+        Caption = 'N'#186
         FocusControl = editNum
       end
       object Label5: TLabel
         Left = 8
-        Top = 64
+        Top = 91
         Width = 21
         Height = 13
         Caption = 'CEP'
@@ -67,7 +67,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object Label6: TLabel
         Left = 8
-        Top = 112
+        Top = 139
         Width = 27
         Height = 13
         Caption = 'Bairro'
@@ -75,7 +75,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object Label7: TLabel
         Left = 8
-        Top = 136
+        Top = 163
         Width = 33
         Height = 13
         Caption = 'Cidade'
@@ -83,7 +83,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object Label8: TLabel
         Left = 368
-        Top = 112
+        Top = 139
         Width = 64
         Height = 13
         Caption = 'Complemento'
@@ -91,7 +91,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object Label9: TLabel
         Left = 8
-        Top = 160
+        Top = 187
         Width = 42
         Height = 13
         Caption = 'Telefone'
@@ -99,7 +99,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object Label10: TLabel
         Left = 256
-        Top = 160
+        Top = 187
         Width = 32
         Height = 13
         Caption = 'Celular'
@@ -107,14 +107,14 @@ object telaCadClientes: TtelaCadClientes
       end
       object Label11: TLabel
         Left = 368
-        Top = 136
+        Top = 163
         Width = 14
         Height = 13
         Caption = 'UF'
       end
       object Label14: TLabel
         Left = 8
-        Top = 264
+        Top = 291
         Width = 83
         Height = 13
         Caption = 'Data de Cadastro'
@@ -122,28 +122,28 @@ object telaCadClientes: TtelaCadClientes
       end
       object Label12: TLabel
         Left = 8
-        Top = 216
+        Top = 243
         Width = 58
         Height = 13
         Caption = 'CNPJ / CPF'
       end
       object Label13: TLabel
         Left = 8
-        Top = 240
+        Top = 267
         Width = 73
         Height = 13
         Caption = 'INSC. EST/RG'
       end
       object Label33: TLabel
         Left = 8
-        Top = 192
+        Top = 219
         Width = 35
         Height = 13
         Caption = 'Pessoa'
       end
       object btnPes: TSpeedButton
         Left = 235
-        Top = 60
+        Top = 86
         Width = 35
         Height = 28
         Enabled = False
@@ -261,6 +261,14 @@ object telaCadClientes: TtelaCadClientes
         NumGlyphs = 2
         OnClick = btnPesClick
       end
+      object Label34: TLabel
+        Left = 8
+        Top = 67
+        Width = 40
+        Height = 13
+        Caption = 'Fantasia'
+        FocusControl = editFantasia
+      end
       object editId: TDBEdit
         Left = 96
         Top = 16
@@ -284,8 +292,8 @@ object telaCadClientes: TtelaCadClientes
       end
       object editEndereco: TDBEdit
         Left = 96
-        Top = 88
-        Width = 395
+        Top = 115
+        Width = 404
         Height = 21
         CharCase = ecUpperCase
         DataField = 'ENDERECO'
@@ -295,7 +303,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object editNum: TDBEdit
         Left = 529
-        Top = 85
+        Top = 112
         Width = 88
         Height = 21
         DataField = 'NUM_END'
@@ -305,7 +313,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object editCep: TDBEdit
         Left = 96
-        Top = 64
+        Top = 91
         Width = 135
         Height = 21
         CharCase = ecUpperCase
@@ -316,7 +324,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object editBairro: TDBEdit
         Left = 96
-        Top = 112
+        Top = 139
         Width = 265
         Height = 21
         CharCase = ecUpperCase
@@ -327,7 +335,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object editCidade: TDBEdit
         Left = 96
-        Top = 136
+        Top = 163
         Width = 265
         Height = 21
         CharCase = ecUpperCase
@@ -338,7 +346,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object editCompl: TDBEdit
         Left = 440
-        Top = 112
+        Top = 139
         Width = 177
         Height = 21
         CharCase = ecUpperCase
@@ -349,7 +357,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object editTelefone: TDBEdit
         Left = 96
-        Top = 160
+        Top = 187
         Width = 148
         Height = 21
         DataField = 'TELEFONE'
@@ -360,7 +368,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object editCelular: TDBEdit
         Left = 296
-        Top = 160
+        Top = 187
         Width = 160
         Height = 21
         DataField = 'CELULAR'
@@ -371,7 +379,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object editCpf: TDBEdit
         Left = 96
-        Top = 216
+        Top = 243
         Width = 265
         Height = 21
         DataField = 'CNPJ_CPF'
@@ -382,7 +390,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object editRg: TDBEdit
         Left = 96
-        Top = 240
+        Top = 267
         Width = 265
         Height = 21
         DataField = 'INSC_RG'
@@ -393,7 +401,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object editDtCad: TDBEdit
         Left = 96
-        Top = 264
+        Top = 291
         Width = 239
         Height = 21
         DataField = 'DATA_CAD'
@@ -403,7 +411,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object cbAtivo: TDBCheckBox
         Left = 96
-        Top = 296
+        Top = 323
         Width = 97
         Height = 17
         Caption = 'Ativo'
@@ -416,7 +424,7 @@ object telaCadClientes: TtelaCadClientes
       end
       object RadioGroup1: TRadioGroup
         Left = 96
-        Top = 180
+        Top = 207
         Width = 201
         Height = 33
         Columns = 2
@@ -429,13 +437,22 @@ object telaCadClientes: TtelaCadClientes
       end
       object editUf: TComboBox
         Left = 392
-        Top = 136
+        Top = 163
         Width = 57
         Height = 21
         CharCase = ecUpperCase
         Enabled = False
         ItemHeight = 13
         TabOrder = 8
+      end
+      object editFantasia: TDBEdit
+        Left = 96
+        Top = 65
+        Width = 521
+        Height = 21
+        DataField = 'FANTASIA'
+        DataSource = telaDados.dsClientes
+        TabOrder = 16
       end
     end
     object TabSheet2: TTabSheet
@@ -797,7 +814,7 @@ object telaCadClientes: TtelaCadClientes
   end
   object Panel1: TPanel
     Left = 0
-    Top = 352
+    Top = 383
     Width = 822
     Height = 58
     Align = alBottom
@@ -808,7 +825,7 @@ object telaCadClientes: TtelaCadClientes
       Width = 90
       Height = 57
       Action = Incluir
-      Caption = 'F1 - Incluir'
+      Caption = 'F1 - &Incluir'
       TabOrder = 0
       Glyph.Data = {
         B60D0000424DB60D000000000000360000002800000030000000180000000100
@@ -1718,10 +1735,10 @@ object telaCadClientes: TtelaCadClientes
     end
   end
   object ActionList1: TActionList
-    Left = 12
-    Top = 312
+    Left = 412
+    Top = 32
     object Incluir: TAction
-      Caption = 'F1 - Incluir'
+      Caption = 'F1 - &Incluir'
       ShortCut = 112
       OnExecute = IncluirExecute
     end

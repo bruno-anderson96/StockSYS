@@ -1,8 +1,8 @@
 object telaCadProdutos: TtelaCadProdutos
   Left = 164
-  Top = 87
+  Top = 86
   Width = 792
-  Height = 544
+  Height = 545
   Caption = 'Cadastro de Produtos'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object telaCadProdutos: TtelaCadProdutos
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 449
+    Top = 450
     Width = 776
     Height = 57
     Align = alBottom
@@ -878,7 +878,7 @@ object telaCadProdutos: TtelaCadProdutos
     Left = 0
     Top = 0
     Width = 776
-    Height = 449
+    Height = 450
     Align = alClient
     TabOrder = 1
     object Label1: TLabel
@@ -1744,6 +1744,7 @@ object telaCadProdutos: TtelaCadProdutos
         Enabled = False
         ItemHeight = 13
         TabOrder = 0
+        OnChange = cbTribChange
       end
     end
     object panelEstoque: TPanel

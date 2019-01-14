@@ -277,7 +277,7 @@ type
     tblComprasENTREGUE: TIBStringField;
     tblComprasVALOR: TIBBCDField;
     tblComprasDESCONTO: TIBBCDField;
-    tblComprasACRESCIO: TIBBCDField;
+    tblComprasACRESCIMO: TIBBCDField;
     tblComprasOUTRAS_DESPESAS: TIBBCDField;
     tblComprasVALOR_TOTAL: TIBBCDField;
     tblComprasCANCELADO: TIBStringField;
@@ -296,10 +296,6 @@ type
     tblComprasMARGEM_VENDA: TIBBCDField;
     tblComprasVALOR_COMISSAO: TIBBCDField;
     tblComprasTOTAL_GERAL: TIBBCDField;
-    tblComprasCOO: TIntegerField;
-    tblComprasCCF: TIntegerField;
-    tblComprasGNF: TIntegerField;
-    tblComprasDAV: TIBStringField;
     tblComprasCNPJ_CPF: TIBStringField;
     tblComprasINSC_EST: TIBStringField;
     tblComprasVALOR_TROCO: TIBBCDField;
@@ -530,13 +526,60 @@ type
     ibdsPos: TIBDataSet;
     qryNcm: TIBQuery;
     tblTributos: TIBTable;
-    tblTributosID: TIntegerField;
     ibdsTributos: TIBDataSet;
-    tblTributosTIPOTRIB: TIBStringField;
     tblProdutosID_TRIB: TIntegerField;
     tblPosCHREQ: TIBStringField;
     tblPagamentoIMPFIS: TMemoField;
     tblPedidosNCFE: TIntegerField;
+    tblClientesFANTASIA: TIBStringField;
+    tblFornecedoresCONTATO: TIBStringField;
+    tblTributosID: TIntegerField;
+    tblTributosTIPOTRIB: TIBStringField;
+    tblTributosCODCST: TIBStringField;
+    tblTributosCODCFOP: TIBStringField;
+    tblTributosCODORIGEM: TIBStringField;
+    tblTributosCODCSOSN: TIBStringField;
+    tblComprasNNOTA: TIBStringField;
+    tblComprasNSERIE: TIBStringField;
+    tblComprasCFOP: TIBStringField;
+    Label23: TLabel;
+    Label24: TLabel;
+    dsTransportadora: TDataSource;
+    dsVeiculo: TDataSource;
+    qryTransportadora: TIBQuery;
+    qryVeiculo: TIBQuery;
+    tblTransportadora: TIBTable;
+    tblVeiculo: TIBTable;
+    dbTransportadora: TIBDatabase;
+    dbVeiculo: TIBDatabase;
+    trnscTransportadora: TIBTransaction;
+    trnscVeiculo: TIBTransaction;
+    tblTransportadoraID: TIntegerField;
+    tblTransportadoraENDERECO: TIBStringField;
+    tblTransportadoraCIDADE: TIBStringField;
+    tblTransportadoraUF: TIBStringField;
+    tblTransportadoraBAIRRO: TIBStringField;
+    tblTransportadoraTELEFONE: TIBStringField;
+    tblTransportadoraTELEFONE2: TIBStringField;
+    tblTransportadoraCNPJ_CPF: TIBStringField;
+    tblTransportadoraINSC_RG: TIBStringField;
+    tblTransportadoraOBS: TBlobField;
+    tblVeiculoID: TIntegerField;
+    tblVeiculoMODELO: TIBStringField;
+    tblVeiculoPLACA: TIBStringField;
+    tblVeiculoUF: TIBStringField;
+    tblVeiculoANTT: TIBStringField;
+    tblVeiculoCHASSI: TIBStringField;
+    tblVeiculoRENAVAM: TIBStringField;
+    tblVeiculoTIPO_VEIC: TIBStringField;
+    tblVeiculoTIPO_ROD: TIBStringField;
+    tblVeiculoTIPO_CARROC: TIBStringField;
+    tblVeiculoTARA: TIBStringField;
+    tblVeiculoCAP_CARGA: TIBStringField;
+    tblVeiculoCAP_M3: TIBStringField;
+    tblComprasMODELO: TIBStringField;
+    dsPesTransportadora: TDataSource;
+    tblTransportadoraDESCRICAO: TIBStringField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
     procedure tblClientesBeforePost(DataSet: TDataSet);
@@ -744,6 +787,11 @@ end;
 
 procedure TtelaDados.FormataCampos;
 begin
+  // Transportadora
+  tblTransportadoraTELEFONE.EditMask         := '(00)0000-0000;0';
+  tblTransportadoraTELEFONE2.EditMask        := '(00)0-0000-0000;0';
+  tblTransportadoraCNPJ_CPF.EditMask         := '000.000.000-00;0';
+  tblTransportadoraINSC_RG.EditMask          := '0000000000-0;0';
   // Clientes
   tblClientesDATA_CAD.DisplayFormat               := 'dd/mm/yyyy hh:mm:ss';
   tblClientes.FieldByName('DATA_CAD').EditMask    := '!99/99/0000 00:00:00;1; ';
@@ -1283,13 +1331,14 @@ end;
 
 procedure TtelaDados.tblTributosBeforePost(DataSet: TDataSet);
 begin
-  if telaDados.tblTributos.state = dsInsert then begin
+  {if telaDados.tblTributos.state = dsInsert then begin
     telaDados.qryTributos.Close;
     telaDados.qryTributos.SQL.Clear;
     telaDados.qryTributos.SQL.Add('Select COUNT(*) from TRIBUTO');
     telaDados.qryTributos.Open;
     telaDados.tblTributosID.Value := telaDados.qryTributos.FieldByName('COUNT').AsInteger + 1;
   end;
+  }
 end;
 
 procedure TtelaDados.tblCompraItensBeforePost(DataSet: TDataSet);

@@ -36,7 +36,11 @@ uses
   uSped in 'uSped.pas' {telaSped},
   uContador in 'uContador.pas' {telaContador},
   uCadPos in 'uCadPos.pas' {telaCadPos},
-  uPreviewCfe in 'uPreviewCfe.pas' {telaPreviewCfe};
+  uPreviewCfe in 'uPreviewCfe.pas' {telaPreviewCfe},
+  uInventario in 'uInventario.pas' {telaInventario},
+  urInventario in 'urInventario.pas' {rInventario},
+  uCadTransportadora in 'uCadTransportadora.pas' {telaCadTransportadora},
+  uPesTransportadora in 'uPesTransportadora.pas' {telaPesTransportadora};
 
 {$R *.res}
 

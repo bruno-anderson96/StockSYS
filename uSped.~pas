@@ -226,6 +226,7 @@ begin
             telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID = ');
             telaDados.qryProdutos.SQL.Add(IntToStr(idP));
             telaDados.qryProdutos.Open;
+
             with Registro0200New do begin
               COD_ITEM     := telaDados.qryProdutos.FieldByName('EAN13').AsString;
               DESCR_ITEM   := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
@@ -237,7 +238,7 @@ begin
               EX_IPI       := '';
               COD_GEN      := '';
               COD_LST      := '';
-              ALIQ_ICMS    := 18;
+              ALIQ_ICMS    := telaDados.qryProdutos.FieldByName('VAL_ICMS').Value * telaDados.qryPedidosItens.FieldByName('QUANTIDADE').Value;;
             end;
             telaDados.qryPedidosItens.Next;
           end;
@@ -319,7 +320,7 @@ begin
                  telaDados.qryPedidosItens.First;
                 while not telaDados.qryPedidosItens.Eof do begin
                   idP := telaDados.qryPedidosItens.FieldByName('ID_PRODUTO').AsInteger;
-
+                  
                   telaDados.qryProdutos.Close;
                   telaDados.qryProdutos.SQL.Clear;
                   telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID = ');

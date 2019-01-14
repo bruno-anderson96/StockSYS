@@ -70,8 +70,19 @@ end;
 procedure TtelaPesCliente.DBGrid1DblClick(Sender: TObject);
 var num : String;
 begin
-  num := DBGrid1.Columns.Items[5].Field.AsString;
-  telaDados.tblClientes.Locate('CNPJ_CPF', num , []);
+  with telaDados.tblEstados do
+  begin
+    First;
+    while not Eof do
+    begin
+      telaCadClientes.editUf.Items.Add(telaDados.tblEstados.FieldByName('UF').AsString);
+      Next;
+    end;
+  end;
+
+  num := DBGrid1.Columns.Items[0].Field.AsString;
+  telaDados.tblClientes.Locate('ID', num , []);
+  telaCadClientes.editUf.Text := telaDados.tblClientesUF_END.AsString;
   telaPesCliente.Close;
 
   telaCadClientes.Excluir.Enabled := true;

@@ -60,8 +60,8 @@ end;
 procedure TtelaPesFor.DBGrid1DblClick(Sender: TObject);
 var num : string;
 begin
-  num := DBGrid1.Columns.Items[5].Field.AsString;
-  telaDados.tblFornecedores.Locate('CNPJ_CPF', num , []);
+  num := DBGrid1.Columns.Items[0].Field.AsString;
+  telaDados.tblFornecedores.Locate('ID', num , []);
   telaPesFor.Close;
   telaCadFor.actExcluir.Enabled := true;
 end;
