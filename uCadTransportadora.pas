@@ -96,6 +96,7 @@ type
     procedure btnVExcClick(Sender: TObject);
     procedure btnVCancClick(Sender: TObject);
     procedure btnVSalvarClick(Sender: TObject);
+    procedure edtTIdChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -107,7 +108,7 @@ var
 
 implementation
 
-uses uDados, uPesTransportadora;
+uses uDados, uPesTransportadora, IBQuery;
 
 {$R *.dfm}
 
@@ -148,6 +149,9 @@ begin
       Next;
     end;
   end;
+
+  TabSheet2.Enabled := false;
+
 end;
 
 procedure TtelaCadTransportadora.FecharExecute(Sender: TObject);
@@ -161,11 +165,14 @@ begin
   if edtTId.Text <> '' then begin
     btnTEdit.Enabled := true;
     btnTExc.Enabled := true;
+    TabSheet2.Enabled := true;
     if edtVId.Text <> '' then begin
       btnVEdit.Enabled := true;
       btnVExc.Enabled := true;
     end;
   end;
+
+
 end;
 
 procedure TtelaCadTransportadora.EditarTExecute(Sender: TObject);
@@ -249,6 +256,7 @@ begin
     ExcluirT.Enabled := False;
   end else begin
     ExcluirT.Enabled := true;
+    TabSheet2.Enabled := true;
   end;
 
 end;
@@ -276,6 +284,11 @@ begin
   telaDados.tblTransportadora.Post;
   telaDados.trnscTransportadora.CommitRetaining;
   telaDados.tblTransportadora.ApplyUpdates;
+
+   TabSheet2.Enabled := true;
+   telaDados.tblVeiculo.Filter := 'IDT =' + edtTId.Text;
+   telaDados.tblVeiculo.Filtered := true;
+
 end;
 
 procedure TtelaCadTransportadora.PesquisarTExecute(Sender: TObject);
@@ -325,9 +338,11 @@ begin
     end;
   end;
 
+  telaDados.tblVeiculo.Filtered := false;
   telaDados.tblVeiculo.Last;
   id := telaDados.tblVeiculoID.Value + 1;
-
+  telaDados.tblVeiculo.Filtered := true;
+  
   telaDados.tblVeiculo.Insert;
   telaDados.tblVeiculoID.Value := id;
 
@@ -383,7 +398,6 @@ begin
     telaDados.qryVeiculo.Open;
 
     telaDados.tblVeiculo.Refresh;
-    telaDados.tblVeiculo.Close;
   end;
 
   if edtVId.Text = '' then begin
@@ -451,6 +465,19 @@ begin
   telaDados.trnscVeiculo.CommitRetaining;
   telaDados.tblVeiculo.ApplyUpdates;
 
+end;
+
+procedure TtelaCadTransportadora.edtTIdChange(Sender: TObject);
+begin
+  telaDados.tblVeiculo.Close;
+  telaDados.tblVeiculo.Open;
+  //telaDados.tblVeiculo.Locate('IDT', edtTId.Text ,[]);
+
+  if telaDados.tblTransportadoraDESCRICAO.AsString <> '' then begin
+    telaDados.tblVeiculo.Filter := 'IDT =' + edtTId.Text;
+    telaDados.tblVeiculo.Filtered := true;
+  end;
+  
 end;
 
 end.

@@ -1748,8 +1748,8 @@ object telaCadProdutos: TtelaCadProdutos
       end
     end
     object panelEstoque: TPanel
-      Left = 512
-      Top = 232
+      Left = 592
+      Top = 224
       Width = 257
       Height = 210
       TabOrder = 15

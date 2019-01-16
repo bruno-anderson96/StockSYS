@@ -643,7 +643,6 @@ end;
 procedure TtelaCadProdutos.CancelarExecute(Sender: TObject);
 begin
   telaDados.tblProdutos.Cancel;
-  telaDados.tblProdutos.Close;
 
   editDesc.Enabled := false;
   editRef.Enabled := false;

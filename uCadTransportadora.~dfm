@@ -957,6 +957,7 @@ object telaCadTransportadora: TtelaCadTransportadora
         DataSource = telaDados.dsTransportadora
         Enabled = False
         TabOrder = 0
+        OnChange = edtTIdChange
       end
       object edtTEnd: TDBEdit
         Left = 16

@@ -5,21 +5,21 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uDados, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls, DBCtrls,
-  Mask, ComCtrls, ActnList;
+  Mask, ComCtrls, ActnList, DB;
 
 type
   TtelaLancCompras = class(TForm)
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
     GroupBox1: TGroupBox;
-    GroupBox2: TGroupBox;
+    gbHeader: TGroupBox;
     Label9: TLabel;
     Label11: TLabel;
     Label13: TLabel;
     editId: TDBEdit;
     editDtCad: TDBEdit;
     editDtEmissao: TDBEdit;
-    GroupBox3: TGroupBox;
+    gbFor: TGroupBox;
     Label20: TLabel;
     editIdFornecedor: TDBEdit;
     cbFornecedor: TDBLookupComboBox;
@@ -74,7 +74,7 @@ type
     Confirmar: TAction;
     Excluir: TAction;
     adicionarItem: TAction;
-    GroupBox6: TGroupBox;
+    gbItem: TGroupBox;
     Label24: TLabel;
     edtItem: TEdit;
     StatusBar1: TStatusBar;
@@ -87,7 +87,6 @@ type
     edtCfop: TDBEdit;
     Label21: TLabel;
     edtChaveNfe: TDBEdit;
-    cbModelo: TComboBox;
     Label22: TLabel;
     Label23: TLabel;
     edtIDesc: TDBEdit;
@@ -113,6 +112,60 @@ type
     edtIMargemP: TDBEdit;
     Label36: TLabel;
     edtIVendaP: TDBEdit;
+    gbAliq: TGroupBox;
+    Label37: TLabel;
+    edtIAICMS: TDBEdit;
+    Label38: TLabel;
+    edtIVICMS: TDBEdit;
+    Label39: TLabel;
+    edtIAIpi: TDBEdit;
+    Label40: TLabel;
+    edtIVIpi: TDBEdit;
+    Label41: TLabel;
+    edtIAPis: TDBEdit;
+    Label42: TLabel;
+    edtIVPis: TDBEdit;
+    Label43: TLabel;
+    edtIAIcmsSub: TDBEdit;
+    Label44: TLabel;
+    edtIVIcmsSub: TDBEdit;
+    Label45: TLabel;
+    edtIACofins: TDBEdit;
+    Label46: TLabel;
+    edtIVCofins: TDBEdit;
+    cbModelo: TDBComboBox;
+    btnConfirmProd: TSpeedButton;
+    gbPrecos: TGroupBox;
+    pcControle: TPageControl;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    TabSheet5: TTabSheet;
+    gbImpostos: TGroupBox;
+    gbTotais: TGroupBox;
+    Label47: TLabel;
+    edtBIpi: TDBEdit;
+    Label48: TLabel;
+    edtBPis: TDBEdit;
+    Label49: TLabel;
+    edtBCofins: TDBEdit;
+    Label50: TLabel;
+    edtBIcms: TDBEdit;
+    Label51: TLabel;
+    edtBIcmsS: TDBEdit;
+    Label52: TLabel;
+    edtVIpi: TDBEdit;
+    Label53: TLabel;
+    edtVPis: TDBEdit;
+    Label54: TLabel;
+    edtVCofins: TDBEdit;
+    Label55: TLabel;
+    edtVIcms: TDBEdit;
+    Label56: TLabel;
+    edtVIcmsS: TDBEdit;
+    Label57: TLabel;
+    edtVTnota: TDBEdit;
+    Label58: TLabel;
+    edtVProd: TDBEdit;
     procedure IncluirExecute(Sender: TObject);
     procedure CancelarExecute(Sender: TObject);
     procedure EncerrarExecute(Sender: TObject);
@@ -124,8 +177,16 @@ type
     procedure btnAddForClick(Sender: TObject);
     procedure edtCfopChange(Sender: TObject);
     procedure edtCfopExit(Sender: TObject);
+    procedure btnConfirmProdClick(Sender: TObject);
+    procedure edtIQtdExit(Sender: TObject);
+    procedure edtIVrUnitExit(Sender: TObject);
+    procedure edtIMargemExit(Sender: TObject);
+    procedure edtIVendaExit(Sender: TObject);
+    procedure edtIMargemPExit(Sender: TObject);
+    procedure edtIVendaPExit(Sender: TObject);
   private
     { Private declarations }
+    procedure calculaVrTotal();
   public
     { Public declarations }
         procedure calculaPedido();
@@ -154,6 +215,12 @@ od := 0.00;
 telaDados.tblCompras.Open;
 telaDados.tblCompras.Last;
 
+telaDados.tblProdutos.Edit;
+telaDados.tblProdutos.ClearFields;
+
+
+//telaDados.cdsTempItens.Insert;
+
 {editNumPed.Enabled := true;}
 editDtCad.Enabled := true;{
 editHrCad.Enabled := true; }
@@ -178,6 +245,32 @@ editEuf.Enabled := true;
 editEcep.Enabled := true;
 edtItem.Enabled := true;
 
+edtIDesc.Enabled := true;
+edtnNota.Enabled := true;
+edtnSerie.Enabled := true;
+edtCfop.Enabled := true;
+edtChaveNfe.Enabled := true;
+edtICfop.Enabled := true;
+edtIEan.Enabled := true;
+edtIVrUnit.Enabled := true;
+edtIPcusto.Enabled := true;
+edtIQtd.Enabled := true;
+//edtIVrTotal.Enabled := true;
+edtIMargem.Enabled := true;
+edtIMargemP.Enabled := true;
+edtIVenda.Enabled := true;
+edtIVendaP.Enabled := true;
+edtIAICMS.Enabled := true;
+edtIAIpi.Enabled := true;
+edtIAPis.Enabled := true;
+edtIAIcmsSub.Enabled := true;
+edtIACofins.Enabled := true;
+edtIVICMS.Enabled := true;
+edtIVIpi.Enabled := true;
+edtIVPis.Enabled := true;
+edtIVIcmsSub.Enabled := true;
+edtIVCofins.Enabled := true;
+cbModelo.Enabled := true; 
 
 btnIncItem.Enabled := true;
 btnExcItem.Enabled := true;
@@ -187,6 +280,9 @@ btnFinPed.Enabled := true;
 btnIncluir.Enabled := false;
 btnConfirmar.Enabled := true;
 btnCancelar.Enabled := true;
+
+btnAddFor.Enabled := true;
+btnConfirmProd.Enabled := true;
 
 Incluir.Enabled := false;
 Confirmar.Enabled := true;
@@ -208,7 +304,8 @@ editOutrasDesp.Text := FloatToStr(od);
         telaLancCompras.Refresh;
 
         editId.Text := IntToStr(id);
-        cbFornecedor.SetFocus;
+        edtnNota.SetFocus;
+        cbModelo.ItemIndex := 7;
 
 
 end;
@@ -216,6 +313,7 @@ end;
 procedure TtelaLancCompras.CancelarExecute(Sender: TObject);
 begin
 telaDados.tblCompras.Cancel;
+telaDados.tblProdutos.Cancel;
 
 {editNumPed.Enabled := false;}
 editDtCad.Enabled := false;{
@@ -241,6 +339,32 @@ editEuf.Enabled := false;
 editEcep.Enabled := false;
 edtItem.Enabled := false;
 
+  edtIDesc.Enabled := false;
+  edtnNota.Enabled := false;
+  edtnSerie.Enabled := false;
+  edtCfop.Enabled := false;
+  edtChaveNfe.Enabled := false;
+  edtICfop.Enabled := false;
+  edtIEan.Enabled := false;
+  edtIVrUnit.Enabled := false;
+  edtIPcusto.Enabled := false;
+  edtIQtd.Enabled := false;
+  edtIVrTotal.Enabled := false;
+  edtIMargem.Enabled := false;
+  edtIMargemP.Enabled := false;
+  edtIVenda.Enabled := false;
+  edtIVendaP.Enabled := false;
+  edtIAICMS.Enabled := false;
+  edtIAIpi.Enabled := false;
+  edtIAPis.Enabled := false;
+  edtIAIcmsSub.Enabled := false;
+  edtIACofins.Enabled := false;
+  edtIVICMS.Enabled := false;
+  edtIVIpi.Enabled := false;
+  edtIVPis.Enabled := false;
+  edtIVIcmsSub.Enabled := false;
+  edtIVCofins.Enabled := false;
+  cbModelo.Enabled := false;
 
 btnIncItem.Enabled := false;
 btnExcItem.Enabled := false;
@@ -250,6 +374,9 @@ btnFinPed.Enabled := false;
 btnIncluir.Enabled := true;
 btnConfirmar.Enabled := false;
 btnCancelar.Enabled := false;
+
+btnAddFor.Enabled := false;
+btnConfirmProd.Enabled := false;
 
 Incluir.Enabled := true;
 Confirmar.Enabled := false;
@@ -299,7 +426,6 @@ end;
   telaDados.tblCompras.Open;
   telaDados.tblCompras.Edit;
   telaDados.tblComprasFORNECEDOR.value := telaDados.tblComprasnFor.Value;
-  telaDados.tblComprasMODELO.Value := cbModelo.Text;
   telaDados.tblCompras.Post;
 
   {editNumPed.Enabled := false;}
@@ -326,6 +452,33 @@ end;
   editEuf.Enabled := false;
   editEcep.Enabled := false;
 
+  edtIDesc.Enabled := false;
+  edtnNota.Enabled := false;
+  edtnSerie.Enabled := false;
+  edtCfop.Enabled := false;
+  edtChaveNfe.Enabled := false;
+  edtICfop.Enabled := false;
+  edtIEan.Enabled := false;
+  edtIVrUnit.Enabled := false;
+  edtIPcusto.Enabled := false;
+  edtIQtd.Enabled := false;
+  edtIVrTotal.Enabled := false;
+  edtIMargem.Enabled := false;
+  edtIMargemP.Enabled := false;
+  edtIVenda.Enabled := false;
+  edtIVendaP.Enabled := false;
+  edtIAICMS.Enabled := false;
+  edtIAIpi.Enabled := false;
+  edtIAPis.Enabled := false;
+  edtIAIcmsSub.Enabled := false;
+  edtIACofins.Enabled := false;
+  edtIVICMS.Enabled := false;
+  edtIVIpi.Enabled := false;
+  edtIVPis.Enabled := false;
+  edtIVIcmsSub.Enabled := false;
+  edtIVCofins.Enabled := false;
+  cbModelo.Enabled := false;
+
   btnIncItem.Enabled := false;
   btnExcItem.Enabled := false;
   btnRetPed.Enabled := false;
@@ -334,6 +487,9 @@ end;
   btnIncluir.Enabled := true;
   btnConfirmar.Enabled := false;
   btnCancelar.Enabled := false;
+
+  btnAddFor.Enabled := false;
+  btnConfirmProd.Enabled := false;
 
   Incluir.Enabled := true;
   Confirmar.Enabled := false;
@@ -444,12 +600,12 @@ tipo := 1;
     begin
       telaDados.qryProdutos.Close;
       telaDados.qryProdutos.SQL.Clear;
-      telaDados.qryProdutos.SQL.Add('Select * from produtos where EAN13 = ');
+      telaDados.qryProdutos.SQL.Add('Select * from produtos where ID = ');
       telaDados.qryProdutos.SQL.Add(edtItem.Text);
       telaDados.qryProdutos.Open;
 
       if telaDados.qryProdutos.RecordCount >0 then begin
-       telaDados.cdsTempItens.Append;
+       {telaDados.cdsTempItens.Append;
        telaDados.tblCompraItens.Open;
        telaDados.cdsTempItensDESC.Value := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
        telaDados.cdsTempItensIDPROD.Value := telaDados.qryProdutos.FieldByName('ID').AsInteger;
@@ -459,23 +615,27 @@ tipo := 1;
        telaDados.cdsTempItensDESCONTO.Value := 0;
        telaDados.cdsTempItensACRESCIMO.Value := 0;
        telaDados.cdsTempItensVRT.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
+       }
 
+       //telaDados.cdsTempItens.Post;
 
-       telaDados.cdsTempItens.Post;
-
-
-       
        {telaDados.tblPedidosVALOR_TOTAL.Value :=   telaDados.cdsTempItensVRT.Value;
        telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR_TOTAL.Value;}
+       telaDados.tblProdutos.Locate('ID', telaDados.qryProdutos.FieldByName('ID').AsString, []);
+       telaDados.tblProdutos.Edit;
+       
        telaLancCompras.Refresh;
        edtItem.Clear;
        end else begin
-       ShowMessage('Nenhum produto com este código !');
-       edtItem.SetFocus;
-
+        if telaDados.tblProdutos.State = dsEdit then begin
+          telaDados.tblProdutos.ClearFields;
+        end;
+        ShowMessage('Nenhum produto com este código !');
+        edtItem.Clear;
+        edtItem.SetFocus;
+      end;
     end;
   end;
-end;
 end;
 
 procedure TtelaLancCompras.edtItemKeyDown(Sender: TObject; var Key: Word;
@@ -542,6 +702,98 @@ end;
 procedure TtelaLancCompras.edtCfopExit(Sender: TObject);
 begin
 vCfop := 0 ;
+end;
+
+procedure TtelaLancCompras.btnConfirmProdClick(Sender: TObject);
+begin
+  if edtIVIpi.Text = '' then edtIVIpi.Text := '0,00';
+  if edtIVPis.Text = '' then edtIVPis.Text := '0,00';
+  if edtIVCofins.Text = '' then edtIVCofins.Text := '0,00';
+  if edtIVICMS.Text = '' then edtIVICMS.Text := '0,00';
+  if edtIVIcmsSub.Text = '' then edtIVIcmsSub.Text := '0,00';
+
+
+  telaDados.cdsTempItens.Append;
+  //telaDados.tblCompraItens.Open;
+  telaDados.cdsTempItensDESC.Value := telaDados.tblProdutosDESCRICAO.Value;
+  telaDados.cdsTempItensIDPROD.Value := telaDados.tblProdutosID.Value;
+  telaDados.cdsTempItensIDPED.Value := StrToInt(editId.Text);
+  telaDados.cdsTempItensQUANT.Value := StrToInt(edtIQtd.Text);
+  telaDados.cdsTempItensVALOR.Value := telaDados.tblProdutosPRECO_COMPRA.Value;
+  telaDados.cdsTempItensDESCONTO.Value := 0;
+  telaDados.cdsTempItensACRESCIMO.Value := 0;
+  telaDados.cdsTempItensVRT.Value := StrToFloat(edtIVrTotal.Text);
+
+  edtVIpi.Text := FloatToStr(telaDados.tblProdutosVAL_IPI.AsFloat + StrToFloat(edtVIpi.Text));
+  edtVPis.Text := FloatToStr(telaDados.tblProdutosVAL_PIS.AsFloat + StrToFloat(edtVPis.Text));
+  edtVIcmsS.Text := FloatToStr(telaDados.tblProdutosVAL_ICMSSUB.AsFloat + StrToFloat(edtVIcmsS.Text));
+  edtVIcms.Text := FloatToStr(telaDados.tblProdutosVAL_ICMS.AsFloat + StrToFloat(edtVIcms.Text));
+  edtVCofins.Text := FloatToStr(telaDados.tblProdutosVAL_COFINS.AsFloat + StrToFloat(edtVCofins.Text));
+
+  edtVTnota.Text := FloatToStr(StrToFloat(edtVIpi.Text) + StrToFloat(edtVPis.Text) +
+  StrToFloat(edtVIcmsS.Text) + StrToFloat(edtVIcms.Text) + StrToFloat(edtVCofins.Text));
+
+  telaDados.cdsTempItens.Post;
+  telaDados.tblProdutos.ClearFields;
+
+  edtItem.SetFocus;
+end;
+
+procedure TtelaLancCompras.edtIQtdExit(Sender: TObject);
+begin
+   calculaVrTotal;
+end;
+
+procedure TtelaLancCompras.calculaVrTotal;
+begin
+  if edtIQtd.Text = '' then edtIQtd.Text := '0,00';
+  if edtIVrUnit.Text = '' then edtIVrUnit.Text := '0,00';
+  edtIVrTotal.Text := FloatToStr(StrToFloat(edtIQtd.Text) * StrToFloat(edtIVrUnit.Text));
+end;
+
+procedure TtelaLancCompras.edtIVrUnitExit(Sender: TObject);
+begin
+calculaVrTotal;
+telaDados.tblProdutosPRECO_COMPRA.AsString := edtIVrUnit.Text;
+end;
+
+procedure TtelaLancCompras.edtIMargemExit(Sender: TObject);
+begin
+  if edtIMargem.Text = '' then begin
+    edtIMargem.Text := '0,00';
+  end else begin
+
+    telaDados.tblProdutosPRECO_VENDA.AsString := FloatToStr(StrToFloat(edtIPcusto.Text) + (StrToFloat(edtIPcusto.Text) * StrToFloat(edtIMargem.Text))/100);
+    {telaDados.FormataCampos; }
+  end;
+end;
+
+procedure TtelaLancCompras.edtIVendaExit(Sender: TObject);
+begin
+  telaDados.tblProdutosMARGEM_LUCRO.AsString :=  FloatToStr(((StrToFloat(edtIVenda.Text) - StrToFloat(edtIPcusto.Text)) / StrToFloat(edtIPcusto.Text) )* 100);
+
+  if edtIVenda.Text = '' then begin
+    edtIVenda.Text := '0,00';
+  end;
+end;
+
+procedure TtelaLancCompras.edtIMargemPExit(Sender: TObject);
+begin
+  if edtIMargemP.Text = '' then begin
+    edtIMargemP.Text := '0,00';
+  end else begin
+
+  telaDados.tblProdutosPRECO_VENDAP.AsString := FloatToStr(StrToFloat(edtIVenda.Text) + (StrToFloat(edtIVenda.Text) * StrToFloat(edtIMargemP.Text))/100);  
+  end;
+end;
+
+procedure TtelaLancCompras.edtIVendaPExit(Sender: TObject);
+begin
+  telaDados.tblProdutosMARGEM_LUCROP.AsString :=  FloatToStr(((StrToFloat(edtIVendaP.Text) - StrToFloat(edtIVenda.Text)) / StrToFloat(edtIVenda.Text) )* 100);
+
+  if edtIVenda.Text = '' then begin
+    edtIVenda.Text := '0,00';
+  end;
 end;
 
 end.

@@ -19,7 +19,7 @@ object telaCadTransportadora: TtelaCadTransportadora
     Top = 0
     Width = 743
     Height = 544
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -957,6 +957,7 @@ object telaCadTransportadora: TtelaCadTransportadora
         DataSource = telaDados.dsTransportadora
         Enabled = False
         TabOrder = 0
+        OnChange = edtTIdChange
       end
       object edtTEnd: TDBEdit
         Left = 16

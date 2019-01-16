@@ -55,6 +55,5 @@ begin
   Application.CreateForm(TtelaConfigSat, telaConfigSat);
   Application.CreateForm(TtelaGerarNfe, telaGerarNfe);
   Application.CreateForm(TtelaConfigEmit, telaConfigEmit);
-  Application.CreateForm(TtelaPesTransportadora, telaPesTransportadora);
   Application.Run;
 end.

@@ -15,6 +15,7 @@ type
     btnPesquisa: TSpeedButton;
     procedure DBGrid1DblClick(Sender: TObject);
     procedure btnPesquisaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,7 +50,7 @@ begin
   telaCadTransportadora.cbTUf.Text := telaDados.tblTransportadoraUF.AsString;
   telaPesTransportadora.Close;
 
-  telaCadTransportadora.Excluir.Enabled := true;
+  telaCadTransportadora.ExcluirT.Enabled := true;
 end;
 
 procedure TtelaPesTransportadora.btnPesquisaClick(Sender: TObject);
@@ -73,6 +74,14 @@ begin
     telaDados.qryTransportadora.Params.ParamByName('pDados').asString := edtBusca.Text + '%';
     telaDados.qryTransportadora.Open;
   end;
+end;
+
+procedure TtelaPesTransportadora.FormShow(Sender: TObject);
+begin
+
+  telaDados.tblVeiculo.Open;
+  telaDados.tblVeiculo.Locate('IDT', edtTId.Text ,[]);
+  telaDados.tblVeiculo.Open;
 end;
 
 end.

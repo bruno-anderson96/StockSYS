@@ -1,8 +1,8 @@
 object telaLancCompras: TtelaLancCompras
-  Left = 251
-  Top = 20
-  Width = 1030
-  Height = 712
+  Left = 214
+  Top = 187
+  Width = 1049
+  Height = 719
   Caption = 'Lan'#231'amento de Compras'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,8 +17,8 @@ object telaLancCompras: TtelaLancCompras
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 1014
-    Height = 674
+    Width = 1033
+    Height = 681
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
@@ -27,22 +27,22 @@ object telaLancCompras: TtelaLancCompras
       object GroupBox1: TGroupBox
         Left = 0
         Top = 0
-        Width = 1006
-        Height = 646
+        Width = 1025
+        Height = 653
         Align = alClient
         TabOrder = 0
-        object GroupBox2: TGroupBox
+        object gbHeader: TGroupBox
           Left = 7
-          Top = 9
+          Top = 6
           Width = 805
           Height = 105
           TabOrder = 0
           object Label9: TLabel
             Left = 8
             Top = 8
-            Width = 9
+            Width = 33
             Height = 13
-            Caption = 'Id'
+            Caption = 'C'#243'digo'
             FocusControl = editId
           end
           object Label11: TLabel
@@ -135,7 +135,8 @@ object telaLancCompras: TtelaLancCompras
             Height = 21
             DataField = 'NNOTA'
             DataSource = telaDados.dsCompras
-            TabOrder = 3
+            Enabled = False
+            TabOrder = 4
           end
           object edtnSerie: TDBEdit
             Left = 200
@@ -144,7 +145,8 @@ object telaLancCompras: TtelaLancCompras
             Height = 21
             DataField = 'NSERIE'
             DataSource = telaDados.dsCompras
-            TabOrder = 4
+            Enabled = False
+            TabOrder = 5
           end
           object edtCfop: TDBEdit
             Left = 248
@@ -153,7 +155,8 @@ object telaLancCompras: TtelaLancCompras
             Height = 21
             DataField = 'CFOP'
             DataSource = telaDados.dsCompras
-            TabOrder = 5
+            Enabled = False
+            TabOrder = 6
             OnChange = edtCfopChange
             OnExit = edtCfopExit
           end
@@ -164,17 +167,18 @@ object telaLancCompras: TtelaLancCompras
             Height = 21
             DataField = 'CHAVENFE'
             DataSource = telaDados.dsCompras
-            TabOrder = 6
-          end
-          object cbModelo: TComboBox
-            Left = 548
-            Top = 21
-            Width = 175
-            Height = 21
-            ItemHeight = 13
-            ItemIndex = 7
+            Enabled = False
             TabOrder = 7
-            Text = '55-Nota Fiscal Eletr'#244'nica'
+          end
+          object cbModelo: TDBComboBox
+            Left = 552
+            Top = 24
+            Width = 233
+            Height = 21
+            DataField = 'MODELO'
+            DataSource = telaDados.dsCompras
+            Enabled = False
+            ItemHeight = 13
             Items.Strings = (
               '01-Nota Fiscal'
               '06-NF/Conta de Energia El'#233'trica'
@@ -185,11 +189,12 @@ object telaLancCompras: TtelaLancCompras
               '08-Conhec. Transp.Rod.Carga(CTRC)'
               '55-Nota Fiscal Eletr'#244'nica'
               '57-Conhec.Transp.Eletr'#244'nico(CTe)')
+            TabOrder = 3
           end
         end
-        object GroupBox3: TGroupBox
+        object gbFor: TGroupBox
           Left = 7
-          Top = 114
+          Top = 112
           Width = 640
           Height = 57
           Caption = 'Fornecedor'
@@ -207,6 +212,7 @@ object telaLancCompras: TtelaLancCompras
             Top = 17
             Width = 31
             Height = 32
+            Enabled = False
             Glyph.Data = {
               B60D0000424DB60D000000000000360000002800000030000000180000000100
               180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -343,7 +349,7 @@ object telaLancCompras: TtelaLancCompras
           end
         end
         object GroupBox4: TGroupBox
-          Left = 816
+          Left = 832
           Top = 344
           Width = 185
           Height = 257
@@ -467,7 +473,7 @@ object telaLancCompras: TtelaLancCompras
           TabOrder = 5
         end
         object btnIncluir: TBitBtn
-          Left = 832
+          Left = 847
           Top = 33
           Width = 151
           Height = 37
@@ -588,7 +594,7 @@ object telaLancCompras: TtelaLancCompras
           NumGlyphs = 2
         end
         object btnExcluir: TBitBtn
-          Left = 832
+          Left = 847
           Top = 73
           Width = 151
           Height = 37
@@ -709,7 +715,7 @@ object telaLancCompras: TtelaLancCompras
           NumGlyphs = 2
         end
         object btnConfirmar: TBitBtn
-          Left = 832
+          Left = 847
           Top = 113
           Width = 151
           Height = 37
@@ -830,7 +836,7 @@ object telaLancCompras: TtelaLancCompras
           NumGlyphs = 2
         end
         object btnCancelar: TBitBtn
-          Left = 832
+          Left = 847
           Top = 152
           Width = 151
           Height = 37
@@ -951,7 +957,7 @@ object telaLancCompras: TtelaLancCompras
           NumGlyphs = 2
         end
         object btnPesquisar: TBitBtn
-          Left = 832
+          Left = 847
           Top = 192
           Width = 151
           Height = 37
@@ -1072,7 +1078,7 @@ object telaLancCompras: TtelaLancCompras
           NumGlyphs = 2
         end
         object btnImprimir: TBitBtn
-          Left = 832
+          Left = 847
           Top = 233
           Width = 151
           Height = 37
@@ -1081,7 +1087,7 @@ object telaLancCompras: TtelaLancCompras
           TabOrder = 11
         end
         object btnEncerrar: TBitBtn
-          Left = 832
+          Left = 847
           Top = 273
           Width = 151
           Height = 37
@@ -1201,410 +1207,10 @@ object telaLancCompras: TtelaLancCompras
             F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
           NumGlyphs = 2
         end
-        object DBGrid1: TDBGrid
-          Left = 8
-          Top = 344
-          Width = 803
-          Height = 270
-          DataSource = telaDados.dsTempItens
-          Enabled = False
-          TabOrder = 13
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'DESC'
-              Title.Caption = 'Descri'#231#227'o'
-              Width = 415
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'QUANT'
-              Title.Caption = 'Quantidade'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VALOR'
-              Title.Caption = 'Valor'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DESCONTO'
-              Title.Caption = 'Desconto'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ACRESCIMO'
-              Title.Caption = 'Acr'#233'scimo'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VRT'
-              Title.Caption = 'Valor Total'
-              Visible = True
-            end>
-        end
-        object GroupBox6: TGroupBox
-          Left = 7
-          Top = 170
-          Width = 801
-          Height = 169
-          Caption = 'Item'
-          TabOrder = 14
-          object Label24: TLabel
-            Left = 7
-            Top = 17
-            Width = 80
-            Height = 13
-            Caption = 'C'#243'digo de Item.: '
-          end
-          object Label23: TLabel
-            Left = 275
-            Top = 10
-            Width = 48
-            Height = 13
-            Caption = 'Descri'#231#227'o'
-            FocusControl = edtIDesc
-          end
-          object Label25: TLabel
-            Left = 688
-            Top = 8
-            Width = 28
-            Height = 13
-            Caption = 'CFOP'
-            FocusControl = edtICfop
-          end
-          object Label26: TLabel
-            Left = 5
-            Top = 41
-            Width = 87
-            Height = 13
-            Caption = 'C'#243'digo de Barras.:'
-          end
-          object Label27: TLabel
-            Left = 89
-            Top = 64
-            Width = 61
-            Height = 13
-            Caption = 'Valor unit'#225'rio'
-            FocusControl = edtIVrUnit
-          end
-          object Label28: TLabel
-            Left = 8
-            Top = 112
-            Width = 37
-            Height = 13
-            Caption = 'P.Custo'
-            FocusControl = edtIPcusto
-          end
-          object Label29: TLabel
-            Left = 8
-            Top = 64
-            Width = 55
-            Height = 13
-            Caption = 'Quantidade'
-            FocusControl = edtIQtd
-          end
-          object Label30: TLabel
-            Left = 71
-            Top = 83
-            Width = 7
-            Height = 13
-            Caption = 'X'
-            FocusControl = edtIQtd
-          end
-          object Label31: TLabel
-            Left = 160
-            Top = 83
-            Width = 6
-            Height = 13
-            Caption = '='
-            FocusControl = edtIQtd
-          end
-          object Label32: TLabel
-            Left = 176
-            Top = 64
-            Width = 51
-            Height = 13
-            Caption = 'Valor Total'
-            FocusControl = edtIVrTotal
-          end
-          object Label33: TLabel
-            Left = 192
-            Top = 112
-            Width = 38
-            Height = 13
-            Caption = 'Margem'
-            FocusControl = edtIMargem
-          end
-          object Label34: TLabel
-            Left = 264
-            Top = 112
-            Width = 48
-            Height = 13
-            Caption = 'R$ Venda'
-            FocusControl = edtIVenda
-          end
-          object Label35: TLabel
-            Left = 336
-            Top = 112
-            Width = 51
-            Height = 13
-            Caption = 'Margem P.'
-            FocusControl = edtIMargemP
-          end
-          object Label36: TLabel
-            Left = 400
-            Top = 112
-            Width = 61
-            Height = 13
-            Caption = 'R$ Venda P.'
-            FocusControl = edtIVendaP
-          end
-          object edtItem: TEdit
-            Left = 95
-            Top = 13
-            Width = 129
-            Height = 21
-            Enabled = False
-            TabOrder = 0
-            OnKeyDown = edtItemKeyDown
-            OnKeyPress = edtItemKeyPress
-          end
-          object btnIncItem: TBitBtn
-            Left = 231
-            Top = 9
-            Width = 35
-            Height = 29
-            Action = adicionarItem
-            Enabled = False
-            TabOrder = 1
-            Glyph.Data = {
-              B60D0000424DB60D000000000000360000002800000030000000180000000100
-              180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCD2E2B9BDCFD8D1D7FF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7E7
-              E7DBDBDBE7E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFC8D0E1285A9F2B5899626F8DABA2AEFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFE5E5E59B9B9B9797979D9D9DC8C8C8FFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC8D1E3285EA55BD3F977DBF426589F70
-              7B9BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6E6E69B9B9BADAD
-              ADB0B0B0979797ABABABFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC8D2E5
-              2963AC5BD5FA7EE3FA45AFF11879DE255099FFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFE6E6E69D9D9DAEAEAEB2B2B2A8A8A89E9E9E9A9A9AFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFC9D4E72967B45CD5FA7FE3FA45AFF1177FE41F5AADC9
-              D4E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6E6E69E9E9EAEAEAEB2B2B2A8A8
-              A89F9F9F9B9B9BE6E6E6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC9D5E9296CBA5CD5FC
-              7FE3FA44AFF1177FE41F5EB6C9D5E9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7
-              E7E79F9F9FAEAEAEB2B2B2A8A8A89F9F9F9C9C9CE7E7E7FFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFC9D6EA2971C15CD5FC7EE3FA44AFF1177FE41F63BDC9D6EAFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFE7E7E7A0A0A0AEAEAEB2B2B2A8A8A89F9F9F9D9D
-              9DE7E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F6F7E7
-              E5E6E6E5E6F4F3F3FFFFFFFFFFFFFFFFFFFFFFFF447DC551C3F47EE3FA44AFEF
-              177FE41F67C3C9D8ECFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFAFAFAF1F1F1F1F1F1F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFADADADAB
-              ABABB2B2B2A8A8A89F9F9F9E9E9EE7E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFDFCFCB6B2B66A636C483F48564950534952453B455C545CA8A3A8F7F7
-              F7EFEDF1B4C2D52E79C83DA2E91780E41F6CC8C9D9EDFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFEFEFED5D5D5A9A9A9929292939393939393909090
-              A2A2A2CDCDCDFAFAFAF4F4F4CECECE9E9E9EA6A6A69F9F9F9F9F9FE7E7E7FFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEEEF6C646E66574AAD9D6FFBDCACFF
-              E6C4FFEECDFFF5CCC0C8A6606263483C4871647F9CA1B691A9BC2372CB1F70D2
-              C9DBF1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F5F5A8A8A89595
-              95A4A4A4B5B5B5B8B8B8BABABABABABAAEAEAE989898949494A0A0A0A9A9A9A9
-              A9A99D9D9DA0A0A0E8E8E8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEEEF
-              5D56618E7753F2C18FFFCFA9FFD6B3FFE6C9FFEDD0FFF2D3FFF8D8FFFCDF97AC
-              A6453B45726374C8C1CBE0EEFAD4E3F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFF5F5F59E9E9E9C9C9CB0B0B0B4B4B4B6B6B6B9B9B9BABABABBBBBB
-              BBBBBBBCBCBCA8A8A89090909B9B9BD5D5D5F2F2F2EDEDEDFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFF7A737E8D734FEAB486F5BC91F6BD91FFD8B6FF
-              E8CDFFEED2FFF3D7FFF9E0FFFDE9FFFEF095AEAD463C49CDC9CDFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAEAEAE9B9B9BADADADB0B0
-              B0B0B0B0B6B6B6B9B9B9BABABABBBBBBBCBCBCBDBDBDBEBEBEA9A9A9909090DF
-              DFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC9C6CB6F5C51
-              DAA574EDB489E2A97EF8BF93FFDAB9FFE7CDFFEED5FFF4DAFFF9E3FFFDEFFFFE
-              F7FFFEEE6B7175A5A1A7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFDEDEDE979797A9A9A9AEAEAEABABABB0B0B0B6B6B6B9B9B9BABABABBBBBB
-              BCBCBCBEBEBEBFBFBFBEBEBE9C9C9CCBCBCBFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFF8F8792A07F52E1A87DDBA277DDA479F6BD92FFD7B5FF
-              E7CEFFEDD4FFF2DAFFF7E1FFFAE7FFFDEDFFFCE7CCD6C05D555FFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB7B7B79E9E9EABABABA9A9A9AAAA
-              AAB0B0B0B6B6B6B9B9B9BABABABBBBBBBCBCBCBDBDBDBEBEBEBDBDBDB2B2B29F
-              9F9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF706471C4905D
-              DDA479D39A6FF8BF94FFD0ACFFDABCFFEBD8FFEBD4FFEED7FFF4DDFFF7E1FFF8
-              E1FFF9DEFFFAD75D525FF0F0F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFF9F9F9FA4A4A4AAAAAAA7A7A7B0B0B0B4B4B4B7B7B7BABABABABABABBBBBB
-              BCBCBCBCBCBCBCBCBCBCBCBCBCBCBC969696F7F7F7FFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFF7C6A78C0895BDAA176EFB68BDAA176E5AC81FDC498FF
-              DCBDFFEFE0FFECD5FFEED6FFF2DAFFF4DAFFF3D8FFF2CF7D7179D6D5D8FFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9D9D9DA3A3A3A9A9A9AEAEAEA9A9
-              A9ACACACB2B2B2B7B7B7BBBBBBBABABABABABABBBBBBBBBBBBBBBBBBBABABA9D
-              9D9DE7E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7E7181BE8759
-              D89F74E4AB80FFCCA5FFE1CBFFDBBFFFCCA4FFDFC3FFECDBFFE9D1FFECD3FFED
-              D3FFEDD1FFEFCE7F767BDAD8DBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFF9E9E9EA2A2A2A8A8A8ABABABB4B4B4B8B8B8B7B7B7B3B3B3B8B8B8BBBBBB
-              BABABABABABABABABABABABABABABA9E9E9EE9E9E9FFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFF827788BF8857D0976CF3BA8FFFE1CBFFEEE2FFF9F5FF
-              DABDFFCBA3FFE6D1FFE4CBFFE5CBFFE7CDFFE7CCFFECC26A5E6BF1F1F2FFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA5A5A5A2A2A2A6A6A6AFAFAFB8B8
-              B8BBBBBBBEBEBEB7B7B7B3B3B3B9B9B9B9B9B9B9B9B9B9B9B9B9B9B9B9B9B999
-              9999F7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A0ACA68053
-              CB9267EBB287FFD9BBFFEADAFFF1E7FFDEC5F1B88DFFDBBFFFCCA3FED3AEFFD8
-              B6FFDDC0D3C594796F7CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFC0C0C09F9F9FA5A5A5ADADADB6B6B6BABABABCBCBCB8B8B8AFAFAFB7B7B7
-              B3B3B3B5B5B5B6B6B6B7B7B7AEAEAEA9A9A9FFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFDFDCE08B776FBF8656D9A075FCC398FFDCC2FFE5D2FF
-              CCA5FBC297FCC398ECB388F3BA8EFFC99EFCD1A08C8171BCB8BEFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7E7E79E9E9EA2A2A2A9A9A9B1B1
-              B1B7B7B7B9B9B9B4B4B4B1B1B1B1B1B1ADADADAFAFAFB3B3B3B3B3B39F9F9FD4
-              D4D4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFABA4AF
-              9D7E5CC0885CDBA277EEB58AFBC297F6BD92EEB58AD1986DDDA479F1B88DF4BE
-              91B09F77847A89FCFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFBFBFBF9F9F9FA3A3A3A9A9A9AEAEAEB1B1B1B0B0B0AEAEAEA7A7A7
-              AAAAAAAFAFAFB0B0B0A5A5A5ADADADFEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFAFAFA9C929FA0825FBF8857CD9469D69D72DD
-              A479DBA277E3AA7FEAB186DFAC7BAB976F857988E9E8EBFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFBFBB0B0B0A0A0A0A2A2
-              A2A6A6A6A8A8A8AAAAAAA9A9A9ABABABADADADABABABA4A4A4A7A7A7F1F1F1FF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FAFAFAB2ABB598867DAD875AC38C5BBC8558C28B5DCF9967BA9668958475968F
-              9BEDECEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFBFBFBC1C1C1A2A2A2A1A1A1A3A3A3A2A2A2A3A3A3A6A6A6
-              A4A4A4A1A1A1B3B3B3F3F3F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE4E0E4B7AFBA9D91A09F
-              919DA1939D968B9BA69FABD7D3D8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E8
-              E8C4C4C4ACACACA6A6A6A6A6A6A9A9A9BBBBBBE1E1E1FFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-            NumGlyphs = 2
-          end
-          object edtIDesc: TDBEdit
-            Left = 276
-            Top = 26
-            Width = 407
-            Height = 21
-            DataField = 'DESCRICAO'
-            DataSource = telaDados.dsProdutos
-            TabOrder = 2
-          end
-          object edtICfop: TDBEdit
-            Left = 688
-            Top = 24
-            Width = 106
-            Height = 21
-            DataField = 'CFOP'
-            DataSource = telaDados.dsProdutos
-            TabOrder = 3
-          end
-          object edtIEan: TDBEdit
-            Left = 96
-            Top = 40
-            Width = 128
-            Height = 21
-            DataField = 'EAN13'
-            DataSource = telaDados.dsProdutos
-            TabOrder = 4
-          end
-          object edtIVrUnit: TDBEdit
-            Left = 91
-            Top = 80
-            Width = 55
-            Height = 21
-            DataField = 'PRECO_COMPRA'
-            DataSource = telaDados.dsProdutos
-            TabOrder = 5
-          end
-          object edtIPcusto: TDBEdit
-            Left = 8
-            Top = 128
-            Width = 56
-            Height = 21
-            DataField = 'PRECO_VENDA'
-            DataSource = telaDados.dsProdutos
-            TabOrder = 6
-          end
-          object edtIQtd: TDBEdit
-            Left = 14
-            Top = 80
-            Width = 47
-            Height = 21
-            DataField = 'QUANTIDADE'
-            DataSource = telaDados.dsCTempItens
-            TabOrder = 7
-          end
-          object edtIVrTotal: TDBEdit
-            Left = 176
-            Top = 80
-            Width = 57
-            Height = 21
-            DataField = 'VALOR_TOTAL'
-            DataSource = telaDados.dsCTempItens
-            TabOrder = 8
-          end
-          object edtIMargem: TDBEdit
-            Left = 192
-            Top = 128
-            Width = 59
-            Height = 21
-            DataField = 'MARGEM_LUCRO'
-            DataSource = telaDados.dsProdutos
-            TabOrder = 9
-          end
-          object edtIVenda: TDBEdit
-            Left = 264
-            Top = 128
-            Width = 64
-            Height = 21
-            DataField = 'PRECO_VENDA'
-            DataSource = telaDados.dsProdutos
-            TabOrder = 10
-          end
-          object edtIMargemP: TDBEdit
-            Left = 336
-            Top = 128
-            Width = 57
-            Height = 21
-            DataField = 'MARGEM_LUCROP'
-            DataSource = telaDados.dsProdutos
-            TabOrder = 11
-          end
-          object edtIVendaP: TDBEdit
-            Left = 400
-            Top = 128
-            Width = 57
-            Height = 21
-            DataField = 'PRECO_VENDAP'
-            DataSource = telaDados.dsProdutos
-            TabOrder = 12
-          end
-        end
         object StatusBar1: TStatusBar
           Left = 2
-          Top = 625
-          Width = 1002
+          Top = 632
+          Width = 1021
           Height = 19
           Panels = <
             item
@@ -1627,6 +1233,976 @@ object telaLancCompras: TtelaLancCompras
               Text = 'F10 - Fecha Tela de Compra'
               Width = 50
             end>
+        end
+        object pcControle: TPageControl
+          Left = 8
+          Top = 171
+          Width = 819
+          Height = 459
+          ActivePage = TabSheet3
+          TabOrder = 14
+          object TabSheet3: TTabSheet
+            Caption = 'Produtos'
+            object DBGrid1: TDBGrid
+              Left = 3
+              Top = 168
+              Width = 804
+              Height = 260
+              DataSource = telaDados.dsTempItens
+              Enabled = False
+              TabOrder = 0
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'MS Sans Serif'
+              TitleFont.Style = []
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'DESC'
+                  Title.Caption = 'Descri'#231#227'o'
+                  Width = 415
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'QUANT'
+                  Title.Caption = 'Quantidade'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'VALOR'
+                  Title.Caption = 'Valor'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'DESCONTO'
+                  Title.Caption = 'Desconto'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'ACRESCIMO'
+                  Title.Caption = 'Acr'#233'scimo'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'VRT'
+                  Title.Caption = 'Valor Total'
+                  Visible = True
+                end>
+            end
+            object gbItem: TGroupBox
+              Left = 4
+              Top = -3
+              Width = 801
+              Height = 169
+              Caption = 'Item'
+              TabOrder = 1
+              object Label24: TLabel
+                Left = 7
+                Top = 17
+                Width = 80
+                Height = 13
+                Caption = 'C'#243'digo de Item.: '
+              end
+              object Label23: TLabel
+                Left = 275
+                Top = 10
+                Width = 48
+                Height = 13
+                Caption = 'Descri'#231#227'o'
+                FocusControl = edtIDesc
+              end
+              object Label25: TLabel
+                Left = 688
+                Top = 8
+                Width = 28
+                Height = 13
+                Caption = 'CFOP'
+                FocusControl = edtICfop
+              end
+              object Label26: TLabel
+                Left = 5
+                Top = 41
+                Width = 87
+                Height = 13
+                Caption = 'C'#243'digo de Barras.:'
+              end
+              object Label27: TLabel
+                Left = 89
+                Top = 64
+                Width = 61
+                Height = 13
+                Caption = 'Valor unit'#225'rio'
+                FocusControl = edtIVrUnit
+              end
+              object Label29: TLabel
+                Left = 8
+                Top = 64
+                Width = 55
+                Height = 13
+                Caption = 'Quantidade'
+                FocusControl = edtIQtd
+              end
+              object Label30: TLabel
+                Left = 73
+                Top = 83
+                Width = 7
+                Height = 13
+                Caption = 'X'
+                FocusControl = edtIQtd
+              end
+              object Label31: TLabel
+                Left = 160
+                Top = 83
+                Width = 6
+                Height = 13
+                Caption = '='
+                FocusControl = edtIQtd
+              end
+              object Label32: TLabel
+                Left = 176
+                Top = 64
+                Width = 51
+                Height = 13
+                Caption = 'Valor Total'
+                FocusControl = edtIVrTotal
+              end
+              object btnConfirmProd: TSpeedButton
+                Left = 749
+                Top = 125
+                Width = 33
+                Height = 31
+                Enabled = False
+                Glyph.Data = {
+                  B60D0000424DB60D000000000000360000002800000030000000180000000100
+                  180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF05793AEDF8F2FFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  8F8F8FF7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFF0E824563CE9D108447EFF9F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFF919191A6A6A6929292F8F8F8FFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0D844472D1A76DD0A466CE9F0F87
+                  47E8F4ECFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF919191A8A8A8
+                  A8A8A8A6A6A6929292F5F5F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0D
+                  864480D7B07ED5AE76D2A96DD0A465CD9F108947EBF6EEFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFF919191ABABABAAAAAAA9A9A9A8A8A8A6A6A6929292F6F6F6FF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFF04823D8FDAB98FDAB986D8B37DD5AE74D2A86ACF
+                  A261CC9D0F8B48EEF7F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF909090ADADADADADADACACAC
+                  AAAAAAA9A9A9A7A7A7A6A6A6929292F7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0C88469CDFC19F
+                  E0C398DDBF8EDBB885D7B27AD4AB6FD1A665CE9F5CCB9A0F8D4AEEF7F1FFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FF929292AFAFAFB0B0B0AFAFAFADADADABABABAAAAAAA8A8A8A6A6A6A5A5A593
+                  9393F7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFF098C47A5E1C6ADE4CCA7E2C89FDFC395DCBC8AD9B67ED6AE72D1
+                  A868CEA05ECB9A57C9970E904CCBE3CCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFF929292B1B1B1B2B2B2B1B1B1B0B0B0AEAEAE
+                  ACACACAAAAAAA8A8A8A7A7A7A5A5A5A4A4A4939393E6E6E6FFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF099048A7E2C8B8E7D2B5E6D0AE
+                  E4CCA4E1C699DDBF26B46688D9B475D2A96ACFA260CC9B57C99651C794048C41
+                  D5E9D6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF929292B1B1
+                  B1B4B4B4B3B3B3B2B2B2B0B0B0AFAFAF9A9A9AACACACA9A9A9A7A7A7A5A5A5A4
+                  A4A4A3A3A3919191EBEBEBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  079347A1E1C4B8E7D2BEE9D6B7E7D3AFE5CDA3E0C60D964AFFFFFF1FAD5F83D7
+                  B26BD0A260CC9C58C99651C89351C7930E974DDAECDBFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFF929292B0B0B0B4B4B4B5B5B5B4B4B4B2B2B2B0B0B0949494
+                  FFFFFF989898ABABABA7A7A7A6A6A6A4A4A4A3A3A3A3A3A3949494EEEEEEFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFF0291438FDBB9AEE4CCB4E6D0B8E7D2B5E6D0A7
+                  E2C80B974BFFFFFFFFFFFFFFFFFF1FAD5F7CD5AD60CC9C57CA9651C89350C792
+                  51C7920E984EDDEEDEFFFFFFFFFFFFFFFFFFFFFFFF919191ADADADB2B2B2B3B3
+                  B3B4B4B4B3B3B3B1B1B1939393FFFFFFFFFFFFFFFFFF989898AAAAAAA6A6A6A4
+                  A4A4A3A3A3A3A3A3A3A3A3949494EFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  19A359A0E0C3AEE4CCB0E4CDA4E1C51DA35BFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FF23B16373D1A856C99650C7924FC7914FC79251C791119C51DEEFDFFFFFFFFF
+                  FFFFFFFFFFFFFFFF979797B0B0B0B2B2B2B2B2B2B0B0B0979797FFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFF999999A9A9A9A4A4A4A3A3A3A3A3A3A3A3A3A3A3A39595
+                  95F0F0F0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1CA75C9DDFC2A6E2C7109F51FF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF23B1636BD0A24FC7924FC792
+                  50C79250C79250C791139E53E3F2E5FFFFFFFFFFFFFFFFFFFFFFFF979797AFAF
+                  AFB1B1B1959595FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF999999A7
+                  A7A7A3A3A3A3A3A3A3A3A3A3A3A3A3A3A3959595F2F2F2FFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFF1AA85A16A557FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFF24B36563CD9E50C7924FC79250C79250C79251C7920C9B4DFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFF979797969696FFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9A9A9AA6A6A6A3A3A3A3A3A3A3A3A3A3A3
+                  A3A3A3A3949494FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF20AF615FCC9A
+                  4FC79250C79251C893088D46FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFF999999A5A5A5A3A3A3A3A3A3A3A3A3929292FFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFF1BAA5C5ACA9853C8940A964BFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF989898A5A5A5A3A3A39393
+                  93FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  11A052139F53FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFF959595959595FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+                NumGlyphs = 2
+                OnClick = btnConfirmProdClick
+              end
+              object edtItem: TEdit
+                Left = 95
+                Top = 13
+                Width = 129
+                Height = 21
+                Enabled = False
+                TabOrder = 0
+                OnKeyDown = edtItemKeyDown
+                OnKeyPress = edtItemKeyPress
+              end
+              object btnIncItem: TBitBtn
+                Left = 231
+                Top = 9
+                Width = 35
+                Height = 29
+                Action = adicionarItem
+                Enabled = False
+                TabOrder = 1
+                Glyph.Data = {
+                  B60D0000424DB60D000000000000360000002800000030000000180000000100
+                  180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCCD2E2B9BDCFD8D1D7FF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7E7
+                  E7DBDBDBE7E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFC8D0E1285A9F2B5899626F8DABA2AEFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFE5E5E59B9B9B9797979D9D9DC8C8C8FFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC8D1E3285EA55BD3F977DBF426589F70
+                  7B9BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6E6E69B9B9BADAD
+                  ADB0B0B0979797ABABABFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC8D2E5
+                  2963AC5BD5FA7EE3FA45AFF11879DE255099FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFE6E6E69D9D9DAEAEAEB2B2B2A8A8A89E9E9E9A9A9AFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFC9D4E72967B45CD5FA7FE3FA45AFF1177FE41F5AADC9
+                  D4E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6E6E69E9E9EAEAEAEB2B2B2A8A8
+                  A89F9F9F9B9B9BE6E6E6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC9D5E9296CBA5CD5FC
+                  7FE3FA44AFF1177FE41F5EB6C9D5E9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7
+                  E7E79F9F9FAEAEAEB2B2B2A8A8A89F9F9F9C9C9CE7E7E7FFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFC9D6EA2971C15CD5FC7EE3FA44AFF1177FE41F63BDC9D6EAFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFE7E7E7A0A0A0AEAEAEB2B2B2A8A8A89F9F9F9D9D
+                  9DE7E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F6F7E7
+                  E5E6E6E5E6F4F3F3FFFFFFFFFFFFFFFFFFFFFFFF447DC551C3F47EE3FA44AFEF
+                  177FE41F67C3C9D8ECFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFAFAFAF1F1F1F1F1F1F8F8F8FFFFFFFFFFFFFFFFFFFFFFFFADADADAB
+                  ABABB2B2B2A8A8A89F9F9F9E9E9EE7E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFDFCFCB6B2B66A636C483F48564950534952453B455C545CA8A3A8F7F7
+                  F7EFEDF1B4C2D52E79C83DA2E91780E41F6CC8C9D9EDFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFEFEFED5D5D5A9A9A9929292939393939393909090
+                  A2A2A2CDCDCDFAFAFAF4F4F4CECECE9E9E9EA6A6A69F9F9F9F9F9FE7E7E7FFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEEEF6C646E66574AAD9D6FFBDCACFF
+                  E6C4FFEECDFFF5CCC0C8A6606263483C4871647F9CA1B691A9BC2372CB1F70D2
+                  C9DBF1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5F5F5A8A8A89595
+                  95A4A4A4B5B5B5B8B8B8BABABABABABAAEAEAE989898949494A0A0A0A9A9A9A9
+                  A9A99D9D9DA0A0A0E8E8E8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEEEF
+                  5D56618E7753F2C18FFFCFA9FFD6B3FFE6C9FFEDD0FFF2D3FFF8D8FFFCDF97AC
+                  A6453B45726374C8C1CBE0EEFAD4E3F5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFF5F5F59E9E9E9C9C9CB0B0B0B4B4B4B6B6B6B9B9B9BABABABBBBBB
+                  BBBBBBBCBCBCA8A8A89090909B9B9BD5D5D5F2F2F2EDEDEDFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFF7A737E8D734FEAB486F5BC91F6BD91FFD8B6FF
+                  E8CDFFEED2FFF3D7FFF9E0FFFDE9FFFEF095AEAD463C49CDC9CDFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAEAEAE9B9B9BADADADB0B0
+                  B0B0B0B0B6B6B6B9B9B9BABABABBBBBBBCBCBCBDBDBDBEBEBEA9A9A9909090DF
+                  DFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC9C6CB6F5C51
+                  DAA574EDB489E2A97EF8BF93FFDAB9FFE7CDFFEED5FFF4DAFFF9E3FFFDEFFFFE
+                  F7FFFEEE6B7175A5A1A7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFDEDEDE979797A9A9A9AEAEAEABABABB0B0B0B6B6B6B9B9B9BABABABBBBBB
+                  BCBCBCBEBEBEBFBFBFBEBEBE9C9C9CCBCBCBFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFF8F8792A07F52E1A87DDBA277DDA479F6BD92FFD7B5FF
+                  E7CEFFEDD4FFF2DAFFF7E1FFFAE7FFFDEDFFFCE7CCD6C05D555FFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB7B7B79E9E9EABABABA9A9A9AAAA
+                  AAB0B0B0B6B6B6B9B9B9BABABABBBBBBBCBCBCBDBDBDBEBEBEBDBDBDB2B2B29F
+                  9F9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF706471C4905D
+                  DDA479D39A6FF8BF94FFD0ACFFDABCFFEBD8FFEBD4FFEED7FFF4DDFFF7E1FFF8
+                  E1FFF9DEFFFAD75D525FF0F0F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFF9F9F9FA4A4A4AAAAAAA7A7A7B0B0B0B4B4B4B7B7B7BABABABABABABBBBBB
+                  BCBCBCBCBCBCBCBCBCBCBCBCBCBCBC969696F7F7F7FFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFF7C6A78C0895BDAA176EFB68BDAA176E5AC81FDC498FF
+                  DCBDFFEFE0FFECD5FFEED6FFF2DAFFF4DAFFF3D8FFF2CF7D7179D6D5D8FFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9D9D9DA3A3A3A9A9A9AEAEAEA9A9
+                  A9ACACACB2B2B2B7B7B7BBBBBBBABABABABABABBBBBBBBBBBBBBBBBBBABABA9D
+                  9D9DE7E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7E7181BE8759
+                  D89F74E4AB80FFCCA5FFE1CBFFDBBFFFCCA4FFDFC3FFECDBFFE9D1FFECD3FFED
+                  D3FFEDD1FFEFCE7F767BDAD8DBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFF9E9E9EA2A2A2A8A8A8ABABABB4B4B4B8B8B8B7B7B7B3B3B3B8B8B8BBBBBB
+                  BABABABABABABABABABABABABABABA9E9E9EE9E9E9FFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFF827788BF8857D0976CF3BA8FFFE1CBFFEEE2FFF9F5FF
+                  DABDFFCBA3FFE6D1FFE4CBFFE5CBFFE7CDFFE7CCFFECC26A5E6BF1F1F2FFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA5A5A5A2A2A2A6A6A6AFAFAFB8B8
+                  B8BBBBBBBEBEBEB7B7B7B3B3B3B9B9B9B9B9B9B9B9B9B9B9B9B9B9B9B9B9B999
+                  9999F7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A0ACA68053
+                  CB9267EBB287FFD9BBFFEADAFFF1E7FFDEC5F1B88DFFDBBFFFCCA3FED3AEFFD8
+                  B6FFDDC0D3C594796F7CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFC0C0C09F9F9FA5A5A5ADADADB6B6B6BABABABCBCBCB8B8B8AFAFAFB7B7B7
+                  B3B3B3B5B5B5B6B6B6B7B7B7AEAEAEA9A9A9FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFDFDCE08B776FBF8656D9A075FCC398FFDCC2FFE5D2FF
+                  CCA5FBC297FCC398ECB388F3BA8EFFC99EFCD1A08C8171BCB8BEFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7E7E79E9E9EA2A2A2A9A9A9B1B1
+                  B1B7B7B7B9B9B9B4B4B4B1B1B1B1B1B1ADADADAFAFAFB3B3B3B3B3B39F9F9FD4
+                  D4D4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFABA4AF
+                  9D7E5CC0885CDBA277EEB58AFBC297F6BD92EEB58AD1986DDDA479F1B88DF4BE
+                  91B09F77847A89FCFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFBFBFBF9F9F9FA3A3A3A9A9A9AEAEAEB1B1B1B0B0B0AEAEAEA7A7A7
+                  AAAAAAAFAFAFB0B0B0A5A5A5ADADADFEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFAFAFA9C929FA0825FBF8857CD9469D69D72DD
+                  A479DBA277E3AA7FEAB186DFAC7BAB976F857988E9E8EBFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFBFBB0B0B0A0A0A0A2A2
+                  A2A6A6A6A8A8A8AAAAAAA9A9A9ABABABADADADABABABA4A4A4A7A7A7F1F1F1FF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FAFAFAB2ABB598867DAD875AC38C5BBC8558C28B5DCF9967BA9668958475968F
+                  9BEDECEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFBFBFBC1C1C1A2A2A2A1A1A1A3A3A3A2A2A2A3A3A3A6A6A6
+                  A4A4A4A1A1A1B3B3B3F3F3F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE4E0E4B7AFBA9D91A09F
+                  919DA1939D968B9BA69FABD7D3D8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE8E8
+                  E8C4C4C4ACACACA6A6A6A6A6A6A9A9A9BBBBBBE1E1E1FFFFFFFFFFFFFFFFFFFF
+                  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+                NumGlyphs = 2
+              end
+              object edtIDesc: TDBEdit
+                Left = 276
+                Top = 26
+                Width = 407
+                Height = 21
+                DataField = 'DESCRICAO'
+                DataSource = telaDados.dsProdutos
+                Enabled = False
+                TabOrder = 3
+              end
+              object edtICfop: TDBEdit
+                Left = 688
+                Top = 24
+                Width = 106
+                Height = 21
+                DataField = 'CFOP'
+                DataSource = telaDados.dsProdutos
+                Enabled = False
+                TabOrder = 4
+              end
+              object edtIEan: TDBEdit
+                Left = 96
+                Top = 40
+                Width = 128
+                Height = 21
+                DataField = 'EAN13'
+                DataSource = telaDados.dsProdutos
+                Enabled = False
+                TabOrder = 2
+              end
+              object edtIVrUnit: TDBEdit
+                Left = 91
+                Top = 80
+                Width = 55
+                Height = 21
+                DataField = 'PRECO_COMPRA'
+                DataSource = telaDados.dsProdutos
+                Enabled = False
+                TabOrder = 6
+                OnExit = edtIVrUnitExit
+              end
+              object edtIQtd: TDBEdit
+                Left = 14
+                Top = 80
+                Width = 47
+                Height = 21
+                DataField = 'QUANTIDADE'
+                DataSource = telaDados.dsCTempItens
+                Enabled = False
+                TabOrder = 5
+                OnExit = edtIQtdExit
+              end
+              object edtIVrTotal: TDBEdit
+                Left = 176
+                Top = 80
+                Width = 57
+                Height = 21
+                DataField = 'VALOR_TOTAL'
+                DataSource = telaDados.dsCTempItens
+                Enabled = False
+                TabOrder = 7
+              end
+              object gbAliq: TGroupBox
+                Left = 238
+                Top = 49
+                Width = 557
+                Height = 64
+                Caption = 'Al'#237'quotas'
+                TabOrder = 8
+                object Label37: TLabel
+                  Left = 8
+                  Top = 16
+                  Width = 34
+                  Height = 13
+                  Caption = '%ICMS'
+                  FocusControl = edtIAICMS
+                end
+                object Label38: TLabel
+                  Left = 56
+                  Top = 16
+                  Width = 32
+                  Height = 13
+                  Caption = '$ICMS'
+                  FocusControl = edtIVICMS
+                end
+                object Label39: TLabel
+                  Left = 114
+                  Top = 16
+                  Width = 21
+                  Height = 13
+                  Caption = '%IPI'
+                  FocusControl = edtIAIpi
+                end
+                object Label40: TLabel
+                  Left = 162
+                  Top = 16
+                  Width = 19
+                  Height = 13
+                  Caption = '$IPI'
+                  FocusControl = edtIVIpi
+                end
+                object Label41: TLabel
+                  Left = 217
+                  Top = 16
+                  Width = 25
+                  Height = 13
+                  Caption = '%PIS'
+                  FocusControl = edtIAPis
+                end
+                object Label42: TLabel
+                  Left = 265
+                  Top = 16
+                  Width = 23
+                  Height = 13
+                  Caption = '$PIS'
+                  FocusControl = edtIVPis
+                end
+                object Label43: TLabel
+                  Left = 318
+                  Top = 16
+                  Width = 56
+                  Height = 13
+                  Caption = '%ICMSSUB'
+                  FocusControl = edtIAIcmsSub
+                end
+                object Label44: TLabel
+                  Left = 382
+                  Top = 16
+                  Width = 54
+                  Height = 13
+                  Caption = '$ICMSSUB'
+                  FocusControl = edtIVIcmsSub
+                end
+                object Label45: TLabel
+                  Left = 453
+                  Top = 16
+                  Width = 47
+                  Height = 13
+                  Caption = '%COFINS'
+                  FocusControl = edtIACofins
+                end
+                object Label46: TLabel
+                  Left = 505
+                  Top = 16
+                  Width = 45
+                  Height = 13
+                  Caption = '$COFINS'
+                  FocusControl = edtIVCofins
+                end
+                object edtIAICMS: TDBEdit
+                  Left = 8
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'ALIQUOTA_ICMS'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 0
+                end
+                object edtIVICMS: TDBEdit
+                  Left = 56
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'VAL_ICMS'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 1
+                end
+                object edtIAIpi: TDBEdit
+                  Left = 114
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'ALIQUOTA_IPI'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 2
+                end
+                object edtIVIpi: TDBEdit
+                  Left = 162
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'VAL_IPI'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 3
+                end
+                object edtIAPis: TDBEdit
+                  Left = 217
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'ALIQUOTA_PIS'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 4
+                end
+                object edtIVPis: TDBEdit
+                  Left = 265
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'VAL_PIS'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 5
+                end
+                object edtIAIcmsSub: TDBEdit
+                  Left = 323
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'ALIQUOTA_ICMSSUB'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 6
+                end
+                object edtIVIcmsSub: TDBEdit
+                  Left = 387
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'VAL_ICMSSUB'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 7
+                end
+                object edtIACofins: TDBEdit
+                  Left = 455
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'ALIQUOTA_COFINS'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 8
+                end
+                object edtIVCofins: TDBEdit
+                  Left = 505
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'VAL_COFINS'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 9
+                end
+              end
+              object gbPrecos: TGroupBox
+                Left = 13
+                Top = 112
+                Width = 665
+                Height = 54
+                Caption = 'Pre'#231'o Produto'
+                TabOrder = 9
+                object Label28: TLabel
+                  Left = 8
+                  Top = 13
+                  Width = 37
+                  Height = 13
+                  Caption = 'P.Custo'
+                  FocusControl = edtIPcusto
+                end
+                object Label33: TLabel
+                  Left = 232
+                  Top = 11
+                  Width = 38
+                  Height = 13
+                  Caption = 'Margem'
+                  FocusControl = edtIMargem
+                end
+                object Label34: TLabel
+                  Left = 297
+                  Top = 12
+                  Width = 48
+                  Height = 13
+                  Caption = 'R$ Venda'
+                  FocusControl = edtIVenda
+                end
+                object Label35: TLabel
+                  Left = 365
+                  Top = 12
+                  Width = 51
+                  Height = 13
+                  Caption = 'Margem P.'
+                  FocusControl = edtIMargemP
+                end
+                object Label36: TLabel
+                  Left = 431
+                  Top = 13
+                  Width = 61
+                  Height = 13
+                  Caption = 'R$ Venda P.'
+                  FocusControl = edtIVendaP
+                end
+                object edtIPcusto: TDBEdit
+                  Left = 8
+                  Top = 29
+                  Width = 56
+                  Height = 21
+                  DataField = 'PRECO_COMPRA'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 0
+                end
+                object edtIMargem: TDBEdit
+                  Left = 230
+                  Top = 27
+                  Width = 59
+                  Height = 21
+                  DataField = 'MARGEM_LUCRO'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 1
+                  OnExit = edtIMargemExit
+                end
+                object edtIVenda: TDBEdit
+                  Left = 296
+                  Top = 27
+                  Width = 59
+                  Height = 21
+                  DataField = 'PRECO_VENDA'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 2
+                  OnExit = edtIVendaExit
+                end
+                object edtIMargemP: TDBEdit
+                  Left = 362
+                  Top = 27
+                  Width = 59
+                  Height = 21
+                  DataField = 'MARGEM_LUCROP'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 3
+                  OnExit = edtIMargemPExit
+                end
+                object edtIVendaP: TDBEdit
+                  Left = 429
+                  Top = 27
+                  Width = 59
+                  Height = 21
+                  DataField = 'PRECO_VENDAP'
+                  DataSource = telaDados.dsProdutos
+                  Enabled = False
+                  TabOrder = 4
+                  OnExit = edtIVendaPExit
+                end
+              end
+            end
+          end
+          object TabSheet4: TTabSheet
+            Caption = 'C'#225'lculo De Impostos'
+            ImageIndex = 1
+            object gbImpostos: TGroupBox
+              Left = 8
+              Top = 8
+              Width = 503
+              Height = 122
+              TabOrder = 0
+              object Label47: TLabel
+                Left = 8
+                Top = 16
+                Width = 30
+                Height = 13
+                Caption = 'BC IPI'
+                FocusControl = edtBIpi
+              end
+              object Label48: TLabel
+                Left = 8
+                Top = 56
+                Width = 34
+                Height = 13
+                Caption = 'BC PIS'
+                FocusControl = edtBPis
+              end
+              object Label49: TLabel
+                Left = 205
+                Top = 16
+                Width = 56
+                Height = 13
+                Caption = 'BC COFINS'
+                FocusControl = edtBCofins
+              end
+              object Label50: TLabel
+                Left = 308
+                Top = 16
+                Width = 43
+                Height = 13
+                Caption = 'BC ICMS'
+                FocusControl = edtBIcms
+              end
+              object Label51: TLabel
+                Left = 308
+                Top = 56
+                Width = 71
+                Height = 13
+                Caption = 'BC ICMS SUB.'
+                FocusControl = edtBIcmsS
+              end
+              object Label52: TLabel
+                Left = 104
+                Top = 16
+                Width = 52
+                Height = 13
+                Caption = 'VALOR IPI'
+                FocusControl = edtVIpi
+              end
+              object Label53: TLabel
+                Left = 104
+                Top = 56
+                Width = 56
+                Height = 13
+                Caption = 'VALOR PIS'
+                FocusControl = edtVPis
+              end
+              object Label54: TLabel
+                Left = 205
+                Top = 56
+                Width = 78
+                Height = 13
+                Caption = 'VALOR COFINS'
+                FocusControl = edtVCofins
+              end
+              object Label55: TLabel
+                Left = 411
+                Top = 16
+                Width = 65
+                Height = 13
+                Caption = 'VALOR ICMS'
+                FocusControl = edtVIcms
+              end
+              object Label56: TLabel
+                Left = 403
+                Top = 56
+                Width = 93
+                Height = 13
+                Caption = 'VALOR ICMS SUB.'
+                FocusControl = edtVIcmsS
+              end
+              object edtBIpi: TDBEdit
+                Left = 8
+                Top = 32
+                Width = 59
+                Height = 21
+                DataField = 'ALIQUOTA_IPI'
+                DataSource = telaDados.dsCompras
+                TabOrder = 0
+              end
+              object edtBPis: TDBEdit
+                Left = 8
+                Top = 72
+                Width = 59
+                Height = 21
+                DataField = 'ALIQUOTA_PIS'
+                DataSource = telaDados.dsCompras
+                TabOrder = 1
+              end
+              object edtBCofins: TDBEdit
+                Left = 205
+                Top = 32
+                Width = 59
+                Height = 21
+                DataField = 'ALIQUOTA_COFINS'
+                DataSource = telaDados.dsCompras
+                TabOrder = 2
+              end
+              object edtBIcms: TDBEdit
+                Left = 308
+                Top = 32
+                Width = 59
+                Height = 21
+                DataField = 'ALIQUOTA_ICMS'
+                DataSource = telaDados.dsCompras
+                TabOrder = 3
+              end
+              object edtBIcmsS: TDBEdit
+                Left = 308
+                Top = 72
+                Width = 59
+                Height = 21
+                DataField = 'ALIQUOTA_ICMSSUB'
+                DataSource = telaDados.dsCompras
+                TabOrder = 4
+              end
+              object edtVIpi: TDBEdit
+                Left = 104
+                Top = 32
+                Width = 59
+                Height = 21
+                DataField = 'VAL_IPI'
+                DataSource = telaDados.dsCompras
+                TabOrder = 5
+              end
+              object edtVPis: TDBEdit
+                Left = 104
+                Top = 72
+                Width = 59
+                Height = 21
+                DataField = 'VAL_PIS'
+                DataSource = telaDados.dsCompras
+                TabOrder = 6
+              end
+              object edtVCofins: TDBEdit
+                Left = 205
+                Top = 72
+                Width = 59
+                Height = 21
+                DataField = 'VAL_COFINS'
+                DataSource = telaDados.dsCompras
+                TabOrder = 7
+              end
+              object edtVIcms: TDBEdit
+                Left = 411
+                Top = 32
+                Width = 59
+                Height = 21
+                DataField = 'VAL_ICMS'
+                DataSource = telaDados.dsCompras
+                TabOrder = 8
+              end
+              object edtVIcmsS: TDBEdit
+                Left = 411
+                Top = 72
+                Width = 59
+                Height = 21
+                DataField = 'VAL_ICMSSUB'
+                DataSource = telaDados.dsCompras
+                TabOrder = 9
+              end
+            end
+            object gbTotais: TGroupBox
+              Left = 616
+              Top = 8
+              Width = 187
+              Height = 122
+              TabOrder = 1
+              object Label57: TLabel
+                Left = 51
+                Top = 64
+                Width = 92
+                Height = 13
+                Caption = 'Valor Total da Nota'
+                FocusControl = edtVTnota
+              end
+              object Label58: TLabel
+                Left = 42
+                Top = 10
+                Width = 112
+                Height = 13
+                Caption = 'Valor total dos Produtos'
+                FocusControl = edtVProd
+              end
+              object edtVTnota: TDBEdit
+                Left = 71
+                Top = 81
+                Width = 59
+                Height = 21
+                DataField = 'TOTAL_GERAL'
+                DataSource = telaDados.dsCompras
+                TabOrder = 0
+              end
+              object edtVProd: TDBEdit
+                Left = 70
+                Top = 28
+                Width = 59
+                Height = 21
+                DataField = 'VALOR_TOTAL'
+                DataSource = telaDados.dsCompras
+                TabOrder = 1
+              end
+            end
+          end
+          object TabSheet5: TTabSheet
+            Caption = 'Transportadora'
+            ImageIndex = 2
+          end
         end
       end
     end
