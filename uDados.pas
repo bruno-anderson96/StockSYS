@@ -597,6 +597,10 @@ type
     tblComprasVAL_COFINS: TIBBCDField;
     tblComprasVAL_ICMS: TIBBCDField;
     tblComprasVAL_ICMSSUB: TIBBCDField;
+    tblComprasIDT: TIntegerField;
+    tblComprasIDV: TIntegerField;
+    tblComprasnTransportadora: TStringField;
+    tblComprasnVeiculo: TStringField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
     procedure tblClientesBeforePost(DataSet: TDataSet);

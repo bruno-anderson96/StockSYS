@@ -1,6 +1,6 @@
 object telaLancCompras: TtelaLancCompras
-  Left = 214
-  Top = 187
+  Left = 223
+  Top = 79
   Width = 1049
   Height = 719
   Caption = 'Lan'#231'amento de Compras'
@@ -1235,17 +1235,17 @@ object telaLancCompras: TtelaLancCompras
             end>
         end
         object pcControle: TPageControl
-          Left = 8
+          Left = 6
           Top = 171
           Width = 819
           Height = 459
-          ActivePage = TabSheet3
+          ActivePage = TabSheet5
           TabOrder = 14
           object TabSheet3: TTabSheet
             Caption = 'Produtos'
             object DBGrid1: TDBGrid
               Left = 3
-              Top = 168
+              Top = 170
               Width = 804
               Height = 260
               DataSource = telaDados.dsTempItens
@@ -1983,7 +1983,7 @@ object telaLancCompras: TtelaLancCompras
             object gbImpostos: TGroupBox
               Left = 8
               Top = 8
-              Width = 503
+              Width = 593
               Height = 122
               TabOrder = 0
               object Label47: TLabel
@@ -2011,16 +2011,16 @@ object telaLancCompras: TtelaLancCompras
                 FocusControl = edtBCofins
               end
               object Label50: TLabel
-                Left = 308
-                Top = 16
+                Left = 204
+                Top = 56
                 Width = 43
                 Height = 13
                 Caption = 'BC ICMS'
                 FocusControl = edtBIcms
               end
               object Label51: TLabel
-                Left = 308
-                Top = 56
+                Left = 404
+                Top = 16
                 Width = 71
                 Height = 13
                 Caption = 'BC ICMS SUB.'
@@ -2043,24 +2043,24 @@ object telaLancCompras: TtelaLancCompras
                 FocusControl = edtVPis
               end
               object Label54: TLabel
-                Left = 205
-                Top = 56
+                Left = 301
+                Top = 16
                 Width = 78
                 Height = 13
                 Caption = 'VALOR COFINS'
                 FocusControl = edtVCofins
               end
               object Label55: TLabel
-                Left = 411
-                Top = 16
+                Left = 307
+                Top = 56
                 Width = 65
                 Height = 13
                 Caption = 'VALOR ICMS'
                 FocusControl = edtVIcms
               end
               object Label56: TLabel
-                Left = 403
-                Top = 56
+                Left = 491
+                Top = 16
                 Width = 93
                 Height = 13
                 Caption = 'VALOR ICMS SUB.'
@@ -2094,8 +2094,8 @@ object telaLancCompras: TtelaLancCompras
                 TabOrder = 2
               end
               object edtBIcms: TDBEdit
-                Left = 308
-                Top = 32
+                Left = 204
+                Top = 72
                 Width = 59
                 Height = 21
                 DataField = 'ALIQUOTA_ICMS'
@@ -2103,8 +2103,8 @@ object telaLancCompras: TtelaLancCompras
                 TabOrder = 3
               end
               object edtBIcmsS: TDBEdit
-                Left = 308
-                Top = 72
+                Left = 404
+                Top = 32
                 Width = 59
                 Height = 21
                 DataField = 'ALIQUOTA_ICMSSUB'
@@ -2130,8 +2130,8 @@ object telaLancCompras: TtelaLancCompras
                 TabOrder = 6
               end
               object edtVCofins: TDBEdit
-                Left = 205
-                Top = 72
+                Left = 309
+                Top = 32
                 Width = 59
                 Height = 21
                 DataField = 'VAL_COFINS'
@@ -2139,8 +2139,8 @@ object telaLancCompras: TtelaLancCompras
                 TabOrder = 7
               end
               object edtVIcms: TDBEdit
-                Left = 411
-                Top = 32
+                Left = 307
+                Top = 72
                 Width = 59
                 Height = 21
                 DataField = 'VAL_ICMS'
@@ -2148,8 +2148,8 @@ object telaLancCompras: TtelaLancCompras
                 TabOrder = 8
               end
               object edtVIcmsS: TDBEdit
-                Left = 411
-                Top = 72
+                Left = 499
+                Top = 32
                 Width = 59
                 Height = 21
                 DataField = 'VAL_ICMSSUB'
@@ -2202,6 +2202,90 @@ object telaLancCompras: TtelaLancCompras
           object TabSheet5: TTabSheet
             Caption = 'Transportadora'
             ImageIndex = 2
+            object GroupBox2: TGroupBox
+              Left = 8
+              Top = 8
+              Width = 321
+              Height = 121
+              Caption = 'Transportadora'
+              TabOrder = 0
+              object Label59: TLabel
+                Left = 8
+                Top = 16
+                Width = 33
+                Height = 13
+                Caption = 'C'#243'digo'
+                FocusControl = edtTId
+              end
+              object Label60: TLabel
+                Left = 8
+                Top = 56
+                Width = 72
+                Height = 13
+                Caption = 'Transportadora'
+                FocusControl = cbTDesc
+              end
+              object edtTId: TDBEdit
+                Left = 8
+                Top = 32
+                Width = 134
+                Height = 21
+                DataField = 'IDT'
+                DataSource = telaDados.dsCompras
+                Enabled = False
+                TabOrder = 0
+              end
+              object cbTDesc: TDBLookupComboBox
+                Left = 8
+                Top = 72
+                Width = 306
+                Height = 21
+                DataField = 'nTransportadora'
+                DataSource = telaDados.dsCompras
+                TabOrder = 1
+                OnEnter = cbTDescEnter
+              end
+            end
+            object GroupBox3: TGroupBox
+              Left = 349
+              Top = 9
+              Width = 321
+              Height = 121
+              Caption = 'Ve'#237'culo'
+              TabOrder = 1
+              object Label61: TLabel
+                Left = 16
+                Top = 56
+                Width = 37
+                Height = 13
+                Caption = 'Ve'#237'culo'
+              end
+              object Label62: TLabel
+                Left = 16
+                Top = 16
+                Width = 33
+                Height = 13
+                Caption = 'C'#243'digo'
+              end
+              object edtVId: TDBEdit
+                Left = 16
+                Top = 32
+                Width = 134
+                Height = 21
+                DataField = 'IDV'
+                DataSource = telaDados.dsCompras
+                TabOrder = 0
+              end
+              object cbVDesc: TDBLookupComboBox
+                Left = 16
+                Top = 72
+                Width = 283
+                Height = 21
+                DataField = 'nVeiculo'
+                DataSource = telaDados.dsCompras
+                TabOrder = 1
+              end
+            end
           end
         end
       end
@@ -2386,8 +2470,8 @@ object telaLancCompras: TtelaLancCompras
     end
   end
   object ActionList1: TActionList
-    Left = 592
-    Top = 8
+    Left = 984
+    Top = 16
     object Incluir: TAction
       Caption = 'F2 - &Incluir'
       ShortCut = 113

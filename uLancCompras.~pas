@@ -166,6 +166,16 @@ type
     edtVTnota: TDBEdit;
     Label58: TLabel;
     edtVProd: TDBEdit;
+    GroupBox2: TGroupBox;
+    GroupBox3: TGroupBox;
+    Label59: TLabel;
+    edtTId: TDBEdit;
+    Label60: TLabel;
+    cbTDesc: TDBLookupComboBox;
+    Label61: TLabel;
+    Label62: TLabel;
+    edtVId: TDBEdit;
+    cbVDesc: TDBLookupComboBox;
     procedure IncluirExecute(Sender: TObject);
     procedure CancelarExecute(Sender: TObject);
     procedure EncerrarExecute(Sender: TObject);
@@ -184,6 +194,7 @@ type
     procedure edtIVendaExit(Sender: TObject);
     procedure edtIMargemPExit(Sender: TObject);
     procedure edtIVendaPExit(Sender: TObject);
+    procedure cbTDescEnter(Sender: TObject);
   private
     { Private declarations }
     procedure calculaVrTotal();
@@ -706,11 +717,11 @@ end;
 
 procedure TtelaLancCompras.btnConfirmProdClick(Sender: TObject);
 begin
-  if edtIVIpi.Text = '' then edtIVIpi.Text := '0,00';
-  if edtIVPis.Text = '' then edtIVPis.Text := '0,00';
-  if edtIVCofins.Text = '' then edtIVCofins.Text := '0,00';
-  if edtIVICMS.Text = '' then edtIVICMS.Text := '0,00';
-  if edtIVIcmsSub.Text = '' then edtIVIcmsSub.Text := '0,00';
+  if edtIVIpi.Text = '' then telaDados.tblComprasVAL_IPI.AsString := '0,00';
+  if edtIVPis.Text = '' then telaDados.tblComprasVAL_PIS.AsString := '0,00';
+  if edtIVCofins.Text = '' then telaDados.tblComprasVAL_COFINS.AsString := '0,00';
+  if edtIVICMS.Text = '' then telaDados.tblComprasVAL_ICMS.AsString := '0,00';
+  if edtIVIcmsSub.Text = '' then telaDados.tblComprasVAL_ICMSSUB.AsString := '0,00';
 
 
   telaDados.cdsTempItens.Append;
@@ -724,14 +735,15 @@ begin
   telaDados.cdsTempItensACRESCIMO.Value := 0;
   telaDados.cdsTempItensVRT.Value := StrToFloat(edtIVrTotal.Text);
 
-  edtVIpi.Text := FloatToStr(telaDados.tblProdutosVAL_IPI.AsFloat + StrToFloat(edtVIpi.Text));
-  edtVPis.Text := FloatToStr(telaDados.tblProdutosVAL_PIS.AsFloat + StrToFloat(edtVPis.Text));
-  edtVIcmsS.Text := FloatToStr(telaDados.tblProdutosVAL_ICMSSUB.AsFloat + StrToFloat(edtVIcmsS.Text));
-  edtVIcms.Text := FloatToStr(telaDados.tblProdutosVAL_ICMS.AsFloat + StrToFloat(edtVIcms.Text));
-  edtVCofins.Text := FloatToStr(telaDados.tblProdutosVAL_COFINS.AsFloat + StrToFloat(edtVCofins.Text));
+  telaDados.tblComprasVAL_IPI.AsString := FloatToStr(telaDados.tblProdutosVAL_IPI.AsFloat + StrToFloat(edtVIpi.Text));
+  telaDados.tblComprasVAL_PIS.AsString := FloatToStr(telaDados.tblProdutosVAL_PIS.AsFloat + StrToFloat(edtVPis.Text));
+  telaDados.tblComprasVAL_ICMSSUB.AsString := FloatToStr(telaDados.tblProdutosVAL_ICMSSUB.AsFloat + StrToFloat(edtVIcmsS.Text));
+  telaDados.tblComprasVAL_ICMS.AsString := FloatToStr(telaDados.tblProdutosVAL_ICMS.AsFloat + StrToFloat(edtVIcms.Text));
+  telaDados.tblComprasVAL_COFINS.AsString := FloatToStr(telaDados.tblProdutosVAL_COFINS.AsFloat + StrToFloat(edtVCofins.Text));
 
   edtVTnota.Text := FloatToStr(StrToFloat(edtVIpi.Text) + StrToFloat(edtVPis.Text) +
-  StrToFloat(edtVIcmsS.Text) + StrToFloat(edtVIcms.Text) + StrToFloat(edtVCofins.Text));
+  StrToFloat(edtVIcmsS.Text) + StrToFloat(edtVIcms.Text) + StrToFloat(edtVCofins.Text) +
+  StrToFloat(edtVProd.Text));
 
   telaDados.cdsTempItens.Post;
   telaDados.tblProdutos.ClearFields;
@@ -793,6 +805,17 @@ begin
 
   if edtIVenda.Text = '' then begin
     edtIVenda.Text := '0,00';
+  end;
+end;
+
+procedure TtelaLancCompras.cbTDescEnter(Sender: TObject);
+begin
+  If cbTDesc.Text <> '' then begin
+    telaDados.qryVeiculo.Close;
+    telaDados.qryVeiculo.SQL.Clear;
+    telaDados.qryVeiculo.SQL.Add('Select * from VEICULO Where IDT = ');
+    telaDados.qryVeiculo.SQL.Add(edtTId.Text);
+    telaDados.qryVeiculo.Open;
   end;
 end;
 

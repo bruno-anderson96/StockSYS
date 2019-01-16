@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 204
-  Top = 300
+  Left = 215
+  Top = 64
   Width = 1215
   Height = 693
   Caption = 'Data m'#243'dulo'
@@ -2857,6 +2857,14 @@ object telaDados: TtelaDados
         DataType = ftBCD
         Precision = 9
         Size = 2
+      end
+      item
+        Name = 'IDT'
+        DataType = ftInteger
+      end
+      item
+        Name = 'IDV'
+        DataType = ftInteger
       end>
     IndexDefs = <
       item
@@ -3069,6 +3077,32 @@ object telaDados: TtelaDados
       FieldName = 'VAL_ICMSSUB'
       Precision = 9
       Size = 2
+    end
+    object tblComprasIDT: TIntegerField
+      FieldName = 'IDT'
+    end
+    object tblComprasIDV: TIntegerField
+      FieldName = 'IDV'
+    end
+    object tblComprasnTransportadora: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nTransportadora'
+      LookupDataSet = tblTransportadora
+      LookupKeyFields = 'ID'
+      LookupResultField = 'DESCRICAO'
+      KeyFields = 'IDT'
+      Size = 50
+      Lookup = True
+    end
+    object tblComprasnVeiculo: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nVeiculo'
+      LookupDataSet = qryVeiculo
+      LookupKeyFields = 'ID'
+      LookupResultField = 'MODELO'
+      KeyFields = 'IDV'
+      Size = 50
+      Lookup = True
     end
   end
   object qryCompras: TIBQuery
