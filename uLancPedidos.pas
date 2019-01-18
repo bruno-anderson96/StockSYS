@@ -148,17 +148,12 @@ type
     procedure IncluirItem();
     { Public declarations }
 
-
-
   end;
 
-var
-
+var 
   telaLancPedidos: TtelaLancPedidos;
   prod: String;
   qt: integer;
-
-
 
 implementation
 

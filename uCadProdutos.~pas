@@ -115,7 +115,6 @@ type
     procedure btnFecharClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure IncluirExecute(Sender: TObject);
     procedure ConfirmarExecute(Sender: TObject);
     procedure editLucroExit(Sender: TObject);
@@ -370,12 +369,6 @@ begin
   Confirmar.Enabled := false;
   Incluir.Enabled := true;
   Cancelar.Enabled := false;
-end;
-
-procedure TtelaCadProdutos.FormClose(Sender: TObject;
-  var Action: TCloseAction);
-begin
-  telaDados.tblProdutos.Close;
 end;
 
 procedure TtelaCadProdutos.IncluirExecute(Sender: TObject);

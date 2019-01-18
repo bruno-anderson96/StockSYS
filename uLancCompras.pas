@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uDados, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls, DBCtrls,
-  Mask, ComCtrls, ActnList, DB;
+  Mask, ComCtrls, ActnList, DB, uCadTransportadora;
 
 type
   TtelaLancCompras = class(TForm)
@@ -99,11 +99,9 @@ type
     Label28: TLabel;
     edtIPcusto: TDBEdit;
     Label29: TLabel;
-    edtIQtd: TDBEdit;
     Label30: TLabel;
     Label31: TLabel;
     Label32: TLabel;
-    edtIVrTotal: TDBEdit;
     Label33: TLabel;
     edtIMargem: TDBEdit;
     Label34: TLabel;
@@ -176,6 +174,15 @@ type
     Label62: TLabel;
     edtVId: TDBEdit;
     cbVDesc: TDBLookupComboBox;
+    btnAddTransp: TSpeedButton;
+    Label63: TLabel;
+    cbVPlaca: TDBLookupComboBox;
+    pnlEdtExc: TPanel;
+    btnEdt: TSpeedButton;
+    btnExc: TSpeedButton;
+    btnFec: TSpeedButton;
+    edtIQtd: TEdit;
+    edtIVrTotal: TEdit;
     procedure IncluirExecute(Sender: TObject);
     procedure CancelarExecute(Sender: TObject);
     procedure EncerrarExecute(Sender: TObject);
@@ -195,9 +202,18 @@ type
     procedure edtIMargemPExit(Sender: TObject);
     procedure edtIVendaPExit(Sender: TObject);
     procedure cbTDescEnter(Sender: TObject);
+    procedure btnAddTranspClick(Sender: TObject);
+    procedure cbVDescEnter(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure btnEdtClick(Sender: TObject);
+    procedure btnExcClick(Sender: TObject);
+    procedure btnFecClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     procedure calculaVrTotal();
+    procedure limpaCamposProduto();
+    procedure atualizarDadosProduto();
   public
     { Public declarations }
         procedure calculaPedido();
@@ -206,7 +222,9 @@ type
 
 var
   telaLancCompras: TtelaLancCompras;
-   vCfop : integer;
+  vCfop : integer;
+  prod: String;
+  modP : integer; //Variavel de controle de dados do produto
 
 implementation
 
@@ -229,7 +247,7 @@ telaDados.tblCompras.Last;
 telaDados.tblProdutos.Edit;
 telaDados.tblProdutos.ClearFields;
 
-
+DBGrid1.Enabled := true;
 //telaDados.cdsTempItens.Insert;
 
 {editNumPed.Enabled := true;}
@@ -281,8 +299,11 @@ edtIVIpi.Enabled := true;
 edtIVPis.Enabled := true;
 edtIVIcmsSub.Enabled := true;
 edtIVCofins.Enabled := true;
-cbModelo.Enabled := true; 
+cbModelo.Enabled := true;
+cbTDesc.Enabled := true;
+cbVDesc.Enabled := true;
 
+btnAddTransp.Enabled := true;
 btnIncItem.Enabled := true;
 btnExcItem.Enabled := true;
 btnRetPed.Enabled := true;
@@ -297,13 +318,13 @@ btnConfirmProd.Enabled := true;
 
 Incluir.Enabled := false;
 Confirmar.Enabled := true;
-Cancelar.Enabled := true; 
+Cancelar.Enabled := true;
 
 {radTpPg.ItemIndex := 0;  }
 
 editDesc.Text := FloatToStr(d);
 editAsc.Text  := FloatToStr(a);
-editOutrasDesp.Text := FloatToStr(od);  
+editOutrasDesp.Text := FloatToStr(od);
 
 
         id := telaDados.tblComprasID.asInteger + 1;
@@ -325,6 +346,8 @@ procedure TtelaLancCompras.CancelarExecute(Sender: TObject);
 begin
 telaDados.tblCompras.Cancel;
 telaDados.tblProdutos.Cancel;
+
+DBGrid1.Enabled := false;
 
 {editNumPed.Enabled := false;}
 editDtCad.Enabled := false;{
@@ -376,7 +399,10 @@ edtItem.Enabled := false;
   edtIVIcmsSub.Enabled := false;
   edtIVCofins.Enabled := false;
   cbModelo.Enabled := false;
+  cbTDesc.Enabled := false;
+  cbVDesc.Enabled := false;
 
+btnAddTransp.Enabled := false;
 btnIncItem.Enabled := false;
 btnExcItem.Enabled := false;
 btnRetPed.Enabled := false;
@@ -393,7 +419,7 @@ Incluir.Enabled := true;
 Confirmar.Enabled := false;
 Cancelar.Enabled := false;
 
-telaDados.cdsTempItens.EmptyDataSet; 
+telaDados.cdsCTempItens.EmptyDataSet; 
 
 
 end;
@@ -403,7 +429,7 @@ begin
 telaLancCompras.Close;
 telaDados.tblCompras.Close;
 
-telaDados.cdsTempItens.EmptyDataSet;
+telaDados.cdsCTempItens.EmptyDataSet;
 end;
 
 procedure TtelaLancCompras.ConfirmarExecute(Sender: TObject);
@@ -489,7 +515,10 @@ end;
   edtIVIcmsSub.Enabled := false;
   edtIVCofins.Enabled := false;
   cbModelo.Enabled := false;
+  cbTDesc.Enabled := false;
+  cbVDesc.Enabled := false;
 
+  btnAddTransp.Enabled := false;
   btnIncItem.Enabled := false;
   btnExcItem.Enabled := false;
   btnRetPed.Enabled := false;
@@ -506,26 +535,26 @@ end;
   Confirmar.Enabled := false;
   Cancelar.Enabled := false;
 
-  telaDados.cdsTempItens.First;
-  while not (telaDados.cdsTempItens.Eof) do
+  telaDados.cdsCTempItens.First;
+  while not (telaDados.cdsCTempItens.Eof) do
   begin
 
     telaDados.tblCompraItens.Append;
 
     telaDados.tblCompraItens.FieldByName('DESCRICAO').Value :=
-      telaDados.cdsTempItens.FieldByName('DESC').Value;
+      telaDados.cdsCTempItens.FieldByName('DESCRICAO').Value;
 
     telaDados.tblCompraItens.FieldByName('ID_PRODUTO').Value :=
-      telaDados.cdsTempItens.FieldByName('IDPROD').Value;
+      telaDados.cdsCTempItens.FieldByName('ID_PRODUTO').Value;
 
     telaDados.tblCompraItens.FieldByName('ID_COMPRA').Value :=
-      telaDados.cdsTempItens.FieldByName('IDPED').Value;
+      telaDados.cdsCTempItens.FieldByName('ID_COMPRA').Value;
 
     telaDados.tblCompraItens.FieldByName('VALOR').Value :=
-      telaDados.cdsTempItens.FieldByName('VALOR').Value;
+      telaDados.cdsCTempItens.FieldByName('VALOR').Value;
 
     telaDados.tblCompraItens.FieldByName('QUANTIDADE').Value :=
-      telaDados.cdsTempItens.FieldByName('QUANT').Value;
+      telaDados.cdsCTempItens.FieldByName('QUANTIDADE').Value;
 
     telaDados.tblProdutos.Open;
     telaDados.tblProdutos.Edit;
@@ -533,38 +562,39 @@ end;
     telaDados.qryProdutos.Close;
     telaDados.qryProdutos.SQL.Clear;
     telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID = ');
-    telaDados.qryProdutos.SQL.Add(telaDados.cdsTempItens.FieldByName('IDPROD').AsString);
-    estoque := telaDados.tblProdutosESTOQUE.AsInteger + telaDados.cdsTempItens.FieldByName('QUANT').AsInteger;
+    telaDados.qryProdutos.SQL.Add(telaDados.cdsCTempItens.FieldByName('ID_PRODUTO').AsString);
+    estoque := telaDados.tblProdutosESTOQUE.AsInteger + telaDados.cdsCTempItens.FieldByName('QUANTIDADE').AsInteger;
     telaDados.qryProdutos.Open; 
 
     telaDados.qryProdutos.Close;
     telaDados.qryProdutos.SQL.Clear;
     telaDados.qryProdutos.SQL.Add('Update PRODUTOS set ESTOQUE = :pDados Where ID = ');
-    telaDados.qryProdutos.SQL.Add(telaDados.cdsTempItens.FieldByName('IDPROD').AsString);
+    telaDados.qryProdutos.SQL.Add(telaDados.cdsCTempItens.FieldByName('ID_PRODUTO').AsString);
     telaDados.qryProdutos.Params.ParamByName('pDados').AsInteger := estoque;
     telaDados.qryProdutos.Open;
 
     telaDados.tblProdutos.FieldByName('ESTOQUE').Value := telaDados.tblProdutos.FieldByName('ESTOQUE').Value +
-      telaDados.cdsTempItens.FieldByName('QUANT').Value;
+      telaDados.cdsCTempItens.FieldByName('QUANTIDADE').Value;
 
-    telaDados.tblProdutos.Close;
+    //telaDados.tblProdutos.Close;
 
-    telaDados.tblCompraItens.FieldByName('DESCONTO').Value :=
-      telaDados.cdsTempItens.FieldByName('DESCONTO').Value;
+    {telaDados.tblCompraItens.FieldByName('DESCONTO').Value :=
+      telaDados.cdsCTempItens.FieldByName('DESCONTO').Value;
 
     telaDados.tblCompraItens.FieldByName('ACRESCIMO').Value :=
-      telaDados.cdsTempItens.FieldByName('ACRESCIMO').Value;
-
+      telaDados.cdsCTempItens.FieldByName('ACRESCIMO').Value;
+     }
     telaDados.tblCompraItens.FieldByName('VALOR_TOTAL').Value :=
-      telaDados.cdsTempItens.FieldByName('VRT').Value;
+      telaDados.cdsCTempItens.FieldByName('VALOR_TOTAL').Value;
 
       telaDados.tblCompraItens.Post;
-      telaDados.cdsTempItens.Delete;
+      telaDados.cdsCTempItens.Delete;
 
   end;
-
+  
+  DBGrid1.Enabled := false;
   telaDados.tblCompraItens.ApplyUpdates;
-  telaDados.tblProdutos.Close;
+  //telaDados.tblProdutos.Close;
 
 end;
 
@@ -573,8 +603,8 @@ begin
 Application.CreateForm(TtelaPesItens, telaPesItens);
 Application.CreateForm(TtelaLancItens, telaLancItens); 
 
-tipo := 1;
-telaDados.cdsTempItens.Append;
+//tipo := 1;
+//telaDados.cdsCTempItens.Append;
 
 
 telaPesItens.Show;
@@ -592,19 +622,25 @@ begin
   if editOutrasDesp.Text = '' then editOutrasDesp.Text := '0';
     outrasDesp := StrToFloat(editOutrasDesp.Text);
 
-  vProd := StrToFloat(editValProd.Text);
+  vProd := telaDados.tblComprasVALOR.Value;
 
+  //telaDados.tblComprasVALOR_TOTAL.Value := telaDados.cdsCTempItens.Aggregates.Items[0].Value; - dsc + acr + outrasDesp;
+  telaDados.tblComprasVALOR_TOTAL.Value := telaDados.tblComprasVAL_IPI.Value +
+  telaDados.tblComprasVAL_PIS.Value +
+  telaDados.tblComprasVAL_ICMS.Value +
+  telaDados.tblComprasVAL_ICMSSUB.Value +
+  telaDados.tblComprasVAL_COFINS.Value +
+  telaDados.cdsCTempItens.Aggregates.Items[0].Value;
 
-  telaDados.tblComprasVALOR_TOTAL.Value := vProd - dsc + acr + outrasDesp;
-
+  //telaDados.tblCompras.ApplyUpdates;
   telaLancCompras.Refresh;
-
   telaDados.FormataCampos;
 end;
 
 
 procedure TtelaLancCompras.edtItemKeyPress(Sender: TObject; var Key: Char);
 begin
+modP := 0;
 tipo := 1;
  if key =#13 then begin
     if edtItem.Text <> '' then
@@ -634,9 +670,10 @@ tipo := 1;
        telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR_TOTAL.Value;}
        telaDados.tblProdutos.Locate('ID', telaDados.qryProdutos.FieldByName('ID').AsString, []);
        telaDados.tblProdutos.Edit;
-       
+
        telaLancCompras.Refresh;
        edtItem.Clear;
+
        end else begin
         if telaDados.tblProdutos.State = dsEdit then begin
           telaDados.tblProdutos.ClearFields;
@@ -662,8 +699,8 @@ if key = vk_shift then
           edtItem.SetFocus;
           Abort;
         end;
-        telaDados.cdsTempItens.Last;
-       telaDados.cdsTempItens.edit;{
+       telaDados.cdsCTempItens.Last;
+       telaDados.cdsCTempItens.edit;{
        telaDados.tblPedidosItens.Open;
        telaDados.cdsTempItensDESC.Value := telaDados.qryProdutos.FieldByName('DESCRICAO').AsString;
        telaDados.cdsTempItensIDPROD.Value := telaDados.qryProdutos.FieldByName('ID').AsInteger;
@@ -717,38 +754,169 @@ end;
 
 procedure TtelaLancCompras.btnConfirmProdClick(Sender: TObject);
 begin
-  if edtIVIpi.Text = '' then telaDados.tblComprasVAL_IPI.AsString := '0,00';
-  if edtIVPis.Text = '' then telaDados.tblComprasVAL_PIS.AsString := '0,00';
-  if edtIVCofins.Text = '' then telaDados.tblComprasVAL_COFINS.AsString := '0,00';
-  if edtIVICMS.Text = '' then telaDados.tblComprasVAL_ICMS.AsString := '0,00';
-  if edtIVIcmsSub.Text = '' then telaDados.tblComprasVAL_ICMSSUB.AsString := '0,00';
+  if telaDados.tblComprasVAL_IPI.AsString = '' then telaDados.tblComprasVAL_IPI.AsString := '0';
+  if telaDados.tblComprasVAL_PIS.AsString = '' then telaDados.tblComprasVAL_PIS.AsString := '0';
+  if telaDados.tblComprasVAL_COFINS.AsString = '' then telaDados.tblComprasVAL_COFINS.AsString := '0';
+  if telaDados.tblComprasVAL_ICMS.AsString = '' then telaDados.tblComprasVAL_ICMS.AsString := '0';
+  if telaDados.tblComprasVAL_ICMSSUB.AsString = '' then telaDados.tblComprasVAL_ICMSSUB.AsString := '0';
 
-
-  telaDados.cdsTempItens.Append;
+  //telaDados.cdsCTempItens.Close;
+  //telaDados.cdsCTempItens.Open;
+  if not(telaDados.cdsCTempItens.State = dsEdit) then begin
+    telaDados.cdsCTempItens.Append;
+  end;
+  //telaDados.cdsCTempItensID.Value := 1;
   //telaDados.tblCompraItens.Open;
-  telaDados.cdsTempItensDESC.Value := telaDados.tblProdutosDESCRICAO.Value;
-  telaDados.cdsTempItensIDPROD.Value := telaDados.tblProdutosID.Value;
-  telaDados.cdsTempItensIDPED.Value := StrToInt(editId.Text);
-  telaDados.cdsTempItensQUANT.Value := StrToInt(edtIQtd.Text);
-  telaDados.cdsTempItensVALOR.Value := telaDados.tblProdutosPRECO_COMPRA.Value;
-  telaDados.cdsTempItensDESCONTO.Value := 0;
-  telaDados.cdsTempItensACRESCIMO.Value := 0;
-  telaDados.cdsTempItensVRT.Value := StrToFloat(edtIVrTotal.Text);
+  telaDados.cdsCTempItensDESCRICAO.Value := telaDados.tblProdutosDESCRICAO.Value;
+  telaDados.cdsCTempItensID_PRODUTO.Value := telaDados.tblProdutosID.Value;
+  telaDados.cdsCTempItensID_COMPRA.Value := StrToInt(editId.Text);
+  telaDados.cdsCTempItensQUANTIDADE.Value := StrToInt(edtIQtd.Text);
+  telaDados.cdsCTempItensVALOR.Value := telaDados.tblProdutosPRECO_COMPRA.Value;
+  //telaDados.cdsCTempItensDESCONTO.Value := 0;
+  //telaDados.cdsCTempItensACRESCIMO.Value := 0;
+  telaDados.cdsCTempItensVALOR_TOTAL.Value := StrToFloat(edtIVrTotal.Text);
 
+  //telaDados.tblProdutos.Post; DANDO ERRO
   telaDados.tblComprasVAL_IPI.AsString := FloatToStr(telaDados.tblProdutosVAL_IPI.AsFloat + StrToFloat(edtVIpi.Text));
   telaDados.tblComprasVAL_PIS.AsString := FloatToStr(telaDados.tblProdutosVAL_PIS.AsFloat + StrToFloat(edtVPis.Text));
   telaDados.tblComprasVAL_ICMSSUB.AsString := FloatToStr(telaDados.tblProdutosVAL_ICMSSUB.AsFloat + StrToFloat(edtVIcmsS.Text));
   telaDados.tblComprasVAL_ICMS.AsString := FloatToStr(telaDados.tblProdutosVAL_ICMS.AsFloat + StrToFloat(edtVIcms.Text));
   telaDados.tblComprasVAL_COFINS.AsString := FloatToStr(telaDados.tblProdutosVAL_COFINS.AsFloat + StrToFloat(edtVCofins.Text));
 
-  edtVTnota.Text := FloatToStr(StrToFloat(edtVIpi.Text) + StrToFloat(edtVPis.Text) +
-  StrToFloat(edtVIcmsS.Text) + StrToFloat(edtVIcms.Text) + StrToFloat(edtVCofins.Text) +
-  StrToFloat(edtVProd.Text));
+  telaDados.tblComprasVALOR_TOTAL.Value := telaDados.tblComprasVAL_IPI.Value +
+  telaDados.tblComprasVAL_PIS.Value +
+  telaDados.tblComprasVAL_ICMS.Value +
+  telaDados.tblComprasVAL_ICMSSUB.Value +
+  telaDados.tblComprasVAL_COFINS.Value +
+  telaDados.tblComprasVALOR.Value;
 
-  telaDados.cdsTempItens.Post;
-  telaDados.tblProdutos.ClearFields;
+  atualizarDadosProduto;
 
+  edtIQtd.Clear;
+  edtIVrTotal.Clear;
+
+  telaDados.cdsCTempItens.Post;
+  limpaCamposProduto;
   edtItem.SetFocus;
+end;
+
+procedure TtelaLancCompras.limpaCamposProduto;
+begin
+  edtIDesc.Clear;
+  edtICfop.Clear;
+  edtIEan.Clear;
+  edtIVrUnit.Clear;
+  edtIVrTotal.Clear;
+  edtIPcusto.Clear;
+  edtIMargem.Clear;
+  edtIVenda.Clear;
+  edtIMargemP.Clear;
+  edtIVendaP.Clear;
+  edtIAICMS.Clear;
+  edtIAIpi.Clear;
+  edtIAPis.Clear;
+  edtIAIcmsSub.Clear;
+  edtIACofins.Clear;
+  edtIVICMS.Clear;
+  edtIVIpi.Clear;
+  edtIVPis.Clear;
+  edtIVIcmsSub.Clear;
+  edtIVCofins.Clear;
+end;
+
+procedure TtelaLancCompras.atualizarDadosProduto;
+begin
+  telaDados.qryProdutos.Close;
+  telaDados.qryProdutos.SQL.Clear;
+  telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS Where ID = ');
+  telaDados.qryProdutos.SQL.Add(telaDados.tblProdutosID.AsString);
+  telaDados.qryProdutos.Open;
+
+  //Verificar e atualizar Dados no Produto
+  if telaDados.qryProdutos.FieldByName('EAN13').AsString <> telaDados.tblProdutosEAN13.AsString then begin
+    telaDados.tblProdutosEAN13.AsString := edtIEan.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('DESCRICAO').AsString <> telaDados.tblProdutosDESCRICAO.AsString then begin
+    telaDados.tblProdutosDESCRICAO.AsString := edtIDesc.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('PRECO_COMPRA').AsString <> telaDados.tblProdutosPRECO_COMPRA.AsString then begin
+    telaDados.tblProdutosPRECO_COMPRA.AsString := edtIVrUnit.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('CFOP').AsString<> telaDados.tblProdutosCFOP.AsString then begin
+    telaDados.tblProdutosCFOP.AsString := edtICfop.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('PRECO_COMPRA').AsString <> telaDados.tblProdutosPRECO_COMPRA.AsString then begin
+    telaDados.tblProdutosPRECO_COMPRA.AsString := edtIPcusto.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('MARGEM_LUCRO').AsString <> telaDados.tblProdutosMARGEM_LUCRO.AsString then begin
+    telaDados.tblProdutosMARGEM_LUCRO.AsString := edtIMargem.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsString <> telaDados.tblProdutosPRECO_VENDA.AsString then begin
+    telaDados.tblProdutosPRECO_VENDA.AsString := edtIVenda.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('MARGEM_LUCROP').AsString <> telaDados.tblProdutosMARGEM_LUCROP.AsString then begin
+    telaDados.tblProdutosMARGEM_LUCROP.AsString := edtIMargemP.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('PRECO_VENDAP').AsString <> telaDados.tblProdutosPRECO_VENDAP.AsString then begin
+    telaDados.tblProdutosPRECO_VENDAP.AsString := edtIVendaP.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMS').AsString <> telaDados.tblProdutosALIQUOTA_ICMS.AsString then begin
+    telaDados.tblProdutosALIQUOTA_ICMS.AsString := edtIAICMS.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('ALIQUOTA_IPI').AsString <> telaDados.tblProdutosALIQUOTA_IPI.AsString then begin
+    telaDados.tblProdutosALIQUOTA_IPI.AsString := edtIAIpi.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMSSUB').AsString <> telaDados.tblProdutosALIQUOTA_ICMSSUB.AsString then begin
+    telaDados.tblProdutosALIQUOTA_ICMSSUB.AsString := edtIAIcmsSub.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('ALIQUOTA_PIS').AsString <> telaDados.tblProdutosALIQUOTA_PIS.AsString then begin
+    telaDados.tblProdutosALIQUOTA_PIS.AsString := edtIAPis.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('ALIQUOTA_COFINS').AsString <> telaDados.tblProdutosALIQUOTA_COFINS.AsString then begin
+    telaDados.tblProdutosALIQUOTA_COFINS.AsString := edtIACofins.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('VAL_ICMS').AsString <> telaDados.tblProdutosVAL_ICMS.AsString then begin
+    telaDados.tblProdutosVAL_ICMS.AsString := edtIVICMS.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('VAL_ICMSSUB').AsString <> telaDados.tblProdutosVAL_ICMSSUB.AsString then begin
+    telaDados.tblProdutosVAL_ICMSSUB.AsString := edtIVIcmsSub.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('VAL_PIS').AsString <> telaDados.tblProdutosVAL_PIS.AsString then begin
+    telaDados.tblProdutosVAL_PIS.AsString := edtIVPis.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('VAL_IPI').AsString <> telaDados.tblProdutosVAL_IPI.AsString then begin
+    telaDados.tblProdutosVAL_IPI.AsString := edtIVIpi.Text;
+    modP := 1;
+  end;
+  if telaDados.qryProdutos.FieldByName('VAL_COFINS').AsString <> telaDados.tblProdutosVAL_COFINS.AsString then begin
+    telaDados.tblProdutosVAL_COFINS.AsString := edtIVCofins.Text;
+    modP := 1;
+  end;
+
+  if modP = 1 then begin
+    if MessageBox(Handle, 'Alguns dados deste produto foram modificados, deseja atualizar o cadastro?',
+     'Confirmação', MB_ICONQUESTION + MB_YESNO) = ID_YES then begin
+      telaDados.tblProdutos.Post;
+    end;
+  end;
+
 end;
 
 procedure TtelaLancCompras.edtIQtdExit(Sender: TObject);
@@ -810,13 +978,77 @@ end;
 
 procedure TtelaLancCompras.cbTDescEnter(Sender: TObject);
 begin
-  If cbTDesc.Text <> '' then begin
+  {If cbTDesc.Text <> '' then begin
     telaDados.qryVeiculo.Close;
     telaDados.qryVeiculo.SQL.Clear;
     telaDados.qryVeiculo.SQL.Add('Select * from VEICULO Where IDT = ');
     telaDados.qryVeiculo.SQL.Add(edtTId.Text);
     telaDados.qryVeiculo.Open;
+  end;}
+end;
+
+procedure TtelaLancCompras.btnAddTranspClick(Sender: TObject);
+begin
+  Application.CreateForm(TtelaCadTransportadora, telaCadTransportadora);
+  telaCadTransportadora.Show;
+end;
+
+procedure TtelaLancCompras.cbVDescEnter(Sender: TObject);
+begin
+  cbVPlaca.ListFieldIndex := 0;
+end;
+
+procedure TtelaLancCompras.DBGrid1DblClick(Sender: TObject);
+begin
+  pnlEdtExc.Visible := true;
+  prod := DBGrid1.Columns[0].Field.AsString;
+end;
+
+procedure TtelaLancCompras.btnEdtClick(Sender: TObject);
+begin
+  telaDados.tblProdutos.Locate('DESCRICAO', prod, []);
+  telaDados.tblProdutos.Open;
+  telaDados.tblProdutos.Edit;
+
+  telaDados.cdsCTempItens.Locate('DESCRICAO', prod, []);
+  edtIQtd.Text := telaDados.cdsCTempItensQUANTIDADE.AsString;
+  edtIVrTotal.Text := telaDados.cdsCTempItensVALOR_TOTAL.AsString;
+  telaDados.cdsCTempItens.Open;
+  telaDados.cdsCTempItens.Edit;
+
+  //telaDados.tblProdutos.Locate();
+  pnlEdtExc.Visible := false;
+end;
+
+procedure TtelaLancCompras.btnExcClick(Sender: TObject);
+begin
+    if MessageDlg('Deseja realmente excluir o produto?',mtinformation,[mbyes,mbno],0) = mryes then begin
+    telaDados.cdsCTempItens.Edit;
+    pnlEdtExc.Visible := false;
+    telaDados.cdsCTempItens.CommandText := 'Delete * from c:\tabela.dat where DESCRICAO =' + prod;
+    //telaDados.cdsCTempItens.Locate('DESCRICAO', prod, []);
+    telaDados.cdsCTempItens.Open;
+    telaDados.cdsCTempItens.Delete;
+    if telaDados.cdsCTempItens.RecordCount < 1 then begin
+      telaDados.tblComprasVALOR.Value := 0;
+      telaDados.tblComprasVALOR_TOTAL.value := 0;
+    end else begin
+    telaDados.tblComprasVALOR.Value := telaDados.cdsCTempItens.Aggregates.Items[0].Value;
+    //telaDados.tblComprasVALOR_TOTAL.Value := telaDados.cdsCTempItens.Aggregates.Items[0].Value;
+    telaLancCompras.calculaPedido;
+    limpaCamposProduto;
+    end;
   end;
+end;
+
+procedure TtelaLancCompras.btnFecClick(Sender: TObject);
+begin
+  pnlEdtExc.Visible := false;
+end;
+
+procedure TtelaLancCompras.FormShow(Sender: TObject);
+begin
+  //alo
 end;
 
 end.

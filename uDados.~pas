@@ -266,7 +266,6 @@ type
     trnscFornecedores: TIBTransaction;
     ibdsFornecedores: TIBDataSet;
     dsCTempItens: TDataSource;
-    cdsCTempItens: TClientDataSet;
     dspCTempItens: TDataSetProvider;
     tblComprasID: TIntegerField;
     tblComprasID_FORNECEDOR: TIntegerField;
@@ -333,23 +332,6 @@ type
     dsPesFor: TDataSource;
     tblEmitenteCOMPLEMENTO: TIBStringField;
     tblComprasnFor: TStringField;
-    cdsCTempItensID: TIntegerField;
-    cdsCTempItensID_COMPRA: TIntegerField;
-    cdsCTempItensID_PRODUTO: TIntegerField;
-    cdsCTempItensDESCRICAO: TStringField;
-    cdsCTempItensQUANTIDADE: TBCDField;
-    cdsCTempItensVALOR: TBCDField;
-    cdsCTempItensDESCONTO: TBCDField;
-    cdsCTempItensACRESCIMO: TBCDField;
-    cdsCTempItensVALOR_TOTAL: TBCDField;
-    cdsCTempItensMARGEM: TBCDField;
-    cdsCTempItensVALOR_REAL: TBCDField;
-    cdsCTempItensTIPOPROD: TIntegerField;
-    cdsCTempItensCANCELADO: TStringField;
-    cdsCTempItensNUM_ITEM: TIntegerField;
-    cdsCTempItensEAN13: TStringField;
-    cdsCTempItensibdsCompraItens: TDataSetField;
-    cdsCTempItensqryCompraItens: TDataSetField;
     ACBrIBGE1: TACBrIBGE;
     Label12: TLabel;
     dsLogin: TDataSource;
@@ -597,6 +579,19 @@ type
     tblComprasVAL_COFINS: TIBBCDField;
     tblComprasVAL_ICMS: TIBBCDField;
     tblComprasVAL_ICMSSUB: TIBBCDField;
+    tblComprasIDT: TIntegerField;
+    tblComprasIDV: TIntegerField;
+    tblComprasnTransportadora: TStringField;
+    tblComprasnVeiculo: TStringField;
+    tblCompraspVeiculo: TStringField;
+    cdsCTempItens: TClientDataSet;
+    cdsCTempItensID: TIntegerField;
+    cdsCTempItensID_PRODUTO: TIntegerField;
+    cdsCTempItensID_COMPRA: TIntegerField;
+    cdsCTempItensDESCRICAO: TStringField;
+    cdsCTempItensVALOR_TOTAL: TFloatField;
+    cdsCTempItensQUANTIDADE: TIntegerField;
+    cdsCTempItensVALOR: TFloatField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
     procedure tblClientesBeforePost(DataSet: TDataSet);
@@ -624,6 +619,7 @@ type
     procedure tblOrigemBeforePost(DataSet: TDataSet);
     procedure tblIbptBeforePost(DataSet: TDataSet);
     procedure tblPosBeforePost(DataSet: TDataSet);
+    procedure cdsCTempItensAfterPost(DataSet: TDataSet);
     
   private
     { Private declarations }
@@ -1520,6 +1516,16 @@ begin
     telaDados.qryPos.SQL.Add('Select COUNT(*) from POS');
     telaDados.qryPos.Open;
     telaDados.tblPosID.Value := telaDados.qryPos.FieldByName('COUNT').AsInteger + 1;
+  end;
+end;
+
+procedure TtelaDados.cdsCTempItensAfterPost(DataSet: TDataSet);
+begin
+  if telaDados.cdsCTempItens.RecordCount < 1 then begin
+    Abort;
+  end else begin
+     telaDados.tblComprasVALOR.Value := telaDados.cdsCTempItens.Aggregates.Items[0].Value;
+     telaLancCompras.calculaPedido;
   end;
 end;
 
