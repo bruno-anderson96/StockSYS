@@ -301,6 +301,7 @@ begin
   edtCaminhoCert.Text     := telaDados.sCertificado;
   edtSenha.Text           := telaDados.sSenha;
   edtNumSer.Text          := telaDados.sSerial;
+  edtCaminhoSchemas.Text  := telaDados.sCaminhoSchemas;
 {//EMITENTE
   edtRazSoc.Text          := telaDados.tblEmitenteRAZ_SOC.AsString;
   edtNomeFan.Text         := telaDados.tblEmitenteFANTASIA.AsString;

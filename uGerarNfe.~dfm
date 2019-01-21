@@ -1,7 +1,7 @@
 object telaGerarNfe: TtelaGerarNfe
   Left = 276
   Top = 85
-  Width = 721
+  Width = 718
   Height = 551
   Align = alCustom
   BorderStyle = bsSizeToolWin
@@ -20,7 +20,7 @@ object telaGerarNfe: TtelaGerarNfe
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
-    Width = 705
+    Width = 702
     Height = 129
     Align = alTop
     TabOrder = 0
@@ -291,7 +291,7 @@ object telaGerarNfe: TtelaGerarNfe
       Visible = False
     end
     object Label3: TLabel
-      Left = 465
+      Left = 458
       Top = 61
       Width = 87
       Height = 13
@@ -509,7 +509,7 @@ object telaGerarNfe: TtelaGerarNfe
       TabOrder = 6
     end
     object cbPos: TComboBox
-      Left = 552
+      Left = 545
       Top = 56
       Width = 145
       Height = 21
@@ -527,14 +527,14 @@ object telaGerarNfe: TtelaGerarNfe
   object GroupBox3: TGroupBox
     Left = 0
     Top = 129
-    Width = 705
+    Width = 702
     Height = 384
     Align = alClient
     TabOrder = 1
     object DBGrid1: TDBGrid
       Left = 2
       Top = 15
-      Width = 701
+      Width = 698
       Height = 348
       Align = alClient
       DataSource = dsConsultaPedidos
@@ -581,7 +581,7 @@ object telaGerarNfe: TtelaGerarNfe
     object StatusBar1: TStatusBar
       Left = 2
       Top = 363
-      Width = 701
+      Width = 698
       Height = 19
       Panels = <
         item

@@ -87,7 +87,7 @@ begin
             telaLancPedidos.edtItem.Text := telaDados.qryProdutos.FieldByName('EAN13').AsString;
             telaLancPedidos.edtItem.SetFocus;
           end else begin
-            telaLancCompras.edtItem.Text := telaDados.qryProdutos.FieldByName('EAN13').AsString;
+            telaLancCompras.edtItem.Text := telaDados.qryProdutos.FieldByName('ID').AsString;
             telaLancCompras.edtItem.SetFocus;
           end;
       telaPesItens.Close;

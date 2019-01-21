@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uDados, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls, DBCtrls,
-  Mask, ComCtrls, ActnList, DB, uCadTransportadora;
+  Mask, ComCtrls, ActnList, DB, uCadTransportadora, pcnConversao;
 
 type
   TtelaLancCompras = class(TForm)
@@ -183,6 +183,8 @@ type
     btnFec: TSpeedButton;
     edtIQtd: TEdit;
     edtIVrTotal: TEdit;
+    OpenDialog1: TOpenDialog;
+    btnImporta: TSpeedButton;
     procedure IncluirExecute(Sender: TObject);
     procedure CancelarExecute(Sender: TObject);
     procedure EncerrarExecute(Sender: TObject);
@@ -209,6 +211,7 @@ type
     procedure btnExcClick(Sender: TObject);
     procedure btnFecClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnImportaClick(Sender: TObject);
   private
     { Private declarations }
     procedure calculaVrTotal();
@@ -228,7 +231,8 @@ var
 
 implementation
 
-uses uLancItens, uPesItens, uLancPedidos, uCadFornecedor;
+uses uLancItens, uPesItens, uLancPedidos, uCadFornecedor, pcnNFe,
+  ACBrNFeNotasFiscais, ACBrNFe;
 
 {$R *.dfm}
 
@@ -603,7 +607,7 @@ begin
 Application.CreateForm(TtelaPesItens, telaPesItens);
 Application.CreateForm(TtelaLancItens, telaLancItens); 
 
-//tipo := 1;
+tipo := 1;
 //telaDados.cdsCTempItens.Append;
 
 
@@ -1049,6 +1053,161 @@ end;
 procedure TtelaLancCompras.FormShow(Sender: TObject);
 begin
   //alo
+end;
+
+procedure TtelaLancCompras.btnImportaClick(Sender: TObject);
+var
+idEmit, idProd : integer;
+i : integer;
+begin
+  OpenDialog1.Execute;
+  telaDados.ACBrNFe1.NotasFiscais.Clear;
+  telaDados.ACBrNFe1.NotasFiscais.LoadFromFile(OpenDialog1.FileName);
+  Incluir.Execute;
+
+  //Cabeçalho da nota
+  telaDados.tblComprasCHAVENFE.Value := IntToStr(telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.cNF);
+  telaDados.tblComprasDATA_COMPRA.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.dEmi;
+  telaDados.tblComprasCFOP.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.natOp;
+  telaDados.tblComprasNNOTA.Value := IntToStr(telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.nNF);
+  telaDados.tblComprasNSERIE.Value := IntToStr(telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.serie);
+
+
+  // Busca Fornecedor
+  telaDados.qryFornecedores.Close;
+  telaDados.qryFornecedores.SQL.Clear;
+  telaDados.qryFornecedores.SQL.Add('Select * from FORNECEDOR where NOME = ''' + telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.xNome+ '''' );
+  //telaDados.qryFornecedores.SQL.Add(telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.xNome);
+  telaDados.qryFornecedores.Open;
+  idEmit := telaDados.qryFornecedores.FieldByName('ID').Value;
+
+  // Cadastra Fornecedor se não existir
+  if telaDados.qryFornecedores.RecordCount < 1 then begin
+    telaDados.tblFornecedores.Last;
+    idEmit := telaDados.tblFornecedoresID.Value + 1;
+    telaDados.tblFornecedores.Insert;
+    telaDados.tblFornecedoresID.Value := idEmit;
+    telaDados.tblFornecedoresNOME.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.xNome;
+    telaDados.tblFornecedoresCNPJ_CPF.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.CNPJCPF;
+    telaDados.tblFornecedoresFANTASIA.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.xFant;
+    telaDados.tblFornecedoresINSC_RG.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.IEST;
+    telaDados.tblFornecedoresENDERECO.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.EnderEmit.xLgr;
+    telaDados.tblFornecedoresNUM_END.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.EnderEmit.nro;
+    telaDados.tblFornecedoresCOMPLEMENTO.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.EnderEmit.xCpl;
+    telaDados.tblFornecedoresBAIRRO_END.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.EnderEmit.xBairro;
+    telaDados.tblFornecedoresCIDADE_END.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.EnderEmit.xMun;
+    telaDados.tblFornecedoresUF_END.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.EnderEmit.UF;
+    telaDados.tblFornecedoresTELEFONE.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.EnderEmit.fone;
+    telaDados.tblFornecedores.Post;
+  end;
+
+  //Fornecedor
+  telaDados.tblComprasID_FORNECEDOR.Value := idEmit;
+
+  //Produtos
+  for i := 0 to telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Count -1 do begin
+  telaDados.qryProdutos.Close;
+  telaDados.qryProdutos.SQL.Clear;
+  telaDados.qryProdutos.SQL.Add('Select * From PRODUTOS where DESCRICAO = '''+telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Prod.xProd+ '''');
+  telaDados.qryProdutos.Open;
+  if telaDados.qryProdutos.RecordCount >= 1 then begin
+    idProd := telaDados.qryProdutos.FieldByName('ID').Value;
+  end;
+  if telaDados.qryProdutos.RecordCount < 1 then begin
+    //Cadastro de Produto
+    telaDados.tblProdutos.Last;
+    idProd := telaDados.tblProdutosID.Value + 1;
+    telaDados.tblProdutos.Insert;
+    telaDados.tblProdutosID.Value := idProd;
+    telaDados.tblProdutosDESCRICAO.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Prod.xProd;
+    telaDados.tblProdutosEAN13.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Prod.cEAN;
+    telaDados.tblProdutosPRECO_COMPRA.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Prod.vUnCom;
+    telaDados.tblProdutosCFOP.Value := StrToInt(telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Prod.CFOP);
+    telaDados.tblProdutosUNIDADE.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Prod.uTrib;
+    //Cadastro de tributos do produto
+    telaDados.qryCsosn.Close;
+    telaDados.qryCsosn.SQL.Clear;
+    telaDados.qryCsosn.SQL.Add('Select * from CSOSN where CODIGO = ');
+    telaDados.qryCsosn.SQL.Add(CSOSNIcmsToStr(telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Imposto.ICMS.CSOSN));
+    telaDados.qryCsosn.Open;
+
+    telaDados.qryCst.Close;
+    telaDados.qryCst.SQL.Clear;
+    telaDados.qryCst.SQL.Add('Select * from CST where CODIGO =');
+    telaDados.qryCst.SQL.Add(CSTICMSToStr(telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Imposto.ICMS.CST));
+    telaDados.qryCst.Open;
+
+    telaDados.qryOrigem.Close;
+    telaDados.qryOrigem.SQL.Clear;
+    telaDados.qryOrigem.SQL.Add('Select * from ORIGEM where CODIGO =');
+    telaDados.qryOrigem.SQL.Add(OrigToStr(telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Imposto.ICMS.orig));
+    telaDados.qryOrigem.Open;
+
+    telaDados.tblProdutosID_ORIGEM.Value := telaDados.qryOrigem.FieldByName('ID').Value;
+    telaDados.tblProdutosID_CSOSN.Value := telaDados.qryCsosn.FieldByName('ID').Value;
+    telaDados.tblProdutosID_CST.Value := telaDados.qryCst.FieldByName('ID').Value;
+
+    //Valores de tributo dos produtos
+    telaDados.tblProdutosALIQUOTA_ICMS.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Imposto.ICMS.pICMS;
+    telaDados.tblProdutosALIQUOTA_ICMSSUB.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Imposto.ICMS.pICMSST;
+    telaDados.tblProdutosALIQUOTA_IPI.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Imposto.IPI.pIPI;
+    telaDados.tblProdutosALIQUOTA_PIS.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Imposto.PIS.pPIS;
+    telaDados.tblProdutosALIQUOTA_COFINS.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Imposto.COFINS.pCOFINS;
+
+    telaDados.tblProdutosVAL_ICMS.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Imposto.ICMS.vICMS;
+    telaDados.tblProdutosVAL_ICMSSUB.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Imposto.ICMS.vICMSST;
+    telaDados.tblProdutosVAL_IPI.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Imposto.IPI.vIPI;
+    telaDados.tblProdutosVAL_PIS.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Imposto.PIS.vPIS;
+    telaDados.tblProdutosVAL_COFINS.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Imposto.COFINS.vCOFINS;
+
+    telaDados.tblProdutos.Post;
+
+    //Totais da Nota
+  
+  end;
+
+  telaDados.tblProdutos.Locate('ID',idProd, []);
+
+    if not(telaDados.cdsCTempItens.State = dsEdit) then begin
+      telaDados.cdsCTempItens.Append;
+    end;
+  //telaDados.cdsCTempItensID.Value := 1;
+  //telaDados.tblCompraItens.Open;
+  telaDados.cdsCTempItensDESCRICAO.Value := telaDados.tblProdutosDESCRICAO.Value;
+  telaDados.cdsCTempItensID_PRODUTO.Value := telaDados.tblProdutosID.Value;
+  telaDados.cdsCTempItensID_COMPRA.Value := StrToInt(editId.Text);
+  telaDados.cdsCTempItensQUANTIDADE.AsFloat := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Prod.qCom;
+  telaDados.cdsCTempItensVALOR.Value := telaDados.tblProdutosPRECO_COMPRA.Value;
+  //telaDados.cdsCTempItensDESCONTO.Value := 0;
+  //telaDados.cdsCTempItensACRESCIMO.Value := 0;
+  telaDados.cdsCTempItensVALOR_TOTAL.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Det.Items[i].Prod.qCom * telaDados.tblProdutosPRECO_COMPRA.Value;
+
+  //telaDados.tblProdutos.Post; DANDO ERRO
+  if telaDados.tblComprasVAL_IPI.AsString = '' then telaDados.tblComprasVAL_IPI.AsString := '0';
+  if telaDados.tblComprasVAL_PIS.AsString = '' then telaDados.tblComprasVAL_PIS.AsString := '0';
+  if telaDados.tblComprasVAL_COFINS.AsString = '' then telaDados.tblComprasVAL_COFINS.AsString := '0';
+  if telaDados.tblComprasVAL_ICMS.AsString = '' then telaDados.tblComprasVAL_ICMS.AsString := '0';
+  if telaDados.tblComprasVAL_ICMSSUB.AsString = '' then telaDados.tblComprasVAL_ICMSSUB.AsString := '0';
+
+  telaDados.tblComprasVAL_IPI.AsString := FloatToStr(telaDados.tblProdutosVAL_IPI.AsFloat + StrToFloat(edtVIpi.Text));
+  telaDados.tblComprasVAL_PIS.AsString := FloatToStr(telaDados.tblProdutosVAL_PIS.AsFloat + StrToFloat(edtVPis.Text));
+  telaDados.tblComprasVAL_ICMSSUB.AsString := FloatToStr(telaDados.tblProdutosVAL_ICMSSUB.AsFloat + StrToFloat(edtVIcmsS.Text));
+  telaDados.tblComprasVAL_ICMS.AsString := FloatToStr(telaDados.tblProdutosVAL_ICMS.AsFloat + StrToFloat(edtVIcms.Text));
+  telaDados.tblComprasVAL_COFINS.AsString := FloatToStr(telaDados.tblProdutosVAL_COFINS.AsFloat + StrToFloat(edtVCofins.Text));
+
+  telaDados.tblComprasVALOR_TOTAL.Value := telaDados.tblComprasVAL_IPI.Value +
+  telaDados.tblComprasVAL_PIS.Value +
+  telaDados.tblComprasVAL_ICMS.Value +
+  telaDados.tblComprasVAL_ICMSSUB.Value +
+  telaDados.tblComprasVAL_COFINS.Value +
+  telaDados.tblComprasVALOR.Value;
+
+  edtIQtd.Clear;
+  edtIVrTotal.Clear;
+
+  telaDados.cdsCTempItens.Post;
+  end;
+  //telaDados.tblComprasnFor.Value := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Emit.xNome;
 end;
 
 end.
