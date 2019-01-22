@@ -87,19 +87,20 @@ begin
     telaDados.GeraBarrasEAN13(telaCadProdutos.editEan.Text, telaCadProdutos.Image1.Canvas);
    end;
 
-   if telaDados.tblProdutosID_TRIB.Value >= 0 then begin
-    telaDados.qryTributos.Close;
-    telaDados.qryTributos.SQL.Clear;
-    telaDados.qryTributos.SQL.Add('Select * from TRIBUTO where id = ');
-    telaDados.qryTributos.SQL.Add(telaDados.tblProdutosID_TRIB.AsString);
-    telaDados.qryTributos.Open;
-    telaCadProdutos.cbTrib.ItemIndex := telaDados.qryTributos.FieldByName('ID').AsInteger ;
+    if telaDados.tblProdutosID_TRIB.AsString <> '' then begin
+      telaDados.qryTributos.Close;
+      telaDados.qryTributos.SQL.Clear;
+      telaDados.qryTributos.SQL.Add('Select * from TRIBUTO where id = ');
+      telaDados.qryTributos.SQL.Add(telaDados.tblProdutosID_TRIB.AsString);
+      telaDados.qryTributos.Open;
 
-   end else begin
-    telaCadProdutos.cbTrib.ItemIndex := -1;
-   end;
+      telaCadProdutos.cbTrib.ItemIndex := telaDados.qryTributos.FieldByName('ID').AsInteger ;
 
-   if telaDados.tblProdutosID_CSOSN.Value >= 0 then begin
+    end else begin
+      telaCadProdutos.cbTrib.ItemIndex := -1;
+    end;
+
+   if telaDados.tblProdutosID_CSOSN.Value <> '' then begin
     telaDados.qryCsosn.Close;
     telaDados.qryCsosn.SQL.Clear;
     telaDados.qryCsosn.SQL.Add('Select * from CSOSN where id = ');
@@ -110,7 +111,7 @@ begin
     telaCadProdutos.cbCsosn.ItemIndex := -1;
    end;
 
-   if telaDados.tblProdutosID_CST.Value >= 0 then begin
+   if telaDados.tblProdutosID_CST.Value <> '' then begin
     telaDados.qryCst.Close;
     telaDados.qryCst.SQL.Clear;
     telaDados.qryCst.SQL.Add('Select * from CST where id =');
@@ -121,7 +122,7 @@ begin
     telaCadProdutos.cbCst.ItemIndex := -1;
    end;
 
-   if telaDados.tblProdutosID_ORIGEM.Value >= 0 then begin
+   if telaDados.tblProdutosID_ORIGEM.Value <> '' then begin
     telaDados.qryOrigem.Close;
     telaDados.qryOrigem.SQL.Clear;
     telaDados.qryOrigem.SQL.Add('Select * from ORIGEM where id =');

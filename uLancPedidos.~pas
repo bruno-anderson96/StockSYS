@@ -337,6 +337,7 @@ begin
   telaDados.FormataCampos;
   telaDados.tblPedidos.Close;
   telaDados.tblPedidosItens.Close;
+  tipo := 0;
 
 end;
 

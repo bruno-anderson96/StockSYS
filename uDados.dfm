@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 407
-  Top = 79
+  Left = 333
+  Top = 200
   Width = 1215
   Height = 693
   Caption = 'Data m'#243'dulo'
@@ -619,6 +619,36 @@ object telaDados: TtelaDados
         DataType = ftBCD
         Precision = 9
         Size = 2
+      end
+      item
+        Name = 'BC_PIS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_COFINS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_ICMS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_ICMSSUB'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_IPI'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
       end>
     IndexDefs = <
       item
@@ -809,6 +839,31 @@ object telaDados: TtelaDados
     end
     object tblProdutosVAL_COFINS: TIBBCDField
       FieldName = 'VAL_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblProdutosBC_PIS: TIBBCDField
+      FieldName = 'BC_PIS'
+      Precision = 9
+      Size = 2
+    end
+    object tblProdutosBC_COFINS: TIBBCDField
+      FieldName = 'BC_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblProdutosBC_ICMS: TIBBCDField
+      FieldName = 'BC_ICMS'
+      Precision = 9
+      Size = 2
+    end
+    object tblProdutosBC_ICMSSUB: TIBBCDField
+      FieldName = 'BC_ICMSSUB'
+      Precision = 9
+      Size = 2
+    end
+    object tblProdutosBC_IPI: TIBBCDField
+      FieldName = 'BC_IPI'
       Precision = 9
       Size = 2
     end
@@ -1725,6 +1780,11 @@ object telaDados: TtelaDados
         Name = 'EAN13'
         DataType = ftString
         Size = 14
+      end
+      item
+        Name = 'CFOP'
+        DataType = ftString
+        Size = 4
       end>
     IndexDefs = <
       item
@@ -2865,6 +2925,36 @@ object telaDados: TtelaDados
       item
         Name = 'IDV'
         DataType = ftInteger
+      end
+      item
+        Name = 'BC_PIS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_COFINS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_ICMS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_ICMSSUB'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_IPI'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
       end>
     IndexDefs = <
       item
@@ -3114,6 +3204,31 @@ object telaDados: TtelaDados
       Size = 15
       Lookup = True
     end
+    object tblComprasBC_PIS: TIBBCDField
+      FieldName = 'BC_PIS'
+      Precision = 9
+      Size = 2
+    end
+    object tblComprasBC_COFINS: TIBBCDField
+      FieldName = 'BC_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblComprasBC_ICMS: TIBBCDField
+      FieldName = 'BC_ICMS'
+      Precision = 9
+      Size = 2
+    end
+    object tblComprasBC_ICMSSUB: TIBBCDField
+      FieldName = 'BC_ICMSSUB'
+      Precision = 9
+      Size = 2
+    end
+    object tblComprasBC_IPI: TIBBCDField
+      FieldName = 'BC_IPI'
+      Precision = 9
+      Size = 2
+    end
   end
   object qryCompras: TIBQuery
     Database = dbCompras
@@ -3247,6 +3362,96 @@ object telaDados: TtelaDados
         Name = 'EAN13'
         DataType = ftString
         Size = 14
+      end
+      item
+        Name = 'BC_PIS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_COFINS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_ICMS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_ICMSSUB'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_IPI'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_PIS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_COFINS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_ICMS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_ICMSSUB'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_IPI'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_PIS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_COFINS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_ICMS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_ICMSSUB'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_IPI'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
       end>
     IndexDefs = <
       item
@@ -3319,6 +3524,81 @@ object telaDados: TtelaDados
     object tblCompraItensEAN13: TIBStringField
       FieldName = 'EAN13'
       Size = 14
+    end
+    object tblCompraItensBC_PIS: TIBBCDField
+      FieldName = 'BC_PIS'
+      Precision = 9
+      Size = 2
+    end
+    object tblCompraItensBC_COFINS: TIBBCDField
+      FieldName = 'BC_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblCompraItensBC_ICMS: TIBBCDField
+      FieldName = 'BC_ICMS'
+      Precision = 9
+      Size = 2
+    end
+    object tblCompraItensBC_ICMSSUB: TIBBCDField
+      FieldName = 'BC_ICMSSUB'
+      Precision = 9
+      Size = 2
+    end
+    object tblCompraItensBC_IPI: TIBBCDField
+      FieldName = 'BC_IPI'
+      Precision = 9
+      Size = 2
+    end
+    object tblCompraItensVAL_PIS: TIBBCDField
+      FieldName = 'VAL_PIS'
+      Precision = 9
+      Size = 2
+    end
+    object tblCompraItensVAL_COFINS: TIBBCDField
+      FieldName = 'VAL_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblCompraItensVAL_ICMS: TIBBCDField
+      FieldName = 'VAL_ICMS'
+      Precision = 9
+      Size = 2
+    end
+    object tblCompraItensVAL_ICMSSUB: TIBBCDField
+      FieldName = 'VAL_ICMSSUB'
+      Precision = 9
+      Size = 2
+    end
+    object tblCompraItensVAL_IPI: TIBBCDField
+      FieldName = 'VAL_IPI'
+      Precision = 9
+      Size = 2
+    end
+    object tblCompraItensALIQUOTA_PIS: TIBBCDField
+      FieldName = 'ALIQUOTA_PIS'
+      Precision = 9
+      Size = 2
+    end
+    object tblCompraItensALIQUOTA_COFINS: TIBBCDField
+      FieldName = 'ALIQUOTA_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblCompraItensALIQUOTA_ICMS: TIBBCDField
+      FieldName = 'ALIQUOTA_ICMS'
+      Precision = 9
+      Size = 2
+    end
+    object tblCompraItensALIQUOTA_ICMSSUB: TIBBCDField
+      FieldName = 'ALIQUOTA_ICMSSUB'
+      Precision = 9
+      Size = 2
+    end
+    object tblCompraItensALIQUOTA_IPI: TIBBCDField
+      FieldName = 'ALIQUOTA_IPI'
+      Precision = 9
+      Size = 2
     end
   end
   object qryCompraItens: TIBQuery
@@ -5516,12 +5796,22 @@ object telaDados: TtelaDados
     Left = 576
     Top = 264
     Data = {
-      9D0000009619E0BD0100000018000000070000000000030000009D0002494404
+      EC0100009619E0BD010000001800000018000000000003000000EC0102494404
       000100000000000A49445F50524F4455544F04000100000000000949445F434F
       4D50524104000100000000000944455343524943414F01004900000001000557
       494454480200020032000B56414C4F525F544F54414C08000400000000000A51
-      55414E54494441444504000100000000000556414C4F52080004000000000000
-      00}
+      55414E54494441444504000100000000000556414C4F52080004000000000005
+      45414E31330100490000000100055749445448020002000D000443464F500100
+      4900000001000557494454480200020004000742435F49434D53080004000000
+      00000A42435F49434D5353554208000400000000000642435F50495308000400
+      000000000942435F434F46494E5308000400000000000642435F495049080004
+      00000000000856414C5F49434D5308000400000000000B56414C5F49434D5353
+      554208000400000000000756414C5F50495308000400000000000A56414C5F43
+      4F46494E5308000400000000000756414C5F49504908000400000000000D414C
+      4951554F54415F49434D53080004000000000010414C4951554F54415F49434D
+      5353554208000400000000000C414C4951554F54415F50495308000400000000
+      000F414C4951554F54415F434F46494E5308000400000000000C414C4951554F
+      54415F49504908000400000000000000}
     object cdsCTempItensID: TIntegerField
       FieldName = 'ID'
     end
@@ -5543,6 +5833,59 @@ object telaDados: TtelaDados
     end
     object cdsCTempItensVALOR: TFloatField
       FieldName = 'VALOR'
+    end
+    object cdsCTempItensEAN13: TStringField
+      FieldName = 'EAN13'
+      Size = 13
+    end
+    object cdsCTempItensCFOP: TStringField
+      FieldName = 'CFOP'
+      Size = 4
+    end
+    object cdsCTempItensBC_ICMS: TFloatField
+      FieldName = 'BC_ICMS'
+    end
+    object cdsCTempItensBC_ICMSSUB: TFloatField
+      FieldName = 'BC_ICMSSUB'
+    end
+    object cdsCTempItensBC_PIS: TFloatField
+      FieldName = 'BC_PIS'
+    end
+    object cdsCTempItensBC_COFINS: TFloatField
+      FieldName = 'BC_COFINS'
+    end
+    object cdsCTempItensBC_IPI: TFloatField
+      FieldName = 'BC_IPI'
+    end
+    object cdsCTempItensVAL_ICMS: TFloatField
+      FieldName = 'VAL_ICMS'
+    end
+    object cdsCTempItensVAL_ICMSSUB: TFloatField
+      FieldName = 'VAL_ICMSSUB'
+    end
+    object cdsCTempItensVAL_PIS: TFloatField
+      FieldName = 'VAL_PIS'
+    end
+    object cdsCTempItensVAL_COFINS: TFloatField
+      FieldName = 'VAL_COFINS'
+    end
+    object cdsCTempItensVAL_IPI: TFloatField
+      FieldName = 'VAL_IPI'
+    end
+    object cdsCTempItensALIQUOTA_ICMS: TFloatField
+      FieldName = 'ALIQUOTA_ICMS'
+    end
+    object cdsCTempItensALIQUOTA_ICMSSUB: TFloatField
+      FieldName = 'ALIQUOTA_ICMSSUB'
+    end
+    object cdsCTempItensALIQUOTA_PIS: TFloatField
+      FieldName = 'ALIQUOTA_PIS'
+    end
+    object cdsCTempItensALIQUOTA_COFINS: TFloatField
+      FieldName = 'ALIQUOTA_COFINS'
+    end
+    object cdsCTempItensALIQUOTA_IPI: TFloatField
+      FieldName = 'ALIQUOTA_IPI'
     end
   end
 end

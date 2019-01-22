@@ -176,7 +176,7 @@ begin
     telaDados.qryUnidade.Next;
   end;
 
-  telaDados.tblProdutos.Close;
+  //telaDados.tblProdutos.Close;
 
   //Abrindo Banco
  { telaDados.tblProdutos.Open;
@@ -880,7 +880,7 @@ begin
     telaDados.qryProdutos.Open;
 
     telaDados.tblProdutos.Refresh;
-    telaDados.tblProdutos.Close;
+    //telaDados.tblProdutos.Close;
   end;
 end;
 
