@@ -1567,7 +1567,35 @@ begin
     Abort;
   end else begin
      telaDados.tblComprasVALOR.Value := telaDados.cdsCTempItens.Aggregates.Items[0].Value;
-     telaLancCompras.calculaPedido;
+
+     {
+     telaDados.tblComprasBC_ICMS.Value := telaDados.cdsCTempItens.Aggregates.Items[1].Value;
+
+     telaDados.tblComprasBC_ICMSSUB.Value := telaDados.cdsCTempItens.Aggregates.Items[2].Value;
+
+     telaDados.tblComprasBC_IPI.Value := telaDados.cdsCTempItens.Aggregates.Items[3].Value;
+
+     telaDados.tblComprasBC_PIS.Value := telaDados.cdsCTempItens.Aggregates.Items[4].Value;
+
+     telaDados.tblComprasBC_COFINS.Value := telaDados.cdsCTempItens.Aggregates.Items[5].Value;
+      }
+        {
+        telaDados.tblComprasVAL_ICMS.Value := telaDados.cdsCTempItens.Aggregates.Items[6].Value;
+
+       if telaDados.tblComprasVAL_ICMSSUB.AsString <> '' then begin
+        telaDados.tblComprasVAL_ICMSSUB.Value := telaDados.cdsCTempItens.Aggregates.Items[7].Value;
+       end;
+       if telaDados.tblComprasVAL_IPI.AsString <> '' then begin
+        telaDados.tblComprasVAL_IPI.Value := telaDados.cdsCTempItens.Aggregates.Items[8].Value;
+       end;
+       if telaDados.tblComprasVAL_PIS.AsString <> '' then begin
+        telaDados.tblComprasVAL_PIS.Value := telaDados.cdsCTempItens.Aggregates.Items[9].Value;
+       end;
+       if telaDados.tblComprasVAL_COFINS.AsString <> '' then begin
+        telaDados.tblComprasVAL_COFINS.Value := telaDados.cdsCTempItens.Aggregates.Items[10].Value;
+       end;
+         }
+       telaLancCompras.calculaPedido;
   end;
 end;
 

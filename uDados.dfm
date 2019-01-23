@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 333
-  Top = 200
+  Left = 374
+  Top = 123
   Width = 1215
   Height = 693
   Caption = 'Data m'#243'dulo'
@@ -5783,9 +5783,59 @@ object telaDados: TtelaDados
     Aggregates = <
       item
         Active = True
-        AggregateName = 'Valor'
+        AggregateName = 'ValorTotalNota'
         Expression = 'sum(VALOR_TOTAL)'
         IndexName = 'total'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrtBCICMS'
+        Expression = 'sum(BC_ICMS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrtBCICMSSUB'
+        Expression = 'sum(BC_ICMSSUB)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrtBCIPI'
+        Expression = 'sum(BC_IPI)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrtBCPIS'
+        Expression = 'sum(BC_PIS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrtBCCOFINS'
+        Expression = 'sum(BC_COFINS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrtICMS'
+        Expression = 'sum(VAL_ICMS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrtICMSSUB'
+        Expression = 'sum(VAL_ICMSSUB)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrtIPI'
+        Expression = 'sum(VAL_IPI)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrtPIS'
+        Expression = 'sum(VAL_PIS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrtCOFINS'
+        Expression = 'sum(VAL_COFINS)'
         Visible = False
       end>
     AggregatesActive = True

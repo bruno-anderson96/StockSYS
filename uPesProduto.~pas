@@ -100,7 +100,7 @@ begin
       telaCadProdutos.cbTrib.ItemIndex := -1;
     end;
 
-   if telaDados.tblProdutosID_CSOSN.Value <> '' then begin
+   if telaDados.tblProdutosID_CSOSN.AsString <> '' then begin
     telaDados.qryCsosn.Close;
     telaDados.qryCsosn.SQL.Clear;
     telaDados.qryCsosn.SQL.Add('Select * from CSOSN where id = ');
@@ -111,7 +111,7 @@ begin
     telaCadProdutos.cbCsosn.ItemIndex := -1;
    end;
 
-   if telaDados.tblProdutosID_CST.Value <> '' then begin
+   if telaDados.tblProdutosID_CST.AsString <> '' then begin
     telaDados.qryCst.Close;
     telaDados.qryCst.SQL.Clear;
     telaDados.qryCst.SQL.Add('Select * from CST where id =');
@@ -122,7 +122,7 @@ begin
     telaCadProdutos.cbCst.ItemIndex := -1;
    end;
 
-   if telaDados.tblProdutosID_ORIGEM.Value <> '' then begin
+   if telaDados.tblProdutosID_ORIGEM.AsString <> '' then begin
     telaDados.qryOrigem.Close;
     telaDados.qryOrigem.SQL.Clear;
     telaDados.qryOrigem.SQL.Add('Select * from ORIGEM where id =');

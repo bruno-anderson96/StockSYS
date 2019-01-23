@@ -27,6 +27,7 @@ type
     procedure BitBtn2Click(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -370,6 +371,91 @@ begin
   telaDados.qryCompras.SQL.Clear;
   telaDados.qryCompras.SQL.Add('select * from pedido where id = 0');
   telaDados.qryCompras.Open;
+end;
+
+procedure TtelaGerarNfeEntrada.DBGrid1DblClick(Sender: TObject);
+var
+num: integer;
+begin
+ num := DBGrid1.Columns.Items[1].Field.AsInteger;
+
+  telaDados.tblCompras.Locate('ID', num , []);
+  telaDados.tblFornecedores.Locate('ID', telaDados.tblComprasID_FORNECEDOR.Value, []);
+
+  telaDados.tblCompraItens.Locate('ID', telaDados.tblCompraItensID_COMPRA.Value,[]);
+
+  telaDados.tblCompraItens.First;
+  while not (telaDados.tblCompraItens.Eof) do
+  begin
+
+    telaDados.cdsCTempItens.Append;
+
+    telaDados.cdsCTempItens.FieldByName('DESCRICAO').Value :=
+      telaDados.tblCompraItens.FieldByName('DESCRICAO').Value;
+
+    telaDados.cdsCTempItens.FieldByName('ID_PRODUTO').Value :=
+      telaDados.tblCompraItens.FieldByName('ID_PRODUTO').Value;
+
+    telaDados.cdsCTempItens.FieldByName('ID_COMPRA').Value :=
+      telaDados.tblCompraItens.FieldByName('ID_COMPRA').Value;
+
+    telaDados.cdsCTempItens.FieldByName('VALOR').Value :=
+      telaDados.tblCompraItens.FieldByName('VALOR').Value;
+
+    telaDados.cdsCTempItens.FieldByName('QUANTIDADE').Value :=
+      telaDados.tblCompraItens.FieldByName('QUANTIDADE').Value;
+
+    {telaDados.cdsCTempItens.FieldByName('BC_ICMS').Value :=
+      telaDados.tblCompraItens.FieldByName('BC_ICMS').Value;
+
+    telaDados.cdsCTempItens.FieldByName('BC_ICMSSUB').Value :=
+      telaDados.tblCompraItens.FieldByName('BC_ICMSSUB').Value;
+
+    telaDados.cdsCTempItens.FieldByName('BC_PIS').Value :=
+      telaDados.tblCompraItens.FieldByName('BC_PIS').Value;
+
+    telaDados.cdsCTempItens.FieldByName('BC_COFINS').Value :=
+      telaDados.tblCompraItens.FieldByName('BC_COFINS').Value;
+
+    telaDados.cdsCTempItens.FieldByName('BC_IPI').Value :=
+      telaDados.tblCompraItens.FieldByName('BC_IPI').Value;
+
+    telaDados.cdsCTempItens.FieldByName('VAL_ICMS').Value :=
+      telaDados.tblCompraItens.FieldByName('VAL_ICMS').Value;
+
+    telaDados.cdsCTempItens.FieldByName('VAL_ICMSSUB').Value :=
+      telaDados.tblCompraItens.FieldByName('VAL_ICMSSUB').Value;
+
+    telaDados.cdsCTempItens.FieldByName('VAL_PIS').Value :=
+      telaDados.tblCompraItens.FieldByName('VAL_PIS').Value;
+
+    telaDados.cdsCTempItens.FieldByName('VAL_COFINS').Value :=
+      telaDados.tblCompraItens.FieldByName('VAL_COFINS').Value;
+
+    telaDados.cdsCTempItens.FieldByName('VAL_IPI').Value :=
+      telaDados.tblCompraItens.FieldByName('VAL_IPI').Value;
+
+    telaDados.cdsCTempItens.FieldByName('ALIQUOTA_ICMS').Value :=
+      telaDados.tblCompraItens.FieldByName('ALIQUOTA_ICMS').Value;
+
+    telaDados.cdsCTempItens.FieldByName('ALIQUOTA_ICMSSUB').Value :=
+      telaDados.tblCompraItens.FieldByName('ALIQUOTA_ICMSSUB').Value;
+
+    telaDados.cdsCTempItens.FieldByName('ALIQUOTA_PIS').Value :=
+      telaDados.tblCompraItens.FieldByName('ALIQUOTA_PIS').Value;
+
+    telaDados.cdsCTempItens.FieldByName('ALIQUOTA_COFINS').Value :=
+      telaDados.tblCompraItens.FieldByName('ALIQUOTA_COFINS').Value;
+
+    telaDados.cdsCTempItens.FieldByName('ALIQUOTA_IPI').Value :=
+      telaDados.tblCompraItens.FieldByName('ALIQUOTA_IPI').Value;
+      }
+   telaDados.cdsCTempItens.Post;
+   telaDados.tblCompraItens.Next;
+
+   end;
+
+
 end;
 
 end.

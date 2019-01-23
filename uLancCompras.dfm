@@ -1445,12 +1445,11 @@ object telaLancCompras: TtelaLancCompras
                 FocusControl = edtIDesc
               end
               object Label25: TLabel
-                Left = 688
+                Left = 711
                 Top = 8
                 Width = 28
                 Height = 13
                 Caption = 'CFOP'
-                FocusControl = edtICfop
               end
               object Label26: TLabel
                 Left = 5
@@ -1757,22 +1756,12 @@ object telaLancCompras: TtelaLancCompras
               object edtIDesc: TDBEdit
                 Left = 336
                 Top = 24
-                Width = 340
+                Width = 361
                 Height = 21
                 DataField = 'DESCRICAO'
                 DataSource = telaDados.dsProdutos
                 Enabled = False
                 TabOrder = 3
-              end
-              object edtICfop: TDBEdit
-                Left = 688
-                Top = 24
-                Width = 106
-                Height = 21
-                DataField = 'CFOP'
-                DataSource = telaDados.dsProdutos
-                Enabled = False
-                TabOrder = 4
               end
               object edtIEan: TDBEdit
                 Left = 96
@@ -1810,27 +1799,25 @@ object telaLancCompras: TtelaLancCompras
                   Caption = 'BC. ICMS'
                 end
                 object Label38: TLabel
-                  Left = 56
+                  Left = 61
                   Top = 16
                   Width = 32
                   Height = 13
                   Caption = '$ICMS'
-                  FocusControl = edtIVICMS
                 end
                 object Label39: TLabel
-                  Left = 240
+                  Left = 241
                   Top = 16
                   Width = 33
                   Height = 13
                   Caption = 'BC. IPI'
                 end
                 object Label40: TLabel
-                  Left = 289
+                  Left = 293
                   Top = 16
                   Width = 19
                   Height = 13
                   Caption = '$IPI'
-                  FocusControl = edtIVIpi
                 end
                 object Label41: TLabel
                   Left = 348
@@ -1845,22 +1832,20 @@ object telaLancCompras: TtelaLancCompras
                   Width = 23
                   Height = 13
                   Caption = '$PIS'
-                  FocusControl = edtIVPis
                 end
                 object Label43: TLabel
-                  Left = 101
+                  Left = 104
                   Top = 16
                   Width = 68
                   Height = 13
                   Caption = 'BC. ICMSSUB'
                 end
                 object Label44: TLabel
-                  Left = 175
+                  Left = 176
                   Top = 16
                   Width = 54
                   Height = 13
                   Caption = '$ICMSSUB'
-                  FocusControl = edtIVIcmsSub
                 end
                 object Label45: TLabel
                   Left = 444
@@ -1875,97 +1860,106 @@ object telaLancCompras: TtelaLancCompras
                   Width = 45
                   Height = 13
                   Caption = '$COFINS'
-                  FocusControl = edtIVCofins
                 end
-                object edtIVICMS: TDBEdit
-                  Left = 56
+                object edtIBIcms: TDBEdit
+                  Left = 11
                   Top = 32
                   Width = 44
                   Height = 21
-                  DataField = 'VAL_ICMS'
-                  DataSource = telaDados.dsProdutos
-                  Enabled = False
-                  TabOrder = 1
-                end
-                object edtIVIpi: TDBEdit
-                  Left = 288
-                  Top = 32
-                  Width = 44
-                  Height = 21
-                  DataField = 'VAL_IPI'
-                  DataSource = telaDados.dsProdutos
-                  Enabled = False
-                  TabOrder = 5
-                end
-                object edtIVPis: TDBEdit
-                  Left = 396
-                  Top = 32
-                  Width = 44
-                  Height = 21
-                  DataField = 'VAL_PIS'
-                  DataSource = telaDados.dsProdutos
-                  Enabled = False
-                  TabOrder = 7
-                end
-                object edtIVIcmsSub: TDBEdit
-                  Left = 178
-                  Top = 32
-                  Width = 44
-                  Height = 21
-                  DataField = 'VAL_ICMSSUB'
-                  DataSource = telaDados.dsProdutos
-                  Enabled = False
-                  TabOrder = 3
-                end
-                object edtIVCofins: TDBEdit
-                  Left = 506
-                  Top = 32
-                  Width = 44
-                  Height = 21
-                  DataField = 'VAL_COFINS'
-                  DataSource = telaDados.dsProdutos
-                  Enabled = False
-                  TabOrder = 9
-                end
-                object edtIBIcms: TEdit
-                  Left = 8
-                  Top = 32
-                  Width = 44
-                  Height = 21
+                  DataField = 'BC_ICMS'
+                  DataSource = telaDados.dsCTempItens
                   Enabled = False
                   TabOrder = 0
                 end
-                object edtIBCofins: TEdit
-                  Left = 451
-                  Top = 32
-                  Width = 44
-                  Height = 21
-                  Enabled = False
-                  TabOrder = 8
-                end
-                object edtIBIpi: TEdit
-                  Left = 240
-                  Top = 32
-                  Width = 44
-                  Height = 21
-                  Enabled = False
-                  TabOrder = 4
-                end
-                object edtIBPis: TEdit
-                  Left = 345
-                  Top = 32
-                  Width = 44
-                  Height = 21
-                  Enabled = False
-                  TabOrder = 6
-                end
-                object edtIBIcmssub: TEdit
+                object edtIBICmssub: TDBEdit
                   Left = 116
                   Top = 32
                   Width = 44
                   Height = 21
+                  DataField = 'BC_ICMSSUB'
+                  DataSource = telaDados.dsCTempItens
                   Enabled = False
                   TabOrder = 2
+                end
+                object edtIBIpi: TDBEdit
+                  Left = 240
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'BC_IPI'
+                  DataSource = telaDados.dsCTempItens
+                  Enabled = False
+                  TabOrder = 4
+                end
+                object edtIBPis: TDBEdit
+                  Left = 345
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'BC_PIS'
+                  DataSource = telaDados.dsCTempItens
+                  Enabled = False
+                  TabOrder = 6
+                end
+                object edtIBCofins: TDBEdit
+                  Left = 449
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'BC_COFINS'
+                  DataSource = telaDados.dsCTempItens
+                  Enabled = False
+                  TabOrder = 8
+                end
+                object edtIVICMS: TDBEdit
+                  Left = 64
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'VAL_ICMS'
+                  DataSource = telaDados.dsCTempItens
+                  Enabled = False
+                  TabOrder = 1
+                end
+                object edtIVIcmssub: TDBEdit
+                  Left = 176
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'VAL_ICMSSUB'
+                  DataSource = telaDados.dsCTempItens
+                  Enabled = False
+                  TabOrder = 3
+                end
+                object edtIVIpi: TDBEdit
+                  Left = 296
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'VAL_IPI'
+                  DataSource = telaDados.dsCTempItens
+                  Enabled = False
+                  TabOrder = 5
+                end
+                object edtIVPis: TDBEdit
+                  Left = 400
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'VAL_PIS'
+                  DataSource = telaDados.dsCTempItens
+                  Enabled = False
+                  TabOrder = 7
+                end
+                object edtIVCofins: TDBEdit
+                  Left = 504
+                  Top = 32
+                  Width = 44
+                  Height = 21
+                  DataField = 'VAL_COFINS'
+                  DataSource = telaDados.dsCTempItens
+                  Enabled = False
+                  TabOrder = 9
                 end
               end
               object gbPrecos: TGroupBox
@@ -2096,6 +2090,14 @@ object telaLancCompras: TtelaLancCompras
                 DataSource = telaDados.dsProdutos
                 Enabled = False
                 TabOrder = 10
+              end
+              object edtICfop: TEdit
+                Left = 712
+                Top = 24
+                Width = 76
+                Height = 21
+                Enabled = False
+                TabOrder = 4
               end
             end
             object pnlEdtExc: TPanel
@@ -2961,6 +2963,7 @@ object telaLancCompras: TtelaLancCompras
     object Pesquisar: TAction
       Caption = 'F6 - &Pesquisar'
       ShortCut = 117
+      OnExecute = PesquisarExecute
     end
     object Imprimir: TAction
       Caption = 'F7 - I&mprimir'

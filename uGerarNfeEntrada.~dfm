@@ -130,6 +130,7 @@ object telaGerarNfeEntrada: TtelaGerarNfeEntrada
       TitleFont.Height = -11
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
+      OnDblClick = DBGrid1DblClick
       Columns = <
         item
           Expanded = False
