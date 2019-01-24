@@ -39,6 +39,8 @@ var
 
 implementation
 
+uses uLancCompras;
+
 {$R *.dfm}
 
 procedure TtelaGerarNfeEntrada.BitBtn1Click(Sender: TObject);
@@ -99,6 +101,7 @@ begin
   telaDados.qryCompraItens.SQL.Add('Select * from COMPRA_ITENS where id = ');
   telaDados.qryCompraItens.SQL.Add(telaDados.qryCompras.FieldByName('ID').Value);
   telaDados.qryCompraItens.Open;
+
 
 
   {ShowMessage(telaDados.qryPedidos.FieldByName('ID').AsString);
@@ -178,11 +181,17 @@ begin
         Inc(aNumItem);
         with Det.Add do
         begin
+            telaDados.qryProdutos.Close;
+            telaDados.qryProdutos.SQL.Clear;
+            telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID =');
+            telaDados.qryProdutos.SQL.Add(telaDados.qryCompraItens.FieldByName('ID_PRODUTO').AsString);
+            telaDados.qryProdutos.Open;
+
           Prod.nItem := aNumItem;
           Prod.cProd := IntToStr(telaDados.qryCompraItens.FieldByName('ID_PRODUTO').AsInteger);
           Prod.cEAN  := telaDados.qryCompraItens.FieldByName('EAN13').AsString;
           Prod.xProd := telaDados.qryCompraItens.FieldByName('DESCRICAO').AsString;
-          Prod.NCM   := telaDados.qryProdutos.FIeldByName('CODIGO_NCM').AsString;
+          Prod.NCM   := telaDados.qryProdutos.FieldByName('CODIGO_NCM').AsString;
           Prod.EXTIPI := '';
           if (telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger = 0) or
              (telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger = 1) or
@@ -271,10 +280,10 @@ begin
         telaDados.qryCompraItens.Next;
       end;
       // Informações finais de NFe
-      Total.ICMSTot.vBC    := telaDados.qryTributos.FieldByName('VALOR').AsFloat;
-      Total.ICMSTot.vICMS  := telaDados.qryTributos.FieldByName('VAL_ICMS').AsFloat;
-      Total.ICMSTot.vBCST  := telaDados.qryTributos.FieldByName('BASE_ST').AsFloat;
-      Total.ICMSTot.vST    := (telaDados.qryTributos.FieldByName('BASE_ST').AsFloat * telaDados.qryTributos.FieldByName('ALIQUOTA_ICMS').AsFloat) / 100;
+      Total.ICMSTot.vBC    := telaDados.qryCompras.FieldByName('BC_ICMS').AsFloat;
+      Total.ICMSTot.vICMS  := telaDados.qryCompras.FieldByName('VAL_ICMS').AsFloat;
+      Total.ICMSTot.vBCST  := telaDados.qryCompras.FieldByName('BC_ICMSSUB').AsFloat;
+      Total.ICMSTot.vST    := (telaDados.qryCompras.FieldByName('VAL_ICMSSUB').AsFloat * telaDados.qryCompras.FieldByName('ALIQUOTA_ICMS').AsFloat) / 100;
       Total.ICMSTot.vProd  := telaDados.qryCompras.FieldByName('Valor').asFloat;
       Total.ICMSTot.vFrete := 0;
       Total.ICMSTot.vSeg   := 0;
@@ -352,8 +361,19 @@ begin
     telaDados.ACBrNFe1.NotasFiscais.Assinar;
     telaDados.ACBrNFe1.NotasFiscais.Validar;
     }
-    telaDados.ACBrNFe1.NotasFiscais.Assinar;                                                      
+    //telaDados.ACBrNFe1.NotasFiscais.Assinar;                                                      
     telaDados.ACBrNFe1.NotasFiscais.Items[0].GravarXML('Teste.xml', ExtractFilePath(ParamStr(0)));
+    ShowMessage('Arquivo Gerado em: '+ telaDados.ACBrNFe1.NotasFiscais.Items[0].NomeArq);
+    if telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.tpEmis = TeDPEC then
+  begin
+    telaDados.ACBrNFe1.WebServices.Consulta.NFeChave := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.infNFe.ID;
+    telaDados.ACBrNFe1.WebServices.Consulta.Executar;
+
+    telaDados.ACBrNFe1.DANFE.ProtocoloNFe := telaDados.ACBrNFe1.WebServices.Consulta.Protocolo+''+
+                                             DateTimeToStr(telaDados.ACBrNFe1.WebServices.Consulta.protNFe.dhRecbto)
+  end;
+  telaDados.ACBrNFe1.NotasFiscais.Imprimir;
+
 
 
     telaDados.tblPedidosItens.Close;
@@ -382,79 +402,167 @@ begin
   telaDados.tblCompras.Locate('ID', num , []);
   telaDados.tblFornecedores.Locate('ID', telaDados.tblComprasID_FORNECEDOR.Value, []);
 
-  telaDados.tblCompraItens.Locate('ID', telaDados.tblCompraItensID_COMPRA.Value,[]);
+  //telaDados.tblCompraItens.Locate('ID_COMPRA', telaDados.tblComprasID.Value,[]);
+    telaDados.qryCompraItens.Close;
+    telaDados.qryCompraItens.SQL.Clear;
+    telaDados.qryCompraItens.SQL.Add('Select * from COMPRA_ITENS where ID_COMPRA =');
+    telaDados.qryCompraItens.SQL.Add(telaDados.tblComprasID.AsString);
+    telaDados.qryCompraItens.Open;
 
-  telaDados.tblCompraItens.First;
-  while not (telaDados.tblCompraItens.Eof) do
+   telaDados.tblFornecedores.Edit;
+   telaDados.tblCompras.Edit;
+   telaDados.tblCompraItens.Edit;
+   telaDados.tblProdutos.Edit;
+   //telaDados.cdsCTempItens.Edit;
+   //telaDados.tblTransportadora.Edit;
+   telaDados.qryCompraItens.First;
+  while not (telaDados.qryCompraItens.Eof) do
   begin
 
     telaDados.cdsCTempItens.Append;
 
     telaDados.cdsCTempItens.FieldByName('DESCRICAO').Value :=
-      telaDados.tblCompraItens.FieldByName('DESCRICAO').Value;
+      telaDados.qryCompraItens.FieldByName('DESCRICAO').Value;
 
     telaDados.cdsCTempItens.FieldByName('ID_PRODUTO').Value :=
-      telaDados.tblCompraItens.FieldByName('ID_PRODUTO').Value;
+      telaDados.qryCompraItens.FieldByName('ID_PRODUTO').Value;
 
     telaDados.cdsCTempItens.FieldByName('ID_COMPRA').Value :=
-      telaDados.tblCompraItens.FieldByName('ID_COMPRA').Value;
+      telaDados.qryCompraItens.FieldByName('ID_COMPRA').Value;
 
     telaDados.cdsCTempItens.FieldByName('VALOR').Value :=
-      telaDados.tblCompraItens.FieldByName('VALOR').Value;
+      telaDados.qryCompraItens.FieldByName('VALOR').Value;
+
+    telaDados.cdsCTempItens.FieldByName('VALOR_TOTAL').Value :=
+      telaDados.qryCompraItens.FieldByName('VALOR_TOTAL').Value;
 
     telaDados.cdsCTempItens.FieldByName('QUANTIDADE').Value :=
-      telaDados.tblCompraItens.FieldByName('QUANTIDADE').Value;
+      telaDados.qryCompraItens.FieldByName('QUANTIDADE').Value;
 
-    {telaDados.cdsCTempItens.FieldByName('BC_ICMS').Value :=
-      telaDados.tblCompraItens.FieldByName('BC_ICMS').Value;
+      telaDados.cdsCTempItens.FieldByName('CFOP').Value :=
+    telaDados.qryCompraItens.FieldByName('CFOP').Value;
+
+    telaDados.cdsCTempItens.FieldByName('BC_ICMS').Value :=
+      telaDados.qryCompraItens.FieldByName('BC_ICMS').Value;
 
     telaDados.cdsCTempItens.FieldByName('BC_ICMSSUB').Value :=
-      telaDados.tblCompraItens.FieldByName('BC_ICMSSUB').Value;
+      telaDados.qryCompraItens.FieldByName('BC_ICMSSUB').Value;
 
     telaDados.cdsCTempItens.FieldByName('BC_PIS').Value :=
-      telaDados.tblCompraItens.FieldByName('BC_PIS').Value;
+      telaDados.qryCompraItens.FieldByName('BC_PIS').Value;
 
     telaDados.cdsCTempItens.FieldByName('BC_COFINS').Value :=
-      telaDados.tblCompraItens.FieldByName('BC_COFINS').Value;
+      telaDados.qryCompraItens.FieldByName('BC_COFINS').Value;
 
     telaDados.cdsCTempItens.FieldByName('BC_IPI').Value :=
-      telaDados.tblCompraItens.FieldByName('BC_IPI').Value;
+      telaDados.qryCompraItens.FieldByName('BC_IPI').Value;
 
     telaDados.cdsCTempItens.FieldByName('VAL_ICMS').Value :=
-      telaDados.tblCompraItens.FieldByName('VAL_ICMS').Value;
+      telaDados.qryCompraItens.FieldByName('VAL_ICMS').Value;
 
     telaDados.cdsCTempItens.FieldByName('VAL_ICMSSUB').Value :=
-      telaDados.tblCompraItens.FieldByName('VAL_ICMSSUB').Value;
+      telaDados.qryCompraItens.FieldByName('VAL_ICMSSUB').Value;
 
     telaDados.cdsCTempItens.FieldByName('VAL_PIS').Value :=
-      telaDados.tblCompraItens.FieldByName('VAL_PIS').Value;
+      telaDados.qryCompraItens.FieldByName('VAL_PIS').Value;
 
     telaDados.cdsCTempItens.FieldByName('VAL_COFINS').Value :=
-      telaDados.tblCompraItens.FieldByName('VAL_COFINS').Value;
+      telaDados.qryCompraItens.FieldByName('VAL_COFINS').Value;
 
     telaDados.cdsCTempItens.FieldByName('VAL_IPI').Value :=
-      telaDados.tblCompraItens.FieldByName('VAL_IPI').Value;
+      telaDados.qryCompraItens.FieldByName('VAL_IPI').Value;
 
     telaDados.cdsCTempItens.FieldByName('ALIQUOTA_ICMS').Value :=
-      telaDados.tblCompraItens.FieldByName('ALIQUOTA_ICMS').Value;
+      telaDados.qryCompraItens.FieldByName('ALIQUOTA_ICMS').Value;
 
     telaDados.cdsCTempItens.FieldByName('ALIQUOTA_ICMSSUB').Value :=
-      telaDados.tblCompraItens.FieldByName('ALIQUOTA_ICMSSUB').Value;
+      telaDados.qryCompraItens.FieldByName('ALIQUOTA_ICMSSUB').Value;
 
     telaDados.cdsCTempItens.FieldByName('ALIQUOTA_PIS').Value :=
-      telaDados.tblCompraItens.FieldByName('ALIQUOTA_PIS').Value;
+      telaDados.qryCompraItens.FieldByName('ALIQUOTA_PIS').Value;
 
     telaDados.cdsCTempItens.FieldByName('ALIQUOTA_COFINS').Value :=
-      telaDados.tblCompraItens.FieldByName('ALIQUOTA_COFINS').Value;
+      telaDados.qryCompraItens.FieldByName('ALIQUOTA_COFINS').Value;
 
     telaDados.cdsCTempItens.FieldByName('ALIQUOTA_IPI').Value :=
-      telaDados.tblCompraItens.FieldByName('ALIQUOTA_IPI').Value;
-      }
+      telaDados.qryCompraItens.FieldByName('ALIQUOTA_IPI').Value;
+
    telaDados.cdsCTempItens.Post;
-   telaDados.tblCompraItens.Next;
+   telaDados.qryCompraItens.Next;
 
    end;
 
+telaLancCompras.DBGrid1.Enabled := true;
+
+telaLancCompras.editDtCad.Enabled := true;
+telaLancCompras.editDtEmissao.Enabled := true;
+telaLancCompras.editIdFornecedor.Enabled := true;
+telaLancCompras.cbFornecedor.Enabled := true;
+
+telaLancCompras.editDesc.Enabled := true;
+telaLancCompras.editAsc.Enabled := true;
+telaLancCompras.editOutrasDesp.Enabled := true;
+
+telaLancCompras.editEemitente.Enabled := true;
+telaLancCompras.editEendereco.Enabled := true;
+telaLancCompras.editEnum.Enabled := true;
+telaLancCompras.editEcompl.Enabled := true;
+telaLancCompras.editEbairro.Enabled := true;
+telaLancCompras.editEcidade.Enabled := true;
+telaLancCompras.editEuf.Enabled := true;
+telaLancCompras.editEcep.Enabled := true;
+telaLancCompras.edtItem.Enabled := true;
+
+telaLancCompras.edtIDesc.Enabled := true;
+telaLancCompras.edtnNota.Enabled := true;
+telaLancCompras.edtnSerie.Enabled := true;
+telaLancCompras.edtCfop.Enabled := true;
+telaLancCompras.edtChaveNfe.Enabled := true;
+telaLancCompras.edtICfop.Enabled := true;
+telaLancCompras.edtIEan.Enabled := true;
+telaLancCompras.edtIVrUnit.Enabled := true;
+telaLancCompras.edtIPcusto.Enabled := true;
+telaLancCompras.edtIQtd.Enabled := true;
+telaLancCompras.edtIMargem.Enabled := true;
+telaLancCompras.edtIMargemP.Enabled := true;
+telaLancCompras.edtIVenda.Enabled := true;
+telaLancCompras.edtIVendaP.Enabled := true;
+telaLancCompras.edtIBICMS.Enabled := true;
+telaLancCompras.edtIBIpi.Enabled := true;
+telaLancCompras.edtIBPis.Enabled := true;
+telaLancCompras.edtIBIcmsSub.Enabled := true;
+telaLancCompras.edtIBCofins.Enabled := true;
+telaLancCompras.edtIVICMS.Enabled := true;
+telaLancCompras.edtIVIpi.Enabled := true;
+telaLancCompras.edtIVPis.Enabled := true;
+telaLancCompras.edtIVIcmsSub.Enabled := true;
+telaLancCompras.edtIVCofins.Enabled := true;
+telaLancCompras.cbModelo.Enabled := true;
+telaLancCompras.cbTDesc.Enabled := true;
+telaLancCompras.cbVDesc.Enabled := true;
+
+telaLancCompras.btnAddTransp.Enabled := true;
+telaLancCompras.btnIncItem.Enabled := true;
+telaLancCompras.btnExcItem.Enabled := true;
+telaLancCompras.btnRetPed.Enabled := true;
+telaLancCompras.btnFinPed.Enabled := true;
+
+telaLancCompras.btnIncluir.Enabled := false;
+telaLancCompras.btnConfirmar.Enabled := true;
+telaLancCompras.btnCancelar.Enabled := true;
+telaLancCompras.btnPesquisar.Enabled := false;
+
+telaLancCompras.btnAddFor.Enabled := true;
+telaLancCompras.btnConfirmProd.Enabled := true;
+
+telaLancCompras.Incluir.Enabled := false;
+telaLancCompras.Confirmar.Enabled := true;
+telaLancCompras.Cancelar.Enabled := true;
+telaLancCOmpras.Pesquisar.Enabled := false;
+
+telaDados.tblProdutos.ClearFields;
+
+telaGerarNfeEntrada.Hide;
 
 end;
 

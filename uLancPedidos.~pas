@@ -102,6 +102,7 @@ type
     Image1: TImage;
     gpPos: TGroupBox;
     cbPos: TComboBox;
+    btnAddCli: TSpeedButton;
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnIncItemClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -137,6 +138,7 @@ type
     procedure editIdChange(Sender: TObject);
     procedure cbPagamentoChange(Sender: TObject);
     procedure edtDinChange(Sender: TObject);
+    procedure btnAddCliClick(Sender: TObject);
 
   private
 
@@ -999,6 +1001,12 @@ begin
   if (edtDin.Text <> '0,00') and (edtDin.Text <>'') then begin
     Ddin := StrToFloat(edtDin.Text);
   end;
+end;
+
+procedure TtelaLancPedidos.btnAddCliClick(Sender: TObject);
+begin
+  Application.CreateForm(TtelaCadClientes, telaCadClientes);
+  telaCadClientes.Show;
 end;
 
 end.

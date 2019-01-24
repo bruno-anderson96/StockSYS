@@ -3452,6 +3452,11 @@ object telaDados: TtelaDados
         DataType = ftBCD
         Precision = 9
         Size = 2
+      end
+      item
+        Name = 'CFOP'
+        DataType = ftString
+        Size = 5
       end>
     IndexDefs = <
       item
@@ -3599,6 +3604,10 @@ object telaDados: TtelaDados
       FieldName = 'ALIQUOTA_IPI'
       Precision = 9
       Size = 2
+    end
+    object tblCompraItensCFOP: TIBStringField
+      FieldName = 'CFOP'
+      Size = 5
     end
   end
   object qryCompraItens: TIBQuery
@@ -5789,51 +5798,61 @@ object telaDados: TtelaDados
         Visible = False
       end
       item
+        Active = True
         AggregateName = 'VrtBCICMS'
         Expression = 'sum(BC_ICMS)'
         Visible = False
       end
       item
+        Active = True
         AggregateName = 'VrtBCICMSSUB'
         Expression = 'sum(BC_ICMSSUB)'
         Visible = False
       end
       item
+        Active = True
         AggregateName = 'VrtBCIPI'
         Expression = 'sum(BC_IPI)'
         Visible = False
       end
       item
+        Active = True
         AggregateName = 'VrtBCPIS'
         Expression = 'sum(BC_PIS)'
         Visible = False
       end
       item
+        Active = True
         AggregateName = 'VrtBCCOFINS'
         Expression = 'sum(BC_COFINS)'
         Visible = False
       end
       item
+        Active = True
         AggregateName = 'VrtICMS'
         Expression = 'sum(VAL_ICMS)'
         Visible = False
       end
       item
+        Active = True
         AggregateName = 'VrtICMSSUB'
         Expression = 'sum(VAL_ICMSSUB)'
         Visible = False
       end
       item
+        Active = True
         AggregateName = 'VrtIPI'
         Expression = 'sum(VAL_IPI)'
         Visible = False
       end
       item
+        Active = True
         AggregateName = 'VrtPIS'
         Expression = 'sum(VAL_PIS)'
         Visible = False
       end
       item
+        Active = True
         AggregateName = 'VrtCOFINS'
         Expression = 'sum(VAL_COFINS)'
         Visible = False

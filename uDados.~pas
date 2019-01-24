@@ -634,6 +634,7 @@ type
     cdsCTempItensALIQUOTA_PIS: TFloatField;
     cdsCTempItensALIQUOTA_COFINS: TFloatField;
     cdsCTempItensALIQUOTA_IPI: TFloatField;
+    tblCompraItensCFOP: TIBStringField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
     procedure tblClientesBeforePost(DataSet: TDataSet);
@@ -1566,36 +1567,24 @@ begin
   if telaDados.cdsCTempItens.RecordCount < 1 then begin
     Abort;
   end else begin
+
      telaDados.tblComprasVALOR.Value := telaDados.cdsCTempItens.Aggregates.Items[0].Value;
 
-     {
+
      telaDados.tblComprasBC_ICMS.Value := telaDados.cdsCTempItens.Aggregates.Items[1].Value;
-
      telaDados.tblComprasBC_ICMSSUB.Value := telaDados.cdsCTempItens.Aggregates.Items[2].Value;
-
      telaDados.tblComprasBC_IPI.Value := telaDados.cdsCTempItens.Aggregates.Items[3].Value;
-
      telaDados.tblComprasBC_PIS.Value := telaDados.cdsCTempItens.Aggregates.Items[4].Value;
-
      telaDados.tblComprasBC_COFINS.Value := telaDados.cdsCTempItens.Aggregates.Items[5].Value;
-      }
-        {
-        telaDados.tblComprasVAL_ICMS.Value := telaDados.cdsCTempItens.Aggregates.Items[6].Value;
 
-       if telaDados.tblComprasVAL_ICMSSUB.AsString <> '' then begin
-        telaDados.tblComprasVAL_ICMSSUB.Value := telaDados.cdsCTempItens.Aggregates.Items[7].Value;
-       end;
-       if telaDados.tblComprasVAL_IPI.AsString <> '' then begin
-        telaDados.tblComprasVAL_IPI.Value := telaDados.cdsCTempItens.Aggregates.Items[8].Value;
-       end;
-       if telaDados.tblComprasVAL_PIS.AsString <> '' then begin
-        telaDados.tblComprasVAL_PIS.Value := telaDados.cdsCTempItens.Aggregates.Items[9].Value;
-       end;
-       if telaDados.tblComprasVAL_COFINS.AsString <> '' then begin
-        telaDados.tblComprasVAL_COFINS.Value := telaDados.cdsCTempItens.Aggregates.Items[10].Value;
-       end;
-         }
-       telaLancCompras.calculaPedido;
+     telaDados.tblComprasVAL_ICMS.Value := telaDados.cdsCTempItens.Aggregates.Items[6].Value;
+     telaDados.tblComprasVAL_ICMSSUB.Value := telaDados.cdsCTempItens.Aggregates.Items[7].Value;
+     telaDados.tblComprasVAL_IPI.Value := telaDados.cdsCTempItens.Aggregates.Items[8].Value;
+     telaDados.tblComprasVAL_PIS.Value := telaDados.cdsCTempItens.Aggregates.Items[9].Value;
+     telaDados.tblComprasVAL_COFINS.Value := telaDados.cdsCTempItens.Aggregates.Items[10].Value;
+
+       
+      telaLancCompras.calculaPedido;
   end;
 end;
 

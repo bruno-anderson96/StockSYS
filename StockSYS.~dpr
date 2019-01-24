@@ -56,4 +56,5 @@ begin
   Application.CreateForm(TtelaGerarNfe, telaGerarNfe);
   Application.CreateForm(TtelaConfigEmit, telaConfigEmit);
   Application.Run;
+
 end.

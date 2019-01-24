@@ -473,7 +473,7 @@ object telaLancCompras: TtelaLancCompras
           Top = 344
           Width = 185
           Height = 257
-          TabOrder = 2
+          TabOrder = 3
           object Label15: TLabel
             Left = 8
             Top = 16
@@ -572,7 +572,7 @@ object telaLancCompras: TtelaLancCompras
           Height = 25
           Caption = 'Excluir Item'
           Enabled = False
-          TabOrder = 3
+          TabOrder = 4
         end
         object btnFinPed: TBitBtn
           Left = 1127
@@ -581,7 +581,7 @@ object telaLancCompras: TtelaLancCompras
           Height = 25
           Caption = '&Finalizar Pedido'
           Enabled = False
-          TabOrder = 4
+          TabOrder = 5
         end
         object btnRetPed: TBitBtn
           Left = 1280
@@ -590,7 +590,7 @@ object telaLancCompras: TtelaLancCompras
           Height = 25
           Caption = 'Retornar Pedido Finalizado'
           Enabled = False
-          TabOrder = 5
+          TabOrder = 6
         end
         object btnIncluir: TBitBtn
           Left = 847
@@ -599,7 +599,7 @@ object telaLancCompras: TtelaLancCompras
           Height = 37
           Action = Incluir
           Caption = 'F2 - &Incluir'
-          TabOrder = 6
+          TabOrder = 7
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -720,7 +720,7 @@ object telaLancCompras: TtelaLancCompras
           Height = 37
           Action = Excluir
           Caption = 'F3 - E&xcluir'
-          TabOrder = 7
+          TabOrder = 8
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -841,7 +841,7 @@ object telaLancCompras: TtelaLancCompras
           Height = 37
           Action = Confirmar
           Caption = 'F4 - &Confirmar'
-          TabOrder = 8
+          TabOrder = 9
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -962,7 +962,7 @@ object telaLancCompras: TtelaLancCompras
           Height = 37
           Action = Cancelar
           Caption = 'F5 - C&ancelar'
-          TabOrder = 9
+          TabOrder = 10
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -1083,7 +1083,7 @@ object telaLancCompras: TtelaLancCompras
           Height = 37
           Action = Pesquisar
           Caption = 'F6 - &Pesquisar'
-          TabOrder = 10
+          TabOrder = 11
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -1199,12 +1199,12 @@ object telaLancCompras: TtelaLancCompras
         end
         object btnImprimir: TBitBtn
           Left = 847
-          Top = 233
+          Top = 232
           Width = 151
           Height = 37
           Action = Imprimir
           Caption = 'F7 - I&mprimir'
-          TabOrder = 11
+          TabOrder = 12
         end
         object btnEncerrar: TBitBtn
           Left = 847
@@ -1213,7 +1213,7 @@ object telaLancCompras: TtelaLancCompras
           Height = 37
           Action = Encerrar
           Caption = 'F10 - &Fechar'
-          TabOrder = 12
+          TabOrder = 13
           Glyph.Data = {
             B60D0000424DB60D000000000000360000002800000030000000180000000100
             180000000000800D000000000000000000000000000000000000FFFFFFFFFFFF
@@ -1360,7 +1360,7 @@ object telaLancCompras: TtelaLancCompras
           Width = 819
           Height = 459
           ActivePage = TabSheet3
-          TabOrder = 14
+          TabOrder = 2
           object TabSheet3: TTabSheet
             Caption = 'Produtos'
             object DBGrid1: TDBGrid
