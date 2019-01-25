@@ -1,6 +1,6 @@
 object telaPesProduto: TtelaPesProduto
-  Left = 279
-  Top = 208
+  Left = 484
+  Top = 62
   Width = 881
   Height = 471
   Caption = 'Procurar Produto'

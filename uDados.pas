@@ -267,7 +267,6 @@ type
     ibdsFornecedores: TIBDataSet;
     dsCTempItens: TDataSource;
     dspCTempItens: TDataSetProvider;
-    tblComprasID: TIntegerField;
     tblComprasID_FORNECEDOR: TIntegerField;
     tblComprasDATA_COMPRA: TDateTimeField;
     tblComprasDATA_ENTREGA: TDateTimeField;
@@ -559,7 +558,6 @@ type
     tblVeiculoTARA: TIBStringField;
     tblVeiculoCAP_CARGA: TIBStringField;
     tblVeiculoCAP_M3: TIBStringField;
-    tblComprasMODELO: TIBStringField;
     dsPesTransportadora: TDataSource;
     tblTransportadoraDESCRICAO: TIBStringField;
     tblVeiculoIDT: TIntegerField;
@@ -636,6 +634,10 @@ type
     cdsCTempItensALIQUOTA_IPI: TFloatField;
     tblCompraItensCFOP: TIBStringField;
     qryCompraItens2: TIBQuery;
+    tblFornecedoresCNAE: TIBStringField;
+    tblFornecedoresIM: TIBStringField;
+    tblComprasID: TIntegerField;
+    tblComprasMODELO: TIBStringField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
     procedure tblClientesBeforePost(DataSet: TDataSet);

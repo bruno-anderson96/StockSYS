@@ -39,7 +39,7 @@ var
 
 implementation
 
-uses uLancCompras;
+uses uLancCompras, pcnNFe;
 
 {$R *.dfm}
 
@@ -82,7 +82,7 @@ begin
   end;
   telaDados.ACBrNFe1.NotasFiscais.Clear;
   //
-  num := DBGrid1.Columns.Items[1].Field.AsInteger;
+  num := DBGrid1.Columns.Items[0].Field.AsInteger;
  
   telaDados.qryCompras.Close;
   telaDados.qryCompras.SQL.Clear;
@@ -98,11 +98,9 @@ begin
 
   telaDados.qryCompraItens.Close;
   telaDados.qryCompraItens.SQL.Clear;
-  telaDados.qryCompraItens.SQL.Add('Select * from COMPRA_ITENS where id = ');
+  telaDados.qryCompraItens.SQL.Add('Select * from COMPRA_ITENS where ID_COMPRA = ');
   telaDados.qryCompraItens.SQL.Add(telaDados.qryCompras.FieldByName('ID').Value);
   telaDados.qryCompraItens.Open;
-
-
 
   {ShowMessage(telaDados.qryPedidos.FieldByName('ID').AsString);
   ShowMessage(telaDados.qryClientes.FieldByName('ID').AsString);
@@ -112,13 +110,13 @@ begin
   begin
     // Dados Principais
     Ide.cNF     := num;
-    Ide.natOp   := '1102';
+    Ide.natOp   := telaDados.qryCompras.FieldByName('CFOP').AsString;
     Ide.indPag  := ipVista;
-    Ide.modelo  := 55; //Indicador de nota fiscal eletrônica;
-    Ide.serie   := 1;  //Nfe = 1~999 (900~999 utilizado para emissão nacional)
-    Ide.nNF     := num;
-    Ide.dEmi    := Date;
-    Ide.dSaiEnt := Date;
+    Ide.modelo  := telaDados.qryCompras.FieldByName('MODELO').AsInteger; //Indicador de nota fiscal eletrônica;
+    Ide.serie   := telaDados.qryCompras.FieldByName('NSERIE').AsInteger;  //Nfe = 1~999 (900~999 utilizado para emissão nacional)
+    Ide.nNF     := telaDados.qryCompras.FieldByName('NNOTA').AsInteger;
+    Ide.dEmi    := telaDados.qryCompras.FieldByName('DATA_COMPRA').AsDateTime;
+    Ide.dSaiEnt := telaDados.qryCompras.FieldByName('DATA_ENTREGA').AsDateTime;
     Ide.tpNF    := tnEntrada;
     if telaDados.sAmbiente = 0 then
       Ide.tpAmb := taProducao
@@ -134,7 +132,7 @@ begin
     Emit.IE      := teladados.qryFornecedores.FieldByName('INSC_RG').AsString;
     Emit.IEST    := '';
     Emit.xNome   := teladados.qryFornecedores.FieldByName('NOME').AsString;
-    Emit.xFant   := '';
+    Emit.xFant   := teladados.qryFornecedores.FieldByName('FANTASIA').AsString;
     Emit.IM      := '';
     Emit.CNAE    := '';
     Emit.EnderEmit.xLgr    := teladados.qryFornecedores.FieldByName('ENDERECO').AsString;
@@ -193,7 +191,7 @@ begin
           Prod.xProd := telaDados.qryCompraItens.FieldByName('DESCRICAO').AsString;
           Prod.NCM   := telaDados.qryProdutos.FieldByName('CODIGO_NCM').AsString;
           Prod.EXTIPI := '';
-          if (telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger = 0) or
+          {if (telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger = 0) or
              (telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger = 1) or
              (telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger = 2) or
              (telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger = 4) then
@@ -203,7 +201,8 @@ begin
             else if telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger = 3 then
             begin
              Prod.CFOP := '1403';
-            end;
+            end; }
+          Prod.CFOP := telaDados.qryProdutos.FieldByName('CFOP').AsString;
           Prod.uCom := telaDados.qryProdutos.FieldByName('UNIDADE').AsString;
           Prod.qCom := telaDados.qryCompraItens.FieldByName('QUANTIDADE').AsFloat;
           Prod.cEANTrib := '';
@@ -219,10 +218,48 @@ begin
           begin
             with ICMS do
             begin
-              if telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger=0 then
-              begin
-              CST := cst00; // 0 - Tributado
-              CSOSN := csosn101;
+              //if telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger=0 then
+              //begin
+            telaDados.qryCst.Close;
+            telaDados.qryCst.SQL.Clear;
+            telaDados.qryCst.SQL.Add('Select * from CST where ID=');
+            telaDados.qryCst.SQL.Add(telaDados.qryProdutos.FieldByName('ID_CST').AsString);
+            telaDados.qryCst.Open;
+
+            telaDados.qryCSOSN.Close;
+            telaDados.qryCSOSN.SQL.Clear;
+            telaDados.qryCSOSN.SQL.Add('Select * from CSOSN where ID=');
+            telaDados.qryCSOSN.SQL.Add(telaDados.qryProdutos.FieldByName('ID_CSOSN').AsString);
+            telaDados.qryCSOSN.Open;
+
+            case telaDados.qryCst.FieldByName('CODIGO').AsInteger of
+            0 : CST := cst00;
+            10 : CST := cst10;
+            20 : CST := cst20;
+            30 : CST := cst30;
+            40 : CST := cst40;
+            41 : CST := cst41;
+            50 : CST := cst50;
+            51 : CST := cst51;
+            60 : CST := cst60;
+            70 : CST := cst70;
+            90 : CST := cst90;
+            end;
+
+            case telaDados.qryCsosn.FieldByName('CODIGO').AsInteger of
+            101 : CSOSN := csosn101;
+            102 : CSOSN := csosn102;
+            103 : CSOSN := csosn103;
+            201 : CSOSN := csosn201;
+            202 : CSOSN := csosn202;
+            203 : CSOSN := csosn203;
+            300 : CSOSN := csosn300;
+            400 : CSOSN := csosn400;
+            500 : CSOSN := csosn500;
+            900 : CSOSN := csosn900;
+            end;
+              //CST := cst00; // 0 - Tributado
+              //CSOSN := csosn101;
               ICMS.orig     := oeNacional;
               ICMS.modBC    := dbiValorOperacao;
               ICMS.vBC      := telaDados.qryCompraItens.FieldByName('VALOR_TOTAL').asFloat;
@@ -231,12 +268,12 @@ begin
               ICMS.modBCST  := dbisMargemValorAgregado;
               ICMS.pMVAST   := 0;
               ICMS.pRedBCST := 0;
-              ICMS.vBCST    := 0;
-              ICMS.pICMSST  := 0;
-              ICMS.vICMSST  := 0;
+              ICMS.vBCST    := telaDados.qryProdutos.FieldByName('BC_ICMSSUB').AsFloat;
+              ICMS.pICMSST  := telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMSSUB').AsFloat;
+              ICMS.vICMSST  := telaDados.qryProdutos.FieldByName('VAL_ICMSSUB').AsFloat;
               ICMS.pRedBC   := 0;
-              end;
-              if telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger=3 then
+              //end;
+              {if telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger=3 then
               begin
               CST := cst60; // 0 - Sub.Tributária
               ICMS.orig     := oeNacional;
@@ -252,10 +289,10 @@ begin
               ICMS.vICMSST  := (telaDados.qryCompraItens.FieldByName('VALOR_TOTAL').AsFloat * telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMS').AsFloat)/ 100;
               ICMS.pRedBC   := 0;
               end;
-            end;
-            if (telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger=1) or
-                (telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger=2) then
-            begin
+            end;}
+            //if (telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger=1) or
+              //  (telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger=2) then
+            //begin
             with II do
             begin
                 vBc := 0;
@@ -263,9 +300,9 @@ begin
                 vII := telaDados.qryCompraItens.FieldByName('VALOR_TOTAL').asFloat;
                 vIOF := 0;
             end;
-            end;
-            if (telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger=4) then
-            begin
+            //end;
+            //if (telaDados.qryCompraItens.FieldByName('TIPOPROD').AsInteger=4) then
+            //begin
             with ISSQN do
             begin
                 vBc       := telaDados.qryCompraItens.FieldByName('VALOR_TOTAL').asFloat;
@@ -275,7 +312,7 @@ begin
                 cListServ := '0';
             end;
             end;
-         
+
         end;
         telaDados.qryCompraItens.Next;
       end;
@@ -283,15 +320,16 @@ begin
       Total.ICMSTot.vBC    := telaDados.qryCompras.FieldByName('BC_ICMS').AsFloat;
       Total.ICMSTot.vICMS  := telaDados.qryCompras.FieldByName('VAL_ICMS').AsFloat;
       Total.ICMSTot.vBCST  := telaDados.qryCompras.FieldByName('BC_ICMSSUB').AsFloat;
-      Total.ICMSTot.vST    := (telaDados.qryCompras.FieldByName('VAL_ICMSSUB').AsFloat * telaDados.qryCompras.FieldByName('ALIQUOTA_ICMS').AsFloat) / 100;
+      //Total.ICMSTot.vST    := (telaDados.qryCompras.FieldByName('VAL_ICMSSUB').AsFloat * telaDados.qryCompras.FieldByName('ALIQUOTA_ICMS').AsFloat) / 100;
+      Total.ICMSTot.vST    := telaDados.qryCompras.FieldByName('VAL_ICMSSUB').AsFloat;
       Total.ICMSTot.vProd  := telaDados.qryCompras.FieldByName('Valor').asFloat;
       Total.ICMSTot.vFrete := 0;
       Total.ICMSTot.vSeg   := 0;
       Total.ICMSTot.vDesc  := telaDados.qryCompras.FieldByName('DESCONTO').AsFloat;
       Total.ICMSTot.vII    := 0;
-      Total.ICMSTot.vIPI   := 0;
-      Total.ICMSTot.vPIS   := 0;
-      Total.ICMSTot.vCOFINS:= 0;
+      Total.ICMSTot.vIPI   := telaDados.qryCompras.FieldByName('VAL_IPI').AsFloat;
+      Total.ICMSTot.vPIS   := telaDados.qryCompras.FieldByName('VAL_PIS').AsFloat;
+      Total.ICMSTot.vCOFINS:= telaDados.qryCompras.FieldByName('VAL_COFINS').AsFloat;
       Total.ICMSTot.vOutro := 0;
       Total.ICMSTot.vNF    := telaDados.qryCompras.FieldByName('VALOR_TOTAL').AsFloat;
       //
@@ -361,8 +399,8 @@ begin
     telaDados.ACBrNFe1.NotasFiscais.Assinar;
     telaDados.ACBrNFe1.NotasFiscais.Validar;
     }
-    //telaDados.ACBrNFe1.NotasFiscais.Assinar;                                                      
-    telaDados.ACBrNFe1.NotasFiscais.Items[0].GravarXML('Teste.xml', ExtractFilePath(ParamStr(0)));
+    //telaDados.ACBrNFe1.NotasFiscais.Assinar;
+    telaDados.ACBrNFe1.NotasFiscais.Items[0].GravarXML(telaDados.qryCompras.FieldByName('CHAVENFE').AsString+'.xml', ExtractFilePath(ParamStr(0))+'NFe');
     ShowMessage('Arquivo Gerado em: '+ telaDados.ACBrNFe1.NotasFiscais.Items[0].NomeArq);
     if telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.tpEmis = TeDPEC then
   begin
@@ -374,9 +412,7 @@ begin
   end;
   telaDados.ACBrNFe1.NotasFiscais.Imprimir;
 
-
-
-    telaDados.tblPedidosItens.Close;
+  telaDados.tblPedidosItens.Close;
   end;
 end;
 
@@ -397,7 +433,7 @@ procedure TtelaGerarNfeEntrada.DBGrid1DblClick(Sender: TObject);
 var
 num: integer;
 begin
- num := DBGrid1.Columns.Items[1].Field.AsInteger;
+ num := DBGrid1.Columns.Items[0].Field.AsInteger;
 
   telaDados.tblCompras.Locate('ID', num , []);
   telaDados.tblFornecedores.Locate('ID', telaDados.tblComprasID_FORNECEDOR.Value, []);

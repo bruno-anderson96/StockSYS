@@ -473,6 +473,7 @@ end;
   telaDados.tblCompras.Open;
   telaDados.tblCompras.Edit;
   telaDados.tblComprasFORNECEDOR.value := telaDados.tblComprasnFor.Value;
+  telaDados.tblComprasMODELO.Value := cbModelo.Text;
   telaDados.tblCompras.Post;
   telaDados.trnscCompras.CommitRetaining;
   telaDados.tblCompras.ApplyUpdates();
@@ -1289,6 +1290,7 @@ end;
 
 procedure TtelaLancCompras.btnConfirmProdClick(Sender: TObject);
 begin
+
 addItem;
 end;
 

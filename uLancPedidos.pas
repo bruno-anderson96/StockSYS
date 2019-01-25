@@ -454,6 +454,7 @@ begin
   telaDados.tblPedidos.Open;
   telaDados.tblPedidos.Edit;
   telaDados.tblPedidosCLIENTE.value := telaDados.tblPedidosnCli.Value;
+  telaDados.tblPedidosTIPODOC.AsInteger := radDoc.ItemIndex;
   telaDados.tblPedidos.Post;
 
   {editNumPed.Enabled := false;}

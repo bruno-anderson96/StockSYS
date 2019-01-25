@@ -1,10 +1,10 @@
 object telaLogin: TtelaLogin
   Left = 273
-  Top = 161
+  Top = 166
   BiDiMode = bdLeftToRight
   BorderStyle = bsToolWindow
   Caption = 'Automa'#231#227'o Comercial'
-  ClientHeight = 237
+  ClientHeight = 232
   ClientWidth = 481
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET

@@ -1,8 +1,8 @@
 object telaGerarNfeEntrada: TtelaGerarNfeEntrada
-  Left = 306
-  Top = 191
-  Width = 819
-  Height = 481
+  Left = 514
+  Top = 342
+  Width = 772
+  Height = 511
   Caption = 'Gerar NFe - Entrada'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,7 +17,7 @@ object telaGerarNfeEntrada: TtelaGerarNfeEntrada
   object GroupBox1: TGroupBox
     Left = 0
     Top = 0
-    Width = 803
+    Width = 756
     Height = 129
     Align = alTop
     TabOrder = 0
@@ -100,7 +100,7 @@ object telaGerarNfeEntrada: TtelaGerarNfeEntrada
       OnClick = BitBtn2Click
     end
     object BitBtn3: TBitBtn
-      Left = 592
+      Left = 648
       Top = 48
       Width = 75
       Height = 73
@@ -112,15 +112,15 @@ object telaGerarNfeEntrada: TtelaGerarNfeEntrada
   object GroupBox3: TGroupBox
     Left = 0
     Top = 129
-    Width = 803
-    Height = 314
+    Width = 756
+    Height = 344
     Align = alClient
     TabOrder = 1
     object DBGrid1: TDBGrid
       Left = 2
       Top = 15
-      Width = 799
-      Height = 297
+      Width = 752
+      Height = 327
       Align = alClient
       DataSource = dsConsultaCompras
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -134,14 +134,19 @@ object telaGerarNfeEntrada: TtelaGerarNfeEntrada
       Columns = <
         item
           Expanded = False
+          FieldName = 'ID'
+          Title.Caption = 'N'#218'MERO DA COMPRA'
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'DATA_COMPRA'
           Title.Caption = 'DATA DO PEDIDO'
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'ID'
-          Title.Caption = 'N'#218'MERO DA COMPRA'
+          FieldName = 'FORNECEDOR'
           Visible = True
         end
         item
@@ -149,17 +154,12 @@ object telaGerarNfeEntrada: TtelaGerarNfeEntrada
           FieldName = 'VALOR_TOTAL'
           Title.Caption = 'VALOR TOTAL'
           Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'FORNECEDOR'
-          Visible = True
         end>
     end
   end
   object dsConsultaCompras: TDataSource
     DataSet = telaDados.qryCompras
-    Left = 600
-    Top = 16
+    Left = 712
+    Top = 8
   end
 end

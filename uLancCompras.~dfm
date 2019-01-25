@@ -1359,7 +1359,7 @@ object telaLancCompras: TtelaLancCompras
           Top = 171
           Width = 819
           Height = 459
-          ActivePage = TabSheet3
+          ActivePage = TabSheet4
           TabOrder = 2
           object TabSheet3: TTabSheet
             Caption = 'Produtos'

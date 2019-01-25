@@ -77,7 +77,6 @@ procedure TtelaPesProduto.DBGrid1DblClick(Sender: TObject);
 var num : integer;
 begin
 
-
  num := DBGrid1.Columns.Items[0].Field.AsInteger;
 
 

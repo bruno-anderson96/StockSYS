@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 374
-  Top = 123
+  Left = 472
+  Top = 86
   Width = 1215
   Height = 693
   Caption = 'Data m'#243'dulo'
@@ -2856,7 +2856,7 @@ object telaDados: TtelaDados
       item
         Name = 'MODELO'
         DataType = ftString
-        Size = 45
+        Size = 2
       end
       item
         Name = 'ALIQUOTA_IPI'
@@ -2968,6 +2968,7 @@ object telaDados: TtelaDados
     Top = 80
     object tblComprasID: TIntegerField
       FieldName = 'ID'
+      Required = True
     end
     object tblComprasID_FORNECEDOR: TIntegerField
       FieldName = 'ID_FORNECEDOR'
@@ -3114,10 +3115,6 @@ object telaDados: TtelaDados
       FieldName = 'CFOP'
       Size = 5
     end
-    object tblComprasMODELO: TIBStringField
-      FieldName = 'MODELO'
-      Size = 45
-    end
     object tblComprasALIQUOTA_IPI: TIBBCDField
       FieldName = 'ALIQUOTA_IPI'
       Precision = 9
@@ -3227,6 +3224,10 @@ object telaDados: TtelaDados
     object tblComprasBC_IPI: TIBBCDField
       FieldName = 'BC_IPI'
       Precision = 9
+      Size = 2
+    end
+    object tblComprasMODELO: TIBStringField
+      FieldName = 'MODELO'
       Size = 2
     end
   end
@@ -3750,6 +3751,16 @@ object telaDados: TtelaDados
         Name = 'CONTATO'
         DataType = ftString
         Size = 50
+      end
+      item
+        Name = 'CNAE'
+        DataType = ftString
+        Size = 11
+      end
+      item
+        Name = 'IM'
+        DataType = ftString
+        Size = 11
       end>
     IndexDefs = <
       item
@@ -3822,6 +3833,14 @@ object telaDados: TtelaDados
     object tblFornecedoresCONTATO: TIBStringField
       FieldName = 'CONTATO'
       Size = 50
+    end
+    object tblFornecedoresCNAE: TIBStringField
+      FieldName = 'CNAE'
+      Size = 11
+    end
+    object tblFornecedoresIM: TIBStringField
+      FieldName = 'IM'
+      Size = 11
     end
   end
   object qryFornecedores: TIBQuery

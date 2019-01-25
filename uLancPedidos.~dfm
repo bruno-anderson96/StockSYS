@@ -1,6 +1,6 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 54
-  Top = 31
+  Left = 61
+  Top = 255
   Align = alClient
   BorderStyle = bsDialog
   Caption = 'Lan'#231'amento de Pedidos'
@@ -3032,7 +3032,7 @@ object telaLancPedidos: TtelaLancPedidos
           end
           object gbCli: TGroupBox
             Left = 18
-            Top = 136
+            Top = 148
             Width = 520
             Height = 62
             Caption = 'Cliente'
@@ -3189,11 +3189,12 @@ object telaLancPedidos: TtelaLancPedidos
             Left = 16
             Top = 5
             Width = 186
-            Height = 60
+            Height = 69
             Caption = 'Documento'
             ItemIndex = 0
             Items.Strings = (
-              'Cupom Fiscal')
+              'Cupom Fiscal'
+              'Nota Fiscal Eletr'#244'nica')
             TabOrder = 5
           end
           object gpValores: TGroupBox
@@ -3262,7 +3263,7 @@ object telaLancPedidos: TtelaLancPedidos
           end
           object gpPagamento: TGroupBox
             Left = 16
-            Top = 69
+            Top = 82
             Width = 185
             Height = 61
             Caption = 'Tipo de Pagamento'
@@ -3285,7 +3286,7 @@ object telaLancPedidos: TtelaLancPedidos
           end
           object gpBandeira: TGroupBox
             Left = 391
-            Top = 69
+            Top = 82
             Width = 147
             Height = 61
             Caption = 'Bandeira'
@@ -3308,7 +3309,7 @@ object telaLancPedidos: TtelaLancPedidos
           end
           object gpPos: TGroupBox
             Left = 207
-            Top = 68
+            Top = 81
             Width = 177
             Height = 63
             Caption = 'POS'
