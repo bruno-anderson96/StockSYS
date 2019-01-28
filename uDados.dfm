@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 472
-  Top = 86
+  Left = 282
+  Top = 62
   Width = 1215
   Height = 693
   Caption = 'Data m'#243'dulo'
@@ -1451,6 +1451,96 @@ object telaDados: TtelaDados
       item
         Name = 'NCFE'
         DataType = ftInteger
+      end
+      item
+        Name = 'VAL_PIS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_COFINS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_ICMS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_ICMSSUB'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_IPI'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_PIS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_COFINS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_ICMS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_ICMSSUB'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_IPI'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_PIS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_COFINS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_ICMS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_ICMSSUB'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_IPI'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
       end>
     IndexDefs = <
       item
@@ -1639,6 +1729,81 @@ object telaDados: TtelaDados
     end
     object tblPedidosNCFE: TIntegerField
       FieldName = 'NCFE'
+    end
+    object tblPedidosVAL_PIS: TIBBCDField
+      FieldName = 'VAL_PIS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosVAL_COFINS: TIBBCDField
+      FieldName = 'VAL_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosVAL_ICMS: TIBBCDField
+      FieldName = 'VAL_ICMS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosVAL_ICMSSUB: TIBBCDField
+      FieldName = 'VAL_ICMSSUB'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosVAL_IPI: TIBBCDField
+      FieldName = 'VAL_IPI'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosBC_PIS: TIBBCDField
+      FieldName = 'BC_PIS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosBC_COFINS: TIBBCDField
+      FieldName = 'BC_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosBC_ICMS: TIBBCDField
+      FieldName = 'BC_ICMS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosBC_ICMSSUB: TIBBCDField
+      FieldName = 'BC_ICMSSUB'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosBC_IPI: TIBBCDField
+      FieldName = 'BC_IPI'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosALIQUOTA_PIS: TIBBCDField
+      FieldName = 'ALIQUOTA_PIS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosALIQUOTA_COFINS: TIBBCDField
+      FieldName = 'ALIQUOTA_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosALIQUOTA_ICMS: TIBBCDField
+      FieldName = 'ALIQUOTA_ICMS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosALIQUOTA_ICMSSUB: TIBBCDField
+      FieldName = 'ALIQUOTA_ICMSSUB'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosALIQUOTA_IPI: TIBBCDField
+      FieldName = 'ALIQUOTA_IPI'
+      Precision = 9
+      Size = 2
     end
   end
   object dbClientes: TIBDatabase
@@ -2363,15 +2528,21 @@ object telaDados: TtelaDados
     Left = 48
     Top = 264
     Data = {
-      0F0100009619E0BD01000000180000000F0000000000030000000F0102494404
+      CE0100009619E0BD010000001800000019000000000003000000CE0102494404
       0001000000000006494450524F44040001000000000005494450454404000100
       0000000004444553430100490000000100055749445448020002003200055155
       414E5404000100000000000556414C4F52080004000000000008444553434F4E
       544F080004000000000009414352455343494D4F080004000000000003565254
-      0800040000000000064D415247454D0800040000000000035652520800040000
-      000000085449504F50524F4404000100000000000943414E43454C41444F0200
-      030000000000084E554D5F4954454D04000100000000000545414E3133010049
-      0000000100055749445448020002000E000000}
+      08000400000000000356525208000400000000000742435F49434D5308000400
+      000000000A42435F49434D5353554208000400000000000642435F5049530800
+      0400000000000942435F434F46494E5308000400000000000642435F49504908
+      000400000000000856414C5F49434D5308000400000000000B56414C5F49434D
+      5353554208000400000000000756414C5F50495308000400000000000A56414C
+      5F434F46494E5308000400000000000756414C5F49504908000400000000000D
+      414C4951554F54415F49434D53080004000000000010414C4951554F54415F49
+      434D5353554208000400000000000C414C4951554F54415F5049530800040000
+      0000000C414C4951554F54415F49504908000400000000000F414C4951554F54
+      415F434F46494E5308000400000000000000}
     object cdsTempItensID: TIntegerField
       FieldName = 'ID'
     end
@@ -2402,6 +2573,51 @@ object telaDados: TtelaDados
     end
     object cdsTempItensVRR: TFloatField
       FieldName = 'VRR'
+    end
+    object cdsTempItensBC_ICMS: TFloatField
+      FieldName = 'BC_ICMS'
+    end
+    object cdsTempItensBC_ICMSSUB: TFloatField
+      FieldName = 'BC_ICMSSUB'
+    end
+    object cdsTempItensBC_PIS: TFloatField
+      FieldName = 'BC_PIS'
+    end
+    object cdsTempItensBC_COFINS: TFloatField
+      FieldName = 'BC_COFINS'
+    end
+    object cdsTempItensBC_IPI: TFloatField
+      FieldName = 'BC_IPI'
+    end
+    object cdsTempItensVAL_ICMS: TFloatField
+      FieldName = 'VAL_ICMS'
+    end
+    object cdsTempItensVAL_ICMSSUB: TFloatField
+      FieldName = 'VAL_ICMSSUB'
+    end
+    object cdsTempItensVAL_PIS: TFloatField
+      FieldName = 'VAL_PIS'
+    end
+    object cdsTempItensVAL_COFINS: TFloatField
+      FieldName = 'VAL_COFINS'
+    end
+    object cdsTempItensVAL_IPI: TFloatField
+      FieldName = 'VAL_IPI'
+    end
+    object cdsTempItensALIQUOTA_ICMS: TFloatField
+      FieldName = 'ALIQUOTA_ICMS'
+    end
+    object cdsTempItensALIQUOTA_ICMSSUB: TFloatField
+      FieldName = 'ALIQUOTA_ICMSSUB'
+    end
+    object cdsTempItensALIQUOTA_PIS: TFloatField
+      FieldName = 'ALIQUOTA_PIS'
+    end
+    object cdsTempItensALIQUOTA_IPI: TFloatField
+      FieldName = 'ALIQUOTA_IPI'
+    end
+    object cdsTempItensALIQUOTA_COFINS: TFloatField
+      FieldName = 'ALIQUOTA_COFINS'
     end
   end
   object dspTempItens: TDataSetProvider
@@ -5969,11 +6185,11 @@ object telaDados: TtelaDados
     object cdsCTempItensALIQUOTA_PIS: TFloatField
       FieldName = 'ALIQUOTA_PIS'
     end
-    object cdsCTempItensALIQUOTA_COFINS: TFloatField
-      FieldName = 'ALIQUOTA_COFINS'
-    end
     object cdsCTempItensALIQUOTA_IPI: TFloatField
       FieldName = 'ALIQUOTA_IPI'
+    end
+    object cdsCTempItensALIQUOTA_COFINS: TFloatField
+      FieldName = 'ALIQUOTA_COFINS'
     end
   end
   object qryCompraItens2: TIBQuery

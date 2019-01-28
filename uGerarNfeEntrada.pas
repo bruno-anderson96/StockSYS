@@ -412,7 +412,7 @@ begin
   end;
   telaDados.ACBrNFe1.NotasFiscais.Imprimir;
 
-  telaDados.tblPedidosItens.Close;
+  //telaDados.tblPedidosItens.Close;
   end;
 end;
 
