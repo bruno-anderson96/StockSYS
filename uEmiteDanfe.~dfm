@@ -48,8 +48,8 @@ object telaEmiteDanfe: TtelaEmiteDanfe
     object BitBtn1: TBitBtn
       Left = 128
       Top = 8
-      Width = 75
-      Height = 25
+      Width = 77
+      Height = 26
       Action = actEmitir
       Caption = 'F2 - Emitir'
       TabOrder = 0

@@ -562,12 +562,18 @@ end;
     telaDados.qryCompraItens2.SQL.Add('and ID_PRODUTO = ');
     telaDados.qryCompraItens2.SQL.Add(telaDados.cdsCTempItensID_PRODUTO.AsString);
     telaDados.qryCompraItens2.Open;
+    ShowMessage(telaDados.qryCompraItens2.FieldByName('DESCRICAO').AsString + '  ' +
+    telaDados.qryCompraItens2.FieldByName('QUANTIDADE').AsString + ' ANTES qry ');
+
 
     if telaDados.qryCompraItens2.RecordCount > 0 then begin
-      telaDados.tblCompraItens.Locate('ID_PRODUTO', telaDados.cdsTempItensIDPROD.Value,[]);
+      telaDados.tblCompraItens.Locate('ID_COMPRA;ID_PRODUTO', VarArrayOf([telaDados.cdsCTempItensID_COMPRA.Value,telaDados.cdsCTempItensID_PRODUTO.Value]),[loPartialKey, loCaseinsensitive]);
       telaDados.tblCompraItens.Edit;
     end;
 
+    ShowMessage(telaDados.tblCompraItensDESCRICAO.AsString + '  ' + telaDados.tblCompraItensQUANTIDADE.AsString + ' tbl ' );
+    ShowMessage(' O que tá no CDS ' + telaDados.cdsCTempItens.FieldByName('DESCRICAO').AsString + telaDados.cdsCTempItens.FieldByName('QUANTIDADE').AsString);
+     
     if not(telaDados.tblCompraItens.State = dsEdit) then begin
       telaDados.tblCompraItens.Append;
     end;

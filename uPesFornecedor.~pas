@@ -69,6 +69,7 @@ end;
 procedure TtelaPesFor.FormShow(Sender: TObject);
 begin
   cbCategoria.ItemIndex := 1;
+  editBusca.SetFocus;
 end;
 
 procedure TtelaPesFor.editBuscaKeyPress(Sender: TObject; var Key: Char);

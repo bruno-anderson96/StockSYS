@@ -1,8 +1,8 @@
 object telaEnviarNfe: TtelaEnviarNfe
-  Left = 192
-  Top = 124
+  Left = 206
+  Top = 241
   Width = 488
-  Height = 200
+  Height = 206
   Caption = 'Enviar NFe'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -53,7 +53,7 @@ object telaEnviarNfe: TtelaEnviarNfe
   end
   object Panel1: TPanel
     Left = 0
-    Top = 121
+    Top = 127
     Width = 472
     Height = 41
     Align = alBottom
@@ -66,7 +66,6 @@ object telaEnviarNfe: TtelaEnviarNfe
       Action = actEnviar
       Caption = 'F2 - Enviar'
       TabOrder = 0
-      OnClick = BitBtn1Click
     end
     object BitBtn2: TBitBtn
       Left = 232

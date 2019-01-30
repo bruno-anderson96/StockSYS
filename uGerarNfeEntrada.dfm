@@ -1,6 +1,6 @@
 object telaGerarNfeEntrada: TtelaGerarNfeEntrada
-  Left = 514
-  Top = 342
+  Left = 386
+  Top = 149
   Width = 772
   Height = 511
   Caption = 'Gerar NFe - Entrada'

@@ -179,6 +179,7 @@ begin
         Inc(aNumItem);
         with Det.Add do
         begin
+           
             telaDados.qryProdutos.Close;
             telaDados.qryProdutos.SQL.Clear;
             telaDados.qryProdutos.SQL.Add('Select * from PRODUTOS where ID =');
@@ -308,8 +309,8 @@ begin
                 vBc       := telaDados.qryCompraItens.FieldByName('VALOR_TOTAL').asFloat;
                 vAliq     := telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMS').AsFloat;
                 vISSQN    := (telaDados.qryCompraItens.FieldByName('VALOR_TOTAL').AsFloat * telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMS').AsFloat)/ 100;
-                cMunFG    := 0;
-                cListServ := '0';
+                cMunFG    := telaDados.pegaCodMun(telaDados.qryFornecedores.FieldByName('CIDADE_END').AsString, telaDados.qryFornecedores.FieldByName('UF_END').AsString);
+                cListServ := '07.02';
             end;
             end;
 
@@ -368,19 +369,22 @@ begin
         pesoB := 0;
       end;
       }
+      //Pagamento
+      Pag.Add.tPag := fpDinheiro;
+      Pag.Add.vPag := telaDados.qryCompras.FieldByName('VALOR_TOTAL').AsFloat;
       //Cobrança
       Cobr.Fat.nFat  := telaDados.qryCompras.FieldByName('ID').AsString;
       Cobr.Fat.vOrig := telaDados.qryCompras.FieldByName('VALOR_TOTAL').AsFloat;
       Cobr.Fat.vDesc := 0;
       Cobr.Fat.vLiq  := telaDados.qryCompras.FieldByName('VALOR_TOTAL').AsFloat;
-      with Cobr.Dup.Add do
+      {with Cobr.Dup.Add do
       begin
         nDup  := telaDados.qryCompras.FieldByName('ID').AsString;
         dVenc := telaDados.qryCompras.FieldByName('DATA_COMPRA').AsDateTime + 30;
         vDup  := telaDados.qryCompras.FieldByName('VALOR_TOTAL').AsFloat;
-      end;
+      end;}
       //
-      with InfAdic.obsCont.Add do
+      {with InfAdic.obsCont.Add do
       begin
         xCampo := '';
         xTexto := '';
@@ -389,25 +393,26 @@ begin
       begin
         xCampo := '';
         xTexto := '';
-      end;
+      end;}
         infNFe.Versao := 4.00;
     end;
 
     // Comandos para gerar arquivo XML
-    {
+
+
     telaDados.ACBrNFe1.NotasFiscais.GerarNFe;
     telaDados.ACBrNFe1.NotasFiscais.Assinar;
     telaDados.ACBrNFe1.NotasFiscais.Validar;
-    }
-    //telaDados.ACBrNFe1.NotasFiscais.Assinar;
+
     telaDados.ACBrNFe1.NotasFiscais.Items[0].GravarXML(telaDados.qryCompras.FieldByName('CHAVENFE').AsString+'.xml', ExtractFilePath(ParamStr(0))+'NFe');
+    //telaDados.ACBrNFe1.NotasFiscais.Assinar;
     ShowMessage('Arquivo Gerado em: '+ telaDados.ACBrNFe1.NotasFiscais.Items[0].NomeArq);
     if telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.tpEmis = TeDPEC then
-  begin
+    begin
     telaDados.ACBrNFe1.WebServices.Consulta.NFeChave := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.infNFe.ID;
     telaDados.ACBrNFe1.WebServices.Consulta.Executar;
 
-    telaDados.ACBrNFe1.DANFE.ProtocoloNFe := telaDados.ACBrNFe1.WebServices.Consulta.Protocolo+''+
+    telaDados.ACBrNFe1.DANFE.Protocolo := telaDados.ACBrNFe1.WebServices.Consulta.Protocolo+''+
                                              DateTimeToStr(telaDados.ACBrNFe1.WebServices.Consulta.protNFe.dhRecbto)
   end;
   telaDados.ACBrNFe1.NotasFiscais.Imprimir;

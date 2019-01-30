@@ -228,7 +228,9 @@ object telaPesFor: TtelaPesFor
       Width = 145
       Height = 21
       ItemHeight = 13
+      ItemIndex = 0
       TabOrder = 1
+      Text = 'Nome'
       Items.Strings = (
         'Nome'
         'CNPJ'

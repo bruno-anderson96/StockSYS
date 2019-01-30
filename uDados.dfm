@@ -364,22 +364,6 @@ object telaDados: TtelaDados
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object ACBrNFe1: TACBrNFe
-    Integrador = ACBrIntegrador1
-    Configuracoes.Geral.SSLLib = libNone
-    Configuracoes.Geral.SSLCryptLib = cryNone
-    Configuracoes.Geral.SSLHttpLib = httpNone
-    Configuracoes.Geral.SSLXmlSignLib = xsNone
-    Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
-    Configuracoes.Geral.VersaoQRCode = veqr000
-    Configuracoes.Arquivos.OrdenacaoPath = <>
-    Configuracoes.WebServices.UF = 'SP'
-    Configuracoes.WebServices.AguardarConsultaRet = 0
-    Configuracoes.WebServices.QuebradeLinha = '|'
-    DANFE = ACBrNFeDANFeRL1
-    Left = 8
-    Top = 16
-  end
   object dsProdutos: TDataSource
     DataSet = tblProdutos
     Left = 96
@@ -4121,12 +4105,6 @@ object telaDados: TtelaDados
     Left = 576
     Top = 376
   end
-  object ACBrIBGE1: TACBrIBGE
-    ProxyPort = '8080'
-    CacheArquivo = 'ACBrIBGE.txt'
-    Left = 8
-    Top = 48
-  end
   object dsLogin: TDataSource
     DataSet = tblLogin
     Left = 784
@@ -5242,54 +5220,6 @@ object telaDados: TtelaDados
     Left = 144
     Top = 624
   end
-  object ACBrIntegrador1: TACBrIntegrador
-    PastaInput = 'C:\Integrador\Input\'
-    PastaOutput = 'C:\Integrador\Output\'
-    Left = 8
-    Top = 80
-  end
-  object ACBrNFeDANFeRL1: TACBrNFeDANFeRL
-    ACBrNFe = ACBrNFe1
-    MostrarPreview = True
-    MostrarStatus = True
-    TipoDANFE = tiRetrato
-    NumCopias = 1
-    ImprimeNomeFantasia = False
-    ImprimirDescPorc = False
-    ImprimirTotalLiquido = True
-    MargemInferior = 0.700000000000000000
-    MargemSuperior = 0.700000000000000000
-    MargemEsquerda = 0.700000000000000000
-    MargemDireita = 0.700000000000000000
-    CasasDecimais.Formato = tdetInteger
-    CasasDecimais._qCom = 4
-    CasasDecimais._vUnCom = 4
-    CasasDecimais._Mask_qCom = ',0.00'
-    CasasDecimais._Mask_vUnCom = ',0.00'
-    ExibirResumoCanhoto = False
-    FormularioContinuo = False
-    TamanhoFonte_DemaisCampos = 8
-    ProdutosPorPagina = 0
-    ImprimirDetalhamentoEspecifico = True
-    NFeCancelada = False
-    ImprimirItens = True
-    ViaConsumidor = True
-    TamanhoLogoHeight = 0
-    TamanhoLogoWidth = 0
-    RecuoEndereco = 0
-    RecuoEmpresa = 0
-    LogoemCima = False
-    TamanhoFonteEndereco = 0
-    RecuoLogo = 0
-    LarguraCodProd = 54
-    ExibirEAN = False
-    QuebraLinhaEmDetalhamentoEspecifico = True
-    ExibeCampoFatura = False
-    ImprimirUnQtVlComercial = iuComercial
-    ImprimirDadosDocReferenciados = True
-    Left = 8
-    Top = 112
-  end
   object dsOrigem: TDataSource
     DataSet = tblOrigem
     Left = 304
@@ -6203,5 +6133,50 @@ object telaDados: TtelaDados
       'select * from COMPRA_ITENS')
     Left = 624
     Top = 296
+  end
+  object ACBrNFeDANFeRL1: TACBrNFeDANFeRL
+    Sistema = 'Projeto ACBr - www.projetoacbr.com.br'
+    MargemInferior = 0.700000000000000000
+    MargemSuperior = 0.700000000000000000
+    MargemEsquerda = 0.700000000000000000
+    MargemDireita = 0.700000000000000000
+    CasasDecimais.Formato = tdetInteger
+    CasasDecimais.qCom = 2
+    CasasDecimais.vUnCom = 2
+    CasasDecimais.MaskqCom = ',0.00'
+    CasasDecimais.MaskvUnCom = ',0.00'
+    ACBrNFe = ACBrNFe1
+    ExibeCampoFatura = False
+    Left = 8
+    Top = 112
+  end
+  object ACBrIntegrador1: TACBrIntegrador
+    PastaInput = 'C:\Integrador\Input\'
+    PastaOutput = 'C:\Integrador\Output\'
+    Left = 8
+    Top = 80
+  end
+  object ACBrIBGE1: TACBrIBGE
+    ProxyPort = '8080'
+    CacheArquivo = 'ACBrIBGE.txt'
+    Left = 8
+    Top = 48
+  end
+  object ACBrNFe1: TACBrNFe
+    Integrador = ACBrIntegrador1
+    Configuracoes.Geral.SSLLib = libNone
+    Configuracoes.Geral.SSLCryptLib = cryNone
+    Configuracoes.Geral.SSLHttpLib = httpNone
+    Configuracoes.Geral.SSLXmlSignLib = xsNone
+    Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
+    Configuracoes.Geral.VersaoQRCode = veqr000
+    Configuracoes.Arquivos.OrdenacaoPath = <>
+    Configuracoes.WebServices.UF = 'SP'
+    Configuracoes.WebServices.AguardarConsultaRet = 0
+    Configuracoes.WebServices.QuebradeLinha = '|'
+    Configuracoes.RespTec.IdCSRT = 0
+    DANFE = ACBrNFeDANFeRL1
+    Left = 8
+    Top = 16
   end
 end

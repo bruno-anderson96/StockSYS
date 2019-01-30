@@ -308,7 +308,7 @@ object telaConfigSat: TtelaConfigSat
       Top = 6
       Width = 329
       Height = 337
-      ActivePage = TabSheet1
+      ActivePage = TabSheet4
       TabOrder = 1
       object TabSheet1: TTabSheet
         Caption = 'MFe - 1'
@@ -1055,17 +1055,20 @@ object telaConfigSat: TtelaConfigSat
     Top = 312
   end
   object ACBrSATExtratoESCPOS1: TACBrSATExtratoESCPOS
-    Mask_qCom = ',0.0000'
-    Mask_vUnCom = ',0.000'
-    MostrarPreview = True
-    MostrarSetup = True
-    NomeArquivo = 'cfeimpresso.pdf'
-    SoftwareHouse = 'Projeto ACBr'
+    Sistema = 'Projeto ACBr - www.projetoacbr.com.br'
     Site = 'http://www.projetoacbr.com.br'
+    MargemInferior = 0.800000000000000000
+    MargemSuperior = 0.800000000000000000
+    MargemEsquerda = 0.600000000000000000
+    MargemDireita = 0.510000000000000000
+    CasasDecimais.Formato = tdetInteger
+    CasasDecimais.qCom = 2
+    CasasDecimais.vUnCom = 2
+    CasasDecimais.MaskqCom = ',0.00'
+    CasasDecimais.MaskvUnCom = ',0.00'
     MsgAppQRCode = 
       'Consulte o QR Code pelo aplicativo  "De olho na nota", dispon'#237've' +
       'l na AppStore (Apple) e PlayStore (Android)'
-    UsaCodigoEanImpressao = True
     PosPrinter = ACBrPosPrinter1
     Left = 80
     Top = 312
@@ -1084,25 +1087,6 @@ object telaConfigSat: TtelaConfigSat
     Left = 112
     Top = 312
   end
-  object OpenDialog1: TOpenDialog
-    Left = 208
-    Top = 312
-  end
-  object ACBrSATExtratoFortes1: TACBrSATExtratoFortes
-    ACBrSAT = ACBrSAT1
-    Mask_qCom = ',0.0000'
-    Mask_vUnCom = ',0.000'
-    MostrarPreview = True
-    MostrarSetup = True
-    NomeArquivo = 'mfepdf.pdf'
-    SoftwareHouse = 'Projeto ACBr'
-    Site = 'http://www.projetoacbr.com.br'
-    MsgAppQRCode = 
-      'Consulte o QR Code pelo aplicativo  "De olho na nota", dispon'#237've' +
-      'l na AppStore (Apple) e PlayStore (Android)'
-    Left = 240
-    Top = 312
-  end
   object PrintDialog1: TPrintDialog
     Left = 144
     Top = 312
@@ -1113,6 +1097,29 @@ object telaConfigSat: TtelaConfigSat
       'ortes Inform'#225'tica'
     DisplayName = 'Documento PDF'
     Left = 176
+    Top = 312
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 208
+    Top = 312
+  end
+  object ACBrSATExtratoFortes1: TACBrSATExtratoFortes
+    Sistema = 'Projeto ACBr - www.projetoacbr.com.br'
+    Site = 'http://www.projetoacbr.com.br'
+    MargemInferior = 4.000000000000000000
+    MargemSuperior = 2.000000000000000000
+    MargemEsquerda = 2.000000000000000000
+    MargemDireita = 2.000000000000000000
+    CasasDecimais.Formato = tdetInteger
+    CasasDecimais.qCom = 2
+    CasasDecimais.vUnCom = 2
+    CasasDecimais.MaskqCom = ',0.00'
+    CasasDecimais.MaskvUnCom = ',0.00'
+    ACBrSAT = ACBrSAT1
+    MsgAppQRCode = 
+      'Consulte o QR Code pelo aplicativo  "De olho na nota", dispon'#237've' +
+      'l na AppStore (Apple) e PlayStore (Android)'
+    Left = 240
     Top = 312
   end
   object ACBrIBPTax1: TACBrIBPTax

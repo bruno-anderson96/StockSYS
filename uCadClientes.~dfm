@@ -1,8 +1,8 @@
 object telaCadClientes: TtelaCadClientes
   Left = 485
-  Top = 161
+  Top = 159
   Width = 838
-  Height = 479
+  Height = 481
   Caption = 'Cadastro de Cliente'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object telaCadClientes: TtelaCadClientes
     Left = 0
     Top = 0
     Width = 822
-    Height = 383
+    Height = 385
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
@@ -814,7 +814,7 @@ object telaCadClientes: TtelaCadClientes
   end
   object Panel1: TPanel
     Left = 0
-    Top = 383
+    Top = 385
     Width = 822
     Height = 58
     Align = alBottom

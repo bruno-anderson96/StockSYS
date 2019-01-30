@@ -38,7 +38,7 @@ var
 
 implementation
 
-uses pcnRetConsReciNFe;
+//uses pcnRetConsReciNFe;
 
 {$R *.dfm}
 
@@ -78,9 +78,9 @@ begin
     telaDados.ACBrNFe1.NotasFiscais.LoadFromFile(edtArquivo.Text);
     telaDados.ACBrNFe1.Enviar(edtNumLote.Text);
   //
-    aChaveNfe  := telaDados.ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].chNFe;
-    aProtocolo := telaDados.ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].nProt;
-    aRecibo    := telaDados.ACBrNFe1.WebServices.Retorno.NFeRetorno.nRec;
+   // aChaveNfe  := telaDados.ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].chNFe;
+    //aProtocolo := telaDados.ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].nProt;
+    //aRecibo    := telaDados.ACBrNFe1.WebServices.Retorno.NFeRetorno.nRec;
   // gera chave NFe
     if aChaveNfe <> '' then
     begin
@@ -113,9 +113,9 @@ begin
     telaDados.ACBrNFe1.NotasFiscais.LoadFromFile(edtArquivo.Text);
     telaDados.ACBrNFe1.Enviar(edtNumLote.Text);
   //
-    aChaveNfe  := telaDados.ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].chNFe;
-    aProtocolo := telaDados.ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].nProt;
-    aRecibo    := telaDados.ACBrNFe1.WebServices.Retorno.NFeRetorno.nRec;
+    //aChaveNfe  := telaDados.ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].chNFe;
+    //aProtocolo := telaDados.ACBrNFe1.WebServices.Retorno.NFeRetorno.ProtNFe.Items[0].nProt;
+    //aRecibo    := telaDados.ACBrNFe1.WebServices.Retorno.NFeRetorno.nRec;
   // gera chave NFe
     if aChaveNfe <> '' then
     begin

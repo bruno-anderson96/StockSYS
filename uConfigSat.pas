@@ -10,28 +10,20 @@ uses
   ACBrDFeSSL, ExtCtrls, uConfig, uDados, uLancPedidos, IniFiles,
   ACBrSATExtratoReportClass, ACBrSATExtratoFortesFr, RLFilters, RLPDFFilter, uGerarNfe,
   ComCtrls, uConfigEmit, ACBrValidador,
-  ACBrSocket, ACBrIBPTax, DB;
+  ACBrSocket, ACBrIBPTax, DB, ACBrDFeReport;
 
 type
   TtelaConfigSat = class(TForm)
-    ACBrIntegrador1: TACBrIntegrador;
-    ACBrSAT1: TACBrSAT;
-    ACBrSATExtratoESCPOS1: TACBrSATExtratoESCPOS;
-    ACBrPosPrinter1: TACBrPosPrinter;
     Memo1: TMemo;
     SpeedButton6: TSpeedButton;
-    OpenDialog1: TOpenDialog;
     Panel1: TPanel;
     cbxModelo: TComboBox;
     cbxPagCodigo: TComboBox;
     SpeedButton7: TSpeedButton;
     cbxModeloPosPrinter: TComboBox;
-    ACBrSATExtratoFortes1: TACBrSATExtratoFortes;
     SpeedButton8: TSpeedButton;
     btnImp: TSpeedButton;
     lImpressora: TLabel;
-    PrintDialog1: TPrintDialog;
-    RLPDFFilter1: TRLPDFFilter;
     label44: TLabel;
     Label1: TLabel;
     Label2: TLabel;
@@ -71,10 +63,18 @@ type
     TabSheet4: TTabSheet;
     TabSheet5: TTabSheet;
     Enviar: TSpeedButton;
-    ACBrIBPTax1: TACBrIBPTax;
     edtChAv: TEdit;
     btnEdChAv: TSpeedButton;
     Label14: TLabel;
+    ACBrIntegrador1: TACBrIntegrador;
+    ACBrSAT1: TACBrSAT;
+    ACBrSATExtratoESCPOS1: TACBrSATExtratoESCPOS;
+    ACBrPosPrinter1: TACBrPosPrinter;
+    PrintDialog1: TPrintDialog;
+    RLPDFFilter1: TRLPDFFilter;
+    OpenDialog1: TOpenDialog;
+    ACBrSATExtratoFortes1: TACBrSATExtratoFortes;
+    ACBrIBPTax1: TACBrIBPTax;
     procedure At(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -518,7 +518,7 @@ begin
   telaDados.tblPedidos.Edit;
   {telaDados.tblPedidosPATH.Value := ExtractFilePath(Application.ExeName) + 'Enviado\CFe\20' + FormatDateTime('yy',Date)+ '\' + FormatDateTime('mm', Date) +'\'+ FormatDateTime('dd', Date)+ '\' + ACBrSAT1.CFe.infCFe.ID +'.xml';
   }
-  telaDados.tblPedidosPATH.Value := ACBrSAT1.NomeBancoCfe;
+  telaDados.tblPedidosPATH.Value := ACBrSAT1.CFe.NomeArquivo;
   telaDados.tblPedidosCHAVECFE.Value := 'CFe' + ACBrSAT1.CFe.infCFe.ID;
   if telaDados.tblPedidosSTATUS.Value = '' then begin
     telaDados.tblPedidosSTATUS.Value := 'V';
@@ -625,18 +625,18 @@ begin
   ACBrPosPrinter1.LinhasEntreCupons := StrToInt(edtLin.Text);
   ACBrPosPrinter1.EspacoEntreLinhas := StrToInt(edtEsp.Text);
   ACBrSATExtratoESCPOS1.ImprimeQRCode := True;
-  ACBrSATExtratoESCPOS1.MostrarPreview := true;
+  ACBrSATExtratoESCPOS1.MostraPreview := true;
   ACBrSATExtratoESCPOS1.ImprimeEmUmaLinha := false;   //aqui pra impressora
 
   ACBrSATExtratoFortes1.LarguraBobina    := 200;
-  ACBrSATExtratoFortes1.Margens.Topo     := 3 ;
-  ACBrSATExtratoFortes1.Margens.Fundo    := 5 ;
-  ACBrSATExtratoFortes1.Margens.Esquerda := 3 ;
-  ACBrSATExtratoFortes1.Margens.Direita  := 3 ;
-  ACBrSATExtratoFortes1.MostrarPreview   := true;
+  ACBrSATExtratoFortes1.MargemSuperior     := 3 ;
+  ACBrSATExtratoFortes1.MargemInferior    := 5 ;
+  ACBrSATExtratoFortes1.MargemEsquerda := 3 ;
+  ACBrSATExtratoFortes1.MargemDireita  := 3 ;
+  ACBrSATExtratoFortes1.MostraPreview   := true;
 
 
-    ACBrSATExtratoFortes1.PrinterName := lImpressora.Caption;
+    ACBrSATExtratoFortes1.Impressora := lImpressora.Caption;
 
     {if cbImprimirChaveUmaLinha.Checked then
       ACBrSATExtratoESCPOS1.ImprimeChaveEmUmaLinha := rSim
@@ -1300,7 +1300,7 @@ begin
     telaDados.tblPedidos.Open;
     telaDados.tblPedidos.Last;
     telaDados.tblPedidos.Edit;
-    telaDados.tblPedidosPATH.Value := ACBrSAT1.NomeBancoCfe;
+    telaDados.tblPedidosPATH.Value := ACBrSAT1.CFe.NomeArquivo;
     telaDados.tblPedidosCHAVECFE.Value := 'CFe' + ACBrSAT1.CFe.infCFe.ID;
     telaDados.tblPedidosSTATUS.Value := 'T';
     telaDados.tblPedidos.Post;  //Caso queira transmitir depois a cfe

@@ -222,7 +222,7 @@ begin
     Dest.EnderDest.nro  := telaDados.qryClientes.FieldByName('NUM_END').AsString;
     Dest.EnderDest.xCpl := telaDados.qryClientes.FieldByName('COMPLEMENTO').AsString;
     Dest.EnderDest.xBairro := telaDados.qryClientes.FieldByName('BAIRRO_END').AsString;
-    Dest.EnderDest.cMun := telaDados.pegaCodMun(telaDados.qryClientes.FieldByName('CIDADE_END').AsString);
+    Dest.EnderDest.cMun := telaDados.pegaCodMun(telaDados.qryClientes.FieldByName('CIDADE_END').AsString, telaDados.qryClientes.FieldByName('UF_END').AsString);
     Dest.EnderDest.xMun := telaDados.qryClientes.FieldByName('CIDADE_END').AsString;
     Dest.EnderDest.UF   := telaDados.qryClientes.FieldByName('UF_END').AsString;
     Dest.EnderDest.CEP  := StrTOInt(telaDados.qryClientes.FieldByName('CEP_END').AsString);
@@ -475,7 +475,7 @@ begin
       telaDados.ACBrNFe1.WebServices.Consulta.NFeChave := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.infNFe.ID;
       telaDados.ACBrNFe1.WebServices.Consulta.Executar;
 
-      telaDados.ACBrNFe1.DANFE.ProtocoloNFe := telaDados.ACBrNFe1.WebServices.Consulta.Protocolo+''+
+      telaDados.ACBrNFe1.DANFE.Protocolo := telaDados.ACBrNFe1.WebServices.Consulta.Protocolo+''+
                                              DateTimeToStr(telaDados.ACBrNFe1.WebServices.Consulta.protNFe.dhRecbto)
     end;
     telaDados.ACBrNFe1.NotasFiscais.Imprimir;

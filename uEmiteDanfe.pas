@@ -70,7 +70,7 @@ begin
     telaDados.ACBrNFe1.WebServices.Consulta.NFeChave := telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.infNFe.ID;
     telaDados.ACBrNFe1.WebServices.Consulta.Executar;
 
-    telaDados.ACBrNFe1.DANFE.ProtocoloNFe := telaDados.ACBrNFe1.WebServices.Consulta.Protocolo+''+
+    telaDados.ACBrNFe1.DANFE.Protocolo  := telaDados.ACBrNFe1.WebServices.Consulta.Protocolo+''+
                                              DateTimeToStr(telaDados.ACBrNFe1.WebServices.Consulta.protNFe.dhRecbto)
   end;
   telaDados.ACBrNFe1.NotasFiscais.Imprimir;

@@ -8,7 +8,7 @@ uses
   IBDatabase, IBCustomDataSet, IBTable, StdCtrls, IBQuery, DBClient,
   DBLocal, DBLocalI, Provider, Math, ACBrDFeSSL, ACBrNFeDANFEClass,
   ACBrNFeDANFeRLClass, ACBrSocket, ACBrCEP, ACBrIBGE, IBUpdateSQL, FMTBcd,
-  SqlExpr, ACBrIntegrador, StrUtils;
+  SqlExpr, ACBrIntegrador, StrUtils, ACBrDFeReport, ACBrDFeDANFeReport;
 
  type
   retornaEndereco = record
@@ -21,7 +21,6 @@ end;
 
 type
   TtelaDados = class(TForm)
-    ACBrNFe1: TACBrNFe;
     dsProdutos: TDataSource;
     tblProdutos: TIBTable;
     trnscProdutos: TIBTransaction;
@@ -331,7 +330,6 @@ type
     dsPesFor: TDataSource;
     tblEmitenteCOMPLEMENTO: TIBStringField;
     tblComprasnFor: TStringField;
-    ACBrIBGE1: TACBrIBGE;
     Label12: TLabel;
     dsLogin: TDataSource;
     tblLogin: TIBTable;
@@ -467,8 +465,6 @@ type
     tblContadorCIDADE: TIBStringField;
     tblContadorUF: TIBStringField;
     tblContadorID_LOGIN: TIntegerField;
-    ACBrIntegrador1: TACBrIntegrador;
-    ACBrNFeDANFeRL1: TACBrNFeDANFeRL;
     Label21: TLabel;
     dsOrigem: TDataSource;
     tblOrigem: TIBTable;
@@ -668,6 +664,10 @@ type
     cdsTempItensALIQUOTA_PIS: TFloatField;
     cdsTempItensALIQUOTA_IPI: TFloatField;
     cdsTempItensALIQUOTA_COFINS: TFloatField;
+    ACBrNFeDANFeRL1: TACBrNFeDANFeRL;
+    ACBrIntegrador1: TACBrIntegrador;
+    ACBrIBGE1: TACBrIBGE;
+    ACBrNFe1: TACBrNFe;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
     procedure tblClientesBeforePost(DataSet: TDataSet);

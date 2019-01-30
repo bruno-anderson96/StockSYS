@@ -171,6 +171,7 @@ begin
   telaDados.tblFornecedores.Post;
   telaDados.trnscFornecedores.CommitRetaining;
   telaDados.tblFornecedores.ApplyUpdates;
+
   //telaDados.tblFornecedores.Close;
 
   btnCep.Enabled := false;
@@ -215,6 +216,17 @@ begin
 
   telaDados.tblFornecedores.Insert;
   telaDados.tblFornecedoresID.Value := id;
+
+  with telaDados.tblEstados do
+  begin
+    First;
+    while not Eof do
+    begin
+      editUf.Items.Add(telaDados.tblEstados.FieldByName('UF').AsString);
+      Next;
+    end;
+  end;
+
 
   btnCep.Enabled := true;
 
@@ -295,6 +307,17 @@ end;
 procedure TtelaCadFor.actEditarExecute(Sender: TObject);
 begin
   telaDados.tblFornecedores.Open;
+  telaDados.tblFornecedores.Edit;
+
+  with telaDados.tblEstados do
+  begin
+    First;
+    while not Eof do
+    begin
+      editUf.Items.Add(telaDados.tblEstados.FieldByName('UF').AsString);
+      Next;
+    end;
+  end;
 
   btnCep.Enabled := true;
 
