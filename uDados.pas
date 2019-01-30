@@ -668,6 +668,22 @@ type
     ACBrIntegrador1: TACBrIntegrador;
     ACBrIBGE1: TACBrIBGE;
     ACBrNFe1: TACBrNFe;
+    tblPedidosItensCFOP: TIBStringField;
+    tblPedidosItensVAL_PIS: TIBBCDField;
+    tblPedidosItensVAL_COFINS: TIBBCDField;
+    tblPedidosItensVAL_ICMS: TIBBCDField;
+    tblPedidosItensVAL_ICMSSUB: TIBBCDField;
+    tblPedidosItensVAL_IPI: TIBBCDField;
+    tblPedidosItensBC_PIS: TIBBCDField;
+    tblPedidosItensBC_COFINS: TIBBCDField;
+    tblPedidosItensBC_ICMS: TIBBCDField;
+    tblPedidosItensBC_ICMSSUB: TIBBCDField;
+    tblPedidosItensBC_IPI: TIBBCDField;
+    tblPedidosItensALIQUOTA_PIS: TIBBCDField;
+    tblPedidosItensALIQUOTA_COFINS: TIBBCDField;
+    tblPedidosItensALIQUOTA_ICMS: TIBBCDField;
+    tblPedidosItensALIQUOTA_ICMSSUB: TIBBCDField;
+    tblPedidosItensALIQUOTA_IPI: TIBBCDField;
     procedure cdsTempItensAfterPost(DataSet: TDataSet);
     procedure tblEstoqueAfterPost(DataSet: TDataSet);
     procedure tblClientesBeforePost(DataSet: TDataSet);
@@ -722,7 +738,7 @@ type
     function verificaCnpj(pCNPJ:String) : boolean;
     function pegaCodMun(cidade, uf:String) : Integer;
     function Mascara(valor: string) : String;
-
+    function CLRDIG(Texto: string):String; 
     procedure GravaChaveNFePedido(pChaveNFe, pNumPed : String);
 
     procedure DesenhaBarras(SequenciaHexa: string; Imagem: TCanvas);
@@ -739,7 +755,7 @@ type
 
 implementation
 
-uses uLancPedidos, uLancItens, uLancCompras, MaskUtils;
+uses uLancPedidos, uLancItens, uLancCompras, MaskUtils, uConfig;
 
 {$R *.dfm}
 
@@ -1620,5 +1636,26 @@ begin
       telaLancCompras.calculaPedido;
   end;
 end;
+
+function TtelaDados.CLRDIG(Texto :String):String; 
+var 
+I: integer;
+S: string; 
+Virgula : Boolean;//Pra verificar se ja Possui virgula 
+begin 
+S := ''; 
+Virgula:=False; 
+
+for I := 1 To Length(Texto) Do 
+begin 
+if (Texto[I] in ['0'..'9']) or ((Texto[I] in [',']) and (Virgula<>True)) then 
+begin 
+if (Texto[I] in [',']) then Virgula:=True; 
+S := S + Copy(Texto, I, 1); 
+end; 
+end; 
+
+result := S; 
+end; 
 
 end.

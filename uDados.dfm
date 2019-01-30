@@ -1934,6 +1934,96 @@ object telaDados: TtelaDados
         Name = 'CFOP'
         DataType = ftString
         Size = 4
+      end
+      item
+        Name = 'VAL_PIS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_COFINS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_ICMS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_ICMSSUB'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_IPI'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_PIS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_COFINS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_ICMS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_ICMSSUB'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_IPI'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_PIS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_COFINS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_ICMS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_ICMSSUB'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_IPI'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
       end>
     IndexDefs = <
       item
@@ -2013,6 +2103,85 @@ object telaDados: TtelaDados
     object tblPedidosItensID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
       Required = True
+    end
+    object tblPedidosItensCFOP: TIBStringField
+      FieldName = 'CFOP'
+      Size = 4
+    end
+    object tblPedidosItensVAL_PIS: TIBBCDField
+      FieldName = 'VAL_PIS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensVAL_COFINS: TIBBCDField
+      FieldName = 'VAL_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensVAL_ICMS: TIBBCDField
+      FieldName = 'VAL_ICMS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensVAL_ICMSSUB: TIBBCDField
+      FieldName = 'VAL_ICMSSUB'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensVAL_IPI: TIBBCDField
+      FieldName = 'VAL_IPI'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensBC_PIS: TIBBCDField
+      FieldName = 'BC_PIS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensBC_COFINS: TIBBCDField
+      FieldName = 'BC_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensBC_ICMS: TIBBCDField
+      FieldName = 'BC_ICMS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensBC_ICMSSUB: TIBBCDField
+      FieldName = 'BC_ICMSSUB'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensBC_IPI: TIBBCDField
+      FieldName = 'BC_IPI'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensALIQUOTA_PIS: TIBBCDField
+      FieldName = 'ALIQUOTA_PIS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensALIQUOTA_COFINS: TIBBCDField
+      FieldName = 'ALIQUOTA_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensALIQUOTA_ICMS: TIBBCDField
+      FieldName = 'ALIQUOTA_ICMS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensALIQUOTA_ICMSSUB: TIBBCDField
+      FieldName = 'ALIQUOTA_ICMSSUB'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensALIQUOTA_IPI: TIBBCDField
+      FieldName = 'ALIQUOTA_IPI'
+      Precision = 9
+      Size = 2
     end
   end
   object dbPedidosItens: TIBDatabase
@@ -2502,6 +2671,56 @@ object telaDados: TtelaDados
         AggregateName = 'Valor'
         Expression = 'sum(VRT)'
         IndexName = 'total'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTBCICMS'
+        Expression = 'sum(BC_ICMS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTBCICMSSUB'
+        Expression = 'sum(BC_ICMSSUB)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTBCIPI'
+        Expression = 'sum(BC_IPI)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTBCPIS'
+        Expression = 'sum(BC_PIS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTBCCOFINS'
+        Expression = 'sum(BC_COFINS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTICMS'
+        Expression = 'sum(VAL_ICMS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTICMSSUB'
+        Expression = 'sum(VAL_ICMSSUB)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTIPI'
+        Expression = 'sum(VAL_IPI)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTPIS'
+        Expression = 'sum(VAL_PIS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTCOFINS'
+        Expression = 'sum(VAL_COFINS)'
         Visible = False
       end>
     AggregatesActive = True
@@ -6164,10 +6383,10 @@ object telaDados: TtelaDados
   end
   object ACBrNFe1: TACBrNFe
     Integrador = ACBrIntegrador1
-    Configuracoes.Geral.SSLLib = libNone
-    Configuracoes.Geral.SSLCryptLib = cryNone
-    Configuracoes.Geral.SSLHttpLib = httpNone
-    Configuracoes.Geral.SSLXmlSignLib = xsNone
+    Configuracoes.Geral.SSLLib = libCustom
+    Configuracoes.Geral.SSLCryptLib = cryWinCrypt
+    Configuracoes.Geral.SSLHttpLib = httpIndy
+    Configuracoes.Geral.SSLXmlSignLib = xsXmlSec
     Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
     Configuracoes.Geral.VersaoQRCode = veqr000
     Configuracoes.Arquivos.OrdenacaoPath = <>

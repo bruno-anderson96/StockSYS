@@ -12,6 +12,7 @@ object telaCadClientes: TtelaCadClientes
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  Scaled = False
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13

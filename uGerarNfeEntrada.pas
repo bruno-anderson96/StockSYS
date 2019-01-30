@@ -404,7 +404,7 @@ begin
     telaDados.ACBrNFe1.NotasFiscais.Assinar;
     telaDados.ACBrNFe1.NotasFiscais.Validar;
 
-    telaDados.ACBrNFe1.NotasFiscais.Items[0].GravarXML(telaDados.qryCompras.FieldByName('CHAVENFE').AsString+'.xml', ExtractFilePath(ParamStr(0))+'NFe');
+    telaDados.ACBrNFe1.NotasFiscais.Items[0].GravarXML(telaDados.qryCompras.FieldByName('CHAVENFE').AsString+'.xml', ExtractFilePath(ParamStr(0))+'NFe\Entrada');
     //telaDados.ACBrNFe1.NotasFiscais.Assinar;
     ShowMessage('Arquivo Gerado em: '+ telaDados.ACBrNFe1.NotasFiscais.Items[0].NomeArq);
     if telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.tpEmis = TeDPEC then

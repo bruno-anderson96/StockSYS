@@ -364,23 +364,6 @@ object telaDados: TtelaDados
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object ACBrNFe1: TACBrNFe
-    Integrador = ACBrIntegrador1
-    Configuracoes.Geral.SSLLib = libNone
-    Configuracoes.Geral.SSLCryptLib = cryNone
-    Configuracoes.Geral.SSLHttpLib = httpNone
-    Configuracoes.Geral.SSLXmlSignLib = xsNone
-    Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
-    Configuracoes.Geral.VersaoDF = ve400
-    Configuracoes.Geral.VersaoQRCode = veqr000
-    Configuracoes.Arquivos.OrdenacaoPath = <>
-    Configuracoes.WebServices.UF = 'SP'
-    Configuracoes.WebServices.AguardarConsultaRet = 0
-    Configuracoes.WebServices.QuebradeLinha = '|'
-    DANFE = ACBrNFeDANFeRL1
-    Left = 8
-    Top = 16
-  end
   object dsProdutos: TDataSource
     DataSet = tblProdutos
     Left = 96
@@ -1951,6 +1934,96 @@ object telaDados: TtelaDados
         Name = 'CFOP'
         DataType = ftString
         Size = 4
+      end
+      item
+        Name = 'VAL_PIS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_COFINS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_ICMS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_ICMSSUB'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'VAL_IPI'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_PIS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_COFINS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_ICMS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_ICMSSUB'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'BC_IPI'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_PIS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_COFINS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_ICMS'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_ICMSSUB'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
+      end
+      item
+        Name = 'ALIQUOTA_IPI'
+        DataType = ftBCD
+        Precision = 9
+        Size = 2
       end>
     IndexDefs = <
       item
@@ -2030,6 +2103,85 @@ object telaDados: TtelaDados
     object tblPedidosItensID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
       Required = True
+    end
+    object tblPedidosItensCFOP: TIBStringField
+      FieldName = 'CFOP'
+      Size = 4
+    end
+    object tblPedidosItensVAL_PIS: TIBBCDField
+      FieldName = 'VAL_PIS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensVAL_COFINS: TIBBCDField
+      FieldName = 'VAL_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensVAL_ICMS: TIBBCDField
+      FieldName = 'VAL_ICMS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensVAL_ICMSSUB: TIBBCDField
+      FieldName = 'VAL_ICMSSUB'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensVAL_IPI: TIBBCDField
+      FieldName = 'VAL_IPI'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensBC_PIS: TIBBCDField
+      FieldName = 'BC_PIS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensBC_COFINS: TIBBCDField
+      FieldName = 'BC_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensBC_ICMS: TIBBCDField
+      FieldName = 'BC_ICMS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensBC_ICMSSUB: TIBBCDField
+      FieldName = 'BC_ICMSSUB'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensBC_IPI: TIBBCDField
+      FieldName = 'BC_IPI'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensALIQUOTA_PIS: TIBBCDField
+      FieldName = 'ALIQUOTA_PIS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensALIQUOTA_COFINS: TIBBCDField
+      FieldName = 'ALIQUOTA_COFINS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensALIQUOTA_ICMS: TIBBCDField
+      FieldName = 'ALIQUOTA_ICMS'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensALIQUOTA_ICMSSUB: TIBBCDField
+      FieldName = 'ALIQUOTA_ICMSSUB'
+      Precision = 9
+      Size = 2
+    end
+    object tblPedidosItensALIQUOTA_IPI: TIBBCDField
+      FieldName = 'ALIQUOTA_IPI'
+      Precision = 9
+      Size = 2
     end
   end
   object dbPedidosItens: TIBDatabase
@@ -2519,6 +2671,56 @@ object telaDados: TtelaDados
         AggregateName = 'Valor'
         Expression = 'sum(VRT)'
         IndexName = 'total'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTBCICMS'
+        Expression = 'sum(BC_ICMS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTBCICMSSUB'
+        Expression = 'sum(BC_ICMSSUB)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTBCIPI'
+        Expression = 'sum(BC_IPI)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTBCPIS'
+        Expression = 'sum(BC_PIS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTBCCOFINS'
+        Expression = 'sum(BC_COFINS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTICMS'
+        Expression = 'sum(VAL_ICMS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTICMSSUB'
+        Expression = 'sum(VAL_ICMSSUB)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTIPI'
+        Expression = 'sum(VAL_IPI)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTPIS'
+        Expression = 'sum(VAL_PIS)'
+        Visible = False
+      end
+      item
+        AggregateName = 'VrTCOFINS'
+        Expression = 'sum(VAL_COFINS)'
         Visible = False
       end>
     AggregatesActive = True
@@ -4122,12 +4324,6 @@ object telaDados: TtelaDados
     Left = 576
     Top = 376
   end
-  object ACBrIBGE1: TACBrIBGE
-    ProxyPort = '8080'
-    CacheArquivo = 'ACBrIBGE.txt'
-    Left = 8
-    Top = 48
-  end
   object dsLogin: TDataSource
     DataSet = tblLogin
     Left = 784
@@ -5243,54 +5439,6 @@ object telaDados: TtelaDados
     Left = 144
     Top = 624
   end
-  object ACBrIntegrador1: TACBrIntegrador
-    PastaInput = 'C:\Integrador\Input\'
-    PastaOutput = 'C:\Integrador\Output\'
-    Left = 8
-    Top = 80
-  end
-  object ACBrNFeDANFeRL1: TACBrNFeDANFeRL
-    ACBrNFe = ACBrNFe1
-    MostrarPreview = True
-    MostrarStatus = True
-    TipoDANFE = tiRetrato
-    NumCopias = 1
-    ImprimeNomeFantasia = False
-    ImprimirDescPorc = False
-    ImprimirTotalLiquido = True
-    MargemInferior = 0.700000000000000000
-    MargemSuperior = 0.700000000000000000
-    MargemEsquerda = 0.700000000000000000
-    MargemDireita = 0.700000000000000000
-    CasasDecimais.Formato = tdetInteger
-    CasasDecimais._qCom = 4
-    CasasDecimais._vUnCom = 4
-    CasasDecimais._Mask_qCom = ',0.00'
-    CasasDecimais._Mask_vUnCom = ',0.00'
-    ExibirResumoCanhoto = False
-    FormularioContinuo = False
-    TamanhoFonte_DemaisCampos = 8
-    ProdutosPorPagina = 0
-    ImprimirDetalhamentoEspecifico = True
-    NFeCancelada = False
-    ImprimirItens = True
-    ViaConsumidor = True
-    TamanhoLogoHeight = 0
-    TamanhoLogoWidth = 0
-    RecuoEndereco = 0
-    RecuoEmpresa = 0
-    LogoemCima = False
-    TamanhoFonteEndereco = 0
-    RecuoLogo = 0
-    LarguraCodProd = 54
-    ExibirEAN = False
-    QuebraLinhaEmDetalhamentoEspecifico = True
-    ExibeCampoFatura = False
-    ImprimirUnQtVlComercial = iuComercial
-    ImprimirDadosDocReferenciados = True
-    Left = 8
-    Top = 112
-  end
   object dsOrigem: TDataSource
     DataSet = tblOrigem
     Left = 304
@@ -6204,5 +6352,50 @@ object telaDados: TtelaDados
       'select * from COMPRA_ITENS')
     Left = 624
     Top = 296
+  end
+  object ACBrNFeDANFeRL1: TACBrNFeDANFeRL
+    Sistema = 'Projeto ACBr - www.projetoacbr.com.br'
+    MargemInferior = 0.700000000000000000
+    MargemSuperior = 0.700000000000000000
+    MargemEsquerda = 0.700000000000000000
+    MargemDireita = 0.700000000000000000
+    CasasDecimais.Formato = tdetInteger
+    CasasDecimais.qCom = 2
+    CasasDecimais.vUnCom = 2
+    CasasDecimais.MaskqCom = ',0.00'
+    CasasDecimais.MaskvUnCom = ',0.00'
+    ACBrNFe = ACBrNFe1
+    ExibeCampoFatura = False
+    Left = 8
+    Top = 112
+  end
+  object ACBrIntegrador1: TACBrIntegrador
+    PastaInput = 'C:\Integrador\Input\'
+    PastaOutput = 'C:\Integrador\Output\'
+    Left = 8
+    Top = 80
+  end
+  object ACBrIBGE1: TACBrIBGE
+    ProxyPort = '8080'
+    CacheArquivo = 'ACBrIBGE.txt'
+    Left = 8
+    Top = 48
+  end
+  object ACBrNFe1: TACBrNFe
+    Integrador = ACBrIntegrador1
+    Configuracoes.Geral.SSLLib = libOpenSSL
+    Configuracoes.Geral.SSLCryptLib = cryOpenSSL
+    Configuracoes.Geral.SSLHttpLib = httpOpenSSL
+    Configuracoes.Geral.SSLXmlSignLib = xsXmlSec
+    Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
+    Configuracoes.Geral.VersaoQRCode = veqr000
+    Configuracoes.Arquivos.OrdenacaoPath = <>
+    Configuracoes.WebServices.UF = 'SP'
+    Configuracoes.WebServices.AguardarConsultaRet = 0
+    Configuracoes.WebServices.QuebradeLinha = '|'
+    Configuracoes.RespTec.IdCSRT = 0
+    DANFE = ACBrNFeDANFeRL1
+    Left = 8
+    Top = 16
   end
 end

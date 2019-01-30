@@ -234,13 +234,13 @@ begin
     Entrega.nro  := telaDados.qryClientes.FieldByName('NUM_END_ENTREGA').AsString;
     Entrega.xCpl := telaDados.qryClientes.FieldByName('COMPL_ENT').AsString;
     Entrega.xBairro := telaDados.qryClientes.FieldByName('BAIRRO_END_ENTREGA').AsString;
-    Entrega.cMun := telaDados.pegaCodMun(telaDados.qryClientes.FieldByName('CIDADE_END').AsString, telaDados.qryClientes.FieldByName('UF_END_ENT').AsString);
+    Entrega.cMun := telaDados.pegaCodMun(telaDados.qryClientes.FieldByName('CID_END_ENTREGA').AsString, telaDados.qryClientes.FieldByName('UF_END_ENT').AsString);
     Entrega.xMun := telaDados.qryClientes.FieldByName('CID_END_ENTREGA').AsString;
     Entrega.UF   := telaDados.qryClientes.FieldByName('UF_END_ENT').AsString;
     // Itens das NFe
     aNumItem := 0;
     telaDados.tblPedidosItens.Open;
-    telaDados.qryPedidosItens.First;
+    telaDados.tblPedidosItens.First;
       while not telaDados.qryPedidosItens.Eof do
       begin
         Inc(aNumItem);
@@ -297,7 +297,7 @@ begin
             telaDados.qryCSOSN.SQL.Add(telaDados.qryProdutos.FieldByName('ID_CSOSN').AsString);
             telaDados.qryCSOSN.Open;
 
-                        case telaDados.qryCst.FieldByName('CODIGO').AsInteger of
+            case telaDados.qryCst.FieldByName('CODIGO').AsInteger of
             0 : CST := cst00;
             10 : CST := cst10;
             20 : CST := cst20;
@@ -333,13 +333,13 @@ begin
               ICMS.modBC    := dbiValorOperacao;
               ICMS.vBC      := telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').asFloat;
               ICMS.pICMS    := telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMS').AsFloat;
-              ICMS.vICMS    := (telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').AsFloat * telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMS').AsFloat)/ 100;
+              ICMS.vICMS    := (telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').AsFloat * (telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMS').AsFloat/ 100));
               ICMS.modBCST  := dbisMargemValorAgregado;
               ICMS.pMVAST   := 0;
               ICMS.pRedBCST := 0;
-              ICMS.vBCST    := telaDados.qryProdutos.FieldByName('BC_ICMSSUB').AsFloat;
+              ICMS.vBCST    := telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').asFloat;
               ICMS.pICMSST  := telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMSSUB').AsFloat;
-              ICMS.vICMSST  := telaDados.qryProdutos.FieldByName('VAL_ICMSSUB').AsFloat;
+              ICMS.vICMSST  := (telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').AsFloat * (telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMSSUB').AsFloat/100));
               ICMS.pRedBC   := 0;
               {end;
               if telaDados.qryPedidosItens.FieldByName('TIPOPROD').AsInteger=3 then
@@ -377,8 +377,8 @@ begin
                 vBc       := telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').asFloat;
                 vAliq     := telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMS').AsFloat;
                 vISSQN    := (telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').AsFloat * telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMS').AsFloat)/ 100;
-                cMunFG    := 0;
-                cListServ := '0';
+                cMunFG    := telaDados.pegaCodMun(telaDados.qryClientes.FieldByName('CIDADE_END').AsString, telaDados.qryClientes.FieldByName('UF_END').AsString);;
+                cListServ := '07.02';
             //end;
             end;
          
@@ -387,9 +387,9 @@ begin
       end;
       // Informações finais de NFe
       Total.ICMSTot.vBC    := telaDados.qryPedidos.FieldByName('BC_ICMS').AsFloat;
-      Total.ICMSTot.vICMS  := telaDados.qryTributos.FieldByName('VAL_ICMS').AsFloat;
-      Total.ICMSTot.vBCST  := telaDados.qryTributos.FieldByName('BC_ICMSSUB').AsFloat;
-      Total.ICMSTot.vST    := (telaDados.qryTributos.FieldByName('VAL_ICMSSUB').AsFloat * telaDados.qryTributos.FieldByName('ALIQUOTA_ICMS').AsFloat) / 100;
+      Total.ICMSTot.vICMS  := telaDados.qryPedidos.FieldByName('VAL_ICMS').AsFloat;
+      Total.ICMSTot.vBCST  := telaDados.qryPedidos.FieldByName('BC_ICMSSUB').AsFloat;
+      Total.ICMSTot.vST    := telaDados.qryPedidos.FieldByName('VAL_ICMSSUB').AsFloat;
       Total.ICMSTot.vProd  := telaDados.qryPedidos.FieldByName('VALOR').asFloat;
       Total.ICMSTot.vFrete := 0;
       Total.ICMSTot.vSeg   := 0;
@@ -436,19 +436,27 @@ begin
         pesoB := 0;
       end;
       }
+      //Pagamento
+      case telaLancPedidos.cbPagamento.ItemIndex of
+      0 : Pag.Add.tPag := fpDinheiro;
+      1 : Pag.Add.tPag := fpCartaoCredito;
+      2 : Pag.Add.tPag := fpCartaoDebito;
+      3 : Pag.Add.tPag := fpCheque;
+      end;
+      Pag.Add.vPag := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat;
       //Cobrança
       Cobr.Fat.nFat  := telaDados.qryPedidos.FieldByName('ID').AsString;
       Cobr.Fat.vOrig := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat;
       Cobr.Fat.vDesc := 0;
       Cobr.Fat.vLiq  := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat;
-      with Cobr.Dup.Add do
+     { with Cobr.Dup.Add do
       begin
         nDup  := telaDados.qryPedidos.FieldByName('ID').AsString;
         dVenc := telaDados.qryPedidos.FieldByName('DATA_PEDIDO').AsDateTime + 30;
         vDup  := telaDados.qryPedidos.FieldByName('VALOR_TOTAL').AsFloat;
-      end;
+      end;}
       //
-      with InfAdic.obsCont.Add do
+      {with InfAdic.obsCont.Add do
       begin
         xCampo := '';
         xTexto := '';
@@ -457,18 +465,25 @@ begin
       begin
         xCampo := '';
         xTexto := '';
-      end;
+      end;}
         infNFe.Versao := 4.00;
     end;
 
     // Comandos para gerar arquivo XML
-    {
+
     telaDados.ACBrNFe1.NotasFiscais.GerarNFe;
-    telaDados.ACBrNFe1.NotasFiscais.Assinar;
-    telaDados.ACBrNFe1.NotasFiscais.Validar;
-    }
-    telaDados.ACBrNFe1.NotasFiscais.Assinar;                                                      
-    telaDados.ACBrNFe1.NotasFiscais.Items[0].GravarXML('Teste.xml', ExtractFilePath(ParamStr(0)));
+    //telaDados.ACBrNFe1.NotasFiscais.Assinar;
+    //telaDados.ACBrNFe1.NotasFiscais.Validar;
+    
+    ShowMessage(telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.infNFe.ID);
+    telaDados.tblPedidos.close;
+    telaDados.tblPedidos.Open;
+    telaDados.tblPedidos.Locate('ID', telaDados.qryPedidos.FieldByName('ID').AsString, []);
+    telaDados.tblPedidos.Edit;
+    telaDados.tblPedidos.FieldByName('CHAVENFE').AsString := telaDados.CLRDIG(telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.infNFe.ID);
+    telaDados.tblPedidos.Post;
+
+    telaDados.ACBrNFe1.NotasFiscais.Items[0].GravarXML(telaDados.qryPedidos.FieldByName('CHAVENFE').AsString+'.xml', ExtractFilePath(ParamStr(0))+'NFe\Saida');
     ShowMessage('Arquivo Gerado em: '+ telaDados.ACBrNFe1.NotasFiscais.Items[0].NomeArq);
     if telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.Ide.tpEmis = TeDPEC then
     begin
