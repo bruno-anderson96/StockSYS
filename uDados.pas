@@ -1038,11 +1038,15 @@ begin
     ACBrNFe1.configuracoes.Certificados.Senha       := sSenha;
   {$ELSE}
     ACBrNFe1.configuracoes.Certificados.NumeroSerie := sSerial;
+    ACBrNFe1.configuracoes.Certificados.Senha       := sSenha;
   {$ENDIF}
   //Geral
     ACBrNFe1.configuracoes.Geral.FormaEmissao       := StrToTpEmis(OK,IntToStr(sFormas));
-    ACBrNFe1.Configuracoes.Geral.SSLLib             := libCapicom;
-    ACBrNFe1.Configuracoes.Geral.SSLHttpLib         := httpOpenSSL;
+    ACBrNFe1.Configuracoes.Geral.SSLLib             := libCustom;
+    ACBrNFe1.Configuracoes.Geral.SSLHttpLib         := httpWinHttp;
+    ACBrNFe1.Configuracoes.Geral.SSLXmlSignLib      := xsLibXml2;
+    ACBrNFe1.Configuracoes.Geral.SSLCryptLib        := cryWinCrypt;
+
   //Arquivos
     ACBrNFe1.configuracoes.Arquivos.Salvar          := sSalvarArq;
     ACBrNFe1.Configuracoes.Arquivos.PathSalvar      := sCaminhoArq;

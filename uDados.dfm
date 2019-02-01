@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 282
-  Top = 62
+  Left = 348
+  Top = 185
   Width = 1215
   Height = 693
   Caption = 'Data m'#243'dulo'
@@ -6385,14 +6385,15 @@ object telaDados: TtelaDados
     Integrador = ACBrIntegrador1
     Configuracoes.Geral.SSLLib = libCustom
     Configuracoes.Geral.SSLCryptLib = cryWinCrypt
-    Configuracoes.Geral.SSLHttpLib = httpIndy
-    Configuracoes.Geral.SSLXmlSignLib = xsXmlSec
+    Configuracoes.Geral.SSLHttpLib = httpOpenSSL
+    Configuracoes.Geral.SSLXmlSignLib = xsLibXml2
     Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
     Configuracoes.Geral.VersaoQRCode = veqr000
     Configuracoes.Arquivos.OrdenacaoPath = <>
     Configuracoes.WebServices.UF = 'SP'
     Configuracoes.WebServices.AguardarConsultaRet = 0
     Configuracoes.WebServices.QuebradeLinha = '|'
+    Configuracoes.WebServices.SSLType = LT_TLSv1_2
     Configuracoes.RespTec.IdCSRT = 0
     DANFE = ACBrNFeDANFeRL1
     Left = 8

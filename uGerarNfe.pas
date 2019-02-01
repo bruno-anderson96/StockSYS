@@ -145,6 +145,7 @@ begin
     Abort;
   end;
   telaDados.ACBrNFe1.NotasFiscais.Clear;
+  telaDados.AtualizaConfigAcbr;
   //
   if numN = 0 then begin
   numN := DBGrid1.Columns.Items[1].Field.AsInteger;
@@ -257,6 +258,7 @@ begin
           Prod.cEAN  := telaDados.qryProdutos.FieldByName('EAN13').AsString;
           Prod.xProd := telaDados.qryPedidosItens.FieldByName('DESCRICAO').AsString;
           Prod.NCM   := telaDados.qryProdutos.FieldByName('CODIGO_NCM').AsString;
+          Prod.vProd := telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').AsCurrency;
           Prod.EXTIPI := '';
           {if (telaDados.qryPedidosItens.FieldByName('TIPOPROD').AsInteger = 0) or
              (telaDados.qryPedidosItens.FieldByName('TIPOPROD').AsInteger = 1) or
@@ -269,15 +271,17 @@ begin
             begin
              Prod.CFOP := '5403';
             end; }
+          Prod.vUnCom := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsCurrency;
+          Prod.vUnTrib := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsCurrency;
           Prod.CFOP := telaDados.qryProdutos.FieldByName('CFOP').AsString;
-          Prod.uCom := telaDados.qryProdutos.FieldByName('UNIDADE').AsString;
+          Prod.uCom := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsString;
           Prod.qCom := telaDados.qryPedidosItens.FieldByName('QUANTIDADE').AsFloat;
-          Prod.cEANTrib := '';
-          Prod.uTrib := telaDados.qryProdutos.FieldByName('UNIDADE').AsString;
+          Prod.cEANTrib := telaDados.qryProdutos.FieldByName('EAN13').AsString;
           if telaDados.qryPedidosItens.FieldByName('TIPOPROD').AsInteger = 0 then
             Prod.qTrib := telaDados.qryPedidosItens.FieldByName('QUANTIDADE').AsFloat
           else
-          Prod.qTrib := 0;
+          Prod.uTrib := telaDados.qryProdutos.FieldByName('UNIDADE').AsString;
+          Prod.qTrib := telaDados.qryPedidosItens.FieldByName('QUANTIDADE').AsFloat;
           Prod.vFrete  := 0;
           Prod.vSeg    := 0;
           Prod.vDesc   := telaDados.qryPedidosItens.FieldByName('DESCONTO').AsFloat;
@@ -331,13 +335,13 @@ begin
               //CSOSN := csosn101;
               ICMS.orig     := oeNacional;
               ICMS.modBC    := dbiValorOperacao;
-              ICMS.vBC      := telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').asFloat;
+              ICMS.vBC      := telaDados.qryPedidosItens.FieldByName('BC_ICMS').asFloat;
               ICMS.pICMS    := telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMS').AsFloat;
               ICMS.vICMS    := (telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').AsFloat * (telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMS').AsFloat/ 100));
               ICMS.modBCST  := dbisMargemValorAgregado;
               ICMS.pMVAST   := 0;
               ICMS.pRedBCST := 0;
-              ICMS.vBCST    := telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').asFloat;
+              ICMS.vBCST    := telaDados.qryPedidosItens.FieldByName('BC_ICMS').asFloat;
               ICMS.pICMSST  := telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMSSUB').AsFloat;
               ICMS.vICMSST  := (telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').AsFloat * (telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMSSUB').AsFloat/100));
               ICMS.pRedBC   := 0;
@@ -362,26 +366,26 @@ begin
             {if (telaDados.qryPedidosItens.FieldByName('TIPOPROD').AsInteger=1) or
                 (telaDados.qryPedidosItens.FieldByName('TIPOPROD').AsInteger=2) then
             begin}
-            with II do
+            {with II do
             begin
                 vBc := 0;
                 vDespAdu := 0;
                 vII := telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').asFloat;
-                vIOF := 0;
+                vIOF := 0;}
             //end;
-            end;
+            //end;
             {if (telaDados.qryPedidosItens.FieldByName('TIPOPROD').AsInteger=4) then
             begin}
-            with ISSQN do
+            {with ISSQN do
             begin
                 vBc       := telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').asFloat;
                 vAliq     := telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMS').AsFloat;
                 vISSQN    := (telaDados.qryPedidosItens.FieldByName('VALOR_TOTAL').AsFloat * telaDados.qryProdutos.FieldByName('ALIQUOTA_ICMS').AsFloat)/ 100;
                 cMunFG    := telaDados.pegaCodMun(telaDados.qryClientes.FieldByName('CIDADE_END').AsString, telaDados.qryClientes.FieldByName('UF_END').AsString);;
-                cListServ := '07.02';
+                cListServ := '07.02';}
             //end;
-            end;
-         
+            //end;
+
         end;
         telaDados.qryPedidosItens.Next;
       end;
@@ -472,7 +476,7 @@ begin
     // Comandos para gerar arquivo XML
 
     telaDados.ACBrNFe1.NotasFiscais.GerarNFe;
-    //telaDados.ACBrNFe1.NotasFiscais.Assinar;
+    telaDados.ACBrNFe1.NotasFiscais.Assinar;
     //telaDados.ACBrNFe1.NotasFiscais.Validar;
     
     ShowMessage(telaDados.ACBrNFe1.NotasFiscais.Items[0].NFe.infNFe.ID);

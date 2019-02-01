@@ -253,6 +253,9 @@ od := 0.00;
 telaDados.tblCompras.Open;
 telaDados.tblCompras.Last;
 
+id := telaDados.tblCompras.RecordCount + 1;
+
+
 telaDados.tblProdutos.Edit;
 telaDados.tblProdutos.ClearFields;
 
@@ -336,15 +339,13 @@ editAsc.Text  := FloatToStr(a);
 editOutrasDesp.Text := FloatToStr(od);
 
 
-        id := telaDados.tblComprasID.asInteger + 1;
-
         telaDados.tblCompras.Insert;
         telaDados.tblComprasID.Value := id;
         telaDados.tblComprasDATA_COMPRA.AsString := DateToStr(date()) + ' ' +  TimeToStr(time());
         telaDados.tblComprasDATA_ENTREGA.AsString := DateToStr(date()) + ' ' +  TimeToStr(time());
         telaLancCompras.Refresh;
 
-        editId.Text := IntToStr(id);
+        //editId.Text := IntToStr(id);
         edtnNota.SetFocus;
         cbModelo.ItemIndex := 7;
 
@@ -562,18 +563,18 @@ end;
     telaDados.qryCompraItens2.SQL.Add('and ID_PRODUTO = ');
     telaDados.qryCompraItens2.SQL.Add(telaDados.cdsCTempItensID_PRODUTO.AsString);
     telaDados.qryCompraItens2.Open;
-    ShowMessage(telaDados.qryCompraItens2.FieldByName('DESCRICAO').AsString + '  ' +
+    {ShowMessage(telaDados.qryCompraItens2.FieldByName('DESCRICAO').AsString + '  ' +
     telaDados.qryCompraItens2.FieldByName('QUANTIDADE').AsString + ' ANTES qry ');
-
+     }
 
     if telaDados.qryCompraItens2.RecordCount > 0 then begin
       telaDados.tblCompraItens.Locate('ID_COMPRA;ID_PRODUTO', VarArrayOf([telaDados.cdsCTempItensID_COMPRA.Value,telaDados.cdsCTempItensID_PRODUTO.Value]),[loPartialKey, loCaseinsensitive]);
       telaDados.tblCompraItens.Edit;
     end;
-
-    ShowMessage(telaDados.tblCompraItensDESCRICAO.AsString + '  ' + telaDados.tblCompraItensQUANTIDADE.AsString + ' tbl ' );
+        
+    {ShowMessage(telaDados.tblCompraItensDESCRICAO.AsString + '  ' + telaDados.tblCompraItensQUANTIDADE.AsString + ' tbl ' );
     ShowMessage(' O que tá no CDS ' + telaDados.cdsCTempItens.FieldByName('DESCRICAO').AsString + telaDados.cdsCTempItens.FieldByName('QUANTIDADE').AsString);
-     
+     }
     if not(telaDados.tblCompraItens.State = dsEdit) then begin
       telaDados.tblCompraItens.Append;
     end;
@@ -586,7 +587,7 @@ end;
 
     telaDados.tblCompraItens.FieldByName('ID_COMPRA').Value :=
       telaDados.cdsCTempItens.FieldByName('ID_COMPRA').Value;
-
+      
     telaDados.tblCompraItens.FieldByName('VALOR').Value :=
       telaDados.cdsCTempItens.FieldByName('VALOR').Value;
 
@@ -830,15 +831,19 @@ tipo := 1;
        telaDados.cdsTempItensDESCONTO.Value := 0;
        telaDados.cdsTempItensACRESCIMO.Value := 0;
        telaDados.cdsTempItensVRT.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat;
-       }
+        }
        //telaDados.cdsTempItens.Post;
 
        {telaDados.tblPedidosVALOR_TOTAL.Value :=   telaDados.cdsTempItensVRT.Value;
        telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR_TOTAL.Value;}
        telaDados.tblProdutos.Locate('ID', telaDados.qryProdutos.FieldByName('ID').AsString, []);
        telaDados.tblProdutos.Edit;
-       
-       edtICfop.Text := telaDados.tblProdutosCFOP.AsString;
+
+       if edtCfop.Text <> '' then begin
+        edtICfop.Text := edtCfop.Text;
+       end else begin
+        edtICfop.Text := telaDados.tblProdutosCFOP.AsString;
+       end;
 
        telaLancCompras.Refresh;
        edtItem.Clear;

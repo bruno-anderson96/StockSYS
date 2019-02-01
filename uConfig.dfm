@@ -56,7 +56,7 @@ object telaConfig: TtelaConfig
     Top = 0
     Width = 457
     Height = 609
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Align = alClient
     TabOrder = 1
     object TabSheet1: TTabSheet
