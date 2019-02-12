@@ -103,6 +103,14 @@ type
     gpPos: TGroupBox;
     cbPos: TComboBox;
     btnAddCli: TSpeedButton;
+    pnlHeader: TPanel;
+    Label12: TLabel;
+    pnlDescProd: TPanel;
+    lblDescProd: TLabel;
+    lblCidDat: TLabel;
+    pnlFooter: TPanel;
+    imgLogo: TImage;
+    Label25: TLabel;
     procedure btnEncerrarClick(Sender: TObject);
     procedure btnIncItemClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -139,6 +147,7 @@ type
     procedure cbPagamentoChange(Sender: TObject);
     procedure edtDinChange(Sender: TObject);
     procedure btnAddCliClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
 
   private
 
@@ -336,10 +345,13 @@ end;
 
 procedure TtelaLancPedidos.FormShow(Sender: TObject);
 begin
+
   telaDados.FormataCampos;
   telaDados.tblPedidos.Close;
   telaDados.tblPedidosItens.Close;
   tipo := 0;
+  //lblCidDat.Left := telaLancPedidos.Width - lblCidDat.Width;
+  
 
 end;
 
@@ -653,7 +665,8 @@ begin
 
     telaDados.tblPedidos.Cancel;
     telaDados.tblPedidosItens.Cancel;
-
+    lblDescProd.Caption := '';
+    
     {editNumPed.Enabled := false;}
     editDtCad.Enabled := false;{
     editHrCad.Enabled := true; }
@@ -780,6 +793,7 @@ begin
   telaDados.tblPedidosVALOR.Value := telaDados.tblPedidosVALOR.Value - DBGrid1.Columns.Items[5].Field.AsCurrency;
   telaDados.tblPedidosVALOR_TOTAL.Value := telaDados.tblPedidosVALOR_TOTAL.Value - DBGrid1.Columns.Items[5].Field.AsCurrency;
   telaDados.cdsTempItens.Delete;
+  lblDescProd.Caption := telaDados.cdsTempItensDESC.AsString;
 end;
 
 procedure TtelaLancPedidos.edtItemKeyPress(Sender: TObject; var Key: Char);
@@ -819,7 +833,7 @@ begin
        telaDados.cdsTempItensDESCONTO.Value := 0;
        telaDados.cdsTempItensACRESCIMO.Value := 0;
        telaDados.cdsTempItensVRT.Value := telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat * qt;
-
+       lblDescProd.Caption := telaDados.cdsTempItensDESC.AsString;
        telaDados.cdsTempItens.Post;
 
        {telaDados.tblPedidosVALOR_TOTAL.Value :=   telaDados.cdsTempItensVRT.Value;
@@ -1008,6 +1022,15 @@ procedure TtelaLancPedidos.btnAddCliClick(Sender: TObject);
 begin
   Application.CreateForm(TtelaCadClientes, telaCadClientes);
   telaCadClientes.Show;
+end;
+
+procedure TtelaLancPedidos.FormCreate(Sender: TObject);
+begin
+lblCidDat.Caption := telaDados.tblEmitenteCIDADE.AsString + ', ' + DateToStr(Date);
+
+  if telaDados.sLogoMarca <> '' then begin
+    imgLogo.Picture.LoadFromFile(telaDados.sLogoMarca);
+  end;
 end;
 
 end.

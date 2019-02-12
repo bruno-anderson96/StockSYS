@@ -209,8 +209,8 @@ procedure TtelaConfigSat.AjustarCfe;
 begin
   telaDados.qryEmitente.Close;
   telaDados.qryEmitente.SQL.Clear;
-  telaDados.qryEmitente.SQL.Add('Select * from Emitente where id_login = ');
-  telaDados.qryEmitente.SQL.Add(telaDados.tblLoginID.AsString);
+  telaDados.qryEmitente.SQL.Add('Select * from Emitente');
+  //telaDados.qryEmitente.SQL.Add(telaDados.tblLoginID.AsString);
   telaDados.qryEmitente.Open;
 
   with ACBrSAT1 do
@@ -1300,7 +1300,7 @@ begin
     telaDados.tblPedidos.Open;
     telaDados.tblPedidos.Last;
     telaDados.tblPedidos.Edit;
-    telaDados.tblPedidosPATH.Value := ACBrSAT1.NomeBancoCfe;
+    telaDados.tblPedidosPATH.Value := ACBrSAT1.CFe.NomeArquivo;
     telaDados.tblPedidosCHAVECFE.Value := 'CFe' + ACBrSAT1.CFe.infCFe.ID;
     telaDados.tblPedidosSTATUS.Value := 'T';
     telaDados.tblPedidos.Post;  //Caso queira transmitir depois a cfe

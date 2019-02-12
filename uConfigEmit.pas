@@ -103,8 +103,8 @@ begin
   Application.CreateForm(TtelaCadEmit, telaCadEmit);
   telaCadEmit.Show;
   telaConfigEmit.Hide;
-  telaDados.tblLogin.Insert;
-telaDados.tblEmitente.Insert;
+  //telaDados.tblLogin.Insert;
+  //telaDados.tblEmitente.Insert;
 end;
 
 procedure TtelaConfigEmit.btnEditarClick(Sender: TObject);

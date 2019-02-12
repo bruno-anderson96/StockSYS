@@ -2773,8 +2773,8 @@ object telaLancCompras: TtelaLancCompras
       object GroupBox5: TGroupBox
         Left = 0
         Top = 0
-        Width = 984
-        Height = 527
+        Width = 1025
+        Height = 653
         Align = alClient
         TabOrder = 0
         object Label1: TLabel

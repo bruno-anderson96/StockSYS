@@ -300,7 +300,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'ENDERECO'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 3
+        TabOrder = 4
       end
       object editNum: TDBEdit
         Left = 529
@@ -310,7 +310,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'NUM_END'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 4
+        TabOrder = 5
       end
       object editCep: TDBEdit
         Left = 96
@@ -321,7 +321,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'CEP_END'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 2
+        TabOrder = 3
       end
       object editBairro: TDBEdit
         Left = 96
@@ -332,7 +332,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'BAIRRO_END'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 5
+        TabOrder = 6
       end
       object editCidade: TDBEdit
         Left = 96
@@ -343,7 +343,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'CIDADE_END'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 7
+        TabOrder = 8
       end
       object editCompl: TDBEdit
         Left = 440
@@ -354,7 +354,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'COMPLEMENTO'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 6
+        TabOrder = 7
       end
       object editTelefone: TDBEdit
         Left = 96
@@ -364,7 +364,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'TELEFONE'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 9
+        TabOrder = 10
         OnKeyPress = editTelefoneKeyPress
       end
       object editCelular: TDBEdit
@@ -375,7 +375,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'CELULAR'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 10
+        TabOrder = 11
         OnKeyPress = editCelularKeyPress
       end
       object editCpf: TDBEdit
@@ -386,7 +386,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'CNPJ_CPF'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 11
+        TabOrder = 12
         OnKeyPress = editCpfKeyPress
       end
       object editRg: TDBEdit
@@ -397,7 +397,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'INSC_RG'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 12
+        TabOrder = 13
         OnKeyPress = editRgKeyPress
       end
       object editDtCad: TDBEdit
@@ -408,7 +408,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'DATA_CAD'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 13
+        TabOrder = 14
       end
       object cbAtivo: TDBCheckBox
         Left = 96
@@ -419,7 +419,7 @@ object telaCadClientes: TtelaCadClientes
         DataField = 'ATIVO'
         DataSource = telaDados.dsClientes
         Enabled = False
-        TabOrder = 14
+        TabOrder = 15
         ValueChecked = 'True'
         ValueUnchecked = 'False'
       end
@@ -433,7 +433,7 @@ object telaCadClientes: TtelaCadClientes
         Items.Strings = (
           'F'#237'sica'
           'Jur'#237'dica')
-        TabOrder = 15
+        TabOrder = 16
         OnClick = RadioGroup1Click
       end
       object editUf: TComboBox
@@ -444,7 +444,7 @@ object telaCadClientes: TtelaCadClientes
         CharCase = ecUpperCase
         Enabled = False
         ItemHeight = 13
-        TabOrder = 8
+        TabOrder = 9
       end
       object editFantasia: TDBEdit
         Left = 96
@@ -453,7 +453,7 @@ object telaCadClientes: TtelaCadClientes
         Height = 21
         DataField = 'FANTASIA'
         DataSource = telaDados.dsClientes
-        TabOrder = 16
+        TabOrder = 2
       end
     end
     object TabSheet2: TTabSheet

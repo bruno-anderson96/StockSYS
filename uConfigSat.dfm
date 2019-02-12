@@ -1069,6 +1069,7 @@ object telaConfigSat: TtelaConfigSat
     MsgAppQRCode = 
       'Consulte o QR Code pelo aplicativo  "De olho na nota", dispon'#237've' +
       'l na AppStore (Apple) e PlayStore (Android)'
+    ImprimeQRCodeLateral = False
     PosPrinter = ACBrPosPrinter1
     Left = 80
     Top = 312
@@ -1119,6 +1120,7 @@ object telaConfigSat: TtelaConfigSat
     MsgAppQRCode = 
       'Consulte o QR Code pelo aplicativo  "De olho na nota", dispon'#237've' +
       'l na AppStore (Apple) e PlayStore (Android)'
+    ImprimeQRCodeLateral = False
     Left = 240
     Top = 312
   end

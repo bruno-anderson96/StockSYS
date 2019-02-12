@@ -892,6 +892,11 @@ end;
 
 procedure TtelaDados.FormataCampos;
 begin
+  //
+  tblComprasVALOR_TOTAL.DisplayFormat     := '###,###,##0.00';
+  tblComprasVALOR_TOTAL.EditFormat        := '###,###,##0.00';
+  cdsCTempItensVALOR_TOTAL.DisplayFormat  := '###,###,##0.00';
+  cdsCTempItensVALOR.DisplayFormat        := '###,###,##0.00';
   // Transportadora
   tblTransportadoraTELEFONE.EditMask         := '(00)0000-0000;0';
   tblTransportadoraTELEFONE2.EditMask        := '(00)0-0000-0000;0';
@@ -1264,7 +1269,7 @@ end;
 
 function TtelaDados.pegaCodMun(cidade, uf: String): Integer;
 begin
-ACBrIBGE1.BuscarPorNome(cidade,uf,true);
+ACBrIBGE1.BuscarPorNome(cidade,uf,false);
 
 result := ACBrIBGE1.Cidades[0].CodMunicipio;
 
@@ -1387,8 +1392,7 @@ procedure TtelaDados.tblLoginBeforePost(DataSet: TDataSet);
 begin
   if telaDados.tblLogin.state = dsInsert then begin
     telaDados.qryLogin.Close;
-    telaDados.qryLogin.SQL.Clear;
-    telaDados.qryLogin.SQL.Add('Select COUNT(*) from LOGIN');
+    telaDados.qryLogin.RecordCount;
     telaDados.qryLogin.Open;
     telaDados.tblLoginID.Value := telaDados.qryLogin.FieldByName('COUNT').AsInteger + 1;
   end;

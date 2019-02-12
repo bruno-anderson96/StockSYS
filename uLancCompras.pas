@@ -585,9 +585,12 @@ end;
     telaDados.tblCompraItens.FieldByName('ID_PRODUTO').Value :=
       telaDados.cdsCTempItens.FieldByName('ID_PRODUTO').Value;
 
+    telaDados.tblCompraItens.FieldByName('EAN13').Value :=
+      telaDados.cdsCTempItens.FieldByName('EAN13').Value;
+
     telaDados.tblCompraItens.FieldByName('ID_COMPRA').Value :=
       telaDados.cdsCTempItens.FieldByName('ID_COMPRA').Value;
-      
+
     telaDados.tblCompraItens.FieldByName('VALOR').Value :=
       telaDados.cdsCTempItens.FieldByName('VALOR').Value;
 
@@ -737,6 +740,7 @@ begin
   if key =#13 then begin
     buscarItem;
     telaDados.cdsCTempItens.Append;
+    edtIQtd.SetFocus;
   end;
 end;
 
@@ -1301,8 +1305,8 @@ end;
 
 procedure TtelaLancCompras.btnConfirmProdClick(Sender: TObject);
 begin
-
 addItem;
+telaDados.FormataCampos;
 end;
 
 procedure TtelaLancCompras.addItem;

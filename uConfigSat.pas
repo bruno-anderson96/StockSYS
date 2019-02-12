@@ -209,8 +209,8 @@ procedure TtelaConfigSat.AjustarCfe;
 begin
   telaDados.qryEmitente.Close;
   telaDados.qryEmitente.SQL.Clear;
-  telaDados.qryEmitente.SQL.Add('Select * from Emitente where id_login = ');
-  telaDados.qryEmitente.SQL.Add(telaDados.tblLoginID.AsString);
+  telaDados.qryEmitente.SQL.Add('Select * from Emitente');
+  //telaDados.qryEmitente.SQL.Add(telaDados.tblLoginID.AsString);
   telaDados.qryEmitente.Open;
 
   with ACBrSAT1 do

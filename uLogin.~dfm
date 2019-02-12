@@ -1,11 +1,11 @@
 object telaLogin: TtelaLogin
-  Left = 273
-  Top = 166
+  Left = 673
+  Top = 89
   BiDiMode = bdLeftToRight
   BorderStyle = bsToolWindow
   Caption = 'Automa'#231#227'o Comercial'
   ClientHeight = 232
-  ClientWidth = 481
+  ClientWidth = 449
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -4143,9 +4143,9 @@ object telaLogin: TtelaLogin
       D9}
   end
   object btnLogin: TSpeedButton
-    Left = 312
-    Top = 168
-    Width = 73
+    Left = 285
+    Top = 167
+    Width = 89
     Height = 41
     Cursor = crHandPoint
     Caption = 'ENTRAR'
@@ -4154,28 +4154,30 @@ object telaLogin: TtelaLogin
     Font.Height = -11
     Font.Name = 'Rockwell'
     Font.Style = [fsBold]
+    Layout = blGlyphRight
     ParentFont = False
     OnClick = btnLoginClick
   end
   object Label1: TLabel
-    Left = 232
+    Left = 264
     Top = 56
     Width = 36
     Height = 13
     Caption = 'Usu'#225'rio'
   end
   object Label2: TLabel
-    Left = 233
+    Left = 265
     Top = 111
     Width = 31
     Height = 13
     Caption = 'Senha'
   end
   object Image1: TImage
-    Left = 33
+    Left = 22
     Top = 9
-    Width = 185
-    Height = 217
+    Width = 180
+    Height = 219
+    AutoSize = True
     Picture.Data = {
       0A54504E474F626A65637489504E470D0A1A0A0000000D49484452000000B400
       0000DB0806000000C46FBBBD0000000467414D410000B18F0BFC610500000006
@@ -4754,8 +4756,8 @@ object telaLogin: TtelaLogin
       30392B30313A30306A6AE7370000000049454E44AE426082}
   end
   object Label3: TLabel
-    Left = 265
-    Top = 16
+    Left = 256
+    Top = 7
     Width = 88
     Height = 37
     Caption = 'Stock'
@@ -4767,8 +4769,8 @@ object telaLogin: TtelaLogin
     ParentFont = False
   end
   object Label4: TLabel
-    Left = 356
-    Top = 16
+    Left = 347
+    Top = 7
     Width = 62
     Height = 37
     Caption = 'SYS'
@@ -4780,16 +4782,16 @@ object telaLogin: TtelaLogin
     ParentFont = False
   end
   object edtLogin: TEdit
-    Left = 232
+    Left = 263
     Top = 72
-    Width = 226
+    Width = 137
     Height = 21
     TabOrder = 0
   end
   object edtSenha: TEdit
-    Left = 233
+    Left = 264
     Top = 127
-    Width = 226
+    Width = 136
     Height = 21
     PasswordChar = '*'
     TabOrder = 1

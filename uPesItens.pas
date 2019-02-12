@@ -54,15 +54,17 @@ begin
     telaDados.qryProdutos.SQL.Add('Select * from Produtos Where');
 
   case cbCategoria.ItemIndex of
-    0: telaDados.qryProdutos.SQL.Add('ID = :pDados');
-    1: telaDados.qryProdutos.SQL.Add('DESCRICAO like :pDados');
-    2: telaDados.qryProdutos.SQL.Add('CODIGO_NCM like :pDados');
+    0: telaDados.qryProdutos.SQL.Add('EAN13 = :pDados');
+    1: telaDados.qryProdutos.SQL.Add('ID = :pDados');
+    2: telaDados.qryProdutos.SQL.Add('DESCRICAO like :pDados');
+    3: telaDados.qryProdutos.SQL.Add('CODIGO_NCM like :pDados');
   end;
 
   case cbCategoria.ItemIndex of
-    0: telaDados.qryProdutos.Params.ParamByName('pDados').asInteger := StrToInt(editBusca.Text);
-    1: telaDados.qryProdutos.Params.ParamByName('pDados').asString := editBusca.Text + '%';
-    2: telaDados.qryProdutos.Params.ParamByName('pDados').AsString := editBusca.Text;
+    0: telaDados.qryProdutos.Params.ParamByName('pDados').AsString := editBusca.Text + '%';
+    1: telaDados.qryProdutos.Params.ParamByName('pDados').asInteger := StrToInt(editBusca.Text);
+    2: telaDados.qryProdutos.Params.ParamByName('pDados').asString := editBusca.Text + '%';
+    3: telaDados.qryProdutos.Params.ParamByName('pDados').AsString := editBusca.Text;
   end;
 
 

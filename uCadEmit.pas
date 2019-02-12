@@ -60,14 +60,16 @@ uses uConfigEmit;
 {$R *.dfm}
 
 procedure TtelaCadEmit.btnSalvarClick(Sender: TObject);
+
 begin
-  telaDados.tblLoginID.Value := 10;
+  //telaDados.tblLoginID.Value := 10;
   telaDados.tblLoginADM.Value := 0;
-  telaDados.tblLogin.Post;
+
 
   telaDados.tblEmitenteREGIME.Value := radReg.ItemIndex;
   telaDados.tblEmitenteTIPOEMP.Value := cbEmpresa.ItemIndex;
-  telaDados.tblEmitenteID_LOGIN.Value := 10;
+  telaDados.tblLogin.Post;
+  //telaDados.tblEmitenteID_LOGIN.Value := telaDados.tblLoginID.Value;
   telaDados.tblEmitente.Post;
 
   telaConfigEmit.Show;
@@ -78,6 +80,8 @@ procedure TtelaCadEmit.FormCreate(Sender: TObject);
 begin
   telaDados.tblLogin.Insert;
   telaDados.tblEmitente.Insert;
+
+
 end;
 
 end.

@@ -14,6 +14,7 @@ type
     cbCategoria: TComboBox;
     btnPesquisa: TSpeedButton;
     DBGrid1: TDBGrid;
+    GroupBox2: TGroupBox;
     procedure btnPesquisaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);

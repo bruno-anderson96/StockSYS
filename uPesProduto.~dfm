@@ -1,6 +1,6 @@
 object telaPesProduto: TtelaPesProduto
-  Left = 279
-  Top = 208
+  Left = 484
+  Top = 62
   Width = 881
   Height = 471
   Caption = 'Procurar Produto'
@@ -154,7 +154,7 @@ object telaPesProduto: TtelaPesProduto
     object GroupBox2: TGroupBox
       Left = 4
       Top = 6
-      Width = 157
+      Width = 159
       Height = 47
       Caption = 'Buscar Por .:'
       TabOrder = 1
@@ -166,6 +166,7 @@ object telaPesProduto: TtelaPesProduto
         ItemHeight = 13
         TabOrder = 0
         Items.Strings = (
+          'C'#243'digo De Barras'
           'C'#243'digo'
           'Descri'#231#227'o'
           'NCM')

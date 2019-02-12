@@ -443,6 +443,7 @@ procedure TtelaGerarNfeEntrada.DBGrid1DblClick(Sender: TObject);
 var
 num: integer;
 begin
+
  num := DBGrid1.Columns.Items[0].Field.AsInteger;
 
   telaDados.tblCompras.Locate('ID', num , []);
@@ -458,7 +459,7 @@ begin
    telaDados.tblFornecedores.Edit;
    telaDados.tblCompras.Edit;
    telaDados.tblCompraItens.Edit;
-   telaDados.tblProdutos.Edit;
+   //telaDados.tblProdutos.Edit;
    //telaDados.cdsCTempItens.Edit;
    //telaDados.tblTransportadora.Edit;
    telaDados.qryCompraItens.First;
@@ -472,6 +473,9 @@ begin
 
     telaDados.cdsCTempItens.FieldByName('ID_PRODUTO').Value :=
       telaDados.qryCompraItens.FieldByName('ID_PRODUTO').Value;
+
+    telaDados.cdsCTempItens.FieldByName('EAN13').Value :=
+      telaDados.qryCompraItens.FieldByName('EAN13').Value;
 
     telaDados.cdsCTempItens.FieldByName('ID_COMPRA').Value :=
       telaDados.qryCompraItens.FieldByName('ID_COMPRA').Value;
@@ -532,6 +536,12 @@ begin
 
     telaDados.cdsCTempItens.FieldByName('ALIQUOTA_IPI').Value :=
       telaDados.qryCompraItens.FieldByName('ALIQUOTA_IPI').Value;
+
+
+    telaDados.tblProdutos.Locate('ID',telaDados.cdsTempItensIDPROD.Value,[]);
+    telaDados.tblProdutos.Edit;
+    telaDados.tblProdutosESTOQUE.Value := telaDados.tblProdutosEstoque.Value - telaDados.cdsCTempItensQUANTIDADE.Value;
+    //telaDados.tblProdutos.Post;
 
    telaDados.cdsCTempItens.Post;
    telaDados.qryCompraItens.Next;

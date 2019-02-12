@@ -1,11 +1,12 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 61
-  Top = 255
+  Left = 73
+  Top = 122
   Align = alClient
+  AutoSize = True
   BorderStyle = bsDialog
   Caption = 'Lan'#231'amento de Pedidos'
   ClientHeight = 633
-  ClientWidth = 1262
+  ClientWidth = 1238
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,13 +16,14 @@ object telaLancPedidos: TtelaLancPedidos
   OldCreateOrder = False
   Position = poDesktopCenter
   OnClose = FormClose
+  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 1262
+    Width = 1238
     Height = 633
     ActivePage = TabSheet1
     Align = alClient
@@ -31,44 +33,22 @@ object telaLancPedidos: TtelaLancPedidos
       object GroupBox1: TGroupBox
         Left = 0
         Top = 0
-        Width = 1254
+        Width = 1230
         Height = 605
         Align = alClient
         Color = clSkyBlue
         ParentBackground = False
         ParentColor = False
         TabOrder = 0
-        object Label10: TLabel
-          Left = 541
-          Top = 607
-          Width = 415
-          Height = 37
-          Caption = 'Tecle F2 para Abrir Cupom'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlue
-          Font.Height = -32
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label21: TLabel
-          Left = 664
-          Top = 8
-          Width = 105
-          Height = 35
-          Caption = 'CAIXA'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -32
-          Font.Name = 'MS Serif'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
         object Image1: TImage
-          Left = 776
-          Top = 0
+          Left = 269
+          Top = 154
           Width = 433
           Height = 169
+          Align = alCustom
+          Anchors = []
+          Center = True
+          ParentShowHint = False
           Picture.Data = {
             0A54504E474F626A65637489504E470D0A1A0A0000000D49484452000001A700
             0000B20806000000E68300040000000467414D410000B18F0BFC610500000006
@@ -1682,23 +1662,40 @@ object telaLancPedidos: TtelaLancPedidos
             393A30313A32352B30303A303081B65DA10000002574455874646174653A6D6F
             6469667900323031382D30382D30315431393A30313A32352B30303A3030F0EB
             E51D0000000049454E44AE426082}
+          ShowHint = False
+        end
+        object imgLogo: TImage
+          Left = 267
+          Top = 326
+          Width = 437
+          Height = 249
+          Align = alCustom
+          Anchors = []
+          Center = True
+        end
+        object Label25: TLabel
+          Left = 2
+          Top = 120
+          Width = 1226
+          Height = 20
+          Align = alTop
+          Alignment = taRightJustify
+          Caption = 'Cupom                                   '
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
         end
         object GroupBox2: TGroupBox
-          Left = 88
-          Top = 48
+          Left = 1232
+          Top = 16
           Width = 633
-          Height = 57
+          Height = 53
           Color = clBtnFace
           ParentColor = False
           TabOrder = 0
-          object Label9: TLabel
-            Left = 8
-            Top = 8
-            Width = 84
-            Height = 13
-            Caption = 'C'#243'digo de Pedido'
-            FocusControl = editId
-          end
           object Label11: TLabel
             Left = 8
             Top = 48
@@ -1715,17 +1712,6 @@ object telaLancPedidos: TtelaLancPedidos
             Caption = 'Data e Hora de Emiss'#227'o'
             Visible = False
           end
-          object editId: TDBEdit
-            Left = 8
-            Top = 24
-            Width = 134
-            Height = 21
-            DataField = 'ID'
-            DataSource = telaDados.dsPedidos
-            Enabled = False
-            TabOrder = 0
-            OnChange = editIdChange
-          end
           object editDtCad: TDBEdit
             Left = 8
             Top = 64
@@ -1734,7 +1720,7 @@ object telaLancPedidos: TtelaLancPedidos
             DataField = 'DATA_PEDIDO'
             DataSource = telaDados.dsPedidos
             Enabled = False
-            TabOrder = 1
+            TabOrder = 0
             Visible = False
           end
           object editDtEmissao: TDBEdit
@@ -1745,13 +1731,13 @@ object telaLancPedidos: TtelaLancPedidos
             DataField = 'DATA_ENTREGA'
             DataSource = telaDados.dsPedidos
             Enabled = False
-            TabOrder = 2
+            TabOrder = 1
             Visible = False
           end
         end
         object GroupBox4: TGroupBox
-          Left = 1024
-          Top = 169
+          Left = 15
+          Top = 255
           Width = 185
           Height = 341
           Color = clBtnFace
@@ -1812,7 +1798,7 @@ object telaLancPedidos: TtelaLancPedidos
             Height = 21
             DataField = 'VALOR'
             DataSource = telaDados.dsPedidos
-            Enabled = False
+            ReadOnly = True
             TabOrder = 0
           end
           object editDesc: TDBEdit
@@ -1854,16 +1840,16 @@ object telaLancPedidos: TtelaLancPedidos
             Width = 164
             Height = 73
             BevelKind = bkTile
-            Color = clYellow
+            Color = clHighlight
             DataField = 'VALOR_TOTAL'
             DataSource = telaDados.dsPedidos
-            Enabled = False
             Font.Charset = ANSI_CHARSET
-            Font.Color = clRed
+            Font.Color = clWhite
             Font.Height = -48
             Font.Name = 'Nirmala UI'
             Font.Style = [fsBold]
             ParentFont = False
+            ReadOnly = True
             TabOrder = 4
           end
         end
@@ -2609,10 +2595,11 @@ object telaLancPedidos: TtelaLancPedidos
           NumGlyphs = 2
         end
         object DBGrid1: TDBGrid
-          Left = 88
-          Top = 166
-          Width = 897
-          Height = 439
+          Left = 737
+          Top = 140
+          Width = 491
+          Height = 399
+          Align = alRight
           Color = clWhite
           DataSource = telaDados.dsTempItens
           FixedColor = clWhite
@@ -2621,7 +2608,7 @@ object telaLancPedidos: TtelaLancPedidos
           Font.Height = -11
           Font.Name = 'MS Sans Serif'
           Font.Style = []
-          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           ParentFont = False
           TabOrder = 9
           TitleFont.Charset = DEFAULT_CHARSET
@@ -2636,42 +2623,42 @@ object telaLancPedidos: TtelaLancPedidos
               Expanded = False
               FieldName = 'DESC'
               Title.Caption = 'Descri'#231#227'o'
-              Width = 461
+              Width = 217
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'QUANT'
-              Title.Caption = 'Quantidade'
-              Width = 78
+              Title.Caption = 'Qtde'
+              Width = 48
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'VALOR'
               Title.Caption = 'Valor'
-              Width = 60
+              Width = 55
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'DESCONTO'
-              Title.Caption = 'Desconto'
-              Width = 71
+              Title.Caption = 'Desc.'
+              Width = 47
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'ACRESCIMO'
-              Title.Caption = 'Acr'#233'scimo'
-              Width = 79
+              Title.Caption = 'Acresc.'
+              Width = 50
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'VRT'
-              Title.Caption = 'Valor Total'
-              Width = 84
+              Title.Caption = 'Total'
+              Width = 61
               Visible = True
             end>
         end
@@ -2800,7 +2787,7 @@ object telaLancPedidos: TtelaLancPedidos
         object StatusBar1: TStatusBar
           Left = 2
           Top = 584
-          Width = 1250
+          Width = 1226
           Height = 19
           Panels = <
             item
@@ -2821,22 +2808,22 @@ object telaLancPedidos: TtelaLancPedidos
             end>
         end
         object GroupBox6: TGroupBox
-          Left = 88
-          Top = 112
-          Width = 633
-          Height = 49
+          Left = 11
+          Top = 149
+          Width = 257
+          Height = 81
           Caption = 'Item'
           TabOrder = 13
           object Label24: TLabel
-            Left = 16
+            Left = 7
             Top = 20
-            Width = 80
+            Width = 69
             Height = 13
-            Caption = 'C'#243'digo de Item.: '
+            Caption = 'C'#243'd. do Item.: '
           end
           object edtItem: TEdit
-            Left = 104
-            Top = 16
+            Left = 12
+            Top = 40
             Width = 129
             Height = 21
             CharCase = ecUpperCase
@@ -2847,8 +2834,8 @@ object telaLancPedidos: TtelaLancPedidos
             OnKeyPress = edtItemKeyPress
           end
           object btnIncItem: TBitBtn
-            Left = 242
-            Top = 12
+            Left = 150
+            Top = 36
             Width = 35
             Height = 31
             Action = adicionarItem
@@ -2968,9 +2955,9 @@ object telaLancPedidos: TtelaLancPedidos
             NumGlyphs = 2
           end
           object edtQt: TEdit
-            Left = 296
-            Top = 16
-            Width = 121
+            Left = 193
+            Top = 40
+            Width = 49
             Height = 21
             TabOrder = 2
             Visible = False
@@ -2978,12 +2965,13 @@ object telaLancPedidos: TtelaLancPedidos
           end
         end
         object PanelCalc: TPanel
-          Left = 162
-          Top = 231
+          Left = 298
+          Top = 175
           Width = 842
           Height = 338
           Align = alCustom
-          Color = clYellow
+          Anchors = []
+          Color = 3208442
           ParentBackground = False
           TabOrder = 12
           Visible = False
@@ -3326,15 +3314,16 @@ object telaLancPedidos: TtelaLancPedidos
           end
         end
         object pnlEdtExc: TPanel
-          Left = 432
-          Top = 376
+          Left = 944
+          Top = 312
           Width = 225
           Height = 65
+          Caption = 'E'
           TabOrder = 14
           Visible = False
           object btnEdt: TSpeedButton
             Left = 24
-            Top = 16
+            Top = 18
             Width = 73
             Height = 33
             Caption = 'Editar'
@@ -3399,7 +3388,7 @@ object telaLancPedidos: TtelaLancPedidos
           end
           object btnExc: TSpeedButton
             Left = 104
-            Top = 16
+            Top = 18
             Width = 73
             Height = 33
             Caption = 'Excluir'
@@ -3466,66 +3455,195 @@ object telaLancPedidos: TtelaLancPedidos
             Left = 192
             Top = 3
             Width = 31
-            Height = 25
+            Height = 28
             Flat = True
             Glyph.Data = {
               F6060000424DF606000000000000360000002800000018000000180000000100
               180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              D8BBA0C99A68C5945BC7965DC8975FC8975FC8975FC8975FC8975FC8965FC896
-              5FC8975FC8975FC8975FC8975FC8975FC7965DC5945BC99A68D8BBA0FFFFFFFF
-              FFFFFFFFFFE9D1B4CFA16FC99A66C28F5AC4915BC99866CB9B6BCB9C6BCB9C6C
-              CB9C6CCB9C6BCB9C6BCB9C6CCB9C6CCB9C6BCB9B6BC99866C4915BC28F5AC99A
-              66CFA16FE9D1B4FFFFFFFFFFFFD5A671D5A97ACC9A66C08951BD834BBF864FC0
-              8852C08852C08852C08852C08852C08852C08852C08852C08852C08852BF864F
-              BD834BC08951CC9A66D5A97AD5A671FFFFFFFFFFFFDBAF85D9AE81CE9C69C287
-              50BD7D43BC7D44BC7D44BC7D44BC7D44BC7D44BC7D44BC7D44BC7D44BC7D44BC
-              7D44BC7D44BC7D44BD7D43C28750CE9C69D9AE81DBAF85FFFFFFFFFFFFE2BA98
-              DEB487D7A87ACD9460C58851C4864DC28146C58851C58750C28146C58750C589
-              52C28146C58851C28146C28146C78A53C88D57CE9764D5A270DEB487E2BA98FF
-              FFFFFFFFFFE7C1A4E3BC93F6F4F2F7F6F6F7F6F6F7F6F6D19968F4F0EDF7F6F6
-              D19A6AF7F6F6F5F0EDD29C6CF5F0EDCB8C54C9884DF5F2F0F7F6F6F6F4F4DBAD
-              7EE2B88CE7C1A4FFFFFFFFFFFFEBC8AFE4BC91E2BA92F7F7F7DBAD84F2E9E1CE
-              8C51D49B69F4EFEBDBAE86F4EFEBD49B68CF9057F7F7F7D09057CE8C51D6A070
-              F7F7F7DCAB80DDAB7AE4BC91EBC8AFFFFFFFFFFFFFECC8AFE5BC90DEAC7BF7F7
-              F7D59D6AD39761CF8D52CF8D52D49A66F3EDE8D49965CF8D52CF8D52F7F7F7CF
-              8E53CF8D52CF8D52F7F7F7D59862DEAB7AE5BC90ECC8AFFFFFFFFFFFFFE9C1A0
-              E3B78ADBA875F8F7F7F8F7F7F1E5DBCB874ACB874AD0945FF4EDE7D0945ECB87
-              4ACB874AF8F7F7CC884CCB874ACB874AF8F7F7D1935BDBA773E3B78AE9C1A0FF
-              FFFFFFFFFFE6BC98E0B587D7A471F8F8F8CE9460CB8D55C78346CE9460F4EFEB
-              D7A87FF4EFEBCE935EC88549F8F8F8D09867F1E9E0D7A87EF8F8F8DCB48EF6F4
-              F1E2BB91E6BC98FFFFFFFFFFFFE1B489DDB182DAB086F9F8F8D2A378F1E7DFC9
-              8F5BF5F0EDF9F8F8CB9360F9F8F8F6F1EECB9360F4EDE7CC9462F9F8F8F9F8F8
-              F9F8F8F9F8F8F9F8F8E0B78DE1B489FFFFFFFFFFFFDAAC79DBB284F8F6F4F9F9
-              F9F9F9F9F9F9F9BC7D42BB7C41BC7D43B9773ABC7E44BD8047B9773ABB7C41B9
-              773ABB7B40BC7D42BC7C41C38A54D1A06ED9AD7CDAAC79FFFFFFFFFFFFD4A165
-              D5A976CD9B69C08853BC824BBD834CBA7E43BA7E43BA7E43BA7E44BA7E44BA7E
-              44BA7E44BA7E43BA7E43BA7E43BA7D43B87B40BC8148C9945ED5A976D4A165FF
-              FFFFFFFFFFCD9952D1A370C4925CBB854EC08A51C3915CC59460C59461C59461
-              C59461C59461C59461C59461C59461C59461C59460C3915CC08A51BB854EC492
-              5CD1A370CD9952FFFFFFFFFFFFE3C8A0C7945FC5935DC49259CC9C67D3A97BD6
-              AF85D6B086D6B086D6B086D6B086D6B086D6B086D6B086D6B086D6AF85D3A97B
-              CC9C67C49259C5935DC7945FE3C8A0FFFFFFFFFFFFFFFFFFD3B397C99A63CA99
-              5ECB9B61CC9D64CC9E66CC9E66CC9E66CC9E66CC9E66CC9E66CC9E66CC9E66CC
-              9E66CC9E66CC9D64CB9B61CA995EC99A63D3B397FFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+              FFFFFFFFFFFFFFFFFFFFFFFF0005450005451C215A4246766B6E94989BB4C1C3
+              D2E6E7EDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF030E503765A93B67AB365EA1
+              305195254083172C6F0A185B0813532A346B5159867B81A3A7ABC2CFD2DEF2F3
+              F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0D327C082D79082D79082D790012573D
+              6FB34A7DBE5184C85A8DD26194D96497DC6295DA5F91D64E7BBF3A62A725478C
+              1632780A21660012570D327DFFFFFFFFFFFFFFFFFFFFFFFF0A317E0C0D0F0C0D
+              0F0C0C0E001A623869AD3163A73568AB3D70B4497CC05588CD5D90D56396DB67
+              99DC5B8ED35083C84679BD3D70B4001A630A317EFFFFFFFFFFFFFFFFFFFFFFFF
+              0C35820E10120E0F120E101200206A3A6BB02A599D295CA0285B9F26599D2558
+              9C497BCD6295DA3366AA396CB03B6EB23B6EB23C6FB300206B0D3583FFFFFFFF
+              FFFFFFFFFFFFFFFF0F3A8711121411121411121400226D3F71B62553982B5DA1
+              2B5EA22B5EA22B5EA24577C85E91D6255599295CA0285B9F2C5FA33869AE0022
+              6E103986FFFFFFFFFFFFFFFFFFFFFFFF113F8C13141713131713131700246F41
+              73B8224E942A5CA02B5EA22B5EA22B5EA24172C0598CD12350942B5EA22B5EA2
+              2F62A63B6CB1002470123E8CFFFFFFFFFFFFFFFFFFFFFFFF14429015161A1417
+              1A14161B0026724375BA1B44892554982B5EA22B5EA22B5EA23C6CBA5386CC1F
+              4A8E2B5EA22B5EA22F62A64072B7002673134290FFFFFFFFFFFFFFFFFFFFFFFF
+              16469517191D17191E17181D0028754577BC14387F1A4286255599295CA02A5D
+              A13766B44E81C7183F8326569A2B5EA23063A74274B9002876164695FFFFFFFF
+              FFFFFFFFFFFFFFFF184B9A191B21191B20191B20002B784779BE0C2B730E2C70
+              173D81214E9226589C3463AF4A7DC21132761C468A26569A2F61A54476BB002B
+              79184B99FFFFFFFFFFFFFFFFFFFFFFFF1A4F9E1B1E231B1E231B1D23002D7B14
+              26691425683A69B12D5AA32450951E498D3362AD477ABF0A266A0F2E72184084
+              2655994678BD002D7C1A4F9FFFFFFFFFFFFFFFFFFFFFFFFF1E53A21E21261E21
+              261E2027002F7D3166B45287D13765AF3A69B33D6FB64274BB477ABF477ABF43
+              73B93564AB2C5AA229569E477ABF002F7E1D53A3FFFFFFFFFFFFFFFFFFFFFFFF
+              1F56A721232A21242A2124290030806497DE72A4E927579B2E5CA23161A83666
+              B03361AE497CC13564B03867B23C6DB64274BB497CC10030811F56A6FFFFFFFF
+              FFFFFFFFFFFFFFFF2159A923262D24262D23252C0032824D80C525539725579B
+              25589C26599D26599D3A6AB85184CA1F4C9028579B3464AC4374BE4B7EC30032
+              83215AAAFFFFFFFFFFFFFFFFFFFFFFFF225CAD25292F25282F26282F0034854F
+              82C8204B9123559924579B25589C25589C4274C45B8ED41D4A8E25589C26599D
+              2E61A54C7FC4003486235CADFFFFFFFFFFFFFFFFFFFFFFFF245EAF282B33272A
+              33282B320036875083C91A42871E4D9123569A24579B24579B4D7FD36699DF19
+              448624579B25589C2D60A44D80C5003688245EB0FFFFFFFFFFFFFFFFFFFFFFFF
+              2560B12A2E362A2D362A2E350138895184CA13367A153D801E4E922254982356
+              9A588DE272A5EA143A7C20509324579B2C5FA34F82C800388A2560B1FFFFFFFF
+              FFFFFFFFFFFFFFFF2560B12C30382C30382C303801398B5285CB0A256807205D
+              0F33731743861D4E926096EF7BAEF40E2D6E1740832051942C5EA25083CA0039
+              8C2560B1FFFFFFFFFFFFFFFFFFFFFFFF2560B12E313A2E313A2E313A013A8D5A
+              8ED34D80C94172BC3969B33160A828549B5A93F682B5FA051C58092462113475
+              214F925184CB003A8E2560B1FFFFFFFFFFFFFFFFFFFFFFFF2560B130333D3033
+              3D30333C003C8F568AD16598DD6FA2E77AADF286B9FE8CBFFF86B9FE7DB0F560
+              93DE4779C33362AB2E5CA45487CD003C902560B1FFFFFFFFFFFFFFFFFFFFFFFF
+              2560B131353E31353F31353E033C8B054194124D9E235DAC3871BD5087D2699E
+              E67BAEF482B5FA7EB1F679ACF171A4E9689BE05C90D5003D912560B1FFFFFFFF
+              FFFFFFFFFFFFFFFF2560B132374032374032364032363F30374528384F21395D
+              183A6A113B770A3C83033E8F0845991754A52863B2346DBA3F77C14379C2003E
+              932560B1FFFFFFFFFFFFFFFFFFFFFFFF2560B134384234384134384234374233
+              3741343742333741333842343841333841333742313846293951213A5E183B6B
+              113C79093E850241962560B1FFFFFFFFFFFFFFFFFFFFFFFF2560B12560B12560
+              B12560B12560B12560B12560B12560B12560B12560B12560B12560B12560B125
+              60B12560B12560B12560B12560B12560B12560B1FFFFFFFFFFFF}
             OnClick = btnFecClick
+          end
+        end
+        object pnlHeader: TPanel
+          Left = 2
+          Top = 15
+          Width = 1226
+          Height = 105
+          Align = alTop
+          BorderStyle = bsSingle
+          TabOrder = 15
+          object Label21: TLabel
+            Left = 1
+            Top = 1
+            Width = 1220
+            Height = 27
+            Align = alTop
+            Alignment = taCenter
+            Caption = 'CAIXA'
+            Color = clBtnFace
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -24
+            Font.Name = 'MS Serif'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object lblCidDat: TLabel
+            Left = 1000
+            Top = 4
+            Width = 118
+            Height = 24
+            Align = alCustom
+            Alignment = taRightJustify
+            Caption = 'Cidade e Data'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -19
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label9: TLabel
+            Left = 8
+            Top = 8
+            Width = 116
+            Height = 16
+            Caption = 'C'#243'digo de Pedido.:'
+            FocusControl = editId
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+          end
+          object pnlDescProd: TPanel
+            Left = 1
+            Top = 30
+            Width = 1220
+            Height = 70
+            Align = alBottom
+            Color = clHighlight
+            ParentBackground = False
+            TabOrder = 0
+            object Label12: TLabel
+              Left = 8
+              Top = 2
+              Width = 155
+              Height = 24
+              Caption = 'Descri'#231#227'o Produto'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -19
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+            end
+            object lblDescProd: TLabel
+              Left = 29
+              Top = 21
+              Width = 8
+              Height = 43
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWhite
+              Font.Height = -31
+              Font.Name = 'Palatino Linotype'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+          end
+          object editId: TDBEdit
+            Left = 129
+            Top = 7
+            Width = 72
+            Height = 21
+            DataField = 'ID'
+            DataSource = telaDados.dsPedidos
+            Enabled = False
+            TabOrder = 1
+            OnChange = editIdChange
+          end
+        end
+        object pnlFooter: TPanel
+          Left = 2
+          Top = 539
+          Width = 1226
+          Height = 45
+          Align = alBottom
+          BorderStyle = bsSingle
+          Color = clHighlight
+          ParentBackground = False
+          TabOrder = 16
+          object Label10: TLabel
+            Left = 1
+            Top = 3
+            Width = 1220
+            Height = 37
+            Align = alBottom
+            Alignment = taCenter
+            Caption = 'Tecle F2 para Abrir Cupom'
+            Color = clBtnFace
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -32
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
           end
         end
       end
@@ -3710,8 +3828,8 @@ object telaLancPedidos: TtelaLancPedidos
     end
   end
   object ActionList1: TActionList
-    Left = 16
-    Top = 40
+    Left = 1184
+    Top = 48
     object Incluir: TAction
       Caption = 'F2 - &Incluir'
       ShortCut = 113

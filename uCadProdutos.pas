@@ -88,7 +88,6 @@ type
     DBEdit4: TDBEdit;
     Label27: TLabel;
     cbTipo: TComboBox;
-    SpeedButton1: TSpeedButton;
     Label24: TLabel;
     cbCsosn: TComboBox;
     cbCst: TComboBox;
@@ -111,6 +110,8 @@ type
     Label31: TLabel;
     cbTrib: TComboBox;
     Label32: TLabel;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
     procedure FormShow(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
@@ -144,6 +145,9 @@ type
     procedure editVendaExit(Sender: TObject);
     procedure editVendaPExit(Sender: TObject);
     procedure cbTribChange(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -1106,6 +1110,31 @@ begin
   cbCst.ItemIndex   := telaDados.qryTributos.FieldByName('ID').AsInteger;
   cbOrigem.ItemIndex:= telaDados.qryOrigem.FieldByName('ID').AsInteger;
   edtCfop.Text      := telaDados.qryTributos.FieldByName('CODCFOP').AsString;
+end;
+
+procedure TtelaCadProdutos.SpeedButton3Click(Sender: TObject);
+begin
+panelEstoque.Visible := false;
+end;
+
+procedure TtelaCadProdutos.BitBtn1Click(Sender: TObject);
+begin
+  if editEstQtd.Text = '' then begin
+    ShowMessage('Digite alguma quantidade');
+    Abort;
+  end;
+  telaDados.tblEstoqueID_PRODUTO.Value := StrToInt(editId.Text);
+  case cbTipo.ItemIndex of
+    0 : telaDados.tblEstoqueTIPO.Value := 'E';
+    1 : telaDados.tblEstoqueTIPO.Value := 'S';
+  end;
+  telaDados.tblEstoque.Post;
+  panelEstoque.Visible := false;
+end;
+
+procedure TtelaCadProdutos.BitBtn2Click(Sender: TObject);
+begin
+panelEstoque.Visible := false;
 end;
 
 end.
