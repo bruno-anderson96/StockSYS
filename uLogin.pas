@@ -14,7 +14,7 @@ type
     Label2: TLabel;
     edtLogin: TEdit;
     edtSenha: TEdit;
-    Image1: TImage;
+    ac: TImage;
     Label3: TLabel;
     Label4: TLabel;
     Image2: TImage;

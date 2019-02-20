@@ -1,6 +1,6 @@
 object telaCadProdutos: TtelaCadProdutos
-  Left = 164
-  Top = 86
+  Left = 181
+  Top = 83
   Width = 792
   Height = 545
   Caption = 'Cadastro de Produtos'

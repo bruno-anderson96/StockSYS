@@ -895,7 +895,7 @@ begin
     First;
     while not Eof do
     begin
-      cbTrib.Items.Add(telaDados.tblTributos.FieldByName('ID').AsString + ' - ' + telaDados.tblTributos.FieldByName('TIPOTRIB').AsString);
+      cbTrib.Items.Add(telaDados.tblTributos.FieldByName('TIPOTRIB').AsString);
       Next;
      end;
   end;
@@ -1083,8 +1083,8 @@ procedure TtelaCadProdutos.cbTribChange(Sender: TObject);
 begin
   telaDados.qryTributos.Close;
   telaDados.qryTributos.SQL.Clear;
-  telaDados.qryTributos.SQL.Add('Select * From TRIBUTO where ID = ');
-  telaDados.qryTributos.SQL.Add(intToStr(cbTrib.ItemIndex));
+  telaDados.qryTributos.SQL.Add('Select * From TRIBUTO where TIPOTRIB = '''+cbTrib.Text +'''');
+  //telaDados.qryTributos.SQL.Add(cbTrib.Text);
   telaDados.qryTributos.Open;
 
   telaDados.qryCsosn.Close;
@@ -1106,10 +1106,21 @@ begin
   telaDados.qryCst.Open;
 
 
-  cbCsosn.ItemIndex := telaDados.qryCsosn.FieldByName('ID').AsInteger;
-  cbCst.ItemIndex   := telaDados.qryTributos.FieldByName('ID').AsInteger;
-  cbOrigem.ItemIndex:= telaDados.qryOrigem.FieldByName('ID').AsInteger;
+  cbCsosn.ItemIndex := cbCsosn.Items.IndexOf(telaDados.qryCsosn.FieldByName('CODIGO').AsString +
+                       ' - ' + telaDados.qryCsosn.FieldByName('DESCRICAO').AsString);
+  cbCst.ItemIndex := cbCst.Items.IndexOf(telaDados.qryCst.FieldByName('CODIGO').AsString +
+                       ' - ' + telaDados.qryCst.FieldByName('DESCRICAO').AsString);
+  cbOrigem.ItemIndex := cbOrigem.Items.IndexOf(telaDados.qryOrigem.FieldByName('CODIGO').AsString +
+                       ' - ' + telaDados.qryOrigem.FieldByName('DESCRICAO').AsString);
+
   edtCfop.Text      := telaDados.qryTributos.FieldByName('CODCFOP').AsString;
+
+  {cbCsosn.ItemIndex := telaDados.qryCsosn.FieldByName('ID').AsInteger;
+  cbCst.ItemIndex   := telaDados.qryTributos.FieldByName('ID').AsInteger;
+  cbOrigem.ItemIndex:= telaDados.qryOrigem.FieldByName('ID').AsInteger;      }
+
+
+
 end;
 
 procedure TtelaCadProdutos.SpeedButton3Click(Sender: TObject);

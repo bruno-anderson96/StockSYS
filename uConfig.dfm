@@ -1,6 +1,6 @@
 object telaConfig: TtelaConfig
-  Left = 620
-  Top = 40
+  Left = 396
+  Top = 60
   Width = 473
   Height = 688
   Caption = 'Configura'#231#227'o NFe'
@@ -56,7 +56,7 @@ object telaConfig: TtelaConfig
     Top = 0
     Width = 457
     Height = 609
-    ActivePage = TabSheet2
+    ActivePage = TabSheet4
     Align = alClient
     TabOrder = 1
     object TabSheet1: TTabSheet
@@ -250,7 +250,7 @@ object telaConfig: TtelaConfig
           Height = 21
           TabOrder = 0
         end
-        object radioAmbiente: TRadioGroup
+        object gbAmbiente: TRadioGroup
           Left = 8
           Top = 40
           Width = 186
@@ -323,6 +323,22 @@ object telaConfig: TtelaConfig
             Width = 121
             Height = 21
             TabOrder = 3
+          end
+        end
+        object GroupBox2: TGroupBox
+          Left = 8
+          Top = 256
+          Width = 401
+          Height = 225
+          Caption = 'Fun'#231#245'es NFe'
+          TabOrder = 3
+          object SpeedButton2: TSpeedButton
+            Left = 16
+            Top = 24
+            Width = 106
+            Height = 41
+            Caption = 'Status de Servi'#231'o'
+            OnClick = SpeedButton2Click
           end
         end
       end

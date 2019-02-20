@@ -740,6 +740,7 @@ begin
   if key =#13 then begin
     buscarItem;
     telaDados.cdsCTempItens.Append;
+    edtIQtd.SetFocus;
   end;
 end;
 

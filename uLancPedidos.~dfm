@@ -1,6 +1,6 @@
 object telaLancPedidos: TtelaLancPedidos
-  Left = 73
-  Top = 122
+  Left = 109
+  Top = 308
   Align = alClient
   AutoSize = True
   BorderStyle = bsDialog

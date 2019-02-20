@@ -568,11 +568,12 @@ begin
     telaConfigSat.num := StrToInt(editId.Text);
     telaConfigSat.PrepararImpressao;
     telaConfigSat.gerarVenda;
+    telaConfigSat.AjustarCfe;
     telaConfigSat.ACBrSAT1.ImprimirExtrato;
   end else begin
     telaGerarNfe.numN := StrToInt(editId.Text);
     telaGerarNfe.btnGeraNfe.Click;
-  end;                                  
+  end;
 
   PanelCalc.Visible := False;
   telaDados.tblPedidosItens.ApplyUpdates;

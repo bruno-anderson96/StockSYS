@@ -1,6 +1,6 @@
 object telaDados: TtelaDados
-  Left = 348
-  Top = 185
+  Left = 1107
+  Top = 318
   Width = 1215
   Height = 693
   Caption = 'Data m'#243'dulo'
@@ -861,7 +861,7 @@ object telaDados: TtelaDados
   end
   object dbProdutos: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey'
@@ -1792,7 +1792,7 @@ object telaDados: TtelaDados
   end
   object dbClientes: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -1806,7 +1806,7 @@ object telaDados: TtelaDados
   end
   object dbPedidos: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -2186,7 +2186,7 @@ object telaDados: TtelaDados
   end
   object dbPedidosItens: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -2208,7 +2208,6 @@ object telaDados: TtelaDados
   object qryProdutos: TIBQuery
     Database = dbProdutos
     Transaction = trnscProdutos
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsProdutos
@@ -2273,7 +2272,7 @@ object telaDados: TtelaDados
   end
   object dbUnidade: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey'
@@ -2296,7 +2295,6 @@ object telaDados: TtelaDados
   object qryUnidade: TIBQuery
     Database = dbUnidade
     Transaction = trnscUnidade
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsUnidade
@@ -2308,7 +2306,6 @@ object telaDados: TtelaDados
   object qryPedidosItens: TIBQuery
     Database = dbPedidosItens
     Transaction = trnscPedidosItens
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsPedidosItens
@@ -2320,7 +2317,6 @@ object telaDados: TtelaDados
   object qryPedidos: TIBQuery
     Database = dbPedidos
     Transaction = trnscPedidos
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsPedidos
@@ -2392,7 +2388,7 @@ object telaDados: TtelaDados
   end
   object dbTributos: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -2414,7 +2410,6 @@ object telaDados: TtelaDados
   object qryTributos: TIBQuery
     Database = dbTributos
     Transaction = trnscTributos
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsTributos
@@ -2599,7 +2594,7 @@ object telaDados: TtelaDados
   end
   object dbEmitente: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -2621,7 +2616,6 @@ object telaDados: TtelaDados
   object qryEmitente: TIBQuery
     Database = dbEmitente
     Transaction = trnscEmitente
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsEmitente
@@ -2837,7 +2831,6 @@ object telaDados: TtelaDados
   object qryClientes: TIBQuery
     Database = dbClientes
     Transaction = trnscClientes
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsClientes
@@ -2894,7 +2887,7 @@ object telaDados: TtelaDados
   end
   object dbNCM: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -3033,7 +3026,7 @@ object telaDados: TtelaDados
   end
   object dbConta: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -3048,7 +3041,6 @@ object telaDados: TtelaDados
   object qryConta: TIBQuery
     Database = dbConta
     Transaction = trnscConta
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsConta
@@ -3653,7 +3645,6 @@ object telaDados: TtelaDados
   object qryCompras: TIBQuery
     Database = dbCompras
     Transaction = trnscCompras
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsCompras
@@ -3671,7 +3662,7 @@ object telaDados: TtelaDados
   end
   object dbCompras: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4033,7 +4024,6 @@ object telaDados: TtelaDados
   object qryCompraItens: TIBQuery
     Database = dbCompraItens
     Transaction = trnscCompraItens
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsCompraItens
@@ -4044,7 +4034,7 @@ object telaDados: TtelaDados
   end
   object dbCompraItens: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4072,7 +4062,6 @@ object telaDados: TtelaDados
       'select * from COMPRA_ITENS')
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_COMPRA_ITENS_ID'
-    Active = True
     DataSource = dsCompraItens
     Left = 672
     Top = 264
@@ -4265,7 +4254,6 @@ object telaDados: TtelaDados
   object qryFornecedores: TIBQuery
     Database = dbFornecedores
     Transaction = trnscFornecedores
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsFornecedores
@@ -4276,7 +4264,7 @@ object telaDados: TtelaDados
   end
   object dbFornecedores: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4387,7 +4375,7 @@ object telaDados: TtelaDados
   end
   object dbLogin: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4474,7 +4462,6 @@ object telaDados: TtelaDados
   object qryCsosn: TIBQuery
     Database = dbCsosn
     Transaction = trnscCsosn
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsCsosn
@@ -4492,7 +4479,7 @@ object telaDados: TtelaDados
   end
   object dbCsosn: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4562,7 +4549,7 @@ object telaDados: TtelaDados
   end
   object dbCst: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4577,7 +4564,6 @@ object telaDados: TtelaDados
   object qryCst: TIBQuery
     Database = dbCst
     Transaction = trnscCst
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsCst
@@ -4601,7 +4587,6 @@ object telaDados: TtelaDados
   object qryEstados: TIBQuery
     Database = dbEstados
     Transaction = trnscEstados
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsEstados
@@ -4612,7 +4597,7 @@ object telaDados: TtelaDados
   end
   object dbEstados: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4849,7 +4834,6 @@ object telaDados: TtelaDados
   object qryRuas: TIBQuery
     Database = dbRuas
     Transaction = trnscRuas
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsRuas
@@ -4861,7 +4845,6 @@ object telaDados: TtelaDados
   object qryBairros: TIBQuery
     Database = dbBairros
     Transaction = trnscBairros
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsBairros
@@ -4873,7 +4856,6 @@ object telaDados: TtelaDados
   object qryCidades: TIBQuery
     Database = dbCidades
     Transaction = trnscCidades
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsCidades
@@ -4884,7 +4866,7 @@ object telaDados: TtelaDados
   end
   object dbCidades: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4898,7 +4880,7 @@ object telaDados: TtelaDados
   end
   object dbRuas: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4911,7 +4893,7 @@ object telaDados: TtelaDados
   end
   object dbBairros: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -4951,7 +4933,6 @@ object telaDados: TtelaDados
   object qryEstoque: TIBQuery
     Database = dbEstoque
     Transaction = trnscEstoque
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsEstoque
@@ -5023,7 +5004,7 @@ object telaDados: TtelaDados
   end
   object dbEstoque: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -5051,7 +5032,6 @@ object telaDados: TtelaDados
   object qryLogin: TIBQuery
     Database = dbLogin
     Transaction = trnscLogin
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsLogin
@@ -5083,7 +5063,6 @@ object telaDados: TtelaDados
   object qryPagamentos: TIBQuery
     Database = dbPagamentos
     Transaction = trnscPagamento
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsPagamentos
@@ -5094,7 +5073,7 @@ object telaDados: TtelaDados
   end
   object dbPagamentos: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -5396,7 +5375,6 @@ object telaDados: TtelaDados
   object qryContador: TIBQuery
     Database = dbContador
     Transaction = trnscContador
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsContador
@@ -5414,7 +5392,7 @@ object telaDados: TtelaDados
   end
   object dbContador: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -5491,7 +5469,6 @@ object telaDados: TtelaDados
   object qryOrigem: TIBQuery
     Database = dbOrigem
     Transaction = trnscOrigem
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsOrigem
@@ -5509,7 +5486,7 @@ object telaDados: TtelaDados
   end
   object dbOrigem: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'password=masterkey'
       'user_name=SYSDBA')
@@ -5606,7 +5583,6 @@ object telaDados: TtelaDados
   object qryIbpt: TIBQuery
     Database = dbIbpt
     Transaction = trnscIbpt
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsIbpt
@@ -5624,7 +5600,7 @@ object telaDados: TtelaDados
   end
   object dbIbpt: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -5698,7 +5674,6 @@ object telaDados: TtelaDados
   object qryPos: TIBQuery
     Database = dbPos
     Transaction = trnscPos
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsPos
@@ -5709,7 +5684,7 @@ object telaDados: TtelaDados
   end
   object dbPos: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -5738,7 +5713,6 @@ object telaDados: TtelaDados
     GeneratorField.Field = 'ID'
     GeneratorField.Generator = 'GEN_POS_ID'
     GeneratorField.ApplyEvent = gamOnPost
-    Active = True
     DataSource = dsPos
     Left = 664
     Top = 624
@@ -5746,7 +5720,6 @@ object telaDados: TtelaDados
   object qryNcm: TIBQuery
     Database = dbNCM
     Transaction = trnscNCM
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsNCM
@@ -5759,11 +5732,13 @@ object telaDados: TtelaDados
     Database = dbTributos
     Transaction = trnscTributos
     BeforePost = tblTributosBeforePost
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     FieldDefs = <
       item
         Name = 'ID'
+        Attributes = [faRequired]
         DataType = ftInteger
       end
       item
@@ -5852,7 +5827,6 @@ object telaDados: TtelaDados
   object qryTransportadora: TIBQuery
     Database = dbTransportadora
     Transaction = trnscTransportadora
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsTransportadora
@@ -6126,7 +6100,7 @@ object telaDados: TtelaDados
   end
   object dbTransportadora: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -6140,7 +6114,7 @@ object telaDados: TtelaDados
   end
   object dbVeiculo: TIBDatabase
     Connected = True
-    DatabaseName = '127.0.0.1:C:\Users\Bruno\Documents\DBFirebird\StockSYS.FDB'
+    DatabaseName = '127.0.0.1:C:\StockSYS2\Banco de dados\StockSYS.FDB'
     Params.Strings = (
       'user_name=SYSDBA'
       'password=masterkey')
@@ -6344,7 +6318,6 @@ object telaDados: TtelaDados
   object qryCompraItens2: TIBQuery
     Database = dbCompraItens
     Transaction = trnscCompraItens
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     DataSource = dsCompraItens
@@ -6383,10 +6356,10 @@ object telaDados: TtelaDados
   end
   object ACBrNFe1: TACBrNFe
     Integrador = ACBrIntegrador1
-    Configuracoes.Geral.SSLLib = libCustom
-    Configuracoes.Geral.SSLCryptLib = cryWinCrypt
-    Configuracoes.Geral.SSLHttpLib = httpOpenSSL
-    Configuracoes.Geral.SSLXmlSignLib = xsLibXml2
+    Configuracoes.Geral.SSLLib = libCapicom
+    Configuracoes.Geral.SSLCryptLib = cryCapicom
+    Configuracoes.Geral.SSLHttpLib = httpWinINet
+    Configuracoes.Geral.SSLXmlSignLib = xsMsXmlCapicom
     Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
     Configuracoes.Geral.VersaoQRCode = veqr000
     Configuracoes.Arquivos.OrdenacaoPath = <>

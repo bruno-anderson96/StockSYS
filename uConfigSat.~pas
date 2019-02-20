@@ -75,6 +75,7 @@ type
     OpenDialog1: TOpenDialog;
     ACBrSATExtratoFortes1: TACBrSATExtratoFortes;
     ACBrIBPTax1: TACBrIBPTax;
+    checkPreview: TCheckBox;
     procedure At(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -256,7 +257,14 @@ begin
   ACBrSAT1.OnGetcodigoDeAtivacao := GetcodigoDeAtivacao;
   ACBrSAT1.OnGetsignAC := GetsignAC;
   ACBrSAT1.OnGetNumeroSessao := telaConfigSat.GetNumeroSessao;
-  ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1;
+
+  if checkPreview.Checked then begin
+    ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1;
+  end else begin
+    ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
+  end;
+
+
   {if ACBrSAT1.numeroSessao = 0 then begin
     ACBrSAT1.GerarnumeroSessao;
   end;}
@@ -280,7 +288,7 @@ tabela: Integer;
 aliqFedNac, aliqFedImp, aliqEst, aliqMun: Double;
 idD : integer;
 begin
-  ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
+  //ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
   tEstadual := 0;
   tFederal  := 0;
   tMunicipal:= 0;
@@ -295,7 +303,7 @@ begin
   mVendaEnviar.Clear;
    }
   // Trasnferindo Informações de Config para o CFe //
-  AjustarCfe;
+  //AjustarCfe;
   ACBrSAT1.Inicializar;
   ACBrSAT1.InicializaCFe;
 
@@ -346,7 +354,7 @@ begin
         telaDados.qryProdutos.SQL.Add(telaDados.qryPedidosItens.FieldByName('ID_PRODUTO').Value);
         telaDados.qryProdutos.Open;
 
-        ACBrIBPTax1.AbrirTabela('C:\Users\Bruno\Documents\IBPT\18.1.A\TabelaIBPTaxCE18.1.A.csv');     //LEMBRAR DE ALTERAR
+        ACBrIBPTax1.AbrirTabela('C:\StockSYS2\IBPT\TabelaIBPTaxCE18.1.A.csv');     //LEMBRAR DE ALTERAR
         ACBrIBPTax1.Procurar(telaDados.qryProdutos.FieldByName('CODIGO_NCM').AsString, ex, descricao, tabela, aliqFedNac, aliqFedImp, aliqEst, aliqMun);
         tEstadual :=  (telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat * telaDados.qryPedidosItens.FieldByName('QUANTIDADE').AsInteger * (aliqEst/100)) +tEstadual;
         tMunicipal :=  (telaDados.qryProdutos.FieldByName('PRECO_VENDA').AsFloat * telaDados.qryPedidosItens.FieldByName('QUANTIDADE').AsInteger * (aliqMun/100)) +tMunicipal;
@@ -511,7 +519,7 @@ begin
   end;
 
 
-  ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1;
+  //ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1;
   telaDados.tblPedidos.Close;
   telaDados.tblPedidos.Open;
   telaDados.tblPedidos.Last;
@@ -615,19 +623,12 @@ end;
 procedure TtelaConfigSat.PrepararImpressao;
 begin
 
-  if ACBrSAT1.Extrato = ACBrSATExtratoESCPOS1 then
+  AjustarCfe;
+
+  if ACBrSAT1.Extrato = ACBrSATExtratoFortes1 then
   begin
 
-  ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModeloPosPrinter.ItemIndex );
-  ACBrPosPrinter1.PaginaDeCodigo := TACBrPosPaginaCodigo( cbxPagCodigo.ItemIndex );
-  ACBrPosPrinter1.Porta := btnImp.Caption;
-  ACBrPosPrinter1.ColunasFonteNormal := StrToInt(edtCol.Text);
-  ACBrPosPrinter1.LinhasEntreCupons := StrToInt(edtLin.Text);
-  ACBrPosPrinter1.EspacoEntreLinhas := StrToInt(edtEsp.Text);
-  ACBrSATExtratoESCPOS1.ImprimeQRCode := True;
-  ACBrSATExtratoESCPOS1.MostraPreview := true;
-  ACBrSATExtratoESCPOS1.ImprimeEmUmaLinha := false;   //aqui pra impressora
-
+  //ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1;
   ACBrSATExtratoFortes1.LarguraBobina    := 200;
   ACBrSATExtratoFortes1.MargemSuperior     := 3 ;
   ACBrSATExtratoFortes1.MargemInferior    := 5 ;
@@ -635,9 +636,22 @@ begin
   ACBrSATExtratoFortes1.MargemDireita  := 3 ;
   ACBrSATExtratoFortes1.MostraPreview   := true;
 
+  ACBrSATExtratoFortes1.Impressora := lImpressora.Caption;
 
-    ACBrSATExtratoFortes1.Impressora := lImpressora.Caption;
 
+  end else begin
+  //ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
+  ACBrPosPrinter1.Modelo := TACBrPosPrinterModelo( cbxModeloPosPrinter.ItemIndex );
+  ACBrPosPrinter1.PaginaDeCodigo := TACBrPosPaginaCodigo( cbxPagCodigo.ItemIndex );
+  ACBrPosPrinter1.Porta := btnImp.Caption;
+  ACBrPosPrinter1.ColunasFonteNormal := StrToInt(edtCol.Text);
+  ACBrPosPrinter1.LinhasEntreCupons := StrToInt(edtLin.Text);
+  ACBrPosPrinter1.EspacoEntreLinhas := StrToInt(edtEsp.Text);
+  ACBrSATExtratoESCPOS1.ImprimeQRCode := True;
+  //ACBrSATExtratoESCPOS1.MostraPreview := true;
+  ACBrSATExtratoESCPOS1.ImprimeEmUmaLinha := false;   //aqui pra impressora
+  ACBrSATExtratoESCPOS1.Impressora := lImpressora.Caption;
+   end;
     {if cbImprimirChaveUmaLinha.Checked then
       ACBrSATExtratoESCPOS1.ImprimeChaveEmUmaLinha := rSim
     else
@@ -647,7 +661,6 @@ begin
   begin
 
     }
- end;
   
 
 end;
@@ -725,6 +738,12 @@ begin
     INI.WriteInteger('PosPrinter','Colunas',StrToInt(edtCol.Text));
     INI.WriteInteger('PosPrinter','EspacoLinhas',StrToInt(edtLin.Text));
     INI.WriteInteger('PosPrinter','LinhasEntreCupons',StrToInt(edtEsp.Text));
+
+    if checkPreview.Checked then begin
+    INI.WriteString('PosPrinter','Preview', '1');
+    end else begin
+    INI.WriteString('PosPrinter','Preview', '0');
+    end;
 
     {INI.WriteString('Emit','CNPJ',edtEmitCNPJ.Text);
     INI.WriteString('Emit','IE',edtEmitIE.Text);
@@ -838,6 +857,11 @@ begin
     cbPreview.Checked      := INI.ReadBool('Fortes','Preview',True);
       }
     lImpressora.Caption    := INI.ReadString('Printer','Name', '');
+    if INI.ReadString('PosPrinter', 'Preview', '') = '1' then begin
+      checkPreview.Checked := true;
+    end else begin
+      checkPreview.Checked := false;
+    end;
 
     {cbImprimir1Linha.Checked := INI.ReadBool('EscPos','ImprimirItemUmaLinha',cbImprimir1Linha.Checked);
     cbImprimirChaveUmaLinha.Checked := INI.ReadBool('EscPos','ImprimirChaveUmaLinha',cbImprimirChaveUmaLinha.Checked);
@@ -1194,6 +1218,7 @@ Begin
         telaDados.tblPagamento.Open;
         Nsu := telaDados.tblPagamentoCODPAG.AsString; {telaDados.qryPagamentos.FieldByName('ID').Value};
         NumerodeAprovacao := telaDados.tblPagamentoCODAUT.Value;
+
         ACBrSATExtratoESCPOS1.ACBrSAT := ACBrSAT1;
         //ImpressaoFiscal := IntToStr(ACBrSAT1.CFe.ide.nCFe);
         Bandeira := telaLancPedidos.cbBandeira.Text; {telaDados.qryPagamentos.FieldByName('INSTFIN').Value}; //DIGITADA PELO CAIXA
@@ -1209,7 +1234,7 @@ Begin
              end;
           //end;
         end;
-        ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1; //Ver cupom na tela ter impressao fiscal
+        //ACBrSATExtratoFortes1.ACBrSAT := ACBrSAT1; //Ver cupom na tela ter impressao fiscal
         Memo1.Text := ImpressaoFiscal;
         if telaGerarNfe.nCfe <> '' then begin
           NumeroDocumento := telaGerarNfe.nCfe;

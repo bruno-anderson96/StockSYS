@@ -43,7 +43,7 @@ type
     GroupBox9: TGroupBox;
     Label11: TLabel;
     edtUfws: TEdit;
-    radioAmbiente: TRadioGroup;
+    gbAmbiente: TRadioGroup;
     GroupBox10: TGroupBox;
     Label12: TLabel;
     Label13: TLabel;
@@ -86,6 +86,8 @@ type
     Label4: TLabel;
     actCancelar: TAction;
     btnCancelar: TSpeedButton;
+    GroupBox2: TGroupBox;
+    SpeedButton2: TSpeedButton;
     procedure btnEscolherCaminhoClick(Sender: TObject);
     procedure btnEscolherCaminho2Click(Sender: TObject);
     procedure btnCaminhoCertClick(Sender: TObject);
@@ -102,6 +104,7 @@ type
     procedure actConfirmarExecute(Sender: TObject);
     procedure btnPathServerClick(Sender: TObject);
     procedure actCancelarExecute(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
   private
     { Private declarations }
 
@@ -221,7 +224,7 @@ begin
   telaDados.sEmailEmitente:= edtEmailEmitente.Text;}
   //WS
   telaDados.sUfws         := edtUfws.Text;
-  telaDados.sAmbiente     := radioAmbiente.ItemIndex;
+  telaDados.sAmbiente     := gbAmbiente.ItemIndex;
   telaDados.sHost         := edtHost.Text;
   telaDados.sPorta        := edtPorta.Text;
   telaDados.sUsuario      := edtUsuario.Text;
@@ -319,7 +322,7 @@ begin
 
 //WS
   edtUfws.Text            := telaDados.sUfws;
-  radioAmbiente.ItemIndex := telaDados.sAmbiente;
+  gbAmbiente.ItemIndex    := telaDados.sAmbiente;
   edtHost.Text            := telaDados.sHost;
   edtPorta.Text           := telaDados.sPorta;
   edtUsuario.Text         := telaDados.sUsuario;
@@ -402,6 +405,14 @@ begin
 DBGrid1.Enabled := false;
 telaDados.tblTributos.Cancel;
 btnInserir.Enabled := true;
+end;
+
+procedure TtelaConfig.SpeedButton2Click(Sender: TObject);
+begin
+telaDados.AtualizaConfigAcbr;
+
+telaDados.ACBrNFe1.WebServices.StatusServico.Executar;
+ShowMessage(telaDados.ACBrNFe1.WebServices.StatusServico.Msg);
 end;
 
 end.

@@ -956,7 +956,7 @@ begin
   tblEmitenteCEP.EditMask                := '00000-000;0';
   tblEmitenteTelefone.EditMask           := '(00)0000-0000;0';
   tblEmitenteCNPJ.EditMask               := '00.000.000/0000-00;0';
-  tblEmitenteINSCEST.EditMask            := '00000000-0;0';
+  tblEmitenteINSCEST.EditMask            := '00000000000-0;0';
   //Fornecedor
   tblFornecedoresCEP_END.EditMask        := '00000-000;0';
   tblFornecedoresTELEFONE.EditMask       := '(00)0000-0000;0';
@@ -1047,18 +1047,19 @@ begin
   {$ENDIF}
   //Geral
     ACBrNFe1.configuracoes.Geral.FormaEmissao       := StrToTpEmis(OK,IntToStr(sFormas));
-    ACBrNFe1.Configuracoes.Geral.SSLLib             := libCustom;
+    {ACBrNFe1.Configuracoes.Geral.SSLLib             := libCustom;
     ACBrNFe1.Configuracoes.Geral.SSLHttpLib         := httpWinHttp;
     ACBrNFe1.Configuracoes.Geral.SSLXmlSignLib      := xsLibXml2;
-    ACBrNFe1.Configuracoes.Geral.SSLCryptLib        := cryWinCrypt;
+    ACBrNFe1.Configuracoes.Geral.SSLCryptLib        := cryWinCrypt;}
 
   //Arquivos
     ACBrNFe1.configuracoes.Arquivos.Salvar          := sSalvarArq;
     ACBrNFe1.Configuracoes.Arquivos.PathSalvar      := sCaminhoArq;
     ACBrNFe1.Configuracoes.Arquivos.PathSchemas     := sCaminhoSchemas;
   //WebService
-    ACBrNFe1.configuracoes.WebServices.UF           := sUfws;
-    ACBrNFe1.configuracoes.WebServices.Ambiente     := StrToTpAmb(OK,IntToStr(sAmbiente));
+    ACBrNFe1.configuracoes.WebServices.UF           := sUfws;   
+    ACBrNFe1.Configuracoes.WebServices.Ambiente     := TpcnTipoAmbiente(telaConfig.gbAmbiente.ItemIndex);
+    //ACBrNFe1.configuracoes.WebServices.Ambiente   := StrToTpAmb(OK,IntToStr(sAmbiente));
     ACBrNFe1.configuracoes.WebServices.Visualizar   := true;
     ACBrNFe1.configuracoes.WebServices.ProxyHost    := sHost;
     ACBrNFe1.configuracoes.WebServices.ProxyPort    := sPorta;
@@ -1394,7 +1395,7 @@ begin
     telaDados.qryLogin.Close;
     telaDados.qryLogin.RecordCount;
     telaDados.qryLogin.Open;
-    telaDados.tblLoginID.Value := telaDados.qryLogin.FieldByName('COUNT').AsInteger + 1;
+    telaDados.tblLoginID.Value := telaDados.qryLogin.RecordCount + 1;
   end;
 end;
 

@@ -308,7 +308,7 @@ object telaConfigSat: TtelaConfigSat
       Top = 6
       Width = 329
       Height = 337
-      ActivePage = TabSheet4
+      ActivePage = TabSheet1
       TabOrder = 1
       object TabSheet1: TTabSheet
         Caption = 'MFe - 1'
@@ -1013,6 +1013,14 @@ object telaConfigSat: TtelaConfigSat
           Height = 21
           TabOrder = 2
           Text = '2'
+        end
+        object checkPreview: TCheckBox
+          Left = 112
+          Top = 208
+          Width = 97
+          Height = 17
+          Caption = 'Mostrar Preview'
+          TabOrder = 3
         end
       end
     end

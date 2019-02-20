@@ -86,6 +86,8 @@ type
     Label4: TLabel;
     actCancelar: TAction;
     btnCancelar: TSpeedButton;
+    GroupBox2: TGroupBox;
+    SpeedButton2: TSpeedButton;
     procedure btnEscolherCaminhoClick(Sender: TObject);
     procedure btnEscolherCaminho2Click(Sender: TObject);
     procedure btnCaminhoCertClick(Sender: TObject);
@@ -102,6 +104,7 @@ type
     procedure actConfirmarExecute(Sender: TObject);
     procedure btnPathServerClick(Sender: TObject);
     procedure actCancelarExecute(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
   private
     { Private declarations }
 
@@ -402,6 +405,14 @@ begin
 DBGrid1.Enabled := false;
 telaDados.tblTributos.Cancel;
 btnInserir.Enabled := true;
+end;
+
+procedure TtelaConfig.SpeedButton2Click(Sender: TObject);
+begin
+telaDados.AtualizaConfigAcbr;
+
+telaDados.ACBrNFe1.WebServices.StatusServico.Executar;
+ShowMessage(telaDados.ACBrNFe1.WebServices.StatusServico.Msg);
 end;
 
 end.

@@ -1,6 +1,6 @@
 object telaLogin: TtelaLogin
-  Left = 673
-  Top = 89
+  Left = 1012
+  Top = 106
   BiDiMode = bdLeftToRight
   BorderStyle = bsToolWindow
   Caption = 'Automa'#231#227'o Comercial'
@@ -4172,7 +4172,7 @@ object telaLogin: TtelaLogin
     Height = 13
     Caption = 'Senha'
   end
-  object Image1: TImage
+  object ac: TImage
     Left = 22
     Top = 9
     Width = 180

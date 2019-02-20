@@ -102,6 +102,7 @@ begin
   telaDados.qryCompraItens.SQL.Add(telaDados.qryCompras.FieldByName('ID').Value);
   telaDados.qryCompraItens.Open;
 
+
   {ShowMessage(telaDados.qryPedidos.FieldByName('ID').AsString);
   ShowMessage(telaDados.qryClientes.FieldByName('ID').AsString);
   ShowMessage(telaDados.qryClientes.FieldByName('Nome').AsString);}
@@ -163,13 +164,13 @@ begin
     Dest.EnderDest.xPais := 'BRASIL';
     Dest.EnderDest.fone  :=  telaDados.sTelefone;
     // Entrega
-    Entrega.xLgr := telaDados.qryEmitente.FieldByName('ENDERECO').AsString;
-    Entrega.nro  := telaDados.qryEmitente.FieldByName('NUMERO').AsString;
-    Entrega.xCpl := telaDados.qryEmitente.FieldByName('COMPLEMENTO').AsString;
-    Entrega.xBairro := telaDados.qryEmitente.FieldByName('BAIRRO').AsString;
-    Entrega.cMun := telaDados.qryEmitente.FieldByName('CODMUN').AsInteger;
-    Entrega.xMun := telaDados.qryEmitente.FieldByName('CIDADE').AsString;
-    Entrega.UF   := telaDados.qryEmitente.FieldByName('UF').AsString;
+    Entrega.xLgr := telaDados.sEndereco;
+    Entrega.nro  := telaDados.sNum;
+    Entrega.xCpl := '';
+    Entrega.xBairro := telaDados.sBairro;
+    Entrega.cMun := StrToInt(telaDados.sCodMun);
+    Entrega.xMun := telaDados.sCidade;
+    Entrega.UF   := telaDados.sUf;
     // Itens das NFe
     aNumItem := 0;
     telaDados.tblCompraItens.Open;
@@ -407,7 +408,10 @@ begin
 
     telaDados.ACBrNFe1.NotasFiscais.GerarNFe;
     telaDados.ACBrNFe1.NotasFiscais.Assinar;
-    //telaDados.ACBrNFe1.NotasFiscais.Validar;
+    telaDados.ACBrNFe1.NotasFiscais.Validar;
+
+    //telaDados.ACBrNFe1.Enviar(1,False,False,False); <- HABILITAR SEPARADAMENTE
+    //ShowMessage('Mensagem: '+ telaDados.ACBrNFe1.WebServices.Retorno.xMsg);
 
     telaDados.ACBrNFe1.NotasFiscais.Items[0].GravarXML(telaDados.qryCompras.FieldByName('CHAVENFE').AsString+'.xml', ExtractFilePath(ParamStr(0))+'NFe\Entrada');
     //telaDados.ACBrNFe1.NotasFiscais.Assinar;
